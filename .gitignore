@@ -1,0 +1,3 @@
+test.sh
+*.lock.json
+dotfiles/zsh/os.zsh

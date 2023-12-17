@@ -1,0 +1,9 @@
+# Visual Studio Code
+# Code/User/settings.json      ${HOME}/.config/Code/User/settings.json
+# Code/User/keybindings.json   ${HOME}/.config/Code/User/keybindings.json
+# Code/User/locale.json        ${HOME}/.config/Code/User/locale.json
+# Code/User/snippets           ${HOME}/.config/Code/User/snippets
+
+#zsh
+Linux/.zprofile ${HOME}/.zprofile
+Linux/linux.zsh ${HOME}/zsh/os.zsh

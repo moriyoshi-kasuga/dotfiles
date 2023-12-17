@@ -1,0 +1,12 @@
+name: main
+
+on: [push]
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    # runs-on: macOS-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: install dotfiles
+        run: make

@@ -1,0 +1,35 @@
+[alias]
+  aa = add -A
+  cm = commit -m
+  co = checkout
+  cod = checkout develop
+  com = checkout main
+  cob = checkout -b
+  br = branch
+  st = status
+
+[fetch]
+  prune = true
+
+[pull]
+  ff = only
+
+[rebase]
+  autostash = true
+  abbreviateCommands = true
+  autosqaush = true
+
+[color]
+  ui = auto
+
+[push]
+  default = current
+
+[grep]
+  lineNumber = true
+
+[include]
+  path = ~/.gitconfigs/global.gitconfig
+
+[init]
+	defaultBranch = main

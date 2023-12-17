@@ -1,0 +1,20 @@
+# tmux
+.tmux.conf ${HOME}/.tmux.conf
+
+
+#zsh
+
+.p10k.zsh ${HOME}/.p10k.zsh
+.zshrc ${HOME}/.zshrc
+zsh ${HOME}/zsh
+
+
+#git
+
+.gitconfig ${HOME}/.gitconfig
+
+# vim
+
+vscodenvim ${HOME}/.config/vscodenvim
+.vimrc ${HOME}/.vimrc
+.ideavimrc ${HOME}/.ideavimrc
