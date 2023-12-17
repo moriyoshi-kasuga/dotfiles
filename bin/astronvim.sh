@@ -23,7 +23,7 @@ if test -d ~/.config/nvim; then
 	install_exist "Astronvim"
 	info ""
 	echo "    Astronvim を install (reinstall) したいときは"
-	echo "    rm -rf ~/.config/nvim ~/.local/state/nvim ~/.local/share/nvim ~/.cache/nvim && make neovim"
+	echo "    rm -rf ~/.config/nvim ~/.local/state/nvim ~/.local/share/nvim ~/.cache/nvim && make astronvim"
 	echo "    を実行してください"
 else
 	brew install luarocks >/dev/null 2>&1
