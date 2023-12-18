@@ -13,7 +13,6 @@ require_password
 
 setup_start "Linux"
 
-npm install -g wsl-open
-sudo ln -s "$(which wsl-open)" /usr/local/bin/xdg-open
+sudo apt install xdg-utils
 
 setup_end "Linux"
