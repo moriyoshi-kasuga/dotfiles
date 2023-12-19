@@ -81,6 +81,10 @@ return {
       { "<S-Enter>", false }, { "<c-f>", false }, { "<c-b>", false },
     }
   },
+  {
+    "unblevable/quick-scope",
+    event = "VeryLazy",
+  },
   -- disable trouble
   { "folke/trouble.nvim", enabled = false },
   {
@@ -90,6 +94,9 @@ return {
       modes = {
         search = {
           enabled = false
+        },
+        char = {
+          enabled = false,
         }
       }
     },
