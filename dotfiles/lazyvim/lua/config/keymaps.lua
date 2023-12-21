@@ -16,8 +16,6 @@ keymap.del("n", "<leader>L")
 -- floating terminal
 keymap.del("n", "<leader>ft")
 keymap.del("n", "<leader>fT")
--- del("n", "<c-/>")
--- del("n", "<c-_>")
 
 -- Terminal Mappings
 keymap.del("t", "<C-h>")
@@ -35,8 +33,8 @@ keymap.set("n", "<leader>wv", "<C-W>v", { desc = "Split window vertical", remap 
 -- format
 keymap.set("n", "<leader>r", function()
   require("conform").format()
-end, { desc = "Format code", remap = true }) -- codeium
-
+end, { desc = "Format code", remap = true })
+-- codeium
 keymap.set("i", "<c-f>", function()
   return vim.fn["codeium#Accept"]()
 end, { expr = true, silent = true })

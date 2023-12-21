@@ -27,7 +27,7 @@ return {
   {
     "nvim-neo-tree/neo-tree.nvim",
     keys = {
-      { "<leader>e", mode = "n", "<cmd>Neotree toggle<cr>", desc = "Neotree toggle." },
+      { "<leader>e", mode = "n", "<cmd>Neotree focus<cr>", desc = "Neotree focus." },
       { "<leader>o", mode = "n", "<cmd>Neotree close<cr>",  desc = "Neotree close." },
     },
     opts = {
