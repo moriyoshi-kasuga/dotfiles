@@ -80,6 +80,21 @@ return {
     "folke/noice.nvim",
     keys = {
       { "<S-Enter>", false }, { "<c-f>", false }, { "<c-b>", false },
+    },
+    opts = {
+      lsp = {
+        progress = {
+          enabled = false,
+        },
+        hover = {
+          enabled = false
+        },
+        override = {
+          ["vim.lsp.util.convert_input_to_markdown_lines"] = false,
+          ["vim.lsp.util.stylize_markdown"] = false,
+          ["cmp.entry.get_documentation"] = false,
+        },
+      },
     }
   },
   {
@@ -232,5 +247,8 @@ return {
   {
     "mbbill/undotree",
     lazy = false,
+    keys = {
+      {"<leader>i",mode="n","<cmd>UndotreeToggle<cr>",desc="undotree"}
+    }
   },
 }

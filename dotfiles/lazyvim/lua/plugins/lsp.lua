@@ -16,7 +16,7 @@ return {
         "html-lsp",
         "css-lsp",
         "bash-language-server",
-        "hadolint"
+        "hadolint",
       })
     end,
   },
