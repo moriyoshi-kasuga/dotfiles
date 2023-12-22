@@ -4,6 +4,10 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     opts = {
+      indent = {
+        enable = true,
+        disable = {"html"}
+      },
       ensure_installed = {
         "astro",
         "cmake",
