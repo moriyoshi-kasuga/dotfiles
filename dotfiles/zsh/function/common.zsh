@@ -46,3 +46,14 @@ useful () {
     chmod +x ./useful.sh
 }
 
+get () {
+  if  [[ -z "$@" ]]
+  then
+    echo "Plese input get url"
+  fi
+  curl -s "$@" | less -R
+}
+
+cht () {
+  get cht.sh/$@
+}
