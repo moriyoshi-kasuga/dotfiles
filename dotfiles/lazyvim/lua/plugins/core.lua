@@ -28,7 +28,7 @@ return {
     "nvim-neo-tree/neo-tree.nvim",
     keys = {
       { "<leader>e", mode = "n", "<cmd>Neotree focus<cr>", desc = "Neotree focus." },
-      { "<leader>o", mode = "n", "<cmd>Neotree close<cr>",  desc = "Neotree close." },
+      { "<leader>o", mode = "n", "<cmd>Neotree close<cr>", desc = "Neotree close." },
     },
     opts = {
       commands = {
@@ -36,11 +36,12 @@ return {
           local node = state.tree:get_node()
           if (node.type == "directory" or node:has_children()) and node:is_expanded() then
             state.commands.toggle_node(state)
-          else require("neo-tree.ui.renderer").focus_node(state, node:get_parent_id())
+          else
+            require("neo-tree.ui.renderer").focus_node(state, node:get_parent_id())
           end
         end,
         child_or_open = function(state)
-          local node = state.tree:get_node() 
+          local node = state.tree:get_node()
           if node.type == "directory" or node:has_children() then
             if not node:is_expanded() then -- if unexpanded, expand
               state.commands.toggle_node(state)
@@ -212,19 +213,20 @@ return {
       },
     },
     keys = {
-      { "<leader>te",mode= {"n","v",}, "<cmd>Translate en<cr>", desc = "Translate English" },
-      { "<leader>tj", mode= {"n","v",},"<cmd>Translate ja<cr>", desc = "Translate Japanese" },
+      { "<leader>te", mode = { "n", "v", }, "<cmd>Translate en<cr>", desc = "Translate English" },
+      { "<leader>tj", mode = { "n", "v", }, "<cmd>Translate ja<cr>", desc = "Translate Japanese" },
       {
-        "<leader>tE",mode= {"n","v",},
+        "<leader>tE",
+        mode = { "n", "v", },
         "<cmd>Translate en -output=replace<cr>",
         desc = "translate to en of replace",
       },
       {
-        "<leader>tJ",mode= {"n","v",},
+        "<leader>tJ",
+        mode = { "n", "v", },
         "<cmd>Translate ja -output=replace<cr>",
         desc = "translate to ja of replace",
       }
     }
-
   },
 }
