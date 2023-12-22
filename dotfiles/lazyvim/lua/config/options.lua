@@ -7,7 +7,4 @@ vim.opt.spelllang = "en,cjk"
 
 vim.o.mouse = "" -- disable mouse
 
-vim.opt.listchars = {
-  eol = "¬",
-  trail = "·",
-}
+vim.opt.list = false
