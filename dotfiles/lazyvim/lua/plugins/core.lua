@@ -104,6 +104,24 @@ return {
   -- disable trouble
   { "folke/trouble.nvim", enabled = false },
   {
+    "phaazon/hop.nvim",
+    event = "User AstroFile",
+    config = function()
+      -- you can configure Hop the way you like here; see :h hop-config
+      require("hop").setup { keys = "etovxqpdygfblzhckisuran" }
+    end,
+    keys = {
+      { ".w", "<cmd>HopWord<cr>", desc = "HopWord" },
+      { ".W", "<cmd>HopWordMW<cr>", desc = "HopWordMW" },
+      { ".m", "<cmd>HopAnywhere<cr>", desc = "HopAnywhere" },
+      { ".M", "<cmd>HopAnywhereMW<cr>", desc = "HopAnywhereMW" },
+      { ".f", "<cmd>HopChar1<cr>", desc = "HopChar1" },
+      { ".F", "<cmd>HopChar1MW<cr>", desc = "HopChar1MW" },
+      { ".k", "<cmd>HopChar2<cr>", desc = "HopChar2" },
+      { ".K", "<cmd>HopChar2MW<cr>", desc = "HopChar2MW" },
+    },
+  },
+  {
     "folke/flash.nvim",
     ---@type Flash.Config
     opts = {
