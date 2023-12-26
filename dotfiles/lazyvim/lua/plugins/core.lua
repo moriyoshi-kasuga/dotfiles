@@ -101,8 +101,6 @@ return {
     "unblevable/quick-scope",
     event = "VeryLazy",
   },
-  -- disable trouble
-  { "folke/trouble.nvim", enabled = false },
   {
     "phaazon/hop.nvim",
     event = "User AstroFile",
@@ -198,6 +196,16 @@ return {
     },
   },
 
+  {
+    "kylechui/nvim-surround",
+    version = "*", -- Use for stability; omit to use `main` branch for the latest features
+    event = "VeryLazy",
+    config = function()
+      require("nvim-surround").setup({
+      })
+    end
+  },
+
   -- add any tools you want to have installed below
   {
     "williamboman/mason.nvim",
@@ -246,4 +254,9 @@ return {
       {"<leader>i",mode="n","<cmd>UndotreeToggle<cr>",desc="undotree"}
     }
   },
+
+  -- disable plugins
+  { "echasnovski/mini.surround", enabled = false },
+  { "folke/trouble.nvim", enabled = false },
+
 }
