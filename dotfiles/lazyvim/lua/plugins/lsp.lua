@@ -17,6 +17,7 @@ return {
         "css-lsp",
         "bash-language-server",
         "hadolint",
+        "djlint",
       })
     end,
   },
@@ -26,6 +27,16 @@ return {
     "neovim/nvim-lspconfig",
     opts = {
       inlay_hints = { enabled = true },
+    },
+  },
+
+  -- formatters
+  {
+    "stevearc/conform.nvim",
+    opts = {
+      formatters_by_ft = {
+        ["htmldjango"] = { "djlint" },
+      },
     },
   },
 }

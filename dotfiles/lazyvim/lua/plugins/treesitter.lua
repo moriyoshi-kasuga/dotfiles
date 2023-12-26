@@ -10,6 +10,7 @@ return {
       },
       ensure_installed = {
         "html",
+        "htmldjango",
         "css",
         "json",
         "yaml",
