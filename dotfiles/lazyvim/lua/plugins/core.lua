@@ -255,8 +255,45 @@ return {
     }
   },
 
+   {
+    "FotiadisM/tabset.nvim",
+    lazy = false,
+    config = function()
+      require("tabset").setup {
+        languages = {
+          yaml = {
+            tabwidth = 2,
+          },
+          {
+            filetypes = {
+              "java",
+              "class",
+              "javascript",
+              "typescript",
+              "javascriptreact",
+              "typescriptreact",
+              "json",
+              "html",
+              "lua",
+              "kotlin",
+            },
+            config = {
+              tabwidth = 2,
+							expandtab = true,
+            },
+          },
+          {
+            filetype = { "python" },
+            config = {
+              tabwidth = 4,
+            },
+          },
+        },
+      }
+    end,
+  },
+
   -- disable plugins
   { "echasnovski/mini.surround", enabled = false },
   { "folke/trouble.nvim", enabled = false },
-
 }
