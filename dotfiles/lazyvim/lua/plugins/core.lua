@@ -99,7 +99,7 @@ return {
   },
   {
     "unblevable/quick-scope",
-    event = "VeryLazy",
+    lazy = false,
   },
   {
     "phaazon/hop.nvim",
