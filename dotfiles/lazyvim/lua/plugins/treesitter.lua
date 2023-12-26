@@ -9,10 +9,12 @@ return {
         disable = {"html"}
       },
       ensure_installed = {
-        "astro",
+        "html",
+        "css",
+        "json",
+        "yaml",
         "cmake",
         "cpp",
-        "css",
         "fish",
         "gitignore",
         "go",
@@ -24,6 +26,10 @@ return {
         "scss",
         "sql",
         "svelte",
+        "python",
+        "tsx",
+        "typescript",
+        "javascript",
       },
 
       -- matchup = {
