@@ -12,6 +12,8 @@ zsh ${HOME}/zsh
 #git
 
 .gitconfig ${HOME}/.gitconfig
+lazygit.yml ${HOME}/.config/lazygit/config.yml
+
 
 # vim
 
