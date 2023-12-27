@@ -8,7 +8,6 @@ return {
         enable = true,
         disable = { "html" },
       },
-      ensure_installed = "all",
 
       -- matchup = {
       -- 	enable = true,
