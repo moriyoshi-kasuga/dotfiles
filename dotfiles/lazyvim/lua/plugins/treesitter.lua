@@ -6,32 +6,9 @@ return {
     opts = {
       indent = {
         enable = true,
-        disable = {"html"}
+        disable = { "html" },
       },
-      ensure_installed = {
-        "html",
-        "htmldjango",
-        "css",
-        "json",
-        "yaml",
-        "cmake",
-        "cpp",
-        "fish",
-        "gitignore",
-        "go",
-        "graphql",
-        "http",
-        "java",
-        "php",
-        "rust",
-        "scss",
-        "sql",
-        "svelte",
-        "python",
-        "tsx",
-        "typescript",
-        "javascript",
-      },
+      ensure_installed = "all",
 
       -- matchup = {
       -- 	enable = true,
