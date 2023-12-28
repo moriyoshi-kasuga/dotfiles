@@ -5,6 +5,14 @@ return {
     event = "BufEnter",
   },
   {
+    --undotree
+    "mbbill/undotree",
+    event = "BufEnter",
+    keys = {
+      { "<leader>i", "<cmd>UndotreeToggle<cr>", desc = "Undotree" },
+    }
+  },
+  {
     "folke/noice.nvim",
     keys = {
       { "<S-Enter>", false },
