@@ -8,34 +8,19 @@ keymap.set("n", "-", "<C-x>")
 -- Select all
 keymap.set("n", "<C-a>", "gg<S-v>G")
 
+-- leave insert mode
 keymap.set("i", "jk", "<esc>")
 
-keymap.del("n", "<leader>xl")
-keymap.del("n", "<leader>xq")
-
-keymap.del("n", "[q")
-keymap.del("n", "]q")
-
--- LazyVim Changelog
-keymap.del("n", "<leader>L")
-
--- floating terminal
-keymap.del("n", "<leader>ft")
-keymap.del("n", "<leader>fT")
-
--- Terminal Mappings
+-- delete Terminal Mappings
 keymap.del("t", "<C-h>")
 keymap.del("t", "<C-j>")
 keymap.del("t", "<C-k>")
 keymap.del("t", "<C-l>")
 
 -- windows
-keymap.del("n", "<leader>w-")
-keymap.del("n", "<leader>w|")
-keymap.del("n", "<leader>-")
-keymap.del("n", "<leader>|")
-keymap.set("n", "<leader>ws", "<C-W>s", { desc = "Split window horizontal"})
-keymap.set("n", "<leader>wv", "<C-W>v", { desc = "Split window vertical"})
+keymap.set("n", "<leader>ws", "<C-W>s", { desc = "Split window horizontal" })
+keymap.set("n", "<leader>wv", "<C-W>v", { desc = "Split window vertical" })
+
 -- codeium
 keymap.set("i", "<c-f>", function()
   return vim.fn["codeium#Accept"]()
@@ -44,6 +29,12 @@ keymap.set("i", "<c-x>", function()
   return vim.fn["codeium#Clear"]()
 end, { expr = true, silent = true })
 -- format
-keymap.set("n","<leader>r",function()
+keymap.set("n", "<leader>r", function()
   Util.format({ force = true })
-end,{desc="format"})
+end, { desc = "format" })
+
+-- buffers
+keymap.del("n", "<S-h>")
+keymap.del("n", "<S-l>")
+keymap.set("n","<A-h>", "<cmd>BufferLineCyclePrev<cr>", { desc = "Prev buffer" })
+keymap.set("n","<A-l>", "<cmd>BufferLineCycleNext<cr>", { desc = "Next buffer" })
