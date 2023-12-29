@@ -10,6 +10,14 @@ return {
       languages = {
         {
           filetypes = {
+            "css",
+            "sccs",
+            "markdown",
+            "markdown.mdx",
+            "graphql",
+            "handlebars",
+            "vue",
+            "less",
             "java",
             "class",
             "javascript",
@@ -17,6 +25,7 @@ return {
             "javascriptreact",
             "typescriptreact",
             "json",
+            "jsonc",
             "html",
             "htmldjango",
             "lua",
