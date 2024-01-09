@@ -1,10 +1,6 @@
 return {
   -- Configure LazyVim to load gruvbox
   {
-    "Exafunction/codeium.vim",
-    event = "BufEnter",
-  },
-  {
     --undotree
     "mbbill/undotree",
     event = "BufEnter",
