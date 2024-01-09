@@ -1,13 +1,6 @@
 local Util = require("lazyvim.util")
 local keymap = vim.keymap
 
--- Increment/decrement
-keymap.set("n", "+", "<C-a>")
-keymap.set("n", "-", "<C-x>")
-
--- Select all
-keymap.set("n", "<C-a>", "gg<S-v>G")
-
 -- leave insert mode
 keymap.set("i", "jk", "<esc>")
 
