@@ -7,6 +7,5 @@ set ignorecase
 set smartcase
 set wrapscan
 set hlsearch
-set clipboard+=unnamedplus
 
 imap jk <Esc>

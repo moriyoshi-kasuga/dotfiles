@@ -35,6 +35,5 @@ zinit wait lucid for \
     zsh-users/zsh-autosuggestions
 
 source "${HOME}/zsh/alias.zsh"
-source "${HOME}/zsh/os.zsh"
 source "${HOME}/zsh/settings.zsh"
 source "${HOME}/zsh/commands.zsh"

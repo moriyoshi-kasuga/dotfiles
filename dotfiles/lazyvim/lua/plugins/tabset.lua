@@ -10,6 +10,15 @@ return {
       languages = {
         {
           filetypes = {
+            "make",
+          },
+          config = {
+            tabwidth = 8,
+            expandtab = false,
+          },
+        },
+        {
+          filetypes = {
             "css",
             "sccs",
             "markdown",

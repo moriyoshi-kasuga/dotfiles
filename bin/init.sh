@@ -44,6 +44,8 @@ make node
 
 make python
 
+make coursier
+
 make neovim
 
 make docker

@@ -22,6 +22,9 @@ node:
 python:
 	bash ./bin/python.sh
 
+coursier:
+	bash ./bin/coursier.sh
+
 neovim:
 	bash ./bin/neovim.sh
 

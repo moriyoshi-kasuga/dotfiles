@@ -4,9 +4,5 @@
 # Code/User/locale.json        ${HOME}/Library/ApplicationSupport/Code/User/locale.json
 # Code/User/snippets           ${HOME}/Library/ApplicationSupport/Code/User/snippets
 
-#zsh
-Darwin/.zprofile ${HOME}/.zprofile
-Darwin/darwin.zsh ${HOME}/zsh/os.zsh
-
 #wezterm
 .wezterm.lua ${HOME}/.wezterm.lua

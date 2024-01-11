@@ -1,3 +1,4 @@
 test.sh
 *.lock.json
 dotfiles/zsh/os.zsh
+.DS_Store
