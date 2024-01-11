@@ -7,3 +7,6 @@
 #zsh
 Darwin/.zprofile ${HOME}/.zprofile
 Darwin/darwin.zsh ${HOME}/zsh/os.zsh
+
+#wezterm
+.wezterm.lua ${HOME}/.wezterm.lua

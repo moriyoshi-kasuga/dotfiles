@@ -9,6 +9,8 @@ cask "slack"
 cask "zoom"
 cask "brave-browser"
 
+cask "wezterm"
+
 cask "docker"
 cask "visual-studio-code"
 cask "local"
