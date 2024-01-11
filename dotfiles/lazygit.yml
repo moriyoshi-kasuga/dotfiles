@@ -2,7 +2,7 @@ git:
   parseEmoji: true
 
 gui:
-  showIcons: true
+  showIcons: false
   language: 'en'
 
 os:
