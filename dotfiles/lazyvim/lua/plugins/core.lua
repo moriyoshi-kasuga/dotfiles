@@ -6,7 +6,7 @@ return {
     event = "BufEnter",
     keys = {
       { "<leader>i", "<cmd>UndotreeToggle<cr>", desc = "Undotree" },
-    }
+    },
   },
   {
     "uga-rosa/translate.nvim",
@@ -21,21 +21,21 @@ return {
       },
     },
     keys = {
-      { "<leader>te", mode = { "n", "v", }, "<cmd>Translate en<cr>", desc = "Translate English" },
-      { "<leader>tj", mode = { "n", "v", }, "<cmd>Translate ja<cr>", desc = "Translate Japanese" },
+      { "<leader>te", mode = { "n", "v" }, "<cmd>Translate en<cr>", desc = "Translate English" },
+      { "<leader>tj", mode = { "n", "v" }, "<cmd>Translate ja<cr>", desc = "Translate Japanese" },
       {
         "<leader>tE",
-        mode = { "n", "v", },
+        mode = { "n", "v" },
         "<cmd>Translate en -output=replace<cr>",
         desc = "translate to en of replace",
       },
       {
         "<leader>tJ",
-        mode = { "n", "v", },
+        mode = { "n", "v" },
         "<cmd>Translate ja -output=replace<cr>",
         desc = "translate to ja of replace",
-      }
-    }
+      },
+    },
   },
   {
     "folke/noice.nvim",
@@ -167,6 +167,18 @@ return {
         },
         -- all the sub-options of filetypes apply to buftypes
         buftypes = {},
+      })
+    end,
+  },
+  {
+    "folke/noice.nvim",
+    opts = function(_, opts)
+      table.insert(opts.routes, {
+        filter = {
+          event = "notify",
+          find = "No information available",
+        },
+        opts = { skip = true },
       })
     end,
   },
