@@ -10,9 +10,9 @@ keymap.del("t", "<C-j>")
 keymap.del("t", "<C-k>")
 keymap.del("t", "<C-l>")
 
--- windows
-keymap.set("n", "<leader>ws", "<C-W>s", { desc = "Split window horizontal" })
-keymap.set("n", "<leader>wv", "<C-W>v", { desc = "Split window vertical" })
+-- Lsp
+keymap.set({ "n", "v" }, "ga", vim.lsp.buf.code_action, { desc = "Code action" })
+keymap.set("n", "gk", vim.lsp.buf.signature_help, { desc = "Signature help" })
 
 -- format
 keymap.set("n", "<leader>r", function()

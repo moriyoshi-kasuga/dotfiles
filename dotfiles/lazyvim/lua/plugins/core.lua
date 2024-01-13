@@ -66,33 +66,12 @@ return {
     version = "*",
     event = "VeryLazy",
     config = function()
-      require("nvim-surround").setup({
-        -- Configuration here, or leave empty to use defaults
-      })
+      require("nvim-surround").setup()
     end,
   },
   {
     "unblevable/quick-scope",
     lazy = false,
-  },
-
-  {
-    "phaazon/hop.nvim",
-    event = "User AstroFile",
-    config = function()
-      -- you can configure Hop the way you like here; see :h hop-config
-      require("hop").setup({ keys = "etovxqpdygfblzhckisuran" })
-    end,
-    keys = {
-      { ".w", "<cmd>HopWord<cr>", desc = "HopWord" },
-      { ".W", "<cmd>HopWordMW<cr>", desc = "HopWordMW" },
-      { ".m", "<cmd>HopAnywhere<cr>", desc = "HopAnywhere" },
-      { ".M", "<cmd>HopAnywhereMW<cr>", desc = "HopAnywhereMW" },
-      { ".f", "<cmd>HopChar1<cr>", desc = "HopChar1" },
-      { ".F", "<cmd>HopChar1MW<cr>", desc = "HopChar1MW" },
-      { ".k", "<cmd>HopChar2<cr>", desc = "HopChar2" },
-      { ".K", "<cmd>HopChar2MW<cr>", desc = "HopChar2MW" },
-    },
   },
 
   {
@@ -108,26 +87,6 @@ return {
         },
       },
     },
-    -- keys = {
-    --   {
-    --     "s",
-    --     mode = { "n", "x", "o" },
-    --     function()
-    --       require("flash").jump()
-    --     end,
-    --     desc = "Flash",
-    --   },
-    --   {
-    --     "S",
-    --     mode = { "n", "o", "x" },
-    --     function()
-    --       require("flash").treesitter()
-    --     end,
-    --     desc = "Flash Treesitter",
-    --   },
-    --   { "r", false },
-    --   { "R", false },
-    -- },
   },
 
   -- add symbols-outline
@@ -180,6 +139,12 @@ return {
         },
         opts = { skip = true },
       })
+    end,
+  },
+  {
+    "smjonas/inc-rename.nvim",
+    config = function()
+      require("inc_rename").setup()
     end,
   },
 }
