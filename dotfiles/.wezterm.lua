@@ -20,17 +20,18 @@ wezterm.on("gui-startup", function(cmd)
 end)
 
 -- フォントの設定
-config.font = wezterm.font("UbuntuMono Nerd Font Mono", { weight = "Regular", stretch = "Normal", style = "Normal" })
-
-config.window_padding = {
-  left = 2,
-  right = 2,
-  top = 30,
-  bottom = 0,
-}
+-- config.font = wezterm.font("UbuntuMono Nerd Font Mono", { weight = "Regular", stretch = "Normal", style = "Normal" })
+config.font = wezterm.font("UDEV Gothic 35NF", { weight = "Regular", stretch = "Normal", style = "Normal" })
 
 -- フォントサイズの設定
-config.font_size = 16
+config.font_size = 14
+
+config.window_padding = {
+	left = 2,
+	right = 2,
+	top = 30,
+	bottom = 0,
+}
 
 -- ショートカットキー設定
 local act = wezterm.action
