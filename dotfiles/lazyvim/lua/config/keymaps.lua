@@ -18,9 +18,3 @@ keymap.set("n", "gk", vim.lsp.buf.signature_help, { desc = "Signature help" })
 keymap.set("n", "<leader>r", function()
   Util.format({ force = true })
 end, { desc = "format" })
-
--- buffers
-keymap.del("n", "<S-h>")
-keymap.del("n", "<S-l>")
-keymap.set("n", "<A-h>", "<cmd>BufferLineCyclePrev<cr>", { desc = "Prev buffer" })
-keymap.set("n", "<A-l>", "<cmd>BufferLineCycleNext<cr>", { desc = "Next buffer" })
