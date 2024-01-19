@@ -9,6 +9,7 @@ return {
         disable = { "html" },
       },
 
+      auto_install = true,
       -- matchup = {
       -- 	enable = true,
       -- },
