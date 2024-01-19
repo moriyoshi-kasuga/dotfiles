@@ -48,3 +48,4 @@ setopt hist_reduce_blanks # 余分なスペースを削除してヒストリに�
 
 ### export ###
 export XDG_CONFIG_HOME="$HOME/.config"
+export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
