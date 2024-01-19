@@ -147,4 +147,10 @@ return {
       require("inc_rename").setup()
     end,
   },
+  {
+    "numToStr/Comment.nvim",
+    config = function()
+      require("Comment").setup()
+    end,
+  },
 }
