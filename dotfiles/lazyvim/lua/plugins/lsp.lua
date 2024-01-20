@@ -83,6 +83,9 @@ return {
       metals_config.init_options.statusBarProvider = "on"
       metals_config.settings = {
         showImplicitArguments = true,
+        superMethodLensesEnabled = true,
+        showInferredType = true,
+        showImplicitConversionsAndClasses = true,
         excludedPackages = { "akka.actor.typed.javadsl", "com.github.swagger.akka.javadsl" },
       }
       metals_config.capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -93,7 +96,16 @@ return {
         -- want basic Java support but it may also conflict if you are using
         -- something like nvim-jdtls which also works on a java filetype autocmd.
         pattern = { "scala", "sbt" },
-        callback = function()
+        callback = function(args)
+          local wk = require("which-key")
+          wk.register({
+            ["gs"] = { require("metals").goto_super_method, "Goto Super" },
+            ["gS"] = { require("metals").super_method_hierarchy, "Super Method Hierarchy" },
+            ["<leader>cu"] = { require("metals").show_cfr, "Show Cfr" },
+            ["<leader>cn"] = { require("metals").new_scala_file, "New Scala File" },
+            ["<leader>cN"] = { require("metals").new_java_file, "New Java File" },
+            ["<leader>co"] = { require("metals").organize_imports, "Organize Imports" },
+          }, { mode = "n", buffer = args.buf })
           require("metals").initialize_or_attach(metals_config)
         end,
         group = nvim_metals_group,
