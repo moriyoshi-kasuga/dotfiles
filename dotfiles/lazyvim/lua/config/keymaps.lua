@@ -23,3 +23,8 @@ keymap.set("n", "gk", vim.lsp.buf.signature_help, { desc = "Signature help" })
 keymap.set("n", "<leader>r", function()
   Util.format({ force = true })
 end, { desc = "format" })
+
+-- RunCode
+keymap.set("n", "<leader>dm", function()
+  require("util.util").RunCode()
+end, { desc = "CodeRunner" })

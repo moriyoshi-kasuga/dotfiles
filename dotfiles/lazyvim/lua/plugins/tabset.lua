@@ -19,6 +19,8 @@ return {
         },
         {
           filetypes = {
+            "c",
+            "cs",
             "css",
             "sccs",
             "markdown",
