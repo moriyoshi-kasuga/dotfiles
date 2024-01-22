@@ -7,28 +7,20 @@ test "$(uname)" = "Darwin" && is_mac=true || is_mac=false
 setup_start "coursier"
 echo
 
-if "${is_mac}"; then
-	load_brew
-	if brew list --versions coursier; then
-		install_exist "coursier"
-		brew upgrade coursier/formulas/coursier >/dev/null 2>&1
-	else
-		install_start "coursier"
-		brew install coursier/formulas/coursier >/dev/null 2>&1
-        yes n | cs setup
-		install_end "coursier"
-	fi
+if type "cs" >/dev/null 2>&1; then
+	install_exist "coursier"
 else
-	if type "cs" >/dev/null 2>&1; then
-		install_exist "coursier"
-	else
-		install_start "coursier"
-        curl -fL "https://github.com/coursier/launchers/raw/master/cs-x86_64-pc-linux.gz" | gzip -d > cs
+	install_start "coursier"
+	if "${is_mac}"; then
+		curl -fL "https://github.com/coursier/launchers/raw/master/cs-x86_64-pc-linux.gz" | gzip -d >cs
 		chmod +x cs
 		sudo mv cs /usr/local/bin/
-        yes n | cs setup
-		install_end "coursier"
+	else
+		brew install coursier/formulas/coursier >/dev/null 2>&1
 	fi
+	yes n | cs setup
+    cs install metals
+	install_end "coursier"
 fi
 
 echo
