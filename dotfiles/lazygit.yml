@@ -2,8 +2,10 @@ git:
   parseEmoji: true
 
 gui:
+  showCommandLog: false
   showIcons: false
-  language: 'en'
+  language: 'en' # test
+  mainPanelSplitMode: "horizontal"
 
 os:
   editPreset: "nvim"
