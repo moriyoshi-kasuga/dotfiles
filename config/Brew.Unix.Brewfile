@@ -9,6 +9,7 @@ brew "direnv"
 brew "ripgrep"
 brew "lazygit"
 brew "wget"
+brew "git-delta"
 
 brew "tmux"
 
