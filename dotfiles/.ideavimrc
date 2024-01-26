@@ -10,6 +10,7 @@ Plug 'tpope/vim-surround'
 Plug 'kana/vim-textobj-entire'
 Plug 'machakann/vim-highlightedyank'
 
+set which-key
 set sneak
 set quickscope
 
@@ -26,55 +27,56 @@ set smartcase
 set wrapscan
 set hlsearch
 set clipboard+=unnamedplus
+set notimeout
 """ Idea specific settings ------------------
 set ideajoin
 set ideastatusicon=gray
 """ My Mappings -----------------------------
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
+nmap <C-h> <C-w>h
+nmap <C-j> <C-w>j
+nmap <C-k> <C-w>k
+nmap <C-l> <C-w>l
 
 " Shift + 矢印でウィンドウサイズを変更
-nnoremap <S-Left>  <C-w><<CR>
-nnoremap <S-Right> <C-w>><CR>
-nnoremap <S-Up>    <C-w>-<CR>
-nnoremap <S-Down>  <C-w>+<CR>
+nmap <S-Left>  <C-w><<CR>
+nmap <S-Right> <C-w>><CR>
+nmap <S-Up>    <C-w>-<CR>
+nmap <S-Down>  <C-w>+<CR>
 
 imap jk <Esc>
+nmap <Esc><Esc> :nohl<CR>
 nmap <leader>e :NERDTreeFocus<CR>
 nmap <leader>o :NERDTreeClose<CR>
+nmap <S-Tab> <Action>(PreviousTab)
+nmap <Tab> <Action>(NextTab)
 
-nmap <ESC><ESC> :nohl<CR>
+nmap <leader>a <Action>(Annotate)
+nmap <leader>r <Action>(ReformatCode)
 
-map <leader>r <Action>(ReformatCode)
-map <leader>lr <Action>(RenameElement)
-map <leader>la <Action>(ShowIntentionActions)
-map <leader>a <Action>(Annotate)
+" Lsp
+nmap ga <Action>(ShowIntentionActions)
+nmap gs <Action>(GotoSuperMethod)
+nmap gA <Action>(QuickImplementations)
+nmap gr <Action>(GotoDeclaration)
+nmap gI <Action>(GotoImplementation)
+nmap gG <Action>(Generate)
+nmap K <Action>(ShowHoverInfo)
 
-map <leader>p <Action>(FileStructurePopup)
+nmap <leader>cs <Action>(GotoSymbol)
+nmap <leader>cr <Action>(RenameElement)
 
-map <leader>J Ji <ESC>
+nmap <leader><leader> <Action>(GotoFile)
+nmap <leader>fa <Action>(GotoAction)
+nmap <leader>fs <Action>(FileStructurePopup)
+nmap <leader>fr <Action>(RecentFiles)
 
-map <C-p> <Action>(GotoFile)
+nmap <leader>cu <Action>(GotoClass)
 
-nmap <leader>u <Action>(GotoClass)
-nmap <leader>s <Action>(GotoSymbol)
-
-nmap <leader>c <Action>(CloseContent)
+nmap <leader>bd <Action>(CloseContent)
 nmap <leader>bc <Action>(CloseAllEditorsButActive)
-nmap <leader>w <Action>(RecentFiles)
 
-nmap ¥ <Action>(SplitVertically)
-nmap - <Action>(SplitHorizontally)
-nmap [b <Action>(PreviousTab)
-nmap ]b <Action>(NextTab)
+
 nmap [c <Action>(VcsShowPrevChangeMarker)
 nmap ]c <Action>(VcsShowNextChangeMarker)
 nmap [d <Action>(GotoPreviousError)
 nmap ]d <Action>(GotoNextError)
-nmap gr <Action>(GotoDeclaration)
-nmap gi <Action>(GotoImplementation)
-nmap gG <Action>(Generate)
-nmap K <Action>(ShowHoverInfo)
-
