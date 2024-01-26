@@ -4,6 +4,12 @@ local keymap = vim.keymap
 -- leave insert mode
 keymap.set("i", "jk", "<esc>")
 
+-- buffer cycle
+keymap.set("n", "<Tab>", "<cmd>BufferLineCycleNext<cr>")
+keymap.set("n", "<S-Tab>", "<cmd>BufferLineCyclePrev<cr>")
+keymap.del("n", "<S-h>")
+keymap.del("n", "<S-l>")
+
 -- delete Terminal Mappings
 keymap.del("t", "<C-h>")
 keymap.del("t", "<C-j>")
