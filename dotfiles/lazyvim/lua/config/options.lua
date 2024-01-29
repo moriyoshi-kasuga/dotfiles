@@ -42,3 +42,9 @@ vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(function(_, result, ctx, c
   end
   return vim.lsp.util.open_floating_preview(markdown_lines, "markdown", config)
 end, { border = "rounded" })
+
+vim.filetype.add({
+  extension = {
+    mdx = "markdown",
+  },
+})

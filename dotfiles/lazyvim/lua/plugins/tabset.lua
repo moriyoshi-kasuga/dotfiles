@@ -25,6 +25,7 @@ return {
             "sccs",
             "markdown",
             "markdown.mdx",
+            "mdx",
             "graphql",
             "handlebars",
             "vue",
