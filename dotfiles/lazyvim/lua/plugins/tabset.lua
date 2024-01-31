@@ -21,7 +21,7 @@ return {
           filetypes = {
             "c",
             "cs",
-            "css",
+            "cpp",
             "sccs",
             "markdown",
             "markdown.mdx",
