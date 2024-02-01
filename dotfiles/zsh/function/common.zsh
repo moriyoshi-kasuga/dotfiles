@@ -1,37 +1,55 @@
-_error () {
+_log () {
     local ESC=$(printf '\033') 
-    echo "${ESC}[31mError:${ESC}[m $@"
+    echo "${ESC}[$1m$2:${ESC}[m ${@:3}"
+}
+_error () {
+    _log "31" "Error" "$@"
 }
 
 _warn () {
-    local ESC=$(printf '\033') 
-    echo "${ESC}[33mWarn:${ESC}[m $@"
+    _log "33" "Warn" "$@"
 }
 
 _info () {
-    local ESC=$(printf '\033') 
-    echo "${ESC}[32mInfo:${ESC}[m $@"
+    _log "32" "Info" "$@"
 }
 
 acct () {
-    if  [[ -z "$@" ]]
-    then
-        echo "Please input run code command"
-        echo "Example: python3 main.py"
-        echo "('g++ -std=c++17 main.cpp' shotcut is 'cpp')"
+    local main=$(find . -maxdepth 1 -type f -iname "*main.*" -print)
+    if [[ 0 -eq 1 ]]; then
+        echo "0 equals 1"
+    fi
+    if [[ -z "$main" ]]; then
+        _error "There is no main file."
         return
     fi
-    if [[ "$@" = "cpp" ]]; then
-        g++ -std=c++17 main.cpp 
-        oj t -d ./tests
-        return 0
+    if [[ $(echo "$main" | wc -l) -ge 2 ]]; then
+        _error "There are more than two main files."
+        _error
+        echo -e "$main" | sed -e 's/^/  /'
+        return
     fi
-    # "python3 main.py" でも python3 main.py のようにダブルクォートで囲まなくてもどちらでも
-    args=""
-    for arg in "$@"; do
-        args="$args $arg"
-    done
-    oj t -c "$args"  -d ./tests
+    local extension=$(basename "$main" | awk -F'.' '{if (NF > 1) {print $NF} else {print ""}}')
+    local lang=""
+    local args=""
+    case "$extension" in
+        "cpp")
+            lang="C++"
+            g++ -std=c++17 "$main"
+            args="./a.out"
+            ;;
+        "py")
+            lang="Python"
+            args="python3 $main"
+            ;;
+        *)
+            _error "Unknown file extension. $extension"
+            return
+            ;;
+    esac
+    _log 36 "Detected languages" "$lang"
+    echo
+    oj t -c "$args" -d ./tests
 }
 
 useful () {
@@ -46,14 +64,6 @@ useful () {
     chmod +x ./useful.sh
 }
 
-get () {
-  if  [[ -z "$@" ]]
-  then
-    echo "Plese input get url"
-  fi
-  curl -s "$@" | less -R
-}
-
 cht () {
-  get cht.sh/$@
+  curl -s "cht.sh/$@" | less -R
 }

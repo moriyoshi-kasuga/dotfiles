@@ -30,7 +30,12 @@ keymap.set("n", "<leader>r", function()
   Util.format({ force = true })
 end, { desc = "format" })
 
--- RunCode
+-- CodeRunner
 keymap.set("n", "<leader>dm", function()
-  require("util.util").RunCode()
+  require("lib.codeRunner").RunCode()
 end, { desc = "CodeRunner" })
+
+--
+keymap.set("n", "<leader>dM", function()
+  require("lib.atcoder").run()
+end, { desc = "AtCoder" })

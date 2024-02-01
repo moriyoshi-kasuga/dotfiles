@@ -50,12 +50,16 @@ return {
           enabled = false,
         },
         hover = {
-          enabled = false,
+          enabled = true,
         },
         override = {
-          ["vim.lsp.util.convert_input_to_markdown_lines"] = false,
-          ["vim.lsp.util.stylize_markdown"] = false,
-          ["cmp.entry.get_documentation"] = false,
+          ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+          ["vim.lsp.util.stylize_markdown"] = true,
+          ["cmp.entry.get_documentation"] = true,
+        },
+        presets = {
+          inc_rename = true, -- enables an input dialog for inc-rename.nvim
+          lsp_doc_border = true, -- add a border to hover docs and signature help
         },
       },
     },
@@ -146,7 +150,6 @@ return {
     config = function()
       require("inc_rename").setup()
       vim.keymap.set("n", "gR", ":IncRename ", { desc = "Inc Rename" })
-
     end,
   },
   {

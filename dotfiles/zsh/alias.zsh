@@ -13,7 +13,7 @@ alias ...="cd ../../"
 alias ....="cd ../../../"
 
 
-alias lg="lazygit"
+alias gl="lazygit"
 alias v="nvim"
 alias pip="pip3"
 alias sqlite="sqlite3"
@@ -28,4 +28,5 @@ alias dcudb='docker compose up -d --build'
 alias dce='docker compose exec'
 alias dcl='docker compose logs'
 alias dcd='docker compose down'
+alias dcb='docker compose build'
 alias dcbnc='docker compose build --no-cache'
