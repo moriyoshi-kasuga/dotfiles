@@ -67,3 +67,11 @@ useful () {
 cht () {
   curl -s "cht.sh/$@" | less -R
 }
+
+ide () {
+    tmux split-window -l 15
+    sleep 0.2
+    tmux split-window -h -l 66%
+    sleep 0.2
+    tmux split-window -h -l 50%
+}
