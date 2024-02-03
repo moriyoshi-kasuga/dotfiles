@@ -17,4 +17,5 @@ cask "local"
 
 cask "font-jetbrains-mono-nerd-font"
 cask "font-ubuntu-mono-nerd-font"
+cask "font-cica"
 cask "font-udev-gothic-nf"

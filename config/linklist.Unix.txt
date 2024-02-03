@@ -4,7 +4,6 @@
 
 #zsh
 
-.p10k.zsh ${HOME}/.p10k.zsh
 .zshrc ${HOME}/.zshrc
 .zprofile ${HOME}/.zprofile
 zsh ${HOME}/zsh

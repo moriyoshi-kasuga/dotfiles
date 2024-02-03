@@ -1,11 +1,11 @@
 ### alias
 
 # ls
-alias ls='lsd'
-alias ll='ls -l'
-alias la='ls -A'
-alias lsa='ls -lA'
-alias lt='ls --tree'
+alias l='lsd'
+alias ll='lsd -l'
+alias la='lsd -A'
+alias lsa='lsd -lA'
+alias lt='lsd --tree'
 
 # Directory
 alias ..="cd ../"
@@ -13,7 +13,7 @@ alias ...="cd ../../"
 alias ....="cd ../../../"
 
 
-alias gl="lazygit"
+alias lg="lazygit"
 alias v="nvim"
 alias pip="pip3"
 alias sqlite="sqlite3"
@@ -30,3 +30,22 @@ alias dcl='docker compose logs'
 alias dcd='docker compose down'
 alias dcb='docker compose build'
 alias dcbnc='docker compose build --no-cache'
+
+# git
+alias ga="git add"
+alias gbd="git branch -d"
+alias gb='git branch'
+alias gcm='git commit -m'
+alias gca="git commit --amend"
+alias gc="git checkout"
+alias gcb="git checkout -b"
+alias gl="git log --date=iso --decorate"
+alias glp="git log --date=iso --decorate --patch"
+alias glg="git log --date=iso --graph --decorate --oneline --all"
+alias gs="git status"
+alias gf="git fetch"
+alias gp="git pull"
+alias gst="git stash"
+alias gstl="git stash list"
+alias gstp="git stash pop"
+alias gstd="git stash drop"

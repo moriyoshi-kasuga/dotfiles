@@ -8,6 +8,7 @@ brew "fzf"
 brew "direnv"
 brew "ripgrep"
 brew "lazygit"
+brew "starship"
 brew "wget"
 brew "git-delta"
 

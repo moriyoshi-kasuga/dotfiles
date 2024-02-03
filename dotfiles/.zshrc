@@ -20,11 +20,8 @@ zinit wait lucid light-mode for \
     zdharma-continuum/zinit-annex-rust
 
 ### End of Zinit's installer chunk
-POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
-typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
-zinit ice depth=1
-zinit light romkatv/powerlevel10k
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+eval "$(starship init zsh)"
 
 ### Plugin
 
