@@ -10,6 +10,9 @@ keymap.set("n", "<S-Tab>", "<cmd>BufferLineCyclePrev<cr>")
 keymap.del("n", "<S-h>")
 keymap.del("n", "<S-l>")
 
+-- Telescope
+keymap.set("n", "gp", "<cmd>Telescope registers<cr>")
+
 -- delete Terminal Mappings
 keymap.del("t", "<C-h>")
 keymap.del("t", "<C-j>")

@@ -5,9 +5,17 @@ vim.g.autoformat = false -- disable auto format
 vim.g["qs_highlight_on_keys"] = { "f", "F", "t", "T" }
 vim.opt.spelllang = "en,cjk"
 
+vim.o.clipboard = ""
+
 vim.o.mouse = "" -- disable mouse
 
 vim.opt.list = false
+
+vim.filetype.add({
+  extension = {
+    mdx = "markdown",
+  },
+})
 
 -- local function replace_markdown(var)
 --   if type(var) == "table" then
@@ -40,9 +48,3 @@ vim.opt.list = false
 --   end
 --   return vim.lsp.util.open_floating_preview(markdown_lines, "markdown", config)
 -- end, { border = "rounded" })
-
-vim.filetype.add({
-  extension = {
-    mdx = "markdown",
-  },
-})

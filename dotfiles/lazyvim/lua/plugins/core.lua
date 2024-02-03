@@ -90,21 +90,6 @@ return {
     lazy = false,
   },
 
-  {
-    "folke/flash.nvim",
-    ---@type Flash.Config
-    opts = {
-      modes = {
-        search = {
-          enabled = false,
-        },
-        char = {
-          enabled = false,
-        },
-      },
-    },
-  },
-
   -- add symbols-outline
   {
     "simrat39/symbols-outline.nvim",
@@ -154,8 +139,37 @@ return {
   },
   {
     "numToStr/Comment.nvim",
+    -- event = { "BufReadPre", "BufNewFile" },
+    dependencies = {
+      "JoosepAlviste/nvim-ts-context-commentstring",
+    },
     config = function()
-      require("Comment").setup()
+      -- import comment plugin safely
+      local comment = require("Comment")
+
+      local ts_context_commentstring = require("ts_context_commentstring.integrations.comment_nvim")
+
+      -- enable comment
+      ---@diagnostic disable-next-line: missing-fields
+      comment.setup({
+        -- for commenting tsx and jsx files
+        pre_hook = ts_context_commentstring.create_pre_hook(),
+      })
+    end,
+  },
+  {
+    "kevinhwang91/nvim-hlslens",
+    config = function()
+      require("hlslens").setup()
+    end,
+  },
+  {
+    "phaazon/hop.nvim",
+    config = function()
+      require("hop").setup({ keys = "etovxqpdygfblzhckisuran" })
+      vim.keymap.set({ "n", "v" }, "s", function()
+        require("hop").hint_words()
+      end)
     end,
   },
 }
