@@ -2,10 +2,12 @@ case ${OSTYPE} in
     darwin*)
         eval "$(/opt/homebrew/bin/brew shellenv)"
         export PATH="$PATH:/Users/${USER}/Library/Application Support/Coursier/bin"
+        export PATH="/opt/homebrew/opt/openjdk@17/bin:$PATH"
         ;;
     linux*)
-        export PATH="$PATH:/home/${USER}/.local/share/coursier/bin"
         eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+        export PATH="$PATH:/home/${USER}/.local/share/coursier/bin"
+        export PATH="/home/linuxbrew/.linuxbrew/opt/openjdk@17/bin:$PATH"
         ;;
 esac
 
@@ -21,3 +23,4 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
+export XDG_CONFIG_HOME="$HOME/.config"
