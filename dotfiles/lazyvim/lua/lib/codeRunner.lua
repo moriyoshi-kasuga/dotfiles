@@ -11,8 +11,8 @@ M.supported_filetypes = {
   cpp = {
     run = "${compile} && $debugPath",
     runStdio = "${compile} && $debugPath < ${input}",
-    compile = "g++ -std=c++17 $file -o $debugPath",
-    debug = "g++ -std=c++17 -Wall -DAL -O2 $file -o $debugPath",
+    compile = "g++ -std=c++23 $file -o $debugPath",
+    debug = "g++ -std=c++23 -Wall -DAL -O2 $file -o $debugPath",
   },
   py = {
     run = "python $file",

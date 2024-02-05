@@ -35,7 +35,7 @@ acct () {
     case "$extension" in
         "cpp")
             lang="C++"
-            g++ -std=c++17 "$main"
+            g++ -std=c++23 "$main"
             args="./a.out"
             ;;
         "py")

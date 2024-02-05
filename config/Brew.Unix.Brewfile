@@ -11,7 +11,7 @@ brew "lazygit"
 brew "starship"
 brew "wget"
 brew "git-delta"
-
+brew "llvm"
 brew "tmux"
 
 brew "supabase/tap/supabase"
