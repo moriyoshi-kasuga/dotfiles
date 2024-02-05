@@ -7,6 +7,7 @@
 .zshrc ${HOME}/.zshrc
 .zprofile ${HOME}/.zprofile
 zsh ${HOME}/zsh
+starship.toml ${HOME}/.config/starship.toml
 
 
 #git
