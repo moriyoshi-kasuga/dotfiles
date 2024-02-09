@@ -3,6 +3,7 @@ tap "homebrew/cask"
 tap "homebrew/cask-fonts"
 
 brew "coreutils"
+brew "gun-time"
 
 cask "discord"
 cask "slack"
