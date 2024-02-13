@@ -49,7 +49,7 @@ acct () {
     esac
     _log 36 "Detected languages" "$lang"
     echo
-    oj t -c "$args" -d ./tests
+    oj t -c "$args" -d ./tests -N
 }
 
 useful () {
