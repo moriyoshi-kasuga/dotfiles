@@ -15,7 +15,7 @@ M.supported_filetypes = {
     debug = "g++ -std=c++23 -Wall -DAL -O2 $file -o $debugPath",
   },
   py = {
-    run = "python $file",
+    run = "python3 $file",
   },
 }
 
@@ -44,8 +44,7 @@ function M.RunCode()
             if selected_cmd:find("${input}") then
               selected_cmd = selected_cmd:gsub("${input}", util.getChoiceFilePath())
             end
-            vim.cmd(term_cmd .. util.substitute(selected_cmd))
-            vim.api.nvim_buf_set_keymap(0, "n", "q", ":bd!<cr>", { noremap = true, silent = true })
+            util.open_buf("CodeRunner", term_cmd .. util.substitute(selected_cmd))
           end)
           run()
         end
@@ -54,16 +53,6 @@ function M.RunCode()
   else
     vim.notify("The filetype isn't included in the list", vim.log.levels.WARN, { title = "Code Runner" })
   end
-end
-
-function M.getPathAndRunDebug()
-  local file_extension = vim.fn.expand("%:e")
-  local filetype = M.supported_filetypes[file_extension]
-  local debug = filetype["debug"]
-  local compileCmd = util.substitute(debug)
-  local job_id = vim.fn.jobstart(compileCmd)
-  vim.fn.jobwait({ job_id }, -1)
-  return util.getDebugPath()
 end
 
 return M

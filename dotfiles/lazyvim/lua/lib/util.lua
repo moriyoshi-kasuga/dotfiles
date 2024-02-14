@@ -15,6 +15,9 @@ function M.exists(file)
   return ok, err
 end
 
+--- option を評価する
+---@param option any
+---@return any
 function M.eval_option(option)
   if type(option) == "function" then
     option = option()
@@ -92,6 +95,23 @@ function M.substitute(cmd)
   cmd = cmd:gsub("$dir", vim.fn.expand("%:p:h"))
   cmd = cmd:gsub("$debugPath", M.getDebugPath())
   return cmd
+end
+
+--- open a buffer
+---@param identifier string identifier
+---@param open_buf_cmd string to open buf
+function M.open_buf(identifier, open_buf_cmd)
+  for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+    local buf = vim.api.nvim_win_get_buf(win)
+    local success, _ = pcall(vim.api.nvim_buf_get_var, buf, identifier)
+    if success then
+      vim.api.nvim_buf_delete(buf, { force = true })
+      break
+    end
+  end
+  vim.cmd(open_buf_cmd)
+  vim.api.nvim_buf_set_var(0, identifier, true)
+  vim.api.nvim_buf_set_keymap(0, "n", "q", ":bd!<cr>", { noremap = true, silent = true })
 end
 
 return M
