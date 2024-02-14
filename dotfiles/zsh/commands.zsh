@@ -1,8 +1,7 @@
 ### Custom commands
 
-source "${HOME}/zsh/function/common.zsh"
-source "${HOME}/zsh/function/venv.zsh"
-source "${HOME}/zsh/function/tmux.zsh"
+source "${HOME}/zsh/script/user.sh"
+source "${HOME}/zsh/script/venv.sh"
 
 function fzf-history-selection() {
     BUFFER=`history -n 1 | tac  | awk '!a[$0]++' | grep -v 'cd ' | fzf --reverse --prompt="history >" --query "$LBUFFER"`

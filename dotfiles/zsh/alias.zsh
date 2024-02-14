@@ -15,9 +15,6 @@ alias ....="cd ../../../"
 
 alias lg="lazygit"
 alias v="nvim"
-alias pip="pip3"
-alias sqlite="sqlite3"
-alias python="python3"
 
 # Dockerコマンド
 alias d='docker'

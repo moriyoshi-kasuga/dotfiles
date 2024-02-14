@@ -4,8 +4,9 @@
 
 #zsh
 
-.zshrc ${HOME}/.zshrc
+.zshenv ${HOME}/.zshenv
 .zprofile ${HOME}/.zprofile
+.zshrc ${HOME}/.zshrc
 zsh ${HOME}/zsh
 starship.toml ${HOME}/.config/starship.toml
 
