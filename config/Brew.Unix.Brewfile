@@ -13,5 +13,6 @@ brew "wget"
 brew "git-delta"
 brew "llvm"
 brew "tmux"
+brew "jq"
 
 brew "supabase/tap/supabase"
