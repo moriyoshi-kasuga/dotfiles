@@ -1,67 +1,79 @@
+local function cmd(command)
+  return table.concat({ "<Cmd>", command, "<CR>" })
+end
+
 local Util = require("lazyvim.util")
-local keymap = vim.keymap
+local map = vim.keymap.set
+local del = vim.keymap.del
 
 -- leave insert mode
-keymap.set("i", "jk", "<esc>")
+map("i", "jk", "<esc>")
 
 -- buffer cycle
-keymap.set("n", "<Tab>", "<cmd>BufferLineCycleNext<cr>")
-keymap.set("n", "<S-Tab>", "<cmd>BufferLineCyclePrev<cr>")
-keymap.del("n", "<S-h>")
-keymap.del("n", "<S-l>")
+map("n", "<Tab>", cmd("BufferLineCycleNext"))
+map("n", "<S-Tab>", cmd("BufferLineCyclePrev"))
+del("n", "<S-h>")
+del("n", "<S-l>")
 
 -- Telescope
-keymap.set("n", "gp", "<cmd>Telescope registers<cr>")
+map("n", "gp", cmd("Telescope registers"))
 
 -- delete Terminal Mappings
-keymap.del("t", "<C-h>")
-keymap.del("t", "<C-j>")
-keymap.del("t", "<C-k>")
-keymap.del("t", "<C-l>")
+del("t", "<C-h>")
+del("t", "<C-j>")
+del("t", "<C-k>")
+del("t", "<C-l>")
 
 -- windows
-keymap.set("n", "<leader>wv", "<C-w>v", { desc = "Vertical split" })
-keymap.set("n", "<leader>ws", "<C-w>s", { desc = "Horizontal split" })
-keymap.set("n", "<leader>wo", "<C-w>o", { desc = "Close Other window" })
+map("n", "<leader>wv", "<C-w>v", { desc = "Vertical split" })
+map("n", "<leader>ws", "<C-w>s", { desc = "Horizontal split" })
+map("n", "<leader>wo", "<C-w>o", { desc = "Close Other window" })
+
+map("n", "<C-w>z", cmd("WindowsMaximize"))
+map("n", "<C-w>_", cmd("WindowsMaximizeVertically"))
+map("n", "<C-w>|", cmd("WindowsMaximizeHorizontally"))
+map("n", "<C-w>=", cmd("WindowsEqualize"))
+map("n","<leader>wz",cmd("WindowsMaximize"))
 
 -- Lsp
-keymap.set({ "n", "v" }, "ga", vim.lsp.buf.code_action, { desc = "Code action" })
-keymap.set("n", "gk", vim.lsp.buf.signature_help, { desc = "Signature help" })
+map({ "n", "v" }, "ga", vim.lsp.buf.code_action, { desc = "Code action" })
+map("n", "gk", vim.lsp.buf.signature_help, { desc = "Signature help" })
 
 -- format
-keymap.set("n", "<leader>r", function()
+map("n", "<leader>r", function()
   Util.format({ force = true })
 end, { desc = "format" })
 
 -- CodeRunner
-keymap.set("n", "<leader>dm", function()
+map("n", "<leader>dm", function()
   require("lib.codeRunner").RunCode()
 end, { desc = "CodeRunner" })
 
 -- dap
-keymap.set("n", "<leader>dM", function()
+map("n", "<leader>dM", function()
   require("lib.util").open_buf("AtCoder", "vsplit term://acct")
 end, { desc = "AtCoder" })
 
 -- noice
-keymap.set("n", "<leader>nl", function()
+map("n", "<leader>nl", function()
   require("noice").cmd("last")
 end, { desc = "Last message" })
-keymap.set("n", "<leader>nf", function()
+map("n", "<leader>nf", function()
   require("noice").cmd("first")
 end, { desc = "First message" })
-keymap.set("n", "<leader>nh", function()
+map("n", "<leader>nh", function()
   require("noice").cmd("history")
 end, { desc = "History" })
-keymap.set("n", "<leader>na", function()
+map("n", "<leader>na", function()
   require("noice").cmd("all")
 end, { desc = "All" })
-keymap.set("n", "<leader>nr", function()
+map("n", "<leader>nr", function()
   require("noice").cmd("refresh")
 end, { desc = "Refresh" })
-keymap.set("n", "<leader>nd", function()
+map("n", "<leader>nd", function()
   require("noice").cmd("dismiss")
 end, { desc = "Dismiss" })
-keymap.set("n", "<leader>ns", function()
+map("n", "<leader>ns", function()
   require("noice").cmd("search")
 end, { desc = "Search" })
+
