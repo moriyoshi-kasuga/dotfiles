@@ -27,8 +27,6 @@ if [[ -n $(echo ${^fpath}/chpwd_recent_dirs(N)) && -n $(echo ${^fpath}/cdr(N)) ]
 		done
 		mv "$HOME/.cache/chpwd-recent-dirs.tmp" "$HOME/.cache/chpwd-recent-dirs"
 	fi
-
-
 fi
 
 
@@ -47,5 +45,4 @@ setopt share_history      # 他のシェルのヒストリをリアルタイム�
 setopt hist_reduce_blanks # 余分なスペースを削除してヒストリに保存する
 
 ### vim
-bindkey -v
-bindkey -M viins 'jk' vi-cmd-mode
+ZVM_VI_INSERT_ESCAPE_BINDKEY=jk

@@ -10,7 +10,6 @@ function fzf-history-selection() {
 }
 
 zle -N fzf-history-selection
-bindkey '^R' fzf-history-selection
 
 function fzf-cdr () {
     local selected_dir="$(cdr -l | awk '{ print $2 }' | sed 's/^[0-9]\+ \+//' | fzf --reverse --prompt="cdr >" --query "$LBUFFER")"
@@ -19,5 +18,8 @@ function fzf-cdr () {
         zle accept-line
     fi
 }
+
 zle -N fzf-cdr
-bindkey '^G' fzf-cdr
+
+zvm_after_init_commands+=('bindkey "^R" fzf-history-selection')
+zvm_after_init_commands+=('bindkey "^G" fzf-cdr')

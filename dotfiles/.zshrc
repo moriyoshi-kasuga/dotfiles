@@ -31,6 +31,9 @@ zinit wait lucid for \
  atload"!_zsh_autosuggest_start" \
     zsh-users/zsh-autosuggestions
 
+zinit ice depth=1
+zinit light jeffreytse/zsh-vi-mode
+
 source "${HOME}/zsh/alias.zsh"
 source "${HOME}/zsh/settings.zsh"
 source "${HOME}/zsh/commands.zsh"
