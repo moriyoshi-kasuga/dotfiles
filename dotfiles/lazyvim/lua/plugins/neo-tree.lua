@@ -5,6 +5,17 @@ return {
     { "<leader>o", mode = "n", "<cmd>Neotree close<cr>", desc = "Neotree close." },
   },
   opts = {
+    event_handlers = {
+      {
+        event = "neo_tree_buffer_enter",
+        handler = function(_)
+          vim.cmd([[
+          setlocal number
+          setlocal relativenumber
+        ]])
+        end,
+      },
+    },
     commands = {
       parent_or_close = function(state)
         local node = state.tree:get_node()

@@ -1,5 +1,5 @@
 local function cmd(command)
-  return table.concat({ "<Cmd>", command, "<CR>" })
+  return table.concat({ "<cmd>", command, "<CR>" })
 end
 
 local Util = require("lazyvim.util")
@@ -23,17 +23,6 @@ del("t", "<C-h>")
 del("t", "<C-j>")
 del("t", "<C-k>")
 del("t", "<C-l>")
-
--- windows
-map("n", "<leader>wv", "<C-w>v", { desc = "Vertical split" })
-map("n", "<leader>ws", "<C-w>s", { desc = "Horizontal split" })
-map("n", "<leader>wo", "<C-w>o", { desc = "Close Other window" })
-
-map("n", "<C-w>z", cmd("WindowsMaximize"))
-map("n", "<C-w>_", cmd("WindowsMaximizeVertically"))
-map("n", "<C-w>|", cmd("WindowsMaximizeHorizontally"))
-map("n", "<C-w>=", cmd("WindowsEqualize"))
-map("n","<leader>wz",cmd("WindowsMaximize"))
 
 -- Lsp
 map({ "n", "v" }, "ga", vim.lsp.buf.code_action, { desc = "Code action" })
@@ -77,3 +66,45 @@ map("n", "<leader>ns", function()
   require("noice").cmd("search")
 end, { desc = "Search" })
 
+-- increment/decrement
+map("n", "+", "<C-a>", { desc = "Increment" })
+map("n", "-", "<C-x>", { desc = "Decrement" })
+
+-- buffers
+map("n", "<leader>bf", cmd("bfirst"), { desc = "First Buffer" })
+map("n", "<leader>ba", cmd("blast"), { desc = "Last Buffer" })
+
+-- Toggle statusline
+map("n", "<leader>uS", function()
+  if vim.opt.laststatus:get() == 0 then
+    vim.opt.laststatus = 3
+  else
+    vim.opt.laststatus = 0
+  end
+end, { desc = "Toggle Statusline" })
+
+-- Toggle tabline
+map("n", "<leader>u<tab>", function()
+  if vim.opt.showtabline:get() == 0 then
+    vim.opt.showtabline = 2
+  else
+    vim.opt.showtabline = 0
+  end
+end, { desc = "Toggle Tabline" })
+
+-- Deleting without yanking empty line
+map("n", "dd", function()
+  return vim.api.nvim_get_current_line():match("^$") ~= nil and '"_dd' or "dd"
+end, { noremap = true, expr = true, desc = "Don't yank empty line to clipboard" })
+
+-- Git
+map("n", "<leader>ug", cmd("Gitsigns toggle_current_line_blame"), { desc = "Toggle Git blame" })
+
+-- delete key somethings
+del("n", "<leader>l")
+del("n", "<leader>L")
+del("n", "<leader>K")
+del("n", "<leader>E")
+del("n", "<leader>|")
+del("n", "<leader>-")
+del("n", "<leader>`")

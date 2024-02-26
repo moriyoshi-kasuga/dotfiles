@@ -38,46 +38,6 @@ return {
     },
   },
   {
-    "folke/noice.nvim",
-    keys = {
-      { "<S-Enter>", false },
-      { "<c-f>", false },
-      { "<c-b>", false },
-    },
-    opts = {
-      lsp = {
-        progress = {
-          enabled = false,
-        },
-        hover = {
-          enabled = true,
-        },
-        override = {
-          ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-          ["vim.lsp.util.stylize_markdown"] = true,
-          ["cmp.entry.get_documentation"] = true,
-        },
-      },
-      presets = {
-        inc_rename = true, -- enables an input dialog for inc-rename.nvim
-        lsp_doc_border = true, -- add a border to hover docs and signature help
-      },
-    },
-  },
-  {
-    "folke/noice.nvim",
-    opts = function(_, opts)
-      table.insert(opts.routes, {
-        filter = {
-          event = "notify",
-          find = "No information available",
-        },
-        opts = { skip = true },
-      })
-    end,
-  },
-
-  {
     "kylechui/nvim-surround",
     version = "*",
     event = "VeryLazy",
@@ -170,15 +130,6 @@ return {
       vim.keymap.set({ "n", "v" }, "s", function()
         require("hop").hint_words()
       end)
-    end,
-  },
-  {
-    "anuvyklack/windows.nvim",
-    dependencies = {
-      "anuvyklack/middleclass",
-    },
-    config = function()
-      require("windows").setup()
     end,
   },
 }

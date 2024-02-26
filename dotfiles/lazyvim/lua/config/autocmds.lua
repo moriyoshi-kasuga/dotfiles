@@ -7,10 +7,31 @@ highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=unde
 highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline
 ]])
 
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "json", "jsonc" },
+local ac = vim.api.nvim_create_autocmd
+local ag = vim.api.nvim_create_augroup
+
+-- next/prev heading on markdown
+ac("FileType", {
+  pattern = "markdown",
   callback = function()
-    vim.wo.spell = false
-    vim.wo.conceallevel = 0
+    vim.keymap.set({ "n", "x" }, "]#", [[/^#\+ .*<CR>]], { desc = "Next Heading", buffer = true })
+    vim.keymap.set({ "n", "x" }, "[#", [[?^#\+ .*<CR>]], { desc = "Prev Heading", buffer = true })
+  end,
+})
+
+-- Disable diagnostics in a .env file
+ac("BufRead", {
+  pattern = ".env",
+  callback = function()
+    vim.diagnostic.disable(0)
+  end,
+})
+
+-- Disable eslint on node_modules
+ac({ "BufNewFile", "BufRead" }, {
+  group = ag("DisableEslintOnNodeModules", { clear = true }),
+  pattern = { "**/node_modules/**", "node_modules", "/node_modules/*" },
+  callback = function()
+    vim.diagnostic.disable(0)
   end,
 })

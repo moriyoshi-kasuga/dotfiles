@@ -1,29 +1,39 @@
+local actions = require("telescope.actions")
+
 return {
-  -- change some telescope options and a keymap to browse plugin files
   {
     "nvim-telescope/telescope.nvim",
     opts = {
       defaults = {
-        layout_strategy = "horizontal",
         layout_config = { prompt_position = "top" },
         sorting_strategy = "ascending",
-        winblend = 0,
+        mappings = {
+          i = {
+            ["<C-i>"] = require("telescope.actions.layout").toggle_preview,
+            ["<C-j>"] = actions.cycle_history_next,
+            ["<C-k>"] = actions.cycle_history_prev,
+          },
+        },
+        file_ignore_patterns = {
+          "node_modules",
+        },
+        pickers = {
+          find_files = {
+            hidden = false,
+          },
+        },
+        extensions = {
+          fzf = {
+            fuzzy = true,
+            override_generic_sorter = true,
+            override_file_sorter = true,
+            case_mode = "smart_case",
+          },
+          ["ui-select"] = {
+            require("telescope.themes").get_dropdown({}),
+          },
+        },
       },
-    },
-    keys = {
-      {"<leader>sb","<cmd>Telescope buffers<cr>", desc = "Search buffer"},
-    }
-  },
-
-  -- add telescope-fzf-native
-  {
-    "telescope.nvim",
-    dependencies = {
-      "nvim-telescope/telescope-fzf-native.nvim",
-      build = "make",
-      config = function()
-        require("telescope").load_extension("fzf")
-      end,
     },
   },
 }
