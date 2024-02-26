@@ -19,17 +19,9 @@ fi
 notice "${BLACK}${CYAN_BG}★ Start setup Initialize"
 
 if ! "${is_mac}"; then
-	echo
-	setup_start "Update to the latest Ubuntu status"
-	echo
-
 	sudo apt-get -y -qq update >/dev/null 2>&1
 	sudo apt-get -y -qq upgrade >/dev/null 2>&1
 	sudo apt-get -y -qq clean >/dev/null 2>&1
-
-	echo
-	setup_end "Update to the latest Ubuntu status"
-	echo
 fi
 
 make link
@@ -51,7 +43,9 @@ make neovim
 make docker
 
 if "${is_mac}"; then
-	make mac
+	make darwin
+else
+	make linux
 fi
 
 echo

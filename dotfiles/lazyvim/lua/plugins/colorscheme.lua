@@ -1,4 +1,5 @@
 return {
+  -- installed colorschemes
   {
     "craftzdog/solarized-osaka.nvim",
   },
@@ -11,13 +12,17 @@ return {
       require("astrotheme").setup({})
     end,
   },
+  -- colorscheme settings
+  {
+    "rafi/theme-loader.nvim",
+    lazy = false,
+    priority = 999,
+    opts = {},
+  },
   {
     "LazyVim/LazyVim",
     opts = {
-      -- colorscheme = "solarized-osaka",
-      colorscheme = "lunar",
-      -- colorscheme = "catppuccin-macchiato",
-      -- colorscheme = "astrodark",
+      colorscheme = function() end,
     },
   },
 }

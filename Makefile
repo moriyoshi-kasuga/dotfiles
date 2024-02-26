@@ -31,9 +31,6 @@ neovim:
 astronvim:
 	bash ./bin/astronvim.sh
 
-mac:
-	bash ./bin/mac.sh
-
 docker:
 	bash ./bin/docker.sh
 
@@ -42,3 +39,9 @@ debug:
 
 likes:
 	bash ./bin/likes.sh
+
+darwin:
+	bash ./bin/darwin.sh
+
+linux:
+	bash ./bin/linux.sh
