@@ -14,5 +14,6 @@ brew "git-delta"
 brew "llvm"
 brew "tmux"
 brew "jq"
+brew "fd"
 
 brew "supabase/tap/supabase"
