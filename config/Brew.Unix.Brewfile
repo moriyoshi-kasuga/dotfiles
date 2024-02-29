@@ -15,5 +15,6 @@ brew "llvm"
 brew "tmux"
 brew "jq"
 brew "fd"
+brew "zoxide"
 
 brew "supabase/tap/supabase"
