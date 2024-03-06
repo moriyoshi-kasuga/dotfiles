@@ -17,7 +17,6 @@ _info() {
 	_log "32" "Info" "$@"
 }
 
-# TODO: Add feature of Choice language
 acct() {
 	local main
 	main=$(find . -maxdepth 1 -type f -iname "*main.*" -print)
@@ -37,7 +36,6 @@ acct() {
 			main="main.$1"
 		else
 			_error "There is no main.$1 file."
-			_error
 			return
 		fi
 	fi
