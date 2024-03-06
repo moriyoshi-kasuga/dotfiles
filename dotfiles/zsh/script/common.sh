@@ -17,21 +17,29 @@ _info() {
 	_log "32" "Info" "$@"
 }
 
+# TODO: Add feature of Choice language
 acct() {
 	local main
 	main=$(find . -maxdepth 1 -type f -iname "*main.*" -print)
-	if [[ 0 -eq 1 ]]; then
-		echo "0 equals 1"
-	fi
 	if [[ -z "$main" ]]; then
 		_error "There is no main file."
 		return
 	fi
-	if [[ $(echo "$main" | wc -l) -ge 2 ]]; then
-		_error "There are more than two main files."
-		_error
-		echo -e "$main" | sed -e 's/^/  /'
-		return
+	if [[ -z "$1" ]]; then
+		if [[ $(echo "$main" | wc -l) -ge 2 ]]; then
+			_error "There are more than two main files."
+			_error
+			echo -e "$main" | sed -e 's/^/  /'
+			return
+		fi
+	else
+		if [[ "$main" == *"main.$1"* ]]; then
+			main="main.$1"
+		else
+			_error "There is no main.$1 file."
+			_error
+			return
+		fi
 	fi
 	local extension
 	extension=$(basename "$main" | awk -F'.' '{if (NF > 1) {print $NF} else {print ""}}')
@@ -69,4 +77,3 @@ useful() {
 	echo "" >>./useful.sh
 	chmod +x ./useful.sh
 }
-
