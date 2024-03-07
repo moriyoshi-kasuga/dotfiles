@@ -12,10 +12,6 @@ alias ..="cd ../"
 alias ...="cd ../../"
 alias ....="cd ../../../"
 
-
-alias lg="lazygit"
-alias v="nvim"
-
 # Dockerコマンド
 alias d='docker'
 alias dc='docker compose'
@@ -46,3 +42,10 @@ alias gst="git stash"
 alias gstl="git stash list"
 alias gstp="git stash pop"
 alias gstd="git stash drop"
+
+# useful
+alias lg="lazygit"
+alias v="nvim"
+alias e="exit"
+alias c="clear"
+alias reload="exec zsh -l"
