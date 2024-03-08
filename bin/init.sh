@@ -1,20 +1,9 @@
 #!/usr/bin/env bash
 
-export TERM=xterm-256color
-
-test "$(uname)" = "Darwin" && is_mac=true || is_mac=false
-"${is_mac}" && script_root=$(dirname "$(readlink -f "${0}")") || script_root=$(dirname "$(realpath "$0")")
+is_mac=$(uname -s | grep -qi "darwin" && echo true || echo false)
+script_root=$(cd "$(dirname "$0")" && pwd)
 . "${script_root}"/common.sh
 require_password
-
-# on_debug=true
-on_debug=false
-
-if "${on_debug}"; then
-	make debug
-	debug "exit debug"
-	exit 0
-fi
 
 notice "${BLACK}${CYAN_BG}★ Start setup Initialize"
 

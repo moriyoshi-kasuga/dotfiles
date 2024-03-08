@@ -86,6 +86,7 @@ return {
         ["htmldjango"] = { "djlint" },
         ["scala"] = { "metals" },
         ["sbt"] = { "metals" },
+        ["rust"] = { "rustfmt" },
       },
     },
   },

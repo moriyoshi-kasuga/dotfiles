@@ -23,3 +23,6 @@ setopt hist_reduce_blanks # 余分なスペースを削除してヒストリに�
 
 ### vim
 ZVM_VI_INSERT_ESCAPE_BINDKEY=jk
+
+### export
+export TERM=xterm-256color

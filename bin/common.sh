@@ -1,18 +1,18 @@
 #!/usr/bin/env bash
 
-test "$(uname)" = "Darwin" && SCRIPT_ROOT=$(dirname "$(readlink -f "${0}")") || SCRIPT_ROOT=$(dirname "$(realpath "$0")")
-. "${SCRIPT_ROOT}/color.sh"
+script_root=$(cd "$(dirname "$0")" && pwd)
+. "${script_root}"/color.sh
 
 # 0 debug,1 info,2 notice,3 warn,4 error
 LOGGER_LEVEL=0
 LOGGER_PREFIX=("DEBUG" "INFO" "NOTICE" "WARN" "ERROR")
 LOGGER_COLOR=("${BLACK}${WHITE_BG}" "${WHITE}" "${BLUE}" "${YELLOW}" "${RED_B}")
 
-log() {
+function log() {
 	echo "${YELLOW}[$(date)]$1[$2] $3${NC}"
 }
 
-logger() {
+function logger() {
 	local level="$1"
 	if test "${level}" -lt "${LOGGER_LEVEL}"; then
 		return
@@ -20,47 +20,47 @@ logger() {
 	log "${LOGGER_COLOR[$level]}" "${LOGGER_PREFIX[$level]}" "$2"
 }
 
-debug() {
-	logger 0 "$1"
-}
-
-info() {
+function debug() {
 	logger 1 "$1"
 }
 
-notice() {
+function info() {
 	logger 2 "$1"
 }
 
-warn() {
+function notice() {
 	logger 3 "$1"
 }
 
-error() {
+function warn() {
 	logger 4 "$1"
 }
 
-setup_start() {
+function error() {
+	logger 5 "$1"
+}
+
+function setup_start() {
 	log "${PURPLE}" "SETUP ↘" "★ Start setup ${PURPLE_U}$1${PURPLE}."
 }
 
-setup_end() {
+function setup_end() {
 	log "${PURPLE}" "SETUP ↗" "★ End setup ${PURPLE_U}$1${PURPLE}."
 }
 
-install_exist() {
+function install_exist() {
 	log "${BLUE}" "INSTALL ⌾" "✔︎ Already installed ${BLUE_U}$1${BLUE}."
 }
 
-install_start() {
+function install_start() {
 	log "${BLUE}" "INSTALL ↘" "▷ Installing  ${BLUE_U}$1${BLUE}..."
 }
 
-install_end() {
+function install_end() {
 	log "${BLUE}" "INSTALL ↗" "✔︎ End install ${BLUE_U}$1${BLUE}."
 }
 
-load_brew() {
+function load_brew() {
 	if type "brew" >/dev/null 2>&1; then
 		return 0
 	fi
@@ -72,14 +72,14 @@ load_brew() {
 	fi
 }
 
-require_password() {
+function require_password() {
 	if [[ -z "$CI" ]]; then
 		sudo -v
 	fi
 }
 
 # シンボリックリンクを作成
-__ln() { (
+function __ln() { (
 	# リンクがすでに存在すれば削除
 	[ -L "$2" ] && unlink "$2"
 
@@ -88,17 +88,17 @@ __ln() { (
 ); }
 
 # シンボリックリンクを削除
-__unlink() { (
+function __unlink() { (
 	unlink "$1" && info "unlink: \"$1\""
 ); }
 
 # ディレクトリを再帰的に作成
-__mkdir() { (
+function __mkdir() { (
 	[ ! -e "$1" ] && mkdir -p "$1" && info "mkdir: \"$1\"" >&2
 ); }
 
 # linklist.txtのコメントを削除
-__remove_linklist_comment() { (
+function __remove_linklist_comment() { (
 	# '#'以降と空行を削除
 	sed -e 's/\s*#.*//' \
 		-e '/^\s*$/d' \

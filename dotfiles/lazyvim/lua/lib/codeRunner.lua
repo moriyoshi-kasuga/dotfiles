@@ -17,6 +17,9 @@ M.supported_filetypes = {
   py = {
     run = "python3 $file",
   },
+  rs = {
+    run = "rustc $file && ./$fileBase",
+  }
 }
 
 function M.RunCode()
