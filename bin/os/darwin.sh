@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 
-test "$(uname)" = "Darwin" && is_mac=true || is_mac=false
+is_mac=$(uname -s | grep -qi "darwin" && echo true || echo false)
 
 if ! "${is_mac}"; then
 	error "This can only be called on mac"
 	exit 1
 fi
 
-script_root=$(dirname "$(readlink -f "${0}")")
+script_root=$(cd "$(dirname "$0")" && cd .. && pwd)
 . "${script_root}"/common.sh
 require_password
 

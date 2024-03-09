@@ -16,32 +16,33 @@ brew:
 git:
 	bash ./bin/git.sh
 
-node:
-	bash ./bin/node.sh
-
-python:
-	bash ./bin/python.sh
-
-coursier:
-	bash ./bin/coursier.sh
-
 neovim:
 	bash ./bin/neovim.sh
-
-astronvim:
-	bash ./bin/astronvim.sh
 
 docker:
 	bash ./bin/docker.sh
 
-debug:
-	bash ./bin/debug.sh
-
 likes:
 	bash ./bin/likes.sh
 
+
+# lang
+node:
+	bash ./bin/lang/node.sh
+
+python:
+	bash ./bin/lang/python.sh
+
+coursier:
+	bash ./bin/lang/coursier.sh
+
+rust:
+	bash ./bin/lang/rust.sh
+
+
+# os
 darwin:
-	bash ./bin/darwin.sh
+	bash ./bin/os/darwin.sh
 
 linux:
-	bash ./bin/linux.sh
+	bash ./bin/os/linux.sh
