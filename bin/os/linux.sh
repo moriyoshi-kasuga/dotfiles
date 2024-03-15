@@ -13,8 +13,10 @@ require_password
 
 setup_start "linux"
 
-npm install -g wsl-open
-sudo ln -s "$(which wsl-open)" /usr/local/bin/open
-sudo ln -s "$(which wsl-open)" /usr/local/bin/xdg-open
+sudo add-apt-repository ppa:wslutilities/wslu
+sudo apt update
+sudo apt install -y wslu
+sudo ln -s "$(which wslview)" /usr/local/bin/open
+sudo ln -s "$(which wslview)" /usr/local/bin/xdg-open
 
 setup_end "linux"
