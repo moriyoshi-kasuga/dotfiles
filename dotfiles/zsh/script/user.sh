@@ -1,4 +1,18 @@
 #!/usr/bin/env bash
+
+useful() {
+	# if exist useful.sh
+	if [[ -f ./useful.sh ]]; then
+		# shellcheck disable=1091
+		source ./useful.sh
+		return
+	fi
+	touch ./useful.sh
+	echo "#!/usr/bin/env bash" >>./useful.sh
+	echo "" >>./useful.sh
+	chmod +x ./useful.sh
+}
+
 tn() {
 	args="$*"
 	if [ -z "$args" ]; then

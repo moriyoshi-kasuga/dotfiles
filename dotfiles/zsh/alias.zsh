@@ -49,3 +49,9 @@ alias v="nvim"
 alias e="exit"
 alias c="clear"
 alias reload="exec zsh -l"
+
+# atcoder with rust
+alias acc="cargo compete"
+alias acct="cargo compete test"
+alias accs="cargo compete submit"
+alias acco="cargo compete open"
