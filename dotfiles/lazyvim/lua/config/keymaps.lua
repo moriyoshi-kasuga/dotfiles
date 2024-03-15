@@ -38,11 +38,6 @@ map("n", "<leader>dm", function()
   require("lib.codeRunner").RunCode()
 end, { desc = "CodeRunner" })
 
--- dap
-map("n", "<leader>dM", function()
-  require("lib.util").open_buf("AtCoder", "vsplit term://acct")
-end, { desc = "AtCoder" })
-
 -- noice
 map("n", "<leader>nl", function()
   require("noice").cmd("last")
