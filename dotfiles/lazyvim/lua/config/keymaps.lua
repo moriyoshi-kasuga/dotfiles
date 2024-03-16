@@ -6,8 +6,12 @@ local Util = require("lazyvim.util")
 local map = vim.keymap.set
 local del = vim.keymap.del
 
--- leave insert mode
+-- insert mode 
 map("i", "jk", "<esc>")
+map("i","<C-f>","<right>")
+map("i","<C-b>","<left>")
+map("i","<C-n>","<down>")
+map("i","<C-p>","<up>")
 
 -- buffer cycle
 map("n", "<Tab>", cmd("BufferLineCycleNext"))
