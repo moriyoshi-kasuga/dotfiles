@@ -7,7 +7,7 @@ git:
 
 gui:
   showCommandLog: false
-  showIcons: true
+  showIcons: false
   language: "en"
   mainPanelSplitMode: "horizontal"
 
