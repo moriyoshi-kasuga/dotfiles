@@ -19,6 +19,9 @@
     },
     "pyright": {
       "python.analysis.typeCheckingMode": "off"
+    },
+    "tsserver": {
+      "typescript.preferences.importModuleSpecifier": "non-relative"
     }
   }
 }

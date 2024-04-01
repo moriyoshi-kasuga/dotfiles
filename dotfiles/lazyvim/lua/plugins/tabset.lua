@@ -22,6 +22,7 @@ return {
             "c",
             "cs",
             "cpp",
+            "css",
             "sccs",
             "markdown",
             "markdown.mdx",
