@@ -1,5 +1,5 @@
 return {
-  -- Configure LazyVim to load gruvbox
+  { "nvim-neotest/nvim-nio" },
   {
     --undotree
     "mbbill/undotree",
