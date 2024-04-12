@@ -38,8 +38,8 @@ config.window_padding = {
 config.keys = {
 	-- Alt(Opt)+Shift+Fでフルスクリーン切り替え
 	{
-		key = "f",
-		mods = "SHIFT|META",
+		key = "Enter",
+		mods = "CMD",
 		action = wezterm.action.ToggleFullScreen,
 	},
 	{
