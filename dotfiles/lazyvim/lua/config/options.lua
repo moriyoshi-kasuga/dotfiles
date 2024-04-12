@@ -17,6 +17,8 @@ vim.filetype.add({
   },
 })
 
+vim.o.conceallevel = 1
+
 -- local function replace_markdown(var)
 --   if type(var) == "table" then
 --     return vim.tbl_map(replace_markdown, var)

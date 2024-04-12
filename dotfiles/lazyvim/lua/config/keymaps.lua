@@ -6,12 +6,12 @@ local Util = require("lazyvim.util")
 local map = vim.keymap.set
 local del = vim.keymap.del
 
--- insert mode 
+-- insert mode
 map("i", "jk", "<esc>")
-map("i","<C-f>","<right>")
-map("i","<C-b>","<left>")
-map("i","<C-n>","<down>")
-map("i","<C-p>","<up>")
+map("i", "<C-f>", "<right>")
+map("i", "<C-b>", "<left>")
+map("i", "<C-n>", "<down>")
+map("i", "<C-p>", "<up>")
 
 -- buffer cycle
 map("n", "<Tab>", cmd("BufferLineCycleNext"))
@@ -20,7 +20,7 @@ del("n", "<S-h>")
 del("n", "<S-l>")
 
 -- Telescope
-map("n", "gp", cmd("Telescope registers"))
+map({ "n", "v" }, "gp", cmd("Telescope registers"))
 
 -- delete Terminal Mappings
 del("t", "<C-h>")
