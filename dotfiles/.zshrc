@@ -32,18 +32,9 @@ zinit wait lucid for \
  atload"!_zsh_autosuggest_start" \
     zsh-users/zsh-autosuggestions
 
-zinit light kutsan/zsh-system-clipboard
 zinit ice depth=1
 zinit light jeffreytse/zsh-vi-mode
 
 source "${HOME}/zsh/settings.zsh"
 source "${HOME}/zsh/alias.zsh"
 source "${HOME}/zsh/commands.zsh"
-
-is_mac=$(uname -s | grep -qi "darwin" && echo true || echo false)
-if "${is_mac}"; then
-    source "${HOME}/zsh/darwin.zsh"
-else
-    source "${HOME}/zsh/linux.zsh"
-fi
-

@@ -1,1 +1,2 @@
 alias pbcopy="clip.exe"
+alias pbpaste='powershell.exe -Command Get-Clipboard'
