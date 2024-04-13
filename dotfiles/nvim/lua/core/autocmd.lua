@@ -10,8 +10,8 @@ local ag = vim.api.nvim_create_augroup
 ac("FileType", {
   pattern = "markdown",
   callback = function()
-    vim.keymap.set({ "n", "x" }, "]#", [[/^#\+ .*<CR>]], { desc = "Next Heading", buffer = true })
-    vim.keymap.set({ "n", "x" }, "[#", [[?^#\+ .*<CR>]], { desc = "Prev Heading", buffer = true })
+    vim.keymap.set({ "n", "x" }, "]#", [[/^#\+ .*<cr>]], { desc = "Next Heading", buffer = true })
+    vim.keymap.set({ "n", "x" }, "[#", [[?^#\+ .*<cr>]], { desc = "Prev Heading", buffer = true })
   end,
 })
 
@@ -25,14 +25,14 @@ ac("BufRead", {
 })
 
 -- tmp以下はundoファイルを作らない
-vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+ac( "BufWritePre" , {
   group = vim.api.nvim_create_augroup("dont_create_undo", { clear = true }),
   pattern = { "/tmp/*" },
   command = "setlocal noundofile",
 })
 
 -- ヤンク時にハイライト
-vim.api.nvim_create_autocmd("TextYankPost", {
+ac("TextYankPost", {
   group = vim.api.nvim_create_augroup("highlight_yank", { clear = true }),
   callback = function()
     vim.highlight.on_yank()
@@ -40,7 +40,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 -- qでヘルプを抜ける
-vim.api.nvim_create_autocmd("FileType", {
+ac("FileType", {
   group = vim.api.nvim_create_augroup("close_with_q", { clear = true }),
   pattern = {
     "qf",
@@ -52,12 +52,12 @@ vim.api.nvim_create_autocmd("FileType", {
   },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
-    vim.keymap.set("n", "q", "<cmd>close<CR>", { buffer = event.buf, silent = true })
+    vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
   end,
 })
 
 -- リサイズ時の調整
-vim.api.nvim_create_autocmd({ "VimResized" }, {
+ac( "VimResized" , {
   group = vim.api.nvim_create_augroup("resize_splits", { clear = true }),
   callback = function()
     local current_tab = vim.fn.tabpagenr()
@@ -66,14 +66,8 @@ vim.api.nvim_create_autocmd({ "VimResized" }, {
   end,
 })
 
--- ファイル変更時に警告を発する
-vim.api.nvim_create_autocmd({ "TermClose", "TermLeave", "FocusGained" }, {
-  group = vim.api.nvim_create_augroup("warm", { clear = true }),
-  command = "checktime",
-})
-
 -- ファイルを開いた時に、カーソルの場所を復元する
-vim.api.nvim_create_autocmd("BufReadPost", {
+ac("BufReadPost", {
   group = vim.api.nvim_create_augroup("restore_cursor", { clear = true }),
   callback = function()
     local mark = vim.api.nvim_buf_get_mark(0, '"')
@@ -85,7 +79,7 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 })
 
 -- ディレクトリが存在しない場合に自動生成する
-vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+ac( "BufWritePre" , {
   group = vim.api.nvim_create_augroup("auto_create_dir", { clear = true }),
   callback = function(event)
     if event.match:match("^%w%w+://") then
@@ -97,7 +91,7 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 })
 
 -- 改行時のコメントアウトを無効
-vim.api.nvim_create_autocmd("FileType", {
+ac("FileType", {
   pattern = "*",
   group = vim.api.nvim_create_augroup("disable_comment", { clear = true }),
   callback = function()

@@ -22,7 +22,6 @@ opt.updatetime = 100
 opt.textwidth = 0
 opt.signcolumn = "auto"
 opt.background = "dark"
-opt.clipboard = { "unnamed", "unnamedplus" }
 -- tab時の見かけのスペース数
 opt.tabstop = 2
 -- 自動的に挿入される量
@@ -82,6 +81,7 @@ opt.listchars = {
   trail = "·",
   --eol = ""
 }
+
 -- ノーマルモードから出るまでの時間を短縮
 opt.ttimeoutlen = 1
 -- 仮想編集を有効

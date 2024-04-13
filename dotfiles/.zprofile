@@ -15,12 +15,12 @@ export PATH=$HOME/.nodebrew/current/bin:$PATH
 
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ] ; then
-    PATH="$HOME/bin:$PATH"
+    export PATH="$HOME/bin:$PATH"
 fi
 
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/.local/bin" ] ; then
-    PATH="$HOME/.local/bin:$PATH"
+    export PAHT="$HOME/.local/bin:$PATH"
 fi
 
 export XDG_CONFIG_HOME="$HOME/.config"

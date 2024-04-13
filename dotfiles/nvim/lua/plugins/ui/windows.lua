@@ -1,3 +1,4 @@
+local cmd = require("util.utils").cmd
 return {
   {
     "anuvyklack/windows.nvim",
@@ -6,16 +7,19 @@ return {
     },
     config = function()
       require("windows").setup()
+      require("which-key").register({
+        ["<leader>w"] = {
+          name = "+window",
+          v = { "<C-w>v", "Vertical split" },
+          s = { "<C-w>s", "Horizontal split" },
+          o = { "<C-w>o", "Close Other window" },
+          S = { cmd "WindowsMaximizeHorizontally", "Horizontal Zoom" },
+          V = { cmd "WindowsMaximizeVertically", "Vertical Zoom" },
+          e = { cmd "WindowsEqualize", "Equalize Zoom" },
+          z = { cmd "WindowsMaxmize", "Maxmize" },
+        },
+      })
     end,
-    keys = {
-      { "<leader>wv", "<C-w>v", desc = "Vertical split" },
-      { "<leader>ws", "<C-w>s", desc = "Horizontal split" },
-      { "<leader>wo", "<C-w>o", desc = "Close Other window" },
-      { "<leader>wS", "<cmd>WindowsMaximizeHorizontally<cr>", desc = "Horizontal Zoom" },
-      { "<leader>wV", "<cmd>WindowsMaximizeVertically<cr>", desc = "Vertical Zoom" },
-      { "<leader>we", "<cmd>WindowsEqualize<cr>", desc = "Equalize Zoom" },
-      { "<leader>wz", "<cmd>WindowsMaximize<cr>", desc = "Maximize" },
-    },
   },
 }
 

@@ -1,6 +1,6 @@
 return {
   "haringsrob/nvim_context_vt",
-  event = "LazyFile",
+  event = { "BufReadPost", "BufNewFile", "BufWritePre" },
   dependencies = "nvim-treesitter/nvim-treesitter",
   opts = {
     prefix = " 󱞷",
@@ -10,9 +10,6 @@ return {
     -- Disable display of virtual text below blocks for indentation based
     -- languages like Python
     disable_virtual_lines_ft = { "yaml" },
-  },
-  keys = {
-    { "<leader>ux", "<cmd>NvimContextVtToggle<CR>", desc = "Toggle Context" },
   },
 }
 

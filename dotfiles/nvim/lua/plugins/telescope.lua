@@ -2,7 +2,8 @@ return {
   {
     'nvim-telescope/telescope.nvim',
     tag = '0.1.6',
-    dependencies = { 'nvim-lua/plenary.nvim',
+    dependencies = {
+      "nvim-lua/plenary.nvim",
       {
         "nvim-telescope/telescope-fzf-native.nvim",
         build = vim.fn.executable("make") == 1 and "make"
@@ -12,11 +13,32 @@ return {
         end,
       },
     },
-    opts = function()
-      require("telescope").load_extension("fzf")
-      require("telescope").load_extension("ui-select")
-      require("telescope").load_extension("file_browser")
-    end,
+    opts = {
+      defaults = {
+        mappings = {
+          i = {
+            ["<C-j>"] = "cycle_history_next",
+            ["<C-k>"] = "cycle_history_prev",
+          },
+        },
+        file_ignore_patterns = {
+          "node_modules",
+        },
+        pickers = {
+          find_files = {
+            hidden = false,
+          },
+        },
+        extensions = {
+          fzf = {
+            fuzzy = true,
+            override_generic_sorter = true,
+            override_file_sorter = true,
+            case_mode = "smart_case",
+          },
+        },
+      },
+    },
     keys = {
       {
         "<leader>,",
@@ -31,8 +53,8 @@ return {
       { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
       -- { "<leader>fR", LazyVim.telescope("oldfiles", { cwd = vim.uv.cwd() }), desc = "Recent (cwd)" },
       -- git
-      -- { "<leader>gc", "<cmd>Telescope git_commits<CR>", desc = "Commits" },
-      -- { "<leader>gs", "<cmd>Telescope git_status<CR>", desc = "Status" },
+      -- { "<leader>gc", "<cmd>Telescope git_commits<cr>", desc = "Commits" },
+      -- { "<leader>gs", "<cmd>Telescope git_status<cr>", desc = "Status" },
       -- search
       { '<leader>sp', "<cmd>Telescope registers<cr>", desc = "Registers" },
       { "<leader>sa", "<cmd>Telescope autocommands<cr>", desc = "Auto Commands" },
@@ -67,11 +89,14 @@ return {
     },
   },
   {
-    "nvim-telescope/telescope-file-browser.nvim",
+    "nvim-telescope/telescope-ui-select.nvim",
     dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
   },
   {
-    "nvim-telescope/telescope-ui-select.nvim",
-    dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
+    "nvim-telescope/telescope.nvim",
+    opts = function()
+      require("telescope").load_extension("fzf")
+      require("telescope").load_extension("ui-select")
+    end,
   }
 }

@@ -1,9 +1,7 @@
-local function cmd(command)
-  return table.concat({ "<cmd>", command, "<CR>" })
-end
-
 local map = vim.keymap.set
 local del = vim.keymap.del
+
+local cmd = require("util.utils").cmd
 
 -- insert mode
 map("i", "jk", "<esc>")
@@ -31,14 +29,14 @@ map("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move Up" })
 map("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "Move Down" })
 map("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move Up" })
 
-map("n", "<Tab>", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
-map("n", "<S-Tab>", "<cmd>bnext<cr>", { desc = "Next Buffer" })
-map("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
-map("n", "]b", "<cmd>bnext<cr>", { desc = "Next Buffer" })
-map("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
-map("n", "<leader>`", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
-map("n", "<leader>bf", cmd("bfirst"), { desc = "First Buffer" })
-map("n", "<leader>ba", cmd("blast"), { desc = "Last Buffer" })
+map("n", "<Tab>", cmd "bprevious", { desc = "Prev Buffer" })
+map("n", "<S-Tab>", cmd "bnext", { desc = "Next Buffer" })
+map("n", "[b", cmd "bprevious", { desc = "Prev Buffer" })
+map("n", "]b", cmd "bnext", { desc = "Next Buffer" })
+map("n", "<leader>bb", cmd "e #", { desc = "Switch to Other Buffer" })
+map("n", "<leader>`", cmd "e #", { desc = "Switch to Other Buffer" })
+map("n", "<leader>bf", cmd "bfirst", { desc = "First Buffer" })
+map("n", "<leader>ba", cmd "blast", { desc = "Last Buffer" })
 
 -- Add undo break-points
 map("i", ",", ",<c-g>u")
@@ -72,9 +70,9 @@ map("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
 map("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
 
 -- tabs
-map("n", "<leader><tab>l", "<cmd>tablast<cr>", { desc = "Last Tab" })
-map("n", "<leader><tab>f", "<cmd>tabfirst<cr>", { desc = "First Tab" })
-map("n", "<leader><tab><tab>", "<cmd>tabnew<cr>", { desc = "New Tab" })
-map("n", "<leader><tab>]", "<cmd>tabnext<cr>", { desc = "Next Tab" })
-map("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
-map("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
+map("n", "<leader><tab>l", cmd "tablast", { desc = "Last Tab" })
+map("n", "<leader><tab>f", cmd "tabfirst", { desc = "First Tab" })
+map("n", "<leader><tab><tab>", cmd "tabnew", { desc = "New Tab" })
+map("n", "<leader><tab>]", cmd "tabnext", { desc = "Next Tab" })
+map("n", "<leader><tab>d", cmd "tabclose", { desc = "Close Tab" })
+map("n", "<leader><tab>[", cmd "tabprevious", { desc = "Previous Tab" })

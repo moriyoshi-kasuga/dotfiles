@@ -1,2 +1,2 @@
-alias pbcopy="clip.exe"
-alias pbpaste='powershell.exe -Command Get-Clipboard'
+alias pbcopy="win32yank.exe -i"
+alias pbpaste='win32yank.exe -o'
