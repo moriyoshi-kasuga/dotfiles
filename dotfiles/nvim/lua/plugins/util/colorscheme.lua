@@ -25,12 +25,6 @@ return {
       })
     end,
   },
-  {
-    "AstroNvim/astrotheme",
-    config = function()
-      require("astrotheme").setup({})
-    end,
-  },
   -- colorscheme settings
   {
     "rafi/theme-loader.nvim",

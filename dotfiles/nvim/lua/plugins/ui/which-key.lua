@@ -8,7 +8,6 @@ return {
   config = function()
     require("which-key").register({
       ["g"] = { name = "+goto" },
-      ["gs"] = { name = "+surround" },
       ["z"] = { name = "+fold" },
       ["]"] = { name = "+next" },
       ["["] = { name = "+prev" },

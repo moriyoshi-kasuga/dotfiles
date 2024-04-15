@@ -1,18 +1,42 @@
-
 return {
   "ThePrimeagen/harpoon",
-  lazy = false,
-  opts = {},
-  config = function()
-    local mark = require("harpoon.mark")
-    local ui = require("harpoon.ui")
-    require("which-key").register({
-      ["<leader>l"] = { mark.add_file, "Add harpoon file" },
-      ["<C-e>"] = { ui.toggle_quick_menu, "Toggle harpoon menu" },
-      ["<C-n>"] = { function() ui.nav_file(1) end, "Nav harpoon 1" },
-      ["<C-p>"] = { function() ui.nav_file(2) end, "Nav harpoon 2" },
-      ["<C-y>"] = { function() ui.nav_file(3) end, "Nav harpoon 3" },
-      ["<C-s>"] = { function() ui.nav_file(4) end, "Nav harpoon 4" },
-    })
+  branch = "harpoon2",
+  opts = {
+    menu = {
+      width = vim.api.nvim_win_get_width(0) - 4,
+    },
+  },
+  config = function(opts)
+    require("harpoon"):setup(opts)
   end,
+  keys = function()
+    local keys = {
+      {
+        "<leader>l",
+        function()
+          require("harpoon"):list():add()
+        end,
+        desc = "Harpoon File",
+      },
+      {
+        "<leader>L",
+        function()
+          local harpoon = require("harpoon")
+          harpoon.ui:toggle_quick_menu(harpoon:list())
+        end,
+        desc = "Harpoon Quick Menu",
+      }
+    }
+
+    for i = 1, 5 do
+      table.insert(keys, {
+        "<leader>" .. i,
+        function()
+          require("harpoon"):list():select(i)
+        end,
+        desc = "Harpoon to File " .. i,
+      })
+    end
+    return keys
+  end
 }

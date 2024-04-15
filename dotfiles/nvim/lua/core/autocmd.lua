@@ -4,11 +4,14 @@ highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=und
 ]])
 
 local ac = vim.api.nvim_create_autocmd
-local ag = vim.api.nvim_create_augroup
+local function ag(name)
+  return vim.api.nvim_create_augroup(name, { clear = true })
+end
 
 -- next/prev heading on markdown
 ac("FileType", {
   pattern = "markdown",
+  group = ag("MarkdownMoveHead"),
   callback = function()
     vim.keymap.set({ "n", "x" }, "]#", [[/^#\+ .*<cr>]], { desc = "Next Heading", buffer = true })
     vim.keymap.set({ "n", "x" }, "[#", [[?^#\+ .*<cr>]], { desc = "Prev Heading", buffer = true })
@@ -18,22 +21,22 @@ ac("FileType", {
 -- Disable diagnostics in a .env file
 ac("BufRead", {
   pattern = { "**/node_modules/**", "node_modules", "/node_modules/*", ".env" },
-  group = ag("DisableDiagnostic", { clear = true }),
+  group = ag("DisableDiagnostic"),
   callback = function()
     vim.diagnostic.disable(0)
   end,
 })
 
 -- tmp以下はundoファイルを作らない
-ac( "BufWritePre" , {
-  group = vim.api.nvim_create_augroup("dont_create_undo", { clear = true }),
+ac("BufWritePre", {
+  group = ag("dont_create_undo"),
   pattern = { "/tmp/*" },
   command = "setlocal noundofile",
 })
 
 -- ヤンク時にハイライト
 ac("TextYankPost", {
-  group = vim.api.nvim_create_augroup("highlight_yank", { clear = true }),
+  group = ag("highlight_yank"),
   callback = function()
     vim.highlight.on_yank()
   end,
@@ -41,7 +44,7 @@ ac("TextYankPost", {
 
 -- qでヘルプを抜ける
 ac("FileType", {
-  group = vim.api.nvim_create_augroup("close_with_q", { clear = true }),
+  group = ag("close_with_q"),
   pattern = {
     "qf",
     "help",
@@ -57,8 +60,8 @@ ac("FileType", {
 })
 
 -- リサイズ時の調整
-ac( "VimResized" , {
-  group = vim.api.nvim_create_augroup("resize_splits", { clear = true }),
+ac("VimResized", {
+  group = ag("resize_splits"),
   callback = function()
     local current_tab = vim.fn.tabpagenr()
     vim.cmd("tabdo wincmd =")
@@ -66,21 +69,9 @@ ac( "VimResized" , {
   end,
 })
 
--- ファイルを開いた時に、カーソルの場所を復元する
-ac("BufReadPost", {
-  group = vim.api.nvim_create_augroup("restore_cursor", { clear = true }),
-  callback = function()
-    local mark = vim.api.nvim_buf_get_mark(0, '"')
-    local lcount = vim.api.nvim_buf_line_count(0)
-    if mark[1] > 0 and mark[1] <= lcount then
-      pcall(vim.api.nvim_win_set_cursor, 0, mark)
-    end
-  end,
-})
-
 -- ディレクトリが存在しない場合に自動生成する
-ac( "BufWritePre" , {
-  group = vim.api.nvim_create_augroup("auto_create_dir", { clear = true }),
+ac("BufWritePre", {
+  group = ag("auto_create_dir"),
   callback = function(event)
     if event.match:match("^%w%w+://") then
       return
@@ -89,14 +80,12 @@ ac( "BufWritePre" , {
     vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
   end,
 })
-
--- 改行時のコメントアウトを無効
-ac("FileType", {
-  pattern = "*",
-  group = vim.api.nvim_create_augroup("disable_comment", { clear = true }),
+--
+-- Fix conceallevel for json files
+ac({ "FileType" }, {
+  group = ag("json_conceal"),
+  pattern = { "json", "jsonc", "json5" },
   callback = function()
-    vim.opt_local.formatoptions:remove({ "r", "o" })
-    vim.opt_local.formatoptions:append({ "M", "j" })
+    vim.opt_local.conceallevel = 0
   end,
 })
-

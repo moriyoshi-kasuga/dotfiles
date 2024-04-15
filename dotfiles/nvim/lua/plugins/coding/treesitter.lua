@@ -46,7 +46,7 @@ return {
     cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
     keys = {
       { "<c-space>", desc = "Increment Selection" },
-      { "<bs>", desc = "Decrement Selection", mode = "x" },
+      { "<bs>",      desc = "Decrement Selection", mode = "x" },
     },
     ---@type TSConfig
     ---@diagnostic disable-next-line: missing-fields

@@ -1,5 +1,4 @@
 local map = vim.keymap.set
-local del = vim.keymap.del
 
 local cmd = require("util.utils").cmd
 
@@ -37,19 +36,18 @@ map("i", ";", ";<c-g>u")
 map("v", "<", "<gv")
 map("v", ">", ">gv")
 
-
 -- Deleting without yanking empty line
 map("n", "dd", function()
-  return vim.api.nvim_get_current_line():match("^$") ~= nil and '"_dd' or "dd"
+	return vim.api.nvim_get_current_line():match("^$") ~= nil and '"_dd' or "dd"
 end, { noremap = true, expr = true, desc = "Don't yank empty line to clipboard" })
 
 -- diagnostic
 local diagnostic_goto = function(next, severity)
-  local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
-  severity = severity and vim.diagnostic.severity[severity] or nil
-  return function()
-    go({ severity = severity })
-  end
+	local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
+	severity = severity and vim.diagnostic.severity[severity] or nil
+	return function()
+		go({ severity = severity })
+	end
 end
 map("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
 map("n", "]d", diagnostic_goto(true), { desc = "Next Diagnostic" })
@@ -60,12 +58,18 @@ map("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
 map("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
 
 -- tabs
-map("n", "<leader><tab>l", cmd "tablast", { desc = "Last Tab" })
-map("n", "<leader><tab>f", cmd "tabfirst", { desc = "First Tab" })
-map("n", "<leader><tab><tab>", cmd "tabnew", { desc = "New Tab" })
-map("n", "<leader><tab>]", cmd "tabnext", { desc = "Next Tab" })
-map("n", "<leader><tab>d", cmd "tabclose", { desc = "Close Tab" })
-map("n", "<leader><tab>[", cmd "tabprevious", { desc = "Previous Tab" })
+map("n", "<leader><tab>l", cmd("tablast"), { desc = "Last Tab" })
+map("n", "<leader><tab>f", cmd("tabfirst"), { desc = "First Tab" })
+map("n", "<leader><tab><tab>", cmd("tabnew"), { desc = "New Tab" })
+map("n", "<leader><tab>]", cmd("tabnext"), { desc = "Next Tab" })
+map("n", "<leader><tab>d", cmd("tabclose"), { desc = "Close Tab" })
+map("n", "<leader><tab>[", cmd("tabprevious"), { desc = "Previous Tab" })
 
 -- other
-map("n","<leader>h",cmd "noh",{desc = "Clear Hilight"})
+map("n", "<leader>h", cmd("noh"), { desc = "Clear Hilight" })
+
+map("n", "<leader>xl", "<cmd>lopen<cr>", { desc = "Location List" })
+map("n", "<leader>xq", "<cmd>copen<cr>", { desc = "Quickfix List" })
+
+map("n", "[q", vim.cmd.cprev, { desc = "Previous Quickfix" })
+map("n", "]q", vim.cmd.cnext, { desc = "Next Quickfix" })

@@ -4,7 +4,7 @@ vim.g["qs_highlight_on_keys"] = { "f", "F", "t", "T" }
 local opt = vim.opt
 
 
-opt.conceallevel = 1 -- Hide * markup for bold and italic, but not markers with substitutions
+opt.conceallevel = 2 -- Hide * markup for bold and italic, but not markers with substitutions
 opt.scrolloff = 4 -- Lines of context
 opt.sidescrolloff = 8 -- Columns of context
 opt.showmode = false -- Dont show mode since we have a statusline
@@ -66,21 +66,7 @@ opt.expandtab = true
 --行の改行を防ぐ
 opt.linebreak = true
 -- 制御文字を表示
-opt.list = true
--- 制御文字をカスタマイズ
---[[
-tab: タブ
-trail: 行末（行最後の文字から改行まで）の半角スペース
-eol: 改行
-space: 半角スペース
-extends: ウィンドウの幅が狭くて右に省略された文字がある記号
-precedes: ウィンドウの幅が狭くて左に省略された文字がある記号
-nbsp: 不可視のスペース]]
-opt.listchars = {
-  tab = " ",
-  trail = "·",
-  --eol = ""
-}
+opt.list = false
 
 -- ノーマルモードから出るまでの時間を短縮
 opt.ttimeoutlen = 1
@@ -98,7 +84,7 @@ opt.undofile = true
 -- ファイル末尾の記号を消す
 opt.fillchars:append("eob: ")
 opt.helplang = { "ja", "en" }
-opt.wrap = true
+opt.wrap = false
 --fold
 opt.fillchars = { fold = " " }
 opt.foldmethod = "indent"
