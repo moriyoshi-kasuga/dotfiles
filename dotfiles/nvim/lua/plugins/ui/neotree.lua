@@ -13,13 +13,6 @@ return {
       end,
       desc = "Git Explorer",
     },
-    {
-      "<leader>be",
-      function()
-        require("neo-tree.command").execute({ source = "buffers", toggle = true })
-      end,
-      desc = "Buffer Explorer",
-    },
   },
   deactivate = function()
     vim.cmd([[Neotree close]])
@@ -43,7 +36,7 @@ return {
         end,
       },
     },
-    sources = { "filesystem", "buffers", "git_status", "document_symbols" },
+    sources = { "filesystem", "git_status", "document_symbols" },
     open_files_do_not_replace_types = { "terminal", "Trouble", "trouble", "qf", "Outline" },
     commands = {
       parent_or_close = function(state)

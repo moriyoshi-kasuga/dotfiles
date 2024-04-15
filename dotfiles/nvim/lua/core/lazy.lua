@@ -15,6 +15,8 @@ require("lazy").setup({
   spec = {
     { import = "plugins" },
     { import = "plugins.ui" },
+    { import = "plugins.coding" },
+    { import = "plugins.util" },
   },
   performance = {
     rtp = {

@@ -4,7 +4,6 @@ local del = vim.keymap.del
 local cmd = require("util.utils").cmd
 
 -- insert mode
-map("i", "jk", "<esc>")
 map("i", "<C-f>", "<right>")
 map("i", "<C-b>", "<left>")
 map("i", "<C-n>", "<down>")
@@ -28,15 +27,6 @@ map("i", "<A-j>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move Down" })
 map("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move Up" })
 map("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "Move Down" })
 map("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move Up" })
-
-map("n", "<Tab>", cmd "bprevious", { desc = "Prev Buffer" })
-map("n", "<S-Tab>", cmd "bnext", { desc = "Next Buffer" })
-map("n", "[b", cmd "bprevious", { desc = "Prev Buffer" })
-map("n", "]b", cmd "bnext", { desc = "Next Buffer" })
-map("n", "<leader>bb", cmd "e #", { desc = "Switch to Other Buffer" })
-map("n", "<leader>`", cmd "e #", { desc = "Switch to Other Buffer" })
-map("n", "<leader>bf", cmd "bfirst", { desc = "First Buffer" })
-map("n", "<leader>ba", cmd "blast", { desc = "Last Buffer" })
 
 -- Add undo break-points
 map("i", ",", ",<c-g>u")
@@ -76,3 +66,6 @@ map("n", "<leader><tab><tab>", cmd "tabnew", { desc = "New Tab" })
 map("n", "<leader><tab>]", cmd "tabnext", { desc = "Next Tab" })
 map("n", "<leader><tab>d", cmd "tabclose", { desc = "Close Tab" })
 map("n", "<leader><tab>[", cmd "tabprevious", { desc = "Previous Tab" })
+
+-- other
+map("n","<leader>h",cmd "noh",{desc = "Clear Hilight"})

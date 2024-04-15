@@ -7,12 +7,20 @@ return {
   end,
   config = function()
     require("which-key").register({
-      ["<leader><tab>"] = {name="+tab"},
-      ["<leader>b"] = {name="+buffer"},
-      ["<leader>s"] = {name="+search"},
-      ["<leader>f"] = {name="+find"},
-      ["<leader>g"] = {name="+git"},
-      ["<leader>t"] = {name="+translate"},
+      ["g"] = { name = "+goto" },
+      ["gs"] = { name = "+surround" },
+      ["z"] = { name = "+fold" },
+      ["]"] = { name = "+next" },
+      ["["] = { name = "+prev" },
+      ["<leader><Tab>"] = { name = "+tab" },
+      ["<leader>q"] = { name = "+session" },
+      ["<leader>s"] = { name = "+search" },
+      ["<leader>c"] = { name = "+code" },
+      ["<leader>f"] = { name = "+find" },
+      ["<leader>g"] = { name = "+git" },
+      ["<leader>t"] = { name = "+translate" },
+      ["<leader>w"] = { name = "+windows" },
+      ["<leader>x"] = { name = "+diagnostics/quickfix" },
     })
   end,
 }
