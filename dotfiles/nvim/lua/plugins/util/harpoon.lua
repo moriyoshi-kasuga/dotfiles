@@ -6,8 +6,8 @@ return {
       width = vim.api.nvim_win_get_width(0) - 4,
     },
   },
-  config = function(opts)
-    require("harpoon"):setup(opts)
+  config = function()
+    require("harpoon"):setup()
   end,
   keys = function()
     local keys = {
