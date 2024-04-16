@@ -11,11 +11,19 @@ return {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
-        basedpyright = {
-          enabled = false,
-        },
         pyright = {
           enabled = true,
+          settings = {
+            pyright = {
+              disableOrganizeImports = true, -- Using Ruff
+            },
+            python = {
+              analysis = {
+                ignore = { '*' },         -- Using Ruff
+                typeCheckingMode = 'off', -- Using mypy
+              },
+            },
+          },
         },
         ruff_lsp = {
           keys = {

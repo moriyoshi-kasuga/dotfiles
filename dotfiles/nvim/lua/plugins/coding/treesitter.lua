@@ -105,12 +105,50 @@ return {
             ["as"] = "@statement.outer",
           },
         },
+        swap = {
+          enable = true,
+          swap_next = {
+            ["<C-n>a"] = "@parameter.inner", -- swap parameters/argument with next
+            ["<C-n>:"] = "@property.outer",  -- swap object property with next
+            ["<C-n>m"] = "@function.outer",  -- swap function with next
+          },
+          swap_previous = {
+            ["<C-p>a"] = "@parameter.inner", -- swap parameters/argument with prev
+            ["<C-p>:"] = "@property.outer",  -- swap object property with prev
+            ["<C-p>m"] = "@function.outer",  -- swap function with previous
+          },
+        },
         move = {
           enable = true,
-          goto_next_start = { ["]f"] = "@function.outer", ["]c"] = "@class.outer" },
-          goto_next_end = { ["]F"] = "@function.outer", ["]C"] = "@class.outer" },
-          goto_previous_start = { ["[f"] = "@function.outer", ["[c"] = "@class.outer" },
-          goto_previous_end = { ["[F"] = "@function.outer", ["[C"] = "@class.outer" },
+          set_jumps = true,
+          goto_next_start = {
+            ["]f"] = { query = "@call.outer", desc = "Next function call start" },
+            ["]m"] = { query = "@function.outer", desc = "Next method/function def start" },
+            ["]c"] = { query = "@class.outer", desc = "Next class start" },
+            ["]i"] = { query = "@conditional.outer", desc = "Next conditional start" },
+            ["]l"] = { query = "@loop.outer", desc = "Next loop start" },
+          },
+          goto_next_end = {
+            ["]F"] = { query = "@call.outer", desc = "Next function call end" },
+            ["]M"] = { query = "@function.outer", desc = "Next method/function def end" },
+            ["]C"] = { query = "@class.outer", desc = "Next class end" },
+            ["]I"] = { query = "@conditional.outer", desc = "Next conditional end" },
+            ["]L"] = { query = "@loop.outer", desc = "Next loop end" },
+          },
+          goto_previous_start = {
+            ["[f"] = { query = "@call.outer", desc = "Prev function call start" },
+            ["[m"] = { query = "@function.outer", desc = "Prev method/function def start" },
+            ["[c"] = { query = "@class.outer", desc = "Prev class start" },
+            ["[i"] = { query = "@conditional.outer", desc = "Prev conditional start" },
+            ["[l"] = { query = "@loop.outer", desc = "Prev loop start" },
+          },
+          goto_previous_end = {
+            ["[F"] = { query = "@call.outer", desc = "Prev function call end" },
+            ["[M"] = { query = "@function.outer", desc = "Prev method/function def end" },
+            ["[C"] = { query = "@class.outer", desc = "Prev class end" },
+            ["[I"] = { query = "@conditional.outer", desc = "Prev conditional end" },
+            ["[L"] = { query = "@loop.outer", desc = "Prev loop end" },
+          },
         },
       },
     },
