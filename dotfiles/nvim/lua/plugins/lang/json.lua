@@ -9,6 +9,27 @@ return {
       end
     end,
   },
+  {
+    "stevearc/conform.nvim",
+    optional = true,
+    opts = {
+      formatters_by_ft = {
+        json = { { "prettierd", "prettier" } },
+        json5 = { { "prettierd", "prettier" } },
+        jsonc = { { "prettierd", "prettier" } },
+      },
+    },
+  },
+
+  {
+    "williamboman/mason.nvim",
+    optional = true,
+    opts = function(_, opts)
+      if type(opts.ensure_installed) == "table" then
+        vim.list_extend(opts.ensure_installed, { "json-lsp" })
+      end
+    end,
+  },
 
   -- yaml schema support
   {

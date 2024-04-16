@@ -32,7 +32,7 @@ function M.get()
     { "K",          vim.lsp.buf.hover,                                                                      desc = "Hover" },
     { "gK",         vim.lsp.buf.signature_help,                                                             desc = "Signature Help",             has = "signatureHelp" },
     { "<c-k>",      vim.lsp.buf.signature_help,                                                             mode = "i",                          desc = "Signature Help", has = "signatureHelp" },
-    { "<leader>r",  function() vim.lsp.buf.format { async = true, timeout_ms = 2000 } end,                  desc = "Code Action",                mode = { "n", "v" },     has = "codeAction" },
+    -- { "<leader>r",  function() vim.lsp.buf.format { async = true, timeout_ms = 2000 } end,                  desc = "Format",                mode = { "n", "v" } },
     { "<leader>ca", "<cmd>Lspsaga code_action<cr>",                                                         desc = "Code Action",                mode = { "n", "v" },     has = "codeAction" },
     { "ga",         "<cmd>Lspsaga code_action<cr>",                                                         desc = "Code Action",                mode = { "n", "v" },     has = "codeAction" },
     { "<leader>cc", vim.lsp.codelens.run,                                                                   desc = "Run Codelens",               mode = { "n", "v" },     has = "codeLens" },

@@ -10,6 +10,13 @@ return {
     end,
   },
 
+  {
+    "vuki656/package-info.nvim",
+    dependencies = { "MunifTanjim/nui.nvim" },
+    opts = {},
+    event = "BufRead package.json",
+  },
+
   -- correctly setup lspconfig
   {
     "neovim/nvim-lspconfig",
@@ -110,5 +117,25 @@ return {
         end
       end
     end,
+  },
+  {
+    "williamboman/mason.nvim",
+    opts = function(_, opts)
+      opts.ensure_installed = opts.ensure_installed or {}
+      vim.list_extend(opts.ensure_installed, { "eslint_d" })
+    end,
+  },
+  {
+    "mfussenegger/nvim-lint",
+    optional = true,
+    opts = {
+      linters_by_ft = {
+        javascript = { "eslint_d" },
+        typescript = { "eslint_d" },
+        javascriptreact = { "eslint_d" },
+        typescriptreact = { "eslint_d" },
+        svelte = { "eslint_d" },
+      },
+    },
   },
 }

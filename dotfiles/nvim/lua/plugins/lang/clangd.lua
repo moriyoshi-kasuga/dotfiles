@@ -21,6 +21,16 @@ return {
   },
 
   {
+    "williamboman/mason-lspconfig.nvim",
+    optional = true,
+    opts = function(_, opts)
+      if type(opts.ensure_installed) == "table" then
+        vim.list_extend(opts.ensure_installed, { "clangd" })
+      end
+    end,
+  },
+
+  {
     "p00f/clangd_extensions.nvim",
     lazy = true,
     config = function() end,

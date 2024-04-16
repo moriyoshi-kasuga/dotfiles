@@ -16,7 +16,7 @@ return {
           S = { cmd "WindowsMaximizeHorizontally", "Horizontal Zoom" },
           V = { cmd "WindowsMaximizeVertically", "Vertical Zoom" },
           e = { cmd "WindowsEqualize", "Equalize Zoom" },
-          z = { cmd "WindowsMaxmize", "Maxmize" },
+          z = { cmd "WindowsMaximize", "Maxmize" },
         },
       })
     end,
