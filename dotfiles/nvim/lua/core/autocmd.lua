@@ -18,6 +18,7 @@ ac("FileType", {
   end,
 })
 
+
 -- Disable diagnostics in a .env file
 ac("BufRead", {
   pattern = { "**/node_modules/**", "node_modules", "/node_modules/*", ".env" },
@@ -25,13 +26,6 @@ ac("BufRead", {
   callback = function()
     vim.diagnostic.disable(0)
   end,
-})
-
--- tmp以下はundoファイルを作らない
-ac("BufWritePre", {
-  group = ag("dont_create_undo"),
-  pattern = { "/tmp/*" },
-  command = "setlocal noundofile",
 })
 
 -- ヤンク時にハイライト
