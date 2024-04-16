@@ -28,7 +28,7 @@ if test -d ~/.config/nvim; then
 else
 	install_start "Neovim"
 	# __ln ${PWD}/dotfiles/nvim ${HOME}/.config/nvim
-	__ln ${PWD}/dotfiles/lazyvim ${HOME}/.config/nvim
+	__ln ${PWD}/dotfiles/nvim ${HOME}/.config/nvim
 	install_end "Neovim"
 fi
 
