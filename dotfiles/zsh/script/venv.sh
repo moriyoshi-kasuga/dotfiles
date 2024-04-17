@@ -13,14 +13,14 @@ function pyvenv {
 		echo "source .venv/bin/activate" >.envrc
 		direnv allow .
 		_info "pyvenv を作成しました"
-		_warn ".gitignore に .envrc と .venv/ を追加してください。"
+		_warn ".gitignore に .venv/ を追加してください。"
 		;;
 	"load")
 		if [[ ! -d "${root}/.venv" ]]; then
 			_error "このディレクトリーでは pyvenv init されていません！"
 			return
 		fi
-		pip3 install -r requirements.txt
+		pip install -r requirements.txt
 		_info "pyvenv をロードしました"
 		;;
 	"save")
@@ -28,7 +28,7 @@ function pyvenv {
 			_error "このディレクトリーでは pyvenv init されていません！"
 			return
 		fi
-		pip3 freeze >requirements.txt
+		pip freeze >requirements.txt
 		_info "pyvenv をセーブしました"
 		;;
 	*)
