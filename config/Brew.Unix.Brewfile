@@ -2,7 +2,7 @@ tap "homebrew/bundle"
 
 brew "ncurses"
 
-brew "lsd"
+brew "eza"
 brew "bat"
 brew "fzf"
 brew "direnv"

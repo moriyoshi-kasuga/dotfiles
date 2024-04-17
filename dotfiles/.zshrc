@@ -21,9 +21,6 @@ zinit wait lucid light-mode for \
 
 ### End of Zinit's installer chunk
 
-eval "$(starship init zsh)"
-eval "$(zoxide init zsh --cmd cd)"
-
 ### Plugin
 
 zinit wait lucid for \

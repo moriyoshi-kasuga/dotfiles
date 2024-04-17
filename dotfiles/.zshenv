@@ -5,5 +5,4 @@ else
     source "${HOME}/zsh/linux.zsh"
 fi
 
-source "${HOME}/zsh/script/common.sh"
 source "$HOME/.cargo/env"
