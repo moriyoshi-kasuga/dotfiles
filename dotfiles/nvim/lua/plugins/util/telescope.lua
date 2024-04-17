@@ -98,19 +98,20 @@ return {
       },
     },
     keys = {
-      { "<leader>/",        "<cmd>Telescope live_grep<cr>",                                          desc = "Grep" },
-      { "<leader>:",        "<cmd>Telescope command_history<cr>",                                    desc = "Command History" },
-      { "<leader><space>",  "<cmd>Telescope find_files<cr>",                                         desc = "Find Files" },
+      { "<leader>/",        "<cmd>Telescope live_grep<cr>",                                            desc = "Grep" },
+      { "<leader>,",        "<cmd>Telescope buffers<cr>",                                              desc = "Buffers" },
+      { "<leader>:",        "<cmd>Telescope command_history<cr>",                                      desc = "Command History" },
+      { "<leader><space>",  "<cmd>Telescope find_files<cr>",                                           desc = "Find Files" },
       { "<leader>s<space>", function() require("telescope.builtin").find_files({ hidden = true }) end, desc = "Find Files" },
       -- find
-      { "<leader>fg",       "<cmd>Telescope git_files<cr>",                                          desc = "Find Files (git-files)" },
-      { "<leader>fr",       "<cmd>Telescope oldfiles<cr>",                                           desc = "Recent" },
+      { "<leader>fg",       "<cmd>Telescope git_files<cr>",                                            desc = "Find Files (git-files)" },
+      { "<leader>fr",       "<cmd>Telescope oldfiles<cr>",                                             desc = "Recent" },
       -- git
-      { "<leader>gc",       "<cmd>Telescope git_commits<cr>",                                        desc = "Commits" },
-      { "<leader>gt",       "<cmd>Telescope git_status<cr>",                                         desc = "Status" },
+      { "<leader>gc",       "<cmd>Telescope git_commits<cr>",                                          desc = "Commits" },
+      { "<leader>gt",       "<cmd>Telescope git_status<cr>",                                           desc = "Status" },
       -- search
-      { "<leader>sp",       "<cmd>Telescope registers<cr>",                                          desc = "Registers" },
-      { "<leader>sa",       "<cmd>Telescope autocommands<cr>",                                       desc = "Auto Commands" },
+      { "<leader>sp",       "<cmd>Telescope registers<cr>",                                            desc = "Registers" },
+      { "<leader>sa",       "<cmd>Telescope autocommands<cr>",                                         desc = "Auto Commands" },
       {
         "<leader>sS",
         function()
