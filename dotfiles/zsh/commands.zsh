@@ -14,6 +14,7 @@ function fzf-history-selection() {
 zle -N fzf-history-selection
 
 zvm_after_init_commands+=('bindkey "^R" fzf-history-selection')
+zvm_after_init_commands+=('bindkey "^H" backward-delete-char')
 
 for f in zvm_backward_kill_region zvm_yank zvm_change_surround_text_object zvm_vi_delete zvm_vi_change zvm_vi_change_eol; do
   eval "$(echo "_$f() {"; declare -f $f | tail -n +2)"
