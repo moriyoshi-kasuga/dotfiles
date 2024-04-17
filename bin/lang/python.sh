@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 script_root=$(cd "$(dirname "$0")" && cd .. && pwd)
-. "${script_root}"/common.sh
+. "${script_root}/../common.sh"
 require_password
 
 setup_start "python"
