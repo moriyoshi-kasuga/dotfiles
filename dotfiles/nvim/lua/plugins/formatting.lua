@@ -1,15 +1,16 @@
 return {
   "stevearc/conform.nvim",
   event = { "BufReadPre", "BufNewFile" },
+  cmd = { "ConformInfo" },
   opts = {
     formatters_by_ft = {
-      javascript = { "prettierd" },
-      typescript = { "prettierd" },
-      javascriptreact = { "prettierd" },
-      typescriptreact = { "prettierd" },
-      svelte = { "prettierd" },
-      graphql = { "prettierd" },
-      iquid = { "prettierd" },
+      javascript = { { "prettierd", "prettier" } },
+      typescript = { { "prettierd", "prettier" } },
+      javascriptreact = { { "prettierd", "prettier" } },
+      typescriptreact = { { "prettierd", "prettier" } },
+      svelte = { { "prettierd", "prettier" } },
+      graphql = { { "prettierd", "prettier" } },
+      iquid = { { "prettierd", "prettier" } },
       lua = { "stylua" },
     }
   },
@@ -25,6 +26,7 @@ return {
       },
     })
 
+    -- TODO: この動画をみて conform nvim と nvim lint の再設定をする https://www.youtube.com/watch?v=ybUE4D80XSk
     vim.keymap.set({ "n", "v" }, "<leader>r", function()
       conform.format({
         lsp_fallback = true,

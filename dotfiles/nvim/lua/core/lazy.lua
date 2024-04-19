@@ -17,7 +17,6 @@ require("lazy").setup({
     { import = "plugins.ui" },
     { import = "plugins.coding" },
     { import = "plugins.util" },
-    { import = "plugins.lsp" },
     { import = "plugins.lang" },
   },
   performance = {
