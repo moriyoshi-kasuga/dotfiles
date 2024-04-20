@@ -7,7 +7,7 @@ return {
     opts = {
       ensure_installed = {
         "stylua",
-        "prettierd",
+        "prettier",
         "luacheck",
         "tailwindcss-language-server",
         "black",
