@@ -18,7 +18,6 @@ ac("FileType", {
   end,
 })
 
-
 -- Disable diagnostics in a .env file
 ac("BufRead", {
   pattern = { "**/node_modules/**", "node_modules", "/node_modules/*", ".env" },

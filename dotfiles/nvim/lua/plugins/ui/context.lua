@@ -12,4 +12,3 @@ return {
     disable_virtual_lines_ft = { "yaml" },
   },
 }
-

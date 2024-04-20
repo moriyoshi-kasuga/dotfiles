@@ -3,7 +3,6 @@ vim.g["qs_highlight_on_keys"] = { "f", "F", "t", "T" }
 
 local opt = vim.opt
 
-
 opt.conceallevel = 2 -- Hide * markup for bold and italic, but not markers with substitutions
 opt.scrolloff = 4 -- Lines of context
 opt.sidescrolloff = 8 -- Columns of context

@@ -1,7 +1,7 @@
 return {
   { "nvim-tree/nvim-web-devicons", lazy = true },
   { "MunifTanjim/nui.nvim", lazy = true },
-    -- indent guides for Neovim
+  -- indent guides for Neovim
   {
     "lukas-reineke/indent-blankline.nvim",
     event = { "BufReadPost", "BufNewFile", "BufWritePre" },

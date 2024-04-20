@@ -46,7 +46,7 @@ return {
     cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
     keys = {
       { "<c-space>", desc = "Increment Selection" },
-      { "<bs>",      desc = "Decrement Selection", mode = "x" },
+      { "<bs>", desc = "Decrement Selection", mode = "x" },
     },
     ---@type TSConfig
     ---@diagnostic disable-next-line: missing-fields
@@ -109,13 +109,13 @@ return {
           enable = true,
           swap_next = {
             ["<C-n>a"] = "@parameter.inner", -- swap parameters/argument with next
-            ["<C-n>:"] = "@property.outer",  -- swap object property with next
-            ["<C-n>m"] = "@function.outer",  -- swap function with next
+            ["<C-n>:"] = "@property.outer", -- swap object property with next
+            ["<C-n>m"] = "@function.outer", -- swap function with next
           },
           swap_previous = {
             ["<C-p>a"] = "@parameter.inner", -- swap parameters/argument with prev
-            ["<C-p>:"] = "@property.outer",  -- swap object property with prev
-            ["<C-p>m"] = "@function.outer",  -- swap function with previous
+            ["<C-p>:"] = "@property.outer", -- swap object property with prev
+            ["<C-p>m"] = "@function.outer", -- swap function with previous
           },
         },
         move = {

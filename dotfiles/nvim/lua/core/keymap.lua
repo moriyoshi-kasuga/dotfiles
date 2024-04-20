@@ -38,16 +38,16 @@ map("v", ">", ">gv")
 
 -- Deleting without yanking empty line
 map("n", "dd", function()
-	return vim.api.nvim_get_current_line():match("^$") ~= nil and '"_dd' or "dd"
+  return vim.api.nvim_get_current_line():match("^$") ~= nil and '"_dd' or "dd"
 end, { noremap = true, expr = true, desc = "Don't yank empty line to clipboard" })
 
 -- diagnostic
 local diagnostic_goto = function(next, severity)
-	local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
-	severity = severity and vim.diagnostic.severity[severity] or nil
-	return function()
-		go({ severity = severity })
-	end
+  local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
+  severity = severity and vim.diagnostic.severity[severity] or nil
+  return function()
+    go({ severity = severity })
+  end
 end
 map("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
 map("n", "]d", diagnostic_goto(true), { desc = "Next Diagnostic" })

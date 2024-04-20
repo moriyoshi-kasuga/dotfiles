@@ -1,4 +1,3 @@
-
 ---@param name string
 local function get_opts(name)
   local plugin = require("lazy.core.config").plugins[name]

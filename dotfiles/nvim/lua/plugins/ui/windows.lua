@@ -13,13 +13,12 @@ return {
           v = { "<C-w>v", "Vertical split" },
           s = { "<C-w>s", "Horizontal split" },
           o = { "<C-w>o", "Close Other window" },
-          S = { cmd "WindowsMaximizeHorizontally", "Horizontal Zoom" },
-          V = { cmd "WindowsMaximizeVertically", "Vertical Zoom" },
-          e = { cmd "WindowsEqualize", "Equalize Zoom" },
-          z = { cmd "WindowsMaximize", "Maxmize" },
+          S = { cmd("WindowsMaximizeHorizontally"), "Horizontal Zoom" },
+          V = { cmd("WindowsMaximizeVertically"), "Vertical Zoom" },
+          e = { cmd("WindowsEqualize"), "Equalize Zoom" },
+          z = { cmd("WindowsMaximize"), "Maxmize" },
         },
       })
     end,
   },
 }
-

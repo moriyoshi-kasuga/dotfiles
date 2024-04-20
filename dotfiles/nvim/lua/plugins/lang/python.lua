@@ -26,8 +26,8 @@ return {
             },
             python = {
               analysis = {
-                ignore = { '*' },         -- Using Ruff
-                typeCheckingMode = 'off', -- Using mypy
+                ignore = { "*" }, -- Using Ruff
+                typeCheckingMode = "off", -- Using mypy
               },
             },
           },

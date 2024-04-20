@@ -12,27 +12,29 @@ return {
       graphql = { { "prettierd", "prettier" } },
       iquid = { { "prettierd", "prettier" } },
       lua = { "stylua" },
-    }
+    },
   },
-  config = function(opts)
+  lazy = true,
+  config = function(_, opts)
     local conform = require("conform")
 
     conform.setup({
       formatters_by_ft = opts.formatters_by_ft,
-      format_on_save = {
-        lsp_fallback = true,
-        async = false,
-        timeout_ms = 1000,
-      },
+      format_on_save = false,
     })
 
-    -- TODO: この動画をみて conform nvim と nvim lint の再設定をする https://www.youtube.com/watch?v=ybUE4D80XSk
-    vim.keymap.set({ "n", "v" }, "<leader>r", function()
-      conform.format({
-        lsp_fallback = true,
-        async = false,
-        timeout_ms = 1000,
-      })
-    end, { desc = "Format file or range (in visual mode)" })
   end,
+  keys = {
+    {
+      "<leader>r",
+      function()
+        require("conform").format({
+          lsp_fallback = true,
+          async = false,
+          timeout_ms = 1000,
+        })
+      end,
+      desc = "Format file or range (in visual mode)",
+    },
+  },
 }

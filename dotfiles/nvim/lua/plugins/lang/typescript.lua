@@ -90,7 +90,7 @@ return {
             -- 💀 Make sure to update this path to point to your installation
             args = {
               require("mason-registry").get_package("js-debug-adapter"):get_install_path()
-              .. "/js-debug/src/dapDebugServer.js",
+                .. "/js-debug/src/dapDebugServer.js",
               "${port}",
             },
           },
