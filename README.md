@@ -54,29 +54,30 @@ sudo apt install make && git clone --depth 1 https://github.com/moriyoshi-kasuga
 
 - Homebrew
 
-  - [lsd](https://github.com/lsd-rs/lsd)
+  - [eza](https://github.com/eza-community/eza)
   - [bat](https://github.com/sharkdp/bat)
   - [fzf](https://github.com/junegunn/fzf)
   - [direnv](https://github.com/direnv/direnv)
-  - [ripgrep](https://github.com/BurntSushi/ripgrep)
   - [lazygit](https://github.com/jesseduffield/lazygit)
-  - [wget](https://www.gnu.org/software/wget/)
+  - [startship](https://github.com/starship/starship)
   - [tmux](https://github.com/tmux/tmux)
+  - [zoxide](https://github.com/ajeetdsouza/zoxide)
+  - [git-delta](https://github.com/dandavison/delta)
   - [and more...](./config/Brew.Unix.Brewfile)
 
 - git
 - docker
   > docker and docker compose
 - zsh
-  > zsh plugin manager using `zinit` and customize theme using `p10k`
-  - my alias
-  - original fzf history of <Ctrl+R>
-  - original directory history with <Ctrl+G>
+  - zsh plugin manager using `zinit`
+  - use keybind of vim
+  - [my alias](./dotfiles/zsh/alias.zsh)
+  - [my useful command](./dotfiles/zsh/script/)
 - nodebrew
   > latest npm and node
 - python
 - neovim
-  - [lazyvim + my settings](./dotfiles/lazyvim/)
-    > I used to use ([astronvim](https://github.com/AstroNvim/AstroNvim) and [my astronvim config](https://github.com/moriyoshi-kasuga/astronvim_config))
+  - [merge my settings and lazyvim](./dotfiles/nvim/)
+    - I used to use [lazyvim + my settings](./dotfiles/lazyvim/)
 - coursier
   > setup and install metals

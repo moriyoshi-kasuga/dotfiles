@@ -25,6 +25,8 @@ fi
 echo
 install_start "Brew bundle"
 
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
 brew bundle --file="${dotfiles_root}"/config/Brew.Unix.Brewfile
 brew bundle --file="${dotfiles_root}"/config/Brew."$(uname)".Brewfile
 

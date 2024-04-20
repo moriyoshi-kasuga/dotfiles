@@ -26,6 +26,7 @@ ZVM_VI_INSERT_ESCAPE_BINDKEY=jk
 
 ## export
 export TERM=xterm-256color
+export PATH=$PATH:/Library/PostgreSQL/15/bin
 
 ## init zsh tool
 eval "$(starship init zsh)"
