@@ -3,7 +3,7 @@
 # ls
 alias l='eza --color=always --long --git --no-filesize --icons=always --no-time --no-user --no-permissions'
 alias la='eza --all --color=always --long --git --no-filesize --icons=always --no-time --no-user --no-permissions'
-alias lsa='eza --all --color=always --long --git'
+alias lsa='eza --all --color=always --long --git --icons=always'
 alias lt='eza --color=always --tree --git --icons=always'
 
 # Directory
