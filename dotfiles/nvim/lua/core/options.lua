@@ -1,5 +1,4 @@
 vim.g.autoformat = false -- disable auto format
-vim.g["qs_highlight_on_keys"] = { "f", "F", "t", "T" }
 
 local opt = vim.opt
 

@@ -1,8 +1,3 @@
-vim.cmd([[
-highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
-highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline
-]])
-
 local ac = vim.api.nvim_create_autocmd
 local function ag(name)
   return vim.api.nvim_create_augroup(name, { clear = true })
@@ -75,7 +70,7 @@ ac("BufWritePre", {
 })
 --
 -- Fix conceallevel for json files
-ac({ "FileType" }, {
+ac("FileType", {
   group = ag("json_conceal"),
   pattern = { "json", "jsonc", "json5" },
   callback = function()
