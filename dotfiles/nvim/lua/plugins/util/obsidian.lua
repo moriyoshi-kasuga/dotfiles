@@ -30,43 +30,60 @@ return {
       },
 
       mappings = {
-        -- Overrides the 'gf' mapping to work on markdown/wiki links within your vault.
         ["gf"] = {
           action = function()
             return require("obsidian").util.gf_passthrough()
           end,
-          opts = { noremap = false, expr = true, buffer = true },
+          opts = { noremap = false, expr = true, buffer = true, desc = "Go to under cursor obsidian" },
         },
         -- Toggle check-boxes.
         ["<leader>ch"] = {
           action = function()
             return require("obsidian").util.toggle_checkbox()
           end,
-          opts = { buffer = true },
+          opts = { buffer = true, desc = "toggle check box" },
         },
         ["<leader><space>"] = {
           action = function()
             return "<cmd>ObsidianSearch<cr>"
           end,
-          opts = { buffer = true, expr = true },
+          opts = { buffer = true, expr = true, desc = "Obsidian Search" },
         },
         [leader .. "b"] = {
           action = function()
             return "<cmd>ObsidianBacklinks<cr>"
           end,
-          opts = { buffer = true, expr = true },
+          opts = { buffer = true, expr = true, desc = "backlinks" },
         },
         [leader .. "d"] = {
           action = function()
             return "<cmd>ObsidianDailies<cr>"
           end,
-          opts = { buffer = true, expr = true },
+          opts = { buffer = true, expr = true, desc = "Dailies" },
         },
         [leader .. "n"] = {
           action = function()
             return "<cmd>ObsidianNew<cr>"
           end,
-          opts = { buffer = true, expr = true },
+          opts = { buffer = true, expr = true, desc = "New" },
+        },
+        [leader .. "s"] = {
+          action = function()
+            return "<cmd>ObsidianTags<cr>"
+          end,
+          opts = { buffer = true, expr = true, desc = "Tags" },
+        },
+        [leader .. "t"] = {
+          action = function()
+            return "<cmd>ObsidianToday<cr>"
+          end,
+          opts = { buffer = true, expr = true, "Today" },
+        },
+        ["<cr>"] = {
+          action = function()
+            return require("obsidian").util.smart_action()
+          end,
+          opts = { buffer = true, expr = true, desc = "Smart Action" },
         },
       },
 

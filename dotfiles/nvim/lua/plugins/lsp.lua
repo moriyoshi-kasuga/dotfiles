@@ -42,7 +42,9 @@ return {
         require("util.utils").on_attach(function(client, buffer)
           if client.supports_method("textDocument/inlayHint") then
             local ih = vim.lsp.buf.inlay_hint or vim.lsp.inlay_hint
-            ih.enable(buffer, true)
+            if ih ~= nil then
+              ih.enable(buffer, true)
+            end
           end
         end)
       end

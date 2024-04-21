@@ -9,7 +9,7 @@ return {
       python = { template = { annotation_convention = "google_docstrings" } },
     },
   },
-  config = function(opts)
+  config = function(_, opts)
     require("neogen").setup(opts)
     require("which-key").register({
       ["<leader>a"] = {

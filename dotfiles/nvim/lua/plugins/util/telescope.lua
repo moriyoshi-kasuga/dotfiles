@@ -118,7 +118,7 @@ return {
         function()
           require("telescope.builtin").find_files({ hidden = true })
         end,
-        desc = "Find Files",
+        desc = "Find Files All",
       },
       -- find
       {
