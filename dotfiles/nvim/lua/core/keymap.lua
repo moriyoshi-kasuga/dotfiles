@@ -2,12 +2,6 @@ local map = vim.keymap.set
 
 local cmd = require("util.utils").cmd
 
--- insert mode
-map("i", "<C-f>", "<right>")
-map("i", "<C-b>", "<left>")
-map("i", "<C-n>", "<down>")
-map("i", "<C-p>", "<up>")
-
 -- better up/down
 map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 map({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
