@@ -55,6 +55,9 @@ return {
         enable = true,
         disable = { "html" },
       },
+      mathup = {
+        enable = true,
+      },
       auto_install = true,
       highlight = { enable = true },
       ensure_installed = {

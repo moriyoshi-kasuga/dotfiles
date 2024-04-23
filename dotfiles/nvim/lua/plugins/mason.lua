@@ -8,6 +8,7 @@ return {
       ensure_installed = {
         "stylua",
         "prettier",
+        "prettierd",
         "luacheck",
         "tailwindcss-language-server",
         "black",
