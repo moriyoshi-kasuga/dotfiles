@@ -97,7 +97,26 @@ return {
       },
     },
     keys = {
-      { "<leader>/", "<cmd>Telescope live_grep<cr>", desc = "Grep" },
+      { "<leader>/", "<cmd>Telescope live_grep<cr>", desc = "Live Grep" },
+      { "<leader>*", "<cmd>Telescope grep_string<cr>", desc = "Grep String" },
+      {
+        "<leader>s/",
+        function()
+          require("telescope.builtin").live_grep({
+            additional_args = { "--hidden" },
+          })
+        end,
+        desc = "Live Grep (include hidden file)",
+      },
+      {
+        "<leader>s*",
+        function()
+          require("telescope.builtin").grep_string({
+            additional_args = { "--hidden" },
+          })
+        end,
+        desc = "Live Grep (include hidden file)",
+      },
       {
         "<leader>,",
         "<cmd>Telescope buffers<cr>",
@@ -116,9 +135,11 @@ return {
       {
         "<leader>s<space>",
         function()
-          require("telescope.builtin").find_files({ hidden = true })
+          require("telescope.builtin").find_files({
+            find_command = { "fd", "--hidden", "--type", "f", "--follow" },
+          })
         end,
-        desc = "Find Files All",
+        desc = "Find Files (include hidden file)",
       },
       -- find
       {

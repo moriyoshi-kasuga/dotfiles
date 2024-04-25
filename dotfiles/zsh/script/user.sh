@@ -4,7 +4,7 @@ useful() {
 	# if exist useful.sh
 	if [[ -f ./useful.sh ]]; then
 		# shellcheck disable=1091
-		source ./useful.sh
+		source ./useful.sh "$@"
 		return
 	fi
 	touch ./useful.sh
