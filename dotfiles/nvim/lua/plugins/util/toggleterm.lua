@@ -18,5 +18,18 @@ return {
     vim.keymap.set("n", "<c-_>", function()
       term:toggle()
     end, { desc = "Toggle Term", noremap = true, silent = true })
+    vim.keymap.set("n", "<leader><c-_>", function()
+      Terminal:new({
+        dir = vim.fn.expand("%:p:h"),
+        direction = "float",
+        float_opts = {
+          border = "double",
+        },
+        on_open = function(open)
+          vim.cmd("startinsert!")
+          vim.api.nvim_buf_set_keymap(open.bufnr, "t", "<c-_>", "<cmd>close<CR>", { silent = true })
+        end,
+      }):toggle()
+    end, { desc = "Toggle Term", noremap = true, silent = true })
   end,
 }
