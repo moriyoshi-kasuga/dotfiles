@@ -77,7 +77,7 @@ return {
           action = function()
             return "<cmd>ObsidianToday<cr>"
           end,
-          opts = { buffer = true, expr = true, "Today" },
+          opts = { buffer = true, expr = true, desc =  "Today" },
         },
         ["<cr>"] = {
           action = function()
