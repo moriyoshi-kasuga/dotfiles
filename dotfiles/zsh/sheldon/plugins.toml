@@ -1,0 +1,83 @@
+# `sheldon` configuration file
+# ----------------------------
+#
+# You can modify this file directly or you can use one of the following
+# `sheldon` commands which are provided to assist in editing the config file:
+#
+# - `sheldon add` to add a new plugin to the config file
+# - `sheldon edit` to open up the config file in the default editor
+# - `sheldon remove` to remove a plugin from the config file
+#
+# See the documentation for more https://github.com/rossmacarthur/sheldon#readme
+
+shell = "zsh"
+
+[plugins]
+
+[templates]
+defer = "{{ hooks?.pre | nl }}{% for file in files %}zsh-defer source \"{{ file }}\"\n{% endfor %}{{ hooks?.get | nl }}"
+hooks = "{{ hooks?.pre | nl }}{% for file in files %}source \"{{ file }}\"\n{% endfor %}{{ hooks?.get | nl }}"
+
+[plugins.zsh-defer]
+github = "romkatv/zsh-defer"
+
+[plugins.compinit]
+inline = 'autoload -Uz compinit && zsh-defer compinit'
+
+[plugins.starship]
+inline = 'eval "$(starship init zsh)"'
+
+[plugins.fzf]
+inline = 'zvm_after_init_commands+=(eval "$(fzf --zsh)")'
+
+[plugins.zoxide]
+inline = 'zsh-defer eval "$(zoxide init zsh --cmd cd)"'
+
+[plugins.direnv]
+inline = 'eval "$(direnv hook zsh)"'
+
+[plugins.zsh-vi-mode]
+github = 'jeffreytse/zsh-vi-mode'
+use = ['zsh-vi-mode.zsh']
+apply = ["hooks"]
+hooks.pre = '''
+echo '\e[5 q'
+function zvm_config() {
+    ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
+    ZVM_VI_INSERT_ESCAPE_BINDKEY=jk
+}
+'''
+hooks.post = '''
+for f in zvm_backward_kill_region zvm_yank zvm_change_surround_text_object zvm_vi_delete zvm_vi_change zvm_vi_change_eol; do
+  eval "$(echo "_$f() {"; declare -f $f | tail -n +2)"
+  eval "$f() { _$f; echo -en \$CUTBUFFER | pbcopy }"
+done
+
+for f in zvm_vi_replace_selection; do
+  eval "$(echo "_$f() {"; declare -f $f | tail -n +2)"
+  eval "$f() { CUTBUFFER=\$(pbpaste); _$f; echo -en \$CUTBUFFER | pbcopy }"
+done
+
+for f in zvm_vi_put_after zvm_vi_put_before; do
+  eval "$(echo "_$f() {"; declare -f $f | tail -n +2)"
+  eval "$f() { CUTBUFFER=\$(pbpaste); _$f; zvm_highlight clear }"
+done
+'''
+
+[plugins.fast-syntax-highlighting]
+github = "zdharma-continuum/fast-syntax-highlighting"
+apply = ["defer"]
+
+[plugins.fzf-tab]
+github = 'Aloxaf/fzf-tab'
+use = ['fzf-tab.zsh']
+apply = ["defer"]
+
+
+[plugins.zsh-completions]
+github = 'zsh-users/zsh-completions'
+apply = ["defer"]
+
+[plugins.zsh-autosuggestions]
+github = 'zsh-users/zsh-autosuggestions'
+apply = ["defer"]

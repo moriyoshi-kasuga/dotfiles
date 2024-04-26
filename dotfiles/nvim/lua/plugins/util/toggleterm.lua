@@ -15,10 +15,10 @@ return {
         vim.api.nvim_buf_set_keymap(term.bufnr, "t", "<c-_>", "<cmd>close<CR>", { silent = true })
       end,
     })
-    vim.keymap.set("n", "<c-_>", function()
-      term:toggle()
-    end, { desc = "Toggle Term", noremap = true, silent = true })
     vim.keymap.set("n", "<leader><c-_>", function()
+      term:toggle()
+    end, { desc = "Toggle Term (Buf Path)", noremap = true, silent = true })
+    vim.keymap.set("n", "<c-_>", function()
       Terminal:new({
         dir = vim.fn.expand("%:p:h"),
         direction = "float",
@@ -30,6 +30,6 @@ return {
           vim.api.nvim_buf_set_keymap(open.bufnr, "t", "<c-_>", "<cmd>close<CR>", { silent = true })
         end,
       }):toggle()
-    end, { desc = "Toggle Term", noremap = true, silent = true })
+    end, { desc = "Toggle Term (Root)", noremap = true, silent = true })
   end,
 }

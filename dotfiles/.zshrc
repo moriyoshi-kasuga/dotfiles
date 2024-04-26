@@ -1,37 +1,31 @@
-### Added by Zinit's installer
-if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
-    print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
-    command mkdir -p "$HOME/.local/share/zinit" && command chmod g-rwX "$HOME/.local/share/zinit"
-    command git clone https://github.com/zdharma-continuum/zinit "$HOME/.local/share/zinit/zinit.git" && \
-        print -P "%F{33} %F{34}Installation successful.%f%b" || \
-        print -P "%F{160} The clone has failed.%f%b"
+ZSH_DIR=${${(%):-%N}:A:h}/zsh
+# source command override technique
+function source {
+  ensure_zcompiled $1
+  builtin source $1
+}
+function ensure_zcompiled {
+  local compiled="$1.zwc"
+  if [[ ! -r "$compiled" || "$1" -nt "$compiled" ]]; then
+    echo "\033[1;36mCompiling\033[m $1"
+    zcompile $1
+  fi
+}
+ensure_zcompiled ~/.zshrc
+
+source "$ZSH_DIR/alias.zsh"
+source "$ZSH_DIR/nonlazy.zsh"
+
+# sheldon cache technique
+export SHELDON_CONFIG_DIR="$ZSH_DIR/sheldon"
+sheldon_cache="${XDG_CACHE_HOME:-$HOME/.cache}/sheldon.zsh"
+sheldon_toml="$SHELDON_CONFIG_DIR/plugins.toml"
+if [[ ! -r "$sheldon_cache" || "$sheldon_toml" -nt "$sheldon_cache" ]]; then
+  sheldon source > $sheldon_cache
 fi
+source "$sheldon_cache"
+unset sheldon_cache sheldon_toml
 
-source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
-autoload -Uz _zinit
-(( ${+_comps} )) && _comps[zinit]=_zinit
-
-# Load a few important annexes, without Turbo
-# (this is currently required for annexes)
-zinit wait lucid light-mode for \
-    zdharma-continuum/zinit-annex-as-monitor \
-    zdharma-continuum/zinit-annex-bin-gem-node \
-    zdharma-continuum/zinit-annex-patch-dl \
-    zdharma-continuum/zinit-annex-rust
-
-### End of Zinit's installer chunk
-
-### Plugin
-
-zinit wait lucid for \
- atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
-    zdharma-continuum/fast-syntax-highlighting \
- atload"!_zsh_autosuggest_start" \
-    zsh-users/zsh-autosuggestions
-
-zinit ice depth=1
-zinit light jeffreytse/zsh-vi-mode
-
-source "${HOME}/zsh/settings.zsh"
-source "${HOME}/zsh/alias.zsh"
-source "${HOME}/zsh/commands.zsh"
+zsh-defer source "$ZSH_DIR/lazy.zsh"
+zsh-defer source "$ZSH_DIR/commands.zsh"
+zsh-defer unfunction source
