@@ -77,3 +77,31 @@ ac("FileType", {
     vim.opt_local.conceallevel = 0
   end,
 })
+
+ac({ "TextChangedI", "TextChangedP" }, {
+  callback = function()
+    if vim.bo.filetype ~= vim.fn.expand("%:e") then
+      return
+    end
+    local line = vim.api.nvim_get_current_line()
+    if not line or line == '' then
+      require("cmp").close()
+      return
+    end
+    local cursor = vim.api.nvim_win_get_cursor(0)[2]
+
+    local current = string.sub(line, cursor, cursor + 1)
+    if current == "." or current == "," or current == " " then
+      require("cmp").close()
+    end
+
+    local before_line = string.sub(line, 1, cursor + 1)
+    local after_line = string.sub(line, cursor + 1, -1)
+    if not string.match(before_line, "^%s+$") then
+      if after_line == "" or string.match(before_line, " $") or string.match(before_line, "%.$") then
+        require("cmp").complete()
+      end
+    end
+  end,
+  pattern = "*",
+})

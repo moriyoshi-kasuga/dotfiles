@@ -7,6 +7,7 @@ return {
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
+      "onsails/lspkind.nvim",
     },
     opts = function()
       vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
@@ -16,6 +17,9 @@ return {
         auto_brackets = {}, -- configure any filetype to auto add brackets
         completion = {
           completeopt = "menu,menuone,noinsert",
+        },
+        view = {
+          entries = { name = "custom", selection_order = "near_cursor" },
         },
         mapping = cmp.mapping.preset.insert({
           ["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
@@ -35,64 +39,23 @@ return {
           end,
         }),
         sources = cmp.config.sources({
-          { name = "nvim_lsp", group_index = 1, max_item_count = 30 },
+          { name = "nvim_lsp" },
           { name = "path" },
         }, {
           { name = "buffer" },
         }),
         formatting = {
-          format = function(_, item)
-            local icons = {
-              Array = " ",
-              Boolean = "󰨙 ",
-              Class = " ",
-              Codeium = "󰘦 ",
-              Color = " ",
-              Control = " ",
-              Collapsed = " ",
-              Constant = "󰏿 ",
-              Constructor = " ",
-              Copilot = " ",
-              Enum = " ",
-              EnumMember = " ",
-              Event = " ",
-              Field = " ",
-              File = " ",
-              Folder = " ",
-              Function = "󰊕 ",
-              Interface = " ",
-              Key = " ",
-              Keyword = " ",
-              Method = "󰊕 ",
-              Module = " ",
-              Namespace = "󰦮 ",
-              Null = " ",
-              Number = "󰎠 ",
-              Object = " ",
-              Operator = " ",
-              Package = " ",
-              Property = " ",
-              Reference = " ",
-              Snippet = " ",
-              String = " ",
-              Struct = "󰆼 ",
-              TabNine = "󰏚 ",
-              Text = " ",
-              TypeParameter = " ",
-              Unit = " ",
-              Value = " ",
-              Variable = "󰀫 ",
-            }
-            if icons[item.kind] then
-              item.kind = icons[item.kind] .. item.kind
-            end
-            return item
-          end,
-        },
-        experimental = {
-          ghost_text = {
-            hl_group = "CmpGhostText",
-          },
+          format = require("lspkind").cmp_format({
+            with_text = true, -- do not show text alongside icons
+            maxwidth = 50,
+            before = function(_, vim_item)
+              local m = vim_item.menu and vim_item.menu or ""
+              if #m > 20 then
+                vim_item.menu = string.sub(m, 1, 20) .. "..."
+              end
+              return vim_item
+            end,
+          }),
         },
         sorting = defaults.sorting,
       }

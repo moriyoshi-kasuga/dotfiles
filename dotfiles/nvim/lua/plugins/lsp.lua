@@ -8,6 +8,7 @@ return {
       { "folke/neodev.nvim", opts = {} },
       "mason.nvim",
       "williamboman/mason-lspconfig.nvim",
+      "hrsh7th/cmp-nvim-lsp",
     },
     config = function(_, opts)
       local plugin = require("lazy.core.config").spec.plugins["neoconf.nvim"]
@@ -170,8 +171,6 @@ return {
       codelens = {
         enabled = false,
       },
-      -- add any global capabilities here
-      capabilities = {},
       -- options for vim.lsp.buf.format
       -- but can be also overridden when specified
       format = {
