@@ -101,9 +101,9 @@ return {
         end,
 
         -- These depend on nvim-dap, but can additionally be disabled by setting false here.
-        dap = { hotcodereplace = "auto", config_overrides = {} },
-        dap_main = {},
-        test = true,
+        -- dap = { hotcodereplace = "auto", config_overrides = {} },
+        -- dap_main = {},
+        -- test = true,
       }
     end,
     config = function(_, opts)
