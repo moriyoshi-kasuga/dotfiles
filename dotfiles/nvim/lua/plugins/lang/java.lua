@@ -1,3 +1,10 @@
+-- NOTE: java での hover の concellevelが正しく動いていないのはnoice.nvimの vim.lsp.util.convert_input_to_markdown_lines の formatter の string の中で
+--       if vim.bo.filetype == "java" then
+--        content = content:gsub("%[(.-)%]%((.-)%)", "[%1]()")
+--       end
+--       このようにして対策してる
+
+--
 -- This is the same as in lspconfig.server_configurations.jdtls, but avoids
 -- needing to require that when this module loads.
 local java_filetypes = { "java" }

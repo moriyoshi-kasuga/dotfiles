@@ -1,5 +1,11 @@
 vim.g.autoformat = false -- disable auto format
 
+vim.g["qs_highlight_on_keys"] = { "f", "F", "t", "T" }
+vim.cmd([[
+highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
+highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline
+]])
+
 local opt = vim.opt
 
 opt.conceallevel = 2 -- Hide * markup for bold and italic, but not markers with substitutions
@@ -24,8 +30,6 @@ opt.background = "dark"
 opt.tabstop = 2
 -- 自動的に挿入される量
 opt.shiftwidth = 2
--- 検索時の強調表示
-opt.inccommand = "split"
 -- Windowsでパスの区切り文字をスラッシュで扱う
 -- 対応する括弧を強調表示
 opt.showmatch = true

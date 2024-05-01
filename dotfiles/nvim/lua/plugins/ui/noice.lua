@@ -8,6 +8,27 @@ return {
         ["vim.lsp.util.stylize_markdown"] = true,
         ["cmp.entry.get_documentation"] = true,
       },
+      signature = { enabled = true },
+      hover = { enabled = true },
+      documentation = {
+        view = "hover",
+        ---@type NoiceViewOptions
+        opts = {
+          border = { style = "rounded" },
+          relative = "cursor",
+          position = {
+            row = 2,
+          },
+          win_options = {
+            concealcursor = "n",
+            conceallevel = 3,
+            winhighlight = {
+              Normal = "LspFloat",
+              FloatBorder = "LspFloatBorder",
+            },
+          },
+        },
+      },
     },
     routes = {
       {
@@ -36,7 +57,7 @@ return {
       bottom_search = true,
       command_palette = true,
       long_message_to_split = true,
-      inc_rename = true,
+      inc_rename = false,
       lsp_doc_border = true,
     },
   },

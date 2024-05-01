@@ -16,3 +16,7 @@ setopt hist_reduce_blanks # 余分なスペースを削除してヒストリに�
 export TERM=xterm-256color
 export PATH=$PATH:/Library/PostgreSQL/15/bin
 export EDITOR=vim
+
+if [ -d "./local.zsh" ] ; then
+    source "./local.zsh"
+fi

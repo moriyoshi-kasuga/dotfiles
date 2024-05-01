@@ -2,6 +2,13 @@ local map = vim.keymap.set
 
 local cmd = require("util.utils").cmd
 
+vim.cmd([[
+nnoremap x "_x
+xnoremap x "_x
+nnoremap X "_X
+xnoremap X "_X
+]])
+
 -- better up/down
 map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 map({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
@@ -29,7 +36,6 @@ map("i", ";", ";<c-g>u")
 -- better indenting
 map("v", "<", "<gv")
 map("v", ">", ">gv")
-
 -- Deleting without yanking empty line
 map("n", "dd", function()
   return vim.api.nvim_get_current_line():match("^$") ~= nil and '"_dd' or "dd"

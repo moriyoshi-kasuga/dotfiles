@@ -5,7 +5,7 @@ return {
     require("lspsaga").setup({ lightbulb = { enable = false } })
   end,
   keys = {
-    { "gs", "<cmd>Lspsaga outline<cr>", desc = "Show Outlines" },
+    { "<leader>cs", "<cmd>Lspsaga outline<cr>", desc = "Show Outlines" },
   },
   dependencies = {
     "nvim-treesitter/nvim-treesitter", -- optional
