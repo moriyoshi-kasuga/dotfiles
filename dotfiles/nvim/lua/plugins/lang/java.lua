@@ -4,23 +4,7 @@
 --       end
 --       このようにして対策してる
 
---
--- This is the same as in lspconfig.server_configurations.jdtls, but avoids
--- needing to require that when this module loads.
 local java_filetypes = { "java" }
-
--- Utility function to extend or override a config table, similar to the way
--- that Plugin.opts works.
----@param config table
----@param custom function | table | nil
-local function extend_or_override(config, custom, ...)
-  if type(custom) == "function" then
-    config = custom(config, ...) or config
-  elseif custom then
-    config = vim.tbl_deep_extend("force", config, custom) --[[@as table]]
-  end
-  return config
-end
 
 return {
   -- Add java to treesitter.
@@ -70,42 +54,69 @@ return {
     dependencies = { "folke/which-key.nvim" },
     ft = java_filetypes,
     opts = function()
+      local jdtls = require("lspconfig.server_configurations.jdtls")
+      local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
+      local workspace_dir = vim.fn.stdpath("data") .. "/site/java/workspace-root/" .. project_name
       return {
-        -- How to find the root dir for a given filename. The default comes from
-        -- lspconfig which provides a function specifically for java projects.
-        root_dir = require("lspconfig.server_configurations.jdtls").default_config.root_dir,
+        root_dir = jdtls.default_config.root_dir,
 
-        -- How to find the project name for a given root dir.
-        project_name = function(root_dir)
-          return root_dir and vim.fs.basename(root_dir)
-        end,
+        cmd = {
+          "java",
+          "-Declipse.application=org.eclipse.jdt.ls.core.id1",
+          "-Dosgi.bundles.defaultStartLevel=4",
+          "-Declipse.product=org.eclipse.jdt.ls.core.product",
+          "-Dlog.protocol=true",
+          "-Dlog.level=ALL",
+          "-javaagent:" .. vim.fn.expand("$MASON/share/jdtls/lombok.jar"),
+          "-Xms1g",
+          "--add-modules=ALL-SYSTEM",
+          "--add-opens",
+          "java.base/java.util=ALL-UNNAMED",
+          "--add-opens",
+          "java.base/java.lang=ALL-UNNAMED",
+          "-jar",
+          vim.fn.expand("$MASON/share/jdtls/plugins/org.eclipse.equinox.launcher.jar"),
+          "-configuration",
+          vim.fn.expand("$MASON/share/jdtls/config"),
+          "-data",
+          workspace_dir,
+        },
+        settings = {
+          java = {
+            format = {
+              enabled = true,
+              tabSize = 2,
+              settings = {
+                profile = "GoogleStyle",
+              },
+            },
+            eclipse = {
+              downloadSources = true,
+            },
+            configuration = {
+              updateBuildConfiguration = "interactive",
+            },
+            maven = {
+              downloadSources = true,
+            },
 
-        -- Where are the config and workspace dirs for a project?
-        jdtls_config_dir = function(project_name)
-          return vim.fn.stdpath("cache") .. "/jdtls/" .. project_name .. "/config"
-        end,
-        jdtls_workspace_dir = function(project_name)
-          return vim.fn.stdpath("cache") .. "/jdtls/" .. project_name .. "/workspace"
-        end,
-
-        -- How to run jdtls. This can be overridden to a full java command-line
-        -- if the Python wrapper script doesn't suffice.
-        cmd = { vim.fn.exepath("jdtls") },
-        full_cmd = function(opts)
-          local fname = vim.api.nvim_buf_get_name(0)
-          local root_dir = opts.root_dir(fname)
-          local project_name = opts.project_name(root_dir)
-          local cmd = vim.deepcopy(opts.cmd)
-          if project_name then
-            vim.list_extend(cmd, {
-              "-configuration",
-              opts.jdtls_config_dir(project_name),
-              "-data",
-              opts.jdtls_workspace_dir(project_name),
-            })
-          end
-          return cmd
-        end,
+            implementationsCodeLens = {
+              enabled = false,
+            },
+            referencesCodeLens = {
+              enabled = false,
+            },
+          },
+          signatureHelp = {
+            enabled = true,
+          },
+          completion = {
+            favoriteStaticMembers = {
+              "java.util.Objects.requireNonNull",
+              "java.util.Objects.requireNonNullElse",
+            },
+          },
+        },
 
         -- These depend on nvim-dap, but can additionally be disabled by setting false here.
         -- dap = { hotcodereplace = "auto", config_overrides = {} },
@@ -142,15 +153,16 @@ return {
         local fname = vim.api.nvim_buf_get_name(0)
 
         -- Configuration can be augmented and overridden by opts.jdtls
-        local config = extend_or_override({
-          cmd = opts.full_cmd(opts),
+        local config = {
+          cmd = opts.cmd,
           root_dir = opts.root_dir(fname),
           init_options = {
             bundles = bundles,
           },
+          settings = opts.settings,
           -- enable CMP capabilities
           capabilities = require("cmp_nvim_lsp").default_capabilities() or nil,
-        }, opts.jdtls)
+        }
 
         -- Existing server will be reused if the root_dir matches.
         require("jdtls").start_or_attach(config)
