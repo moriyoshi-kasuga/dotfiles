@@ -46,6 +46,7 @@ return {
           any = {
             { find = "%d+L, %d+B" },
             { find = "No information available" },
+            { find = "jdtls" },
           },
         },
         opts = {
