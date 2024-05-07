@@ -37,7 +37,8 @@ opt.matchtime = 1
 opt.swapfile = false
 opt.shadafile = "NONE"
 opt.fileencoding = "utf-8"
-opt.spelllang = "en_us"
+opt.spell = true
+opt.spelllang = { "en_us" }
 opt.fileformats = { "unix", "dos", "mac" }
 -- 検索系
 -- 検索文字列が小文字の場合は大文字小文字を区別なく検索する
