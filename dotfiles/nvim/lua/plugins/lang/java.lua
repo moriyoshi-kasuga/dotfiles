@@ -68,7 +68,7 @@ return {
           "-Dlog.protocol=true",
           "-Dlog.level=ALL",
           "-javaagent:" .. vim.fn.expand("$MASON/share/jdtls/lombok.jar"),
-          "-Xms1g",
+          "-Xms2G",
           "--add-modules=ALL-SYSTEM",
           "--add-opens",
           "java.base/java.util=ALL-UNNAMED",

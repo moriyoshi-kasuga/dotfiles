@@ -59,7 +59,7 @@ customCommands:
         key: "Message"
         initialValue: ""
       - type: "menu"
-        title: "Choise the emoji"
+        title: "Choise the emoji ({{.Form.Type}})"
         key: "Emoji"
         options:
           - name: "(empty)"
