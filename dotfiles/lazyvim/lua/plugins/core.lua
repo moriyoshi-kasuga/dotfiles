@@ -49,14 +49,6 @@ return {
     "unblevable/quick-scope",
     lazy = false,
   },
-
-  -- add symbols-outline
-  {
-    "simrat39/symbols-outline.nvim",
-    cmd = "SymbolsOutline",
-    keys = { { "<leader>cs", "<cmd>SymbolsOutline<cr>", desc = "Symbols Outline" } },
-    config = true,
-  },
   {
     "NvChad/nvim-colorizer.lua",
     config = function()
@@ -93,7 +85,8 @@ return {
   {
     "smjonas/inc-rename.nvim",
     config = function()
-      require("inc_rename").setup()
+      ---@diagnostic disable-next-line: missing-fields
+      require("inc_rename").setup({})
       vim.keymap.set("n", "gR", ":IncRename ", { desc = "Inc Rename" })
     end,
   },
@@ -121,15 +114,6 @@ return {
     "kevinhwang91/nvim-hlslens",
     config = function()
       require("hlslens").setup()
-    end,
-  },
-  {
-    "phaazon/hop.nvim",
-    config = function()
-      require("hop").setup({ keys = "etovxqpdygfblzhckisuran" })
-      vim.keymap.set({ "n", "v" }, "s", function()
-        require("hop").hint_words()
-      end)
     end,
   },
 }

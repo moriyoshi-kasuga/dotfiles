@@ -18,17 +18,6 @@ return {
         require("util.lsp-keymap").on_attach(client, buffer)
       end)
 
-      local register_capability = vim.lsp.handlers["client/registerCapability"]
-
-      vim.lsp.handlers["client/registerCapability"] = function(err, res, ctx)
-        ---@diagnostic disable-next-line: no-unknown
-        local ret = register_capability(err, res, ctx)
-        local client = vim.lsp.get_client_by_id(ctx.client_id)
-        local buffer = vim.api.nvim_get_current_buf()
-        require("util.lsp-keymap").on_attach(client, buffer)
-        return ret
-      end
-
       -- diagnostics signs
       if vim.fn.has("nvim-0.10.0") == 0 then
         for severity, icon in pairs(opts.diagnostics.signs.text) do
@@ -38,64 +27,13 @@ return {
         end
       end
 
-      -- inlay hints
-      if opts.inlay_hints.enabled then
-        require("util.utils").on_attach(function(client, buffer)
-          if client.supports_method("textDocument/inlayHint") then
-            local ih = vim.lsp.buf.inlay_hint or vim.lsp.inlay_hint
-            if ih ~= nil then
-              ih.enable(buffer, true)
-            end
-          end
-        end)
-      end
-
-      -- code lens
-      if opts.codelens.enabled and vim.lsp.codelens then
-        require("util.utils").on_attach(function(client, buffer)
-          if client.supports_method("textDocument/codeLens") then
-            vim.lsp.codelens.refresh()
-            --- autocmd BufEnter,CursorHold,InsertLeave <buffer> lua vim.lsp.codelens.refresh()
-            vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
-              buffer = buffer,
-              callback = vim.lsp.codelens.refresh,
-            })
-          end
-        end)
-      end
-
-      if type(opts.diagnostics.virtual_text) == "table" and opts.diagnostics.virtual_text.prefix == "icons" then
-        opts.diagnostics.virtual_text.prefix = vim.fn.has("nvim-0.10.0") == 0 and "●"
-          or function(diagnostic)
-            local icons = {
-              Error = " ",
-              Warn = " ",
-              Hint = " ",
-              Info = " ",
-            }
-            for d, icon in pairs(icons) do
-              if diagnostic.severity == vim.diagnostic.severity[d:upper()] then
-                return icon
-              end
-            end
-          end
-      end
-
-      vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
-
       local servers = opts.servers
-      local has_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-      local capabilities = vim.tbl_deep_extend(
-        "force",
-        {},
-        vim.lsp.protocol.make_client_capabilities(),
-        has_cmp and cmp_nvim_lsp.default_capabilities() or {},
-        opts.capabilities or {}
-      )
+
+      local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
       local function setup(server)
         local server_opts = vim.tbl_deep_extend("force", {
-          capabilities = vim.deepcopy(capabilities),
+          capabilities = capabilities,
         }, servers[server] or {})
 
         if opts.setup[server] then
@@ -110,34 +48,11 @@ return {
         require("lspconfig")[server].setup(server_opts)
       end
 
-      -- get all the servers that are available through mason-lspconfig
-      local have_mason, mlsp = pcall(require, "mason-lspconfig")
-      local all_mslp_servers = {}
-      if have_mason then
-        all_mslp_servers = vim.tbl_keys(require("mason-lspconfig.mappings.server").lspconfig_to_package)
-      end
-
-      local ensure_installed = {} ---@type string[]
-      for server, server_opts in pairs(servers) do
-        if server_opts then
-          server_opts = server_opts == true and {} or server_opts
-          -- run manual setup if mason=false or if this is a server that cannot be installed with mason-lspconfig
-          if server_opts.mason == false or not vim.tbl_contains(all_mslp_servers, server) then
-            setup(server)
-          elseif server_opts.enabled ~= false then
-            ensure_installed[#ensure_installed + 1] = server
-          end
-        end
-      end
-
-      if have_mason then
-        mlsp.setup({ ensure_installed = ensure_installed, handlers = { setup } })
-      end
+      require("mason-lspconfig").setup({ handlers = { setup } })
     end,
     ---@class PluginLspOpts
     opts = {
       -- options for vim.diagnostic.config()
-      ---@type vim.diagnostic.Opts
       diagnostics = {
         underline = true,
         update_in_insert = false,

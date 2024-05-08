@@ -5,6 +5,11 @@ vim.g.autoformat = false -- disable auto format
 vim.g["qs_highlight_on_keys"] = { "f", "F", "t", "T" }
 vim.opt.spelllang = "en,cjk"
 
+vim.cmd([[
+highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
+highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline
+]])
+
 vim.o.clipboard = ""
 
 vim.o.mouse = "" -- disable mouse
@@ -16,37 +21,3 @@ vim.filetype.add({
     mdx = "markdown",
   },
 })
-
-vim.o.conceallevel = 1
-
--- local function replace_markdown(var)
---   if type(var) == "table" then
---     return vim.tbl_map(replace_markdown, var)
---   elseif type(var) == "string" then
---     return var
---       :gsub("%[([^%]]+)%]%([^%)]+%)", "[%1]()")
---       :gsub("<b>", "**")
---       :gsub("</b>", "**")
---       :gsub("<i>", "*")
---       :gsub("</i>", "*")
---   end
--- end
-
--- vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(function(_, result, ctx, config)
---   local file_extension = vim.fn.expand("%:e")
---   if file_extension ~= "java" and file_extension ~= "class" and file_extension ~= "kt" then
---     return vim.lsp.handlers.hover(_, result, ctx, config)
---   end
---   config = config or {}
---   config.focus_id = ctx.method
---   if not (result and result.contents) then
---     return
---   end
---   local contents = result.contents
---   contents = replace_markdown(contents)
---   local markdown_lines = vim.lsp.util.convert_input_to_markdown_lines(contents)
---   if vim.tbl_isempty(markdown_lines) then
---     return
---   end
---   return vim.lsp.util.open_floating_preview(markdown_lines, "markdown", config)
--- end, { border = "rounded" })

@@ -27,8 +27,7 @@ if test -d ~/.config/nvim; then
 	echo "    を実行してください"
 else
 	install_start "Neovim"
-	# __ln ${PWD}/dotfiles/nvim ${HOME}/.config/nvim
-	__ln ${PWD}/dotfiles/nvim ${HOME}/.config/nvim
+	__ln ${PWD}/dotfiles/lazyvim ${HOME}/.config/nvim
 	install_end "Neovim"
 fi
 

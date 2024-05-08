@@ -3,6 +3,46 @@ local actions = require("telescope.actions")
 return {
   {
     "nvim-telescope/telescope.nvim",
+    keys = {
+      { "<leader>*", "<cmd>Telescope grep_string<cr>", desc = "Grep String" },
+      {
+        "<leader>s/",
+        function()
+          require("telescope.builtin").live_grep({
+            additional_args = { "--hidden" },
+          })
+        end,
+        desc = "Live Grep (include hidden file)",
+      },
+      {
+        "<leader>s*",
+        function()
+          require("telescope.builtin").grep_string({
+            additional_args = { "--hidden" },
+          })
+        end,
+        desc = "Live Grep (include hidden file)",
+      },
+      { "<leader>*", "<cmd>Telescope grep_string<cr>", desc = "Grep String" },
+      {
+        "<leader>s/",
+        function()
+          require("telescope.builtin").live_grep({
+            additional_args = { "--hidden" },
+          })
+        end,
+        desc = "Live Grep (include hidden file)",
+      },
+      {
+        "<leader>s*",
+        function()
+          require("telescope.builtin").grep_string({
+            additional_args = { "--hidden" },
+          })
+        end,
+        desc = "Live Grep (include hidden file)",
+      },
+    },
     opts = {
       defaults = {
         layout_config = { prompt_position = "top" },
@@ -34,6 +74,18 @@ return {
           },
         },
       },
+    },
+  },
+  {
+    "prochri/telescope-all-recent.nvim",
+    dependencies = {
+      "nvim-telescope/telescope.nvim",
+      "kkharji/sqlite.lua",
+      -- optional, if using telescope for vim.ui.select
+      "stevearc/dressing.nvim",
+    },
+    opts = {
+      -- your config goes here
     },
   },
 }
