@@ -13,6 +13,7 @@ del("n", "<S-h>")
 del("n", "<S-l>")
 
 del({ "i", "n" }, "<esc>")
+map("n", "<leader>h", cmd("noh"))
 
 -- Telescope
 map({ "n", "v" }, "gp", cmd("Telescope registers"))

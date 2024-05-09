@@ -1,44 +1,40 @@
 return {
   {
     "folke/noice.nvim",
-    opts = function(_, opts)
-      table.insert(opts.routes, {
-        filter = {
-          event = "notify",
-          find = "No information available",
-        },
-        opts = {
-          skip = true,
-        },
-      })
-      table.insert(opts.routes, {
-        filter = {
-          event = "msg_show",
-          any = {
-            { find = "; after #%d+" },
-            { find = "; before #%d+" },
-          },
-        },
-        view = "mini",
-        {},
-      })
-      table.insert(opts.routes, {
-        filter = {
-          any = {
-            { find = "%d+L, %d+B" },
-            { find = "No information available" },
-            { find = "jdtls" },
-          },
-        },
-        opts = {
-          skip = true,
-        },
-      })
-    end,
-  },
-  {
-    "folke/noice.nvim",
     opts = {
+      routes = {
+        {
+          filter = {
+            any = {
+              { find = "%d+L, %d+B" },
+              { find = "No information available" },
+              { find = "jdtls" },
+            },
+          },
+          opts = {
+            skip = true,
+          },
+        },
+        {
+          filter = {
+            event = "msg_show",
+            any = {
+              { find = "; after #%d+" },
+              { find = "; before #%d+" },
+            },
+          },
+          view = "mini",
+        },
+        {
+          filter = {
+            event = "notify",
+            find = "No information available",
+          },
+          opts = {
+            skip = true,
+          },
+        },
+      },
       presets = {
         inc_rename = true,
         lsp_doc_border = true,
