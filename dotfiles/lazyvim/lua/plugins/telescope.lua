@@ -1,10 +1,22 @@
 local actions = require("telescope.actions")
 
+local function filename_first(_, path)
+  local tail = vim.fs.basename(path)
+  local parent = vim.fs.dirname(path)
+  if parent == "." then
+    return tail
+  end
+  return string.format("%s\t%s", tail, parent)
+end
+
 return {
   {
     "nvim-telescope/telescope.nvim",
+    dependencies = {
+      { "nvim-telescope/telescope-ui-select.nvim" },
+    },
     keys = {
-      { "<leader>*", "<cmd>Telescope grep_string<cr>", desc = "Grep String" },
+      { "<leader>*", "<cmd>Telescope grep_string<cr>", desc = "Grep String", mode = { "n", "v" } },
       {
         "<leader>s/",
         function()
@@ -22,29 +34,12 @@ return {
           })
         end,
         desc = "Live Grep (include hidden file)",
-      },
-      { "<leader>*", "<cmd>Telescope grep_string<cr>", desc = "Grep String" },
-      {
-        "<leader>s/",
-        function()
-          require("telescope.builtin").live_grep({
-            additional_args = { "--hidden" },
-          })
-        end,
-        desc = "Live Grep (include hidden file)",
-      },
-      {
-        "<leader>s*",
-        function()
-          require("telescope.builtin").grep_string({
-            additional_args = { "--hidden" },
-          })
-        end,
-        desc = "Live Grep (include hidden file)",
+        mode = { "n", "v" },
       },
     },
     opts = {
       defaults = {
+        path_display = filename_first,
         layout_config = { prompt_position = "top" },
         sorting_strategy = "ascending",
         mappings = {
@@ -75,6 +70,10 @@ return {
         },
       },
     },
+    config = function(_, opts)
+      require("telescope").setup(opts)
+      require("telescope").load_extension("ui-select")
+    end,
   },
   {
     "prochri/telescope-all-recent.nvim",
