@@ -1,48 +1,50 @@
-init:
+help: ## Prints help for targets with comments
+	@cat $(MAKEFILE_LIST) | grep -E '^[a-zA-Z_-]+:.*?## .*$$' | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
+init: ## Initialize dotfiles
 	bash ./bin/init.sh
 
-link:
+link: ## Link dotfiles
 	bash ./bin/links.sh link
 
-unlink:
+unlink: ## Unlink dotfiles
 	bash ./bin/links.sh unlink
 
-zsh:
+zsh: ## Install zsh
 	bash ./bin/zsh.sh
 
-brew:
+brew: ## Install homebrew
 	bash ./bin/brew.sh
 
-git:
+git: ## Install git
 	bash ./bin/git.sh
 
-neovim:
+neovim: ## Install neovim
 	bash ./bin/neovim.sh
 
-docker:
+docker: ## Install docker
 	bash ./bin/docker.sh
 
-likes:
+likes: ## Install likes
 	bash ./bin/likes.sh
 
 
 # lang
-node:
+node: ## Install node
 	bash ./bin/lang/node.sh
 
-python:
+python: ## Install python
 	bash ./bin/lang/python.sh
 
-coursier:
+coursier: ## Install coursier
 	bash ./bin/lang/coursier.sh
 
-rust:
+rust: ## Install rust
 	bash ./bin/lang/rust.sh
 
 
 # os
-darwin:
+darwin: ## Install darwin
 	bash ./bin/os/darwin.sh
 
-linux:
+linux: ## Install linux
 	bash ./bin/os/linux.sh

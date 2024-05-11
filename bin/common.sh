@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-script_root=$(cd "$(dirname "$0")" && pwd)
 . "${script_root}"/color.sh
 
 # 0 debug,1 info,2 notice,3 warn,4 error
