@@ -12,6 +12,16 @@ setopt share_history      # 他のシェルのヒストリをリアルタイム�
 setopt hist_ignore_space
 setopt hist_reduce_blanks # 余分なスペースを削除してヒストリに保存する
 
+autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
+add-zsh-hook chpwd chpwd_recent_dirs
+
+# cdr の設定
+zstyle ':completion:*' recent-dirs-insert both
+zstyle ':chpwd:*' recent-dirs-max 500
+zstyle ':chpwd:*' recent-dirs-default true
+zstyle ':chpwd:*' recent-dirs-file "$HOME/.cache/chpwd-recent-dirs"
+zstyle ':chpwd:*' recent-dirs-pushd true
+
 ## export
 export TERM=xterm-256color
 export PATH=$PATH:/Library/PostgreSQL/15/bin
@@ -20,3 +30,14 @@ export EDITOR=vim
 if [ -d "./local.zsh" ] ; then
     source "./local.zsh"
 fi
+
+function fzf-cdr () {
+    local selected_dir="$(cdr -l | awk '{ print $2 }' | sed 's/^[0-9]\+ \+//' | fzf --reverse --prompt="cdr >" --query "$LBUFFER")"
+    if [ -n "$selected_dir" ]; then
+        BUFFER="cd ${selected_dir}"
+        zle accept-line
+    fi
+}
+
+zle -N fzf-cdr
+zvm_after_init_commands+=('bindkey "^G" fzf-cdr')
