@@ -25,7 +25,7 @@ make node
 
 make python
 
-make coursier
+# make coursier
 
 make neovim
 
