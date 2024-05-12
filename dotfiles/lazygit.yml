@@ -62,8 +62,8 @@ customCommands:
         title: "Choise the emoji ({{.Form.Type}})"
         key: "Emoji"
         options:
-          - name: "(empty)"
-            description: "empty"
+          - name: ":mute:"
+            description: "(🔇) empty"
           - name: ":ambulance:"
             description: "(fix)🚑致命的なバグ修正"
             value: ":ambulance:"
@@ -121,5 +121,5 @@ customCommands:
       - type: "confirm"
         title: "Commit"
         body: "Commit with the message '{{.Form.Type}}({{.Form.Scope}}): {{.Form.Message}}{{.Form.Emoji}}'. Is this okay?"
-    command: 'bash -c ''type="{{.Form.Type}}"; scope="{{.Form.Scope}}"; message="{{.Form.Message}}"; emoji="{{.Form.Emoji}}"; commit_message="$type${scope:+($scope)}: $message $emoji"; git commit -m "$commit_message"'''
+    command: 'git commit -m "{{.Form.Type}}{{if .Form.Scope }}({{.Form.Scope}}){{end}}: {{.Form.Message}} {{.Form.Emoji}}"'
     loadingText: "Commiting..."
