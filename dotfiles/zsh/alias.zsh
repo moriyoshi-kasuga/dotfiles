@@ -1,9 +1,9 @@
 ### alias
 
 # ls
-alias l='eza --color=always --long --git --no-filesize --icons=always --no-time --no-user --no-permissions'
+alias l='eza --color=always --icons=always'
 alias ll='eza --color=always --long --git --icons=always'
-alias la='eza --all --color=always --long --git --no-filesize --icons=always --no-time --no-user --no-permissions'
+alias la='eza --color=always --icons=always --all'
 alias lsa='eza --all --color=always --long --git --icons=always'
 alias lt='eza --color=always --tree --git --icons=always'
 
