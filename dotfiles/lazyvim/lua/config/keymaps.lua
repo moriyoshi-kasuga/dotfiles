@@ -104,4 +104,12 @@ del("n", "<leader>|")
 del("n", "<leader>-")
 del("n", "<leader>`")
 
+-- outline
 map("n", "<leader>cs", cmd("Outline"))
+
+-- mark
+map("n", "M", function()
+  local char = vim.fn.getcharstr()
+  vim.cmd("delmarks " .. char)
+end, { desc = "Delete Mark" })
+map("n", "<leader>m", cmd("Telescope marks"), { desc = "Browse marks with telescoe" })
