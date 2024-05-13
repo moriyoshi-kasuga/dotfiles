@@ -14,7 +14,6 @@ cask "wezterm"
 
 cask "docker"
 cask "visual-studio-code"
-cask "local"
 
 cask "font-jetbrains-mono-nerd-font"
 cask "font-ubuntu-mono-nerd-font"
