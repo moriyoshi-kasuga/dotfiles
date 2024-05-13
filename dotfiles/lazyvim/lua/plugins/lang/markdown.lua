@@ -11,7 +11,7 @@ return {
     "williamboman/mason.nvim",
     opts = function(_, opts)
       opts.ensure_installed = opts.ensure_installed or {}
-      vim.list_extend(opts.ensure_installed, { "markdownlint", "marksman" })
+      vim.list_extend(opts.ensure_installed, { "marksman" })
     end,
   },
   {
@@ -39,5 +39,13 @@ return {
     config = function()
       require("render-markdown").setup({})
     end,
+  },
+  {
+    "neovim/nvim-lspconfig",
+    opts = {
+      servers = {
+        marksman = {},
+      },
+    },
   },
 }
