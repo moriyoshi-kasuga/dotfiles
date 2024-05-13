@@ -15,12 +15,26 @@ setopt hist_reduce_blanks # 余分なスペースを削除してヒストリに�
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
 add-zsh-hook chpwd chpwd_recent_dirs
 
-# cdr の設定
-zstyle ':completion:*' recent-dirs-insert both
-zstyle ':chpwd:*' recent-dirs-max 500
-zstyle ':chpwd:*' recent-dirs-default true
-zstyle ':chpwd:*' recent-dirs-file "$HOME/.cache/chpwd-recent-dirs"
-zstyle ':chpwd:*' recent-dirs-pushd true
+if [[ -n $(echo ${^fpath}/chpwd_recent_dirs(N)) && -n $(echo ${^fpath}/cdr(N)) ]]; then
+    autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
+    add-zsh-hook chpwd chpwd_recent_dirs
+    zstyle ':completion:*' recent-dirs-insert both
+    zstyle ':chpwd:*' recent-dirs-default true
+    zstyle ':chpwd:*' recent-dirs-max 1000
+    zstyle ':chpwd:*' recent-dirs-file "$HOME/.cache/chpwd-recent-dirs"
+
+	if [ -f $HOME/.cache/chpwd-recent-dirs ]; then
+		cat $HOME/.cache/chpwd-recent-dirs \
+  			| sed -e 's/^..\(.*\)./\1/g' \
+  			| while read line
+		do
+  			if [ -d "$line" ]; then
+    			echo "\$'$line'" >>"$HOME/.cache/chpwd-recent-dirs.tmp"
+  			fi
+		done
+		mv "$HOME/.cache/chpwd-recent-dirs.tmp" "$HOME/.cache/chpwd-recent-dirs"
+	fi
+fi
 
 ## export
 export TERM=xterm-256color
