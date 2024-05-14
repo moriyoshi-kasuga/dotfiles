@@ -37,6 +37,10 @@ return {
           state.commands.open(state)
         end
       end,
+      toggle_compact = function(state)
+        state.group_empty_dirs = not state.group_empty_dirs
+        require("neo-tree.sources.manager").refresh()
+      end,
       copy_path = function(state)
         -- NeoTree is based on [NuiTree](https://github.com/MunifTanjim/nui.nvim/tree/main/lua/nui/tree)
         -- The node is based on [NuiNode](https://github.com/MunifTanjim/nui.nvim/tree/main/lua/nui/tree#nuitreenode)
@@ -80,6 +84,7 @@ return {
     filesystem = {
       filtered_items = {
         visible = true,
+        group_empty_dirs = false,
         hide_dotfiles = false,
         hide_gitignore = true,
         hide_hidden = true,
@@ -95,10 +100,11 @@ return {
       mappings = {
         h = "parent_or_close",
         l = "child_or_open",
-        ["Y"] = {
+        Y = {
           "copy_path",
           desc = "Copy Path to Clipboard",
         },
+        T = "toggle_compact",
       },
     },
   },
