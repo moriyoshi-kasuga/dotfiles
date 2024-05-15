@@ -11,16 +11,16 @@ return {
     },
   },
   keys = {
-    { "<leader>te", mode = { "n", "v" }, "<cmd>Translate en<cr>", desc = "Translate English" },
-    { "<leader>tj", mode = { "n", "v" }, "<cmd>Translate ja<cr>", desc = "Translate Japanese" },
+    { "<leader>Te", mode = { "n", "v" }, "<cmd>Translate en<cr>", desc = "Translate English" },
+    { "<leader>Tj", mode = { "n", "v" }, "<cmd>Translate ja<cr>", desc = "Translate Japanese" },
     {
-      "<leader>tE",
+      "<leader>TE",
       mode = { "n", "v" },
       "<cmd>Translate en -output=replace<cr>",
       desc = "translate to en of replace",
     },
     {
-      "<leader>tJ",
+      "<leader>TJ",
       mode = { "n", "v" },
       "<cmd>Translate ja -output=replace<cr>",
       desc = "translate to ja of replace",
