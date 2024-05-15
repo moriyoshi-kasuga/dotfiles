@@ -15,4 +15,6 @@ return {
       colorscheme = function() end,
     },
   },
+  { "catppuccin/nvim", lazy = false },
+  { "rebelot/kanagawa.nvim", lazy = false },
 }
