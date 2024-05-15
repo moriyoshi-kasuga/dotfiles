@@ -83,6 +83,9 @@ return {
       -- optional, if using telescope for vim.ui.select
       "stevearc/dressing.nvim",
     },
+    config = function()
+      require("telescope-all-recent").setup({})
+    end,
     opts = {
       -- your config goes here
     },
