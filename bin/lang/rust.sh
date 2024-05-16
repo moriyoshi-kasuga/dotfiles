@@ -13,8 +13,8 @@ else
 	install_start "rust"
 	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --no-modify-path
 	source "$HOME/.cargo/env"
-	rustup toolchain install 1.70.0
-	rustup default 1.70.0
+	rustup toolchain install stable
+	rustup default stable
 	install_end "rust"
 fi
 
