@@ -36,6 +36,20 @@ return {
         desc = "Live Grep (include hidden file)",
         mode = { "n", "v" },
       },
+      {
+        "<leader><space>",
+        "<cmd>Telescope find_files<cr>",
+        desc = "Find Files",
+      },
+      {
+        "<leader>s<space>",
+        function()
+          require("telescope.builtin").find_files({
+            find_command = { "fd", "--hidden", "--type", "f", "--follow" },
+          })
+        end,
+        desc = "Find Files (include hidden file)",
+      },
     },
     opts = {
       defaults = {
