@@ -16,7 +16,6 @@ return {
       },
       formatters_by_ft = {
         ["htmldjango"] = { "djlint" },
-        ["rust"] = { "rustfmt" },
       },
     },
   },

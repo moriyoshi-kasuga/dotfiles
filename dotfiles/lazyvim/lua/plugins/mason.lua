@@ -8,7 +8,6 @@ return {
       "selene",
       "luacheck",
       "shellcheck",
-      "rustfmt",
       "shfmt",
       "tailwindcss-language-server",
       "typescript-language-server",
