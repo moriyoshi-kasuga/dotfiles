@@ -107,7 +107,7 @@ del("n", "<leader>`")
 -- outline
 map("n", "<leader>cs", cmd("Outline"))
 
-map("n", "M", function()
+map("n", "<leader><c-_>", function()
   LazyVim.terminal(nil, { cwd = vim.fn.expand("%:p:h") })
 end, { desc = "Open Terminal with current dir" })
 
