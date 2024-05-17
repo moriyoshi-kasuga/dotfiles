@@ -11,7 +11,7 @@ return {
     "williamboman/mason.nvim",
     opts = function(_, opts)
       opts.ensure_installed = opts.ensure_installed or {}
-      vim.list_extend(opts.ensure_installed, { "marksman" })
+      vim.list_extend(opts.ensure_installed, { "marksman", "mdformat" })
     end,
   },
   {
@@ -45,6 +45,15 @@ return {
     opts = {
       servers = {
         marksman = {},
+      },
+    },
+  },
+  {
+    "stevearc/conform.nvim",
+    opts = {
+      formatters_by_ft = {
+        md = { "mdformat" },
+        markdown = { "mdformat" },
       },
     },
   },
