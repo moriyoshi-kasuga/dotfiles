@@ -56,3 +56,5 @@ for f in zvm_vi_put_after zvm_vi_put_before; do
   eval "$(echo "_$f() {"; declare -f $f | tail -n +2)"
   eval "$f() { CUTBUFFER=\$(pbpaste); _$f; zvm_highlight clear }"
 done
+
+bindkey "^H" backward-delete-char
