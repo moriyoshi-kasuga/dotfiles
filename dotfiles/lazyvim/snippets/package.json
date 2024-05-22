@@ -8,11 +8,6 @@
     "snippets": [
       {
         "language": [
-          "plaintext",
-          "markdown",
-          "tex",
-          "html",
-          "global",
           "all"
         ],
         "path": "./languages/global.json"
@@ -20,6 +15,10 @@
       {
         "language": "markdown",
         "path": "./languages/markdown.json"
+      },
+      {
+        "language": "rust",
+        "path": "./languages/rust.json"
       }
     ]
   }

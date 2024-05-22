@@ -20,6 +20,7 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.linting.eslint" },
 
     { import = "lazyvim.plugins.extras.coding.mini-ai" },
+    { import = "lazyvim.plugins.extras.coding.luasnip" },
 
     { import = "lazyvim.plugins.extras.editor.outline" },
     { import = "lazyvim.plugins.extras.editor.navic" },

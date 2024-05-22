@@ -1,0 +1,38 @@
+{
+  "printlnvar1": {
+    "body": "println!(\"{}\", $1);$0",
+    "prefix": "printlnvar1"
+  },
+  "printlnvar2": {
+    "body": "println!(\"{} : {}\", $1, $2);$0",
+    "prefix": "printlnvar2"
+  },
+  "printlnvar3": {
+    "body": "println!(\"{} : {} : {}\", $1 ,$2 ,$3);$0",
+    "prefix": "printlnvar3"
+  },
+  "printvar1": {
+    "body": "print!(\"{}\", $1);$0",
+    "prefix": "printvar1"
+  },
+  "printvar2": {
+    "body": "print!(\"{} : {}\", $1, $2);$0",
+    "prefix": "printvar2"
+  },
+  "printvar3": {
+    "body": "print!(\"{} : {} : {}\", $1, $2, $3);$0",
+    "prefix": "printvar3"
+  },
+  "formatvar1": {
+    "body": "format!(\"{}\", $1);$0",
+    "prefix": "formatvar1"
+  },
+  "formatvar2": {
+    "body": "format!(\"{} : {}\", $1, $2);$0",
+    "prefix": "formatvar2"
+  },
+  "formatvar3": {
+    "body": "format!(\"{} : {} : {}\", $1, $2, $3);$0",
+    "prefix": "formatvar3"
+  }
+}
