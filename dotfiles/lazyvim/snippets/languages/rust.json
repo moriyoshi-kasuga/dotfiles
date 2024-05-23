@@ -8,7 +8,7 @@
     "prefix": "printlnvar2"
   },
   "printlnvar3": {
-    "body": "println!(\"{} : {} : {}\", $1 ,$2 ,$3);$0",
+    "body": "println!(\"{} : {} : {}\", $1, $2, $3);$0",
     "prefix": "printlnvar3"
   },
   "printvar1": {
