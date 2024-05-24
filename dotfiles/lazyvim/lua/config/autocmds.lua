@@ -23,7 +23,7 @@ ac("FileType", {
 ac("BufRead", {
   pattern = ".env",
   callback = function()
-    vim.diagnostic.disable(0)
+    vim.diagnostic.enable(false)
   end,
 })
 
@@ -32,7 +32,7 @@ ac({ "BufNewFile", "BufRead" }, {
   group = ag("DisableEslintOnNodeModules", { clear = true }),
   pattern = { "**/node_modules/**", "node_modules", "/node_modules/*" },
   callback = function()
-    vim.diagnostic.disable(0)
+    vim.diagnostic.enable(false)
   end,
 })
 

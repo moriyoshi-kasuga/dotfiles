@@ -19,7 +19,6 @@ require("lazy").setup({
 
     { import = "lazyvim.plugins.extras.linting.eslint" },
 
-    { import = "lazyvim.plugins.extras.coding.mini-ai" },
     { import = "lazyvim.plugins.extras.coding.luasnip" },
 
     { import = "lazyvim.plugins.extras.editor.outline" },
@@ -42,7 +41,6 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.lang.yaml" },
 
     { import = "lazyvim.plugins.extras.ui.mini-indentscope" },
-    { import = "lazyvim.plugins.extras.ui.treesitter-context" },
 
     -- import/override with your plugins
     { import = "plugins" },
