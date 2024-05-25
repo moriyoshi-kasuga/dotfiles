@@ -46,6 +46,7 @@ map("n", "<leader>ba", cmd("blast"), { desc = "Last Buffer" })
 
 -- Toggle statusline
 map("n", "<leader>uS", function()
+  ---@diagnostic disable-next-line: undefined-field
   if vim.opt.laststatus:get() == 0 then
     vim.opt.laststatus = 3
   else
@@ -55,6 +56,7 @@ end, { desc = "Toggle Statusline" })
 
 -- Toggle tabline
 map("n", "<leader>u<tab>", function()
+  ---@diagnostic disable-next-line: undefined-field
   if vim.opt.showtabline:get() == 0 then
     vim.opt.showtabline = 2
   else
