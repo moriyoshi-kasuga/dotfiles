@@ -27,6 +27,9 @@ del("t", "<C-l>")
 -- Lsp
 map({ "n", "v" }, "ga", vim.lsp.buf.code_action, { desc = "Code action" })
 map("n", "gk", vim.lsp.buf.signature_help, { desc = "Signature help" })
+map("n", "gd", function()
+  require("telescope.builtin").lsp_definitions({ reuse_win = true })
+end, { desc = "Goto Definition" })
 
 -- format
 map("n", "<leader>r", function()
