@@ -30,6 +30,7 @@ map("n", "gk", vim.lsp.buf.signature_help, { desc = "Signature help" })
 map("n", "gd", function()
   require("telescope.builtin").lsp_definitions({ reuse_win = true })
 end, { desc = "Goto Definition" })
+map("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Rename" })
 
 -- format
 map("n", "<leader>r", function()
