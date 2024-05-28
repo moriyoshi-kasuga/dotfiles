@@ -68,7 +68,7 @@ sudo apt install make && git clone --depth 1 https://github.com/moriyoshi-kasuga
 - docker
   > docker and docker compose
 - zsh
-  - zsh plugin manager using `zinit`
+  - zsh plugin manager using `sheldon`
   - use keybind of vim
   - [my alias](./dotfiles/zsh/alias.zsh)
   - [my useful command](./dotfiles/zsh/script/)

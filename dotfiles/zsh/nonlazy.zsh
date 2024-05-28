@@ -1,5 +1,10 @@
+# bindkey emac
+bindkey -e
+
 # ## Complement
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' # 補完時に大文字小文字を区別しない
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}' # 補完時に大文字小文字を区別しない
+zstyle ':completion:*' menu no
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
 
 setopt no_beep
 
@@ -7,10 +12,14 @@ setopt no_beep
 HISTFILE=~/.zsh_history   # ヒストリを保存するファイル
 HISTSIZE=1000            # メモリに保存されるヒストリの件数
 SAVEHIST=1000            # 保存されるヒストリの件数
-setopt hist_ignore_dups   # 直前と同じコマンドはヒストリに追加しない
+
+setopt appendhistory
 setopt share_history      # 他のシェルのヒストリをリアルタイムで共有する
 setopt hist_ignore_space
-setopt hist_reduce_blanks # 余分なスペースを削除してヒストリに保存する
+setopt hist_ignore_all_dups
+setopt hist_save_no_dups
+setopt hist_ignore_dups   # 直前と同じコマンドはヒストリに追加しない
+setopt hist_find_no_dups
 
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
 add-zsh-hook chpwd chpwd_recent_dirs
@@ -54,4 +63,4 @@ function fzf-cdr () {
 }
 
 zle -N fzf-cdr
-zvm_after_init_commands+=('bindkey "^G" fzf-cdr')
+bindkey "^G" fzf-cdr
