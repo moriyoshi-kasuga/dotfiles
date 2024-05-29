@@ -43,7 +43,7 @@ apply = ["defer"]
 inline = 'autoload -Uz compinit && zsh-defer compinit'
 
 [plugins.fzf]
-inline = 'eval "$(fzf --zsh)"'
+inline = 'zsh-defer eval "$(fzf --zsh)"'
 
 [plugins.direnv]
-inline = 'eval "$(direnv hook zsh)"'
+inline = 'zsh-defer eval "$(direnv hook zsh)"'
