@@ -35,7 +35,8 @@ return {
           "-Dlog.protocol=true",
           "-Dlog.level=ALL",
           "-javaagent:" .. vim.fn.expand("$MASON/share/jdtls/lombok.jar"),
-          "-Xms2G",
+          "-Xms1G",
+          "-Xmx2G",
           "--add-modules=ALL-SYSTEM",
           "--add-opens",
           "java.base/java.util=ALL-UNNAMED",
@@ -51,11 +52,7 @@ return {
         settings = {
           java = {
             format = {
-              enabled = true,
-              tabSize = 2,
-              settings = {
-                profile = "GoogleStyle",
-              },
+              enabled = false,
             },
             eclipse = {
               downloadSources = true,
@@ -160,7 +157,6 @@ return {
               ["<leader>cxc"] = { require("jdtls").extract_constant, "Extract Constant" },
               ["gs"] = { require("jdtls").super_implementation, "Goto Super" },
               ["gS"] = { require("jdtls.tests").goto_subjects, "Goto Subjects" },
-              ["<leader>co"] = { require("jdtls").organize_imports, "Organize Imports" },
             }, { mode = "n", buffer = args.buf })
             wk.register({
               ["<leader>c"] = { name = "+code" },
@@ -206,5 +202,14 @@ return {
       -- Avoid race condition by calling attach the first time, since the autocmd won't fire.
       attach_jdtls()
     end,
+  },
+  {
+    "stevearc/conform.nvim",
+    optional = true,
+    opts = {
+      formatters_by_ft = {
+        java = { "google-java-format" },
+      },
+    },
   },
 }

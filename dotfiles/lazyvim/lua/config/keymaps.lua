@@ -2,7 +2,6 @@ local function cmd(command)
   return table.concat({ "<cmd>", command, "<CR>" })
 end
 
-local Util = require("lazyvim.util")
 local map = vim.keymap.set
 local del = vim.keymap.del
 
@@ -31,11 +30,6 @@ map("n", "gd", function()
   require("telescope.builtin").lsp_definitions({ reuse_win = true })
 end, { desc = "Goto Definition" })
 map("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Rename" })
-
--- format
-map("n", "<leader>r", function()
-  Util.format({ force = true })
-end, { desc = "format" })
 
 -- increment/decrement
 map("n", "+", "<C-a>", { desc = "Increment" })

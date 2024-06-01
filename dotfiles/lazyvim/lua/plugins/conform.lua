@@ -18,5 +18,15 @@ return {
         ["htmldjango"] = { "djlint" },
       },
     },
+    keys = {
+      {
+        -- Customize or remove this keymap to your liking
+        "<leader>r",
+        function()
+          LazyVim.format({ force = true })
+        end,
+        desc = "Format buffer",
+      },
+    },
   },
 }

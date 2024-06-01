@@ -6,7 +6,7 @@ return {
     opts = {
       indent = {
         enable = true,
-        disable = { "html" },
+        disable = { "html", "java" },
       },
 
       auto_install = true,
