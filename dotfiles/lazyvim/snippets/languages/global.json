@@ -2,5 +2,9 @@
   "space of string": {
     "body": "&nbsp;",
     "prefix": "space of string"
+  },
+  "file base name": {
+    "body": "${TM_FILENAME_BASE}",
+    "prefix": "file base name"
   }
 }
