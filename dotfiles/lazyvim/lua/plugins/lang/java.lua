@@ -63,7 +63,11 @@ return {
             maven = {
               downloadSources = true,
             },
-
+            inlayHints = {
+              parameterNames = {
+                enabled = "all",
+              },
+            },
             implementationsCodeLens = {
               enabled = false,
             },
