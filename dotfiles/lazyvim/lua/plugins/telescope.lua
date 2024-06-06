@@ -89,19 +89,4 @@ return {
       require("telescope").load_extension("ui-select")
     end,
   },
-  {
-    "prochri/telescope-all-recent.nvim",
-    dependencies = {
-      "nvim-telescope/telescope.nvim",
-      "kkharji/sqlite.lua",
-      -- optional, if using telescope for vim.ui.select
-      "stevearc/dressing.nvim",
-    },
-    config = function()
-      require("telescope-all-recent").setup({})
-    end,
-    opts = {
-      -- your config goes here
-    },
-  },
 }
