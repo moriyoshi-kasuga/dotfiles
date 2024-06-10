@@ -1,6 +1,5 @@
 tap "homebrew/bundle"
 tap "homebrew/cask"
-tap "homebrew/cask-fonts"
 
 brew "coreutils"
 brew "gun-time"
