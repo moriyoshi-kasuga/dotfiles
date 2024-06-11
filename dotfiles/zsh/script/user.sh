@@ -64,3 +64,7 @@ ide() {
 	sleep 0.2
 	tmux split-window -h -l 50%
 }
+
+mkcd() {
+	mkdir "$1" && cd "$1" && pwd
+}
