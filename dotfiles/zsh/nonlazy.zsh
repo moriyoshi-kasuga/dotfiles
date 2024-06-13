@@ -63,4 +63,4 @@ function fzf-cdr () {
 }
 
 zle -N fzf-cdr
-bindkey "^G" fzf-cdr
+zvm_after_init_commands+=('bindkey "^G" fzf-cdr')
