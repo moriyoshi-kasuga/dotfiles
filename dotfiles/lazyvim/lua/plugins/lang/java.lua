@@ -87,9 +87,9 @@ return {
         },
 
         -- These depend on nvim-dap, but can additionally be disabled by setting false here.
-        -- dap = { hotcodereplace = "auto", config_overrides = {} },
-        -- dap_main = {},
-        -- test = true,
+        dap = { hotcodereplace = "auto", config_overrides = {} },
+        dap_main = {},
+        test = true,
       }
     end,
     config = function()
@@ -182,7 +182,7 @@ return {
             if opts.dap and Util.has("nvim-dap") and mason_registry.is_installed("java-debug-adapter") then
               -- custom init for Java debugger
               require("jdtls").setup_dap(opts.dap)
-              require("jdtls.dap").setup_dap_main_class_configs()
+              require("jdtls.dap").setup_dap_main_class_configs(opts.dap_main)
 
               -- Java Test require Java debugger to work
               if opts.test and mason_registry.is_installed("java-test") then
@@ -215,5 +215,27 @@ return {
         java = { "google-java-format" },
       },
     },
+  },
+  {
+    "mfussenegger/nvim-dap",
+    optional = true,
+    dependencies = {
+      {
+        "williamboman/mason.nvim",
+        opts = { ensure_installed = { "java-debug-adapter", "java-test" } },
+      },
+    },
+    opts = function()
+      local dap = require("dap")
+      dap.configurations.java = {
+        {
+          type = "java",
+          request = "attach",
+          name = "Debug (Attach) - Remote 0.0.0.0",
+          hostName = "0.0.0.0",
+          port = 5005,
+        },
+      }
+    end,
   },
 }
