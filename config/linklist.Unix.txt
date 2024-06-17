@@ -15,10 +15,3 @@ starship.toml ${HOME}/.config/starship.toml
 
 .gitconfig ${HOME}/.gitconfig
 lazygit.yml ${HOME}/.config/lazygit/config.yml
-
-
-# vim
-
-vscodenvim ${HOME}/.config/vscodenvim
-.vimrc ${HOME}/.vimrc
-.ideavimrc ${HOME}/.ideavimrc

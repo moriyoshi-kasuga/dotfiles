@@ -27,6 +27,8 @@ docker: ## Install docker
 likes: ## Install likes
 	bash ./bin/likes.sh
 
+vim: ## Install only vim
+	bash ./bin/vim.sh
 
 # lang
 node: ## Install node

@@ -1,0 +1,87 @@
+[[plugins]]
+repo = 'haya14busa/dein-command.vim'
+
+[[plugins]]
+repo = 'markonm/traces.vim'
+
+[[plugins]]
+repo = 'unblevable/quick-scope'
+hook_add = """
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+augroup qs_colors
+  autocmd!
+  autocmd ColorScheme * highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
+  autocmd ColorScheme * highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline
+augroup END
+"""
+
+[[plugins]]
+repo = 'ghifarit53/tokyonight-vim'
+hook_add = """
+set termguicolors
+let g:tokyonight_style = 'storm' " available: night, storm
+colorscheme tokyonight
+"""
+
+[[plugins]]
+repo = 'tpope/vim-surround'
+
+[[plugins]]
+repo = 'Matt-A-Bennett/vim-surround-funk'
+
+[[plugins]]
+repo = 'mbbill/undotree'
+hook_add = """
+nnoremap <leader>u :UndotreeToggle<CR>
+"""
+
+[[plugins]]
+repo = 'preservim/nerdtree'
+hook_add = """
+let g:NERDTreeLimitedSyntax = 1
+nnoremap <leader>e :NERDTreeFocus<CR>
+nnoremap <leader>o :NERDTreeClose<CR>
+"""
+
+[[plugins]]
+repo = 'junegunn/fzf'
+build = './install --bin'
+merged = 0
+
+[[plugins]]
+repo = 'junegunn/fzf.vim'
+depends = 'fzf'
+hook_add = '''
+command! -bang -nargs=* Rg
+\ call fzf#vim#grep(
+\   'rg --line-number --no-heading '.shellescape(<q-args>), 0,
+\   fzf#vim#with_preview({'options': '--exact --reverse'}, 'right:50%:wrap'))
+
+nnoremap <leader><space> :Files<cr>
+nnoremap <leader>/ :Rg<cr>
+tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"
+'''
+
+[[plugins]]
+repo = 'ryanoasis/vim-devicons'
+hook_add = """
+let g:webdevicons_enable_nerdtree=1
+"""
+
+[[plugins]]
+repo = 'tiagofumo/vim-nerdtree-syntax-highlight'
+
+[[plugins]]
+repo = 'neoclide/coc.nvim'
+rev = 'release'
+merged = 0
+
+[[plugins]]
+repo = 'antoinemadec/coc-fzf'
+
+[[plugins]]
+repo = 'nvim-zh/better-escape.vim'
+
+[[plugins]]
+repo = 'tpope/vim-commentary'
+

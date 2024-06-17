@@ -22,7 +22,7 @@ case $1 in
 	echo
 	config="${dotfiles_root}/config"
 	cd "${dotfiles_root}"/dotfiles || exit
-	for linklist in "${config}/linklist.Unix.txt" "${config}/linklist.$(uname).txt"; do
+	for linklist in "${config}/linklist.Vim.txt" "${config}/linklist.Unix.txt" "${config}/linklist.$(uname).txt"; do
 		[ ! -r "${linklist}" ] && continue
 
 		__remove_linklist_comment "$linklist" | while read -r target link; do
@@ -42,7 +42,7 @@ case $1 in
 	echo
 	config="${dotfiles_root}/config"
 	cd "${dotfiles_root}"/dotfiles || exit
-	for linklist in "${config}/linklist.Unix.txt" "${config}/linklist.$(uname).txt"; do
+	for linklist in "${config}/linklist.Vim.txt" "${config}/linklist.Unix.txt" "${config}/linklist.$(uname).txt"; do
 		[ ! -r "${linklist}" ] && continue
 		__remove_linklist_comment "$linklist" | while read -r target link; do
 			# ~ や環境変数を展開
