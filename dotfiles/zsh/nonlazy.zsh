@@ -49,6 +49,7 @@ fi
 export TERM=tmux-256color
 export PATH=$PATH:/Library/PostgreSQL/15/bin
 export EDITOR=vim
+export WORDCHARS='*?_.[]~-=&;!#$%^(){}<>'
 
 if [ -d "./local.zsh" ] ; then
     source "./local.zsh"
@@ -64,3 +65,4 @@ function fzf-cdr () {
 
 zle -N fzf-cdr
 zvm_after_init_commands+=('bindkey "^G" fzf-cdr')
+
