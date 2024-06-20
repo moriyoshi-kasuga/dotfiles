@@ -27,6 +27,8 @@ make python
 
 # make coursier
 
+make vim
+
 make neovim
 
 make docker

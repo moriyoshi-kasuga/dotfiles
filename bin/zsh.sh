@@ -18,6 +18,19 @@ else
 	install_end "zsh"
 fi
 
+rm -f "${XDG_CACHE_HOME:-$HOME/.cache}/sheldon.zsh"
+
+if type "sheldon" >/dev/null 2>&1; then
+	install_exist "sheldon"
+else
+	install_start "sheldon"
+
+	load_brew
+	brew install sheldon >/dev/null 2>&1
+
+	install_end "sheldon"
+fi
+
 zsh_path="$(which zsh)"
 
 if ! grep -q "$zsh_path" /etc/shells >/dev/null; then
