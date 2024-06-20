@@ -13,7 +13,7 @@ require_password
 
 setup_start "linux"
 
-sudo add-apt-repository ppa:wslutilities/wslu
+sudo add-apt-repository ppa:wslutilities/wslu -y
 sudo apt update
 sudo apt install -y wslu
 sudo ln -s "$(which wslview)" /usr/local/bin/open
