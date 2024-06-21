@@ -11,6 +11,14 @@ map("n", "<S-Tab>", cmd("BufferLineCyclePrev"))
 del("n", "<S-h>")
 del("n", "<S-l>")
 
+-- del move lines
+del("n", "<A-j>")
+del("n", "<A-k>")
+del("i", "<A-j>")
+del("i", "<A-k>")
+del("v", "<A-j>")
+del("v", "<A-k>")
+
 del({ "i", "n" }, "<esc>")
 map("n", "<leader>h", cmd("noh"))
 
