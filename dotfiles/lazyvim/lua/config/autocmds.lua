@@ -40,7 +40,7 @@ ac("FileType", {
   pattern = "TelescopeResults",
   callback = function(ctx)
     vim.api.nvim_buf_call(ctx.buf, function()
-      vim.fn.matchadd("TelescopeParent", "\t.*$")
+      vim.fn.matchadd("TelescopeParent", " [^ ]*")
       vim.api.nvim_set_hl(0, "TelescopeParent", { link = "Comment" })
     end)
   end,

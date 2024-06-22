@@ -24,6 +24,7 @@ map("n", "<leader>h", cmd("noh"))
 
 -- Telescope
 map({ "n", "v" }, "gp", cmd("Telescope registers"))
+map("n", "<leader>m", cmd("Telescope current_buffer_fuzzy_find"))
 
 -- delete Terminal Mappings
 del("t", "<C-h>")
