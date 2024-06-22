@@ -15,3 +15,6 @@ starship.toml ${HOME}/.config/starship.toml
 
 .gitconfig ${HOME}/.gitconfig
 lazygit.yml ${HOME}/.config/lazygit/config.yml
+
+#docker
+lazydocker.yml ${HOME}/.config/lazydocker/config.yml

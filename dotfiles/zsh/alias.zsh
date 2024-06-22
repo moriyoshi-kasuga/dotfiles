@@ -23,6 +23,7 @@ alias dcl='docker compose logs'
 alias dcd='docker compose down'
 alias dcb='docker compose build'
 alias dcbnc='docker compose build --no-cache'
+alias dl='lazydocker'
 
 # git
 alias ga="git add"

@@ -10,6 +10,7 @@ gui:
   showIcons: true
   language: "en"
   mainPanelSplitMode: "horizontal"
+  # ref: https://github.com/folke/tokyonight.nvim/blob/main/extras/lazygit/tokyonight_moon.yml
   nerdFontsVersion: "3"
   theme:
     activeBorderColor:
