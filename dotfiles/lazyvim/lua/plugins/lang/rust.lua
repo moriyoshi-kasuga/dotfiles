@@ -1,4 +1,10 @@
 return {
+  recommended = function()
+    return LazyVim.extras.wants({
+      ft = "rust",
+      root = { "Cargo.toml", "rust-project.json" },
+    })
+  end,
 
   -- Extend auto completion
   {
@@ -7,6 +13,11 @@ return {
       {
         "Saecki/crates.nvim",
         event = { "BufRead Cargo.toml" },
+        opts = {
+          completion = {
+            cmp = { enabled = true },
+          },
+        },
       },
     },
     ---@param opts cmp.ConfigSchema
@@ -19,20 +30,24 @@ return {
   -- Add Rust & related to treesitter
   {
     "nvim-treesitter/nvim-treesitter",
-    opts = function(_, opts)
-      opts.ensure_installed = opts.ensure_installed or {}
-      vim.list_extend(opts.ensure_installed, { "ron", "rust", "toml" })
-    end,
+    opts = { ensure_installed = { "rust", "ron" } },
   },
 
   -- Ensure Rust debugger is installed
   {
     "williamboman/mason.nvim",
     optional = true,
-    opts = function(_, opts)
-      opts.ensure_installed = opts.ensure_installed or {}
-      vim.list_extend(opts.ensure_installed, { "codelldb", "rust-analyzer" })
-    end,
+    opts = { ensure_installed = { "codelldb" } },
+  },
+
+  {
+    "stevearc/conform.nvim",
+    optional = true,
+    opts = {
+      formatters_by_ft = {
+        rust = { "rustfmt" },
+      },
+    },
   },
 
   -- Correctly setup lspconfig for Rust 🚀
@@ -40,7 +55,6 @@ return {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
-        rust_analyzer = {},
         taplo = {
           keys = {
             {
@@ -63,21 +77,68 @@ return {
   {
     "nvim-neotest/neotest",
     optional = true,
-    opts = function(_, opts)
-      opts.adapters = opts.adapters or {}
-      vim.list_extend(opts.adapters, {
-        require("rustaceanvim.neotest"),
-      })
-    end,
+    opts = {
+      adapters = {
+        ["rustaceanvim.neotest"] = {},
+      },
+    },
   },
 
   {
-    "Saecki/crates.nvim",
-    event = { "BufRead Cargo.toml" },
+    "mrcjkb/rustaceanvim",
+    version = "^4", -- Recommended
+    ft = { "rust" },
     opts = {
-      completion = {
-        cmp = { enabled = true },
+      server = {
+        on_attach = function(_, bufnr)
+          vim.keymap.set("n", "<leader>cR", function()
+            vim.cmd.RustLsp("codeAction")
+          end, { desc = "Code Action", buffer = bufnr })
+          vim.keymap.set("n", "<leader>dr", function()
+            vim.cmd.RustLsp("debuggables")
+          end, { desc = "Rust Debuggables", buffer = bufnr })
+        end,
+        capabilities = require("cmp_nvim_lsp").default_capabilities() or nil,
+        default_settings = {
+          -- rust-analyzer language server configuration
+          ["rust-analyzer"] = {
+            cargo = {
+              allFeatures = true,
+              loadOutDirsFromCheck = true,
+              buildScripts = {
+                enable = true,
+              },
+            },
+            -- Add clippy lints for Rust.
+            checkOnSave = true,
+            procMacro = {
+              enable = true,
+              ignored = {
+                ["async-trait"] = { "async_trait" },
+                ["napi-derive"] = { "napi" },
+                ["async-recursion"] = { "async_recursion" },
+              },
+            },
+          },
+        },
+      },
+      tools = {
+        float_win_config = {
+          border = "rounded",
+        },
+        hover_actions = {
+          replace_builtin_hover = false,
+        },
       },
     },
+    config = function(_, opts)
+      vim.g.rustaceanvim = vim.tbl_deep_extend("keep", vim.g.rustaceanvim or {}, opts or {})
+      if vim.fn.executable("rust-analyzer") == 0 then
+        LazyVim.error(
+          "**rust-analyzer** not found in PATH, please install it.\nhttps://rust-analyzer.github.io/",
+          { title = "rustaceanvim" }
+        )
+      end
+    end,
   },
 }
