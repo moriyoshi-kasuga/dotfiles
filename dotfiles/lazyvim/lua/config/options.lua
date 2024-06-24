@@ -12,8 +12,6 @@ highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=und
 
 vim.o.clipboard = ""
 
-vim.lsp.inlay_hint.enable(true, {})
-
 vim.o.mouse = "" -- disable mouse
 
 vim.opt.list = false
