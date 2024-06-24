@@ -46,7 +46,7 @@ if [[ -n $(echo ${^fpath}/chpwd_recent_dirs(N)) && -n $(echo ${^fpath}/cdr(N)) ]
 fi
 
 ## export
-export TERM=tmux-256color
+export TERM=xterm-256color
 export PATH=$PATH:/Library/PostgreSQL/15/bin
 export EDITOR=vim
 export WORDCHARS='*?_.[]~-=&;!#$%^(){}<>'
