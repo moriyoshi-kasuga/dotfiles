@@ -35,6 +35,7 @@ return {
             "typescript",
             "javascriptreact",
             "typescriptreact",
+            "astro",
             "json",
             "jsonc",
             "html",
