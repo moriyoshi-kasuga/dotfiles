@@ -13,30 +13,30 @@ config.color_scheme = "tokyonight_moon"
 -- 最初からフルスクリーンで起動
 local mux = wezterm.mux
 wezterm.on("gui-startup", function(cmd)
-	local tab, pane, window = mux.spawn_window(cmd or {})
+	local _, _, window = mux.spawn_window(cmd or {})
 	window:gui_window():toggle_fullscreen()
 end)
 
 -- フォントの設定
--- config.font = wezterm.font("Cica", { weight = "Regular", stretch = "Normal", style = "Normal" })
+---- UbuntuMono
+-- config.font = wezterm.font("UbuntuMono Nerd Font Mono", { weight = "Regular", stretch = "Normal", style = "Normal" })
 -- config.font_size = 17
-config.font = wezterm.font("UbuntuMono Nerd Font Mono", { weight = "Regular", stretch = "Normal", style = "Normal" })
-config.font_size = 17
--- config.font = wezterm.font("UDEV Gothic 35NF", { weight = "Regular", stretch = "Normal", style = "Normal" })
--- config.font_size = 14
+---- JetBrains
+config.font = wezterm.font("JetBrains Mono", { weight = "Regular", stretch = "Normal", style = "Normal" })
+config.font_size = 15
 
 -- フォントサイズの設定
 
 config.window_padding = {
-	left = 2,
-	right = 2,
+	left = 0,
+	right = 0,
 	top = 30,
 	bottom = 0,
 }
 
 -- ショートカットキー設定
 config.keys = {
-	-- Alt(Opt)+Shift+Fでフルスクリーン切り替え
+	-- CMD(command)+Enterでフルスクリーン切り替え
 	{
 		key = "Enter",
 		mods = "CMD",
