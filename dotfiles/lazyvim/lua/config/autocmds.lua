@@ -19,23 +19,6 @@ ac("FileType", {
   end,
 })
 
--- Disable diagnostics in a .env file
-ac("BufRead", {
-  pattern = ".env",
-  callback = function()
-    vim.diagnostic.enable(false)
-  end,
-})
-
--- Disable eslint on node_modules
-ac({ "BufNewFile", "BufRead" }, {
-  group = ag("DisableEslintOnNodeModules", { clear = true }),
-  pattern = { "**/node_modules/**", "node_modules", "/node_modules/*" },
-  callback = function()
-    vim.diagnostic.enable(false)
-  end,
-})
-
 ac("FileType", {
   pattern = "TelescopeResults",
   callback = function(ctx)
