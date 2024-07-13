@@ -92,6 +92,8 @@ map("n", "<leader><c-_>", function()
   LazyVim.terminal(nil, { cwd = vim.fn.expand("%:p:h") })
 end, { desc = "Open Terminal with current dir" })
 
+map("v", "<leader>cn", ":CarbonNow<CR>", { silent = true })
+
 -- mark
 -- map("n", "M", function()
 --   local char = vim.fn.getcharstr()
