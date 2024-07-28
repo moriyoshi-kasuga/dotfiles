@@ -7,6 +7,7 @@
 .zshenv ${HOME}/.zshenv
 .zprofile ${HOME}/.zprofile
 .zshrc ${HOME}/.zshrc
+.zlogin ${HOME}/.zlogin
 zsh ${HOME}/zsh
 starship.toml ${HOME}/.config/starship.toml
 

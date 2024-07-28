@@ -1,38 +1,38 @@
 [alias]
-  aa = add -A
-  cm = commit -m
-  co = checkout
-  cod = checkout develop
-  com = checkout main
-  cob = checkout -b
-  br = branch
-  st = status
+    aa = add -A
+    cm = commit -m
+    co = checkout
+    cod = checkout develop
+    com = checkout main
+    cob = checkout -b
+    br = branch
+    st = status
 
 [fetch]
-  prune = true
+    prune = true
 
 [pull]
-  ff = only
+    ff = only
 
 [rebase]
-  autostash = true
-  abbreviateCommands = true
-  autosqaush = true
+    autostash = true
+    abbreviateCommands = true
+    autosqaush = true
 
 [color]
-  ui = auto
+    ui = auto
 
 [push]
-  default = current
+    default = current
 
 [grep]
-  lineNumber = true
+    lineNumber = true
 
 [include]
-  path = ~/.gitconfigs/global.gitconfig
+    path = ~/.gitconfigs/global.gitconfig
 
 [init]
-	defaultBranch = main
+    defaultBranch = main
 
 [core]
     pager = delta

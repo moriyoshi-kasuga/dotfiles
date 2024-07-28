@@ -24,16 +24,23 @@ github = "romkatv/zsh-defer"
 [plugins.starship]
 inline = 'eval "$(starship init zsh)"'
 
-[plugins.zsh-vi-mode]
-github = 'jeffreytse/zsh-vi-mode'
-use = ['zsh-vi-mode.zsh']
-apply = ["hooks"]
-hooks.pre = '''
-function zvm_config() {
-    ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
-    ZVM_VI_INSERT_ESCAPE_BINDKEY=jk
-}
+[plugins.edit-command-line]
+inline = '''
+zsh-defer autoload -Uz edit-command-line
+zsh-defer zle -N edit-command-line
+zsh-defer bindkey "^O" edit-command-line
 '''
+
+# [plugins.zsh-vi-mode]
+# github = 'jeffreytse/zsh-vi-mode'
+# use = ['zsh-vi-mode.zsh']
+# apply = ["hooks"]
+# hooks.pre = '''
+# function zvm_config() {
+#     ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
+#     ZVM_VI_INSERT_ESCAPE_BINDKEY=jk
+# }
+# '''
 
 [plugins.fzf-tab]
 github = 'Aloxaf/fzf-tab'
