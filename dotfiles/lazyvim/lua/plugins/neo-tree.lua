@@ -1,8 +1,10 @@
 return {
   "nvim-neo-tree/neo-tree.nvim",
   keys = {
-    { "<leader>e", mode = "n", "<cmd>Neotree focus<cr>", desc = "Neotree focus." },
     { "<leader>o", mode = "n", "<cmd>Neotree close<cr>", desc = "Neotree close." },
+    { "<leader>e", mode = "n", "<cmd>Neotree focus<cr>", desc = "Neotree focus." },
+    { "<leader>ge", mode = "n", "<cmd>Neotree git_status<cr>", desc = "Git Explorer" },
+    { "<leader>be", mode = "n", "<cmd>Neotree buffers<cr>", desc = "Buffer Explorer" },
   },
   opts = {
     event_handlers = {
