@@ -24,6 +24,9 @@ github = "romkatv/zsh-defer"
 [plugins.starship]
 inline = 'eval "$(starship init zsh)"'
 
+[plugins.tagged_file_flow]
+inline = 'eval "$(tagged_file_flow init)"'
+
 [plugins.edit-command-line]
 inline = '''
 zsh-defer autoload -Uz edit-command-line
