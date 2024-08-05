@@ -7,7 +7,7 @@
 ### Mac
 
 ```
-git clone --depth 1 https://github.com/moriyoshi-kasuga/dotfiles.git ~/dotfiles && cd ~/dotfiles && make
+git clone --depth 1 https://github.com/moriyoshi-kasuga/dotfiles.git ~/dotfiles && cd ~/dotfiles && make init
 ```
 
 > **ここでエラーが吐く場合は自分で調べてください、私の環境ではエラーは吐きませんでした**
@@ -15,7 +15,7 @@ git clone --depth 1 https://github.com/moriyoshi-kasuga/dotfiles.git ~/dotfiles 
 ### Linux (Ubuntu,WSL)
 
 ```
-sudo apt install make && git clone --depth 1 https://github.com/moriyoshi-kasuga/dotfiles.git ~/dotfiles && cd ~/dotfiles && make
+sudo apt install make && git clone --depth 1 https://github.com/moriyoshi-kasuga/dotfiles.git ~/dotfiles && cd ~/dotfiles && make init
 ```
 
 <details>
