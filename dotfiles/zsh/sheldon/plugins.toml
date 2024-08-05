@@ -25,7 +25,7 @@ github = "romkatv/zsh-defer"
 inline = 'eval "$(starship init zsh)"'
 
 [plugins.tagged_file_flow]
-inline = 'eval "$(tagged_file_flow init)"'
+inline = 'type tagged_file_flow &> /dev/null && eval "$(tagged_file_flow init)"'
 
 [plugins.edit-command-line]
 inline = '''
