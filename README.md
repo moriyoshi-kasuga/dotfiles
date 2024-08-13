@@ -6,7 +6,7 @@
 
 ### Mac
 
-```
+```sh
 git clone --depth 1 https://github.com/moriyoshi-kasuga/dotfiles.git ~/dotfiles && cd ~/dotfiles && make init
 ```
 
@@ -14,39 +14,47 @@ git clone --depth 1 https://github.com/moriyoshi-kasuga/dotfiles.git ~/dotfiles 
 
 ### Linux (Ubuntu,WSL)
 
-```
+```sh
 sudo apt install make && git clone --depth 1 https://github.com/moriyoshi-kasuga/dotfiles.git ~/dotfiles && cd ~/dotfiles && make init
 ```
 
 <details>
 <summary>エラーを吐く場合は、この手段をしてください</summary>
 
-> 1.  **Ubuntu** で
->     ```
->     sudo vim /etc/wsl.conf
->     ```
->     を 実行して 下記を追加して保存してください。
->     ```
->     [network]
->     generateResolvConf = false
->     ```
-> 2.  **Windows PowerShell** で
+> 1. **Ubuntu** で
 >
->     ```
->     wsl --shutdown
->     ```
+>    ```sh
+>    sudo vim /etc/wsl.conf
+>    ```
 >
->     を 実行して **Ubuntu** を再起動してください。
+>    を 実行して 下記を追加して保存してください。
 >
-> 3.  **Ubuntu** で
->     ```
->     sudo vim /etc/resolv.conf
->     ```
->     を 実行して 下記を追加して保存してください。
->     ```
->     nameserver 8.8.8.8
->     ```
-> 4.  そしたら **Ubuntu** の Shell で もう一回 **インストールのコマンド** を実行してください。
+>    ```text
+>    [network]
+>    generateResolvConf = false
+>    ```
+>
+> 2. **Windows PowerShell** で
+>
+>    ```sh
+>    wsl --shutdown
+>    ```
+>
+>    を 実行して **Ubuntu** を再起動してください。
+>
+> 3. **Ubuntu** で
+>
+>    ```sh
+>    sudo vim /etc/resolv.conf
+>    ```
+>
+>    を 実行して 下記を追加して保存してください。
+>
+>    ```text
+>    nameserver 8.8.8.8
+>    ```
+>
+> 4. そしたら **Ubuntu** の Shell で もう一回 **インストールのコマンド** を実行してください。
 
 </details>
 
@@ -76,7 +84,4 @@ sudo apt install make && git clone --depth 1 https://github.com/moriyoshi-kasuga
   > latest npm and node
 - python
 - neovim
-  - [merge my settings and lazyvim](./dotfiles/nvim/)
-    - I used to use [lazyvim + my settings](./dotfiles/lazyvim/)
-- coursier
-  > setup and install metals
+  - I used to use [lazyvim + my settings](./dotfiles/lazyvim/)
