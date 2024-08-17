@@ -42,6 +42,7 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.lang.typescript" },
     { import = "lazyvim.plugins.extras.lang.yaml" },
     { import = "lazyvim.plugins.extras.lang.astro" },
+    { import = "lazyvim.plugins.extras.lang.rust" },
 
     { import = "lazyvim.plugins.extras.ui.mini-indentscope" },
 
