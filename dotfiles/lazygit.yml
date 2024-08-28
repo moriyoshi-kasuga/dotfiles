@@ -86,7 +86,7 @@ customCommands:
         key: "Message"
         initialValue: ""
       - type: "menu"
-        title: "Choise the emoji of {{.Form.Type}}{{if .Form.Scope }} in {{.Form.Scope}}{{end}}"
+        title: "Choice the emoji of {{.Form.Type}}{{if .Form.Scope }} in {{.Form.Scope}}{{end}}"
         key: "Emoji"
         options:
           - name: ":mute:"
@@ -149,4 +149,4 @@ customCommands:
         title: "Commit"
         body: "Commit with the message '{{.Form.Type}}{{.Form.Type}}{{if .Form.Scope }}({{.Form.Scope}}){{end}}: {{.Form.Message}}'. Is this okay?"
     command: 'git commit -m "{{.Form.Type}}{{if .Form.Scope }}({{.Form.Scope}}){{end}}: {{.Form.Message}} {{.Form.Emoji}}"'
-    loadingText: "Commiting..."
+    loadingText: "Committing..."

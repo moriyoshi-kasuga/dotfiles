@@ -90,9 +90,6 @@ return {
         hide_dotfiles = false,
         hide_gitignore = true,
         hide_hidden = true,
-        hiden_by_name = {
-          "node_modules",
-        },
         never_show = {
           ".DS_Store",
         },
