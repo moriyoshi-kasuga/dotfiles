@@ -20,6 +20,13 @@ ac("FileType", {
 })
 
 ac("FileType", {
+  pattern = { "markdown", "txt" },
+  callback = function()
+    vim.opt_local.spell = false
+  end,
+})
+
+ac("FileType", {
   pattern = "TelescopeResults",
   callback = function(ctx)
     vim.api.nvim_buf_call(ctx.buf, function()
