@@ -21,6 +21,8 @@ export SHELDON_CONFIG_DIR="$ZSH_DIR/sheldon"
 sheldon_cache="${XDG_CACHE_HOME:-$HOME/.cache}/sheldon.zsh"
 sheldon_toml="$SHELDON_CONFIG_DIR/plugins.toml"
 if [[ ! -r "$sheldon_cache" || "$sheldon_toml" -nt "$sheldon_cache" ]]; then
+  mydir="${sheldon_cache%/*}"
+  [[ -d $mydir ]] || mkdir -p "$mydir"
   sheldon source > $sheldon_cache
 fi
 source "$sheldon_cache"
