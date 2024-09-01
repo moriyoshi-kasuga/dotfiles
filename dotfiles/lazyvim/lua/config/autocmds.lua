@@ -8,7 +8,6 @@ highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=und
 ]])
 
 local ac = vim.api.nvim_create_autocmd
-local ag = vim.api.nvim_create_augroup
 
 -- next/prev heading on markdown
 ac("FileType", {

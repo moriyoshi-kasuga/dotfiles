@@ -49,7 +49,6 @@ return {
         hover = { enabled = true },
         documentation = {
           view = "hover",
-          ---@type NoiceViewOptions
           opts = {
             border = { style = "rounded" },
             relative = "cursor",
