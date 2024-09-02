@@ -86,7 +86,7 @@ del("n", "<leader>-")
 del("n", "<leader>`")
 
 -- outline
-map("n", "<leader>cs", cmd("Outline"))
+map("n", "gs", cmd("AerialToggle"))
 
 map("n", "<leader><c-_>", function()
   LazyVim.terminal(nil, { cwd = vim.fn.expand("%:p:h") })
