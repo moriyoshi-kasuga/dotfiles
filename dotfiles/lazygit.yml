@@ -41,6 +41,11 @@ gui:
 os:
   editPreset: "nvim"
 
+keybinding:
+  universal:
+    nextScreenMode: ;
+    prevScreenMode: +
+
 customCommands:
   - key: "t"
     context: "files"
