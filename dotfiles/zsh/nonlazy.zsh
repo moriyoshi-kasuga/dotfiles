@@ -22,7 +22,7 @@ setopt hist_ignore_dups   # 直前と同じコマンドはヒストリに追加�
 setopt hist_find_no_dups
 
 ## export
-export TERM=xterm-256color
+export TERM=wezterm nvim
 export EDITOR=nvim
 export WORDCHARS='*?_.[]~-=&;!#$%^(){}<>'
 
