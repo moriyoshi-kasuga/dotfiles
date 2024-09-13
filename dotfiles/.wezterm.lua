@@ -6,6 +6,8 @@ if wezterm.config_builder then
 	config = wezterm.config_builder()
 end
 
+config.disable_default_key_bindings = true
+config.enable_tab_bar = false
 config.hide_tab_bar_if_only_one_tab = true
 -- カラースキームの設定
 config.color_scheme = "tokyonight_moon"
@@ -17,15 +19,21 @@ wezterm.on("gui-startup", function(cmd)
 	window:gui_window():toggle_fullscreen()
 end)
 
--- フォントの設定
----- UbuntuMono
+---- フォントの設定
+
+--- Monaspace
+-- config.font = wezterm.font("MonaspiceKr Nerd Font Mono", { weight = "Regular", stretch = "Normal", style = "Normal" })
+-- config.font = wezterm.font("MonaspiceXe Nerd Font Mono", { weight = "Regular", stretch = "Normal", style = "Normal" })
+-- config.font = wezterm.font("MonaspiceNe Nerd Font Mono", { weight = "Regular", stretch = "Normal", style = "Normal" })
+-- config.font_size = 16.3
+
+--- UbuntuMono
 -- config.font = wezterm.font("UbuntuMono Nerd Font Mono", { weight = "Regular", stretch = "Normal", style = "Normal" })
--- config.font_size = 17
----- JetBrains
+-- config.font_size = 17.5
+
+--- JetBrains
 config.font = wezterm.font("JetBrains Mono", { weight = "Regular", stretch = "Normal", style = "Normal" })
 config.font_size = 15
-
--- フォントサイズの設定
 
 config.window_padding = {
 	left = 0,
@@ -45,6 +53,16 @@ config.keys = {
 	{
 		key = "¥",
 		action = wezterm.action({ SendString = "\\" }),
+	},
+	{
+		key = "c",
+		mods = "CMD",
+		action = wezterm.action.CopyTo("Clipboard"),
+	},
+	{
+		key = "v",
+		mods = "CMD",
+		action = wezterm.action.PasteFrom("Clipboard"),
 	},
 }
 
