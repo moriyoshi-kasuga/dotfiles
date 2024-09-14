@@ -20,20 +20,14 @@ wezterm.on("gui-startup", function(cmd)
 end)
 
 ---- フォントの設定
-
---- Monaspace
--- config.font = wezterm.font("MonaspiceKr Nerd Font Mono", { weight = "Regular", stretch = "Normal", style = "Normal" })
--- config.font = wezterm.font("MonaspiceXe Nerd Font Mono", { weight = "Regular", stretch = "Normal", style = "Normal" })
--- config.font = wezterm.font("MonaspiceNe Nerd Font Mono", { weight = "Regular", stretch = "Normal", style = "Normal" })
--- config.font_size = 16.3
-
---- UbuntuMono
--- config.font = wezterm.font("UbuntuMono Nerd Font Mono", { weight = "Regular", stretch = "Normal", style = "Normal" })
--- config.font_size = 17.5
-
---- JetBrains
-config.font = wezterm.font("JetBrains Mono", { weight = "Regular", stretch = "Normal", style = "Normal" })
-config.font_size = 15
+local font = require("font")
+font.register_fonts({
+	{ name = "JetBrains Mono", mod = "font-jetbrains" },
+	{ name = "Monaspace Neon", mod = "font-monaspace-neon" },
+	{ name = "Monaspace Krypton", mod = "font-monaspace-krypton", default = true },
+	{ name = "Ubuntu Mono", mod = "font-ubuntu" },
+})
+font.load_default(config)
 
 config.window_padding = {
 	left = 0,
@@ -63,6 +57,11 @@ config.keys = {
 		key = "v",
 		mods = "CMD",
 		action = wezterm.action.PasteFrom("Clipboard"),
+	},
+	{
+		key = "f",
+		mods = "CMD",
+		action = font.selector_action(),
 	},
 }
 

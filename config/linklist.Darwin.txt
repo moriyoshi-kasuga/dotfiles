@@ -6,3 +6,4 @@
 
 #wezterm
 .wezterm.lua ${HOME}/.wezterm.lua
+wezterm ${HOME}/.config/wezterm
