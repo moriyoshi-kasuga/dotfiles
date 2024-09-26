@@ -1,6 +1,6 @@
 return {
   "FotiadisM/tabset.nvim",
-  lazy = false,
+  event = "LazyFile",
   config = function()
     require("tabset").setup({
       defaults = {

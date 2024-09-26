@@ -1,20 +1,11 @@
 return {
-  { "nvim-treesitter/playground", cmd = "TSPlaygroundToggle" },
-
   {
     "nvim-treesitter/nvim-treesitter",
     opts = {
       indent = {
         enable = true,
-        disable = { "html", "java" },
       },
-
       auto_install = true,
-      -- matchup = {
-      -- 	enable = true,
-      -- },
-
-      -- https://github.com/nvim-treesitter/playground#query-linter
       query_linter = {
         enable = true,
         use_virtual_text = true,
@@ -24,8 +15,8 @@ return {
       playground = {
         enable = true,
         disable = {},
-        updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
-        persist_queries = true, -- Whether the query persists across vim sessions
+        updatetime = 25,
+        persist_queries = true,
         keybindings = {
           toggle_query_editor = "o",
           toggle_hl_groups = "i",
@@ -40,5 +31,20 @@ return {
         },
       },
     },
+  },
+  {
+    "Wansmer/treesj",
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    event = { "LazyFile", "VeryLazy" },
+    opts = {
+      use_default_keymaps = false,
+    },
+    config = function(_, opts)
+      require("treesj").setup(opts)
+      vim.keymap.set("n", "<leader>m", require("treesj").toggle, { desc = "Toggle split" })
+      vim.keymap.set("n", "<leader>M", function()
+        require("treesj").toggle({ split = { recursive = true } })
+      end, { desc = "Toggle split (recursive)" })
+    end,
   },
 }

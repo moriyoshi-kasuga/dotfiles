@@ -16,10 +16,10 @@ return {
       NOTE = { icon = "󱞁 ", color = "hint", alt = { "INFO" } },
       TEST = { icon = "󰙨 ", color = "test", alt = { "TESTING", "PASSED", "FAILED" } },
     },
-    -- TODO: 
+    -- TODO:
     -- FIX:
-    -- HACK: 
-    -- WARN: 
+    -- HACK:
+    -- WARN:
     -- PERF:
     -- NOTE:
     -- TEST:

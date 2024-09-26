@@ -1,23 +1,18 @@
 -- Options are automatically loaded before lazy.nvim startup
 -- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
 -- Add any additional options here
-vim.g.autoformat = false -- disable auto format
-vim.g["qs_highlight_on_keys"] = { "f", "F", "t", "T" }
-vim.opt.laststatus = 0
 
-vim.cmd([[
-highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
-highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline
-]])
+vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"
+vim.g.autoformat = false
 
-vim.o.clipboard = ""
-
-vim.o.mouse = "" -- disable mouse
-
+vim.opt.signcolumn = "no"
+vim.opt.laststatus = 3
+vim.opt.clipboard = ""
+vim.opt.mouse = ""
 vim.opt.list = false
 
-vim.filetype.add({
-  extension = {
-    mdx = "markdown",
-  },
-})
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_node_provider = 0
+vim.g.loaded_python3_provider = 0
+vim.g.loaded_ruby_provider = 0

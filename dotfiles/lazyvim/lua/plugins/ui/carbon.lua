@@ -1,6 +1,5 @@
 return {
   "ellisonleao/carbon-now.nvim",
-  lazy = true,
   cmd = "CarbonNow",
   opts = {
     base_url = "https://carbon.now.sh/",

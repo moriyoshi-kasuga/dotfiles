@@ -28,9 +28,6 @@ end
 return {
   {
     "nvim-telescope/telescope.nvim",
-    dependencies = {
-      { "nvim-telescope/telescope-ui-select.nvim" },
-    },
     keys = {
       { "<leader>*", "<cmd>Telescope grep_string<cr>", desc = "Grep String", mode = { "n", "v" } },
       {
@@ -108,15 +105,8 @@ return {
             override_file_sorter = true,
             case_mode = "smart_case",
           },
-          ["ui-select"] = {
-            require("telescope.themes").get_dropdown({}),
-          },
         },
       },
     },
-    config = function(_, opts)
-      require("telescope").setup(opts)
-      require("telescope").load_extension("ui-select")
-    end,
   },
 }

@@ -1,6 +1,6 @@
 return {
   "mbbill/undotree",
-  event = "BufEnter",
+  cmd = "UndotreeToggle",
   keys = {
     { "<leader>i", "<cmd>UndotreeToggle<cr>", desc = "Undotree" },
   },
