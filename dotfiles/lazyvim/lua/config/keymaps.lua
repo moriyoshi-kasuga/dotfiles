@@ -22,6 +22,12 @@ map("n", "<leader>h", cmd("noh"))
 
 -- Telescope
 map("n", "<leader>\\", cmd("Telescope current_buffer_fuzzy_find"))
+map("n", "<leader>se", function()
+  require("telescope.builtin").diagnostics({ severity = vim.diagnostic.severity.ERROR })
+end, { desc = "Error Diagnostics" })
+map("n", "<leader>sE", function()
+  require("telescope.builtin").diagnostics({ severity = { min = vim.diagnostic.severity.WARN } })
+end, { desc = "Warning Diagnostics" })
 
 -- delete Terminal Mappings
 del("t", "<C-h>")
