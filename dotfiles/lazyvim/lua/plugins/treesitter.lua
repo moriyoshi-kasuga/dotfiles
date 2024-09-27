@@ -36,15 +36,28 @@ return {
     "Wansmer/treesj",
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     event = { "LazyFile", "VeryLazy" },
-    opts = {
-      use_default_keymaps = false,
-    },
+    opts = { use_default_keymaps = false },
     config = function(_, opts)
       require("treesj").setup(opts)
-      vim.keymap.set("n", "<leader>m", require("treesj").toggle, { desc = "Toggle split" })
-      vim.keymap.set("n", "<leader>M", function()
+      vim.keymap.set("n", "<leader>j", require("treesj").toggle, { desc = "Toggle split" })
+      vim.keymap.set("n", "<leader>J", function()
         require("treesj").toggle({ split = { recursive = true } })
       end, { desc = "Toggle split (recursive)" })
     end,
+  },
+  {
+    "haringsrob/nvim_context_vt",
+    event = "LazyFile",
+    dependencies = "nvim-treesitter/nvim-treesitter",
+    opts = {
+      prefix = " 󱞷",
+      highlight = "NonText",
+      min_rows = 7,
+      disable_ft = { "markdown", "css" },
+      disable_virtual_lines_ft = { "yaml" },
+    },
+    keys = {
+      { "<leader>ux", "<cmd>NvimContextVtToggle<CR>", desc = "Toggle Context" },
+    },
   },
 }

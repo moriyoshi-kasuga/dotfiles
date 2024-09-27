@@ -2,6 +2,7 @@ return {
   "folke/todo-comments.nvim",
   dependencies = { "nvim-lua/plenary.nvim" },
   opts = {
+    signs = false,
     keywords = {
       FIX = {
         icon = " ", -- icon used for the sign, and in search results

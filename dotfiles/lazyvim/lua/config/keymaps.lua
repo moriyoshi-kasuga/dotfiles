@@ -5,6 +5,10 @@ end
 local map = vim.keymap.set
 local del = vim.keymap.del
 
+-- buffer cycle
+del("n", "<S-h>")
+del("n", "<S-l>")
+
 -- del move lines
 del("n", "<A-j>")
 del("n", "<A-k>")
