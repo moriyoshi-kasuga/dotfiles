@@ -1,6 +1,7 @@
 return {
   {
     "folke/noice.nvim",
+    disabled = true,
     opts = {
       routes = {
         {
@@ -69,5 +70,9 @@ return {
         },
       },
     },
+  },
+  {
+    "moriyoshi-kasuga/noice.nvim",
+    event = "VeryLazy",
   },
 }
