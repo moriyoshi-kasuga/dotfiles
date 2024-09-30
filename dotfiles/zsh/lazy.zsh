@@ -20,6 +20,7 @@ function fzf-cdr () {
 
 zle -N fzf-cdr
 bindkey "^G" fzf-cdr
+bindkey "^K" fzf-cd-widget
 
 ## bat
 export BAT_THEME=tokyonight_moon
