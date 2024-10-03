@@ -155,26 +155,28 @@ return {
           if client and client.name == "jdtls" then
             local wk = require("which-key")
             wk.add({
-              ["<leader>cx"] = { name = "+extract" },
-              ["<leader>cxv"] = { require("jdtls").extract_variable_all, "Extract Variable" },
-              ["<leader>cxc"] = { require("jdtls").extract_constant, "Extract Constant" },
-              ["gs"] = { require("jdtls").super_implementation, "Goto Super" },
-              ["gS"] = { require("jdtls.tests").goto_subjects, "Goto Subjects" },
+              { "<leader>cx", { group = "+extract" } },
+              { "<leader>cxv", require("jdtls").extract_variable_all, desc = "Extract Variable" },
+              { "<leader>cxc", require("jdtls").extract_constant, desc = "Extract Constant" },
+              { "gs", require("jdtls").super_implementation, desc = "Goto Super" },
+              { "gS", require("jdtls.tests").goto_subjects, desc = "Goto Subjects" },
             }, { mode = "n", buffer = args.buf })
             wk.add({
-              ["<leader>c"] = { name = "+code" },
-              ["<leader>cx"] = { name = "+extract" },
-              ["<leader>cxm"] = {
+              { "<leader>cx", group = "+extract" },
+              {
+                "<leader>cxm",
                 [[<ESC><CMD>lua require('jdtls').extract_method(true)<CR>]],
-                "Extract Method",
+                desc = "Extract Method",
               },
-              ["<leader>cxv"] = {
+              {
+                "<leader>cxv",
                 [[<ESC><CMD>lua require('jdtls').extract_variable_all(true)<CR>]],
-                "Extract Variable",
+                desc = "Extract Variable",
               },
-              ["<leader>cxc"] = {
+              {
+                "<leader>cxc",
                 [[<ESC><CMD>lua require('jdtls').extract_constant(true)<CR>]],
-                "Extract Constant",
+                desc = "Extract Constant",
               },
             }, { mode = "v", buffer = args.buf })
 
@@ -187,11 +189,31 @@ return {
               if opts.test and mason_registry.is_installed("java-test") then
                 -- custom keymaps for Java test runner (not yet compatible with neotest)
                 wk.add({
-                  ["<leader>t"] = { name = "+test" },
-                  ["<leader>tt"] = { require("jdtls.dap").test_class, "Run All Test" },
-                  ["<leader>tr"] = { require("jdtls.dap").test_nearest_method, "Run Nearest Test" },
-                  ["<leader>tT"] = { require("jdtls.dap").pick_test, "Run Test" },
-                }, { mode = "n", buffer = args.buf })
+                  {
+                    mode = "n",
+                    buffer = args.buf,
+                    { "<leader>t", group = "test" },
+                    {
+                      "<leader>tt",
+                      function()
+                        require("jdtls.dap").test_class({
+                          config_overrides = type(opts.test) ~= "boolean" and opts.test.config_overrides or nil,
+                        })
+                      end,
+                      desc = "Run All Test",
+                    },
+                    {
+                      "<leader>tr",
+                      function()
+                        require("jdtls.dap").test_nearest_method({
+                          config_overrides = type(opts.test) ~= "boolean" and opts.test.config_overrides or nil,
+                        })
+                      end,
+                      desc = "Run Nearest Test",
+                    },
+                    { "<leader>tT", require("jdtls.dap").pick_test, desc = "Run Test" },
+                  },
+                })
               end
             end
 
