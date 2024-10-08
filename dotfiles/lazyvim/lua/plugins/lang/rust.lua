@@ -7,6 +7,16 @@ return {
           replace_builtin_hover = false,
         },
       },
+      server = {
+        on_attach = function(_, bufnr)
+          vim.keymap.set(
+            "n",
+            "<leader>cx",
+            "<cmd>RustLsp openDocs<cr>",
+            { silent = true, desc = "Open docs", buffer = bufnr }
+          )
+        end,
+      },
     },
   },
 }
