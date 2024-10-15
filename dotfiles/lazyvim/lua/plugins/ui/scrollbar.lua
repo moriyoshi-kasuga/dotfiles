@@ -5,6 +5,13 @@ return {
     local colors = require("tokyonight.colors").setup()
 
     require("scrollbar").setup({
+      excluded_filetypes = {
+        "prompt",
+        "TelescopePrompt",
+        "noice",
+        "neo-tree",
+        "neo-tree-popup",
+      },
       handle = {
         color = colors.bg_highlight,
       },
