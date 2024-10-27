@@ -30,3 +30,13 @@ vim.api.nvim_create_autocmd("FileType", {
     end)
   end,
 })
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "rust",
+  group = vim.api.nvim_create_augroup("dotfile_rust", { clear = true }),
+  callback = function()
+    LazyVim.on_load("mini.pairs", function()
+      vim.keymap.set("i", "'", "'", { buffer = true })
+    end)
+  end,
+})
