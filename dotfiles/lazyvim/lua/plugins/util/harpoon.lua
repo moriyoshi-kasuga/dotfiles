@@ -50,7 +50,7 @@ return {
     {
       "<C-m>",
       function()
-        require("harpoon"):list():select(3)
+        require("harpoon"):list():select(4)
       end,
       desc = "Harpoon Select 4",
     },
