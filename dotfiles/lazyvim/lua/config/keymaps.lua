@@ -29,12 +29,6 @@ map("n", "<leader>sE", function()
   require("telescope.builtin").diagnostics({ severity = { min = vim.diagnostic.severity.WARN } })
 end, { desc = "Warning Diagnostics" })
 
--- delete Terminal Mappings
-del("t", "<C-h>")
-del("t", "<C-j>")
-del("t", "<C-k>")
-del("t", "<C-l>")
-
 -- Lsp
 map({ "n", "v" }, "ga", vim.lsp.buf.code_action, { desc = "Code action" })
 
