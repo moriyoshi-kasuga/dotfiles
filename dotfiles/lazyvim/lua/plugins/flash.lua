@@ -12,7 +12,7 @@ return {
   },
   keys = {
     -- disable the default flash keymap
-    { "s", mode = { "o" }, false },
-    { "S", mode = { "n", "x", "o" }, false },
+    { "s", mode = { "o", "v", "x" }, false },
+    { "S", mode = { "n", "x", "o", "v" }, false },
   },
 }
