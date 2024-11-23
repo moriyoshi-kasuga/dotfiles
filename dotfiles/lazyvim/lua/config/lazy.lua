@@ -24,10 +24,9 @@ require("lazy").setup({
 
     { import = "lazyvim.plugins.extras.editor.illuminate" },
 
-    { import = "lazyvim.plugins.extras.coding.codeium" },
+    { import = "lazyvim.plugins.extras.ai.codeium" },
 
     { import = "lazyvim.plugins.extras.ui.mini-indentscope" },
-    { import = "lazyvim.plugins.extras.ui.mini-starter" },
 
     { import = "lazyvim.plugins.extras.linting.eslint" },
 
