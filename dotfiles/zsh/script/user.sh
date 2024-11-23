@@ -32,33 +32,44 @@ tn() {
 }
 
 tl() {
-    args="$*"
-    if [[ -z "$args" ]]; then
+    if [ $# -eq 0 ]; then
         tmux ls
         return
-    else
-        tmux ls | grep "$args"
     fi
+    local list
+    list=$(tmux ls)
+    for args_value in "$@"; do
+        list=$(echo "$list" | grep -i "$args_value")
+    done
+    echo "$list"
 }
 
 ta() {
-    args="$*"
-    if [[ -z "$args" ]]; then
+    if [ $# -eq 0 ]; then
         tmux a
         return
-    else
-        tmux a -t "$args"
     fi
+    local list
+    list=$(tmux list-sessions -F '#{session_name}')
+    for args_value in "$@"; do
+        list=$(echo "$list" | grep -i "$args_value")
+    done
+    list=$(echo "$list" | tr -d '\n')
+    tmux a -t "$list"
 }
 
 tk() {
-    args="$*"
-    if [[ -z "$args" ]]; then
+    if [ $# -eq 0 ]; then
         tmux kill-session
         return
-    else
-        tmux kill-session -t "$args"
     fi
+    local list
+    list=$(tmux list-sessions -F '#{session_name}')
+    for args_value in "$@"; do
+        list=$(echo "$list" | grep -i "$args_value")
+    done
+    list=$(echo "$list" | tr -d '\n')
+    tmux kill-session -t "$list"
 }
 
 cht() {
