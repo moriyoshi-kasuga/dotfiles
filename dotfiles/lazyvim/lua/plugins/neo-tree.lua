@@ -82,6 +82,12 @@ return {
           end
         end)
       end,
+      open_terminal = function(state)
+        local node = state.tree:get_node()
+        local filepath = node:get_id()
+        filepath = vim.fn.fnamemodify(filepath, ":p:h")
+        Snacks.terminal(nil, { cwd = filepath })
+      end,
     },
     filesystem = {
       filtered_items = {
@@ -103,7 +109,8 @@ return {
           "copy_path",
           desc = "Copy Path to Clipboard",
         },
-        T = "toggle_compact",
+        I = "toggle_compact",
+        T = "open_terminal",
       },
     },
   },

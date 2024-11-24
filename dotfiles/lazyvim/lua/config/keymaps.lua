@@ -67,7 +67,7 @@ del("n", "<leader>`")
 
 map("n", "<leader><c-_>", function()
   ---@diagnostic disable-next-line: redundant-parameter
-  LazyVim.terminal(nil, { cwd = vim.fn.expand("%:p:h") })
+  Snacks.terminal(nil, { cwd = vim.fn.expand("%:p:h") })
 end, { desc = "Open Terminal with current dir" })
 
 map("v", "<leader>cn", ":CarbonNow<CR>", { silent = true })
