@@ -10,7 +10,7 @@ config.disable_default_key_bindings = true
 config.enable_tab_bar = false
 config.hide_tab_bar_if_only_one_tab = true
 -- カラースキームの設定
-config.color_scheme = "tokyonight_moon"
+config.color_scheme = "tokyonight_night"
 
 -- 最初からフルスクリーンで起動
 local mux = wezterm.mux

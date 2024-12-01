@@ -10,20 +10,25 @@ if [[ -n $(echo ${^fpath}/chpwd_recent_dirs(N)) && -n $(echo ${^fpath}/cdr(N)) ]
     zstyle ':chpwd:*' recent-dirs-file "$HOME/.cache/chpwd-recent-dirs"
 fi
 
-function fzf-cdr () {
-    local selected_dir="$(cdr -l | awk '{ print $2 }' | sed 's/^[0-9]\+ \+//' | fzf --reverse --prompt="cdr >" --query "$LBUFFER")"
-    if [ -n "$selected_dir" ]; then
-        BUFFER="cd ${selected_dir}"
-        zle accept-line
-    fi
+function fzf-cdr() {
+  local selected
+  setopt localoptions noglobsubst noposixbuiltins pipefail no_aliases noglob nobash_rematch 2> /dev/null
+  selected="$(cdr -l | awk '{ print $2 }' | sed 's/^[0-9]\+ \+//' |
+    FZF_DEFAULT_OPTS=$(__fzf_defaults "" "-n2..,.. --scheme=history --bind=ctrl-r:toggle-sort --wrap-sign '\t↳ ' --highlight-line ${FZF_CTRL_R_OPTS-} --query=${(qqq)LBUFFER} +m") \
+    FZF_DEFAULT_OPTS_FILE='' $(__fzfcmd))"
+  if [ -n "$selected" ]; then
+    BUFFER="cd ${selected}"
+    zle accept-line
+  fi
+  zle reset-prompt
 }
 
 zle -N fzf-cdr
 bindkey "^G" fzf-cdr
 bindkey "^K" fzf-cd-widget
 
-## bat
-export BAT_THEME=tokyonight_moon
+## bat (https://github.com/folke/tokyonight.nvim/issues/23#issuecomment-1636639722)
+export BAT_THEME=tokyonight_night
 
 ## fzf
 export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git"
@@ -46,10 +51,28 @@ export FZF_CTRL_T_OPTS="--preview '$preview'"
 export FZF_ALT_C_OPTS="--preview 'eza --tree --color=always {} | head -200'"
 
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
---color=fg:#c8d3f5,bg:#222436,hl:#ff966c \
---color=fg+:#c8d3f5,bg+:#2f334d,hl+:#ff966c \
---color=info:#82aaff,prompt:#86e1fc,pointer:#86e1fc \
---color=marker:#c3e88d,spinner:#c3e88d,header:#c3e88d"
+  --highlight-line \
+  --info=inline-right \
+  --ansi \
+  --layout=reverse \
+  --border=none
+  --color=bg+:#283457 \
+  --color=bg:#16161e \
+  --color=border:#27a1b9 \
+  --color=fg:#c0caf5 \
+  --color=gutter:#16161e \
+  --color=header:#ff9e64 \
+  --color=hl+:#2ac3de \
+  --color=hl:#2ac3de \
+  --color=info:#545c7e \
+  --color=marker:#ff007c \
+  --color=pointer:#ff007c \
+  --color=prompt:#2ac3de \
+  --color=query:#c0caf5:regular \
+  --color=scrollbar:#27a1b9 \
+  --color=separator:#ff9e64 \
+  --color=spinner:#ff007c \
+"
 
 # for f in zvm_backward_kill_region zvm_yank zvm_change_surround_text_object zvm_vi_delete zvm_vi_change zvm_vi_change_eol; do
 #   eval "$(echo "_$f() {"; declare -f $f | tail -n +2)"
