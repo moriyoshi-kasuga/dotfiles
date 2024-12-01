@@ -58,6 +58,15 @@ ta() {
     tmux a -t "$list"
 }
 
+ts() {
+    local session
+    session=$(tmux list-sessions -F "#{session_name}" | fzf)
+    if [ -z "$session" ]; then
+        return
+    fi
+    tmux switch -t "$session"
+}
+
 tk() {
     if [ $# -eq 0 ]; then
         tmux kill-session
