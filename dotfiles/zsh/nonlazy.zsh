@@ -1,6 +1,8 @@
 # bindkey emac
 bindkey -e
 
+bindkey "^H" backward-delete-char
+
 # ## Complement
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}' # 補完時に大文字小文字を区別しない
 zstyle ':completion:*' menu no

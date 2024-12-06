@@ -24,34 +24,8 @@ github = "romkatv/zsh-defer"
 [plugins.starship]
 inline = 'eval "$(starship init zsh)"'
 
-[plugins.tagged_file_flow]
-inline = 'type tagged_file_flow &> /dev/null && eval "$(tagged_file_flow init)"'
-
-[plugins.edit-command-line]
-inline = '''
-zsh-defer autoload -Uz edit-command-line
-zsh-defer zle -N edit-command-line
-zsh-defer bindkey "^O" edit-command-line
-'''
-
-# [plugins.zsh-vi-mode]
-# github = 'jeffreytse/zsh-vi-mode'
-# use = ['zsh-vi-mode.zsh']
-# apply = ["hooks"]
-# hooks.pre = '''
-# function zvm_config() {
-#     ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
-#     ZVM_VI_INSERT_ESCAPE_BINDKEY=jk
-# }
-# '''
-
-[plugins.fzf-tab]
-github = 'Aloxaf/fzf-tab'
-apply = ["defer"]
-
-[plugins.fast-syntax-highlighting]
-github = "zdharma-continuum/fast-syntax-highlighting"
-apply = ["defer"]
+[plugins.compinit]
+inline = 'autoload -Uz compinit && zsh-defer compinit'
 
 [plugins.zsh-completions]
 github = 'zsh-users/zsh-completions'
@@ -61,11 +35,29 @@ apply = ["defer"]
 github = 'zsh-users/zsh-autosuggestions'
 apply = ["defer"]
 
-[plugins.compinit]
-inline = 'autoload -Uz compinit && zsh-defer compinit'
-
-[plugins.fzf]
-inline = 'zsh-defer eval "$(fzf --zsh)"'
+[plugins.fast-syntax-highlighting]
+github = "zdharma-continuum/fast-syntax-highlighting"
+apply = ["defer"]
 
 [plugins.direnv]
 inline = 'zsh-defer eval "$(direnv hook zsh)"'
+
+[plugins.fzf]
+inline = '''
+zsh-defer eval "$(fzf --zsh)"
+zsh-defer bindkey "^K" fzf-cd-widget
+'''
+
+[plugins.fzf-tab]
+github = 'Aloxaf/fzf-tab'
+apply = ["defer"]
+
+[plugins.edit-command-line]
+inline = '''
+zsh-defer autoload -Uz edit-command-line
+zsh-defer zle -N edit-command-line
+zsh-defer bindkey "^O" edit-command-line
+'''
+
+[plugins.tagged_file_flow]
+inline = 'type tagged_file_flow &> /dev/null && zsh-defer eval "$(tagged_file_flow init)"'
