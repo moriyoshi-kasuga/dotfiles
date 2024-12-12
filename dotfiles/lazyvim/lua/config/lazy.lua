@@ -22,10 +22,12 @@ require("lazy").setup({
   spec = {
     { "LazyVim/LazyVim", import = "lazyvim.plugins" },
 
+    { import = "lazyvim.plugins.extras.ai.supermaven" },
+
     { import = "lazyvim.plugins.extras.editor.illuminate" },
     { import = "lazyvim.plugins.extras.editor.outline" },
     { import = "lazyvim.plugins.extras.editor.fzf" },
-    
+
     { import = "lazyvim.plugins.extras.ui.mini-indentscope" },
 
     { import = "lazyvim.plugins.extras.linting.eslint" },
