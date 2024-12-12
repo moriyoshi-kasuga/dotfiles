@@ -20,14 +20,10 @@ del("v", "<A-k>")
 del({ "i", "n" }, "<esc>")
 map("n", "<leader>h", cmd("noh"))
 
--- Telescope
-map("n", "<leader>\\", cmd("Telescope current_buffer_fuzzy_find"))
-map("n", "<leader>se", function()
-  require("telescope.builtin").diagnostics({ severity = vim.diagnostic.severity.ERROR })
-end, { desc = "Error Diagnostics" })
-map("n", "<leader>sE", function()
-  require("telescope.builtin").diagnostics({ severity = { min = vim.diagnostic.severity.WARN } })
-end, { desc = "Warning Diagnostics" })
+-- FzfLua
+map("n", "<leader>\\", cmd("FzfLua grep_curbuf"))
+map("n", "<leader>se", cmd("FzfLua diagnostics_workspace severity_limit=2"), { desc = "Warn Diagnostics" })
+map("n", "<leader>sE", cmd("FzfLua diagnostics_workspace severity_limit=1"), { desc = "Error Diagnostics" })
 
 -- Lsp
 map({ "n", "v" }, "ga", vim.lsp.buf.code_action, { desc = "Code action" })

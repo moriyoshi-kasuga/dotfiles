@@ -22,16 +22,6 @@ del_lazyvim_auto_cmd("close_with_q")
 del_lazyvim_auto_cmd("wrap_spell")
 
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = "TelescopeResults",
-  callback = function(ctx)
-    vim.api.nvim_buf_call(ctx.buf, function()
-      vim.fn.matchadd("TelescopeParent", " [^ ]*")
-      vim.api.nvim_set_hl(0, "TelescopeParent", { link = "Comment" })
-    end)
-  end,
-})
-
-vim.api.nvim_create_autocmd("FileType", {
   pattern = "rust",
   group = vim.api.nvim_create_augroup("dotfile_rust", { clear = true }),
   callback = function()
