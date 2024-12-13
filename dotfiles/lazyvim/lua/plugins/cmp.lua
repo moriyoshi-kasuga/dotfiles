@@ -1,27 +1,30 @@
 return {
   {
-    "hrsh7th/nvim-cmp",
+    "saghen/blink.cmp",
     opts = {
-      formatting = {
-        format = function(_, item)
-          local icons = require("lazyvim.config").icons.kinds
-          if icons[item.kind] then
-            item.kind = icons[item.kind] .. item.kind
-          end
-          local m = item.menu and item.menu or ""
-          if #m > 20 then
-            item.menu = string.sub(m, 1, 20) .. "..."
-          end
-          return item
-        end,
-      },
-      window = {
-        completion = require("cmp").config.window.bordered({
+      completion = {
+        accept = { auto_brackets = { enabled = true } },
+        menu = {
           border = "single",
-        }),
-        documentation = require("cmp").config.window.bordered({
-          border = "single",
-        }),
+          scrolloff = 1,
+          scrollbar = false,
+          columns = { { "kind_icon" }, { "label", "label_description", gap = 0 } },
+
+          draw = {
+            padding = 0,
+            gap = 1,
+            treesitter = true,
+          },
+        },
+
+        documentation = {
+          auto_show_delay_ms = 0,
+          auto_show = true,
+
+          window = {
+            border = "single",
+          },
+        },
       },
     },
   },
