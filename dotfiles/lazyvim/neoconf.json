@@ -22,6 +22,11 @@
     },
     "tsserver": {
       "typescript.preferences.importModuleSpecifier": "non-relative"
+    },
+    "cssls": {
+      "css.lint.unknownAtRules": "ignore",
+      "scss.lint.unknownAtRules": "ignore",
+      "less.lint.unknownAtRules": "ignore"
     }
   }
 }
