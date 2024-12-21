@@ -47,6 +47,7 @@ return {
             "class",
             "kotlin",
             "scala",
+            "svelte",
           },
           config = {
             tabwidth = 2,
