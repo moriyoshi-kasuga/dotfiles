@@ -15,6 +15,12 @@ return {
             "<cmd>RustLsp openDocs<cr>",
             { silent = true, desc = "Open docs", buffer = bufnr }
           )
+          vim.keymap.set(
+            "n",
+            "<leader>co",
+            "<cmd>RustLsp expandMacro<cr>",
+            { silent = true, desc = "Expand Macro", buffer = bufnr }
+          )
         end,
       },
     },
