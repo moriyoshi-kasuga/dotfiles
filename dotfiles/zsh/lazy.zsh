@@ -1,28 +1,3 @@
-if [[ -n $(echo ${^fpath}/chpwd_recent_dirs(N)) && -n $(echo ${^fpath}/cdr(N)) ]]; then
-    autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
-    add-zsh-hook chpwd chpwd_recent_dirs
-    zstyle ':completion:*' recent-dirs-insert both
-    zstyle ':chpwd:*' recent-dirs-default true
-    zstyle ':chpwd:*' recent-dirs-max 1000
-    zstyle ':chpwd:*' recent-dirs-file ${XDG_CACHE_HOME:-$HOME/.cache}/chpwd-recent-dirs
-
-    function fzf-cdr() {
-        local selected
-        setopt localoptions noglobsubst noposixbuiltins pipefail no_aliases noglob nobash_rematch 2> /dev/null
-        selected="$(cdr -l | awk '{ print $2 }' | sed 's/^[0-9]\+ \+//' | rg '^~' | sort | 
-            FZF_DEFAULT_OPTS=$(__fzf_defaults "" "-n2..,.. --scheme=history --bind=ctrl-r:toggle-sort --wrap-sign '\t↳ ' --highlight-line ${FZF_CTRL_R_OPTS-} --query=${(qqq)LBUFFER} +m") \
-            FZF_DEFAULT_OPTS_FILE='' $(__fzfcmd))"
-        if [ -n "$selected" ]; then
-            BUFFER="cd ${selected}"
-            zle accept-line
-        fi
-        zle reset-prompt
-    }
-
-    zle -N fzf-cdr
-    bindkey "^G" fzf-cdr
-fi
-
 ## bat (https://github.com/folke/tokyonight.nvim/issues/23#issuecomment-1636639722)
 export BAT_THEME=tokyonight_night
 
