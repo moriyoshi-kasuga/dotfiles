@@ -10,6 +10,9 @@ return {
         },
 
         documentation = {
+          auto_show_delay_ms = 0,
+          auto_show = true,
+
           window = {
             border = "single",
           },
