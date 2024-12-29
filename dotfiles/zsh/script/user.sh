@@ -37,11 +37,11 @@ tl() {
         return
     fi
     local list
-    list=$(tmux ls)
-    for args_value in "$@"; do
-        list=$(echo "$list" | grep -i "$args_value")
-    done
-    echo "$list"
+    list="$(
+        IFS='|'
+        echo "$*"
+    )"
+    tmux list-sessions -F '#{session_name}' | grep -iE "$list"
 }
 
 ta() {
@@ -49,22 +49,15 @@ ta() {
         tmux a
         return
     fi
-    local list
-    list=$(tmux list-sessions -F '#{session_name}')
-    for args_value in "$@"; do
-        list=$(echo "$list" | grep -i "$args_value")
-    done
-    list=$(echo "$list" | tr -d '\n')
-    tmux a -t "$list"
+    tmux a -t "$(tl "$@")"
 }
 
 ts() {
-    local session
-    session=$(tmux list-sessions -F "#{session_name}" | fzf)
-    if [ -z "$session" ]; then
+    if [ $# -eq 0 ]; then
+        echo "Please input session name (type tl on print session list)"
         return
     fi
-    tmux switch -t "$session"
+    tmux switch -t "$(tl "$@")"
 }
 
 tk() {
@@ -72,13 +65,7 @@ tk() {
         tmux kill-session
         return
     fi
-    local list
-    list=$(tmux list-sessions -F '#{session_name}')
-    for args_value in "$@"; do
-        list=$(echo "$list" | grep -i "$args_value")
-    done
-    list=$(echo "$list" | tr -d '\n')
-    tmux kill-session -t "$list"
+    tmux kill-session -t "$(tl "$@")"
 }
 
 cht() {
