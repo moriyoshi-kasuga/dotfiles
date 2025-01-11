@@ -22,7 +22,7 @@ require("lazy").setup({
   spec = {
     { "LazyVim/LazyVim", import = "lazyvim.plugins" },
 
-    { import = "lazyvim.plugins.extras.ai.supermaven" },
+    { import = "lazyvim.plugins.extras.ai.codeium" },
 
     { import = "lazyvim.plugins.extras.lsp.neoconf" },
 
