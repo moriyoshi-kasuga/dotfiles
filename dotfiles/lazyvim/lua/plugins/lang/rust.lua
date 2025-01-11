@@ -22,6 +22,13 @@ return {
             { silent = true, desc = "Expand Macro", buffer = bufnr }
           )
         end,
+        default_settings = {
+          ["rust-analyzer"] = {
+            diagnostics = {
+              disabled = { "macro-error", "proc-macro-disabled" },
+            },
+          },
+        },
       },
     },
   },
