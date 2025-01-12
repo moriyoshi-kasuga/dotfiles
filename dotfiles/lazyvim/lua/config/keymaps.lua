@@ -20,6 +20,11 @@ del("v", "<A-k>")
 del({ "i", "n" }, "<esc>")
 map("n", "<leader>h", cmd("noh"))
 
+-- window
+map("n", "<leader>wv", "<C-w>v", { desc = "Vertical split" })
+map("n", "<leader>ws", "<C-w>s", { desc = "Horizontal split" })
+map("n", "<leader>wo", "<C-w>o", { desc = "Close Other window" })
+
 -- FzfLua
 map("n", "<leader>\\", cmd("FzfLua grep_curbuf"))
 map("n", "<leader>se", cmd("FzfLua diagnostics_workspace severity_limit=2"), { desc = "Warn Diagnostics" })
