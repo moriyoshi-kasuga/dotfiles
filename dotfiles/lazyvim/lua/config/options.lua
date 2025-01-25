@@ -18,3 +18,25 @@ vim.g.loaded_python3_provider = 0
 vim.g.loaded_ruby_provider = 0
 
 vim.g.snacks_animate = false
+
+-- uncomment on ssh
+-- vim.o.clipboard = "unnamedplus"
+--
+-- local function paste()
+--   return {
+--     vim.fn.split(vim.fn.getreg(""), "\n"),
+--     vim.fn.getregtype(""),
+--   }
+-- end
+--
+-- vim.g.clipboard = {
+--   name = "OSC 52",
+--   copy = {
+--     ["+"] = require("vim.ui.clipboard.osc52").copy("+"),
+--     ["*"] = require("vim.ui.clipboard.osc52").copy("*"),
+--   },
+--   paste = {
+--     ["+"] = paste,
+--     ["*"] = paste,
+--   },
+-- }
