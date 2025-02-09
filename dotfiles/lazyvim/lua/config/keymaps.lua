@@ -31,7 +31,18 @@ map("n", "<leader>se", cmd("FzfLua diagnostics_workspace severity_limit=2"), { d
 map("n", "<leader>sE", cmd("FzfLua diagnostics_workspace severity_limit=1"), { desc = "Error Diagnostics" })
 
 -- Lsp
-map({ "n", "v" }, "ga", vim.lsp.buf.code_action, { desc = "Code action" })
+map({ "n", "v" }, "ga", function()
+  require("fzf-lua").lsp_code_actions({
+    winopts = {
+      width = 0.8,
+      height = 0.8,
+      preview = {
+        vertical = "down:70%",
+        layout = "vertical",
+      },
+    },
+  })
+end, { desc = "Code actions" })
 
 -- Toggle statusline
 map("n", "<leader>uS", function()
