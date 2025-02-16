@@ -17,6 +17,12 @@ return {
           )
           vim.keymap.set(
             "n",
+            "<leader>cm",
+            "<cmd>RustLsp rebuildProcMacros<cr>",
+            { silent = true, desc = "Rebuild ProcMacros", buffer = bufnr }
+          )
+          vim.keymap.set(
+            "n",
             "<leader>co",
             "<cmd>RustLsp expandMacro<cr>",
             { silent = true, desc = "Expand Macro", buffer = bufnr }
