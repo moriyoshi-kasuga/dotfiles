@@ -23,6 +23,12 @@ return {
           )
           vim.keymap.set(
             "n",
+            "<leader>ce",
+            "<cmd>RustLsp explainError<cr>",
+            { silent = true, desc = "Explain Error", buffer = bufnr }
+          )
+          vim.keymap.set(
+            "n",
             "<leader>co",
             "<cmd>RustLsp expandMacro<cr>",
             { silent = true, desc = "Expand Macro", buffer = bufnr }
