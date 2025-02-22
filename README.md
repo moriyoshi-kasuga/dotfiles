@@ -12,7 +12,7 @@ git clone --depth 1 https://github.com/moriyoshi-kasuga/dotfiles.git ~/dotfiles 
 
 > **ここでエラーが吐く場合は自分で調べてください、私の環境ではエラーは吐きませんでした**
 
-### Linux (Ubuntu,WSL)
+### Linux (WSL2)
 
 ```sh
 sudo apt install make && git clone --depth 1 https://github.com/moriyoshi-kasuga/dotfiles.git ~/dotfiles && cd ~/dotfiles && make init
