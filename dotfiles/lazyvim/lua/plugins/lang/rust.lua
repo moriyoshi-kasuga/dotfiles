@@ -39,6 +39,13 @@ return {
             diagnostics = {
               disabled = { "macro-error", "proc-macro-disabled" },
             },
+            procMacro = {
+              enable = true,
+              ignored = {
+                ["async-trait"] = { "async_trait" },
+                ["tauri_macros"] = { "generate_context" },
+              },
+            },
           },
         },
       },
