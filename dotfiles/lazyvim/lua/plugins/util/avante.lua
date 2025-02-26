@@ -6,9 +6,9 @@ return {
     version = false, -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
     opts = {
       provider = "copilot",
-      copilot = {
-        model = "claude-3.5-sonnet",
-      },
+      -- copilot = {
+      --   model = "claude-3.5-sonnet",
+      -- },
       behaviour = {
         auto_suggestions = false,
         auto_set_highlight_group = true,
