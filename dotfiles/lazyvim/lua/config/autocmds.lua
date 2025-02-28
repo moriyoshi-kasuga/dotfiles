@@ -22,7 +22,7 @@ del_lazyvim_auto_cmd("close_with_q")
 del_lazyvim_auto_cmd("wrap_spell")
 
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = "rust",
+  pattern = { "rust" },
   group = vim.api.nvim_create_augroup("dotfile_rust", { clear = true }),
   callback = function()
     LazyVim.on_load("mini.pairs", function()
