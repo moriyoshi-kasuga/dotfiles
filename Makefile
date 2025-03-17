@@ -15,6 +15,9 @@ zsh: ## Install zsh
 brew: ## Install homebrew
 	bash ./bin/brew.sh
 
+bat: ## Set config bat
+	bash ./bin/bat.sh
+
 git: ## Install git
 	bash ./bin/git.sh
 
