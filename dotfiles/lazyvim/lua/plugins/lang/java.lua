@@ -3,28 +3,14 @@ return {
     "mfussenegger/nvim-jdtls",
     opts = {
       jdtls = {
-        -- cmd = {
-        --   "java",
-        --   "-Declipse.application=org.eclipse.jdt.ls.core.id1",
-        --   "-Dosgi.bundles.defaultStartLevel=4",
-        --   "-Declipse.product=org.eclipse.jdt.ls.core.product",
-        --   "-Dlog.protocol=true",
-        --   "-Dlog.level=ALL",
-        --   "-javaagent:" .. vim.fn.expand("$MASON/share/jdtls/lombok.jar"),
-        --   "-Xms1G",
-        --   "-Xmx2G",
-        --   "--add-modules=ALL-SYSTEM",
-        --   "--add-opens",
-        --   "java.base/java.util=ALL-UNNAMED",
-        --   "--add-opens",
-        --   "java.base/java.lang=ALL-UNNAMED",
-        --   "-jar",
-        --   vim.fn.expand("$MASON/share/jdtls/plugins/org.eclipse.equinox.launcher.jar"),
-        --   "-configuration",
-        --   vim.fn.expand("$MASON/share/jdtls/config"),
-        --   "-data",
-        --   workspace_dir,
-        -- },
+        root_dir = vim.fs.root(0, {
+          "build.gradle",
+          "build.gradle.kts",
+          "build.xml", -- Ant
+          "pom.xml", -- Maven
+          "settings.gradle", -- Gradle
+          "settings.gradle.kts", -- Gradle
+        }),
         settings = {
           java = {
             format = {
