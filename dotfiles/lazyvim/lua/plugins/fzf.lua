@@ -4,5 +4,10 @@ return {
     files = {
       formatter = "path.filename_first",
     },
+    keymap = {
+      fzf = {
+        ["ctrl-l"] = "abort",
+      },
+    },
   },
 }

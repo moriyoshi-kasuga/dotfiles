@@ -20,6 +20,9 @@ del("v", "<A-k>")
 del({ "i", "n" }, "<esc>")
 map("n", "<leader>h", cmd("noh"))
 
+-- insert mode
+map("i", "<C-l>", "<esc>", { desc = "Escape", silent = true })
+
 -- window
 map("n", "<leader>wv", "<C-w>v", { desc = "Vertical split" })
 map("n", "<leader>ws", "<C-w>s", { desc = "Horizontal split" })
