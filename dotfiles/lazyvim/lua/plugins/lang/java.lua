@@ -14,7 +14,11 @@ return {
         settings = {
           java = {
             format = {
-              enabled = false,
+              enabled = true,
+              settings = {
+                url = "https://github.com/google/styleguide/blob/gh-pages/eclipse-java-google-style.xml",
+                profile = "GoogleStyle",
+              },
             },
             eclipse = {
               downloadSources = true,
@@ -40,6 +44,7 @@ return {
           signatureHelp = {
             enabled = true,
           },
+          contentProvider = { preferred = "fernflower" },
           completion = {
             favoriteStaticMembers = {
               "java.util.Objects.requireNonNull",
@@ -47,15 +52,6 @@ return {
             },
           },
         },
-      },
-    },
-  },
-  {
-    "stevearc/conform.nvim",
-    optional = true,
-    opts = {
-      formatters_by_ft = {
-        java = { "google-java-format" },
       },
     },
   },

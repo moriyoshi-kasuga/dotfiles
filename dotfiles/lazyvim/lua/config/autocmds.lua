@@ -30,3 +30,16 @@ vim.api.nvim_create_autocmd("FileType", {
     end)
   end,
 })
+
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if client and client.name == "jdtls" then
+      vim.keymap.set("n", "<leader>r", function()
+        -- NOTE: if bug on java format, reverse the order of the functions
+        require("jdtls").organize_imports()
+        LazyVim.format()
+      end, { buffer = true, noremap = true, silent = true })
+    end
+  end,
+})
