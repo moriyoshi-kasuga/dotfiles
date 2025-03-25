@@ -31,15 +31,14 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
-vim.api.nvim_create_autocmd("LspAttach", {
-  callback = function(args)
-    local client = vim.lsp.get_client_by_id(args.data.client_id)
-    if client and client.name == "jdtls" then
-      vim.keymap.set("n", "<leader>r", function()
-        -- NOTE: if bug on java format, reverse the order of the functions
-        require("jdtls").organize_imports()
-        LazyVim.format()
-      end, { buffer = true, noremap = true, silent = true })
-    end
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "java" },
+  group = vim.api.nvim_create_augroup("dotfile_java", { clear = true }),
+  callback = function()
+    vim.keymap.set("n", "<leader>r", function()
+      -- NOTE: if not working format on java , reverse the order of the functions
+      require("jdtls").organize_imports()
+      LazyVim.format.format({ force = true })
+    end, { buffer = true, desc = "Organize imports and format" })
   end,
 })
