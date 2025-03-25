@@ -20,6 +20,10 @@ del("v", "<A-k>")
 del({ "i", "n" }, "<esc>")
 map("n", "<leader>h", cmd("noh"))
 
+map("n", "<leader>r", function()
+  LazyVim.format.format({ force = true })
+end, { desc = "Format buffer" })
+
 -- insert mode
 map("i", "<C-l>", "<esc>", { desc = "Escape", silent = true })
 
