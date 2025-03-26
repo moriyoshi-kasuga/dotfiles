@@ -1,11 +1,19 @@
 #!/usr/bin/env bash
 
 dcr() {
-    dcd "$1" && dcud "$1" && dcl "$1" -f
+    if [ $# -eq 0 ]; then
+        dcd && dcud && dcl -f
+    else
+        dcd "$1" && dcud "$1" && dcl "$1" -f
+    fi
 }
 
 dcrb() {
-    dcd "$1" && dcudb "$1" && dcl "$1" -f
+    if [ $# -eq 0 ]; then
+        dcd && dcudb && dcl -f
+    else
+        dcd "$1" && dcudb "$1" && dcl "$1" -f
+    fi
 }
 
 useful() {
