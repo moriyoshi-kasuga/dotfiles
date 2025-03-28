@@ -20,6 +20,10 @@ del("v", "<A-k>")
 del({ "i", "n" }, "<esc>")
 map("n", "<leader>h", cmd("noh"))
 
+for _, quote in ipairs({ '"', "'", "`" }) do
+  map({ "x", "o" }, "a" .. quote, "2i" .. quote)
+end
+
 map("n", "<leader>r", function()
   LazyVim.format.format({ force = true })
 end, { desc = "Format buffer" })
