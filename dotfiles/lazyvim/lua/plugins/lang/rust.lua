@@ -33,6 +33,12 @@ return {
             "<cmd>RustLsp expandMacro<cr>",
             { silent = true, desc = "Expand Macro", buffer = bufnr }
           )
+          vim.keymap.set(
+            "n",
+            "<leader>cs",
+            "<cmd>RustLsp parentModule<cr>",
+            { silent = true, desc = "Goto Parent Module", buffer = bufnr }
+          )
         end,
         default_settings = {
           ["rust-analyzer"] = {
