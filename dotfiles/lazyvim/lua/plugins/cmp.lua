@@ -2,6 +2,16 @@ return {
   {
     "saghen/blink.cmp",
     opts = {
+      fuzzy = {
+        implementation = "prefer_rust_with_warning",
+        sorts = {
+          "exact",
+          -- defaults
+          "score",
+          "sort_text",
+        },
+      },
+
       completion = {
         menu = {
           border = "single",
@@ -10,7 +20,6 @@ return {
         },
 
         documentation = {
-          auto_show_delay_ms = 0,
           auto_show = true,
 
           window = {
