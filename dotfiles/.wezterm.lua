@@ -14,10 +14,11 @@ config.color_scheme = "tokyonight_night"
 
 -- 最初からフルスクリーンで起動
 local mux = wezterm.mux
-wezterm.on("gui-startup", function(cmd)
-	local _, _, window = mux.spawn_window(cmd or {})
-	window:gui_window():toggle_fullscreen()
+wezterm.on("gui-startup", function()
+	local _, pane, window = mux.spawn_window({})
+	window:gui_window():perform_action(wezterm.action.ToggleFullScreen, pane)
 end)
+config.native_macos_fullscreen_mode = true
 
 ---- フォントの設定
 local font = require("font")
@@ -32,7 +33,7 @@ font.load_default(config)
 config.window_padding = {
 	left = 0,
 	right = 0,
-	top = 30,
+	top = 0,
 	bottom = 0,
 }
 
