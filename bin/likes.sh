@@ -2,7 +2,6 @@
 
 script_root=$(cd "$(dirname "$0")" && pwd)
 . "${script_root}"/common.sh
-require_password
 
 setup_start "likes"
 echo

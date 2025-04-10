@@ -3,19 +3,18 @@
 is_mac=$(uname -s | grep -qi "darwin" && echo true || echo false)
 script_root=$(cd "$(dirname "$0")" && pwd)
 . "${script_root}"/common.sh
-require_password
 
 notice "${BLACK}${CYAN_BG}★ Start setup Initialize"
 
 if ! "${is_mac}"; then
-	sudo apt-get -y -qq update >/dev/null 2>&1
-	sudo apt-get -y -qq upgrade >/dev/null 2>&1
-	sudo apt-get -y -qq clean >/dev/null 2>&1
+    sudo apt-get -y -qq update >/dev/null 2>&1
+    sudo apt-get -y -qq upgrade >/dev/null 2>&1
+    sudo apt-get -y -qq clean >/dev/null 2>&1
 fi
 
 make link
 
-make brew
+sudo make brew
 
 make zsh
 
@@ -31,12 +30,12 @@ make vim
 
 make neovim
 
-make docker
+sudo make docker
 
 if "${is_mac}"; then
-	make darwin
+    sudo make darwin
 else
-	make linux
+    sudo make linux
 fi
 
 echo

@@ -3,7 +3,6 @@
 script_root=$(cd "$(dirname "$0")" && pwd)
 dotfiles_root=$(dirname "${script_root}")
 . "${script_root}"/common.sh
-require_password
 
 setup_start "git"
 echo
