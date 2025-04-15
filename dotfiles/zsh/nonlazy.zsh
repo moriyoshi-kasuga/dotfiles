@@ -27,6 +27,8 @@ setopt hist_find_no_dups
 export TERM=wezterm nvim
 export EDITOR=nvim
 export WORDCHARS='*?_.[]~-=&;!#$%^(){}<>'
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
 
 if [ -d "./local.zsh" ] ; then
     source "./local.zsh"
