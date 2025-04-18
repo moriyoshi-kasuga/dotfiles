@@ -4,6 +4,13 @@ return {
     opts = {
       servers = {
         svelte = {
+          capabilities = {
+            workspace = {
+              didChangeWatchedFiles = {
+                dynamicRegistration = false,
+              },
+            },
+          },
           settings = {
             svelte = {
               plugin = {
