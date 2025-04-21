@@ -9,8 +9,8 @@ end
 config.disable_default_key_bindings = true
 config.enable_tab_bar = false
 config.hide_tab_bar_if_only_one_tab = true
--- カラースキームの設定
-config.color_scheme = "tokyonight_night"
+-- config.color_scheme = "tokyonight_night"
+config.color_scheme = "Catppuccin Macchiato"
 
 -- 最初からフルスクリーンで起動
 local mux = wezterm.mux
@@ -40,7 +40,6 @@ config.window_padding = {
 
 -- ショートカットキー設定
 config.keys = {
-	-- CMD(command)+Enterでフルスクリーン切り替え
 	{
 		key = "Enter",
 		mods = "CMD",
