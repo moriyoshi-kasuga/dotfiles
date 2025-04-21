@@ -68,7 +68,6 @@ function M.selector_action()
 					M.select(overrides, label)
 					window:set_config_overrides(overrides)
 					M.save_default(label)
-					-- wezterm.log_info("Set font to " .. label)
 				end),
 				title = "Font Selector",
 				choices = choices,

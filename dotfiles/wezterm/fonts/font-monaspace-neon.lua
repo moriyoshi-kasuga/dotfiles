@@ -1,4 +1,3 @@
-
 local wezterm = require("wezterm")
 return function(config, _)
 	config.font =
