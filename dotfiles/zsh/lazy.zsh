@@ -1,4 +1,3 @@
-## bat (https://github.com/folke/tokyonight.nvim/issues/23#issuecomment-1636639722)
 export BAT_THEME=tokyonight_night
 
 ## fzf
@@ -15,10 +14,8 @@ _fzf_compgen_dir() {
   fd --type d --hidden --follow --exclude ".git" . "$1"
 }
 
-local preview='[ -d {} ] && eza --tree --color=always {} | head -200 || bat -n --color=always --line-range :500 {}'
-
 export FZF_CTRL_R_OPTS="--reverse --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'"
-export FZF_CTRL_T_OPTS="--preview '$preview'"
+export FZF_CTRL_T_OPTS="--preview '[ -d {} ] && eza --tree --color=always {} | head -200 || bat -n --color=always --line-range :500 {}'"
 export FZF_ALT_C_OPTS="--preview 'eza --tree --color=always {} | head -200'"
 
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
