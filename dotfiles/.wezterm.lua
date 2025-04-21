@@ -29,6 +29,7 @@ font.register_fonts({
 	{ name = "Ubuntu Mono", mod = "font-ubuntu" },
 })
 font.load_default(config)
+config.adjust_window_size_when_changing_font_size = false
 
 config.window_padding = {
 	left = 0,
@@ -63,6 +64,26 @@ config.keys = {
 		key = "f",
 		mods = "CMD",
 		action = font.selector_action(),
+	},
+	{
+		key = "+",
+		mods = "CMD",
+		action = wezterm.action.IncreaseFontSize,
+	},
+	{
+		key = "-",
+		mods = "CMD",
+		action = wezterm.action.DecreaseFontSize,
+	},
+	{
+		key = ".",
+		mods = "CMD",
+		action = wezterm.action.ResetFontSize,
+	},
+	{
+		key = "l",
+		mods = "CMD",
+		action = wezterm.action.ShowDebugOverlay,
 	},
 }
 
