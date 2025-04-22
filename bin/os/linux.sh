@@ -3,8 +3,8 @@
 is_mac=$(uname -s | grep -qi "darwin" && echo true || echo false)
 
 if "${is_mac}"; then
-	error "This can only be called on mac"
-	exit 1
+  error "This can only be called on mac"
+  exit 1
 fi
 
 script_root=$(cd "$(dirname "$0")" && cd .. && pwd)

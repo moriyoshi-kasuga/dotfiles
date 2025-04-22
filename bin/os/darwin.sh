@@ -3,8 +3,8 @@
 is_mac=$(uname -s | grep -qi "darwin" && echo true || echo false)
 
 if ! "${is_mac}"; then
-	error "This can only be called on mac"
-	exit 1
+  error "This can only be called on mac"
+  exit 1
 fi
 
 script_root=$(cd "$(dirname "$0")" && cd .. && pwd)
@@ -75,9 +75,9 @@ defaults write com.apple.menuextra.clock DateFormat -string 'EEE d MMM HH:mm'
 defaults write com.apple.menuextra.battery ShowPercent -string "YES"
 
 for app in "Dock" \
-	"Finder" \
-	"SystemUIServer"; do
-	killall "${app}" &>/dev/null
+  "Finder" \
+  "SystemUIServer"; do
+  killall "${app}" &>/dev/null
 done
 
 setup_end "Mac"

@@ -5,18 +5,18 @@ dotfiles_root=$(dirname "${script_root}")
 . "${script_root}"/common.sh
 
 if ! type "bat" >/dev/null 2>&1; then
-    error "bat is not installed"
-    exit
+  error "bat is not installed"
+  exit
 fi
 
 if test -d "$(bat --config-dir)/themes"; then
-    install_exist "bat themes"
-    exit
+  install_exist "bat themes"
+  exit
 fi
 
 if test -d "$(bat --config-dir)/config"; then
-    install_exist "bat themes"
-    exit
+  install_exist "bat themes"
+  exit
 fi
 
 mkdir -p "$(bat --config-dir)/themes"

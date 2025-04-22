@@ -7,11 +7,11 @@ dotfiles_root=$(dirname "${script_root}")
 setup_start "Vim"
 echo
 if type "Vim" >/dev/null 2>&1; then
-	install_exist "Vim"
+  install_exist "Vim"
 else
-	install_start "Vim"
-	sudo apt install vim >/dev/null 2>&1
-	install_end "Vim"
+  install_start "Vim"
+  sudo apt install vim >/dev/null 2>&1
+  install_end "Vim"
 fi
 
 echo
@@ -23,12 +23,12 @@ cd "${dotfiles_root}"/dotfiles || exit
 linklist="${config}/linklist.Vim.txt"
 
 __remove_linklist_comment "$linklist" | while read -r target link; do
-	# ~ や環境変数を展開
-	target=$(eval echo "${PWD}/${target}")
-	link=$(eval echo "${link}")
-	# シンボリックリンクを作成
-	__mkdir "$(dirname "${link}")"
-	__ln "${target}" "${link}"
+  # ~ や環境変数を展開
+  target=$(eval echo "${PWD}/${target}")
+  link=$(eval echo "${link}")
+  # シンボリックリンクを作成
+  __mkdir "$(dirname "${link}")"
+  __ln "${target}" "${link}"
 done
 echo
 setup_end "vim symbole links"

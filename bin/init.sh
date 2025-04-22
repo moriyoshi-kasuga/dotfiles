@@ -7,9 +7,9 @@ script_root=$(cd "$(dirname "$0")" && pwd)
 notice "${BLACK}${CYAN_BG}★ Start setup Initialize"
 
 if ! "${is_mac}"; then
-    sudo apt-get -y -qq update >/dev/null 2>&1
-    sudo apt-get -y -qq upgrade >/dev/null 2>&1
-    sudo apt-get -y -qq clean >/dev/null 2>&1
+  sudo apt-get -y -qq update >/dev/null 2>&1
+  sudo apt-get -y -qq upgrade >/dev/null 2>&1
+  sudo apt-get -y -qq clean >/dev/null 2>&1
 fi
 
 make link
@@ -33,9 +33,9 @@ make neovim
 sudo make docker
 
 if "${is_mac}"; then
-    sudo make darwin
+  sudo make darwin
 else
-    sudo make linux
+  sudo make linux
 fi
 
 echo
