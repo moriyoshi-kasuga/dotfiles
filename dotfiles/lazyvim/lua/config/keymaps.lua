@@ -5,18 +5,6 @@ end
 local map = vim.keymap.set
 local del = vim.keymap.del
 
--- buffer cycle
-del("n", "<S-h>")
-del("n", "<S-l>")
-
--- del move lines
-del("n", "<A-j>")
-del("n", "<A-k>")
-del("i", "<A-j>")
-del("i", "<A-k>")
-del("v", "<A-j>")
-del("v", "<A-k>")
-
 del({ "i", "n" }, "<esc>")
 map("n", "<leader>h", cmd("noh"))
 
@@ -27,9 +15,6 @@ end
 map("n", "<leader>r", function()
   LazyVim.format.format({ force = true })
 end, { desc = "Format buffer" })
-
--- insert mode
-map("i", "<C-l>", "<esc>", { desc = "Escape", silent = true })
 
 -- window
 map("n", "<leader>wv", "<C-w>v", { desc = "Vertical split" })
@@ -82,8 +67,6 @@ end, { noremap = true, expr = true, desc = "Don't yank empty line to clipboard" 
 
 -- delete key somethings
 del("n", "<leader>l")
-del("n", "<leader>L")
-del("n", "<leader>K")
 del("n", "<leader>|")
 del("n", "<leader>-")
 del("n", "<leader>`")
