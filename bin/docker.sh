@@ -3,6 +3,7 @@
 is_mac=$(uname -s | grep -qi "darwin" && echo true || echo false)
 script_root=$(cd "$(dirname "$0")" && pwd)
 . "${script_root}"/common.sh
+require_password
 
 setup_start "Docker"
 echo

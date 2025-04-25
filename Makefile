@@ -3,7 +3,7 @@ help: ## 🌟 Display help
 	
 
 init: ## 🚀 Initialize the dotfiles environment
-	sudo bash ./bin/init.sh
+	bash ./bin/init.sh
 
 link: ## 🔗 Create symbolic links for dotfiles
 	bash ./bin/links.sh link
@@ -15,7 +15,7 @@ zsh: ## 🐚 Install and configure Zsh shell
 	bash ./bin/zsh.sh
 
 brew: ## 🍺 Install Homebrew package manager
-	sudo bash ./bin/brew.sh
+	bash ./bin/brew.sh
 
 bat: ## 🦇 Configure Bat, a cat clone with wings
 	bash ./bin/bat.sh
@@ -27,7 +27,7 @@ neovim: ## ✨ Install Neovim, a modern and extensible text editor
 	bash ./bin/neovim.sh
 
 docker: ## 🐳 Install Docker for containerized applications
-	sudo bash ./bin/docker.sh
+	bash ./bin/docker.sh
 
 likes: ## 👍 Install Likes, a tool for managing preferences
 	bash ./bin/likes.sh
@@ -51,7 +51,7 @@ rust: ## 🦀 Install Rust programming language
 
 # os
 darwin: ## 🍏 Setup macOS (Darwin) specific configurations
-	sudo bash ./bin/os/darwin.sh
+	bash ./bin/os/darwin.sh
 
 linux: ## 🐧 Setup Linux specific configurations
-	sudo bash ./bin/os/linux.sh
+	bash ./bin/os/linux.sh

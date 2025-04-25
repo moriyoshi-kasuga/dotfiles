@@ -71,6 +71,12 @@ function load_brew() {
   fi
 }
 
+function require_password() {
+	if [[ -z "$CI" ]]; then
+		sudo -v
+	fi
+}
+
 # シンボリックリンクを作成
 function __ln() { (
   # リンクがすでに存在すれば削除

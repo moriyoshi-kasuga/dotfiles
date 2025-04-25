@@ -9,6 +9,7 @@ fi
 
 script_root=$(cd "$(dirname "$0")" && cd .. && pwd)
 . "${script_root}"/common.sh
+require_password
 
 setup_start "linux"
 

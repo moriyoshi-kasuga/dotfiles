@@ -3,6 +3,7 @@
 script_root=$(cd "$(dirname "$0")" && pwd)
 dotfiles_root=$(dirname "${script_root}")
 . "${script_root}"/common.sh
+require_password
 
 if [ $# -ne 1 ]; then
   error "実行するには1個の引数が必要です。
