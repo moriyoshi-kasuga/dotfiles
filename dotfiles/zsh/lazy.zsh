@@ -50,3 +50,7 @@ export FZF_DEFAULT_OPTS=" \
 #   --color=separator:#ff9e64 \
 #   --color=spinner:#ff007c \
 # "
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && zsh-defer source "$HOME/.sdkman/bin/sdkman-init.sh"

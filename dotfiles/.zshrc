@@ -31,10 +31,3 @@ unset sheldon_cache sheldon_toml
 zsh-defer source "$ZSH_DIR/lazy.zsh"
 zsh-defer source "$ZSH_DIR/commands.zsh"
 unfunction source
-
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && zsh-defer source "$HOME/.sdkman/bin/sdkman-init.sh"
-
-# bun completions
-[ -s "~/.bun/_bun" ] && source "~/.bun/_bun"
