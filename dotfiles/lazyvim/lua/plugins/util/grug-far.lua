@@ -9,4 +9,10 @@ return {
       desc = "Open grug-far on current file",
     },
   },
+  opts = {
+    keymaps = {
+      openNextLocation = { n = "<C-n>" },
+      openPrevLocation = { n = "<C-p>" },
+    },
+  },
 }
