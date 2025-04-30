@@ -35,6 +35,11 @@ map("n", "<leader>bo", function()
   end
 end, { desc = "Delete buffers not shown in any window" })
 
+map("n", "<leader>bO", function()
+  vim.cmd("only")
+  vim.cmd("BufferLineCloseOthers")
+end, { desc = "Delete other buffers and Close other windows" })
+
 -- FzfLua
 map("n", "<leader>\\", cmd("FzfLua grep_curbuf"))
 map("n", "<leader>se", cmd("FzfLua diagnostics_workspace severity_limit=2"), { desc = "Warn Diagnostics" })
