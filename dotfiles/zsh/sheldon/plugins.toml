@@ -86,4 +86,4 @@ zsh-defer bindkey "^O" edit-command-line
 '''
 
 [plugins.tagged_file_flow]
-inline = 'type tagged_file_flow &> /dev/null && zsh-defer eval "$(tagged_file_flow init)"'
+inline = 'zsh-defer eval "$(tagged_file_flow init zsh)"'
