@@ -42,12 +42,8 @@ node: ## 🟢 Install Node.js, JavaScript runtime
 python: ## 🐍 Install Python programming language
 	bash ./bin/lang/python.sh
 
-coursier: ## 🚀 Install Coursier, a Scala artifact fetcher
-	bash ./bin/lang/coursier.sh
-
 rust: ## 🦀 Install Rust programming language
 	bash ./bin/lang/rust.sh
-
 
 # os
 darwin: ## 🍏 Setup macOS (Darwin) specific configurations
