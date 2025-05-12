@@ -7,7 +7,7 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 vim.g.autoformat = false
 
-vim.opt.signcolumn = "yes"
+vim.opt.signcolumn = "no"
 vim.opt.clipboard = ""
 vim.opt.numberwidth = 3
 vim.opt.mouse = ""
