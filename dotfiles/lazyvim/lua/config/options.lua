@@ -8,7 +8,6 @@ vim.g.maplocalleader = "\\"
 vim.g.autoformat = false
 
 vim.opt.signcolumn = "no"
-vim.opt.clipboard = ""
 vim.opt.numberwidth = 3
 vim.opt.mouse = ""
 vim.opt.list = false
@@ -17,24 +16,6 @@ vim.opt.laststatus = 0
 vim.g.ai_cmp = false
 vim.g.snacks_animate = false
 
--- uncomment on ssh
--- vim.o.clipboard = "unnamedplus"
---
--- local function paste()
---   return {
---     vim.fn.split(vim.fn.getreg(""), "\n"),
---     vim.fn.getregtype(""),
---   }
--- end
---
--- vim.g.clipboard = {
---   name = "OSC 52",
---   copy = {
---     ["+"] = require("vim.ui.clipboard.osc52").copy("+"),
---     ["*"] = require("vim.ui.clipboard.osc52").copy("*"),
---   },
---   paste = {
---     ["+"] = paste,
---     ["*"] = paste,
---   },
--- }
+vim.cmd([[
+ se splitkeep=cursor
+]])
