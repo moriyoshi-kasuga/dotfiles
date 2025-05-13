@@ -2,13 +2,13 @@ return {
   { "lewis6991/gitsigns.nvim", enabled = false },
   {
     "NeogitOrg/neogit",
+    event = "VeryLazy",
     dependencies = {
       "nvim-lua/plenary.nvim",
       "sindrets/diffview.nvim",
 
       "folke/snacks.nvim",
     },
-    lazy = false,
     opts = {
       disable_hint = true,
       disable_signs = true,
@@ -25,7 +25,6 @@ return {
   },
   {
     "sindrets/diffview.nvim",
-    lazy = false,
     keys = {
       { "<leader>gd", "<cmd>DiffviewOpen<CR>", desc = "Diffview Open" },
       { "<leader>gf", "<cmd>DiffviewFileHistory %<CR>", desc = "Diffview File History" },
