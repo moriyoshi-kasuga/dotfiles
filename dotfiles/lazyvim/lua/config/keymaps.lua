@@ -96,3 +96,14 @@ map("n", "<leader><c-_>", function()
 end, { desc = "Open Terminal with current dir" })
 
 map("v", "<leader>cn", ":CarbonNow<CR>", { silent = true })
+
+-- disable of git keymaps by LazyVim
+del("n", "<leader>gg")
+del("n", "<leader>gG")
+del("n", "<leader>gl")
+del("n", "<leader>gL")
+del("n", "<leader>gb")
+del("n", "<leader>gB")
+del("n", "<leader>gY")
+del("n", "<leader>ge")
+del("n", "<leader>gc")

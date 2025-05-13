@@ -35,7 +35,7 @@ return {
           )
           vim.keymap.set(
             "n",
-            "<leader>cs",
+            "<leader>ct",
             "<cmd>RustLsp parentModule<cr>",
             { silent = true, desc = "Goto Parent Module", buffer = bufnr }
           )
