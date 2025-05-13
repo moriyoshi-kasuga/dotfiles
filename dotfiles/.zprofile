@@ -8,5 +8,3 @@ case ${OSTYPE} in
 esac
 
 export PATH=$HOME/.nodebrew/current/bin:$PATH
-
-export XDG_CONFIG_HOME="$HOME/.config"
