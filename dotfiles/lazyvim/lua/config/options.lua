@@ -15,7 +15,7 @@ vim.opt.signcolumn = "no"
 vim.opt.numberwidth = 3
 vim.opt.mouse = ""
 vim.opt.list = false
-vim.opt.laststatus = 0
+vim.opt.laststatus = 3
 vim.cmd([[
  se splitkeep=cursor
 ]])
