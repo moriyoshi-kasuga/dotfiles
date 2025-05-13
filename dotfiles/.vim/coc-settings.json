@@ -1,6 +1,6 @@
 {
   "floatFactory.floatConfig": {
-    "border": true,
+    "border": true
   },
   "suggest.floatConfig": {
     "border": true
