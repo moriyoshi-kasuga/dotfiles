@@ -3,6 +3,7 @@ tap "homebrew/cask"
 
 brew "coreutils"
 brew "gun-time"
+brew "llvm"
 
 cask "discord"
 cask "slack"
