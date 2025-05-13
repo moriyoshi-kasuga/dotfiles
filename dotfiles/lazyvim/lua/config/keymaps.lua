@@ -37,7 +37,7 @@ end, { desc = "Delete buffers not shown in any window" })
 
 map("n", "<leader>bO", function()
   vim.cmd("only")
-  vim.cmd("BufferLineCloseOthers")
+  Snacks.bufdelete.other({})
 end, { desc = "Delete other buffers and Close other windows" })
 
 -- FzfLua
