@@ -21,6 +21,9 @@ return {
     keys = {
       { "gs", "<cmd>Neogit kind=tab<CR>", desc = "Neogit" },
       { "gS", "<cmd>Neogit kind=split<CR>", desc = "Neogit Split" },
+      { "<leader>gc", "<cmd>Neogit commit<CR>", desc = "Neogit Commit" },
+      { "<leader>gp", "<cmd>Neogit pull<CR>", desc = "Neogit Pull" },
+      { "<leader>gP", "<cmd>Neogit push<CR>", desc = "Neogit Push" },
     },
   },
   {

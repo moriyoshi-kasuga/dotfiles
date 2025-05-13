@@ -4,7 +4,7 @@ return {
     { "<leader>o", mode = "n", "<cmd>Neotree close<cr>", desc = "Neotree close." },
     { "<leader>e", mode = "n", "<cmd>Neotree focus<cr>", desc = "Neotree focus." },
     { "<leader>be", mode = "n", "<cmd>Neotree buffers<cr>", desc = "Buffer Explorer" },
-    { "<leader>ge", enabled = false },
+    { "<leader>ge", mode = "n", false },
   },
   opts = {
     event_handlers = {
