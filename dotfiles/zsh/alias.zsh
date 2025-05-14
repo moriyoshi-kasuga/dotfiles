@@ -46,6 +46,7 @@ alias gstp="git stash pop"
 alias gstd="git stash drop"
 
 # useful
+alias lg="lazygit"
 alias v="nvim"
 alias e="exit"
 alias c="clear"

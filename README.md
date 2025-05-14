@@ -66,6 +66,7 @@ sudo apt install make && git clone --depth 1 https://github.com/moriyoshi-kasuga
   - [bat](https://github.com/sharkdp/bat)
   - [fzf](https://github.com/junegunn/fzf)
   - [direnv](https://github.com/direnv/direnv)
+  - [lazygit](https://github.com/jesseduffield/lazygit)
   - [startship](https://github.com/starship/starship)
   - [tmux](https://github.com/tmux/tmux)
   - [and more...](./config/Brew.Unix.Brewfile)
