@@ -12,11 +12,6 @@ return {
     opts = {
       disable_hint = true,
       disable_signs = true,
-      mappings = {
-        status = {
-          ["a"] = "Toggle",
-        },
-      },
     },
     keys = {
       { "gs", "<cmd>Neogit kind=tab<CR>", desc = "Neogit" },
