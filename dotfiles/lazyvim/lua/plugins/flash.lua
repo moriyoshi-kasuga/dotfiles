@@ -13,6 +13,14 @@ return {
   keys = {
     -- disable the default flash keymap
     { "s", mode = { "o", "v", "x" }, false },
-    { "S", mode = { "n", "x", "o", "v" }, false },
+    { "S", mode = { "n", "x", "o" }, false },
+    {
+      "R",
+      mode = { "n", "o", "v" },
+      function()
+        require("flash").treesitter()
+      end,
+      desc = "Flash Treesitter",
+    },
   },
 }
