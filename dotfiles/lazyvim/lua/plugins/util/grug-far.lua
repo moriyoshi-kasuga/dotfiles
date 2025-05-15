@@ -10,6 +10,7 @@ return {
     },
   },
   opts = {
+    windowCreationCommand = "vsplit | wincmd L",
     keymaps = {
       openNextLocation = { n = "<C-n>" },
       openPrevLocation = { n = "<C-p>" },

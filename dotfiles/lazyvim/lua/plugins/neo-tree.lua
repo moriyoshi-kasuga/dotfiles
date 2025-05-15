@@ -88,6 +88,11 @@ return {
         filepath = vim.fn.fnamemodify(filepath, ":p:h")
         Snacks.terminal(nil, { cwd = filepath })
       end,
+      open_grug_far = function(state)
+        local node = state.tree:get_node()
+        local filepath = node:get_id()
+        require("grug-far").open({ prefills = { paths = filepath } })
+      end,
     },
     filesystem = {
       filtered_items = {
@@ -111,6 +116,7 @@ return {
         },
         I = "toggle_compact",
         T = "open_terminal",
+        R = "open_grug_far",
       },
     },
   },
