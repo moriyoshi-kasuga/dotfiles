@@ -9,6 +9,6 @@ esac
 
 export XDG_CONFIG_HOME="$HOME/.config"
 
-if [ -e "$HOME/.cargo/env" ]; then
-  source "$HOME/.cargo/env"
-fi
+source "$HOME/.cargo/env"
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"

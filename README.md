@@ -79,8 +79,8 @@ sudo apt install make && git clone --depth 1 https://github.com/moriyoshi-kasuga
   - use keybind of vim
   - [my alias](./dotfiles/zsh/alias.zsh)
   - [my useful command](./dotfiles/zsh/script/)
-- nodebrew
-  > latest npm and node
+- node
+  - [volta](https://volta.sh/): The Hassle-Free JavaScript Tool Manager
 - python
 - neovim
   - I used to use [lazyvim + my settings](./dotfiles/lazyvim/)

@@ -6,23 +6,16 @@ script_root=$(cd "$(dirname "$0")" && cd .. && pwd)
 setup_start "node"
 echo
 
-load_brew
-if type "nodebrew" >/dev/null 2>&1; then
-  install_exist "nodebrew"
-  brew upgrade nodebrew >/dev/null 2>&1
+if type "volta" >/dev/null 2>&1; then
+  install_exist "node"
 else
-  install_start "nodebrew"
-  brew install nodebrew >/dev/null 2>&1
-  install_end "nodebrew"
-fi
+  curl https://get.volta.sh | bash -s -- --skip-setup
 
-if [[ ":$PATH:" != *":$HOME/.nodebrew/current/bin:"* ]]; then
-  export PATH=$HOME/.nodebrew/current/bin:$PATH
-fi
+  export VOLTA_HOME="$HOME/.volta"
+  export PATH="$VOLTA_HOME/bin:$PATH"
 
-nodebrew setup >/dev/null 2>&1
-nodebrew install-binary latest >/dev/null 2>&1
-nodebrew use latest
+  volta install node
+fi
 
 echo
 setup_end "node"
