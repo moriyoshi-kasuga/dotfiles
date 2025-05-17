@@ -24,7 +24,7 @@ setopt hist_ignore_dups   # 直前と同じコマンドはヒストリに追加�
 setopt hist_find_no_dups
 
 ## export
-export TERM=wezterm nvim
+export TERM=screen-256color
 export EDITOR=vim
 export WORDCHARS='*?_.[]~-=&;!#$%^(){}<>'
 export BUN_INSTALL="$HOME/.bun"
