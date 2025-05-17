@@ -1,5 +1,3 @@
-tap "homebrew/bundle"
-
 brew "ncurses"
 
 brew "eza"
@@ -17,3 +15,4 @@ brew "fd"
 brew "sheldon"
 brew "httpie"
 brew "lazydocker"
+brew "zoxide"
