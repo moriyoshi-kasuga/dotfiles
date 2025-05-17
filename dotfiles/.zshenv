@@ -9,4 +9,6 @@ esac
 
 export XDG_CONFIG_HOME="$HOME/.config"
 
-source "$HOME/.cargo/env"
+if [ -e "$HOME/.cargo/env" ]; then
+  source "$HOME/.cargo/env"
+fi
