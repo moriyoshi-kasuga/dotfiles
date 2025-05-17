@@ -39,6 +39,12 @@ apply = ["defer"]
 github = "zdharma-continuum/fast-syntax-highlighting"
 apply = ["defer"]
 
+[plugins.tagged_file_flow]
+inline = 'zsh-defer eval "$(tagged_file_flow init zsh)"'
+
+[plugins.direnv]
+inline = 'zsh-defer eval "$(direnv hook zsh)"'
+
 [plugins.zoxide]
 github = "ajeetdsouza/zoxide"
 apply = ["defer"]
@@ -65,25 +71,18 @@ zle -N _run-cdi
 bindkey "^G" _run-cdi
 """
 
-[plugins.direnv]
-inline = 'zsh-defer eval "$(direnv hook zsh)"'
-
 [plugins.fzf]
 inline = '''
-zsh-defer eval "$(fzf --zsh)"
-zsh-defer bindkey "^K" fzf-cd-widget
+eval "$(fzf --zsh)"
+bindkey "^K" fzf-cd-widget
 '''
 
 [plugins.fzf-tab]
 github = 'Aloxaf/fzf-tab'
-apply = ["defer"]
 
 [plugins.edit-command-line]
 inline = '''
-zsh-defer autoload -Uz edit-command-line
-zsh-defer zle -N edit-command-line
-zsh-defer bindkey "^O" edit-command-line
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey "^O" edit-command-line
 '''
-
-[plugins.tagged_file_flow]
-inline = 'zsh-defer eval "$(tagged_file_flow init zsh)"'
