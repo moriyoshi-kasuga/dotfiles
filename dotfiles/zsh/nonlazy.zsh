@@ -24,11 +24,14 @@ setopt hist_ignore_dups   # 直前と同じコマンドはヒストリに追加�
 setopt hist_find_no_dups
 
 ## export
-export TERM=screen-256color
 export EDITOR=vim
 export WORDCHARS='*?_.[]~-=&;!#$%^(){}<>'
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+export LC_CTYPE=en_US.UTF-8
 
 if [ -d "./local.zsh" ] ; then
     source "./local.zsh"
