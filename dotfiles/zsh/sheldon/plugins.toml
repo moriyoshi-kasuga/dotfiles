@@ -40,7 +40,7 @@ github = "zdharma-continuum/fast-syntax-highlighting"
 apply = ["defer"]
 
 [plugins.tagged_file_flow]
-inline = 'zsh-defer eval "$(tagged_file_flow init zsh)"'
+inline = 'type tagged_file_flow &>/dev/null && zsh-defer eval "$(tagged_file_flow init zsh)"'
 
 [plugins.direnv]
 inline = 'zsh-defer eval "$(direnv hook zsh)"'
