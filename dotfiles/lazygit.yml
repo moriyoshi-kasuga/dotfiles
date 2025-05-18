@@ -38,7 +38,7 @@ gui:
 
 os:
   editPreset: "nvim"
-  openLink: open -n "$(echo {{link}} | sed 's/%2F/\//g')"
+  openLink: open "$(echo {{link}} | sed 's/%2F/\//g')"
 
 keybinding:
   universal:
