@@ -8,22 +8,19 @@ set fileencoding=utf-8
 set fileencodings=utf-8
 set ttyfast
 
-set hlsearch
-set ignorecase
-set smartcase
-set expandtab
-
 set tabstop=4
 set shiftwidth=0
 
 set splitbelow
 set termwinsize=15x0
 
-let g:netrw_banner=0
-
 set number
 set relativenumber
-
+set hlsearch
+set ignorecase
+set smartcase
+set expandtab
+let g:netrw_banner=0
 set termguicolors
 
 " keymap
@@ -43,8 +40,12 @@ call jetpack#begin()
 
 Jetpack 'tani/vim-jetpack'
 Jetpack 'tpope/vim-surround'
+Jetpack 'tpope/vim-commentary'
+
 Jetpack 'catppuccin/vim', { 'as': 'catppuccin' }
+colorscheme catppuccin_macchiato
+
+Jetpack 'jdhao/better-escape.vim'
+let g:better_escape_shortcut = 'jk'
 
 call jetpack#end()
-
-colorscheme catppuccin_macchiato
