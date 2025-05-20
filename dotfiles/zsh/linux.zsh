@@ -1,5 +1,4 @@
-alias pbcopy="win32yank.exe -i"
-alias pbpaste='win32yank.exe -o'
+export PATH="$PATH:$HOME/zsh/linux"
 export LIBGL_ALWAYS_SOFTWARE=1
 
 if [ -d "$HOME/Android/SDK" ]; then
