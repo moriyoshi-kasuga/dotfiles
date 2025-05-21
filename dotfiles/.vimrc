@@ -51,3 +51,12 @@ Jetpack 'jdhao/better-escape.vim'
 let g:better_escape_shortcut = 'jk'
 
 call jetpack#end()
+
+" WSL yank support
+let s:clip = 'pbcopy'
+if executable(s:clip)
+    augroup Yank
+        autocmd!
+        autocmd TextYankPost * if v:event.operator ==# 'y' | call system(s:clip, @0) | endif
+    augroup END
+endif
