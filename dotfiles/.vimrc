@@ -26,6 +26,8 @@ set termguicolors
 " keymap
 let mapleader = "\<space>"
 nnoremap <leader>h :set nohlsearch<CR>
+nnoremap j gj
+nnoremap k gk
 
 " Plugins
 let s:jetpack_dir = expand('~/.vim/pack/jetpack/start/vim-jetpack/plugin/jetpack.vim')
