@@ -20,8 +20,10 @@ set hlsearch
 set ignorecase
 set smartcase
 set expandtab
-let g:netrw_banner=0
 set termguicolors
+
+let g:netrw_banner=0
+let g:netrw_bufsettings = 'noma nomod relativenumber nobl nowrap ro'
 
 " keymap
 let mapleader = "\<space>"
