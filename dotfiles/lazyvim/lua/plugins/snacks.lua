@@ -15,5 +15,21 @@ return {
         },
       },
     },
+    keys = {
+      {
+        "<leader>go",
+        function()
+          Snacks.gitbrowse()
+        end,
+        desc = "Open GitHub Repository",
+      },
+      {
+        "<leader>gb",
+        function()
+          Snacks.git.blame_line()
+        end,
+        desc = "Git Blame Line",
+      },
+    },
   },
 }
