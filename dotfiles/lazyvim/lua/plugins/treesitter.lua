@@ -36,7 +36,10 @@ return {
     "Wansmer/treesj",
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     event = { "LazyFile", "VeryLazy" },
-    opts = { use_default_keymaps = false },
+    opts = {
+      use_default_keymaps = false,
+      max_join_length = 1200,
+    },
     config = function(_, opts)
       require("treesj").setup(opts)
       vim.keymap.set("n", "<leader>j", require("treesj").toggle, { desc = "Toggle split" })
