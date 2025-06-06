@@ -9,7 +9,7 @@ return {
             { icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
             { icon = " ", key = "/", desc = "Find Text", action = ":lua Snacks.dashboard.pick('live_grep')" },
             { icon = "󰊢 ", key = "g", desc = "Neogit", action = ":Neogit kind=tab" },
-            { icon = " ", key = "s", desc = "Restore Session", action = ":SessionLoadLast" },
+            { icon = " ", key = "s", desc = "Restore Session", action = ":SessionLoad" },
             { icon = " ", key = "q", desc = "Quit", action = ":qa" },
           },
         },
