@@ -20,3 +20,16 @@ vim.opt.laststatus = 3
 vim.cmd([[
  se splitkeep=cursor
 ]])
+
+vim.g.clipboard = {
+  name = "win32yank",
+  copy = {
+    ["+"] = "pbcopy",
+    ["*"] = "pbcopy",
+  },
+  paste = {
+    ["+"] = "pbpaste",
+    ["*"] = "pbpaste",
+  },
+  cache_enabled = 0,
+}

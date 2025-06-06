@@ -1,1 +1,2 @@
+#!/bin/sh
 win32yank.exe -o --lf
