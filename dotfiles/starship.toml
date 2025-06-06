@@ -3,3 +3,12 @@
 add_newline = false
 
 command_timeout = 1000
+
+[java]
+disabled = true
+
+[kotlin]
+disabled = true
+
+[gradle]
+disabled = true
