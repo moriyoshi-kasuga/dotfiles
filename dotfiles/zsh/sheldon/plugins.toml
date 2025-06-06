@@ -27,17 +27,27 @@ inline = 'eval "$(starship init zsh)"'
 [plugins.compinit]
 inline = 'autoload -Uz compinit && zsh-defer compinit'
 
-[plugins.zsh-completions]
-github = 'zsh-users/zsh-completions'
-apply = ["defer"]
+[plugins.fzf]
+inline = '''
+eval "$(fzf --zsh)"
+bindkey "^K" fzf-cd-widget
+'''
+
+[plugins.fzf-tab]
+github = 'Aloxaf/fzf-tab'
+
+[plugins.edit-command-line]
+inline = '''
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey "^O" edit-command-line
+'''
 
 [plugins.zsh-autosuggestions]
 github = 'zsh-users/zsh-autosuggestions'
-apply = ["defer"]
 
 [plugins.fast-syntax-highlighting]
 github = "zdharma-continuum/fast-syntax-highlighting"
-apply = ["defer"]
 
 [plugins.tagged_file_flow]
 inline = 'type tagged_file_flow &>/dev/null && zsh-defer eval "$(tagged_file_flow init zsh)"'
@@ -70,19 +80,3 @@ _run-cdi() {
 zle -N _run-cdi
 bindkey "^G" _run-cdi
 """
-
-[plugins.fzf]
-inline = '''
-eval "$(fzf --zsh)"
-bindkey "^K" fzf-cd-widget
-'''
-
-[plugins.fzf-tab]
-github = 'Aloxaf/fzf-tab'
-
-[plugins.edit-command-line]
-inline = '''
-autoload -Uz edit-command-line
-zle -N edit-command-line
-bindkey "^O" edit-command-line
-'''
