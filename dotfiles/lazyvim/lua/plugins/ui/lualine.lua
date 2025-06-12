@@ -12,7 +12,9 @@ return {
       options = {
         theme = "auto",
         globalstatus = true,
-        disabled_filetypes = { statusline = { "dashboard", "alpha", "ministarter", "snacks_dashboard" } },
+        disabled_filetypes = {
+          statusline = { "dashboard", "alpha", "ministarter", "snacks_dashboard" },
+        },
       },
       sections = {
         lualine_a = {
@@ -30,6 +32,15 @@ return {
         lualine_b = { "branch" },
         lualine_c = {
           LazyVim.lualine.root_dir(),
+          {
+            "diagnostics",
+            symbols = {
+              error = LazyVim.config.icons.diagnostics.Error,
+              warn = LazyVim.config.icons.diagnostics.Warn,
+              info = LazyVim.config.icons.diagnostics.Info,
+              hint = LazyVim.config.icons.diagnostics.Hint,
+            },
+          },
           { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
           { LazyVim.lualine.pretty_path({ length = 10 }) },
         },
@@ -46,6 +57,7 @@ return {
         },
         lualine_z = {},
       },
+      extensions = { "neo-tree", "lazy", "fzf" },
     })
   end,
 }
