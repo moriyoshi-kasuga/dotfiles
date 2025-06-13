@@ -90,6 +90,10 @@ del("n", "<leader>|")
 del("n", "<leader>-")
 del("n", "<leader>`")
 
+-- buffer cycle
+del("n", "<S-h>")
+del("n", "<S-l>")
+
 map("n", "<leader><c-_>", function()
   ---@diagnostic disable-next-line: redundant-parameter
   Snacks.terminal(nil, { cwd = vim.fn.expand("%:p:h") })
