@@ -28,6 +28,7 @@ export EDITOR=vim
 export WORDCHARS='*?_.[]~-=&;!#$%^(){}<>'
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+export MANPAGER='nvim +Man!'
 
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
