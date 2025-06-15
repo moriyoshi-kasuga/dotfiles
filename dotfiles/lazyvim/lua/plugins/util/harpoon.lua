@@ -2,57 +2,58 @@ return {
   "ThePrimeagen/harpoon",
   branch = "harpoon2",
   dependencies = { "nvim-lua/plenary.nvim" },
-  opts = {
-    menu = {
-      width = vim.api.nvim_win_get_width(0) - 4,
-    },
-    settings = {
-      save_on_toggle = true,
-    },
-  },
-  keys = {
-    {
-      "<leader>m",
-      function()
-        require("harpoon"):list():add()
-      end,
-      desc = "Harpoon File",
-    },
-    {
-      "<leader>M",
-      function()
-        local harpoon = require("harpoon")
-        harpoon.ui:toggle_quick_menu(harpoon:list())
-      end,
-      desc = "Harpoon Quick Menu",
-    },
-    {
-      "<C-n>",
-      function()
-        require("harpoon"):list():select(1)
-      end,
-      desc = "Harpoon Select 1",
-    },
-    {
-      "<C-p>",
-      function()
-        require("harpoon"):list():select(2)
-      end,
-      desc = "Harpoon Select 2",
-    },
-    {
-      "<C-s>",
-      function()
-        require("harpoon"):list():select(3)
-      end,
-      desc = "Harpoon Select 3",
-    },
-    {
-      "<C-m>",
-      function()
-        require("harpoon"):list():select(4)
-      end,
-      desc = "Harpoon Select 4",
-    },
-  },
+  opts = function()
+    return {
+      menu = { width = vim.api.nvim_win_get_width(0) - 4 },
+      settings = {
+        save_on_toggle = true,
+      },
+    }
+  end,
+  keys = function()
+    local harpoon = require("harpoon")
+    local keys = {
+      {
+        "<leader>m",
+        function()
+          harpoon.ui:toggle_quick_menu(harpoon:list())
+        end,
+        desc = "Harpoon Quick Menu",
+      },
+      {
+        "<leader>k",
+        function()
+          harpoon:list():select(1)
+        end,
+      },
+      {
+        "<leader>K",
+        function()
+          harpoon:list():replace_at(1)
+        end,
+      },
+    }
+
+    local targets = { "m", "n", "p", "s" }
+
+    for base_i, target in ipairs(targets) do
+      local i = base_i + 1
+      table.insert(keys, {
+        "<C-" .. target .. ">",
+        function()
+          harpoon:list():select(i)
+        end,
+        desc = "Harpoon Select " .. i,
+      })
+      table.insert(keys, {
+        "," .. target,
+        function()
+          harpoon:list():replace_at(i)
+        end,
+        desc = "Harpoon Write to " .. i,
+      })
+    end
+
+    return keys
+  end,
 }
