@@ -25,12 +25,14 @@ return {
         function()
           harpoon:list():select(1)
         end,
+        desc = "Harpoon Select Scratchpad",
       },
       {
         "<leader>K",
         function()
           harpoon:list():replace_at(1)
         end,
+        desc = "Harpoon Write to Scratchpad",
       },
     }
 
