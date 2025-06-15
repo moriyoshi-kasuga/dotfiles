@@ -4,6 +4,9 @@ add_newline = false
 
 command_timeout = 1000
 
+[package]
+disabled = true
+
 [java]
 disabled = true
 
@@ -11,4 +14,7 @@ disabled = true
 disabled = true
 
 [gradle]
+disabled = true
+
+[aws]
 disabled = true
