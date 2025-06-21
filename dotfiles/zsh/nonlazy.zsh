@@ -34,6 +34,6 @@ export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
 
-if [ -d "./local.zsh" ] ; then
-    source "./local.zsh"
+if [ -f "$HOME/.local.zsh" ]; then
+  builtin source "$HOME/.local.zsh"
 fi
