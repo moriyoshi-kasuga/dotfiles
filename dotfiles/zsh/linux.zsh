@@ -1,3 +1,4 @@
+export BROWSER=explorer.exe
 export PATH="$PATH:$HOME/zsh/linux"
 export LIBGL_ALWAYS_SOFTWARE=1
 
