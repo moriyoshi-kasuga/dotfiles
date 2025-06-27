@@ -2,6 +2,7 @@ return {
   -- installed colorschemes
   {
     "rafi/theme-loader.nvim",
+    lazy = false,
     priority = 999,
     opts = {},
   },
@@ -11,5 +12,4 @@ return {
       colorscheme = function() end,
     },
   },
-  { "rebelot/kanagawa.nvim" },
 }
