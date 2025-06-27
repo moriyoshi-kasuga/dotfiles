@@ -91,3 +91,10 @@ ide() {
 mkcd() {
     mkdir "$1" && cd "$1" && pwd
 }
+
+ggc() {
+  OUTPUT=$(git diff --staged | gemini -p "Generate a git commit message in Conventional Commits format:\n\n<type>[optional scope]: <title>\n\n<body as bullet list>\n\nRequirements:\n- First line must be the commit title\n- Then a blank line\n- Then each detailed change on its own line prefixed with '- '\n- Do not output any other text")
+  TITLE=$(printf "%s" "$OUTPUT" | sed -n '1p')
+  BODY=$(printf "%s" "$OUTPUT" | tail -n +3)
+  git commit -m "$TITLE" -m "$BODY"
+}
