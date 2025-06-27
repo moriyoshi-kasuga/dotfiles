@@ -96,5 +96,20 @@ ggc() {
   OUTPUT=$(git diff --staged | gemini -p "Generate a git commit message in Conventional Commits format:\n\n<type>[optional scope]: <title>\n\n<body as bullet list>\n\nRequirements:\n- First line must be the commit title\n- Then a blank line\n- Then each detailed change on its own line prefixed with '- '\n- Do not output any other text")
   TITLE=$(printf "%s" "$OUTPUT" | sed -n '1p')
   BODY=$(printf "%s" "$OUTPUT" | tail -n +3)
+  if [ -z "$TITLE" ]; then
+    echo "No commit message generated."
+    return 1
+  fi
+  echo "Commit Title: "
+  echo -e "    \033[1;34m$TITLE\033[0m"
+  echo "Commit Body:"
+  # shellcheck disable=SC2001
+  echo -e "\033[1;34m$(echo "$BODY" | sed 's/^/    /')\033[0m"
+
+  echo "Do you want to commit with this message? (Press any key to confirm)"
+  if ! read -r -n 1; then
+    echo "Commit cancelled."
+    return 1
+  fi
   git commit -m "$TITLE" -m "$BODY"
 }
