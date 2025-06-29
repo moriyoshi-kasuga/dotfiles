@@ -21,15 +21,7 @@ vim.cmd([[
  se splitkeep=cursor
 ]])
 
-vim.g.clipboard = {
-  name = "win32yank",
-  copy = {
-    ["+"] = "pbcopy",
-    ["*"] = "pbcopy",
-  },
-  paste = {
-    ["+"] = "pbpaste",
-    ["*"] = "pbpaste",
-  },
-  cache_enabled = 0,
-}
+vim.g.clipboard = "pbcopy"
+
+-- In ssh sessions, use OSC52 for clipboard support
+-- vim.g.clipboard = "osc52"
