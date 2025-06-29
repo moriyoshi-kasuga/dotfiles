@@ -92,8 +92,12 @@ mkcd() {
   mkdir "$1" && cd "$1" && pwd
 }
 
+ask() {
+  gemini -m "gemini-2.5-pro" -p "$1"
+}
+
 ggc() {
-  OUTPUT=$(git diff --staged | gemini -m "gemini-2.5-flash" -p "Generate a git commit message in Conventional Commits format:\n\n<type>[optional scope]: <title>\n\n<body as bullet list>\n\nRequirements:\n- First line must be the commit title\n- Then a blank line\n- Then each detailed change on its own line prefixed with '- '\n- Do not output any other text")
+  OUTPUT=$(git diff --staged | ask "Generate a git commit message in Conventional Commits format:\n\n<type>[optional scope]: <title>\n\n<body as bullet list>\n\nRequirements:\n- First line must be the commit title\n- Then a blank line\n- Then each detailed change on its own line prefixed with '- '\n- Do not output any other text")
   TITLE=$(printf "%s" "$OUTPUT" | sed -n '1p')
   BODY=$(printf "%s" "$OUTPUT" | tail -n +3)
   if [ -z "$TITLE" ]; then
@@ -115,7 +119,7 @@ ggc() {
 }
 
 ggcs() {
-  CHOICE=$(gemini -m "gemini-2.5-flash" -p "Please suggest 10 commit messages, given the following diff:
+  CHOICE=$(ask "Please suggest 10 commit messages, given the following diff:
 
             \`\`\`diff
             $(git diff --cached)
