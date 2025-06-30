@@ -92,6 +92,19 @@ mkcd() {
   mkdir "$1" && cd "$1" && pwd
 }
 
+timer() {
+  if [ -z "$1" ]; then
+    echo "Usage: timer <duration in seconds>"
+    return 1
+  fi
+  echo "Timer started for $1 seconds..."
+  for ((i = 0; i < $1; i++)); do
+    sleep 1
+    echo -ne "\r===== $((i + 1))/$1 seconds ====="
+  done
+  echo -e "\nTime's up!"
+}
+
 ask() {
   gemini -m "gemini-2.5-pro" -p "$1"
 }
