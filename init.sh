@@ -11,7 +11,7 @@ if [ ! -f "./vars.nix" ]; then
   exit 1
 fi
 
-USERNAME=$(nix eval --raw --file ./vars.nix username)
+USERNAME=$(nix --extra-experimental-features 'nix-command' eval --raw --file ./vars.nix username)
 
 if [ -z "$USERNAME" ]; then
   echo 'Username not set in vars.nix, please edit it to your needs.'
@@ -20,7 +20,7 @@ fi
 
 echo 'Building Nix configuration...'
 git add --force ./vars.nix &>/dev/null
-nix --extra-experimental-features 'nix-command flakes' run home-manager/master -- switch --flake .#"$USERNAME"
+nix --extra-experimental-features 'nix-command flakes' run home-manager/master -- switch --extra-experimental-features 'nix-command flakes' --flake .#"$USERNAME"
 SUCCESS=$?
 git rm --force --cached ./vars.nix &>/dev/null
 if [ $SUCCESS -ne 0 ]; then
