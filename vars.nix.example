@@ -1,0 +1,7 @@
+# This file is an example of how to define variables for a Nix configuration.
+# Edit this file to set your own variables.
+{
+  username = "user";
+  homeDirectory = "/Users/user";
+  system = "aarch64-darwin";
+}

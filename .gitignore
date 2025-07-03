@@ -4,3 +4,4 @@ dotfiles/zsh/os.zsh
 dotfiles/zsh/local.zsh
 .DS_Store
 *.zwc
+vars.nix
