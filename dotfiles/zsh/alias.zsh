@@ -1,5 +1,8 @@
 ### alias
 
+# utilities
+alias todo='vim ~/todo.txt'
+
 # ls
 alias l='eza'
 alias ll='eza --long --git'
