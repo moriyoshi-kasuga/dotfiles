@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -euo pipefail
-
 if ! command -v nix &>/dev/null; then
   echo 'Nix is not installed or not in PATH'
   echo 'If you not have Nix installed, goto https://nixos.org/download.html'
@@ -21,5 +19,12 @@ if [ -z "$USERNAME" ]; then
 fi
 
 echo 'Building Nix configuration...'
+git add --force ./vars.nix &>/dev/null
 nix --extra-experimental-features 'nix-command flakes' run home-manager/master -- switch --flake .#"$USERNAME"
+SUCCESS=$?
+git rm --force --cached ./vars.nix &>/dev/null
+if [ $SUCCESS -ne 0 ]; then
+  echo 'Failed to apply Nix configuration.'
+  exit $SUCCESS
+fi
 echo 'Backing up existing configuration files...'

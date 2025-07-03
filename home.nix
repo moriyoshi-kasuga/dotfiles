@@ -1,6 +1,6 @@
 { pkgs, ... }:
 
-let
+let 
   vars = (import ./vars.nix);
 in
 {
