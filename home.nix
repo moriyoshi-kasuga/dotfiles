@@ -1,8 +1,5 @@
-{ pkgs, ... }:
+{ pkgs, vars, ... }:
 
-let
-  vars = (import ./vars.nix);
-in
 {
   home.username = vars.username;
   home.homeDirectory = vars.homeDirectory;

@@ -10,15 +10,24 @@
   };
 
   outputs =
-    { nixpkgs, home-manager, ... }:
+    {
+      nixpkgs,
+      home-manager,
+      ...
+    }:
     let
-      vars = (import ./vars.nix);
+      vars = builtins.fromJSON (builtins.getEnv "USER_NIX_VARS");
       pkgs = import nixpkgs { system = vars.system; };
     in
     {
       homeConfigurations.${vars.username} = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        modules = [ ./home.nix ];
+        modules = [
+          ./home.nix
+        ];
+        extraSpecialArgs = {
+          inherit vars;
+        };
       };
     };
 }

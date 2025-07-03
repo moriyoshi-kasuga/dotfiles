@@ -18,11 +18,17 @@ if [ -z "$USERNAME" ]; then
   exit 1
 fi
 
+VARS=$(nix --extra-experimental-features 'nix-command' eval --file ./vars.nix)
+
+if [ -n "$1" ]; then
+  VARS=$(nix --extra-experimental-features 'nix-command' eval --expr "$VARS // $1")
+fi
+
+VARS=$(nix --extra-experimental-features 'nix-command' eval --json --expr "$VARS")
+
 echo 'Building Nix configuration...'
-git add --force ./vars.nix &>/dev/null
-nix --extra-experimental-features 'nix-command flakes' run home-manager/master -- switch --extra-experimental-features 'nix-command flakes' --flake .#"$USERNAME"
+USER_NIX_VARS=$VARS nix --extra-experimental-features 'nix-command flakes' run --impure home-manager/master -- switch --impure --extra-experimental-features 'nix-command flakes' --flake .#"$USERNAME" --impure
 SUCCESS=$?
-git rm --force --cached ./vars.nix &>/dev/null
 if [ $SUCCESS -ne 0 ]; then
   echo 'Failed to apply Nix configuration.'
   exit $SUCCESS
