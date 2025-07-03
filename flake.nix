@@ -13,7 +13,7 @@
     { nixpkgs, home-manager, ... }:
     let
       vars = (import ./vars.nix);
-      pkgs = import nixpkgs {system = vars.system;};
+      pkgs = import nixpkgs { system = vars.system; };
     in
     {
       homeConfigurations.${vars.username} = home-manager.lib.homeManagerConfiguration {

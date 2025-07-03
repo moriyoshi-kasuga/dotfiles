@@ -1,6 +1,6 @@
 { pkgs, ... }:
 
-let 
+let
   vars = (import ./vars.nix);
 in
 {
@@ -11,6 +11,7 @@ in
 
   home.packages = [
     pkgs.fastfetch
+    pkgs.nixfmt-rfc-style
   ];
 
   home.file = {
