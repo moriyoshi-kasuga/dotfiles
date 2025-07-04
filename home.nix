@@ -1,8 +1,11 @@
 { pkgs, vars, ... }:
 
 {
-  catppuccin.flavor = "macchiato";
-  catppuccin.enable = true;
+  catppuccin = {
+    enable = true;
+    flavor = "mocha";
+    accent = "sapphire";
+  };
 
   home.username = vars.username;
   home.homeDirectory = vars.homeDirectory;
