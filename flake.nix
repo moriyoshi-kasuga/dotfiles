@@ -27,9 +27,7 @@
         modules = [
           catppuccin.homeModules.catppuccin
           ./home.nix
-          ./modules/git
-          ./modules/zsh
-          ./modules/tools
+          ./modules/defualt.nix
         ];
         extraSpecialArgs = {
           inherit vars;
