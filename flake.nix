@@ -31,8 +31,6 @@
         ];
         extraSpecialArgs = {
           inherit vars;
-          rootPath = ./.;
-          dotfilesPath = ./dotfiles;
         };
       };
     };
