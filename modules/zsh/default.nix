@@ -22,6 +22,8 @@
     };
   };
 
+  home.file.".zsh-scripts".source = ./script;
+
   imports = [
     ./starship.nix
     ./fzf.nix
