@@ -28,6 +28,7 @@
           catppuccin.homeModules.catppuccin
           ./home.nix
           ./modules/git
+          ./modules/zsh
         ];
         extraSpecialArgs = {
           inherit vars;

@@ -29,12 +29,9 @@ create() {
 
 _nix-build() {
   if ! command -v nix &>/dev/null; then
+    echo 'Nix is not installed or not in PATH'
     sh <(curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install) --daemon
     echo 'Nix is now installed. Please run this script again.'
-    exit 1
-  fi
-  if [ ! -f "./vars.nix" ]; then
-    echo 'vars.nix not found, please copy from vars.nix.example and edit it to your needs.'
     exit 1
   fi
   USERNAME=$(nix --extra-experimental-features 'nix-command' eval --raw --file ./vars.nix username)
@@ -43,19 +40,13 @@ _nix-build() {
 }
 
 build() {
-  if ! command -v nix &>/dev/null; then
-    echo 'Nix is not installed or not in PATH'
-    echo 'Please install Nix first.'
-    exit 1
-  fi
-
   if [ ! -f "./vars.nix" ]; then
     echo 'vars.nix not found, please copy from vars.nix.example and edit it to your needs.'
     exit 1
   fi
 
   SHELL_COMMANDS=$(type _nix-build | awk 'NR > 3 { print $0 }' | sed '$d')
-  limactl shell nix -- bash -c "$SHELL_COMMANDS"
+  limactl shell nix -- bash -cl "$SHELL_COMMANDS"
 }
 
 if [ $# -eq 0 ]; then
