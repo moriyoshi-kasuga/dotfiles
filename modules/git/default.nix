@@ -1,6 +1,12 @@
 {
   programs.git = {
     enable = true;
+
+    extraConfig = {
+      init.defaultBranch = "main";
+      merge.conflictStyle = "zdiff3";
+      push.default = "current";
+    };
   };
 
   programs.zsh.shellAliases = {
@@ -15,4 +21,9 @@
   };
 
   home.file.".gitconfigs".source = ./.gitconfigs;
+
+  imports = [
+    ./lazygit.nix
+    ./delta.nix
+  ];
 }

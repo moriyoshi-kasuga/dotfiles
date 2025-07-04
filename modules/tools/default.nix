@@ -2,7 +2,6 @@
 
 {
   imports = [
-    ./lazygit.nix
     ./tmux.nix
     ./btop.nix
     ./docker.nix
@@ -14,4 +13,8 @@
     bat
     jq
   ];
+
+  programs.fd.enable = true;
+  programs.bat.enable = true;
+  programs.jq.enable = true;
 }
