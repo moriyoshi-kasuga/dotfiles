@@ -1,6 +1,8 @@
 { pkgs, vars, ... }:
 
 {
+  catppuccin.flavor = "macchiato";
+
   home.username = vars.username;
   home.homeDirectory = vars.homeDirectory;
 
