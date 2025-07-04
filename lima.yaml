@@ -7,3 +7,14 @@ base:
 mounts:
   - location: "~"
     writable: true
+
+user:
+  shell: "/usr/bin/zsh"
+
+provision:
+  - mode: system
+    script: |
+      #!/bin/bash
+      set -eux
+      apt-get update
+      apt-get install -y zsh
