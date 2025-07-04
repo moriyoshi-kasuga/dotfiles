@@ -24,9 +24,12 @@
         inherit pkgs;
         modules = [
           ./home.nix
+          ./modules/git
         ];
         extraSpecialArgs = {
           inherit vars;
+          rootPath = ./.;
+          dotfilesPath = ./dotfiles;
         };
       };
     };
