@@ -24,6 +24,4 @@
       aws.disabled = true;
     };
   };
-
-  catppuccin.starship.enable = true;
 }

@@ -2,6 +2,7 @@
 
 {
   catppuccin.flavor = "macchiato";
+  catppuccin.enable = true;
 
   home.username = vars.username;
   home.homeDirectory = vars.homeDirectory;
