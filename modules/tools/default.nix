@@ -12,6 +12,10 @@
     fd
     bat
     jq
+    tailspin
+    xh
+    dust
+    git-cliff
   ];
 
   programs.fd.enable = true;
