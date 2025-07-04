@@ -5,6 +5,7 @@
     ./tmux.nix
     ./btop.nix
     ./docker.nix
+    ./lazydocker.nix
   ];
 
   home.packages = with pkgs; [
