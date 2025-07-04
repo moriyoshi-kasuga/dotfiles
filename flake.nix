@@ -29,6 +29,7 @@
           ./home.nix
           ./modules/git
           ./modules/zsh
+          ./modules/tools
         ];
         extraSpecialArgs = {
           inherit vars;
