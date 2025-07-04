@@ -1,6 +1,10 @@
+{ vars, ... }:
+
 {
   programs.git = {
     enable = true;
+    userName = vars.gitUserName;
+    userEmail = vars.gitUserEmail;
 
     extraConfig = {
       init.defaultBranch = "main";
@@ -19,8 +23,6 @@
     gl = "git log --oneline --graph --decorate";
     glg = "git log --pretty=format:'%C(yellow)%h%Creset %C(green)(%ad)%Creset %C(blue)%d%Creset %s %C(red)(%an)%Creset' --date=iso --graph";
   };
-
-  home.file.".gitconfigs".source = ./.gitconfigs;
 
   imports = [
     ./lazygit.nix

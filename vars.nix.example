@@ -4,4 +4,6 @@
   username = "user";
   homeDirectory = "/Users/user";
   system = "aarch64-darwin";
+  gitUserName = "Your Name";
+  gitUserEmail = "example@gmail.com";
 }
