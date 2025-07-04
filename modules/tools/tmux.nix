@@ -11,7 +11,7 @@
     escapeTime = 0;
     clock24 = true;
     keyMode = "vi";
-    shortcut = "C-t";
+    shortcut = "t";
     extraConfig = builtins.readFile ./tmux.conf;
   };
 }
