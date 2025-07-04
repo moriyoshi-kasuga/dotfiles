@@ -8,5 +8,6 @@
 
   imports = [
     ./starship.nix
+    ./fzf.nix
   ];
 }
