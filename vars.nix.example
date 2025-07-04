@@ -6,4 +6,7 @@
   system = "aarch64-darwin";
   gitUserName = "Your Name";
   gitUserEmail = "example@gmail.com";
+
+  # Optional: Set the darwin username if using Nix on macOS.
+  darwinUsername = "user";
 }

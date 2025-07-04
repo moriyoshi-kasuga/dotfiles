@@ -13,6 +13,7 @@
   home.stateVersion = "25.05";
 
   home.packages = [
+    pkgs.vim
     pkgs.fastfetch
     pkgs.nixfmt-rfc-style
   ];

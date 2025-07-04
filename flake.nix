@@ -8,6 +8,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-darwin = {
+      url = "github:nix-darwin/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -15,6 +19,7 @@
       nixpkgs,
       catppuccin,
       home-manager,
+      nix-darwin,
       ...
     }:
     let
@@ -32,6 +37,12 @@
         extraSpecialArgs = {
           inherit vars;
         };
+      };
+      darwinConfigurations.${vars.darwinUsername} = nix-darwin.lib.darwinSystem {
+        modules = [
+          home-manager.darwinModules.home-manager
+          ./darwin
+        ];
       };
     };
 }
