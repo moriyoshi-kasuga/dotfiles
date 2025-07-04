@@ -27,7 +27,7 @@ fi
 VARS=$(nix --extra-experimental-features 'nix-command' eval --json --expr "$VARS")
 
 echo 'Building Nix configuration...'
-USER_NIX_VARS=$VARS nix --extra-experimental-features 'nix-command flakes' run --impure home-manager/master -- switch --impure --extra-experimental-features 'nix-command flakes' --flake .#"$USERNAME" --impure
+USER_NIX_VARS=$VARS nix --extra-experimental-features 'nix-command flakes' run --impure home-manager/master -- switch --impure --extra-experimental-features 'nix-command flakes' --flake .#"$USERNAME" --impure -b backup
 SUCCESS=$?
 if [ $SUCCESS -ne 0 ]; then
   echo 'Failed to apply Nix configuration.'
