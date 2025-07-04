@@ -29,6 +29,7 @@
     {
       homeConfigurations.${vars.username} = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
+
         modules = [
           catppuccin.homeModules.catppuccin
           ./home.nix

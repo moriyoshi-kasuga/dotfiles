@@ -1,9 +1,12 @@
 # This file is an example of how to define variables for a Nix configuration.
 # Edit this file to set your own variables.
 {
+  catppuccinFlavor = "mocha"; # Options: latte, frappe, macchiato, mocha
+
   username = "user";
   homeDirectory = "/Users/user";
   system = "aarch64-darwin";
+  
   gitUserName = "Your Name";
   gitUserEmail = "example@gmail.com";
 

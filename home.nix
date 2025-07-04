@@ -3,7 +3,7 @@
 {
   catppuccin = {
     enable = true;
-    flavor = "mocha";
+    flavor = vars.catppuccinFlavor;
     accent = "sapphire";
   };
 
@@ -13,7 +13,6 @@
   home.stateVersion = "25.05";
 
   home.packages = [
-    pkgs.vim
     pkgs.fastfetch
     pkgs.nixfmt-rfc-style
   ];
