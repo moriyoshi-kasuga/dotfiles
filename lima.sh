@@ -35,7 +35,8 @@ _nix-build() {
     exit 1
   fi
   USERNAME=$(nix --extra-experimental-features 'nix-command' eval --raw --file ./vars.nix username)
-  OVERRIDE="{ homeDirectory = \"/home/${USERNAME}.linux\"; system = \"aarch64-linux\"; }"
+  ARCH=$(uname -m)
+  OVERRIDE="{ homeDirectory = \"/home/${USERNAME}.linux\"; system = \"$ARCH-linux\"; }"
   ./init.sh "$OVERRIDE"
 }
 
