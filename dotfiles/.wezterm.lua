@@ -10,7 +10,12 @@ config.disable_default_key_bindings = true
 config.enable_tab_bar = false
 config.hide_tab_bar_if_only_one_tab = true
 
-local flavor = os.getenv("CATPPUCCIN_FLAVOR") or "mocha"
+local flavor = os.getenv("CATPPUCCIN_FLAVOR")
+if not flavor then
+	flavor = "Mocha"
+else
+	flavor = flavor:gsub("^%l", string.upper)
+end
 config.color_scheme = "Catppuccin " .. flavor
 
 -- 最初からフルスクリーンで起動
