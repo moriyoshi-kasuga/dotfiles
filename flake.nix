@@ -25,6 +25,7 @@
     let
       vars = builtins.fromJSON (builtins.getEnv "USER_NIX_VARS");
       pkgs = import nixpkgs { system = vars.system; };
+      dotfilesPath = ./dotfiles;
     in
     {
       homeConfigurations.${vars.username} = home-manager.lib.homeManagerConfiguration {
@@ -37,6 +38,7 @@
         ];
         extraSpecialArgs = {
           inherit vars;
+          inherit dotfilesPath;
         };
       };
       darwinConfigurations.${vars.darwinUsername} = nix-darwin.lib.darwinSystem {

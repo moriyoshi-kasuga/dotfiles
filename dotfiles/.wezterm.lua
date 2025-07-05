@@ -9,8 +9,9 @@ end
 config.disable_default_key_bindings = true
 config.enable_tab_bar = false
 config.hide_tab_bar_if_only_one_tab = true
--- config.color_scheme = "tokyonight_night"
-config.color_scheme = "Catppuccin Macchiato"
+
+local flavor = os.getenv("CATPPUCCIN_FLAVOR") or "mocha"
+config.color_scheme = "Catppuccin " .. flavor
 
 -- 最初からフルスクリーンで起動
 local mux = wezterm.mux
