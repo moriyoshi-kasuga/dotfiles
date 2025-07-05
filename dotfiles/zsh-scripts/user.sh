@@ -115,6 +115,10 @@ ggc() {
 }
 
 ggcs() {
+  EXTRA_PROMPT=$1
+  if [ -n "$EXTRA_PROMPT" ]; then
+    EXTRA_PROMPT="\nFollowing the prompt: $EXTRA_PROMPT"
+  fi
   CHOICE=$(ask "Please suggest 10 commit messages, given the following diff:
 
             \`\`\`diff
@@ -178,7 +182,7 @@ ggcs() {
             for your best commit, not the best average commit. It's better to cover more
             scenarios than include a lot of overlap.
 
-            Write your 10 commit messages below in the format shown in Output Template section above." |
+            Write your 10 commit messages below in the format shown in Output Template section above.$EXTRA_PROMPT" |
     fzf --height 40% --border --ansi --preview "echo {}" --preview-window=up:wrap)
   if [ -z "$CHOICE" ]; then
     echo "No commit message selected."
