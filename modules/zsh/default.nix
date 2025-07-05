@@ -25,6 +25,7 @@
 
       e = "exit";
       reload = "exec zsh";
+      todo = "vim ~/todo.md";
     };
   };
 
