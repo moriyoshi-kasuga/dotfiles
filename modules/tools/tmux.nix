@@ -14,4 +14,6 @@
     shortcut = "t";
     extraConfig = builtins.readFile (dotfilesPath + /tmux.conf);
   };
+
+  catppuccin.tmux.extraConfig = builtins.readFile (dotfilesPath + /tmux.conf.catppuccin);
 }
