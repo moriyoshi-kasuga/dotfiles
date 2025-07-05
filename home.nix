@@ -39,7 +39,6 @@ in
 
   home.sessionVariables = {
     EDITOR = "vim";
-    CATPPUCCIN_FLAVOR = vars.catppuccinFlavor;
   };
 
   programs.home-manager.enable = true;
