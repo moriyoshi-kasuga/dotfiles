@@ -1,5 +1,8 @@
 { pkgs, dotfilesPath, ... }:
 
+let
+  shell = "${pkgs.zsh}/bin/zsh";
+in
 {
   home.packages = with pkgs; [
     tmux
@@ -12,7 +15,12 @@
     clock24 = true;
     keyMode = "vi";
     shortcut = "t";
-    extraConfig = builtins.readFile (dotfilesPath + /tmux.conf);
+    shell = shell;
+    extraConfig =
+      builtins.readFile (dotfilesPath + /tmux.conf)
+      + ''
+        set -g default-command "${shell}"
+      '';
   };
 
   catppuccin.tmux.extraConfig = builtins.readFile (dotfilesPath + /tmux.conf.catppuccin);
