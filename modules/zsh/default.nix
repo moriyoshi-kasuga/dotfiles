@@ -24,7 +24,7 @@
       "..." = "cd ../../";
 
       e = "exit";
-      reload = "exec zsh -l";
+      reload = "exec zsh";
     };
   };
 
