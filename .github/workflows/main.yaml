@@ -12,7 +12,7 @@ jobs:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
       - name: set vars.nix
         run: |
-          DEFAULT_VARS=$(nix --extra-experimental-features 'nix-command' eval --file ./vars.nix)
+          DEFAULT_VARS=$(nix --extra-experimental-features 'nix-command' eval --file ./vars.nix.example)
           OVERRIDES="{
             username = "runner";
             homeDirectory = "/home/runner";
