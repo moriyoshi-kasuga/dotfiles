@@ -118,7 +118,7 @@ ggcs() {
   CHOICE=$(ask "Please suggest 10 commit messages, given the following diff:
 
             \`\`\`diff
-            $(git diff --cached)
+            $(git diff --staged)
             \`\`\`
 
             **Criteria:**
