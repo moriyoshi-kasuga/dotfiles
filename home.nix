@@ -1,5 +1,20 @@
-{ pkgs, vars, ... }:
+{
+  pkgs,
+  vars,
+  dotfilesPath,
+  ...
+}:
 
+let
+  capitalize =
+    s:
+    pkgs.lib.toUpper (builtins.substring 0 1 s) + builtins.substring 1 (builtins.stringLength s - 1) s;
+  catppuccinFlavor = capitalize vars.catppuccinFlavor;
+  weztermConfigRaw = builtins.readFile (dotfilesPath + /.wezterm.lua);
+  weztermConfig =
+    builtins.replaceStrings [ "@COLORSCHEME@" ] [ "Catppuccin ${catppuccinFlavor}" ]
+      weztermConfigRaw;
+in
 {
   catppuccin = {
     enable = true;
@@ -18,8 +33,8 @@
   ];
 
   home.file = {
-    ".wezterm.lua".source = ./dotfiles/.wezterm.lua;
-    ".config/wezterm".source = ./dotfiles/wezterm;
+    ".wezterm.lua".text = weztermConfig;
+    ".config/wezterm".source = dotfilesPath + /wezterm;
   };
 
   home.sessionVariables = {
