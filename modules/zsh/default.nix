@@ -1,3 +1,5 @@
+{ dotfilesPath, vars, ... }:
+
 {
   programs.zsh = {
     enable = true;
@@ -11,7 +13,11 @@
       size = 10000;
     };
 
-    initContent = builtins.readFile ./default.zsh;
+    initContent =
+      builtins.readFile (dotfilesPath + /.zshrc)
+      + ''
+        source ${vars.homeDirectory}/.zsh-scripts/mod.zsh
+      '';
 
     shellAliases = {
       ".." = "cd ../";
@@ -22,7 +28,7 @@
     };
   };
 
-  home.file.".zsh-scripts".source = ./script;
+  home.file.".zsh-scripts".source = dotfilesPath + /zsh-scripts;
 
   imports = [
     ./starship.nix

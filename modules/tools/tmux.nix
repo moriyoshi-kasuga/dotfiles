@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, dotfilesPath, ... }:
 
 {
   home.packages = with pkgs; [
@@ -12,6 +12,6 @@
     clock24 = true;
     keyMode = "vi";
     shortcut = "t";
-    extraConfig = builtins.readFile ./tmux.conf;
+    extraConfig = builtins.readFile (dotfilesPath + /tmux.conf);
   };
 }
