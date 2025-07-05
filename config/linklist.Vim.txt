@@ -1,7 +1,0 @@
-# vim
-
-vscodenvim ${HOME}/.config/vscodenvim
-.vimrc ${HOME}/.vimrc
-.vim/coc-settings.json ${HOME}/.vim/coc-settings.json
-.vim/rc ${HOME}/.vim/
-.ideavimrc ${HOME}/.ideavimrc

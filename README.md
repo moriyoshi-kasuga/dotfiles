@@ -2,86 +2,82 @@
 
 [![main](https://github.com/moriyoshi-kasuga/dotfiles/actions/workflows/main.yml/badge.svg)](https://github.com/moriyoshi-kasuga/dotfiles/actions/workflows/main.yml)
 
-これは、私、[moriyoshi-kasuga](https://github.com/moriyoshi-kasuga)が作成した、macOSとLinux (WSL2) のための開発環境を構築するdotfilesです。
-モダンで効率的なCUI中心の開発体験を、コマンド一つで再現することを目指しています。
+これは、私、[moriyoshi-kasuga](https://github.com/moriyoshi-kasuga)が作成した、macOSとLinuxのための開発環境を構築するdotfilesです。
+[Nix](https://nixos.org/)と[Home Manager](https://github.com/nix-community/home-manager)を利用し、宣言的で再現性の高い環境構築を目指しています。
 
-## ✨ 特徴 (Features)
+## ✨ Features
 
-- **🚀 簡単なセットアップ**: `make init` を実行するだけで、環境構築が完了します。
-- **🖥️ クロスプラットフォーム**: macOSとLinuxの両方に対応。共通の設定とOS固有の設定を管理しています。
-- **🔧 モダンなツール群**: `zsh`, `neovim`, `tmux`, `wezterm` などを中心に、生産性を高めるためのモダンなツールを厳選しています。
-- **⚙️ `Makefile` による管理**: 各種ツールのインストールや設定の適用を、`make <target>` 形式で簡単に行えます。
-- **⚡️ 軽量かつ高速**: `sheldon` や `lazyvim` を採用し、シェルの起動やエディタの動作を高速に保ちます。
+- **宣言的な環境構築**: Nix Flakesを用いて、開発環境の依存関係や設定をコードとして管理します。
+- **再現性**: どこでも同じ環境を簡単に再現できます。
+- **クロスプラットフォーム**: macOS (darwin) と Linux をサポート。
+- **簡単なセットアップ**: `vars.nix` を設定し `./init.sh` を実行するだけで、環境構築が完了します。
+- **Home Manager**: dotfilesのシンボリックリンクや package 管理をHome Managerで一元管理します。
+- **モダンなツール群**: `zsh`, `neovim`, `tmux`, `wezterm` などを中心に、生産性を高めるためのモダンなツールを厳選しています。
 
-<!-- ## 📸 スクリーンショット (Screenshot) -->
-<!-- *(ここにWeztermやNeovimのスクリーンショットを挿入すると、より魅力的になります)* -->
+## Prerequisites
 
-## 📦 インストール (Installation)
+- [Nix](https://nixos.org/download.html) がインストールされていること。
+- `git`がインストールされていること。
 
-お使いのOSに合わせて、以下のコマンドを実行してください。
+## 📦 Installation
 
-### macOS
+1. **リポジトリのクローン**
+
+    ```sh
+    git clone --depth 1 https://github.com/moriyoshi-kasuga/dotfiles.git ~/dotfiles
+    cd ~/dotfiles
+    ```
+
+2. **config file を作成・編集**
+    `vars.nix.example` を `vars.nix` にコピーし、あなたの環境に合わせて内容を編集します。
+
+    ```sh
+    cp vars.nix.example vars.nix
+    ```
+
+    `vars.nix` file 内で、`username`, `hostname`, `email` などを設定してください。
+
+3. **初期化 script を実行**
+    以下の command を実行すると、Nix Flakeの設定が適用され、環境構築が完了します。
+
+    ```sh
+    ./init.sh
+    ```
+
+## 🛠️ 設定の適用 (Apply Configuration)
+
+`.nix` file やdotfilesの設定を変更した後は、再度 `init.sh` を実行するか、以下の command でHome Managerの設定を再適用します。
 
 ```sh
-git clone --depth 1 https://github.com/moriyoshi-kasuga/dotfiles.git ~/dotfiles && cd ~/dotfiles && make init
+home-manager switch --flake .#<username>@<hostname>
 ```
-
-### Linux (WSL2)
-
-```sh
-sudo apt update && sudo apt install -y make git && \
-git clone --depth 1 https://github.com/moriyoshi-kasuga/dotfiles.git ~/dotfiles && \
-cd ~/dotfiles && make init
-```
-
-## 🛠️ 使い方 (Usage)
-
-`Makefile` に定義されたコマンドを使って、各種設定を個別に管理できます。
-
-| コマンド | 説明 |
-| :--- | :--- |
-| `make help` | 利用可能なすべてのコマンドを表示します |
-| `make init` | 環境全体の初期セットアップを行います |
-| `make link` | dotfilesへのシンボリックリンクを作成します |
-| `make unlink` | シンボリックリンクを削除します |
-| `make zsh` | Zshと関連プラグインを設定します |
-| `make brew` | Homebrewでパッケージをインストールします |
-| `make neovim` | Neovimと関連プラグインを設定します |
-| `make git` | Gitのグローバル設定を行います |
-| `make docker` | Dockerをインストール・設定します |
-| `make node` | Node.js環境 (Volta) をセットアップします |
-| `make python` | Python環境 (pyenv) をセットアップします |
-| `make rust` | Rust環境 (rustup) をセットアップします |
 
 ## 🎨 カスタマイズ (Customization)
 
-このdotfilesは、あなたの好みに合わせて簡単にカスタマイズできます。
+このdotfilesは、以下の file や directory を編集することでカスタマイズします。
 
-- **Homebrewパッケージ**: `config/Brew.Unix.Brewfile` に追記・修正することで、インストールするパッケージを変更できます。OS固有のパッケージは `Brew.Darwin.Brewfile` や `Brew.Linux.Brewfile` を編集します。
-- **Zsh**: `dotfiles/zsh/alias.zsh` にエイリアスを、`dotfiles/zsh/sheldon/plugins.toml` にプラグインを追加できます。
-- **Neovim**: `dotfiles/lazyvim/lua/plugins/` 以下に `lazy.nvim` 形式で設定ファイルを追加することで、プラグインの追加や設定変更が可能です。
-- **Git**: `dotfiles/.gitconfig` や `dotfiles/.gitconfigs/global.gitconfig` を編集して、Gitの設定を変更します。
+- **package の追加・削除**: `home.nix` や `modules/**/*.nix` の `home.packages` を編集します。
+- **Neovim**: `modules/editor/neovim.nix` や `dotfiles/lazyvim/` 以下の設定を編集します。
+- **Zsh**: `modules/zsh/default.nix` や `dotfiles/.zshrc` を編集します。
+- **新しい module の追加**: `modules/` directory に新しい `.nix` file を作成し、`home.nix` からインポートします。
 
 ## 🧰 主要ツール一覧 (Tools)
 
-| ツール | 役割 | 設定ファイル |
+| ツール | 役割 | 設定 file / module |
 | :--- | :--- | :--- |
-| **Wezterm** | ターミナルエミュレータ | `dotfiles/.wezterm.lua` |
-| **Zsh** | シェル | `dotfiles/.zshrc`, etc. |
-| **Sheldon** | Zshプラグインマネージャ | `dotfiles/zsh/sheldon/plugins.toml` |
-| **Starship** | プロンプト | `dotfiles/starship.toml` |
-| **Neovim** | テキストエディタ | `dotfiles/lazyvim/` |
-| **LazyVim** | Neovim設定フレームワーク | `dotfiles/lazyvim/lua/config/lazy.lua` |
-| **Tmux** | ターミナルマルチプレクサ | `dotfiles/.tmux.conf` |
-| **eza** | `ls` の代替 | - |
-| **bat** | `cat` の代替 | `bin/bat.sh` |
-| **fzf** | 曖昧検索ツール | - |
-| **lazygit** | GitのTUIクライアント | `dotfiles/lazygit.yml` |
-| **lazydocker** | DockerのTUIクライアント | `dotfiles/lazydocker.yml` |
-| **Volta** | Node.jsバージョン管理 | `bin/lang/node.sh` |
-| **pyenv** | Pythonバージョン管理 | `bin/lang/python.sh` |
-| **rustup** | Rustバージョン管理 | `bin/lang/rust.sh` |
+| **Nix** | Package Manager | `flake.nix`, `home.nix` |
+| **Home Manager** | dotfiles管理 | `home.nix` |
+| **Wezterm** | Terminal Emulator | `dotfiles/.wezterm.lua` |
+| **Zsh** | Shell | `modules/zsh/default.nix` |
+| **Starship** | Prompt | `modules/zsh/starship.nix` |
+| **Neovim** | Text Editor | `modules/editor/neovim.nix` |
+| **LazyVim** | Neovim Configuration Framework | `dotfiles/lazyvim/` |
+| **Tmux** | Terminal Multiplexer | `modules/tools/tmux.nix` |
+| **eza** | `ls` の代替 | `modules/zsh/eza.nix` |
+| **fzf** | 曖昧検索ツール | `modules/zsh/fzf.nix` |
+| **lazygit** | Git TUI Client | `modules/git/lazygit.nix` |
+| **lazydocker** | Docker TUI Client | `modules/tools/lazydocker.nix` |
 
-## 📜 ライセンス (License)
+## 📜 License
 
 [MIT](./LICENSE)

@@ -1,4 +1,0 @@
-# Example
-
-[includeIf "gitdir:~/Desktop/repositories/"]
-  path = ~/.gitconfigs/moriyoshi-kasuga.gitconfig

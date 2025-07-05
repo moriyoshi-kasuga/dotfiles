@@ -9,8 +9,8 @@ end
 config.disable_default_key_bindings = true
 config.enable_tab_bar = false
 config.hide_tab_bar_if_only_one_tab = true
--- config.color_scheme = "tokyonight_night"
-config.color_scheme = "Catppuccin Macchiato"
+
+config.color_scheme = "@COLORSCHEME@" --binding by nix
 
 -- 最初からフルスクリーンで起動
 local mux = wezterm.mux
@@ -23,10 +23,9 @@ config.native_macos_fullscreen_mode = true
 ---- フォントの設定
 local font = require("font")
 font.register_fonts({
-	{ name = "JetBrains Mono", mod = "font-jetbrains" },
+	{ name = "JetBrains Mono", mod = "font-jetbrains", default = true },
 	{ name = "Monaspace Neon", mod = "font-monaspace-neon" },
-	{ name = "Monaspace Krypton", mod = "font-monaspace-krypton", default = true },
-	{ name = "Ubuntu Mono", mod = "font-ubuntu" },
+	{ name = "Monaspace Krypton", mod = "font-monaspace-krypton" },
 })
 font.load_default(config)
 config.adjust_window_size_when_changing_font_size = false
