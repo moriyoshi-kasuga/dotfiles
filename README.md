@@ -1,6 +1,6 @@
 # My Dotfiles for Development Environment
 
-[![main](https://github.com/moriyoshi-kasuga/dotfiles/actions/workflows/main.yml/badge.svg)](https://github.com/moriyoshi-kasuga/dotfiles/actions/workflows/main.yml)
+[![main](https://github.com/moriyoshi-kasuga/dotfiles/actions/workflows/main.yaml/badge.svg)](https://github.com/moriyoshi-kasuga/dotfiles/actions/workflows/main.yaml)
 
 これは、私、[moriyoshi-kasuga](https://github.com/moriyoshi-kasuga)が作成した、macOSとLinuxのための開発環境を構築するdotfilesです。
 [Nix](https://nixos.org/)と[Home Manager](https://github.com/nix-community/home-manager)を利用し、宣言的で再現性の高い環境構築を目指しています。
