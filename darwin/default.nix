@@ -5,9 +5,8 @@
   home.packages = [
     (pkgs.nerdfonts.override {
       fonts = [
-        "JetBrains Mono"
-        "Monaspace Neon"
-        "Monaspace Krypton"
+        "JetBrainsMono"
+        "Monaspace"
       ];
     })
   ];
