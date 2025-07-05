@@ -2,10 +2,11 @@
 
 {
   home.packages = with pkgs; [
-    bun
+    volta
   ];
 
-  programs.bun = {
-    enable = true;
-  };
+  programs.zsh.envExtra = ''
+    export VOLTA_HOME="$HOME/.volta"
+    export PATH="$VOLTA_HOME/bin:$PATH"
+  '';
 }
