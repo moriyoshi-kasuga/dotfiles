@@ -35,7 +35,7 @@
     cp vars.nix.example vars.nix
     ```
 
-    `vars.nix` file 内で、`username`, `hostname`, `email` などを設定してください。
+    `vars.nix` file 内で、`username`, `hostDirectory`, `system` などを設定してください。
 
 3. **初期化 script を実行**
     以下の command を実行すると、Nix Flakeの設定が適用され、環境構築が完了します。
@@ -46,10 +46,11 @@
 
 ## 🛠️ 設定の適用 (Apply Configuration)
 
-`.nix` file やdotfilesの設定を変更した後は、再度 `init.sh` を実行するか、以下の command でHome Managerの設定を再適用します。
+`.nix` file やdotfilesの設定を変更した後は、再度 `init.sh` を実行することで、変更を適用できます。
 
 ```sh
-home-manager switch --flake .#<username>@<hostname>
+# 変更を適用
+./init.sh
 ```
 
 ## 🎨 カスタマイズ (Customization)
