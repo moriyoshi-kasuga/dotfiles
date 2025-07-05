@@ -19,6 +19,7 @@ jobs:
             system = "x86_64-linux";
           }'
           VARS=$(nix --extra-experimental-features 'nix-command' eval --expr "$DEFAULT_VARS // $OVERRIDES")
+          echo "$VARS" > vars.nix
 
       - name: install dotfiles
         run: ./init.sh
