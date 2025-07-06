@@ -1,9 +1,21 @@
-{ dotfilesPath, vars, ... }:
+{
+  pkgs,
+  dotfilesPath,
+  vars,
+  ...
+}:
 
+let
+  zshConfigDefault = pkgs.lib.mkOrder 1000 (builtins.readFile (dotfilesPath + /.zshrc));
+  zshConfigAfter = pkgs.lib.mkOrder 1500 ''
+    autoload -Uz compinit && zsh-defer compinit
+    zsh-defer source ${vars.homeDirectory}/.zsh-scripts/mod.zsh
+  '';
+in
 {
   programs.zsh = {
     enable = true;
-    enableCompletion = true;
+    enableCompletion = false;
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
     defaultKeymap = "emacs";
@@ -13,11 +25,17 @@
       size = 10000;
     };
 
-    initContent =
-      builtins.readFile (dotfilesPath + /.zshrc)
-      + ''
-        source ${vars.homeDirectory}/.zsh-scripts/mod.zsh
-      '';
+    plugins = [
+      {
+        name = "zsh-defer";
+        src = pkgs.zsh-defer.src;
+      }
+    ];
+
+    initContent = pkgs.lib.mkMerge [
+      zshConfigDefault
+      zshConfigAfter
+    ];
 
     shellAliases = {
       ".." = "cd ../";
