@@ -5,12 +5,6 @@
     pkgs.starship
   ];
 
-  programs.zsh = {
-    initContent = ''
-      eval "$(starship init zsh)"
-    '';
-  };
-
   programs.starship = {
     enable = true;
     settings = {
