@@ -4,7 +4,8 @@
   home.packages = with pkgs; [
     gnumake
     cmake
-    gcc
+    llvmPackages.bintools
     pkg-config
+    ninja
   ];
 }
