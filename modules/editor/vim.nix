@@ -25,6 +25,9 @@ in
       vim-easyescape
       lightline-vim
       catppuccin-vim
+      editorconfig-vim
+      undotree
+      quick-scope
       BetterEscape
     ];
     extraConfig =
