@@ -46,7 +46,7 @@
       darwinConfigurations.${vars.darwinUsername} = nix-darwin.lib.darwinSystem {
         modules = [
           home-manager.darwinModules.home-manager
-          ./darwin
+          ./nix-darwin
         ];
       };
     };
