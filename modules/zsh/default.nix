@@ -7,6 +7,10 @@
 }:
 
 let
+  zshConfigBefore = pkgs.lib.mkOrder 500 ''
+    unset __HM_SESS_VARS_SOURCED
+    . "${config.home.profileDirectory}/etc/profile.d/hm-session-vars.sh"
+  '';
   zshConfigDefault = pkgs.lib.mkOrder 1000 (builtins.readFile (dotfilesPath + /.zshrc));
   zshConfigAfter = pkgs.lib.mkOrder 1500 ''
     autoload -Uz compinit && zsh-defer compinit
@@ -34,6 +38,7 @@ in
     ];
 
     initContent = pkgs.lib.mkMerge [
+      zshConfigBefore
       zshConfigDefault
       zshConfigAfter
     ];
@@ -56,8 +61,4 @@ in
     ./eza.nix
     ./zoxide.nix
   ];
-
-  home.file.".zprofile".text = ''
-    . "${config.home.profileDirectory}/etc/profile.d/hm-session-vars.sh"
-  '';
 }
