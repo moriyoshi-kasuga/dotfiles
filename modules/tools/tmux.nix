@@ -13,6 +13,7 @@ in
     baseIndex = 1;
     escapeTime = 0;
     clock24 = true;
+    mouse = false;
     keyMode = "vi";
     shortcut = "t";
     shell = shell;
