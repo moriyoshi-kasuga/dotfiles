@@ -2,6 +2,7 @@
   pkgs,
   dotfilesPath,
   vars,
+  config,
   ...
 }:
 
@@ -55,4 +56,8 @@ in
     ./eza.nix
     ./zoxide.nix
   ];
+
+  home.file.".zprofile".text = ''
+    . "${config.home.profileDirectory}/etc/profile.d/hm-session-vars.sh"
+  '';
 }
