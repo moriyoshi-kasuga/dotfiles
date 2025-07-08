@@ -17,7 +17,6 @@
     xh
     dust
     git-cliff
-    ffmpeg
   ];
 
   programs.fd.enable = true;
