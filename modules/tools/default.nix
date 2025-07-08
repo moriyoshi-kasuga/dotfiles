@@ -17,6 +17,8 @@
     xh
     dust
     git-cliff
+    kind
+    kubernetes-helm
   ];
 
   programs.fd.enable = true;
