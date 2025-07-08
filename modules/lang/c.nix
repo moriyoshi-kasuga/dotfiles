@@ -4,6 +4,7 @@ let
   pkgConfigModules = with pkgs; [
     ffmpeg
     openssl
+    sqlite
   ];
 in
 {
