@@ -88,10 +88,6 @@ timer() {
   echo -e "\nTime's up!"
 }
 
-ask() {
-  gemini -m "gemini-2.5-pro" -p "$1"
-}
-
 ggc() {
   OUTPUT=$(git diff --staged | ask "Generate a git commit message in Conventional Commits format:\n\n<type>[optional scope]: <title>\n\n<body as bullet list>\n\nRequirements:\n- First line must be the commit title\n- Then a blank line\n- Then each detailed change on its own line prefixed with '- '\n- Do not output any other text")
   TITLE=$(printf "%s" "$OUTPUT" | sed -n '1p')

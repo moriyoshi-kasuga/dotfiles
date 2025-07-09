@@ -10,6 +10,8 @@
   gitUserName = "Your Name";
   gitUserEmail = "example@gmail.com";
 
+  askAI = "gemini"; # Options: gemini, claude
+
   # Optional: Set the darwin username if using Nix on macOS.
   darwinUsername = "user";
 }

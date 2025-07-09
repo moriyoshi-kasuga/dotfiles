@@ -60,5 +60,6 @@ in
     ./fzf.nix
     ./eza.nix
     ./zoxide.nix
+    ./ai.nix
   ];
 }
