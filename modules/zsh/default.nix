@@ -13,6 +13,9 @@ let
   '';
   zshConfigDefault = pkgs.lib.mkOrder 1000 (builtins.readFile (dotfilesPath + /.zshrc));
   zshConfigAfter = pkgs.lib.mkOrder 1500 ''
+    if [[ -f $HOME/.local.zshrc ]]; then
+      source $HOME/.local.zshrc
+    fi
     autoload -Uz compinit && zsh-defer compinit
     zsh-defer source ${vars.homeDirectory}/.zsh-scripts/mod.zsh
   '';
