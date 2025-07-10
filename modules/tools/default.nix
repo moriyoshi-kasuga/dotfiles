@@ -19,6 +19,7 @@
     git-cliff
     kind
     kubernetes-helm
+    tldr
 
     # Download latest version
     bash
