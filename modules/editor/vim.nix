@@ -28,6 +28,7 @@ in
       editorconfig-vim
       undotree
       quick-scope
+      fzf-vim
       BetterEscape
     ];
     extraConfig =

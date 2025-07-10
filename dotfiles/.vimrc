@@ -52,3 +52,6 @@ augroup qs_colors
 augroup END
 
 nnoremap <leader>i :UndotreeToggle<CR>
+
+nnoremap <leader><space> :Files<CR>
+nnoremap <leader>g :GFiles<CR>
