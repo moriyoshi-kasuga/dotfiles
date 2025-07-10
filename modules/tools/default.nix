@@ -19,6 +19,9 @@
     git-cliff
     kind
     kubernetes-helm
+
+    # Download latest version
+    bash
   ];
 
   programs.fd.enable = true;
