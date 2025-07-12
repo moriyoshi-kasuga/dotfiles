@@ -1,26 +1,5 @@
 return {
   {
-    "NeogitOrg/neogit",
-    event = "VeryLazy",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "sindrets/diffview.nvim",
-
-      "folke/snacks.nvim",
-    },
-    opts = {
-      disable_hint = true,
-      disable_signs = true,
-    },
-    keys = {
-      { "gs", "<cmd>Neogit kind=tab<CR>", desc = "Neogit" },
-      { "gS", "<cmd>Neogit kind=split<CR>", desc = "Neogit Split" },
-      { "<leader>gc", "<cmd>Neogit commit<CR>", desc = "Neogit Commit" },
-      { "<leader>gp", "<cmd>Neogit pull<CR>", desc = "Neogit Pull" },
-      { "<leader>gP", "<cmd>Neogit push<CR>", desc = "Neogit Push" },
-    },
-  },
-  {
     "sindrets/diffview.nvim",
     opts = function()
       local actions = require("diffview.actions")
@@ -32,8 +11,6 @@ return {
         actions.select_prev_entry,
         { desc = "Open the diff for the previous file" },
       }
-      local close = { "n", "q", "<cmd>tabclose<CR>", { desc = "Close Diffview" } }
-      local commit = { "n", "c", "<cmd>Neogit commit<CR>", { desc = "Neogit Commit" } }
 
       return {
         hooks = {
@@ -50,14 +27,10 @@ return {
           view = {
             next,
             prev,
-            close,
-            commit,
           },
           file_panel = {
             next,
             prev,
-            close,
-            commit,
           },
         },
       }
