@@ -57,3 +57,6 @@ nnoremap <leader><space> :Files<CR>
 nnoremap <leader>g :GFiles<CR>
 
 let g:yazi_replace_netrw = 1
+let g:yazi_no_mappings = 1
+
+nnoremap <leader>e :Yazi<CR>
