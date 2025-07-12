@@ -20,6 +20,7 @@
     kind
     kubernetes-helm
     tldr
+    yazi
 
     # Download latest version
     bash
