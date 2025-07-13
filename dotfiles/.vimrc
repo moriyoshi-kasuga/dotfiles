@@ -26,6 +26,24 @@ set mouse=
 let g:netrw_banner=0
 let g:netrw_bufsettings = 'noma nomod relativenumber nobl nowrap ro'
 
+" Create directories if they do not exist
+silent! call mkdir(expand('~/.vim/tmp/undo'), 'p')
+silent! call mkdir(expand('~/.vim/tmp/backup'), 'p')
+
+" swap, undo, backup
+set noswapfile
+
+set undodir=~/.vim/tmp/undo
+set undofile
+
+set backupdir=~/.vim/tmp/backup
+set backup
+set writebackup
+set backupskip=/tmp/*,/private/tmp/*,/var/folders/*
+
+" Wildignore for performance
+set wildignore+=*/target/*,*/node_modules/*,*/.git/*,*/.cache/*,*/.vscode/*,*.swp,*.swo,*.bak,*.pyc,*.pyo,*.class,*.o,*.log
+
 let mapleader = "\<space>"
 nnoremap <leader>h :set nohlsearch<CR>
 nnoremap j gj
