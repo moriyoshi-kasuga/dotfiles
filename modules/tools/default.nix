@@ -6,6 +6,7 @@
     ./btop.nix
     ./docker.nix
     ./lazydocker.nix
+    ./tff.nix
   ];
 
   home.packages = with pkgs; [
