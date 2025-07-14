@@ -9,6 +9,9 @@
     cargo-udeps
     cargo-tauri
     cargo-release
+    cargo-audit
+    cargo-udeps
+    cargo-about
     just
   ];
 }
