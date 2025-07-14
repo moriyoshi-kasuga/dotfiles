@@ -11,7 +11,8 @@
     cargo-release
     cargo-audit
     cargo-udeps
-    cargo-about
+    cargo-outdated
+    cargo-deny
     just
   ];
 }
