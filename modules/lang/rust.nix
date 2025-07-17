@@ -13,6 +13,7 @@
     cargo-udeps
     cargo-outdated
     cargo-deny
+    sea-orm-cli
     just
   ];
 }
