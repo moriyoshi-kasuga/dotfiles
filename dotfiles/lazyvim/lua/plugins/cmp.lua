@@ -4,12 +4,6 @@ return {
     opts = {
       fuzzy = {
         implementation = "prefer_rust_with_warning",
-        sorts = {
-          "exact",
-          -- defaults
-          "score",
-          "sort_text",
-        },
       },
 
       completion = {
@@ -27,6 +21,8 @@ return {
           },
         },
       },
+
+      signature = { window = { border = "single" } },
     },
   },
 }
