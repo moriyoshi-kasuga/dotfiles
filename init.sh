@@ -24,7 +24,9 @@ if [ -n "$1" ]; then
   VARS=$(nix --extra-experimental-features 'nix-command' eval --expr "$VARS // $1")
 fi
 
-VARS=$(nix --extra-experimental-features 'nix-command' eval --json --expr "$VARS")
+dir=$(dirname "$(realpath "$0")")
+
+VARS=$(nix --extra-experimental-features 'nix-command' eval --json --expr "$VARS // { dotfilesRepoDir = ""$dir""; }")
 
 echo 'Building Nix configuration...'
 USER_NIX_VARS=$VARS nix --extra-experimental-features 'nix-command flakes' run --impure home-manager/master -- switch --impure --extra-experimental-features 'nix-command flakes' --flake .#"$USERNAME" --impure -b backup
