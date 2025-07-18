@@ -18,12 +18,10 @@ let
   VimYazi = pkgs.vimUtils.buildVimPlugin {
     name = "vim-yazi";
     src = pkgs.fetchFromGitHub {
-      # https://github.com/yukimura1227/vim-yazi/pull/1
-      # owner = "yukimura1227";
       owner = "moriyoshi-kasuga";
       repo = "vim-yazi";
-      rev = "27c3a4b8b5fb7cf23026a459db478e1529cef03e";
-      sha256 = "UZEuz5YOmAOhuSLExM0akWop5HKPS9YESCSkVOt5w30=";
+      rev = "159119dbaef9232759e3b4546907c3831c6c2547";
+      sha256 = "sha256-n37H3V68Rm21xxNJnzMty30vI+Vg/qWAttGXVn1xpL8=";
     };
   };
 in
