@@ -13,7 +13,13 @@
     cargo-udeps
     cargo-outdated
     cargo-deny
+
+    mdbook
+    mdbook-admonish
+    mdbook-mermaid
+
     sea-orm-cli
+
     just
   ];
 }
