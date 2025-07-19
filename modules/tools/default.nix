@@ -22,6 +22,7 @@
     kubernetes-helm
     tldr
     yazi
+    gh
 
     # Download latest version
     bash
