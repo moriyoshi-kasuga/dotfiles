@@ -14,6 +14,10 @@
     ];
   };
 
+  home.sessionVariables = {
+    _ZO_EXCLUDE_DIRS = "$HOME:/tmp/*:/var/*:/nix/*:/mnt/*";
+  };
+
   programs.zsh.initContent = ''
     _run-cdi() {
       cdi
