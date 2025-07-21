@@ -23,4 +23,8 @@
     just
     typos
   ];
+
+  programs.zsh.shellAliases = {
+    typos = "typos --config ~/.config/typos.toml";
+  };
 }
