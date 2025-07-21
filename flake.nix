@@ -35,7 +35,7 @@
         modules = [
           catppuccin.homeModules.catppuccin
           ./home.nix
-          ./modules/defualt.nix
+          ./modules
         ] ++ linuxModules;
 
         extraSpecialArgs = {
