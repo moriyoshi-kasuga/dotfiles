@@ -6,4 +6,16 @@ return {
       vim.list_extend(opts.ensure_installed, { "typos-lsp" })
     end,
   },
+  {
+    "neovim/nvim-lspconfig",
+    opts = {
+      servers = {
+        typos_lsp = {
+          init_options = {
+            config = "~/.config/typos.toml",
+          },
+        },
+      },
+    },
+  },
 }
