@@ -21,5 +21,6 @@
     sea-orm-cli
 
     just
+    typos
   ];
 }
