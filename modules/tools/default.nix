@@ -7,6 +7,7 @@
     ./docker.nix
     ./lazydocker.nix
     ./tff.nix
+    ./yazi.nix
   ];
 
   home.packages = with pkgs; [
@@ -21,7 +22,6 @@
     kind
     kubernetes-helm
     tldr
-    yazi
     gh
 
     # Download latest version
