@@ -20,8 +20,8 @@ let
     src = pkgs.fetchFromGitHub {
       owner = "moriyoshi-kasuga";
       repo = "vim-yazi";
-      rev = "159119dbaef9232759e3b4546907c3831c6c2547";
-      sha256 = "sha256-n37H3V68Rm21xxNJnzMty30vI+Vg/qWAttGXVn1xpL8=";
+      rev = "40225f6488d7eaf5c9545e61a17164a4115210a5";
+      sha256 = "5lXVAaGYmaHKtW6PKjCCyW+qnMkQHCSh4VVny56OxkQ=";
     };
   };
 in
