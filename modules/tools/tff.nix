@@ -13,7 +13,6 @@
         hash = "sha256-TrKhemh+ZL51v//x24CYritSACtSjpomHFNYH2pn7z8=";
       };
 
-      useFetchCargoVendor = true;
       cargoHash = "sha256-a4kAnj+t0027k2nEeEBG1BZXqjjdY5gHYGomZCSoHfE=";
     })
   ];
