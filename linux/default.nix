@@ -8,5 +8,7 @@
     (writeShellScriptBin "pbcopy" ''
       win32yank.exe -i --crlf
     '')
+    docker
+    docker-compose
   ];
 }

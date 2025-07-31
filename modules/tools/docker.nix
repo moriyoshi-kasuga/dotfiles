@@ -1,11 +1,4 @@
-{ pkgs, ... }:
-
 {
-  home.packages = with pkgs; [
-    docker
-    docker-compose
-  ];
-
   programs.zsh.shellAliases = {
     d = "docker";
     dc = "docker compose";
