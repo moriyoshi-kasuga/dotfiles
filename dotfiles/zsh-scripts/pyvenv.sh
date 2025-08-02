@@ -2,7 +2,7 @@
 
 # Python virtual environment handler
 pyvenv() {
-  local VENV_DIR="venv"
+  local VENV_DIR=".venv"
   local REQUIREMENTS_FILE="requirements.txt"
   local ENVRC_FILE=".envrc"
 
