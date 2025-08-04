@@ -68,6 +68,7 @@ in
     ./fzf.nix
     ./eza.nix
     ./zoxide.nix
+    ./direnv.nix
     ./ai.nix
   ];
 }
