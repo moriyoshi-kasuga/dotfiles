@@ -21,6 +21,11 @@ let
   '';
 in
 {
+
+  home.packages = with pkgs; [
+    # Download and use latest version
+    bash
+  ];
   programs.zsh = {
     enable = true;
     enableCompletion = false;

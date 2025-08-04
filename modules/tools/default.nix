@@ -23,9 +23,6 @@
     kubernetes-helm
     tldr
     gh
-
-    # Download latest version
-    bash
   ];
 
   programs.fd.enable = true;
