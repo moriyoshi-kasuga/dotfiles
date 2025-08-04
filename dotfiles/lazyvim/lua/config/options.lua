@@ -21,6 +21,9 @@ vim.cmd([[
  se splitkeep=cursor
 ]])
 
+vim.g.lazyvim_python_lsp = "pyright"
+vim.g.lazyvim_python_ruff = "ruff"
+
 vim.g.clipboard = "pbcopy"
 
 -- In ssh sessions, use OSC52 for clipboard support
