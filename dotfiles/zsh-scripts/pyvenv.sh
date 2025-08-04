@@ -21,6 +21,7 @@ pyvenv() {
     # Allow direnv if available
     if command -v direnv &>/dev/null; then
       direnv allow .
+      echo "Info: direnv allowed for this directory"
     fi
 
     echo "Info: Virtual environment created"
