@@ -4,7 +4,13 @@ return {
     optional = true,
     opts = function(_, opts)
       if type(opts.ensure_installed) == "table" then
-        vim.list_extend(opts.ensure_installed, { "html", "css" })
+        vim.list_extend(opts.ensure_installed, {
+          "html",
+          "css",
+          "scss",
+          "htmldjango",
+          "jinja",
+        })
       end
     end,
   },
