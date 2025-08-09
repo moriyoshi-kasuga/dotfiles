@@ -18,6 +18,9 @@ let
     fi
     autoload -Uz compinit && zsh-defer compinit
     zsh-defer source ${vars.homeDirectory}/.zsh-scripts/mod.zsh
+    if [[ -f "$HOME/.sdkman/bin/sdkman-init.sh" ]]; then
+      source "$HOME/.sdkman/bin/sdkman-init.sh"
+    fi
   '';
 in
 {
