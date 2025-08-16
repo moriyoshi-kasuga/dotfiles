@@ -40,24 +40,15 @@ map("n", "<leader>bO", function()
   Snacks.bufdelete.other({})
 end, { desc = "Delete other buffers and Close other windows" })
 
--- FzfLua
-map("n", "<leader>\\", cmd("FzfLua grep_curbuf"))
-map("n", "<leader>se", cmd("FzfLua diagnostics_workspace severity_limit=2"), { desc = "Warn Diagnostics" })
-map("n", "<leader>sE", cmd("FzfLua diagnostics_workspace severity_limit=1"), { desc = "Error Diagnostics" })
-
--- Lsp
+map("n", "<leader>se", function()
+  Snacks.picker.diagnostics({ limit = 2 })
+end, { desc = "Warn and Error Diagnostics" })
+map("n", "<leader>sE", function()
+  Snacks.picker.diagnostics({ limit = 1 })
+end, { desc = "Error Diagnostics" })
 map({ "n", "v" }, "ga", function()
-  require("fzf-lua").lsp_code_actions({
-    winopts = {
-      width = 0.8,
-      height = 0.8,
-      preview = {
-        vertical = "down:70%",
-        layout = "vertical",
-      },
-    },
-  })
-end, { desc = "Code actions" })
+  vim.lsp.buf.code_action()
+end, { desc = "Code Action" })
 
 -- Toggle statusline
 map("n", "<leader>uS", function()

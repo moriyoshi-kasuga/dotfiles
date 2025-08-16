@@ -2,6 +2,9 @@ return {
   {
     "snacks.nvim",
     opts = {
+      image = {
+        enabled = false,
+      },
       dashboard = {
         preset = {
           ---@type snacks.dashboard.Item[]

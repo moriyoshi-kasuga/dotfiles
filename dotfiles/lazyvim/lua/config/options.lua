@@ -7,7 +7,7 @@ vim.g.maplocalleader = "\\"
 vim.g.editorconfig = true
 vim.g.autoformat = false
 vim.g.snacks_animate = false
-vim.g.lazyvim_picker = "fzf"
+vim.g.lazyvim_picker = "snacks"
 vim.g.lazyvim_cmp = "blink.cmp"
 vim.g.ai_cmp = false
 

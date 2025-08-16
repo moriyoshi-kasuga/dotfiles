@@ -57,7 +57,7 @@ return {
         },
         lualine_z = {},
       },
-      extensions = { "neo-tree", "lazy", "fzf" },
+      extensions = { "neo-tree", "lazy" },
     })
   end,
 }
