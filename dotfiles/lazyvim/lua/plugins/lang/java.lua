@@ -16,7 +16,7 @@ return {
             format = {
               enabled = true,
               settings = {
-                url = "https://github.com/google/styleguide/blob/gh-pages/eclipse-java-google-style.xml",
+                url = "https://raw.githubusercontent.com/google/styleguide/refs/heads/gh-pages/eclipse-java-google-style.xml",
                 profile = "GoogleStyle",
                 -- url = "https://raw.githubusercontent.com/redhat-developer/vscode-java/refs/heads/master/formatters/eclipse-formatter.xml",
                 -- profile = "Eclipse",
