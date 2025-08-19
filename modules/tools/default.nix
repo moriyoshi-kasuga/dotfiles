@@ -23,6 +23,7 @@
     kubernetes-helm
     tldr
     gh
+    google-java-format
   ];
 
   programs.fd.enable = true;
