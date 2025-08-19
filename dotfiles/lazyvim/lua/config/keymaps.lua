@@ -44,10 +44,14 @@ map("n", "<leader>\\", function()
   Snacks.picker.lines()
 end, { desc = "Grep current buffer" })
 map("n", "<leader>se", function()
-  Snacks.picker.diagnostics({ limit = 2 })
+  Snacks.picker.diagnostics({
+    severity = { "WARN", "ERROR" },
+  })
 end, { desc = "Warn and Error Diagnostics" })
 map("n", "<leader>sE", function()
-  Snacks.picker.diagnostics({ limit = 1 })
+  Snacks.picker.diagnostics({
+    severity = { "ERROR" },
+  })
 end, { desc = "Error Diagnostics" })
 map({ "n", "v" }, "ga", function()
   vim.lsp.buf.code_action()
