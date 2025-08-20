@@ -60,14 +60,10 @@ return {
   {
     "stevearc/conform.nvim",
     optional = true,
-    opts = function(_, opts)
-      opts.formatters["google-java-format"] = {
-        prepend_args = { "--aosp" },
-      }
-
-      opts.formatters_by_ft["java"] = { "google-java-format" }
-
-      return opts
-    end,
+    opts = {
+      formatters_by_ft = {
+        java = { "spotless_gradle" },
+      },
+    },
   },
 }
