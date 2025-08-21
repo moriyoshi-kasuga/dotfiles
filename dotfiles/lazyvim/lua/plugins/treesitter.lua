@@ -4,6 +4,9 @@ return {
     opts = {
       indent = {
         enable = true,
+        disable = function(lang)
+          return lang == "java"
+        end,
       },
       auto_install = true,
       query_linter = {
