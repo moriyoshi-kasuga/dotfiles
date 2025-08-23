@@ -18,6 +18,8 @@
     mdbook-admonish
     mdbook-mermaid
 
+    trunk
+
     sea-orm-cli
 
     just
