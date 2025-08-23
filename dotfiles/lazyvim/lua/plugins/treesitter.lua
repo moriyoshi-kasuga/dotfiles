@@ -5,7 +5,7 @@ return {
       indent = {
         enable = true,
         disable = function(lang)
-          return lang == "java"
+          return lang == "java" or lang == "rust"
         end,
       },
       auto_install = true,
