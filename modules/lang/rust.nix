@@ -24,6 +24,7 @@
 
     sea-orm-cli
 
+    rustypaste-cli
     just
     typos
   ];
