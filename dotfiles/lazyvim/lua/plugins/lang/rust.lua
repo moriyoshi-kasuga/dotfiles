@@ -77,4 +77,15 @@ return {
       },
     },
   },
+
+  {
+    "stevearc/conform.nvim",
+    opts = function(_, opts)
+      local is_dioxus_project = vim.fs.root(0, { "Dioxus.toml" }) ~= nil
+      opts.formatters_by_ft = opts.formatters_by_ft or {}
+      if is_dioxus_project then
+        opts.formatters_by_ft.rust = { "dioxus", "rustfmt", lsp_format = "fallback" }
+      end
+    end,
+  },
 }
