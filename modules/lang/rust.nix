@@ -19,6 +19,8 @@
     mdbook-mermaid
 
     trunk
+    dioxus-cli
+    wasm-bindgen-cli
 
     sea-orm-cli
 
