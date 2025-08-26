@@ -21,7 +21,6 @@
     trunk
     dioxus-cli
     wasm-bindgen-cli
-    yew-fmt
 
     sea-orm-cli
 

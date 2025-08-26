@@ -81,15 +81,10 @@ return {
   {
     "stevearc/conform.nvim",
     opts = function(_, opts)
-      local is_yew_project = vim.fs.root(0, { ".yew-root" }) ~= nil
       local is_dioxus_project = vim.fs.root(0, { "Dioxus.toml" }) ~= nil
       opts.formatters_by_ft = opts.formatters_by_ft or {}
       if is_dioxus_project then
         opts.formatters_by_ft.rust = { "dioxus", lsp_format = "first" }
-      else
-        if is_yew_project then
-          opts.formatters_by_ft.rust = { "yew-fmt", lsp_format = "first" }
-        end
       end
     end,
   },
