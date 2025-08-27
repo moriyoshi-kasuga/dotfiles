@@ -65,19 +65,13 @@ return {
           "Filename: " .. results[4],
           "Filename without extension: " .. results[5],
           "Extension of the filename: " .. results[6],
-        }, { prompt = "Choose to copy to clipboard:" }, function(choice)
-          if choice then
-            local i = tonumber(choice:sub(1, 1))
-            if i then
-              local result = results[i]
-              vim.fn.setreg("*", result)
-              vim.notify("Copied: " .. result)
-            else
-              vim.notify("Invalid selection")
-            end
-          else
-            vim.notify("Selection cancelled")
+        }, { prompt = "Choose to copy to clipboard:" }, function(_, idx)
+          if idx == nil then
+            return
           end
+          local result = results[idx]
+          vim.fn.setreg("*", result)
+          vim.notify("Copied: " .. result)
         end)
       end,
       open_terminal = function(state)
