@@ -27,6 +27,7 @@
     rustypaste-cli
     just
     typos
+    bacon
   ];
 
   programs.zsh.shellAliases = {
