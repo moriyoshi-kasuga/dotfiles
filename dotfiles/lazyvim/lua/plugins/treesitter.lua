@@ -3,10 +3,7 @@ return {
     "nvim-treesitter/nvim-treesitter",
     opts = {
       indent = {
-        enable = true,
-        disable = function(lang)
-          return lang == "java" or lang == "rust"
-        end,
+        enable = false,
       },
       auto_install = true,
       query_linter = {
