@@ -5,5 +5,6 @@
     ./python.nix
     ./rust.nix
     ./go.nix
+    ./haskell.nix
   ];
 }
