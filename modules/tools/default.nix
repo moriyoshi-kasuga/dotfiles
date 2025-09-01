@@ -24,6 +24,8 @@
     tldr
     gh
     google-java-format
+    zip
+    unzip
   ];
 
   programs.fd.enable = true;
