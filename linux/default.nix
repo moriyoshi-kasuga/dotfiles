@@ -10,5 +10,6 @@
     '')
     docker
     docker-compose
+    zsh
   ];
 }
