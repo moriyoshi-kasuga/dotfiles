@@ -27,6 +27,7 @@
       pkgs = import nixpkgs { system = vars.system; };
       dotfilesPath = ./dotfiles;
       linuxModules = if pkgs.stdenv.isLinux then [ ./linux ] else [ ];
+      darwinModules = if pkgs.stdenv.isDarwin then [ ./darwin ] else [ ];
     in
     {
       homeConfigurations.${vars.username} = home-manager.lib.homeManagerConfiguration {
@@ -36,7 +37,9 @@
           catppuccin.homeModules.catppuccin
           ./home.nix
           ./modules
-        ] ++ linuxModules;
+        ]
+        ++ linuxModules
+        ++ darwinModules;
 
         extraSpecialArgs = {
           inherit vars;

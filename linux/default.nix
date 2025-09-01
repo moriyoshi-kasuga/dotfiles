@@ -11,5 +11,6 @@
     docker
     docker-compose
     zsh
+    gcc
   ];
 }

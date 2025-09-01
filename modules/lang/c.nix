@@ -13,7 +13,6 @@ in
     [
       gnumake
       cmake
-      llvmPackages.bintools
       pkg-config
       ninja
     ]
