@@ -39,7 +39,8 @@
           ./modules
         ]
         ++ linuxModules
-        ++ darwinModules;
+        ++ darwinModules
+        ++ [ ./pkg.nix ];
 
         extraSpecialArgs = {
           inherit vars;
