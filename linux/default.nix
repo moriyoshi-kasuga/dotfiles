@@ -8,6 +8,7 @@
     (writeShellScriptBin "pbcopy" ''
       win32yank.exe -i --crlf
     '')
+    xdg-utils
     docker
     docker-compose
     zsh
