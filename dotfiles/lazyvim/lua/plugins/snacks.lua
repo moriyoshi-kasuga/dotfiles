@@ -2,6 +2,35 @@ return {
   {
     "snacks.nvim",
     opts = {
+      picker = {
+        formatters = {
+          file = {
+            truncate = 200,
+          },
+        },
+        actions = {
+          ---@param picker snacks.Picker
+          list_scroll_right = function(picker)
+            if picker.list.win:valid() then
+              picker.list.win:hscroll()
+            end
+          end,
+          ---@param picker snacks.Picker
+          list_scroll_left = function(picker)
+            if picker.list.win:valid() then
+              picker.list.win:hscroll(true)
+            end
+          end,
+        },
+        win = {
+          input = {
+            keys = {
+              ["<C-l>"] = { "list_scroll_right", mode = { "n", "i" } },
+              ["<C-h>"] = { "list_scroll_left", mode = { "n", "i" } },
+            },
+          },
+        },
+      },
       image = {
         enabled = false,
       },
