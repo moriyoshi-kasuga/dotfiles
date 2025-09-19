@@ -20,7 +20,13 @@ require("lazy").setup({
     notify = false,
   },
   spec = {
-    { "LazyVim/LazyVim", import = "lazyvim.plugins" },
+    {
+      "folke/tokyonight.nvim",
+      enabled = false,
+    },
+    { "LazyVim/LazyVim", import = "lazyvim.plugins", opts = {
+      colorscheme = "catppuccin",
+    } },
 
     { import = "plugins" },
     { import = "plugins.ui" },
@@ -36,7 +42,6 @@ require("lazy").setup({
     version = false, -- always use the latest git commit
     -- version = "*", -- try installing the latest stable version for plugins that support semver
   },
-  -- install = { colorscheme = { "solarized-osaka" } },
   checker = { enabled = false, notify = false }, -- automatically check for plugin updates
   performance = {
     rtp = {
