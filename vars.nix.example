@@ -7,8 +7,10 @@
   homeDirectory = "/Users/user";
   system = "aarch64-darwin";
   
-  gitUserName = "Your Name";
-  gitUserEmail = "example@gmail.com";
+  # ref: https://nix-community.github.io/home-manager/options.xhtml#opt-programs.git.includes
+  gitIncludes = [
+  
+  ];
 
   askAI = "gemini"; # Options: gemini, claude
 

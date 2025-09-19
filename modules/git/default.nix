@@ -3,14 +3,14 @@
 {
   programs.git = {
     enable = true;
-    userName = vars.gitUserName;
-    userEmail = vars.gitUserEmail;
 
     extraConfig = {
       init.defaultBranch = "main";
       merge.conflictStyle = "zdiff3";
       push.default = "current";
     };
+
+    includes = vars.gitIncludes;
   };
 
   programs.zsh.shellAliases = {
