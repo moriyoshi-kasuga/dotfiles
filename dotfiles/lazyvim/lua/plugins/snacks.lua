@@ -16,6 +16,16 @@ return {
           },
         },
       },
+      terminal = {
+        win = {
+          keys = {
+            nav_h = { "<C-h>", false },
+            nav_j = { "<C-j>", false },
+            nav_k = { "<C-k>", false },
+            nav_l = { "<C-l>", false },
+          },
+        },
+      },
     },
     keys = {
       {

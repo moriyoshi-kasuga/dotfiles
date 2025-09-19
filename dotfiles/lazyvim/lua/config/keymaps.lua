@@ -5,7 +5,7 @@ end
 local map = vim.keymap.set
 local del = vim.keymap.del
 
-del({ "i", "n" }, "<esc>")
+del({ "i", "n", "s" }, "<esc>")
 map("n", "<leader>h", cmd("noh"))
 
 for _, quote in ipairs({ '"', "'", "`" }) do
