@@ -45,10 +45,10 @@ return {
           { LazyVim.lualine.pretty_path({ length = 10 }) },
         },
         lualine_x = {},
-        -- ref: https://github.com/LazyVim/LazyVim/blob/25abbf546d564dc484cf903804661ba12de45507/lua/lazyvim/plugins/extras/ai/copilot.lua#L42
+        -- ref: https://github.com/LazyVim/LazyVim/blob/f4e64eea45d9aa171e057ca328f2b9459c40404a/lua/lazyvim/plugins/extras/ai/copilot.lua#L51
         lualine_y = {
           LazyVim.lualine.status(LazyVim.config.icons.kinds.Copilot, function()
-            local clients = package.loaded["copilot"] and LazyVim.lsp.get_clients({ name = "copilot", bufnr = 0 }) or {}
+            local clients = package.loaded["copilot"] and vim.lsp.get_clients({ name = "copilot", bufnr = 0 }) or {}
             if #clients > 0 then
               local status = require("copilot.status").data.status
               return (status == "InProgress" and "pending") or (status == "Warning" and "error") or "ok"
