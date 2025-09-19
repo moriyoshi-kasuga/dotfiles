@@ -1,3 +1,35 @@
+local snacks_extension = {
+  sections = {
+    lualine_a = {
+      function()
+        return "Snacks"
+      end,
+    },
+    lualine_z = {
+      function()
+        local pickers = Snacks.picker.get()
+        if #pickers == 0 then
+          return " No Picker"
+        end
+        ---@type string?
+        local file = nil
+        for _, p in ipairs(pickers) do
+          local item = p.list:current()
+          if item and item.file then
+            file = item.file
+            break
+          end
+        end
+        if file then
+          return " " .. file
+        end
+        return " Picker Open"
+      end,
+    },
+  },
+  filetypes = { "snacks_picker_input" },
+}
+
 return {
   "nvim-lualine/lualine.nvim",
   opts = {
@@ -57,7 +89,7 @@ return {
         },
         lualine_z = {},
       },
-      extensions = { "neo-tree", "lazy" },
+      extensions = { "neo-tree", "lazy", snacks_extension },
     })
   end,
 }
