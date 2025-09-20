@@ -13,7 +13,9 @@ for _, quote in ipairs({ '"', "'", "`" }) do
 end
 
 map("n", "<leader>r", function()
-  LazyVim.format.format({ force = true })
+  require("conform").format({
+    async = true,
+  })
 end, { desc = "Format buffer" })
 
 -- window
