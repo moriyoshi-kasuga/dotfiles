@@ -15,6 +15,7 @@
       java.disabled = true;
       kotlin.disabled = true;
       gradle.disabled = true;
+      scala.disabled = true;
       aws.disabled = true;
     };
   };
