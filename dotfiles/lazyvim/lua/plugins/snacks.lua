@@ -26,7 +26,7 @@ return {
           input = {
             keys = {
               ["<C-l>"] = { "list_scroll_right", mode = { "n", "i" } },
-              ["<C-h>"] = { "list_scroll_left", mode = { "n", "i" } },
+              ["<C-r>"] = { "list_scroll_left", mode = { "n", "i" } },
             },
           },
         },
