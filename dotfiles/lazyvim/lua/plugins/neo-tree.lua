@@ -95,6 +95,11 @@ return {
         hide_hidden = true,
         never_show = {
           ".DS_Store",
+          "bin",
+          ".settings",
+          ".classpath",
+          ".project",
+          ".factorypath",
         },
       },
     },
