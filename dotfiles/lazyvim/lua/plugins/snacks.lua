@@ -6,6 +6,7 @@ return {
         formatters = {
           file = {
             truncate = 200,
+            filename_first = true,
           },
         },
         actions = {
