@@ -8,10 +8,6 @@
   programs.zoxide = {
     enable = true;
     enableZshIntegration = true;
-    options = [
-      "--cmd"
-      "cd"
-    ];
   };
 
   home.sessionVariables = {
@@ -20,7 +16,7 @@
 
   programs.zsh.initContent = ''
     _run-cdi() {
-      cdi
+      zi
       zle reset-prompt 
     }
 
