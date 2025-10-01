@@ -26,6 +26,7 @@
     google-java-format
     zip
     unzip
+    lnav
   ];
 
   programs.fd.enable = true;
