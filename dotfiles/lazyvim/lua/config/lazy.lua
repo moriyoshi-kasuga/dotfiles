@@ -25,7 +25,7 @@ require("lazy").setup({
       enabled = false,
     },
     { "LazyVim/LazyVim", import = "lazyvim.plugins", opts = {
-      colorscheme = "catppuccin-frappe",
+      colorscheme = "catppuccin-macchiato",
     } },
 
     { import = "plugins" },
