@@ -104,7 +104,6 @@ return {
       },
     },
     window = {
-      position = "right",
       mappings = {
         h = "parent_or_close",
         l = "child_or_open",
