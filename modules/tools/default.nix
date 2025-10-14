@@ -27,6 +27,7 @@
     zip
     unzip
     lnav
+    glow
   ];
 
   programs.fd.enable = true;
