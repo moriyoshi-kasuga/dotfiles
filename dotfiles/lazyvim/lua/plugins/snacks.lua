@@ -88,6 +88,15 @@ return {
         end,
         desc = "Git Blame Line",
       },
+      {
+        "<leader>,",
+        function()
+          Snacks.picker.buffers()
+        end,
+        desc = "Buffers",
+      },
+      { "<leader>/", LazyVim.pick("grep", { root = false }), desc = "Grep (Cwd)" },
+      { "<leader><space>", LazyVim.pick("files", { root = false }), desc = "Find Files (Cwd)" },
     },
   },
 }
