@@ -26,14 +26,15 @@ font.register_fonts({
 	{ name = "JetBrains Mono", mod = "font-jetbrains", default = true },
 	{ name = "Monaspace Neon", mod = "font-monaspace-neon" },
 	{ name = "Monaspace Krypton", mod = "font-monaspace-krypton" },
+	{ name = "CommitMono", mod = "font-commit" },
 })
 font.load_default(config)
 config.adjust_window_size_when_changing_font_size = false
 
 config.window_padding = {
-	left = 0,
-	right = 0,
-	top = 0,
+	left = 200,
+	right = 200,
+	top = 200,
 	bottom = 0,
 }
 
