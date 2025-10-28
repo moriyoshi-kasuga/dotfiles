@@ -32,9 +32,9 @@ font.load_default(config)
 config.adjust_window_size_when_changing_font_size = false
 
 config.window_padding = {
-	left = 200,
-	right = 200,
-	top = 200,
+	left = 0,
+	right = 0,
+	top = 0,
 	bottom = 0,
 }
 
