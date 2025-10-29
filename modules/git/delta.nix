@@ -5,15 +5,14 @@
     delta
   ];
 
-  programs.git = {
-    delta = {
-      enable = true;
-      options = {
-        hyperlinks = true;
-        side-by-side = true;
-        line-numbers = true;
-        navigate = true;
-      };
+  programs.delta = {
+    enable = true;
+    enableGitIntegration = true;
+    options = {
+      hyperlinks = true;
+      side-by-side = true;
+      line-numbers = true;
+      navigate = true;
     };
   };
 }

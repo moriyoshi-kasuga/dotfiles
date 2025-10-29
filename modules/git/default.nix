@@ -4,7 +4,7 @@
   programs.git = {
     enable = true;
 
-    extraConfig = {
+    settings = {
       init.defaultBranch = "main";
       merge.conflictStyle = "zdiff3";
       push.default = "current";
