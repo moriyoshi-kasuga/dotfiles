@@ -39,6 +39,7 @@
     typos
     bacon
     tokei
+    uv
   ];
 
   programs.zsh.shellAliases = {
