@@ -15,6 +15,7 @@
     fd
     bat
     jq
+    jid
     tailspin
     xh
     dust
