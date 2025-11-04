@@ -38,6 +38,7 @@
     just
     typos
     bacon
+    tokei
   ];
 
   programs.zsh.shellAliases = {
