@@ -21,18 +21,20 @@ in
 
   config = {
     home.packages = packages;
-
-    home.sessionVariables.PKG_CONFIG_PATH =
-      let
-        getPkgConfigPath =
-          pkg:
-          let
-            pcpath = pkg.dev or pkg;
-            path = "${pcpath}/lib/pkgconfig";
-          in
-          if builtins.pathExists path then path else null;
-        pkgConfigPaths = builtins.filter (x: x != null) (map getPkgConfigPath packages);
-      in
-      pkgs.lib.concatStringsSep ":" pkgConfigPaths;
+    home.sessionVariables = {
+      PKG_CONFIG_PATH =
+        let
+          getPkgConfigPath =
+            pkg:
+            let
+              pcpath = pkg.dev or pkg;
+              path = "${pcpath}/lib/pkgconfig";
+            in
+            if builtins.pathExists path then path else null;
+          pkgConfigPaths = builtins.filter (x: x != null) (map getPkgConfigPath packages);
+        in
+        pkgs.lib.concatStringsSep ":" pkgConfigPaths;
+      LD_LIBRARY_PATH = lib.makeLibraryPath [ pkgs.openssl ];
+    };
   };
 }
