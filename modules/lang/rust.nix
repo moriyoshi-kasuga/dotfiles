@@ -14,6 +14,9 @@
   '';
 
   home.packages = with pkgs; [
+    # A Modern Linker
+    mold
+
     cargo-msrv
     cargo-nextest
     cargo-udeps
