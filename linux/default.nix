@@ -8,6 +8,9 @@
     (writeShellScriptBin "pbcopy" ''
       win32yank.exe -i --crlf
     '')
+    (writeShellScriptBin "open" ''
+      xdg-open "$@"
+    '')
     xdg-utils
     docker
     docker-compose
