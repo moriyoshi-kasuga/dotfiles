@@ -21,12 +21,14 @@ in
       builtins.readFile (dotfilesPath + /tmux.conf)
       + ''
         set -g default-command "${shell}"
+
+        set -g @thumbs-command 'echo -n {} | pbcopy'
       '';
   };
 
 
   programs.tmux.plugins = with pkgs.tmuxPlugins; [
-    fingers
+    tmux-thumbs
   ];
 
   catppuccin.tmux.extraConfig = builtins.readFile (dotfilesPath + /tmux.conf.catppuccin);
