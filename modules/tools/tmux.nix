@@ -24,5 +24,10 @@ in
       '';
   };
 
+
+  programs.tmux.plugins = with pkgs.tmuxPlugins; [
+    fingers
+  ];
+
   catppuccin.tmux.extraConfig = builtins.readFile (dotfilesPath + /tmux.conf.catppuccin);
 }
