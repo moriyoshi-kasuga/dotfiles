@@ -45,6 +45,7 @@
     xorg.libXi
     xorg.libXrandr
     libxkbcommon
+    # maybe downgrade, mesa use llvm21, but vulkan use llvm20
     mesa
     libdrm
   ];
