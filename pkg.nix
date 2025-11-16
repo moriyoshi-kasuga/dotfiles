@@ -6,11 +6,28 @@
 }:
 
 let
-  packages = config.pkgPackages ++ [
-    pkgs.ffmpeg
-    pkgs.openssl
-    pkgs.sqlite
-  ];
+  packages =
+    config.pkgPackages
+    ++ (
+      with pkgs;
+      [
+        ffmpeg
+        openssl
+        sqlite
+      ]
+      ++ lib.optionals (pkgs.stdenv.isLinux) [
+        wayland
+        alsa-lib
+        vulkan-loader
+        vulkan-tools
+        libudev-zero
+        xorg.libX11
+        xorg.libXcursor
+        xorg.libXi
+        xorg.libXrandr
+        libxkbcommon
+      ]
+    );
 in
 {
   options.pkgPackages = lib.mkOption {
@@ -34,7 +51,24 @@ in
           pkgConfigPaths = builtins.filter (x: x != null) (map getPkgConfigPath packages);
         in
         pkgs.lib.concatStringsSep ":" pkgConfigPaths;
-      LD_LIBRARY_PATH = lib.makeLibraryPath [ pkgs.openssl ];
+      LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath (
+        with pkgs;
+        [
+          openssl
+          sqlite
+          ffmpeg
+        ]
+        ++ pkgs.lib.optionals (pkgs.stdenv.isLinux) [
+          wayland
+          vulkan-loader
+          libudev-zero
+          xorg.libX11
+          xorg.libXcursor
+          xorg.libXi
+          xorg.libXrandr
+          libxkbcommon
+        ]
+      );
     };
   };
 }
