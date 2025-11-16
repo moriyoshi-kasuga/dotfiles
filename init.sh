@@ -1,5 +1,37 @@
 #!/bin/bash
 
+# options: init, update, darwin, help (default init)
+
+OPTIONS=$1
+case $OPTIONS in
+init) ;;
+darwin) ;;
+update)
+  echo 'Updating Nix configuration...'
+  nix --extra-experimental-features 'nix-command flakes' flake update
+  echo 'Nix configuration updated.'
+  exit 0
+  ;;
+help)
+  echo 'Usage: ./init.sh [option]'
+  echo 'Options:'
+  echo '  init    - Initialize the Nix configuration (default)'
+  echo '  update  - Update the Nix configuration'
+  echo '  darwin  - Apply the Nix configuration on macOS'
+  echo '  help    - Show this help message'
+  exit 0
+  ;;
+*)
+  if [ -z "$OPTIONS" ]; then
+    OPTIONS="init"
+  else
+    echo "Unknown option: $OPTIONS"
+    echo 'Use ./init.sh help to see available options.'
+    exit 1
+  fi
+  ;;
+esac
+
 if ! command -v nix &>/dev/null; then
   echo 'Nix is not installed or not in PATH'
   echo 'If you not have Nix installed, goto https://nixos.org/download.html'
@@ -20,16 +52,21 @@ fi
 
 VARS=$(nix --extra-experimental-features 'nix-command' eval --file ./vars.nix)
 
-if [ -n "$1" ]; then
-  VARS=$(nix --extra-experimental-features 'nix-command' eval --expr "$VARS // $1")
-fi
-
 dir=$(dirname "$(realpath "$0")")
 
 VARS=$(nix --extra-experimental-features 'nix-command' eval --json --expr "$VARS // { dotfilesRepoDir = ""$dir""; }")
 
 echo 'Building Nix configuration...'
-USER_NIX_VARS=$VARS nix --extra-experimental-features 'nix-command flakes' run --impure home-manager/master -- switch --impure --extra-experimental-features 'nix-command flakes' --flake .#"$USERNAME" --impure -b backup
+case $OPTIONS in
+init)
+  USER_NIX_VARS=$VARS nix --extra-experimental-features 'nix-command flakes' run --impure home-manager/master -- switch --impure --extra-experimental-features 'nix-command flakes' --flake .#"$USERNAME" --impure -b backup
+  ;;
+darwin)
+  sudo env USER_NIX_VARS="$VARS" nix --extra-experimental-features 'nix-command flakes' run --impure nix-darwin/master#darwin-rebuild -- switch --impure --flake .#"$USERNAME" --impure
+  ;;
+*) ;;
+esac
+
 SUCCESS=$?
 if [ $SUCCESS -ne 0 ]; then
   echo 'Failed to apply Nix configuration.'

@@ -47,11 +47,11 @@
           inherit dotfilesPath;
         };
       };
-      darwinConfigurations.${vars.darwinUsername} = nix-darwin.lib.darwinSystem {
+      darwinConfigurations.${vars.username} = nix-darwin.lib.darwinSystem {
         modules = [
-          home-manager.darwinModules.home-manager
           ./nix-darwin
         ];
+        specialArgs = { inherit vars; };
       };
     };
 }

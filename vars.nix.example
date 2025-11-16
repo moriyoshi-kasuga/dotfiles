@@ -14,9 +14,6 @@
 
   askAI = "gemini"; # Options: gemini, claude
 
-  # Optional: Set the darwin username if using Nix on macOS.
-  darwinUsername = "user";
-  
   # Optional: Set your RustyPaste server URL if you use RustyPaste.
   rustypasteServer = "https://rpt.example.com";
 }
