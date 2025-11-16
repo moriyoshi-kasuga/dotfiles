@@ -53,6 +53,7 @@
     llvmPackages_20.libllvm
 
     wayland
+    alsa-lib
     vulkan-loader
     libudev-zero
     xorg.libX11
