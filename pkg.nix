@@ -7,33 +7,30 @@
 
 let
   packages =
-    config.pkgPackages
-    ++ (
-      with pkgs;
-      [
-        ffmpeg
-        openssl
-        sqlite
-      ]
-      ++ lib.optionals (pkgs.stdenv.isLinux) [
-        wayland
-        alsa-lib
-        vulkan-loader
-        vulkan-tools
-        libudev-zero
-        xorg.libX11
-        xorg.libXcursor
-        xorg.libXi
-        xorg.libXrandr
-        libxkbcommon
-      ]
-    );
+    (with pkgs; [
+      ffmpeg
+      openssl
+      sqlite
+    ])
+    ++ config.pkgPackages;
+  ldLibraryPathPackages =
+    (with pkgs; [
+      openssl
+      sqlite
+      ffmpeg
+    ])
+    ++ config.ldLibraryPathPackages;
 in
 {
   options.pkgPackages = lib.mkOption {
     type = lib.types.listOf lib.types.package;
     default = [ ];
     description = "Additional packages to include for PKG_CONFIG_PATH";
+  };
+  options.ldLibraryPathPackages = lib.mkOption {
+    type = lib.types.listOf lib.types.package;
+    default = [ ];
+    description = "Additional packages to include for LD_LIBRARY_PATH";
   };
 
   config = {
@@ -51,24 +48,7 @@ in
           pkgConfigPaths = builtins.filter (x: x != null) (map getPkgConfigPath packages);
         in
         pkgs.lib.concatStringsSep ":" pkgConfigPaths;
-      LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath (
-        with pkgs;
-        [
-          openssl
-          sqlite
-          ffmpeg
-        ]
-        ++ pkgs.lib.optionals (pkgs.stdenv.isLinux) [
-          wayland
-          vulkan-loader
-          libudev-zero
-          xorg.libX11
-          xorg.libXcursor
-          xorg.libXi
-          xorg.libXrandr
-          libxkbcommon
-        ]
-      );
+      LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath ldLibraryPathPackages;
     };
   };
 }

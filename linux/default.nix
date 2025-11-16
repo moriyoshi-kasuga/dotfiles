@@ -19,6 +19,8 @@
   ];
 
   pkgPackages = with pkgs; [
+    llvmPackages_20.libllvm
+
     at-spi2-atk
     atkmm
     cairo
@@ -32,5 +34,32 @@
     pango
     webkitgtk_4_1
     gobject-introspection
+
+    wayland
+    alsa-lib
+    vulkan-loader
+    vulkan-tools
+    libudev-zero
+    xorg.libX11
+    xorg.libXcursor
+    xorg.libXi
+    xorg.libXrandr
+    libxkbcommon
+    mesa
+    libdrm
+  ];
+  ldLibraryPathPackages = with pkgs; [
+    llvmPackages_20.libllvm
+
+    wayland
+    vulkan-loader
+    libudev-zero
+    xorg.libX11
+    xorg.libXcursor
+    xorg.libXi
+    xorg.libXrandr
+    libxkbcommon
+    mesa
+    libdrm
   ];
 }
