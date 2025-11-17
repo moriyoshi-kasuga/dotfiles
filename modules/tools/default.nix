@@ -3,7 +3,6 @@
 {
   imports = [
     ./tmux.nix
-    ./btop.nix
     ./docker.nix
     ./lazydocker.nix
     ./tff.nix
@@ -29,6 +28,7 @@
     unzip
     lnav
     glow
+    bottom
   ];
 
   programs.fd.enable = true;
