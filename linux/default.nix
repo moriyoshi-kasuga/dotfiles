@@ -3,10 +3,10 @@
 {
   home.packages = with pkgs; [
     (writeShellScriptBin "pbpaste" ''
-      win32yank.exe -o --lf
+      wl-paste --no-newline
     '')
     (writeShellScriptBin "pbcopy" ''
-      win32yank.exe -i --crlf
+      wl-copy --trim-newline
     '')
     (writeShellScriptBin "open" ''
       xdg-open "$@"
