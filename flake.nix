@@ -53,5 +53,36 @@
         ];
         specialArgs = { inherit vars; };
       };
+      nixosConfigurations.${vars.username} = nixpkgs.lib.nixosSystem {
+        system = "${vars.system}";
+
+        modules = [
+          catppuccin.nixosModules.catppuccin
+          ./configuration.nix
+
+          home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              extraSpecialArgs = {
+                inherit vars;
+                inherit dotfilesPath;
+              };
+              users.${vars.username} = {
+                imports = [
+                  catppuccin.homeModules.catppuccin
+                  ./home.nix
+                  ./modules
+                  ./pkg.nix
+                ];
+              };
+            };
+          }
+        ];
+
+        specialArgs = {
+          inherit vars;
+          inherit dotfilesPath;
+        };
+      };
     };
 }

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # options: init, update, darwin, help (default init)
 
@@ -6,6 +6,7 @@ OPTIONS=$1
 case $OPTIONS in
 init) ;;
 darwin) ;;
+nixos) ;;
 update)
   echo 'Updating Nix configuration...'
   nix --extra-experimental-features 'nix-command flakes' flake update
@@ -63,6 +64,9 @@ init)
   ;;
 darwin)
   sudo env USER_NIX_VARS="$VARS" nix --extra-experimental-features 'nix-command flakes' run --impure nix-darwin/master#darwin-rebuild -- switch --impure --flake .#"$USERNAME" --impure
+  ;;
+nixos)
+  sudo env USER_NIX_VARS="$VARS" nixos-rebuild switch --flake .#"$USERNAME" --impure
   ;;
 *) ;;
 esac
