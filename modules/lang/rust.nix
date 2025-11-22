@@ -43,6 +43,7 @@
     bacon
     tokei
     uv
+    sccache
   ];
 
   programs.zsh.shellAliases = {
