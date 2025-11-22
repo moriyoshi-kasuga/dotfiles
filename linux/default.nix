@@ -35,7 +35,6 @@
     webkitgtk_4_1
     gobject-introspection
 
-    wayland
     alsa-lib
     vulkan-loader
     vulkan-tools
@@ -45,9 +44,11 @@
     xorg.libXi
     xorg.libXrandr
     libxkbcommon
-    # maybe downgrade, mesa use llvm21, but vulkan use llvm20
     mesa
     libdrm
+    wayland
+    alsa-lib
+    libudev-zero
   ];
   ldLibraryPathPackages = with pkgs; [
     llvmPackages_20.libllvm
