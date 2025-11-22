@@ -49,6 +49,14 @@
 
         modules = [
           ./hosts/darwin
+
+          home-manager.darwinModules.home-manager
+          {
+            home-manager = {
+              extraSpecialArgs = specialArgs;
+              users.${vars.username}.imports = homeModules;
+            };
+          }
         ];
       };
       nixosConfigurations.${vars.username} = nixpkgs.lib.nixosSystem {
