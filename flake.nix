@@ -30,9 +30,9 @@
         ./home.nix
         ./modules
       ]
-      ++ (if pkgs.stdenv.isLinux then [ ./linux ] else [ ])
-      ++ (if pkgs.stdenv.isDarwin then [ ./darwin ] else [ ])
-      ++ [ ./pkg.nix ];
+      ++ (if pkgs.stdenv.isLinux then [ ./home/linux ] else [ ])
+      ++ (if pkgs.stdenv.isDarwin then [ ./home/darwin ] else [ ])
+      ++ [ ./home/pkg.nix ];
 
       specialArgs = {
         inherit vars;
