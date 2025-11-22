@@ -104,6 +104,8 @@
       wl-clipboard
       discord
       slack
+      aseprite
+      ldtk
     ];
   };
 
