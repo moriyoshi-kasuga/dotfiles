@@ -48,7 +48,7 @@
         inherit specialArgs;
 
         modules = [
-          ./nix-darwin
+          ./hosts/darwin
         ];
       };
       nixosConfigurations.${vars.username} = nixpkgs.lib.nixosSystem {
@@ -57,7 +57,7 @@
 
         modules = [
           catppuccin.nixosModules.catppuccin
-          ./configuration.nix
+          ./hosts/nixos
 
           home-manager.nixosModules.home-manager
           {
