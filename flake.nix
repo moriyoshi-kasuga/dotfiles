@@ -73,7 +73,8 @@
                   ./home.nix
                   ./modules
                   ./pkg.nix
-                ];
+                ]
+                ++ linuxModules;
               };
             };
           }
