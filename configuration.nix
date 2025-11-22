@@ -100,10 +100,10 @@
     shell = pkgs.zsh;
     packages = with pkgs; [
       brave
-      # google-chrome
       wezterm
       wl-clipboard
-      #  thunderbird
+      discord
+      slack
     ];
   };
 
@@ -147,5 +147,28 @@
         monospace = [ "Jetbrains Mono" ];
       };
     };
+  };
+
+  services.tailscale.enable = true;
+  networking.firewall = {
+    enable = true;
+    trustedInterfaces = [ "tailscale0" ];
+    allowedUDPPorts = [ config.services.tailscale.port ];
+  };
+
+  virtualisation = {
+    docker = {
+      enable = true;
+      rootless = {
+        enable = true;
+        setSocketVariable = true;
+      };
+    };
+  };
+
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true;
+    dedicatedServer.openFirewall = true;
   };
 }
