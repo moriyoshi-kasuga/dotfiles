@@ -27,8 +27,7 @@
       pkgs = import nixpkgs { system = vars.system; };
       homeModules = [
         catppuccin.homeModules.catppuccin
-        ./home.nix
-        ./modules
+        ./home
       ]
       ++ (if pkgs.stdenv.isLinux then [ ./home/linux ] else [ ])
       ++ (if pkgs.stdenv.isDarwin then [ ./home/darwin ] else [ ])
