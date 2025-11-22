@@ -25,35 +25,35 @@
     let
       vars = builtins.fromJSON (builtins.getEnv "USER_NIX_VARS");
       pkgs = import nixpkgs { system = vars.system; };
-      dotfilesPath = ./dotfiles;
-      linuxModules = if pkgs.stdenv.isLinux then [ ./linux ] else [ ];
-      darwinModules = if pkgs.stdenv.isDarwin then [ ./darwin ] else [ ];
+      homeModules = [
+        catppuccin.homeModules.catppuccin
+        ./home.nix
+        ./modules
+      ]
+      ++ (if pkgs.stdenv.isLinux then [ ./linux ] else [ ])
+      ++ (if pkgs.stdenv.isDarwin then [ ./darwin ] else [ ])
+      ++ [ ./pkg.nix ];
+
+      specialArgs = {
+        inherit vars;
+        dotfilesPath = ./dotfiles;
+      };
     in
     {
       homeConfigurations.${vars.username} = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-
-        modules = [
-          catppuccin.homeModules.catppuccin
-          ./home.nix
-          ./modules
-        ]
-        ++ linuxModules
-        ++ darwinModules
-        ++ [ ./pkg.nix ];
-
-        extraSpecialArgs = {
-          inherit vars;
-          inherit dotfilesPath;
-        };
+        extraSpecialArgs = specialArgs;
+        modules = homeModules;
       };
       darwinConfigurations.${vars.username} = nix-darwin.lib.darwinSystem {
+        inherit specialArgs;
+
         modules = [
           ./nix-darwin
         ];
-        specialArgs = { inherit vars; };
       };
       nixosConfigurations.${vars.username} = nixpkgs.lib.nixosSystem {
+        inherit specialArgs;
         system = "${vars.system}";
 
         modules = [
@@ -63,27 +63,11 @@
           home-manager.nixosModules.home-manager
           {
             home-manager = {
-              extraSpecialArgs = {
-                inherit vars;
-                inherit dotfilesPath;
-              };
-              users.${vars.username} = {
-                imports = [
-                  catppuccin.homeModules.catppuccin
-                  ./home.nix
-                  ./modules
-                  ./pkg.nix
-                ]
-                ++ linuxModules;
-              };
+              extraSpecialArgs = specialArgs;
+              users.${vars.username}.imports = homeModules;
             };
           }
         ];
-
-        specialArgs = {
-          inherit vars;
-          inherit dotfilesPath;
-        };
       };
     };
 }
