@@ -46,6 +46,7 @@
     alsa.support32Bit = true;
     pulse.enable = true;
     jack.enable = true;
+    wireplumber.enable = true;
 
     # use the example session manager (no others are packaged yet so this is enabled by default,
     # no need to redefine it in your config for now)
@@ -59,6 +60,9 @@
     extraGroups = [
       "networkmanager"
       "wheel"
+      "input"
+      "audio"
+      "video"
     ];
     shell = pkgs.zsh;
     packages = with pkgs; [
@@ -78,6 +82,8 @@
   environment.systemPackages = with pkgs; [
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
+    alsa-utils
+    pulseaudio
   ];
 
   # Enable the OpenSSH daemon.
@@ -113,14 +119,21 @@
 
   boot.kernelParams = [
     "drm_kms_helper.poll=1" # ホットプラグ検出をポーリングで補う（回避策）
+    "usbcore.autosuspend=-1" # USB自動サスペンドを無効化
   ];
-  # services.udev.extraRules = ''
-  #   ACTION=="change", SUBSYSTEM=="drm", ENV{HOTPLUG}=="1", RUN+="hotPlugMonitor"
-  # '';
-  #
-  # home.packages = with pkgs; [
-  #   # TODO: implement hotPlugMonitor script
-  #   (writeShellScriptBin "hotPlugMonitor" '''')
-  # ];
 
+  # USB hotplug とHID デバイスのサポートを強化
+  services.udev.enable = true;
+  services.udev.extraRules = ''
+    # すべてのHID入力デバイスの自動サスペンドを無効化
+    ACTION=="add", SUBSYSTEM=="usb", DRIVER=="usbhid", TEST=="power/control", ATTR{power/control}="on"
+  '';
+
+  hardware.enableAllFirmware = true;
+  hardware.enableAllHardware = true;
+  services.libinput.enable = true;
+
+  # USB電源管理の設定
+  powerManagement.enable = true;
+  services.upower.enable = true;
 }
