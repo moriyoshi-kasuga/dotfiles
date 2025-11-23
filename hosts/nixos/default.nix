@@ -22,40 +22,28 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
-  # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
-
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
+  services.xserver = {
+    xkb = {
+      layout = "us";
+      variant = "";
+    };
+    enable = true;
+    libinput.enable = true;
+    displayManager.lightdm.enable = true;
+    desktopManager.cinnamon.enable = true;
+    displayManager.defaultSession = "cinnamon";
   };
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
-  # Enable sound with pipewire.
   services.pulseaudio.enable = false;
-  # sound.enable = true; # alereday changed to services.pipewire.alsa.enable
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    jack.enable = true;
-    wireplumber.enable = true;
-  };
-
-  # PipeWire systemd環境変数設定
-  systemd.user.services.pipewire.environment = {
-    SPA_PLUGIN_DIR = "${pkgs.pipewire}/lib/spa-0.2";
-  };
-  systemd.user.services.wireplumber.environment = {
-    SPA_PLUGIN_DIR = "${pkgs.pipewire}/lib/spa-0.2";
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -123,7 +111,6 @@
   };
 
   boot.kernelParams = [
-    "drm_kms_helper.poll=1" # ホットプラグ検出をポーリングで補う（回避策）
     "usbcore.autosuspend=-1" # USB自動サスペンドを無効化
   ];
 
@@ -132,11 +119,15 @@
   services.udev.extraRules = ''
     # すべてのHID入力デバイスの自動サスペンドを無効化
     ACTION=="add", SUBSYSTEM=="usb", DRIVER=="usbhid", TEST=="power/control", ATTR{power/control}="on"
+
+    # 入力デバイスのACL設定
+    KERNEL=="event[0-9]*", SUBSYSTEM=="input", TAG+="uaccess"
   '';
 
-  hardware.enableAllFirmware = true;
-  hardware.enableAllHardware = true;
   services.libinput.enable = true;
+
+  # logind設定でinputデバイスのACLを有効化
+  services.logind.powerKey = "ignore";
 
   # USB電源管理の設定
   powerManagement.enable = true;
