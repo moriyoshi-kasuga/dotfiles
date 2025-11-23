@@ -34,6 +34,8 @@ help)
   ;;
 esac
 
+shift
+
 if ! command -v nix &>/dev/null; then
   echo 'Nix is not installed or not in PATH'
   echo 'If you not have Nix installed, goto https://nixos.org/download.html'
@@ -67,7 +69,17 @@ darwin)
   sudo env USER_NIX_VARS="$VARS" nix --extra-experimental-features 'nix-command flakes' run --impure nix-darwin/master#darwin-rebuild -- switch --impure --flake .#"$USERNAME" --impure
   ;;
 nixos)
-  sudo env USER_NIX_VARS="$VARS" nixos-rebuild switch --flake .#"$USERNAME" --impure
+  if [ "$1" == "--upgrade" ]; then
+    echo 'Upgrading NixOS system...'
+  elif [ -z "$1" ]; then
+    echo 'Applying NixOS configuration...'
+  else
+    echo "Unknown argument for nixos option: $1"
+    echo 'Usage: ./init.sh nixos [--upgrade]'
+    exit 1
+  fi
+  # shellcheck disable=SC2068
+  sudo env USER_NIX_VARS="$VARS" nixos-rebuild switch --flake .#"$USERNAME" --impure $@
   ;;
 *) ;;
 esac
