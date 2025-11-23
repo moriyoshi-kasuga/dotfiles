@@ -60,6 +60,26 @@ config.keys = {
 		action = wezterm.action.PasteFrom("Clipboard"),
 	},
 	{
+		key = "c",
+		mods = "SUPER",
+		action = wezterm.action.CopyTo("Clipboard"),
+	},
+	{
+		key = "v",
+		mods = "SUPER",
+		action = wezterm.action.PasteFrom("Clipboard"),
+	},
+	{
+		key = "c",
+		mods = "CTRL|SHIFT",
+		action = wezterm.action.CopyTo("Clipboard"),
+	},
+	{
+		key = "v",
+		mods = "CTRL|SHIFT",
+		action = wezterm.action.PasteFrom("Clipboard"),
+	},
+	{
 		key = "f",
 		mods = "CMD",
 		action = font.selector_action(),
