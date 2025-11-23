@@ -44,6 +44,7 @@
     tokei
     uv
     sccache
+    cyme
   ];
 
   programs.zsh.shellAliases = {
