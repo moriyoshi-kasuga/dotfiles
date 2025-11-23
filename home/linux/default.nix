@@ -11,6 +11,9 @@
     (writeShellScriptBin "open" ''
       xdg-open "$@"
     '')
+    (writeShellScriptBin "mogo" ''
+      RUSTC_WRAPPER=sccache mold -run cargo $@
+    '')
     xdg-utils
     docker
     docker-compose

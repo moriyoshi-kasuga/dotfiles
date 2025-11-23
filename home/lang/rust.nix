@@ -48,6 +48,5 @@
 
   programs.zsh.shellAliases = {
     typos = "typos --config ~/.config/typos.toml";
-    mogo = "RUSTC_WRAPPER=sccache mold -run cargo";
   };
 }
