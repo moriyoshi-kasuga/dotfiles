@@ -39,6 +39,7 @@
 
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
+  # sound.enable = true; # alereday changed to services.pipewire.alsa.enable
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -47,10 +48,14 @@
     pulse.enable = true;
     jack.enable = true;
     wireplumber.enable = true;
+  };
 
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
+  # PipeWire systemd環境変数設定
+  systemd.user.services.pipewire.environment = {
+    SPA_PLUGIN_DIR = "${pkgs.pipewire}/lib/spa-0.2";
+  };
+  systemd.user.services.wireplumber.environment = {
+    SPA_PLUGIN_DIR = "${pkgs.pipewire}/lib/spa-0.2";
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
