@@ -45,8 +45,7 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
+    jack.enable = true;
 
     # use the example session manager (no others are packaged yet so this is enabled by default,
     # no need to redefine it in your config for now)
@@ -98,4 +97,30 @@
     remotePlay.openFirewall = true;
     dedicatedServer.openFirewall = true;
   };
+
+  hardware.nvidia = {
+    open = true;
+    powerManagement.enable = true; # May require additional configuration
+    nvidiaSettings = true;
+    modesetting.enable = true;
+
+    prime.offload = {
+      enable = true;
+      enableOffloadCmd = true;
+    };
+
+  };
+
+  boot.kernelParams = [
+    "drm_kms_helper.poll=1" # ホットプラグ検出をポーリングで補う（回避策）
+  ];
+  # services.udev.extraRules = ''
+  #   ACTION=="change", SUBSYSTEM=="drm", ENV{HOTPLUG}=="1", RUN+="hotPlugMonitor"
+  # '';
+  #
+  # home.packages = with pkgs; [
+  #   # TODO: implement hotPlugMonitor script
+  #   (writeShellScriptBin "hotPlugMonitor" '''')
+  # ];
+
 }
