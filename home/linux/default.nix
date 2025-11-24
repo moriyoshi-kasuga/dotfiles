@@ -20,7 +20,8 @@
     docker
     docker-compose
     zsh
-    gcc
+    clang
+    gcc-unwrapped
   ];
 
   pkgPackages = with pkgs; [
