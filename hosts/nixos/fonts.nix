@@ -2,7 +2,7 @@
 
 {
   fonts = {
-    fonts = with pkgs; [
+    packages = with pkgs; [
       nerd-fonts.jetbrains-mono
       nerd-fonts.commit-mono
       noto-fonts

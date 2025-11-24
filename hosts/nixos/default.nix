@@ -28,11 +28,11 @@
       variant = "";
     };
     enable = true;
-    libinput.enable = true;
     displayManager.lightdm.enable = true;
     desktopManager.cinnamon.enable = true;
-    displayManager.defaultSession = "cinnamon";
   };
+  services.libinput.enable = true;
+  services.displayManager.defaultSession = "cinnamon";
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -123,10 +123,8 @@
     KERNEL=="event[0-9]*", SUBSYSTEM=="input", TAG+="uaccess"
   '';
 
-  services.libinput.enable = true;
-
   # logind設定でinputデバイスのACLを有効化
-  services.logind.powerKey = "ignore";
+  services.logind.settings.Login.HandlePowerKey = "ignore";
 
   # USB電源管理の設定
   powerManagement.enable = true;
