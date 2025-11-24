@@ -26,6 +26,6 @@
 
   imports = [
     ./lazygit.nix
-    ./delta.nix
+    ./difftastic.nix
   ];
 }
