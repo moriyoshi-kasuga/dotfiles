@@ -14,9 +14,6 @@
   '';
 
   home.packages = with pkgs; [
-    # A Modern Linker
-    mold
-
     cargo-msrv
     cargo-nextest
     cargo-udeps
@@ -46,6 +43,8 @@
     sccache
     cyme
   ];
+
+  home.sessionVariables.RUSTC_WRAPPER = "${pkgs.sccache}/bin/sccache";
 
   programs.zsh.shellAliases = {
     typos = "typos --config ~/.config/typos.toml";

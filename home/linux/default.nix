@@ -11,9 +11,10 @@
     (writeShellScriptBin "open" ''
       xdg-open "$@"
     '')
-    (writeShellScriptBin "mogo" ''
-      RUSTC_WRAPPER=sccache mold -run cargo $@
+    (writeShellScriptBin "wigo" ''
+      RUSTFLAGS="-Clinker=clang -Clink-args=--ld-path=wild" cargo $@
     '')
+    wild-unwrapped
     xclip
     xdg-utils
     docker
