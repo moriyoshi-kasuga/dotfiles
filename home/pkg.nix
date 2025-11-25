@@ -11,6 +11,7 @@ let
       ffmpeg
       openssl
       sqlite
+      icu
     ])
     ++ config.pkgPackages;
   ldLibraryPathPackages =
@@ -18,6 +19,7 @@ let
       openssl
       sqlite
       ffmpeg
+      icu
     ])
     ++ config.ldLibraryPathPackages;
 in
