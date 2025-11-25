@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-# options: init, update, darwin, help (default init)
+# options: flake, update, darwin, help
 
 OPTIONS=$1
 case $OPTIONS in
-init) ;;
-darwin) ;;
+flake) ;;
 nixos) ;;
+darwin) ;;
 update)
   echo 'Updating Nix configuration...'
   nix --extra-experimental-features 'nix-command flakes' flake update
@@ -16,7 +16,8 @@ update)
 help)
   echo 'Usage: ./init.sh [option]'
   echo 'Options:'
-  echo '  init    - Initialize the Nix configuration (default)'
+  echo '  flake    - Apply the Nix configuration using flakes'
+  echo '  nixos    - Apply the Nix configuration on NixOS'
   echo '  update  - Update the Nix configuration'
   echo '  darwin  - Apply the Nix configuration on macOS'
   echo '  help    - Show this help message'
@@ -24,14 +25,16 @@ help)
   ;;
 *)
   if [ -z "$OPTIONS" ]; then
-    OPTIONS="init"
+    echo 'No option provided.'
   else
     echo "Unknown option: $OPTIONS"
-    echo 'Use ./init.sh help to see available options.'
-    exit 1
   fi
+  echo 'Use ./init.sh help to see available options.'
+  exit 1
   ;;
 esac
+
+shift
 
 if ! command -v nix &>/dev/null; then
   echo 'Nix is not installed or not in PATH'
@@ -59,14 +62,24 @@ VARS=$(nix --extra-experimental-features 'nix-command' eval --json --expr "$VARS
 
 echo 'Building Nix configuration...'
 case $OPTIONS in
-init)
+flake)
   USER_NIX_VARS=$VARS nix --extra-experimental-features 'nix-command flakes' run --impure home-manager/master -- switch --impure --extra-experimental-features 'nix-command flakes' --flake .#"$USERNAME" --impure -b backup
   ;;
 darwin)
   sudo env USER_NIX_VARS="$VARS" nix --extra-experimental-features 'nix-command flakes' run --impure nix-darwin/master#darwin-rebuild -- switch --impure --flake .#"$USERNAME" --impure
   ;;
 nixos)
-  sudo env USER_NIX_VARS="$VARS" nixos-rebuild switch --flake .#"$USERNAME" --impure
+  if [ "$1" == "--upgrade" ]; then
+    echo 'Upgrading NixOS system...'
+  elif [ -z "$1" ]; then
+    echo 'Applying NixOS configuration...'
+  else
+    echo "Unknown argument for nixos option: $1"
+    echo 'Usage: ./init.sh nixos [--upgrade]'
+    exit 1
+  fi
+  # shellcheck disable=SC2068
+  sudo env USER_NIX_VARS="$VARS" nixos-rebuild switch --flake .#"$USERNAME" --impure $@
   ;;
 *) ;;
 esac

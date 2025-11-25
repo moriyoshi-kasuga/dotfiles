@@ -23,7 +23,7 @@
       git = {
         pagers = [
           {
-            pager = "delta --dark --paging=never";
+            pager = "delta --dark --paging=never --diff-so-fancy";
           }
         ];
       };

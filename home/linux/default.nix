@@ -3,19 +3,25 @@
 {
   home.packages = with pkgs; [
     (writeShellScriptBin "pbpaste" ''
-      wl-paste --no-newline
+      xclip -selection clipboard -o
     '')
     (writeShellScriptBin "pbcopy" ''
-      wl-copy --trim-newline
+      xclip -selection clipboard -i
     '')
     (writeShellScriptBin "open" ''
       xdg-open "$@"
     '')
+    (writeShellScriptBin "wigo" ''
+      RUSTFLAGS="-Clinker=clang -Clink-args=--ld-path=wild" cargo $@
+    '')
+    wild-unwrapped
+    xclip
     xdg-utils
     docker
     docker-compose
     zsh
-    gcc
+    clang
+    gcc-unwrapped
   ];
 
   pkgPackages = with pkgs; [

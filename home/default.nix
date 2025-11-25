@@ -42,4 +42,12 @@ in
   };
 
   programs.home-manager.enable = true;
+
+  imports = [
+    ./zsh
+    ./git
+    ./tools
+    ./lang
+    ./editor
+  ];
 }
