@@ -23,7 +23,7 @@
       git = {
         pagers = [
           {
-            externalDiffCommand = "difft --color=always";
+            pager = "delta --dark --paging=never";
           }
         ];
       };
