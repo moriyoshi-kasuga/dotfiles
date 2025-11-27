@@ -12,9 +12,6 @@
       url = "github:nix-darwin/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixos-hardware = {
-      url = "github:NixOS/nixos-hardware/master";
-    };
   };
 
   outputs =
@@ -22,7 +19,6 @@
       nixpkgs,
       catppuccin,
       home-manager,
-      nixos-hardware,
       nix-darwin,
       ...
     }:
@@ -78,20 +74,7 @@
               users.${vars.username}.imports = homeModules;
             };
           }
-
-          {
-            hardware.nvidia.prime = {
-              intelBusId = "PCI:0:2:0";
-              nvidiaBusId = "PCI:1:0:0";
-            };
-          }
-        ]
-        ++ (with nixos-hardware.nixosModules; [
-          common-cpu-intel
-          common-gpu-nvidia
-          common-pc-ssd
-          common-pc-laptop
-        ]);
+        ];
       };
     };
 }

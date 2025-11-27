@@ -30,6 +30,10 @@
     enable = true;
     displayManager.lightdm.enable = true;
     desktopManager.cinnamon.enable = true;
+    videoDrivers = [
+      "modesetting"
+      "nvidia"
+    ];
   };
   services.libinput.enable = true;
   services.displayManager.defaultSession = "cinnamon";
@@ -96,17 +100,16 @@
     dedicatedServer.openFirewall = true;
   };
 
+  hardware.opengl.enable = true;
   hardware.nvidia = {
     open = true;
-    powerManagement.enable = true; # May require additional configuration
-    nvidiaSettings = true;
-    modesetting.enable = true;
 
-    prime.offload = {
-      enable = true;
-      enableOffloadCmd = true;
+    prime = {
+      offload.enable = true;
+
+      intelBusId = "PCI:0:2:0";
+      nvidiaBusId = "PCI:1:0:0";
     };
-
   };
 
   boot.kernelParams = [
