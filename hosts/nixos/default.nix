@@ -100,9 +100,13 @@
     dedicatedServer.openFirewall = true;
   };
 
-  hardware.opengl.enable = true;
+  hardware.graphics.enable = true;
   hardware.nvidia = {
     open = true;
+    powerManagement.enable = false;
+    powerManagement.finegrained = false;
+    nvidiaSettings = true;
+    modesetting.enable = true;
 
     prime = {
       offload.enable = true;
