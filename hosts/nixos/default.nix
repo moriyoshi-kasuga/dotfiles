@@ -28,15 +28,23 @@
       variant = "";
     };
     enable = true;
-    displayManager.lightdm.enable = true;
     desktopManager.cinnamon.enable = true;
     videoDrivers = [
       "modesetting"
       "nvidia"
     ];
   };
+
+  # Display Manager configuration
+  services.displayManager = {
+    defaultSession = "cinnamon";
+  };
+  services.xserver.displayManager.lightdm = {
+    enable = true;
+    greeters.slick.enable = true;
+  };
+
   services.libinput.enable = true;
-  services.displayManager.defaultSession = "cinnamon";
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
