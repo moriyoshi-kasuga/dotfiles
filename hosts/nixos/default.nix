@@ -30,7 +30,7 @@
     enable = true;
     desktopManager.cinnamon.enable = true;
     videoDrivers = [
-      "modesetting"
+      # "modesetting"
       "nvidia"
     ];
   };
@@ -114,11 +114,11 @@
     powerManagement.enable = false;
     powerManagement.finegrained = false;
     nvidiaSettings = true;
-    modesetting.enable = true;
+    # modesetting.enable = true;
 
     prime = {
-      offload.enable = true;
-      offload.enableOffloadCmd = true;
+      # offload.enable = true;
+      # offload.enableOffloadCmd = true;
 
       intelBusId = "PCI:0:2:0";
       nvidiaBusId = "PCI:1:0:0";
