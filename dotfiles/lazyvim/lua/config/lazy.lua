@@ -31,7 +31,7 @@ require("lazy").setup({
 		{ import = "plugins" },
 		-- { import = "plugins.coding" },
 	},
-
+  change_detection = { enabled = false},
 	checker = { enabled = false },
 	performance = {
 		cache = {
