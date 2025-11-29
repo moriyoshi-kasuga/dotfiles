@@ -117,6 +117,7 @@
     # modesetting.enable = true;
 
     prime = {
+      sync.enable = true;
       # offload.enable = true;
       # offload.enableOffloadCmd = true;
 
