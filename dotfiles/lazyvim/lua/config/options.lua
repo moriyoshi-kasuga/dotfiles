@@ -6,6 +6,12 @@ vim.opt.autoread = true
 vim.opt.hidden = true
 vim.opt.mouse = "a"
 
+vim.opt.laststatus = 3
+vim.opt.splitkeep = "screen"
+
+-- disable nvim intro
+vim.opt.shortmess:append "sI"
+
 vim.opt.wrap = false
 vim.opt.number = true
 vim.opt.relativenumber = true
@@ -36,3 +42,16 @@ vim.opt.incsearch = true
 vim.opt.hlsearch = true
 vim.opt.wrapscan = true
 vim.opt.wildmode = { list = "longest" }
+
+vim.opt.undofile = true
+vim.opt.undolevels = 10000
+
+vim.opt.whichwrap:append "<>[]hl"
+
+vim.g.clipboard = vim.env.SSH_CONNECTION and "" or "pbcopy"
+
+-- disable some default providers
+vim.g.loaded_node_provider = 0
+vim.g.loaded_python3_provider = 0
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_ruby_provider = 0
