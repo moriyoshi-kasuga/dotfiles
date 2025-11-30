@@ -88,6 +88,8 @@
     wget
     alsa-utils
     pulseaudio
+    easyeffects
+    helvum
   ];
 
   # Enable the OpenSSH daemon.
