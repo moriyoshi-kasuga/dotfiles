@@ -17,7 +17,7 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.cursorline = false
 vim.opt.cursorcolumn = false
-vim.opt.virtualedit = "onemore"
+vim.opt.virtualedit = "block"
 vim.opt.visualbell = false
 vim.opt.errorbells = false
 vim.opt.showmatch = true
@@ -45,8 +45,6 @@ vim.opt.wildmode = { list = "longest" }
 
 vim.opt.undofile = true
 vim.opt.undolevels = 10000
-
-vim.opt.whichwrap:append "<>[]hl"
 
 vim.g.clipboard = vim.env.SSH_CONNECTION and "" or "pbcopy"
 
