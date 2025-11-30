@@ -19,7 +19,8 @@ return {
         ['<C-space>'] = { 'show', 'show_documentation', 'hide_documentation' },
         ['<C-e>'] = { 'cancel', 'fallback' },
         ['<C-y>'] = { 'select_and_accept', 'fallback' },
-        ['<S-CR>'] = { 'cancel', 'fallback' },
+        ['<S-CR>'] = { 'fallback' },
+        ['<C-CR>'] = { 'fallback' },
         ['<CR>'] = { 'accept', 'fallback' },
 
         ['<Tab>'] = { 'snippet_forward', 'fallback' },
