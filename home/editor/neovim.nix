@@ -13,9 +13,7 @@ in
   catppuccin.nvim.enable = false;
 
   home.activation.nvim = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    if [ ! -e ${config.home.homeDirectory}/.config/nvim ]; then
-      ln -s ${vars.dotfilesRepoDir}/dotfiles/lazyvim ${config.home.homeDirectory}/.config/nvim
-    fi
+    ln -sfn ${vars.dotfilesRepoDir}/dotfiles/neovim ${config.home.homeDirectory}/.config/nvim
   '';
 
   programs.neovim = {
