@@ -55,9 +55,6 @@ map("n", "<leader>sE", function()
     severity = { "ERROR" },
   })
 end, { desc = "Error Diagnostics" })
-map({ "n", "v" }, "ga", function()
-  vim.lsp.buf.code_action()
-end, { desc = "Code Action" })
 
 -- Toggle statusline
 map("n", "<leader>uS", function()
