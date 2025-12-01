@@ -6,5 +6,6 @@
     ./rust.nix
     ./go.nix
     ./haskell.nix
+    ./nix.nix
   ];
 }

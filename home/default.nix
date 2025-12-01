@@ -29,7 +29,6 @@ in
 
   home.packages = [
     pkgs.fastfetch
-    pkgs.nixfmt-rfc-style
   ];
 
   home.file = {
