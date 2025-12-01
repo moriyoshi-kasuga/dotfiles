@@ -10,9 +10,8 @@ return {
     },
     indent = {
       enabled = true,
-      indent = {
-        only_current= true,
-        only_scope= true,
+      animate = {
+        enabled = false
       }
     },
     picker = {
@@ -40,26 +39,11 @@ return {
         },
       },
     },
-    dashboard = {
-      enabled = true,
-      preset = {
-        ---@type snacks.dashboard.Item[]
-        keys = {
-          { icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
-          { icon = " ", key = "/", desc = "Find Text", action = ":lua Snacks.dashboard.pick('live_grep')" },
-          { icon = " ", key = "q", desc = "Quit", action = ":qa" },
-        },
-      },
-    },
     bigfile = {
       enabled = true,
     },
   },
   keys = {
-    {
-      "s",
-      enable = false,
-    },
     {
       ",",
       enable = false,
@@ -67,9 +51,9 @@ return {
     {
       ",<cr>",
       function()
-        Snacks.picker.picker_actions()
+        Snacks.picker.pick()
       end,
-      desc = "Picker Actions",
+      desc = "Pick",
     },
     {
       ",g",
@@ -90,7 +74,9 @@ return {
     {
       ",w",
       function()
-        Snacks.picker.grep_word()
+        Snacks.picker.grep_word({
+          hidden = true,
+        })
       end,
       desc = "Grep String",
       mode = { "n", "x" },
@@ -108,6 +94,26 @@ return {
         Snacks.picker.colorschemes()
       end,
       desc = "Colorscheme",
+    },
+    {
+      ",e",
+      function()
+        Snacks.picker({
+          finder = "proc",
+          cmd = "fd",
+          args = { "-H", "-E", ".git", "-t", "d" },
+          confirm = function(picker, item)
+            picker:close()
+            if item then
+              require("oil").open(item.file)
+            end
+          end,
+          transform = function(item)
+            item.file = item.text
+          end,
+        })
+      end,
+      desc = "Open Folder by Oil",
     },
     {
       ",s",
@@ -190,5 +196,17 @@ return {
       end,
       desc = "Dim",
     },
+
+    { "gd", function() Snacks.picker.lsp_definitions() end, desc = "Goto Definition" },
+    { "gD", function() Snacks.picker.lsp_declarations() end, desc = "Goto Declaration" },
+    { "gr", function() Snacks.picker.lsp_references() end, nowait = true, desc = "References" },
+    { "gI", function() Snacks.picker.lsp_implementations() end, desc = "Goto Implementation" },
+    { "gy", function() Snacks.picker.lsp_type_definitions() end, desc = "Goto T[y]pe Definition" },
+    { "gai", function() Snacks.picker.lsp_incoming_calls() end, desc = "C[a]lls Incoming" },
+    { "gao", function() Snacks.picker.lsp_outgoing_calls() end, desc = "C[a]lls Outgoing" },
+
+    { "K", function() return vim.lsp.buf.hover() end, desc = "Hover" },
+    { "gK", function() return vim.lsp.buf.signature_help() end, desc = "Signature Help" },
+    { "<c-k>", function() return vim.lsp.buf.signature_help() end, mode = "i", desc = "Signature Help" },
   },
 }
