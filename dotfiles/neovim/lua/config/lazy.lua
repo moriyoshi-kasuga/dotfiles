@@ -21,13 +21,6 @@ require("lazy").setup({
     missing = true,
   },
 	spec = {
-    {
-      "catppuccin/nvim", name = "catppuccin", priority = 1000,
-      init = function()
-        vim.cmd('colorschem catppuccin-mocha')
-      end
-    },
-
 		{ import = "plugins" },
 		{ import = "plugins.utils" },
 	},
