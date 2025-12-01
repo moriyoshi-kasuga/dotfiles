@@ -2,6 +2,7 @@ return {
   "ThePrimeagen/harpoon",
   branch = "harpoon2",
   dependencies = { "nvim-lua/plenary.nvim" },
+  lazy = true,
   opts = function()
     return {
       menu = { width = vim.api.nvim_win_get_width(0) - 4 },
@@ -11,11 +12,11 @@ return {
     }
   end,
   keys = function()
-    local harpoon = require("harpoon")
     local keys = {
       {
         "<leader>m",
         function()
+          local harpoon = require("harpoon")
           harpoon.ui:toggle_quick_menu(harpoon:list())
         end,
         desc = "Harpoon Quick Menu",
@@ -23,14 +24,14 @@ return {
       {
         "<leader>k",
         function()
-          harpoon:list():select(1)
+          require("harpoon"):list():select(1)
         end,
         desc = "Harpoon Select Scratchpad",
       },
       {
         "<leader>K",
         function()
-          harpoon:list():replace_at(1)
+          require("harpoon"):list():replace_at(1)
         end,
         desc = "Harpoon Write to Scratchpad",
       },
@@ -43,14 +44,14 @@ return {
       table.insert(keys, {
         "<C-" .. target .. ">",
         function()
-          harpoon:list():select(i)
+          require("harpoon"):list():select(i)
         end,
         desc = "Harpoon Select " .. i,
       })
       table.insert(keys, {
         "," .. target,
         function()
-          harpoon:list():replace_at(i)
+          require("harpoon"):list():replace_at(i)
         end,
         desc = "Harpoon Write to " .. i,
       })

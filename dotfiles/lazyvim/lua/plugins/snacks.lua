@@ -3,6 +3,8 @@ return {
     "snacks.nvim",
     opts = {
       picker = {
+        -- Disable auto-loading of picker config modules at startup
+        preload = false,
         formatters = {
           file = {
             truncate = 200,

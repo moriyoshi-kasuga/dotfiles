@@ -21,12 +21,15 @@ end
 del_lazyvim_auto_cmd("close_with_q")
 del_lazyvim_auto_cmd("wrap_spell")
 
+-- Defer mini.pairs setup to avoid UIEnter delay
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "rust" },
   group = vim.api.nvim_create_augroup("disable_completion_single_quote_on_rust", { clear = true }),
   callback = function()
-    LazyVim.on_load("mini.pairs", function()
-      vim.keymap.set("i", "'", "'", { buffer = true })
-    end)
+    vim.defer_fn(function()
+      LazyVim.on_load("mini.pairs", function()
+        vim.keymap.set("i", "'", "'", { buffer = true })
+      end)
+    end, 100)
   end,
 })
