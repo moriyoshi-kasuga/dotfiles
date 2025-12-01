@@ -29,7 +29,7 @@ require("lazy").setup({
     },
 
 		{ import = "plugins" },
-		-- { import = "plugins.coding" },
+		{ import = "plugins.utils" },
 	},
   change_detection = { enabled = false},
 	checker = { enabled = false },
