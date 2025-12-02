@@ -14,6 +14,8 @@
   system.stateVersion = 6;
   system.primaryUser = "${vars.username}";
 
+  users.users.${vars.username}.home = "${vars.homeDirectory}";
+
   imports = [
     ./dock.nix
     ./finder.nix
