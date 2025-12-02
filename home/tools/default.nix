@@ -18,6 +18,7 @@
     tailspin
     xh
     dust
+    duf
     git-cliff
     kind
     kubernetes-helm
