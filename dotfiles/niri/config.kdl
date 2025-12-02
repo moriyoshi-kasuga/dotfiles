@@ -281,8 +281,8 @@ binds {
   // shows a list of important hotkeys.
   Mod+Shift+Slash { show-hotkey-overlay; }
 
-  Super+Space hotkey-overlay-title="Launcher: fuzzel" { spawn "fuzzel"; }
-  Super+Alt+L hotkey-overlay-title="Lock the Screen: hyprlock" { spawn "hyprlock"; }
+  Super+Space hotkey-overlay-title="Launcher" { spawn-sh "noctalia-shell ipc call launcher toggle"; }
+  Super+Alt+L hotkey-overlay-title="SessionMenu" { spawn-sh "noctalia-shell ipc call sessionMenu toggle"; }
 
   // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
   // Note: the entire command goes as a single argument. It's passed verbatim to `sh -c`.

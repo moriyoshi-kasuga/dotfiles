@@ -12,12 +12,6 @@
     wayland
     niri
 
-    # Launcher
-    fuzzel
-
-    # Screen locker
-    hyprlock
-
     # XDG Portals (スクリーンキャスト、ファイル選択等に必要)
     xdg-desktop-portal-gnome
     xdg-desktop-portal-gtk
@@ -51,10 +45,6 @@
 
   programs = {
     niri = {
-      enable = true;
-    };
-
-    hyprlock = {
       enable = true;
     };
 
