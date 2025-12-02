@@ -49,11 +49,6 @@
     NIXOS_OZONE_WL = "1";
   };
 
-  services.displayManager.sddm = {
-    wayland.enable = true;
-    enable = true;
-  };
-
   programs = {
     niri = {
       enable = true;
