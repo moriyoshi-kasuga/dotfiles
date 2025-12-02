@@ -234,11 +234,11 @@ dotfiles/
 
 このdotfilesはNixOS上で以下の機能を提供します:
 
-- **デスクトップ環境**: Cinnamon Desktop Environment
-- **ディスプレイマネージャー**: LightDM
+- **ウィンドウマネージャー**: Niri (スクロール可能なタイリングWaylandコンポジタ)
+- **ディスプレイマネージャー**: SDDM (Wayland対応)
 - **グラフィックス**: NVIDIA GPU サポート (Optimus対応)
 - **フォント**: Nerd Fonts (JetBrains Mono, Commit Mono), Noto Fonts (CJK対応)
-- **オーディオ**: PipeWire
+- **オーディオ**: PipeWire (Bluetoothオーディオ対応)
 - **仮想化**: Rootless Docker
 - **ネットワーク**: NetworkManager, Tailscale
 - **ゲーミング**: Steam サポート
