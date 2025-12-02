@@ -1,5 +1,7 @@
 {
   pkgs,
+  inputs,
+  vars,
   ...
 }:
 
@@ -25,7 +27,19 @@
     # Screenshot utilities (niriには内蔵されているが、追加ツールも有用)
     grim
     slurp
+
+    inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
+
+  home-manager.users.${vars.username} = {
+    imports = [
+      inputs.noctalia.homeModules.default
+    ];
+
+    programs.noctalia-shell = {
+      enable = true;
+    };
+  };
 
   environment.sessionVariables = {
     QT_QPA_PLATFORM = "wayland";
