@@ -1,5 +1,3 @@
-{ ... }:
-
 {
   # Steam ゲーミングプラットフォーム
   programs.steam = {

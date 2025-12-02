@@ -1,14 +1,16 @@
 { config, ... }:
 
 {
-  # OpenSSH
-  services.openssh.enable = true;
+  services = {
+    # OpenSSH
+    openssh.enable = true;
 
-  # プリンター (CUPS)
-  services.printing.enable = true;
+    # プリンター (CUPS)
+    printing.enable = true;
 
-  # Tailscale VPN
-  services.tailscale.enable = true;
+    # Tailscale VPN
+    tailscale.enable = true;
+  };
 
   # ファイアウォール設定
   networking.firewall = {

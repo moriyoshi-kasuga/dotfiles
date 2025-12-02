@@ -1,7 +1,5 @@
 {
   pkgs,
-  vars,
-  dotfilesPath,
   ...
 }:
 
