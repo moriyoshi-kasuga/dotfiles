@@ -3,10 +3,10 @@
 {
   home.packages = with pkgs; [
     (writeShellScriptBin "pbpaste" ''
-      xclip -selection clipboard -o
+      wl-paste --no-newline
     '')
     (writeShellScriptBin "pbcopy" ''
-      xclip -selection clipboard -i
+      wl-copy --trim-newline
     '')
     (writeShellScriptBin "open" ''
       xdg-open "$@"
@@ -15,7 +15,6 @@
       RUSTFLAGS="-Clinker=clang -Clink-args=--ld-path=wild" cargo $@
     '')
     wild-unwrapped
-    xclip
     xdg-utils
     docker
     docker-compose

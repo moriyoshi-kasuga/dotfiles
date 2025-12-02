@@ -64,6 +64,7 @@
     packages = with pkgs; [
       brave
       wezterm
+      wl-clipboard
       discord
       slack
       aseprite
