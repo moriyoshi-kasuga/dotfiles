@@ -34,6 +34,7 @@
       "raycast"
       "visual-studio-code"
       "discord"
+      "slack"
     ];
   };
 }
