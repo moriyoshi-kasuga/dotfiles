@@ -40,6 +40,20 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
+  # Bluetooth サポート
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+    settings = {
+      General = {
+        Enable = "Source,Sink,Media,Socket";
+        Experimental = true;
+      };
+    };
+  };
+  services.blueman.enable = true;
+
+  # サウンド設定 (PipeWire)
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -47,6 +61,8 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+    # Bluetooth オーディオサポート
+    wireplumber.enable = true;
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -140,4 +156,5 @@
   # USB電源管理の設定
   powerManagement.enable = true;
   services.upower.enable = true;
+
 }
