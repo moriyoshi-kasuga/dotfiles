@@ -34,6 +34,11 @@ in
   home.file = {
     ".wezterm.lua".text = weztermConfig;
     ".config/wezterm".source = dotfilesPath + /wezterm;
+    ".config/niri/config.kdl" = {
+      source = dotfilesPath + /niri/config.kdl;
+      # Created default config by niri, so force overwrite
+      force = true;
+    };
   };
 
   home.sessionVariables = {

@@ -15,6 +15,7 @@
     ./region.nix
     ./fonts.nix
     ./virtualisation.nix
+    ./niri.nix
   ];
 
   # Bootloader.
@@ -28,20 +29,10 @@
       variant = "";
     };
     enable = true;
-    desktopManager.cinnamon.enable = true;
     videoDrivers = [
       # "modesetting"
       "nvidia"
     ];
-  };
-
-  # Display Manager configuration
-  services.displayManager = {
-    defaultSession = "cinnamon";
-  };
-  services.xserver.displayManager.lightdm = {
-    enable = true;
-    greeters.slick.enable = true;
   };
 
   services.libinput.enable = true;
