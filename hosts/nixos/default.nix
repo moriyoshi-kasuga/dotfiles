@@ -148,6 +148,10 @@
 
     # 入力デバイスのACL設定
     KERNEL=="event[0-9]*", SUBSYSTEM=="input", TAG+="uaccess"
+
+    # マウスとキーボードの追加サポート
+    SUBSYSTEM=="input", GROUP="input", MODE="0660"
+    SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_device", MODE="0664"
   '';
 
   # logind設定でinputデバイスのACLを有効化
