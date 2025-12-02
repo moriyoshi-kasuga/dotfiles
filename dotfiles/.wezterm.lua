@@ -12,13 +12,16 @@ config.hide_tab_bar_if_only_one_tab = true
 
 config.color_scheme = "@COLORSCHEME@" --binding by nix
 
--- 最初からフルスクリーンで起動
-local mux = wezterm.mux
-wezterm.on("gui-startup", function()
-	local _, pane, window = mux.spawn_window({})
-	window:gui_window():perform_action(wezterm.action.ToggleFullScreen, pane)
-end)
-config.native_macos_fullscreen_mode = true
+-- Linuxはniriを使うのでフルスクリーンで起動しないようにする
+if wezterm.target_triple ~= "x86_64-unknown-linux-gnu" then
+	-- 最初からフルスクリーンで起動
+	local mux = wezterm.mux
+	wezterm.on("gui-startup", function()
+		local _, pane, window = mux.spawn_window({})
+		window:gui_window():perform_action(wezterm.action.ToggleFullScreen, pane)
+	end)
+	config.native_macos_fullscreen_mode = true
+end
 
 ---- フォントの設定
 local font = require("font")
