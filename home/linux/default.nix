@@ -43,7 +43,6 @@
     alsa-lib
     vulkan-loader
     vulkan-tools
-    libudev-zero
     xorg.libX11
     xorg.libXcursor
     xorg.libXi
@@ -53,7 +52,6 @@
     libdrm
     wayland
     alsa-lib
-    libudev-zero
   ];
   ldLibraryPathPackages = with pkgs; [
     llvmPackages_20.libllvm
@@ -61,7 +59,6 @@
     wayland
     alsa-lib
     vulkan-loader
-    libudev-zero
     xorg.libX11
     xorg.libXcursor
     xorg.libXi
