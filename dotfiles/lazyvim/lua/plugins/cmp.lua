@@ -7,6 +7,10 @@ return {
       },
 
       completion = {
+        accept = {
+          auto_brackets = { enabled = false },
+        },
+
         menu = {
           border = "single",
           scrolloff = 1,
