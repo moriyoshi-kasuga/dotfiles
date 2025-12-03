@@ -97,8 +97,10 @@ return {
         end,
         desc = "Buffers",
       },
-      { "<leader>/", LazyVim.pick("grep", { root = false }), desc = "Grep (Cwd)" },
-      { "<leader><space>", LazyVim.pick("files", { root = false }), desc = "Find Files (Cwd)" },
+      { "<leader>/", LazyVim.pick("grep", { root = false, hidden = true }), desc = "Grep (Cwd)" },
+      { "<leader><space>", LazyVim.pick("files", { root = false, hidden = true }), desc = "Find Files (Cwd)" },
+      { "<leader>ff", LazyVim.pick("files", { hidden = true }), desc = "Find Files (Root Dir)" },
+      { "<leader>fF", LazyVim.pick("files", { root = false, hidden = true }), desc = "Find Files (cwd)" },
     },
   },
 }
