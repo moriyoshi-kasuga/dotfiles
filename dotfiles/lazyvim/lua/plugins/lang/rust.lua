@@ -54,6 +54,15 @@ return {
                 ["tokio_macros"] = { "test", "main" },
               },
             },
+
+            -- clippyは非常に重いため、cargo checkで代用する
+            check = {
+              command = "check",
+            },
+            checkOnSave = {
+              command = "check",
+            },
+
             files = {
               excludeDirs = {
                 "**/.git",
