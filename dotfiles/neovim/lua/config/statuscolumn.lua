@@ -9,6 +9,8 @@ _G.StatusColumnFn = function()
     highlight = "%#CmpItemKindConstant#"
     number = vim.v.lnum
   end
-  -- 大抵は1000行以下。あまりにも多い場合はなにか対策する
-  return highlight .. string.format("%3s", number)
+
+  local max_line = vim.fn.line('$')
+  local digits = math.max(#tostring(max_line), 3)
+  return highlight .. string.format("%" .. digits .. "s ", number)
 end
