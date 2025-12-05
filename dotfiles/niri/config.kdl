@@ -261,10 +261,8 @@ window-rule {
   // block-out-from "screencast"
 }
 
-// Example: enable rounded corners for all windows.
-// (This example rule is commented out with a "/-" in front.)
-/-window-rule {
-  geometry-corner-radius 12
+window-rule {
+  geometry-corner-radius 20
   clip-to-geometry true
 }
 
@@ -283,8 +281,8 @@ binds {
   // shows a list of important hotkeys.
   Mod+Shift+Slash { show-hotkey-overlay; }
 
-  Mod+Space hotkey-overlay-title="Launcher" { spawn-sh "noctalia-shell ipc call launcher toggle"; }
-  Super+Alt+L hotkey-overlay-title="SessionMenu" { spawn-sh "noctalia-shell ipc call sessionMenu toggle"; }
+  Mod+Space hotkey-overlay-title="Launcher" { spawn "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
+  Super+Alt+L hotkey-overlay-title="SessionMenu" { spawn "noctalia-shell" "ipc" "call" "sessionMenu" "toggle"; }
 
   // Example volume keys mappings for PipeWire & WirePlumber.
   // The allow-when-locked=true property makes them work even when the session is locked.
@@ -527,4 +525,9 @@ binds {
   // Powers off the monitors. To turn them back on, do any input like
   // moving the mouse or pressing any other key.
   Mod+Shift+P { power-off-monitors; }
+}
+
+debug {
+  // Allows notification actions and window activation from Noctalia.
+  honor-xdg-activation-with-invalid-serial
 }
