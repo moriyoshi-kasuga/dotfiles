@@ -36,7 +36,7 @@ in
     ".wezterm.lua".text = weztermConfig;
     ".config/wezterm".source = config.lib.file.mkOutOfStoreSymlink (dotfilesPath + "/wezterm");
     ".config/nvim" = {
-      source = config.lib.file.mkOutOfStoreSymlink (dotfilesPath + "/lazyvim");
+      source = config.lib.file.mkOutOfStoreSymlink (dotfilesPath + "/neovim");
       force = true;
     };
     ".config/niri/config.kdl" = {

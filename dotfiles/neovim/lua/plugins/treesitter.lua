@@ -1,0 +1,94 @@
+return {
+  "nvim-treesitter/nvim-treesitter",
+  event = { "BufReadPost", "VeryLazy" },
+  dependencies = {
+    { "nvim-treesitter/nvim-treesitter-textobjects" },
+
+    { "haringsrob/nvim_context_vt" },
+  },
+  config = function()
+    ---@diagnostic disable:missing-fields
+    require("nvim-treesitter.configs").setup({
+      ignore_install = { "phpdoc" },
+      auto_install = false, -- Grammars are provided by Nix
+      sync_install = false,
+      highlight = {
+        enable = true,
+        additional_vim_regex_highlighting = false,
+        disable = function(_, bufnr)
+          return bufnr and vim.api.nvim_buf_line_count(bufnr) > 50000
+        end,
+      },
+      rainbow = {
+        enable = true,
+        extended_mode = true,
+      },
+      matchup = {
+        enable = true,
+      },
+      autotag = {
+        enable = true,
+      },
+      endwise = {
+        enable = true,
+      },
+      indent = {
+        enable = true,
+      },
+      textobjects = {
+        select = {
+          enable = true,
+          -- Automatically jump forward to textobj, similar to targets.vim
+          lookahead = true,
+          keymaps = {
+            -- You can use the capture groups defined in textobjects.scm
+            ["af"] = "@function.outer",
+            ["if"] = "@function.inner",
+            ["ai"] = "@conditional.outer",
+            ["ii"] = "@conditional.inner",
+            ["aC"] = "@class.outer",
+            ["iC"] = "@class.inner",
+            ["ac"] = "@comment.outer",
+            ["ic"] = "@comment.inner",
+            ["ab"] = "@block.outer",
+            ["ib"] = "@block.inner",
+            ["al"] = "@loop.outer",
+            ["il"] = "@loop.inner",
+            ["ip"] = "@parameter.inner",
+            ["ap"] = "@parameter.outer",
+          },
+        },
+        swap = {
+          enable = true,
+          swap_next = {
+            ["<leader>>"] = "@parameter.inner",
+          },
+          swap_previous = {
+            ["<leader><"] = "@parameter.inner",
+          },
+        },
+        move = {
+          enable = true,
+          set_jumps = true, -- whether to set jumps in the jumplist
+          goto_next_start = {
+            ["]f"] = "@function.outer",
+            ["]c"] = "@conditional.outer",
+          },
+          goto_next_end = {
+            ["]F"] = "@function.outer",
+            ["]C"] = "@conditional.outer",
+          },
+          goto_previous_start = {
+            ["[f"] = "@function.outer",
+            ["[c"] = "@conditional.outer",
+          },
+          goto_previous_end = {
+            ["[F"] = "@function.outer",
+            ["[C"] = "@conditional.outer",
+          },
+        },
+      },
+      tree_docs = { enable = true },
+    })
+  end,
+}
