@@ -7,6 +7,7 @@ return {
 		{ "haringsrob/nvim_context_vt" },
 	},
 	config = function()
+		---@diagnostic disable:missing-fields
 		require("nvim-treesitter.configs").setup({
 			ignore_install = { "phpdoc" },
 			auto_install = false, -- Grammars are provided by Nix

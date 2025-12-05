@@ -4,7 +4,7 @@ vim.opt.swapfile = false
 vim.opt.writebackup = true
 vim.opt.autoread = true
 vim.opt.hidden = true
-vim.opt.mouse = "a"
+vim.opt.mouse = ""
 
 vim.opt.laststatus = 3
 vim.opt.splitkeep = "cursor"
@@ -43,10 +43,13 @@ vim.opt.hlsearch = true
 vim.opt.wrapscan = true
 vim.opt.wildmode = { list = "longest" }
 
+vim.opt.shada = "!,'50,<10,s5,h"
+
 vim.opt.undofile = true
 vim.opt.undolevels = 10000
 
 vim.g.clipboard = vim.env.SSH_CONNECTION and "" or "pbcopy"
+vim.g.editorconfig = true
 
 -- disable some default providers
 vim.g.loaded_node_provider = 0

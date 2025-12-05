@@ -92,20 +92,18 @@ return {
 					map("n", "gy", function()
 						snacks_picker.lsp_type_definitions()
 					end, "Goto T[y]pe Definition")
-					map("n", "gai", function()
+					map("n", "gsi", function()
 						snacks_picker.lsp_incoming_calls()
-					end, "C[a]lls Incoming")
-					map("n", "gao", function()
+					end, "Call[s] Incoming")
+					map("n", "gso", function()
 						snacks_picker.lsp_outgoing_calls()
-					end, "C[a]lls Outgoing")
+					end, "Call[s] Outgoing")
 
 					-- Hover and signature help
 					map("n", "K", vim.lsp.buf.hover, "Hover")
 					map("n", "gK", vim.lsp.buf.signature_help, "Signature Help")
 					map("i", "<C-k>", vim.lsp.buf.signature_help, "Signature Help")
 
-					-- Code actions
-					map({ "n", "v" }, "ga", vim.lsp.buf.code_action, "Code Action")
 					map("n", "<leader>cr", vim.lsp.buf.rename, "Rename")
 
 					-- Show line diagnostics
