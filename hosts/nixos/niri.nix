@@ -16,11 +16,11 @@
     xdg-desktop-portal-gnome
     xdg-desktop-portal-gtk
 
-    (xwayland-satellite.override { withSystemd = false; }) # Niri automatically runs this when xwayland support is required
+    # Additional packages for better experience
+    qimgv # image viewer
+    mpv # media player
 
-    # Screenshot utilities (niriには内蔵されているが、追加ツールも有用)
-    grim
-    slurp
+    (xwayland-satellite.override { withSystemd = false; }) # Niri automatically runs this when xwayland support is required
 
     inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
