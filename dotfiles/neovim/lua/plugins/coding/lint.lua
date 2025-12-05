@@ -6,21 +6,8 @@ return {
 		config = function()
 			local lint = require("lint")
 
-			-- Configure linters by filetype
-			-- Note: All linters should be installed via Nix
 			lint.linters_by_ft = {
-				lua = { "luacheck" },
 				nix = { "statix" },
-			}
-
-			lint.linters.luacheck.args = {
-				"--globals",
-				"vim",
-				"--formatter",
-				"plain",
-				"--codes",
-				"--ranges",
-				"-",
 			}
 
 			-- Auto-lint on these events

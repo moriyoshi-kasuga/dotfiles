@@ -26,7 +26,6 @@ in
 
       lua-language-server
       stylua
-      luaPackages.luacheck
       nixd
       pyright
       typos-lsp
