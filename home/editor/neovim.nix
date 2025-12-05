@@ -1,7 +1,4 @@
 {
-  config,
-  lib,
-  vars,
   pkgs,
   ...
 }:
@@ -21,22 +18,24 @@ in
       "${treesitterGrammars}"
     ];
 
-    extraPackages = with pkgs; [
+    extraPackages = [
       treesitterGrammars
-
-      lua-language-server
-      stylua
-      nixd
-      pyright
-      typos-lsp
-      ruff
-      hadolint
-      actionlint
-      svelte-language-server
-      tailwindcss-language-server
-      vtsls
     ];
   };
+
+  home.packages = with pkgs; [
+    lua-language-server
+    stylua
+    nixd
+    pyright
+    typos-lsp
+    ruff
+    hadolint
+    actionlint
+    svelte-language-server
+    tailwindcss-language-server
+    vtsls
+  ];
 
   programs.zsh.shellAliases = {
     v = "nvim";
