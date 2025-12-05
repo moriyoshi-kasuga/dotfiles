@@ -22,6 +22,7 @@ require("lazy").setup({
   },
 	spec = {
 		{ import = "plugins" },
+		{ import = "plugins.coding" },
 		{ import = "plugins.utils" },
 	},
   change_detection = { enabled = false},

@@ -25,12 +25,12 @@ in
       treesitterGrammars
 
       lua-language-server
+      stylua
+      luaPackages.luacheck
       nixd
-      efm-langserver
       pyright
       typos-lsp
       ruff
-      stylua
       hadolint
       actionlint
       svelte-language-server
