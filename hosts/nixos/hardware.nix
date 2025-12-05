@@ -1,0 +1,64 @@
+{
+  # グラフィックス設定
+  hardware.graphics.enable = true;
+
+  # NVIDIA GPU 設定
+  hardware.nvidia = {
+    open = true;
+    powerManagement.enable = false;
+    powerManagement.finegrained = false;
+    nvidiaSettings = true;
+    modesetting.enable = true;
+
+    # NVIDIA Optimus (Intel + NVIDIA) 設定
+    prime = {
+      offload = {
+        enable = true;
+        enableOffloadCmd = true;
+      };
+
+      intelBusId = "PCI:0:2:0";
+      nvidiaBusId = "PCI:1:0:0";
+    };
+  };
+  services = {
+    # X11 ディスプレイサーバー設定
+    xserver = {
+      enable = true;
+      xkb = {
+        layout = "us";
+        variant = "";
+      };
+      videoDrivers = [
+        "modesetting"
+        "nvidia"
+      ];
+    };
+
+    # Libinput (タッチパッド・マウス) サポート
+    libinput.enable = true;
+
+    # USB hotplug と HID デバイスのサポート
+    udev = {
+      enable = true;
+      extraRules = ''
+        # すべてのHID入力デバイスの自動サスペンドを無効化
+        ACTION=="add", SUBSYSTEM=="usb", DRIVER=="usbhid", TEST=="power/control", ATTR{power/control}="on"
+
+        # 入力デバイスのACL設定
+        KERNEL=="event[0-9]*", SUBSYSTEM=="input", TAG+="uaccess"
+
+        # マウスとキーボードの追加サポート
+        SUBSYSTEM=="input", GROUP="input", MODE="0660"
+        SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_device", MODE="0664"
+      '';
+    };
+    upower.enable = true;
+
+    # logind設定
+    logind.settings.Login.HandlePowerKey = "ignore";
+  };
+
+  # 電源管理設定
+  powerManagement.enable = true;
+}

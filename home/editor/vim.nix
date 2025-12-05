@@ -42,7 +42,7 @@ in
       VimYazi
     ];
     extraConfig =
-      builtins.readFile (dotfilesPath + /.vimrc)
+      builtins.readFile (dotfilesPath + "/.vimrc")
       + ''
         let g:lightline = {'colorscheme': 'catppuccin_${vars.catppuccinFlavor}'}
         colorscheme catppuccin_${vars.catppuccinFlavor}

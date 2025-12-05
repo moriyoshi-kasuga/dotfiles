@@ -3,10 +3,10 @@
 {
   home.packages = with pkgs; [
     (writeShellScriptBin "pbpaste" ''
-      xclip -selection clipboard -o
+      wl-paste --no-newline
     '')
     (writeShellScriptBin "pbcopy" ''
-      xclip -selection clipboard -i
+      wl-copy --trim-newline
     '')
     (writeShellScriptBin "open" ''
       xdg-open "$@"
@@ -15,7 +15,6 @@
       RUSTFLAGS="-Clinker=clang -Clink-args=--ld-path=wild" cargo $@
     '')
     wild-unwrapped
-    xclip
     xdg-utils
     docker
     docker-compose
@@ -44,7 +43,6 @@
     alsa-lib
     vulkan-loader
     vulkan-tools
-    libudev-zero
     xorg.libX11
     xorg.libXcursor
     xorg.libXi
@@ -54,7 +52,6 @@
     libdrm
     wayland
     alsa-lib
-    libudev-zero
   ];
   ldLibraryPathPackages = with pkgs; [
     llvmPackages_20.libllvm
@@ -62,7 +59,6 @@
     wayland
     alsa-lib
     vulkan-loader
-    libudev-zero
     xorg.libX11
     xorg.libXcursor
     xorg.libXi

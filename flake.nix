@@ -12,10 +12,14 @@
       url = "github:nix-darwin/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    noctalia = {
+      url = "github:noctalia-dev/noctalia-shell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
-    {
+    inputs@{
       nixpkgs,
       catppuccin,
       home-manager,
@@ -24,7 +28,7 @@
     }:
     let
       vars = builtins.fromJSON (builtins.getEnv "USER_NIX_VARS");
-      pkgs = import nixpkgs { system = vars.system; };
+      pkgs = import nixpkgs { inherit (vars) system; };
       homeModules = [
         catppuccin.homeModules.catppuccin
         ./home
@@ -35,7 +39,8 @@
 
       specialArgs = {
         inherit vars;
-        dotfilesPath = ./dotfiles;
+        inherit inputs;
+        dotfilesPath = builtins.toPath vars.dotfilesDir;
       };
     in
     {

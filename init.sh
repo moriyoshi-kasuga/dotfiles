@@ -56,9 +56,9 @@ fi
 
 VARS=$(nix --extra-experimental-features 'nix-command' eval --file ./vars.nix)
 
-dir=$(dirname "$(realpath "$0")")
+dir="$(dirname "$(realpath "$0")")/dotfiles"
 
-VARS=$(nix --extra-experimental-features 'nix-command' eval --json --expr "$VARS // { dotfilesRepoDir = ""$dir""; }")
+VARS=$(nix --extra-experimental-features 'nix-command' eval --json --expr "$VARS // { dotfilesDir = $dir; }")
 
 echo 'Building Nix configuration...'
 case $OPTIONS in

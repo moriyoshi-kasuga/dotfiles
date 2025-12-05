@@ -5,10 +5,6 @@
     lazygit
   ];
 
-  programs.zsh.shellAliases = {
-    lg = "lazygit";
-  };
-
   programs.lazygit = {
     enable = true;
     settings = {
