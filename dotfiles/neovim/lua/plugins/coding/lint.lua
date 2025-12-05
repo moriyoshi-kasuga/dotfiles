@@ -10,17 +10,9 @@ return {
 			-- Note: All linters should be installed via Nix
 			lint.linters_by_ft = {
 				lua = { "luacheck" },
-				-- Example for other languages:
-				-- rust = { "clippy" },
-				-- go = { "golangci-lint" },
-				-- nix = { "nix" },
-				-- typescript = { "eslint" },
-				-- javascript = { "eslint" },
-				-- svelte = { "eslint" },
+				nix = { "statix" },
 			}
 
-			-- Customize linter settings if needed
-			-- Example for luacheck:
 			lint.linters.luacheck.args = {
 				"--globals",
 				"vim",

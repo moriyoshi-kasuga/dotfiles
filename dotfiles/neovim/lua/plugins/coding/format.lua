@@ -22,23 +22,14 @@ return {
 			-- Note: All formatters should be installed via Nix
 			formatters_by_ft = {
 				lua = { "stylua" },
-				-- Example for other languages:
-				-- rust = { "rustfmt" },
-				-- go = { "gofmt", "goimports" },
-				-- nix = { "nixpkgs-fmt" },
-				-- javascript = { "prettier" },
-				-- typescript = { "prettier" },
-				-- svelte = { "prettier" },
-				-- c = { "clang-format" },
-				-- zig = { "zigfmt" },
+				rust = { "rustfmt" },
+				nix = { "nixfmt" },
 			},
 
-			-- Customize formatter settings if needed
 			formatters = {
-				-- Example for stylua:
-				-- stylua = {
-				--   prepend_args = { "--indent-type", "Spaces", "--indent-width", "2" },
-				-- },
+				stylua = {
+					prepend_args = { "--indent-type", "Spaces", "--indent-width", "2" },
+				},
 			},
 
 			-- Disable auto-formatting on save (as requested)
