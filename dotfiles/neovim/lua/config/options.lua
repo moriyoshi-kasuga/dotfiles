@@ -7,10 +7,10 @@ vim.opt.hidden = true
 vim.opt.mouse = "a"
 
 vim.opt.laststatus = 3
-vim.opt.splitkeep = "screen"
+vim.opt.splitkeep = "cursor"
 
 -- disable nvim intro
-vim.opt.shortmess:append "sI"
+vim.opt.shortmess:append("sI")
 
 vim.opt.wrap = false
 vim.opt.number = true
@@ -56,5 +56,5 @@ vim.g.loaded_ruby_provider = 0
 
 local treesitter_grammars = vim.env.TREESITTER_GRAMMARS
 if treesitter_grammars then
-  vim.opt.runtimepath:append(treesitter_grammars)
+	vim.opt.runtimepath:append(treesitter_grammars)
 end
