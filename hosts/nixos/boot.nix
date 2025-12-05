@@ -9,6 +9,7 @@
     # USB自動サスペンドを無効化
     kernelParams = [
       "usbcore.autosuspend=-1"
+      "nvidia_drm.modeset=1"
     ];
   };
 }

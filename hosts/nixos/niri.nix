@@ -36,11 +36,16 @@
   };
 
   environment.sessionVariables = {
+    # Wayland 設定
     QT_QPA_PLATFORM = "wayland";
     QT_QPA_PLATFORMTHEME = "gtk3";
     SDL_VIDEODRIVER = "wayland";
     XDG_SESSION_TYPE = "wayland";
     NIXOS_OZONE_WL = "1";
+
+    # NVIDIA Wayland サポート
+    GBM_BACKEND = "nvidia-drm";
+    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
   };
 
   programs = {
@@ -53,8 +58,6 @@
       enable = true;
     };
   };
-
-  i18n.inputMethod.fcitx5.waylandFrontend = true;
 
   # XDG Desktop Portal の設定
   xdg.portal = {

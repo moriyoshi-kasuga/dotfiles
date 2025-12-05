@@ -8,13 +8,14 @@
     powerManagement.enable = false;
     powerManagement.finegrained = false;
     nvidiaSettings = true;
-    # modesetting.enable = true;
+    modesetting.enable = true;
 
     # NVIDIA Optimus (Intel + NVIDIA) 設定
     prime = {
-      sync.enable = true;
-      # offload.enable = true;
-      # offload.enableOffloadCmd = true;
+      offload = {
+        enable = true;
+        enableOffloadCmd = true;
+      };
 
       intelBusId = "PCI:0:2:0";
       nvidiaBusId = "PCI:1:0:0";
@@ -29,7 +30,7 @@
         variant = "";
       };
       videoDrivers = [
-        # "modesetting"
+        "modesetting"
         "nvidia"
       ];
     };
