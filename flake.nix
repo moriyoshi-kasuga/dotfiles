@@ -28,7 +28,7 @@
     }:
     let
       vars = builtins.fromJSON (builtins.getEnv "USER_NIX_VARS");
-      pkgs = import nixpkgs { system = vars.system; };
+      pkgs = import nixpkgs { inherit (vars) system; };
       homeModules = [
         catppuccin.homeModules.catppuccin
         ./home
@@ -40,7 +40,7 @@
       specialArgs = {
         inherit vars;
         inherit inputs;
-        dotfilesPath = ./dotfiles;
+        dotfilesPath = builtins.toPath vars.dotfilesDir;
       };
     in
     {

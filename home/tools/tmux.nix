@@ -18,7 +18,7 @@ in
     shortcut = "t";
     shell = shell;
     extraConfig =
-      builtins.readFile (dotfilesPath + /tmux.conf)
+      builtins.readFile (dotfilesPath + "/tmux.conf")
       + ''
         set -g default-command "${shell}"
 
@@ -31,5 +31,5 @@ in
     tmux-thumbs
   ];
 
-  catppuccin.tmux.extraConfig = builtins.readFile (dotfilesPath + /tmux.conf.catppuccin);
+  catppuccin.tmux.extraConfig = builtins.readFile (dotfilesPath + "/tmux.conf.catppuccin");
 }

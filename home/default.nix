@@ -11,7 +11,7 @@ let
     s:
     pkgs.lib.toUpper (builtins.substring 0 1 s) + builtins.substring 1 (builtins.stringLength s - 1) s;
   catppuccinFlavor = capitalize vars.catppuccinFlavor;
-  weztermConfigRaw = builtins.readFile (dotfilesPath + /.wezterm.lua);
+  weztermConfigRaw = builtins.readFile (dotfilesPath + "/.wezterm.lua");
   weztermConfig =
     builtins.replaceStrings [ "@COLORSCHEME@" ] [ "Catppuccin ${catppuccinFlavor}" ]
       weztermConfigRaw;
@@ -34,9 +34,13 @@ in
 
   home.file = {
     ".wezterm.lua".text = weztermConfig;
-    ".config/wezterm".source = dotfilesPath + /wezterm;
+    ".config/wezterm".source = config.lib.file.mkOutOfStoreSymlink (dotfilesPath + "/wezterm");
+    ".config/nvim" = {
+      source = config.lib.file.mkOutOfStoreSymlink (dotfilesPath + "/lazyvim");
+      force = true;
+    };
     ".config/niri/config.kdl" = {
-      source = config.lib.file.mkOutOfStoreSymlink (dotfilesPath + /niri/config.kdl);
+      source = config.lib.file.mkOutOfStoreSymlink (dotfilesPath + "/niri/config.kdl");
       # Created default config by niri, so force overwrite
       force = true;
     };
