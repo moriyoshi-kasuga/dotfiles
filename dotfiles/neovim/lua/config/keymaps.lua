@@ -14,7 +14,6 @@ map("n", "<leader>bo", function()
   end
 end, { desc = "Delete buffers not shown in any window" })
 
-
 -- Deleting without yanking empty line
 map("n", "dd", function()
   return vim.api.nvim_get_current_line():match("^$") ~= nil and '"_dd' or "dd"

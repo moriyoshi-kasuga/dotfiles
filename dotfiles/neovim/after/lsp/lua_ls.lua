@@ -35,6 +35,6 @@ return {
       format = {
         enable = false,
       },
-    }
-  }
+    },
+  },
 }
