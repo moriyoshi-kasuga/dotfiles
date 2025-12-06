@@ -29,6 +29,8 @@
       aseprite # ピクセルアートエディタ
       ldtk # レベルデザインツールキット
 
+      # Gui File Explorer
+      thunar
       # Minecraft Launcher
       prismlauncher
     ];
