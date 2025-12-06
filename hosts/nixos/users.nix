@@ -28,6 +28,9 @@
       # クリエイティブツール
       aseprite # ピクセルアートエディタ
       ldtk # レベルデザインツールキット
+
+      # Minecraft Launcher
+      prismlauncher
     ];
   };
 
