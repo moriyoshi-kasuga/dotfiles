@@ -12,8 +12,13 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 vim.api.nvim_create_autocmd("User", {
   pattern = "OilActionsPost",
   callback = function(event)
-    if event.data.actions[1].type == "move" then
-      Snacks.rename.on_rename_file(event.data.actions[1].src_url, event.data.actions[1].dest_url)
+    if event.data.actions == nil then
+      return
+    end
+    for _, value in ipairs(event.data.actions) do
+      if value.type == "move" then
+        Snacks.rename.on_rename_file(value.src_url, value.dest_url)
+      end
     end
   end,
 })
