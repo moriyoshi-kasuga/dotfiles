@@ -38,6 +38,9 @@ return {
         "lua_ls",
         "typos_lsp",
         "bashls",
+        "html-lsp",
+        "css-lsp",
+        "jsonls",
       })
 
       -- Configure diagnostics

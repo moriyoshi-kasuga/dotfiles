@@ -28,6 +28,9 @@ in
     shellcheck
     shfmt
 
+    # HTML/CSS/JSON/ESLint
+    vscode-langservers-extracted
+
     lua-language-server
     stylua
 
