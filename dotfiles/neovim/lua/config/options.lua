@@ -22,6 +22,19 @@ vim.opt.visualbell = false
 vim.opt.errorbells = false
 vim.opt.showmatch = true
 vim.opt.showcmd = true
+vim.opt.updatetime = 200
+vim.opt.timeoutlen = 300
+vim.opt.scrolloff = 4
+vim.opt.sidescrolloff = 8
+vim.opt.completeopt = "menu,menuone,noselect"
+vim.opt.pumheight = 10
+vim.opt.grepprg = "rg --vimgrep"
+vim.opt.grepformat = "%f:%l:%c:%m"
+
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.opt.foldenable = false
+vim.opt.foldlevel = 99
 
 vim.opt.splitright = true
 vim.opt.splitbelow = true

@@ -44,8 +44,6 @@ return {
             -- You can use the capture groups defined in textobjects.scm
             ["af"] = "@function.outer",
             ["if"] = "@function.inner",
-            ["ai"] = "@conditional.outer",
-            ["ii"] = "@conditional.inner",
             ["aC"] = "@class.outer",
             ["iC"] = "@class.inner",
             ["ac"] = "@comment.outer",

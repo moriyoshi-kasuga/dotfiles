@@ -12,10 +12,7 @@ return {
       enabled = true,
     },
     indent = {
-      enabled = true,
-      animate = {
-        enabled = false,
-      },
+      enabled = false,
     },
     picker = {
       ui_select = true,
@@ -253,7 +250,14 @@ return {
       function()
         Snacks.picker.git_status()
       end,
-      desc = "Git Status"
+      desc = "Git Status",
+    },
+    {
+      "<leader>o",
+      function()
+        Snacks.picker.explorer({ auto_close = true })
+      end,
+      desc = "Tree Explorer",
     },
   },
 }

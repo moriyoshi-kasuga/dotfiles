@@ -13,6 +13,16 @@ map("n", "<leader>bo", function()
     end
   end
 end, { desc = "Delete buffers not shown in any window" })
+map("n", "<leader>bd", "<cmd>bd<cr>", { desc = "Delete Buffer" })
+map("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
+map("n", "]b", "<cmd>bnext<cr>", { desc = "Next Buffer" })
+
+map("n", "<A-j>", "<cmd>m .+1<cr>==", { desc = "Move Down" })
+map("n", "<A-k>", "<cmd>m .-2<cr>==", { desc = "Move Up" })
+map("i", "<A-j>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move Down" })
+map("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move Up" })
+map("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "Move Down" })
+map("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move Up" })
 
 -- Deleting without yanking empty line
 map("n", "dd", function()
