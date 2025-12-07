@@ -19,6 +19,7 @@
     docker
     docker-compose
     zsh
+    clang-tools
     clang
     gcc-unwrapped
   ];

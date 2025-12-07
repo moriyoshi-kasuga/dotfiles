@@ -42,6 +42,7 @@ return {
         "css-lsp",
         "jsonls",
         "sqruff",
+        "clangd",
       })
 
       -- Configure diagnostics
