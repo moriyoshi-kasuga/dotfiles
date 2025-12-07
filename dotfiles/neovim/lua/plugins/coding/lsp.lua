@@ -41,6 +41,7 @@ return {
         "html-lsp",
         "css-lsp",
         "jsonls",
+        "sqruff",
       })
 
       -- Configure diagnostics
