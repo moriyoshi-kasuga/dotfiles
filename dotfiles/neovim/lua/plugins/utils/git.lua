@@ -13,6 +13,7 @@ return {
       }
 
       return {
+        use_icons = false, -- required nvim-web-devicons
         hooks = {
           diff_buf_read = function()
             vim.opt_local.wrap = false
