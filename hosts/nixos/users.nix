@@ -41,7 +41,7 @@
 
   # システム全体のパッケージ
   environment.systemPackages = with pkgs; [
-    vim
+    vim-full
     wget
   ];
 }
