@@ -24,17 +24,25 @@ in
   };
 
   home.packages = with pkgs; [
+    bash-language-server
+    shellcheck
+    shfmt
+
     lua-language-server
     stylua
+
     nixd
+
     pyright
-    typos-lsp
     ruff
-    hadolint
-    actionlint
+
     svelte-language-server
     tailwindcss-language-server
     vtsls
+
+    hadolint
+    actionlint
+    typos-lsp
   ];
 
   programs.zsh.shellAliases = {

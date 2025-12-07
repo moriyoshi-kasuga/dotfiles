@@ -8,6 +8,8 @@ return {
 
       lint.linters_by_ft = {
         nix = { "statix" },
+        sh = { "shellcheck" },
+        bash = { "shellcheck" },
       }
 
       -- Auto-lint on these events

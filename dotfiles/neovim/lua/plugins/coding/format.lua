@@ -24,6 +24,8 @@ return {
         lua = { "stylua" },
         rust = { "rustfmt" },
         nix = { "nixfmt" },
+        sh = { "shfmt" },
+        bash = { "shfmt" },
       },
 
       formatters = {

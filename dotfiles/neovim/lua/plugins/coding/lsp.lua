@@ -37,6 +37,7 @@ return {
         "vtsls",
         "lua_ls",
         "typos_lsp",
+        "bashls",
       })
 
       -- Configure diagnostics
