@@ -1,6 +1,7 @@
 return {
   "catppuccin/nvim",
-  lazy = true,
+  lazy = false,
+  priority = 1000,
   name = "catppuccin",
   opts = {
     lsp_styles = {
@@ -16,13 +17,12 @@ return {
       flash = true,
       grug_far = true,
       mini = true,
-      noice = true,
-      notify = true,
       snacks = true,
       treesitter_context = true,
     },
   },
-  init = function()
+  config = function(_, opts)
+    require("catppuccin").setup(opts)
     vim.cmd("colorscheme catppuccin-mocha")
   end,
 }

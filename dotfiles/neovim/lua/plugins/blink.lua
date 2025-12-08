@@ -1,13 +1,8 @@
 return {
   {
     "saghen/blink.cmp",
-
-    -- use a release tag to download pre-built binaries
     version = "1.*",
-    -- AND/OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
-    -- build = 'cargo build --release',
-    -- If you use nix, you can build from source using latest nightly rust with:
-    -- build = 'nix run .#build-plugin',
+    event = { "InsertEnter", "CmdLineEnter" },
 
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
@@ -36,20 +31,31 @@ return {
       },
 
       appearance = {
+        use_nvim_cmp_as_default = false,
         -- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
         -- Adjusts spacing to ensure icons are aligned
         nerd_font_variant = "mono",
       },
 
       completion = {
+        keyword = { range = "full" },
+
         menu = {
           border = "single",
           scrolloff = 1,
           scrollbar = false,
         },
 
+        ghost_text = {
+          enabled = true,
+          show_with_menu = true,
+        },
+
+        accept = { auto_brackets = { enabled = false } },
+
         documentation = {
           auto_show = true,
+          auto_show_delay_ms = 500,
 
           window = {
             border = "single",

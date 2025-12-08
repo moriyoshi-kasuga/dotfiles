@@ -20,7 +20,7 @@ return {
   {
     "mrcjkb/rustaceanvim",
     version = "^6",
-    lazy = false,
+    ft = { "rust" },
     opts = {
       tools = {
         hover_actions = {
@@ -86,10 +86,7 @@ return {
             check = {
               command = "check",
             },
-            checkOnSave = {
-              command = "check",
-            },
-
+            checkOnSave = false,
             files = {
               excludeDirs = {
                 "**/.git",

@@ -6,7 +6,7 @@ _G.StatusColumnFn = function()
   local highlight = ""
   local number = vim.v.relnum
   if number == 0 then
-    highlight = "%#CmpItemKindConstant#"
+    highlight = "%#BlinkCmpKindConstant#"
     number = vim.v.lnum
   end
 

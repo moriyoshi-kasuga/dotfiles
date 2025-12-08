@@ -101,7 +101,9 @@ return {
           end, "Call[s] Outgoing")
 
           -- Hover and signature help
-          map("n", "K", vim.lsp.buf.hover, "Hover")
+          map("n", "K", function()
+            vim.lsp.buf.hover({ border = "single", max_height = 25, max_width = 120 })
+          end, "Hover")
           map("n", "gK", vim.lsp.buf.signature_help, "Signature Help")
           map("i", "<C-k>", vim.lsp.buf.signature_help, "Signature Help")
 

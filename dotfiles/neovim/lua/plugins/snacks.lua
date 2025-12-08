@@ -5,15 +5,10 @@ return {
   lazy = false,
   ---@type snacks.Config
   opts = {
-    input = {
-      enabled = true,
-    },
-    gh = {
-      enabled = true,
-    },
-    indent = {
-      enabled = false,
-    },
+    input = { enabled = true },
+    gh = { enabled = true },
+    indent = { enabled = false },
+    bigfile = { enabled = true },
     picker = {
       ui_select = true,
       formatters = {
@@ -39,15 +34,9 @@ return {
         },
       },
     },
-    bigfile = {
-      enabled = true,
-    },
   },
   keys = {
-    {
-      ",",
-      enable = false,
-    },
+    { ",", enable = false },
     {
       ",<cr>",
       function()

@@ -29,8 +29,8 @@ return {
     headerMaxWidth = 80,
     windowCreationCommand = "vsplit | wincmd L",
     keymaps = {
-      openNextLocation = { n = "<C-n>" },
-      openPrevLocation = { n = "<C-p>" },
+      openNextLocation = { n = "<C-j>" },
+      openPrevLocation = { n = "<C-k>" },
     },
   },
 }

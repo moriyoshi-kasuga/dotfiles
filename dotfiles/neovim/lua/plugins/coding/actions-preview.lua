@@ -11,4 +11,12 @@ return {
       mode = { "n", "v" },
     },
   },
+  opts = {
+    highlight_command = {
+      function()
+        return require("actions-preview.highlight").delta("delta --diff-so-fancy")
+      end,
+    },
+    backend = { "snacks" },
+  },
 }
