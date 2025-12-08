@@ -23,6 +23,7 @@ return {
       nvim_surround = true,
       blink_cmp = true,
       diffview = true,
+      render_markdown = true,
     },
   },
   config = function(_, opts)
