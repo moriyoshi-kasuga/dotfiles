@@ -53,3 +53,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end
   end,
 })
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "rust" },
+  callback = function()
+    vim.keymap.set("i", "'", "'", { buffer = true })
+  end,
+})
