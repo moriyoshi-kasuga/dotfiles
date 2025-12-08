@@ -74,3 +74,8 @@ local treesitter_grammars = vim.env.TREESITTER_GRAMMARS
 if treesitter_grammars then
   vim.opt.runtimepath:append(treesitter_grammars)
 end
+
+-- Disable loading of built-in markdown syntax (use treesitter instead)
+vim.g.markdown_fenced_languages = {}
+vim.g.markdown_recommended_style = 0
+vim.g.markdown_syntax_conceal = 0
