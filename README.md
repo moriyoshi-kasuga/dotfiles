@@ -1,7 +1,5 @@
 # My Dotfiles for Development Environment
 
-[![main](https://github.com/moriyoshi-kasuga/dotfiles/actions/workflows/main.yaml/badge.svg)](https://github.com/moriyoshi-kasuga/dotfiles/actions/workflows/main.yaml)
-
 これは、私、[moriyoshi-kasuga](https://github.com/moriyoshi-kasuga)が作成した、macOS と NixOS のための開発環境を構築するdotfilesです。
 [Nix](https://nixos.org/)と[Home Manager](https://github.com/nix-community/home-manager)を利用し、宣言的で再現性の高い環境構築を目指しています。
 
@@ -86,7 +84,7 @@
 ### 共通設定
 
 - **package の追加・削除**: `home/default.nix` や `home/**/*.nix` の `home.packages` を編集します。
-- **Neovim**: `home/editor/neovim.nix` や `dotfiles/lazyvim/` 以下の設定を編集します。
+- **Neovim**: `home/editor/neovim.nix` や `dotfiles/neovim/` 以下の設定を編集します。
 - **Zsh**: `home/zsh/default.nix` や `dotfiles/.zshrc` を編集します。
 - **Git**: `home/git/` directory の設定を編集します。
 
@@ -135,7 +133,7 @@ dotfiles/
 │   │   └── virtualisation.nix # Docker 仮想化設定
 │   └── darwin/               # macOS システム設定 (nix-darwin)
 └── dotfiles/                 # ドットファイル
-    ├── lazyvim/              # LazyVim 設定
+    ├── neovim/               # Neovim 設定
     ├── wezterm/              # WezTerm 設定
     ├── zsh-scripts/          # Zsh スクリプト
     ├── .zshrc                # Zsh 設定
@@ -168,7 +166,7 @@ dotfiles/
 | ツール | 役割 | 設定 file / module |
 | :--- | :--- | :--- |
 | **Neovim** | Text Editor | `home/editor/neovim.nix` |
-| **LazyVim** | Neovim Configuration Framework | `dotfiles/lazyvim/` |
+| **Neovim Config** | Neovim Configuration | `dotfiles/neovim/` |
 | **Vim** | Text Editor | `home/editor/vim.nix`, `dotfiles/.vimrc` |
 
 ### Git ツール
