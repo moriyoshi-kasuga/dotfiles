@@ -3,6 +3,7 @@ return {
   lazy = false,
   priority = 1000,
   name = "catppuccin",
+  ---@type CatppuccinOptions
   opts = {
     lsp_styles = {
       underlines = {
@@ -17,8 +18,11 @@ return {
       flash = true,
       grug_far = true,
       mini = true,
-      snacks = true,
+      fzf = true,
       treesitter_context = true,
+      nvim_surround = true,
+      blink_cmp = true,
+      diffview = true,
     },
   },
   config = function(_, opts)

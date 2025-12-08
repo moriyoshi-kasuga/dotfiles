@@ -72,32 +72,35 @@ return {
           end
 
           local map = function(mode, lhs, rhs, desc)
-            vim.keymap.set(mode, lhs, rhs, { buffer = buffer, desc = desc })
+            vim.keymap.set(mode, lhs, rhs, { buffer = buffer, desc = desc, silent = true })
           end
 
-          local snacks_picker = require("snacks.picker")
+          local fzf = require("fzf-lua")
 
-          -- Navigation with Snacks.nvim picker
+          -- Navigation with fzf-lua
+          map("n", "ga", function()
+            fzf.lsp_code_actions()
+          end, "Goto Definition")
           map("n", "gd", function()
-            snacks_picker.lsp_definitions()
+            fzf.lsp_definitions()
           end, "Goto Definition")
           map("n", "gD", function()
-            snacks_picker.lsp_declarations()
+            fzf.lsp_declarations()
           end, "Goto Declaration")
           map("n", "gr", function()
-            snacks_picker.lsp_references()
+            fzf.lsp_references()
           end, "References")
           map("n", "gI", function()
-            snacks_picker.lsp_implementations()
+            fzf.lsp_implementations()
           end, "Goto Implementation")
           map("n", "gy", function()
-            snacks_picker.lsp_type_definitions()
+            fzf.lsp_typedefs()
           end, "Goto T[y]pe Definition")
           map("n", "gsi", function()
-            snacks_picker.lsp_incoming_calls()
+            fzf.lsp_incoming_calls()
           end, "Call[s] Incoming")
           map("n", "gso", function()
-            snacks_picker.lsp_outgoing_calls()
+            fzf.lsp_outgoing_calls()
           end, "Call[s] Outgoing")
 
           -- Hover and signature help

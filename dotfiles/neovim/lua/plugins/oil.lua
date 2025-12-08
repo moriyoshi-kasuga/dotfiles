@@ -6,7 +6,13 @@ return {
     dependencies = { { "nvim-mini/mini.icons", opts = {} } },
     ---@module 'oil'
     ---@type oil.SetupOpts
-    opts = {},
+    opts = {
+      lsp_file_methods = {
+        enabled = true,
+        autosave_changes = true,
+        timeout_ms = 1000,
+      },
+    },
     keys = {
       { "<leader>e", "<cmd>Oil<CR>" },
     },

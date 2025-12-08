@@ -9,20 +9,6 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   end,
 })
 
-vim.api.nvim_create_autocmd("User", {
-  pattern = "OilActionsPost",
-  callback = function(event)
-    if event.data.actions == nil then
-      return
-    end
-    for _, value in ipairs(event.data.actions) do
-      if value.type == "move" then
-        Snacks.rename.on_rename_file(value.src_url, value.dest_url)
-      end
-    end
-  end,
-})
-
 -- go to last loc when opening a buffer
 vim.api.nvim_create_autocmd("BufReadPost", {
   group = augroup("last_loc"),
