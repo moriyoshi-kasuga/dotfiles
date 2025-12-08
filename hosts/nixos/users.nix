@@ -50,5 +50,6 @@
   environment.systemPackages = with pkgs; [
     vim-full
     wget
+    appimage-run
   ];
 }
