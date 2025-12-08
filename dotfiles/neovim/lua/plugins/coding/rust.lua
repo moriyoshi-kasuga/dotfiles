@@ -86,7 +86,7 @@ return {
             check = {
               command = "check",
             },
-            checkOnSave = false,
+            checkOnSave = true,
             files = {
               excludeDirs = {
                 "**/.git",
