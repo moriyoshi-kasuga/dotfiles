@@ -15,12 +15,18 @@ return {
 
   {
     "nvim-treesitter/nvim-treesitter-textobjects",
+    event = { "VeryLazy", "BufReadPost", "BufNewFile", "BufWritePre" },
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
     branch = "main",
   },
   {
     "nvim-treesitter/nvim-treesitter-context",
+    event = { "VeryLazy", "BufReadPost", "BufNewFile", "BufWritePre" },
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
   },
   {
     "andersevenrud/nvim_context_vt",
+    event = { "VeryLazy", "BufReadPost", "BufNewFile", "BufWritePre" },
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
   },
 }

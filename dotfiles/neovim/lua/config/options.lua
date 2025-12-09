@@ -20,7 +20,7 @@ vim.opt.cursorcolumn = false
 vim.opt.virtualedit = "block"
 vim.opt.visualbell = false
 vim.opt.errorbells = false
-vim.opt.showmatch = true
+vim.opt.showmatch = false
 vim.opt.showcmd = true
 vim.opt.updatetime = 200
 vim.opt.timeoutlen = 300
@@ -60,6 +60,15 @@ vim.opt.shada = "!,'50,<10,s5,h"
 
 vim.opt.undofile = true
 vim.opt.undolevels = 10000
+
+-- パフォーマンス改善
+vim.opt.lazyredraw = true
+
+-- コマンドライン補完
+vim.opt.wildignorecase = true
+
+-- セッション保存項目の最適化
+vim.opt.sessionoptions = "buffers,curdir,tabpages,winsize,help,globals,skiprtp"
 
 vim.g.clipboard = vim.env.SSH_CONNECTION and "" or "pbcopy"
 vim.g.editorconfig = true
