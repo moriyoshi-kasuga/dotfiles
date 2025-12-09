@@ -31,6 +31,7 @@
     lnav
     glow
     bottom
+    just
   ];
 
   programs.fd.enable = true;
