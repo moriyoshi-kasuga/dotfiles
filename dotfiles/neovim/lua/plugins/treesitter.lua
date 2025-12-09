@@ -1,14 +1,11 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
-    event = { "BufReadPost", "BufNewFile" },
+    event = { "VeryLazy", "BufReadPost", "BufNewFile", "BufWritePre" },
     branch = "main",
     init = function()
       vim.api.nvim_create_autocmd("FileType", {
         callback = function(args)
-          if vim.bo.filetype == "markdown" then
-            return
-          end
           -- ignore error
           pcall(vim.treesitter.start, args.buf)
         end,

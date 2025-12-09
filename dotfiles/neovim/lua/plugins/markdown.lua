@@ -10,9 +10,16 @@ return {
         render_modes = true,
         heading = {
           width = "block",
+          sign = false,
+          icons = {},
         },
         code = {
-          border = "thin",
+          sign = false,
+          width = "block",
+          right_pad = 1,
+        },
+        checkbox = {
+          enabled = false,
         },
       },
     },
