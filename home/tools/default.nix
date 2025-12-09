@@ -24,6 +24,7 @@
     kubernetes-helm
     tldr
     gh
+    gh-dash
     google-java-format
     zip
     unzip
