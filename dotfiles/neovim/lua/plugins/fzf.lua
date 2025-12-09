@@ -173,6 +173,13 @@ return {
       desc = "Jumplist",
     },
     {
+      ",k",
+      function()
+        require("fzf-lua").keymaps()
+      end,
+      desc = "Jumplist",
+    },
+    {
       ",m",
       function()
         require("fzf-lua").marks()
@@ -234,6 +241,20 @@ return {
         require("fzf-lua").git_status()
       end,
       desc = "Git Status",
+    },
+    {
+      ",t",
+      function()
+        require("todo-comments.fzf").todo()
+      end,
+      desc = "Todo",
+    },
+    {
+      ",T",
+      function()
+        require("todo-comments.fzf").todo({ keywords = { "TODO", "FIX", "FIXME" } })
+      end,
+      desc = "Todo/Fix/Fixme",
     },
   },
 }

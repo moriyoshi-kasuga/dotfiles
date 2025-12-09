@@ -29,4 +29,14 @@ return {
     event = { "VeryLazy", "BufReadPost", "BufNewFile", "BufWritePre" },
     dependencies = { "nvim-treesitter/nvim-treesitter" },
   },
+  {
+    "aaronik/treewalker.nvim",
+    opts = {},
+    keys = {
+      { "{", "<cmd>Treewalker Up<cr>", desc = "Tree Up", silent = true },
+      { "}", "<cmd>Treewalker Down<cr>", desc = "Tree Down", silent = true },
+      { "<C-[>", "<cmd>Treewalker SwapUp<cr>", desc = "Tree Swap Up", silent = true },
+      { "<C-]>", "<cmd>Treewalker SwapDown<cr>", desc = "Tree Swap Down", silent = true },
+    },
+  },
 }

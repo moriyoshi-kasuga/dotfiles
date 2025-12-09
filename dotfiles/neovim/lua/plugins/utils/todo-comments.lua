@@ -33,13 +33,6 @@ return {
       NOTE = { icon = "󱞁 ", color = "hint", alt = { "INFO" } },
       TEST = { icon = "󰙨 ", color = "test", alt = { "TESTING", "PASSED", "FAILED" } },
     },
-    -- TODO:
-    -- FIX:
-    -- HACK:
-    -- WARN:
-    -- PERF:
-    -- NOTE:
-    -- TEST:
     colors = {
       error = { "DiagnosticError", "ErrorMsg", "#DC2626" },
       warning = { "DiagnosticWarn", "WarningMsg", "#FBBF24" },
