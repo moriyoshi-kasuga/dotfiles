@@ -91,13 +91,6 @@ return {
   keys = {
     { ",", desc = "FzfLua" },
     {
-      ",<cr>",
-      function()
-        require("fzf-lua").resume()
-      end,
-      desc = "Resume",
-    },
-    {
       ",s",
       function()
         require("fzf-lua").files()
@@ -149,7 +142,7 @@ return {
       desc = "Colorscheme",
     },
     {
-      ",e",
+      ",f",
       function()
         local fzf = require("fzf-lua")
         fzf.fzf_exec("fd -H -E .git -t d", {
@@ -220,6 +213,20 @@ return {
         require("fzf-lua").diagnostics_workspace()
       end,
       desc = "Diagnostics (Workspace)",
+    },
+    {
+      ",e",
+      function()
+        require("fzf-lua").diagnostics_document({ severity_only = "ERROR" })
+      end,
+      desc = "Error (Buffer)",
+    },
+    {
+      ",E",
+      function()
+        require("fzf-lua").diagnostics_workspace({ severity_only = "ERROR" })
+      end,
+      desc = "Error (Workspace)",
     },
     {
       ",gs",
