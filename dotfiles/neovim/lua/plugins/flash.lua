@@ -25,9 +25,9 @@ return {
       "R",
       mode = { "n", "o", "x" },
       function()
-        require("flash").treesitter()
+        require("flash").remote()
       end,
-      desc = "Flash Treesitter",
+      desc = "Flash Remote",
     },
     {
       "<c-space>",
