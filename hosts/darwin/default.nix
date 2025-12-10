@@ -35,6 +35,7 @@
       "visual-studio-code"
       "discord"
       "slack"
+      "figma"
     ];
   };
 }
