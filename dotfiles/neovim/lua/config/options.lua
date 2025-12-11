@@ -61,9 +61,6 @@ vim.opt.shada = "!,'50,<10,s5,h"
 vim.opt.undofile = true
 vim.opt.undolevels = 10000
 
--- パフォーマンス改善
-vim.opt.lazyredraw = true
-
 -- コマンドライン補完
 vim.opt.wildignorecase = true
 
