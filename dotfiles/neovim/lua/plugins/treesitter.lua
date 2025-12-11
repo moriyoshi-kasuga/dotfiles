@@ -23,22 +23,6 @@ return {
     branch = "main",
   },
   {
-    "nvim-treesitter/nvim-treesitter-context",
-    event = { "VeryLazy", "BufReadPost", "BufNewFile", "BufWritePre" },
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
-    opts = {
-      ---@param buf integer
-      ---@return boolean
-      on_attach = function(buf)
-        local filetype = vim.bo[buf].filetype
-        if filetype == "markdown" or filetype == "markdown_inline" then
-          return false
-        end
-        return true
-      end,
-    },
-  },
-  {
     "andersevenrud/nvim_context_vt",
     event = { "VeryLazy", "BufReadPost", "BufNewFile", "BufWritePre" },
     dependencies = { "nvim-treesitter/nvim-treesitter" },
