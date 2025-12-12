@@ -41,14 +41,14 @@ return {
         keyword = { range = "full" },
 
         menu = {
-          border = "single",
+          border = "rounded",
           scrolloff = 1,
           scrollbar = false,
         },
 
         ghost_text = {
-          enabled = true,
-          show_with_menu = true,
+          enabled = false,
+          show_with_menu = false,
         },
 
         accept = { auto_brackets = { enabled = false } },
@@ -58,17 +58,26 @@ return {
           auto_show_delay_ms = 500,
 
           window = {
-            border = "single",
+            border = "rounded",
           },
         },
       },
 
-      signature = { window = { border = "single" } },
+      signature = { window = { border = "rounded" } },
 
       -- Default list of enabled providers defined so that you can extend it
       -- elsewhere in your config, without redefining it, due to `opts_extend`
       sources = {
-        default = { "lsp", "path", "buffer" },
+        default = { "lsp", "path", "snippets", "buffer" },
+        providers = {
+          snippets = {
+            min_keyword_length = 2,
+          },
+          buffer = {
+            min_keyword_length = 3,
+            max_items = 5,
+          },
+        },
       },
 
       -- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
