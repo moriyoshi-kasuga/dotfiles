@@ -11,7 +11,7 @@ return {
         sh = { "shellcheck" },
         bash = { "shellcheck" },
         python = { "ruff" },
-        dockerfile = { "hadlint" },
+        dockerfile = { "hadolint" },
       }
 
       -- Auto-lint on these events
