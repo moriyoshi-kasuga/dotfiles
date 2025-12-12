@@ -36,7 +36,7 @@ in
 
     nixd
 
-    pyright
+    ty
     ruff
 
     svelte-language-server
@@ -46,7 +46,6 @@ in
     hadolint
     actionlint
     typos-lsp
-    sqruff
   ];
 
   programs.zsh.shellAliases = {

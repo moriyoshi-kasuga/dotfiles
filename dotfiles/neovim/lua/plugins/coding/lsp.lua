@@ -32,17 +32,22 @@ return {
       -- Enable LSP servers
       -- Note: All LSP servers should be installed via Nix
       vim.lsp.enable({
-        "nixd",
         "svelte",
         "vtsls",
-        "lua_ls",
-        "typos_lsp",
-        "bashls",
-        "html-lsp",
-        "css-lsp",
-        "jsonls",
-        "sqruff",
+
         "clangd",
+        "ty",
+        "nixd",
+        "lua_ls",
+
+        "bashls",
+        "jsonls",
+        "typos_lsp",
+
+        -- vscode-html-language-server
+        "html",
+        -- vscode-css-language-server
+        "cssls",
       })
 
       -- Configure diagnostics

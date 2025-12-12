@@ -26,6 +26,7 @@ return {
         nix = { "nixfmt" },
         sh = { "shfmt" },
         bash = { "shfmt" },
+        python = { "ruff_format" },
       },
 
       formatters = {

@@ -10,6 +10,8 @@ return {
         nix = { "statix" },
         sh = { "shellcheck" },
         bash = { "shellcheck" },
+        python = { "ruff" },
+        dockerfile = { "hadlint" },
       }
 
       -- Auto-lint on these events
