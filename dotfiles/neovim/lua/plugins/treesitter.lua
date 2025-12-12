@@ -183,6 +183,7 @@ return {
     event = { "VeryLazy", "BufReadPost", "BufNewFile", "BufWritePre" },
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     opts = {
+      disable_virtual_lines = true,
       disable_ft = {
         "markdown",
         "markdown_inline",
