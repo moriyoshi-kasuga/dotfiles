@@ -80,6 +80,13 @@ return {
             vim.keymap.set(mode, lhs, rhs, { buffer = buffer, desc = desc, silent = true })
           end
 
+          if client:supports_method("textDocument/inlayHint") then
+            vim.lsp.inlay_hint.enable(true, { bufnr = args.buf })
+            map("n", "<leader>uh", function()
+              vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = 0 }), { bufnr = 0 })
+            end, "Toggle Inlay Hints")
+          end
+
           local fzf = require("fzf-lua")
 
           -- Navigation with fzf-lua

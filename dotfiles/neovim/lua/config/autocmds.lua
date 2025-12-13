@@ -27,19 +27,6 @@ vim.api.nvim_create_autocmd("BufReadPost", {
   end,
 })
 
-vim.api.nvim_create_autocmd("LspAttach", {
-  callback = function(args)
-    local client = vim.lsp.get_client_by_id(args.data.client_id)
-    if client and client:supports_method("textDocument/inlayHint") then
-      vim.lsp.inlay_hint.enable(true, { bufnr = args.buf })
-      -- トグルキーマップ
-      vim.keymap.set("n", "<leader>uh", function()
-        vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = 0 }), { bufnr = 0 })
-      end, { buffer = args.buf, desc = "Toggle Inlay Hints" })
-    end
-  end,
-})
-
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "rust" },
   callback = function()
