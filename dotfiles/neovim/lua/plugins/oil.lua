@@ -25,7 +25,7 @@ return {
               vim.notify("failed to get oil dir", 2)
               return
             end
-            require("toggleterm").toggle(nil, nil, oil_dir)
+            require("config.terminal").toggle(oil_dir)
           end,
           mode = "n",
           nowait = true,

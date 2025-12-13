@@ -47,14 +47,18 @@ local function setup_terminal_keymaps(buf)
 end
 
 -- Main toggle function
-function M.toggle()
+function M.toggle(dir)
   -- Always create a new temporary terminal
   local buf = create_terminal_buffer()
   create_floating_window(buf)
 
+  -- Determine the directory to open terminal in
+  local cwd = dir or vim.fn.getcwd()
+
   -- Start terminal in the buffer
   ---@diagnostic disable-next-line
   vim.fn.termopen(vim.o.shell, {
+    cwd = cwd,
     on_exit = function()
       -- Clean up when terminal exits
       if vim.api.nvim_buf_is_valid(buf) then
@@ -71,7 +75,9 @@ function M.toggle()
 end
 
 -- Setup commands and keymaps
-vim.api.nvim_create_user_command("FloatTerminal", M.toggle, {})
+vim.api.nvim_create_user_command("FloatTerminal", function(opts)
+  M.toggle(opts.args ~= "" and opts.args or nil)
+end, { nargs = "?", complete = "dir" })
 vim.keymap.set("n", "<C-/>", M.toggle, { desc = "Float Terminal" })
 
 return M
