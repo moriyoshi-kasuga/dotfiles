@@ -1,3 +1,7 @@
+if require("config.util").is_in_simple_mode() then
+  return {}
+end
+
 return {
   {
     {

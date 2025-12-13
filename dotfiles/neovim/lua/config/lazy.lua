@@ -22,7 +22,7 @@ require("lazy").setup({
   },
   spec = {
     { import = "plugins" },
-    { import = "plugins.coding" },
+    require("config.util").is_in_simple_mode() and {} or { import = "plugins.coding" },
     { import = "plugins.utils" },
   },
   change_detection = { enabled = false },

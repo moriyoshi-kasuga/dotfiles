@@ -47,7 +47,7 @@ in
   };
 
   home.sessionVariables = {
-    EDITOR = "vim";
+    EDITOR = "simplenvim";
   };
 
   programs.home-manager.enable = true;

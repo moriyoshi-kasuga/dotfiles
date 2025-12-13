@@ -24,6 +24,10 @@ in
   };
 
   home.packages = with pkgs; [
+    (pkgs.writeShellScriptBin "simplenvim" ''
+      NVIM_SIMPLE_MODE=1 exec ${pkgs.neovim}/bin/nvim "$@"
+    '')
+
     bash-language-server
     shellcheck
     shfmt
