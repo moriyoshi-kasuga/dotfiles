@@ -1,9 +1,8 @@
 return {
   {
     "stevearc/oil.nvim",
-    -- Lazy loading is not recommended because it is very tricky to make it work correctly in all situations.
-    lazy = false,
-    dependencies = { { "nvim-mini/mini.icons", opts = {} } },
+    dependencies = { { "nvim-mini/mini.icons", lazy = true, opts = {} } },
+    cmd = { "Oil" },
     ---@module 'oil'
     ---@type oil.SetupOpts
     opts = {
@@ -43,7 +42,8 @@ return {
       use_default_keymaps = false,
     },
     keys = {
-      { "<leader>e", "<cmd>Oil<CR>" },
+      { "<leader>e", "<cmd>Oil<CR>", desc = "Open Oil file browser" },
+      { "-", "<cmd>Oil<CR>", desc = "Open parent directory" },
     },
   },
 }
