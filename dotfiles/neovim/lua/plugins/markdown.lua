@@ -3,7 +3,7 @@ return {
     {
       "MeanderingProgrammer/render-markdown.nvim",
       dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-mini/mini.icons" },
-      event = "VeryLazy",
+      ft = "markdown",
       ---@module 'render-markdown'
       opts = {
         render_modes = true,

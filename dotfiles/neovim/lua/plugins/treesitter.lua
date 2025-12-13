@@ -18,7 +18,6 @@ return {
 
   {
     "nvim-treesitter/nvim-treesitter-textobjects",
-    event = { "VeryLazy", "BufReadPost", "BufNewFile", "BufWritePre" },
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     branch = "main",
     opts = {},
@@ -180,7 +179,7 @@ return {
   },
   {
     "andersevenrud/nvim_context_vt",
-    event = { "VeryLazy", "BufReadPost", "BufNewFile", "BufWritePre" },
+    event = "LspAttach",
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     opts = {
       disable_virtual_lines = true,

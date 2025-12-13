@@ -1,6 +1,5 @@
 return {
   "gbprod/yanky.nvim",
-  event = "VeryLazy",
   opts = {
     system_clipboard = {
       sync_with_ring = not vim.env.SSH_CONNECTION,
