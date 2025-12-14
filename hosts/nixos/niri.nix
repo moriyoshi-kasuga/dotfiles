@@ -32,6 +32,14 @@
 
     programs.noctalia-shell = {
       enable = true;
+      settings = {
+        bar = {
+          floating = true;
+        };
+        dock = {
+          enabled = false;
+        };
+      };
     };
   };
 

@@ -82,7 +82,7 @@ output "HDMI-A-1" {
 // https://yalter.github.io/niri/Configuration:-Layout
 layout {
   // Set gaps around windows in logical pixels.
-  gaps 8
+  gaps 0
 
   // When to center a column when changing focus, options are:
   // - "never", default behavior, focusing an off-screen column will keep at the left
@@ -129,7 +129,7 @@ layout {
   }
 
   border {
-    width 2
+    width 1
     active-color "#f9e2af"
     inactive-color "transparent"
     active-gradient from="#E5989B" to="#FFB4A2" angle=45 relative-to="workspace-view" in="oklch longer hue"
@@ -280,6 +280,8 @@ binds {
   // Mod-Shift-/, which is usually the same as Mod-?,
   // shows a list of important hotkeys.
   Mod+Shift+Slash { show-hotkey-overlay; }
+
+  Mod+S { spawn "noctalia-shell" "ipc" "call" "controlCenter" "toggle"; }
 
   Mod+Space hotkey-overlay-title="Launcher" { spawn "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
   Super+Alt+L hotkey-overlay-title="SessionMenu" { spawn "noctalia-shell" "ipc" "call" "sessionMenu" "toggle"; }

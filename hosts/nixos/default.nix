@@ -23,6 +23,8 @@
     ./sddm.nix # SDDM ログイン画面設定
   ];
 
+  home-manager.backupFileExtension = "nixbackup";
+
   # NixOS バージョン (初期インストール時のバージョンを維持)
   system.stateVersion = "25.05";
 }
