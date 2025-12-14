@@ -20,7 +20,11 @@ return {
     "nvim-treesitter/nvim-treesitter-textobjects",
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     branch = "main",
-    opts = {},
+    opts = {
+      move = {
+        set_jumps = true,
+      },
+    },
     keys = {
       -- Text object selections
       {
