@@ -39,6 +39,7 @@ return {
         "ty",
         "nixd",
         "lua_ls",
+        "hls",
 
         "bashls",
         "jsonls",
