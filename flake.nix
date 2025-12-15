@@ -12,8 +12,8 @@
       url = "github:nix-darwin/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    noctalia = {
-      url = "github:noctalia-dev/noctalia-shell";
+    sherlock = {
+      url = "github:Skxxtz/sherlock";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

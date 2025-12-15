@@ -22,42 +22,37 @@
 
     (xwayland-satellite.override { withSystemd = false; }) # Niri automatically runs this when xwayland support is required
 
-    inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
-
-    quickshell
+    gtk4
+    gtk4-layer-shell
   ];
 
   home-manager.users.${vars.username} = {
-    imports = [
-      inputs.noctalia.homeModules.default
-    ];
-
-    programs.noctalia-shell = {
+    programs.sherlock = {
       enable = true;
+      systemd.enable = true;
+
+      # If wanted, you can use this line for the _latest_ package. / Otherwise, you're relying on nixpkgs to update it frequently enough.
+      # For this to work, make sure to add sherlock as a flake input!
+      # package = inputs.sherlock.packages.${pkgs.system}.default;
+
+      # config.toml
       settings = {
-        bar = {
-          density = "mini";
-        };
-        general = {
-          enableShadows = false;
-        };
-        dock = {
-          enabled = false;
+        default_apps = {
+          terminal = "wezterm";
         };
       };
-    };
-  };
 
-  qt = {
-    enable = true;
-    style = "adwaita-dark";
-    platformTheme = "gnome";
+      # sherlockignore
+      ignore = ''
+        Avahi*
+      '';
+    };
   };
 
   environment.sessionVariables = {
     # Wayland 設定
     QT_QPA_PLATFORM = "wayland";
-    QT_QPA_PLATFORMTHEME = "gnome";
+    QT_QPA_PLATFORMTHEME = "gtk4";
     SDL_VIDEODRIVER = "wayland";
     XDG_SESSION_TYPE = "wayland";
     NIXOS_OZONE_WL = "1";
@@ -81,21 +76,15 @@
   # XDG Desktop Portal の設定
   xdg.portal = {
     enable = true;
-    extraPortals = with pkgs; [
-      xdg-desktop-portal-gnome
-      xdg-desktop-portal-gtk
-    ];
     config = {
       common = {
         default = [
-          "gnome"
-          "gtk"
+          "gtk4"
         ];
       };
       niri = {
         default = [
-          "gnome"
-          "gtk"
+          "gtk4"
         ];
         "org.freedesktop.impl.portal.Secret" = [ "gnome-keyring" ];
       };

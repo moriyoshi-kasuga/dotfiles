@@ -62,7 +62,7 @@ input {
 }
 
 cursor {
-  xcursor-theme "gtk"
+  xcursor-theme "gtk4"
   xcursor-size 24
   hide-when-typing
   hide-after-inactive-ms 10000
@@ -199,7 +199,6 @@ layout {
 // which may be more convenient to use.
 // See the binds section below for more spawn examples.
 
-spawn-at-startup "noctalia-shell"
 spawn-at-startup "easyeffects" "--service-mode"
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
@@ -288,10 +287,10 @@ binds {
 
   Mod+Return { spawn "wezterm"; }
 
-  Mod+S { spawn "noctalia-shell" "ipc" "call" "controlCenter" "toggle"; }
+  Mod+S { spawn "nwg-panel"; }
 
-  Mod+Space hotkey-overlay-title="Launcher" { spawn "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
-  Super+Alt+L hotkey-overlay-title="SessionMenu" { spawn "noctalia-shell" "ipc" "call" "sessionMenu" "toggle"; }
+  Mod+Space hotkey-overlay-title="Launcher" { spawn "sherlock"; }
+  // Super+Alt+L hotkey-overlay-title="SessionMenu" { spawn "noctalia-shell" "ipc" "call" "sessionMenu" "toggle"; }
 
   // Example volume keys mappings for PipeWire & WirePlumber.
   // The allow-when-locked=true property makes them work even when the session is locked.
