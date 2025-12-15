@@ -198,14 +198,15 @@ layout {
 // which may be more convenient to use.
 // See the binds section below for more spawn examples.
 
-spawn-at-startup "easyeffects" "--service-mode"
+spawn-at-startup "easyeffects" "--service-mode" "-q"
+spawn-at-startup "noctalia-shell"
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
 
 hotkey-overlay {
   // Uncomment this line to disable the "Important Hotkeys" pop-up at startup.
-  // skip-at-startup
+  skip-at-startup
 }
 
 // Uncomment this line to ask the clients to omit their client-side decorations if possible.
@@ -236,16 +237,6 @@ animations {
 // Window rules let you adjust behavior for individual windows.
 // Find more information on the wiki:
 // https://yalter.github.io/niri/Configuration:-Window-Rules
-
-// Work around WezTerm's initial configure bug
-// by setting an empty default-column-width.
-window-rule {
-  // This regular expression is intentionally made as specific as possible,
-  // since this is the default config, and we want no false positives.
-  // You can get away with just app-id="wezterm" if you want.
-  match app-id=r#"^org\.wezfurlong\.wezterm$"#
-  default-column-width { proportion 1.0; }
-}
 
 // Open the Firefox picture-in-picture player as floating by default.
 window-rule {
@@ -298,10 +289,10 @@ binds {
 
   Mod+Return { spawn "wezterm"; }
 
-  Mod+S { spawn "nwg-panel"; }
+  Mod+S { spawn "noctalia-shell" "ipc" "call" "controlCenter" "toggle"; }
 
-  Mod+Space hotkey-overlay-title="Launcher" { spawn "fuzzel"; }
-  // Super+Alt+L hotkey-overlay-title="SessionMenu" { spawn "noctalia-shell" "ipc" "call" "sessionMenu" "toggle"; }
+  Mod+Space hotkey-overlay-title="Launcher" { spawn "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
+  Super+Alt+L hotkey-overlay-title="SessionMenu" { spawn "noctalia-shell" "ipc" "call" "sessionMenu" "toggle"; }
 
   // Example volume keys mappings for PipeWire & WirePlumber.
   // The allow-when-locked=true property makes them work even when the session is locked.

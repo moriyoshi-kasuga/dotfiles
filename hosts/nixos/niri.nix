@@ -24,11 +24,76 @@
 
     gtk4
     gtk4-layer-shell
-    fuzzel
   ];
 
   home-manager.users.${vars.username} = {
-    catppuccin.fuzzel.enable = true;
+    imports = [
+      inputs.noctalia.homeModules.default
+    ];
+
+    # configure options
+    programs.noctalia-shell = {
+      enable = true;
+      settings = {
+        # configure noctalia here
+        bar = {
+          density = "compact";
+          position = "top";
+          showCapsule = false;
+          widgets = {
+            left = [
+              {
+                id = "ControlCenter";
+                useDistroLogo = true;
+              }
+              {
+                id = "WiFi";
+              }
+              {
+                id = "Bluetooth";
+              }
+            ];
+            center = [
+              {
+                hideUnoccupied = false;
+                id = "Workspace";
+                labelMode = "none";
+              }
+            ];
+            right = [
+              {
+                alwaysShowPercentage = false;
+                id = "Battery";
+                warningThreshold = 30;
+              }
+              {
+                formatHorizontal = "HH:mm";
+                formatVertical = "HH mm";
+                id = "Clock";
+                useMonospacedFont = true;
+                usePrimaryColor = true;
+              }
+            ];
+          };
+        };
+        dock = {
+          enabled = false;
+        };
+        network = {
+          wifiEnabled = false;
+        };
+        appLauncher = {
+          terminalCommand = "wezterm -e";
+        };
+        general = {
+          enableShadows = false;
+        };
+        ui = {
+          fontDefault = "CommitMono Nerd Font";
+          fontFixed = "CommitMono Nerd Font";
+        };
+      };
+    };
   };
 
   environment.sessionVariables = {
