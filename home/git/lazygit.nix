@@ -14,7 +14,7 @@
         mainPanelSplitMode = "vertical";
       };
       os = {
-        editPreset = "vim";
+        editPreset = "simplenvim";
       };
       git = {
         pagers = [
