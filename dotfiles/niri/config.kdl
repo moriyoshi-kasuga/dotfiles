@@ -138,7 +138,7 @@ layout {
   border {
     off
     
-    width 1
+    width 4
     active-color "#f9e2af"
     inactive-color "transparent"
     active-gradient from="#E5989B" to="#FFB4A2" angle=45 relative-to="workspace-view" in="oklch longer hue"
@@ -267,6 +267,18 @@ window-rule {
 
   // Use this instead if you want them visible on third-party screenshot tools.
   // block-out-from "screencast"
+}
+
+window-rule {
+  match is-floating=true
+  
+  border {
+    on
+  }
+  
+  geometry-corner-radius 16
+
+  clip-to-geometry true
 }
 
 binds {
