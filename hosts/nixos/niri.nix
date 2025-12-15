@@ -23,6 +23,8 @@
     (xwayland-satellite.override { withSystemd = false; }) # Niri automatically runs this when xwayland support is required
 
     inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
+
+    quickshell
   ];
 
   home-manager.users.${vars.username} = {
@@ -34,7 +36,10 @@
       enable = true;
       settings = {
         bar = {
-          floating = true;
+          density = "mini";
+        };
+        general = {
+          enableShadows = false;
         };
         dock = {
           enabled = false;

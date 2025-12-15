@@ -10,8 +10,8 @@ input {
   mod-key "Alt"
 
   keyboard {
-    repeat-delay 320
-    repeat-rate 30
+    repeat-delay 200
+    repeat-rate 25
     xkb {
     }
   }
@@ -61,6 +61,13 @@ input {
   // focus-follows-mouse max-scroll-amount="0%"
 }
 
+cursor {
+  xcursor-theme "gtk"
+  xcursor-size 24
+  hide-when-typing
+  hide-after-inactive-ms 10000
+}
+
 // Run `niri msg outputs` while inside a niri instance to list all outputs and their modes.
 
 output "eDP-1" {
@@ -100,6 +107,7 @@ layout {
     proportion 0.33333
     proportion 0.5
     proportion 0.66667
+    proportion 1.0
 
     // Fixed sets the width in logical pixels exactly.
     // fixed 1920
@@ -129,6 +137,8 @@ layout {
   }
 
   border {
+    off
+    
     width 1
     active-color "#f9e2af"
     inactive-color "transparent"
@@ -137,8 +147,7 @@ layout {
 
   // You can enable drop shadows for windows.
   shadow {
-    // Uncomment the next line to enable shadows.
-    // on
+    off
 
     // By default, the shadow draws only around its window, and not behind it.
     // Uncomment this setting to make the shadow draw behind its window.
@@ -191,6 +200,7 @@ layout {
 // See the binds section below for more spawn examples.
 
 spawn-at-startup "noctalia-shell"
+spawn-at-startup "easyeffects" "--service-mode"
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
@@ -219,7 +229,6 @@ screenshot-path "~/Pictures/Screenshots/Screenshot-from-%Y-%m-%d-%H-%M-%S.png";
 // The wiki explains how to configure individual animations:
 // https://yalter.github.io/niri/Configuration:-Animations
 animations {
-  // Uncomment to turn off all animations.
   // off
 
   // Slow down all animations by this factor. Values below 1 speed them up instead.
@@ -237,7 +246,7 @@ window-rule {
   // since this is the default config, and we want no false positives.
   // You can get away with just app-id="wezterm" if you want.
   match app-id=r#"^org\.wezfurlong\.wezterm$"#
-  default-column-width {}
+  default-column-width { proportion 1.0; }
 }
 
 // Open the Firefox picture-in-picture player as floating by default.
@@ -246,6 +255,7 @@ window-rule {
   // - host Firefox (app-id is "firefox")
   // - Flatpak Firefox (app-id is "org.mozilla.firefox")
   match app-id=r#"firefox$"# title="^Picture-in-Picture$"
+  match app-id=r#"brave$"# title="^Picture-in-Picture$"
   open-floating true
 }
 
@@ -259,11 +269,6 @@ window-rule {
 
   // Use this instead if you want them visible on third-party screenshot tools.
   // block-out-from "screencast"
-}
-
-window-rule {
-  geometry-corner-radius 20
-  clip-to-geometry true
 }
 
 binds {
@@ -280,6 +285,8 @@ binds {
   // Mod-Shift-/, which is usually the same as Mod-?,
   // shows a list of important hotkeys.
   Mod+Shift+Slash { show-hotkey-overlay; }
+
+  Mod+Return { spawn "wezterm"; }
 
   Mod+S { spawn "noctalia-shell" "ipc" "call" "controlCenter" "toggle"; }
 
@@ -474,14 +481,6 @@ binds {
   // Center all fully visible columns on screen.
   Mod+Ctrl+C { center-visible-columns; }
 
-  // Finer width adjustments.
-  // This command can also:
-  // * set width in pixels: "1000"
-  // * adjust width in pixels: "-5" or "+5"
-  // * set width as a percentage of screen width: "25%"
-  // * adjust width as a percentage of screen width: "-10%" or "+10%"
-  // Pixel sizes use logical, or scaled, pixels. I.e. on an output with scale 2.0,
-  // set-column-width "100" will make the column occupy 200 physical screen pixels.
   Mod+Minus { set-column-width "-10%"; }
   Mod+Equal { set-column-width "+10%"; }
 
