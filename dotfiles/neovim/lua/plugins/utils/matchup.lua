@@ -1,6 +1,6 @@
 return {
   "andymass/vim-matchup",
-  event = "BufReadPost",
+  event = { "BufReadPost", "BufNewFile", "BufWritePost" },
   init = function()
     -- NOTE: disable markdown because so lag
     -- ref: https://github.com/andymass/vim-matchup/issues/416
