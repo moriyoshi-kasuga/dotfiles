@@ -1,6 +1,8 @@
 { vars, pkgs, ... }:
 
 {
+  catppuccin.cursors.enable = true;
+
   # ユーザーアカウント設定
   users.users.${vars.username} = {
     isNormalUser = true;

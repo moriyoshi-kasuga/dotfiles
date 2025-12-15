@@ -24,29 +24,11 @@
 
     gtk4
     gtk4-layer-shell
+    fuzzel
   ];
 
   home-manager.users.${vars.username} = {
-    programs.sherlock = {
-      enable = true;
-      systemd.enable = true;
-
-      # If wanted, you can use this line for the _latest_ package. / Otherwise, you're relying on nixpkgs to update it frequently enough.
-      # For this to work, make sure to add sherlock as a flake input!
-      # package = inputs.sherlock.packages.${pkgs.system}.default;
-
-      # config.toml
-      settings = {
-        default_apps = {
-          terminal = "wezterm";
-        };
-      };
-
-      # sherlockignore
-      ignore = ''
-        Avahi*
-      '';
-    };
+    catppuccin.fuzzel.enable = true;
   };
 
   environment.sessionVariables = {

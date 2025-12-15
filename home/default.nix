@@ -35,6 +35,9 @@ in
   home.file = {
     ".wezterm.lua".text = weztermConfig;
     ".config/wezterm".source = config.lib.file.mkOutOfStoreSymlink (dotfilesPath + "/wezterm");
+    ".config/fuzzel/fuzzel.ini".source = config.lib.file.mkOutOfStoreSymlink (
+      dotfilesPath + "/fuzzel/fuzzel.ini"
+    );
     ".config/nvim" = {
       source = config.lib.file.mkOutOfStoreSymlink (dotfilesPath + "/neovim");
       force = true;
@@ -48,6 +51,7 @@ in
 
   home.sessionVariables = {
     EDITOR = "simplenvim";
+    TERMINAL = "wezterm";
   };
 
   programs.home-manager.enable = true;

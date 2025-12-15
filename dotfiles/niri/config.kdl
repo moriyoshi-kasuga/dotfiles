@@ -62,7 +62,6 @@ input {
 }
 
 cursor {
-  xcursor-theme "gtk4"
   xcursor-size 24
   hide-when-typing
   hide-after-inactive-ms 10000
@@ -289,7 +288,7 @@ binds {
 
   Mod+S { spawn "nwg-panel"; }
 
-  Mod+Space hotkey-overlay-title="Launcher" { spawn "sherlock"; }
+  Mod+Space hotkey-overlay-title="Launcher" { spawn "fuzzel"; }
   // Super+Alt+L hotkey-overlay-title="SessionMenu" { spawn "noctalia-shell" "ipc" "call" "sessionMenu" "toggle"; }
 
   // Example volume keys mappings for PipeWire & WirePlumber.
