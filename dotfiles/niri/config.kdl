@@ -293,12 +293,11 @@ binds {
 
   Mod+Space hotkey-overlay-title="Launcher" { spawn "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
   Super+Alt+L hotkey-overlay-title="SessionMenu" { spawn "noctalia-shell" "ipc" "call" "sessionMenu" "toggle"; }
+  Super+L { spawn "noctalia-shell" "ipc" "call" "lockScreen" "lock"; }
 
-  // Example volume keys mappings for PipeWire & WirePlumber.
-  // The allow-when-locked=true property makes them work even when the session is locked.
-  // Using spawn-sh allows to pass multiple arguments together with the command.
-  XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+"; }
-  XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-"; }
+  Mod+M { spawn "noctalia-shell" "ipc" "call" "volume" "muteInput"; }
+  // XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+"; }
+  // XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-"; }
   XF86AudioMute        allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
   XF86AudioMicMute     allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
 

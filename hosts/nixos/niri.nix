@@ -62,9 +62,7 @@
             ];
             right = [
               {
-                alwaysShowPercentage = false;
-                id = "Battery";
-                warningThreshold = 30;
+                id = "Volume";
               }
               {
                 formatHorizontal = "HH:mm";
@@ -72,6 +70,9 @@
                 id = "Clock";
                 useMonospacedFont = true;
                 usePrimaryColor = true;
+              }
+              {
+                id = "NotificationHistory";
               }
             ];
           };
