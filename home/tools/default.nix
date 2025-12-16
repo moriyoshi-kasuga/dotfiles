@@ -32,6 +32,7 @@
     glow
     bottom
     just
+    tailspin
   ];
 
   programs.fd.enable = true;
