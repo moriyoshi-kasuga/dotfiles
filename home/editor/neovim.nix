@@ -47,6 +47,8 @@ in
     tailwindcss-language-server
     vtsls
 
+    fsautocomplete
+
     hadolint
     actionlint
     typos-lsp

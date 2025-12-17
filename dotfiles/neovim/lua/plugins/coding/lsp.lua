@@ -40,6 +40,7 @@ return {
         "nixd",
         "lua_ls",
         "hls",
+        "fsautocomplete",
 
         "bashls",
         "jsonls",
