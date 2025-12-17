@@ -7,5 +7,6 @@
     ./go.nix
     ./haskell.nix
     ./nix.nix
+    ./fsharp.nix
   ];
 }
