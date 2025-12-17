@@ -37,7 +37,7 @@ in
 
   config = {
     home.packages = packages;
-    home.sessionVariables = {
+    home.sessionVariables = rec {
       PKG_CONFIG_PATH =
         let
           getPkgConfigPath =
@@ -51,6 +51,7 @@ in
         in
         pkgs.lib.concatStringsSep ":" pkgConfigPaths;
       LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath ldLibraryPathPackages;
+      LIBRARY_PATH = LD_LIBRARY_PATH;
     };
   };
 }
