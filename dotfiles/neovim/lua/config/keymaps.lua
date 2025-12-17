@@ -59,3 +59,8 @@ map("n", "<leader><Tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
 map("n", "<leader><Tab>o", "<cmd>tabonly<cr>", { desc = "Close Other Tab" })
 map("n", "<leader><Tab>n", "<cmd>tabnext<cr>", { desc = "Tab Next" })
 map("n", "<leader><Tab>p", "<cmd>tabprevious<cr>", { desc = "Tab Prev" })
+
+map("n", "=", [[<cmd>vertical resize +5<cr>]])
+map("n", "-", [[<cmd>vertical resize -5<cr>]])
+map("n", "+", [[<cmd>horizontal resize +2<cr>]])
+map("n", "_", [[<cmd>horizontal resize -2<cr>]])
