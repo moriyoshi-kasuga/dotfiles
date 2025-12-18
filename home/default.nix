@@ -44,6 +44,9 @@ in
       # Created default config by niri, so force overwrite
       force = true;
     };
+    ".config/opencode/opencode.json".source = config.lib.file.mkOutOfStoreSymlink (
+      dotfilesPath + "/opencode.json"
+    );
   };
 
   home.sessionVariables = {
