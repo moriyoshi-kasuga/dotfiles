@@ -1,3 +1,5 @@
+local is_simple_mode = require("config.util").is_in_simple_mode()
+
 vim.opt.backup = true
 vim.opt.backupdir = vim.fn.expand(vim.fn.stdpath("cache") .. "/.vim_backup")
 vim.opt.swapfile = false
@@ -31,10 +33,17 @@ vim.opt.pumheight = 10
 vim.opt.grepprg = "rg --vimgrep"
 vim.opt.grepformat = "%f:%l:%c:%m"
 
-vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-vim.opt.foldenable = false
-vim.opt.foldlevel = 99
+if is_simple_mode then
+  -- Simple mode: disable folding completely
+  vim.opt.foldmethod = "manual"
+  vim.opt.foldenable = false
+else
+  -- Full mode: treesitter-based folding
+  vim.opt.foldmethod = "expr"
+  vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+  vim.opt.foldenable = false
+  vim.opt.foldlevel = 99
+end
 
 vim.opt.splitright = true
 vim.opt.splitbelow = true
@@ -56,10 +65,18 @@ vim.opt.hlsearch = true
 vim.opt.wrapscan = true
 vim.opt.wildmode = { list = "longest" }
 
-vim.opt.shada = "!,'50,<10,s5,h"
-
-vim.opt.undofile = true
-vim.opt.undolevels = 10000
+if is_simple_mode then
+  -- Simple mode: minimal history and no persistent state
+  vim.opt.shada = "!,'10,h" -- Minimal marks (10 files) and disable hlsearch on load
+  vim.opt.undofile = false
+  vim.opt.undolevels = 100
+  vim.opt.jumpoptions = "stack" -- Limit jumplist behavior
+else
+  -- Full mode: normal history settings
+  vim.opt.shada = "!,'50,<10,s5,h"
+  vim.opt.undofile = true
+  vim.opt.undolevels = 10000
+end
 
 -- コマンドライン補完
 vim.opt.wildignorecase = true
