@@ -12,7 +12,7 @@ let
     if [[ $- != *i* ]]; then
       return
     fi
-    
+
     unset __HM_SESS_VARS_SOURCED
     . "${config.home.profileDirectory}/etc/profile.d/hm-session-vars.sh"
   '';
@@ -21,10 +21,10 @@ let
     if [[ -f $HOME/.local.zshrc ]]; then
       source $HOME/.local.zshrc
     fi
-    
+
     # Defer autosuggestions
     zsh-defer source ${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-    
+
     # Optimize compinit with cache
     autoload -Uz compinit
     if [[ -n ''${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
@@ -32,13 +32,13 @@ let
     else
       zsh-defer compinit -C
     fi
-    
+
     # Defer heavy plugins
     zsh-defer source ${vars.homeDirectory}/.zsh-scripts/mod.zsh
-    
+
     # Defer syntax highlighting to reduce startup time
     zsh-defer source ${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-    
+
     if [[ -f "$HOME/.sdkman/bin/sdkman-init.sh" ]]; then
       source "$HOME/.sdkman/bin/sdkman-init.sh"
     fi
@@ -85,7 +85,7 @@ in
 
       e = "exit";
       reload = "exec zsh";
-      todo = "vim ~/todo.md";
+      todo = "simplenvim ~/todo.md";
       mypaste = "rpaste --server ${vars.rustypasteServer or ""}";
     };
   };
