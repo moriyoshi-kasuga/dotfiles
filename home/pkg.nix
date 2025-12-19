@@ -12,6 +12,7 @@ let
       openssl
       sqlite
       icu
+      lua5_4
     ])
     ++ config.pkgPackages;
   ldLibraryPathPackages =
@@ -20,6 +21,7 @@ let
       sqlite
       ffmpeg
       icu
+      lua5_4
     ])
     ++ config.ldLibraryPathPackages;
 in
