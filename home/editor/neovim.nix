@@ -49,6 +49,7 @@ in
 
     fsautocomplete
 
+    tombi
     hadolint
     actionlint
     typos-lsp
