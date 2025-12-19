@@ -49,6 +49,7 @@ in
 
     fsautocomplete
 
+    just-lsp
     tombi
     hadolint
     actionlint

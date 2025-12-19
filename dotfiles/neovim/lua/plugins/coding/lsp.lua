@@ -46,6 +46,7 @@ return {
         "jsonls",
         "typos_lsp",
         "tombi",
+        "just",
 
         -- vscode-html-language-server
         "html",
