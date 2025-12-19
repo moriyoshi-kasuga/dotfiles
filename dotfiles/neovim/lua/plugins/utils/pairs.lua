@@ -6,7 +6,21 @@ return {
     local npairs = require("nvim-autopairs")
     npairs.setup(plugin_opts)
 
-    local bracket = require("nvim-autopairs.rules.basic").bracket_creator(npairs.config)
-    npairs.add_rule(bracket("<", ">", { "rust", "cpp", "c" }))
+    local Rule = require("nvim-autopairs.rule")
+    local cond = require("nvim-autopairs.conds")
+
+    npairs.add_rule(Rule("<", ">", {
+      "rust",
+      "cpp",
+      "c",
+    }):with_pair(
+      -- regex will make it so that it will auto-pair on
+      -- `a<` but not `a <`
+      -- The `:?:?` part makes it also
+      -- work on Rust generics like `some_func::<T>()`
+      cond.before_regex("%a+:?:?$", 3)
+    ):with_move(function(opts)
+      return opts.char == ">"
+    end))
   end,
 }
