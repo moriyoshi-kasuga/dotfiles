@@ -12,18 +12,18 @@
     wayland
     niri
 
-    # XDG Portals (スクリーンキャスト、ファイル選択等に必要)
-    xdg-desktop-portal-gnome
-    xdg-desktop-portal-gtk
-
     # Additional packages for better experience
     qimgv # image viewer
     mpv # media player
+
+    grim
+    slurp
 
     (xwayland-satellite.override { withSystemd = false; }) # Niri automatically runs this when xwayland support is required
 
     gtk4
     gtk4-layer-shell
+    quickshell
   ];
 
   home-manager.users.${vars.username} = {
@@ -100,7 +100,6 @@
   environment.sessionVariables = {
     # Wayland 設定
     QT_QPA_PLATFORM = "wayland";
-    QT_QPA_PLATFORMTHEME = "gtk4";
     SDL_VIDEODRIVER = "wayland";
     XDG_SESSION_TYPE = "wayland";
     NIXOS_OZONE_WL = "1";
@@ -124,17 +123,23 @@
   # XDG Desktop Portal の設定
   xdg.portal = {
     enable = true;
+    wlr.enable = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-gnome
+      xdg-desktop-portal-gtk
+    ];
     config = {
       common = {
         default = [
-          "gtk4"
+          "gnome"
+          "gtk"
         ];
       };
       niri = {
         default = [
-          "gtk4"
+          "gnome"
+          "gtk"
         ];
-        "org.freedesktop.impl.portal.Secret" = [ "gnome-keyring" ];
       };
     };
   };
