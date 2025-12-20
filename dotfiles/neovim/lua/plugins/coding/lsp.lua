@@ -41,6 +41,7 @@ return {
         "lua_ls",
         "hls",
         "fsautocomplete",
+        "zls",
 
         "bashls",
         "jsonls",

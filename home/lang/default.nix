@@ -8,5 +8,6 @@
     ./haskell.nix
     ./nix.nix
     ./fsharp.nix
+    ./zig.nix
   ];
 }
