@@ -12,6 +12,7 @@
 
   home.sessionVariables = {
     _ZO_EXCLUDE_DIRS = "$HOME:/tmp/*:/var/*:/nix/*:/mnt/*";
+    _ZO_FZF_OPTS = "--style minimal --tmux 75%,85%";
   };
 
   programs.zsh.initContent = ''
