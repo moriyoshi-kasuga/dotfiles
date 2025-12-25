@@ -38,10 +38,6 @@ let
 
     # Defer syntax highlighting to reduce startup time
     zsh-defer source ${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-    if [[ -f "$HOME/.sdkman/bin/sdkman-init.sh" ]]; then
-      source "$HOME/.sdkman/bin/sdkman-init.sh"
-    fi
   '';
 in
 {

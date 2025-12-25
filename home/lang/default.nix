@@ -9,5 +9,6 @@
     ./nixlang.nix
     ./fsharp.nix
     ./zig.nix
+    ./jvm.nix
   ];
 }

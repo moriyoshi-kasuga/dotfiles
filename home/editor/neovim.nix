@@ -28,26 +28,34 @@ in
       NVIM_SIMPLE_MODE=1 exec ${pkgs.neovim}/bin/nvim "$@"
     '')
 
+    # shell
     bash-language-server
     shellcheck
     shfmt
 
-    # HTML/CSS/JSON/ESLint
-    vscode-langservers-extracted
-
+    # lua
     lua-language-server
     stylua
 
-    nixd
-
+    # python
     ty
     ruff
 
+    # ts
     svelte-language-server
     tailwindcss-language-server
     vtsls
 
+    # jvm
+    jdt-language-server
+    metals
+
+    # single package for each lang
+    nixd
     fsautocomplete
+
+    # HTML/CSS/JSON/ESLint
+    vscode-langservers-extracted
 
     just-lsp
     tombi
