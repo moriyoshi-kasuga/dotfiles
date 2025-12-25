@@ -3,8 +3,13 @@
 {
   home.packages = with pkgs; [
     jdk21_headless
+
     gradle-unwrapped
-    scala
+
+    scala-next
     sbt
+    coursier
+    scalafmt
+    scalafix
   ];
 }

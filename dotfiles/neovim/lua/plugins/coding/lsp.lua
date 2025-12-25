@@ -42,8 +42,6 @@ return {
         "hls",
         "fsautocomplete",
         "zls",
-        "jdtls",
-        "metals",
 
         "bashls",
         "jsonls",
