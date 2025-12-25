@@ -291,7 +291,7 @@ binds {
   // shows a list of important hotkeys.
   Mod+Shift+Slash { show-hotkey-overlay; }
 
-  Mod+Return { spawn "wezterm"; }
+  Mod+Slash { spawn "wezterm"; }
 
   Mod+S { spawn "noctalia-shell" "ipc" "call" "controlCenter" "toggle"; }
 
