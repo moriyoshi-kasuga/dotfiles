@@ -14,7 +14,7 @@
     ./gaming.nix # ゲーミング設定
 
     # その他のモジュール
-    ./nix.nix # Nix デーモン設定
+    ./nixos.nix # Nix デーモン設定
     ./network.nix # ネットワーク設定
     ./region.nix # 地域・言語設定
     ./fonts.nix # フォント設定

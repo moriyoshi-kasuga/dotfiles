@@ -6,7 +6,7 @@
     ./rust.nix
     ./go.nix
     ./haskell.nix
-    ./nix.nix
+    ./nixlang.nix
     ./fsharp.nix
     ./zig.nix
   ];
