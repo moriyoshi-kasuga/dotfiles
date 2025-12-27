@@ -7,6 +7,7 @@
   users.users.${vars.username} = {
     isNormalUser = true;
     description = "${vars.username}";
+    group = "${vars.username}";
     extraGroups = [
       "networkmanager"
       "wheel"
@@ -35,6 +36,12 @@
       # Minecraft Launcher
       prismlauncher
     ];
+  };
+
+  users.groups.${vars.username} = {
+    name = "${vars.username}";
+    members = [ "${vars.username}" ];
+    gid = 1000;
   };
 
   programs.thunar.enable = true;
