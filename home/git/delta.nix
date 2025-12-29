@@ -1,16 +1,18 @@
 { pkgs, ... }:
 
+let
+  package = pkgs.delta;
+  cmd = pkgs.lib.getExe package;
+in
 {
-  home.packages = with pkgs; [
-    delta
+  home.packages = [
+    package
   ];
 
-  programs.delta = {
-    enable = true;
-    enableGitIntegration = true;
-    options = {
-      hyperlinks = true;
-      side-by-side = true;
+  programs.git.iniContent = {
+    core.pager = "${cmd} --diff-so-fancy";
+    interactive.diffFilter = "${cmd} --color-only";
+    delta = {
       line-numbers = true;
       navigate = true;
     };
