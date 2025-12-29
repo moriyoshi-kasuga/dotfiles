@@ -6,7 +6,7 @@ bindkey "^H" backward-delete-char
 # Defer expensive zstyle configurations
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' menu no
-zstyle ':completion:*:git-checkout:*' sort false
+zstyle ':completion:*' sort false
 
 # Defer edit-command-line setup
 autoload -Uz edit-command-line
