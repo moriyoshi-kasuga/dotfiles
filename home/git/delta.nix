@@ -11,7 +11,7 @@ in
 
   programs.git.iniContent = {
     core.pager = "${cmd} --diff-so-fancy";
-    interactive.diffFilter = "${cmd} --color-only";
+    interactive.diffFilter = "${cmd} --diff-so-fancy --color-only";
     delta = {
       line-numbers = true;
       navigate = true;
