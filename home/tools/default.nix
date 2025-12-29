@@ -39,5 +39,8 @@
     bat.enable = true;
     jq.enable = true;
     lazydocker.enable = true;
+    zsh.shellAliases = {
+      fdh = "fd -H -E '.git'";
+    };
   };
 }
