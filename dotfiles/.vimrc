@@ -26,20 +26,7 @@ set mouse=
 let g:netrw_banner=0
 let g:netrw_bufsettings = 'noma nomod relativenumber nobl nowrap ro'
 
-" Create directories if they do not exist
-silent! call mkdir(expand('~/.vim/tmp/undo'), 'p')
-silent! call mkdir(expand('~/.vim/tmp/backup'), 'p')
-
-" swap, undo, backup
 set noswapfile
-
-set undodir=~/.vim/tmp/undo
-set undofile
-
-set backupdir=~/.vim/tmp/backup
-set backup
-set writebackup
-set backupskip=/tmp/*,/private/tmp/*,/var/folders/*
 
 " Wildignore for performance
 set wildignore+=*/target/*,*/node_modules/*,*/.git/*,*/.cache/*,*/.vscode/*,*.swp,*.swo,*.bak,*.pyc,*.pyo,*.class,*.o,*.log
@@ -69,12 +56,5 @@ augroup qs_colors
   autocmd ColorScheme * highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline
 augroup END
 
-nnoremap <leader>i :UndotreeToggle<CR>
-
-nnoremap <leader><space> :Files<CR>
-nnoremap <leader>g :GFiles<CR>
-
-let g:yazi_replace_netrw = 1
-let g:yazi_no_mappings = 1
-
-nnoremap <leader>e :Yazi<CR>
+nnoremap ,s :Files<CR>
+nnoremap ,g :GFiles<CR>

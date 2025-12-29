@@ -15,37 +15,21 @@ let
       sha256 = "usuUic5k/rsKccTjEBG105kTM/wiJmmPatlmIMlNtlE=";
     };
   };
-  VimYazi = pkgs.vimUtils.buildVimPlugin {
-    name = "vim-yazi";
-    src = pkgs.fetchFromGitHub {
-      owner = "moriyoshi-kasuga";
-      repo = "vim-yazi";
-      rev = "40225f6488d7eaf5c9545e61a17164a4115210a5";
-      sha256 = "5lXVAaGYmaHKtW6PKjCCyW+qnMkQHCSh4VVny56OxkQ=";
-    };
-  };
 in
 {
   programs.vim = {
     enable = true;
     plugins = with pkgs.vimPlugins; [
+      BetterEscape
+      editorconfig-vim
+      catppuccin-vim
+      quick-scope
       vim-surround
       vim-commentary
-      vim-easyescape
-      lightline-vim
-      catppuccin-vim
-      editorconfig-vim
-      undotree
-      quick-scope
       fzf-vim
-      BetterEscape
-      VimYazi
     ];
-    extraConfig =
-      builtins.readFile (dotfilesPath + "/.vimrc")
-      + ''
-        let g:lightline = {'colorscheme': 'catppuccin_${vars.catppuccinFlavor}'}
-        colorscheme catppuccin_${vars.catppuccinFlavor}
-      '';
+    extraConfig = builtins.readFile (dotfilesPath + "/.vimrc") + ''
+      colorscheme catppuccin_${vars.catppuccinFlavor}
+    '';
   };
 }

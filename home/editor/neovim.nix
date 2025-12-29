@@ -5,12 +5,15 @@
 
 let
   treesitterGrammars = pkgs.vimPlugins.nvim-treesitter.withAllGrammars;
+  neovim = pkgs.neovim-unwrapped;
+  neovimCmd = pkgs.lib.getExe neovim;
 in
 {
   catppuccin.nvim.enable = false;
 
   programs.neovim = {
     enable = true;
+    package = neovim;
 
     extraWrapperArgs = [
       "--set"
@@ -25,7 +28,7 @@ in
 
   home.packages = with pkgs; [
     (pkgs.writeShellScriptBin "simplenvim" ''
-      NVIM_SIMPLE_MODE=1 exec ${pkgs.neovim}/bin/nvim "$@"
+      NVIM_SIMPLE_MODE=1 exec ${neovimCmd} "$@"
     '')
 
     # shell
@@ -46,17 +49,16 @@ in
     tailwindcss-language-server
     vtsls
 
-    # jvm
+    # jvm langs
     jdt-language-server
     metals
+
+    # HTML/CSS/JSON
+    vscode-langservers-extracted
 
     # single package for each lang
     nixd
     fsautocomplete
-
-    # HTML/CSS/JSON/ESLint
-    vscode-langservers-extracted
-
     just-lsp
     tombi
     hadolint
