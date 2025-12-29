@@ -1,13 +1,9 @@
 { pkgs, dotfilesPath, ... }:
 
 let
-  shell = "${pkgs.zsh}/bin/zsh";
+  shell = pkgs.lib.getExe pkgs.zsh;
 in
 {
-  home.packages = with pkgs; [
-    tmux
-  ];
-
   programs.tmux = {
     enable = true;
     baseIndex = 1;
@@ -16,20 +12,11 @@ in
     mouse = false;
     keyMode = "vi";
     shortcut = "t";
-    shell = shell;
-    extraConfig =
-      builtins.readFile (dotfilesPath + "/tmux.conf")
-      + ''
-        set -g default-command "${shell}"
-
-        set -g @thumbs-command 'echo -n {} | pbcopy'
-      '';
+    inherit shell;
+    extraConfig = builtins.readFile (dotfilesPath + "/tmux.conf") + ''
+      set -g default-command "${shell}"
+    '';
   };
-
-
-  programs.tmux.plugins = with pkgs.tmuxPlugins; [
-    tmux-thumbs
-  ];
 
   catppuccin.tmux.extraConfig = builtins.readFile (dotfilesPath + "/tmux.conf.catppuccin");
 }

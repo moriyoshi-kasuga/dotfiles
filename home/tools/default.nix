@@ -4,9 +4,7 @@
   imports = [
     ./tmux.nix
     ./docker.nix
-    ./lazydocker.nix
     ./tff.nix
-    ./yazi.nix
   ];
 
   home.packages = with pkgs; [
@@ -35,7 +33,11 @@
     tailspin
   ];
 
-  programs.fd.enable = true;
-  programs.bat.enable = true;
-  programs.jq.enable = true;
+  programs = {
+    yazi.enable = true;
+    fd.enable = true;
+    bat.enable = true;
+    jq.enable = true;
+    lazydocker.enable = true;
+  };
 }

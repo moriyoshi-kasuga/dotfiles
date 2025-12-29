@@ -43,7 +43,7 @@ in
 {
 
   home.packages = with pkgs; [
-    # Download and use latest version
+    # use latest version
     bash
   ];
   programs.zsh = {

@@ -9,10 +9,6 @@ let
   opts = pkgs.lib.concatStringsSep " " defaultOptions;
 in
 {
-  home.packages = with pkgs; [
-    fzf
-  ];
-
   programs = {
     fzf = {
       enable = true;
