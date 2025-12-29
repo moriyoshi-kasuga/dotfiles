@@ -12,7 +12,7 @@
   
   ];
 
-  askAI = "gemini"; # Options: gemini, claude
+  askAI = "gemini"; # Options: gemini, claude, copilot
 
   # Optional: Set your RustyPaste server URL if you use RustyPaste.
   rustypasteServer = "https://rpt.example.com";

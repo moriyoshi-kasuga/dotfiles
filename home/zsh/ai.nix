@@ -9,6 +9,10 @@ let
       ''
         claude -p "$1"
       ''
+    else if ai == "copilot" then
+      ''
+        copilot --model gpt-5-mini -p "$1"
+      ''
     else if ai == "gemini" then
       ''
         gemini -m "gemini-2.5-pro" -p "$1"
