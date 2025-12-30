@@ -7,8 +7,6 @@ vim.opt.writebackup = true
 vim.opt.autoread = true
 vim.opt.hidden = true
 vim.opt.mouse = ""
-
-vim.opt.laststatus = 3
 vim.opt.splitkeep = "cursor"
 
 -- disable nvim intro
@@ -23,7 +21,6 @@ vim.opt.virtualedit = "block"
 vim.opt.visualbell = false
 vim.opt.errorbells = false
 vim.opt.showmatch = false
-vim.opt.showcmd = true
 vim.opt.updatetime = 200
 vim.opt.timeoutlen = 1000
 vim.opt.scrolloff = 4
@@ -98,3 +95,24 @@ end
 vim.g.markdown_fenced_languages = {}
 vim.g.markdown_recommended_style = 0
 vim.g.markdown_syntax_conceal = 0
+
+-- hide cmd
+vim.opt.showcmd = false
+vim.opt.cmdheight = 0
+
+-- hide statusline
+vim.opt.laststatus = 0
+vim.opt.fillchars = {
+  stl = "─",
+  stlnc = "─",
+}
+vim.opt.statusline = "─"
+
+-- smooth bg and fg on statusline
+local bg = vim.fn.synIDattr(vim.fn.hlID("Normal"), "bg#")
+local fg = vim.fn.synIDattr(vim.fn.hlID("VertSplit"), "fg#")
+if bg == "" then
+  bg = "NONE"
+end
+vim.cmd("hi StatusLine ctermbg=NONE guibg=" .. bg .. " ctermfg=NONE guifg=" .. fg)
+vim.cmd("hi StatuslineNC ctermbg=NONE guibg=" .. bg .. " ctermfg=NONE guifg=" .. fg)
