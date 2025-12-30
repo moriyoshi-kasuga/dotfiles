@@ -97,7 +97,7 @@ return {
           -- Navigation with fzf-lua
           map("n", "ga", function()
             fzf.lsp_code_actions()
-          end, "Goto Definition")
+          end, "Code Actions")
           map("n", "gd", function()
             fzf.lsp_definitions()
           end, "Goto Definition")

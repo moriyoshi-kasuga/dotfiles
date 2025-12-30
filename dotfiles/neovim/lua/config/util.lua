@@ -1,4 +1,4 @@
-M = {}
+local M = {}
 
 ---@return boolean
 M.is_in_simple_mode = function()

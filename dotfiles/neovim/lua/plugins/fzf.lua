@@ -181,7 +181,7 @@ return {
       function()
         require("fzf-lua").keymaps()
       end,
-      desc = "Jumplist",
+      desc = "Keymaps",
     },
     {
       ",m",

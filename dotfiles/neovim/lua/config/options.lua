@@ -1,7 +1,11 @@
 local is_simple_mode = require("config.util").is_in_simple_mode()
 
 vim.opt.backup = true
-vim.opt.backupdir = vim.fn.expand(vim.fn.stdpath("cache") .. "/.vim_backup")
+local backup_dir = vim.fn.expand(vim.fn.stdpath("cache") .. "/.vim_backup")
+if vim.fn.isdirectory(backup_dir) == 0 then
+  vim.fn.mkdir(backup_dir, "p")
+end
+vim.opt.backupdir = backup_dir
 vim.opt.swapfile = false
 vim.opt.writebackup = true
 vim.opt.autoread = true
@@ -108,10 +112,24 @@ vim.opt.fillchars = {
 vim.opt.statusline = "─"
 
 -- smooth bg and fg on statusline
-local bg = vim.fn.synIDattr(vim.fn.hlID("Normal"), "bg#")
-local fg = vim.fn.synIDattr(vim.fn.hlID("VertSplit"), "fg#")
-if bg == "" then
-  bg = "NONE"
+local function update_statusline_colors()
+  local bg = vim.fn.synIDattr(vim.fn.hlID("Normal"), "bg#")
+  local fg = vim.fn.synIDattr(vim.fn.hlID("VertSplit"), "fg#")
+  if bg == "" then
+    bg = "NONE"
+  end
+  if fg == "" then
+    fg = "None"
+  end
+  vim.cmd("hi StatusLine ctermbg=NONE guibg=" .. bg .. " ctermfg=NONE guifg=" .. fg)
+  vim.cmd("hi StatuslineNC ctermbg=NONE guibg=" .. bg .. " ctermfg=NONE guifg=" .. fg)
 end
-vim.cmd("hi StatusLine ctermbg=NONE guibg=" .. bg .. " ctermfg=NONE guifg=" .. fg)
-vim.cmd("hi StatuslineNC ctermbg=NONE guibg=" .. bg .. " ctermfg=NONE guifg=" .. fg)
+
+-- Update on initial load
+update_statusline_colors()
+
+-- Update when colorscheme changes
+vim.api.nvim_create_autocmd("ColorScheme", {
+  group = vim.api.nvim_create_augroup("mori_statusline_colors", { clear = true }),
+  callback = update_statusline_colors,
+})
