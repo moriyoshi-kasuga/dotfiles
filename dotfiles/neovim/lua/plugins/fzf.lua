@@ -191,7 +191,7 @@ return {
       desc = "Marks",
     },
     {
-      ",p",
+      ",P",
       function()
         require("fzf-lua").commands()
       end,

@@ -14,6 +14,6 @@ return {
     { "gP", "<Plug>(YankyGPutBefore)", mode = { "n", "x" }, desc = "Put before and leave cursor" },
     { "]p", "<Plug>(YankyPutIndentAfterLinewise)", desc = "Put indented after" },
     { "[p", "<Plug>(YankyPutIndentBeforeLinewise)", desc = "Put indented before" },
-    { "<leader>p", "<cmd>YankyRingHistory<cr>", desc = "Yank History" },
+    { ",p", "<cmd>YankyRingHistory<cr>", desc = "Yank History" },
   },
 }

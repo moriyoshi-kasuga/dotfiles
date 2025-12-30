@@ -120,7 +120,6 @@ return {
     end,
     keys = {
       { "<leader>e", "<cmd>Oil<CR>", desc = "Open Oil file browser" },
-      { "-", "<cmd>Oil<CR>", desc = "Open parent directory" },
     },
   },
 }

@@ -14,6 +14,7 @@ return {
 
       return {
         use_icons = false, -- required nvim-web-devicons
+        show_help_hints = false,
         hooks = {
           diff_buf_read = function()
             vim.opt_local.wrap = true

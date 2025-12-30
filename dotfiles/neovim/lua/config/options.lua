@@ -45,7 +45,6 @@ end
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
-vim.opt.fenc = "utf-8"
 vim.opt.autoindent = true
 vim.opt.smartindent = true
 vim.opt.backspace = { "indent", "eol", "start" }
