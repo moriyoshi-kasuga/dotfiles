@@ -6,7 +6,8 @@ _G.StatusColumnFn = function()
   local highlight = ""
   local number = vim.v.relnum
   if number == 0 then
-    highlight = "%#BlinkCmpKindConstant#"
+    local is_recording = vim.fn.reg_recording() ~= ""
+    highlight = is_recording and "%#Macro#" or "%#Constant#"
     number = vim.v.lnum
   end
 
