@@ -299,6 +299,7 @@ binds {
   Super+Alt+L hotkey-overlay-title="SessionMenu" { spawn "noctalia-shell" "ipc" "call" "sessionMenu" "toggle"; }
   Super+L { spawn "noctalia-shell" "ipc" "call" "lockScreen" "lock"; }
 
+  Mod+P { spawn "noctalia-shell" "ipc" "call" "calendar" "toggle"; }
   Mod+N { spawn "noctalia-shell" "ipc" "call" "notifications" "toggleHistory"; }
   Mod+T { spawn "noctalia-shell" "ipc" "call" "bar" "toggle"; }
   Mod+M { spawn "noctalia-shell" "ipc" "call" "volume" "muteInput"; }
