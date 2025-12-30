@@ -260,5 +260,51 @@ return {
       end,
       desc = "Todo/Fix/Fixme",
     },
+    {
+      ",v",
+      function()
+        local fzf = require("fzf-lua")
+        local filepath = vim.fn.expand("%:p")
+        local filename = vim.fn.expand("%:t")
+
+        local paths = {
+          { label = "Absolute", value = filepath },
+          { label = "Relative to CWD", value = vim.fn.fnamemodify(filepath, ":.") },
+          { label = "Relative to HOME", value = vim.fn.fnamemodify(filepath, ":~") },
+          { label = "Filename only", value = filename },
+        }
+
+        local entries = vim.tbl_map(function(item)
+          return string.format("%-20s %s", item.label, item.value)
+        end, paths)
+
+        fzf.fzf_exec(entries, {
+          prompt = "Copy Path> ",
+          winopts = { height = 0.4, width = 0.7 },
+          actions = {
+            ["default"] = function(selected)
+              if not selected or not selected[1] then
+                return
+              end
+              -- エントリーから実際のパスを抽出
+              local idx = nil
+              for i, entry in ipairs(entries) do
+                if entry == selected[1] then
+                  idx = i
+                  break
+                end
+              end
+              if idx then
+                local result = paths[idx].value
+                vim.fn.setreg("+", result)
+                vim.fn.setreg("*", result)
+                vim.notify("Copied: " .. result, vim.log.levels.INFO)
+              end
+            end,
+          },
+        })
+      end,
+      desc = "Copy Current Buf Path",
+    },
   },
 }
