@@ -1,8 +1,15 @@
+-- first load
 require("config.util")
-require("config.lazy")
+
+-- options
 require("config.options")
-require("config.keymaps")
-require("config.autocmds")
 require("config.tab")
 require("config.statuscolumn")
+require("config.keymaps")
+require("config.autocmds")
+
+-- plugins
+require("config.lazy")
+
+-- my customs
 require("config.terminal")
