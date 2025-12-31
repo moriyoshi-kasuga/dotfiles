@@ -1,6 +1,9 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
+    -- pin to working commit
+    -- ref: https://www.reddit.com/r/neovim/comments/1psyhxj/neovim_treesitter_error_invalid_node_type_when/
+    commit = "f795520371e6563dac17a0d556f41d70ca86a789",
     event = { "VeryLazy", "BufReadPost", "BufNewFile", "BufWritePre" },
     branch = "main",
     init = function()
