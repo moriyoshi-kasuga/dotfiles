@@ -64,6 +64,7 @@ in
     hadolint
     actionlint
     typos-lsp
+    asm-lsp
   ];
 
   programs.zsh.shellAliases = {

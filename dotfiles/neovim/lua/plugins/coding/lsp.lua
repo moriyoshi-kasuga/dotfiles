@@ -48,6 +48,7 @@ return {
         "typos_lsp",
         "tombi",
         "just",
+        "asm_lsp",
 
         -- vscode-html-language-server
         "html",
