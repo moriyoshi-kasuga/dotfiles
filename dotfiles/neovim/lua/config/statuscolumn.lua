@@ -1,8 +1,8 @@
 vim.opt.signcolumn = "no"
-vim.o.statuscolumn = "%!v:lua.StatusColumnFn()"
+vim.o.statuscolumn = "%!v:lua.MoriStatusColumn()"
 vim.opt.numberwidth = 3
 
-_G.StatusColumnFn = function()
+_G.MoriStatusColumn = function()
   local highlight = ""
   local number = vim.v.relnum
   if number == 0 then
