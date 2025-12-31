@@ -29,13 +29,8 @@ local function new_git_status()
           text = true,
         }
       )
-      local tracked_proc = vim.system({ "git", "ls-tree", "HEAD", "--name-only" }, {
-        cwd = key,
-        text = true,
-      })
       local ret = {
         ignored = parse_output(ignore_proc),
-        tracked = parse_output(tracked_proc),
       }
 
       rawset(self, key, ret)
@@ -66,16 +61,8 @@ return {
           if not dir then
             return is_dotfile
           end
-          -- dotfiles are considered hidden unless tracked
-          if is_dotfile then
-            return not git_status[dir].tracked[name]
-          else
-            -- Check if file is gitignored
-            return git_status[dir].ignored[name]
-          end
-        end,
-        is_always_hidden = function(name, _)
-          return name == "target" or name == "node_modules" or name == ".git"
+          -- Hide only gitignored files (regardless of dotfile status)
+          return git_status[dir].ignored[name]
         end,
       },
       keymaps = {
