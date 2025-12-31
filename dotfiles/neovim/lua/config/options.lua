@@ -113,16 +113,21 @@ vim.opt.statusline = "─"
 
 -- smooth bg and fg on statusline
 local function update_statusline_colors()
-  local bg = vim.fn.synIDattr(vim.fn.hlID("Normal"), "bg#")
-  local fg = vim.fn.synIDattr(vim.fn.hlID("VertSplit"), "fg#")
-  if bg == "" then
-    bg = "NONE"
-  end
-  if fg == "" then
-    fg = "None"
-  end
-  vim.cmd("hi StatusLine ctermbg=NONE guibg=" .. bg .. " ctermfg=NONE guifg=" .. fg)
-  vim.cmd("hi StatuslineNC ctermbg=NONE guibg=" .. bg .. " ctermfg=NONE guifg=" .. fg)
+  local normal_hl = vim.api.nvim_get_hl(0, { name = "Normal" })
+  local vertsplit_hl = vim.api.nvim_get_hl(0, { name = "VertSplit" })
+
+  local bg = normal_hl.bg and string.format("#%06x", normal_hl.bg) or "NONE"
+  local fg = vertsplit_hl.fg and string.format("#%06x", vertsplit_hl.fg) or "NONE"
+
+  vim.api.nvim_set_hl(0, "StatusLine", {
+    bg = bg,
+    fg = fg,
+  })
+
+  vim.api.nvim_set_hl(0, "StatusLineNC", {
+    bg = bg,
+    fg = fg,
+  })
 end
 
 -- Update on initial load
