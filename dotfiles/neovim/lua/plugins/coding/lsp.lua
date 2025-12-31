@@ -125,6 +125,7 @@ return {
           map("n", "K", function()
             vim.lsp.buf.hover({ border = "rounded", max_height = 25, max_width = 120, wrap = false })
           end, "Hover")
+          map("n", "gk", vim.lsp.buf.signature_help, "Signature Help")
           map("n", "gK", vim.lsp.buf.signature_help, "Signature Help")
           map("i", "<C-k>", vim.lsp.buf.signature_help, "Signature Help")
 
