@@ -4,14 +4,13 @@ return {
     "nvim-lua/plenary.nvim",
     "nvim-treesitter/nvim-treesitter",
   },
-  version = "v17.33.0",
   opts = {
     ignore_warnings = true,
     opts = {
       log_level = "DEBUG",
       language = "Japanese",
     },
-    strategies = {
+    interactions = {
       chat = {
         adapter = "copilot",
         model = "claude-4.5-sonnet",
@@ -38,6 +37,12 @@ return {
     {
       "<leader>ac",
       ":CodeCompanionChat<CR>",
+      mode = { "n", "v" },
+      silent = true,
+    },
+    {
+      "<leader>ae",
+      ":CodeCompanionChat /explain<CR>",
       mode = { "n", "v" },
       silent = true,
     },
