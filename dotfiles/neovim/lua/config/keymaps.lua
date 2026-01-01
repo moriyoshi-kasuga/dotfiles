@@ -66,3 +66,7 @@ map("n", "=", [[<cmd>vertical resize +5<cr>]], { desc = "Increase window width" 
 map("n", "-", [[<cmd>vertical resize -5<cr>]], { desc = "Decrease window width" })
 map("n", "+", [[<cmd>horizontal resize +2<cr>]], { desc = "Increase window height" })
 map("n", "_", [[<cmd>horizontal resize -2<cr>]], { desc = "Decrease window height" })
+
+map("n", "<leader>ud", function()
+  vim.diagnostic.enable(not vim.diagnostic.is_enabled())
+end, { desc = "Toggle Diagnostics" })
