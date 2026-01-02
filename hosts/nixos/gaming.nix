@@ -1,5 +1,4 @@
 {
-  pkgs,
   vars,
   ...
 }:
@@ -12,12 +11,11 @@
     dedicatedServer.openFirewall = true;
   };
 
+  programs.gamemode.enable = true;
+
   users.users.${vars.username} = {
     extraGroups = [
       "gamemode"
-    ];
-    packages = with pkgs; [
-      gamemode
     ];
   };
 }
