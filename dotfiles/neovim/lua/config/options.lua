@@ -16,6 +16,7 @@ vim.opt.splitkeep = "cursor"
 -- disable nvim intro
 vim.opt.shortmess:append("sI")
 
+vim.opt.laststatus = 3
 vim.opt.wrap = false
 vim.opt.number = true
 vim.opt.relativenumber = true
@@ -102,39 +103,3 @@ vim.g.markdown_syntax_conceal = 0
 -- hide cmd
 vim.opt.showcmd = false
 vim.opt.cmdheight = 0
-
--- hide statusline
-vim.opt.laststatus = 0
-vim.opt.fillchars = {
-  stl = "─",
-  stlnc = "─",
-}
-vim.opt.statusline = "─"
-
--- smooth bg and fg on statusline
-local function update_statusline_colors()
-  local normal_hl = vim.api.nvim_get_hl(0, { name = "Normal" })
-  local vertsplit_hl = vim.api.nvim_get_hl(0, { name = "VertSplit" })
-
-  local bg = normal_hl.bg and string.format("#%06x", normal_hl.bg) or "NONE"
-  local fg = vertsplit_hl.fg and string.format("#%06x", vertsplit_hl.fg) or "NONE"
-
-  vim.api.nvim_set_hl(0, "StatusLine", {
-    bg = bg,
-    fg = fg,
-  })
-
-  vim.api.nvim_set_hl(0, "StatusLineNC", {
-    bg = bg,
-    fg = fg,
-  })
-end
-
--- Update on initial load
-update_statusline_colors()
-
--- Update when colorscheme changes
-vim.api.nvim_create_autocmd("ColorScheme", {
-  group = vim.api.nvim_create_augroup("mori_statusline_colors", { clear = true }),
-  callback = update_statusline_colors,
-})
