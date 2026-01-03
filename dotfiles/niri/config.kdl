@@ -303,6 +303,7 @@ binds {
   Mod+N { spawn "noctalia-shell" "ipc" "call" "notifications" "toggleHistory"; }
   Mod+T { spawn "noctalia-shell" "ipc" "call" "bar" "toggle"; }
   Mod+M { spawn "noctalia-shell" "ipc" "call" "volume" "muteInput"; }
+  Mod+E { spawn "noctalia-shell" "ipc" "call" "volume" "togglePanel"; }
   // XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+"; }
   // XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-"; }
   XF86AudioMute        allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
