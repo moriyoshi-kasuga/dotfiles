@@ -60,11 +60,12 @@ in
     nixd
     fsautocomplete
     just-lsp
-    tombi
     hadolint
     actionlint
     typos-lsp
     asm-lsp
+    # tombiが新しいtoml lspとしてあるが、sortの無効化が保守的だったり、configが不完全のためtaploを使用する
+    taplo
   ];
 
   programs.zsh.shellAliases = {
