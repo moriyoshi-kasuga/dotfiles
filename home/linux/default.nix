@@ -54,6 +54,7 @@
     wayland
     alsa-lib
     libxcb
+    systemd
   ];
   ldLibraryPathPackages = with pkgs; [
     llvmPackages_20.libllvm
@@ -69,5 +70,6 @@
     mesa
     libdrm
     libxcb
+    systemd
   ];
 }
