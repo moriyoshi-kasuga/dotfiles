@@ -111,7 +111,12 @@ return {
           end,
         },
         lualine_b = { "branch", "diagnostics" },
-        lualine_c = { "filename" },
+        lualine_c = {
+          {
+            "filename",
+            path = 1, -- relative to current working directory (:cd)
+          },
+        },
         lualine_x = { "searchcount", "filetype" },
         lualine_y = { "progress" },
         lualine_z = { "location" },
