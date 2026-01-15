@@ -19,6 +19,9 @@ local tab = {
   just = {
     width = 4,
   },
+  dosbatch = {
+    width = 4,
+  },
 }
 
 vim.api.nvim_create_autocmd("FileType", {
