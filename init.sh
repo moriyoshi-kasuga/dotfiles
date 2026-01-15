@@ -66,7 +66,7 @@ flake)
   USER_NIX_VARS=$VARS nix --extra-experimental-features 'nix-command flakes' run --impure home-manager/master -- switch --impure --extra-experimental-features 'nix-command flakes' --flake .#"$USERNAME" --impure -b backup
   ;;
 darwin)
-  sudo env USER_NIX_VARS="$VARS" nix --extra-experimental-features 'nix-command flakes' run --impure nix-darwin/master#darwin-rebuild -- switch --impure --flake .#"$USERNAME" --impure
+  sudo env USER_NIX_VARS="$VARS" NIXPKGS_ALLOW_BROKEN=1 nix --extra-experimental-features 'nix-command flakes' run --impure nix-darwin/master#darwin-rebuild -- switch --impure --flake .#"$USERNAME" --impure
   ;;
 nixos)
   if [ "$1" == "--upgrade" ]; then
