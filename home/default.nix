@@ -11,9 +11,15 @@ let
     s:
     pkgs.lib.toUpper (builtins.substring 0 1 s) + builtins.substring 1 (builtins.stringLength s - 1) s;
   catppuccinFlavor = capitalize vars.catppuccinFlavor;
+  bigMonitor = vars.bigMonitor or false;
   weztermConfigRaw = builtins.readFile (dotfilesPath + "/.wezterm.lua");
   weztermConfig =
-    builtins.replaceStrings [ "@COLORSCHEME@" ] [ "Catppuccin ${catppuccinFlavor}" ]
+    builtins.replaceStrings
+      [ "@COLORSCHEME@" "\"@BIGMONITOR@\"" ]
+      [
+        "Catppuccin ${catppuccinFlavor}"
+        (if bigMonitor then "true" else "false")
+      ]
       weztermConfigRaw;
 in
 {

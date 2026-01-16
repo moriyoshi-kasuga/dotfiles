@@ -1,5 +1,7 @@
 local wezterm = require("wezterm")
 
+local big_monitor = "@BIGMONITOR@"
+
 local config = {}
 
 if wezterm.config_builder then
@@ -34,12 +36,21 @@ font.register_fonts({
 font.load_default(config)
 config.adjust_window_size_when_changing_font_size = false
 
-config.window_padding = {
-  left = 0,
-  right = 0,
-  top = 0,
-  bottom = 0,
-}
+if big_monitor then
+  config.window_padding = {
+    left = 180,
+    right = 180,
+    top = 180,
+    bottom = 0,
+  }
+else
+  config.window_padding = {
+    left = 0,
+    right = 0,
+    top = 0,
+    bottom = 0,
+  }
+end
 
 -- ショートカットキー設定
 config.keys = {
