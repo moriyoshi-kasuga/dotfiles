@@ -3,11 +3,13 @@
   "default_agent": "plan",
   "permission": {
     "bash": {
+      "cargo run *": "deny",
       "terraform *": "deny",
       "gh *": "ask",
       "rm *": "ask",
-      "git status": "allow",
-      "git push": "ask",
+      "git push *": "ask",
+      "nix *": "ask",
+      "nixos-rebuild *": "deny",
     }
   },
   "agent": {
