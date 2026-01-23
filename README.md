@@ -117,10 +117,6 @@ macOS と NixOS のための開発環境を構築する `dotfiles` です（Nix 
 ├── flake.nix                 # Flake エントリーポイント
 ├── vars.nix.example          # 設定テンプレート
 ├── init.sh                   # セットアップスクリプト
-├── dev.sh                    # Docker 環境管理スクリプト
-├── docker/                   # Docker 開発環境
-│   ├── Dockerfile            # Docker イメージ定義
-│   └── compose.yaml          # Docker Compose 設定
 ├── home/                     # Home Manager 設定
 │   ├── default.nix           # Home Manager メイン設定
 │   ├── pkg.nix               # PKG_CONFIG_PATH と LD_LIBRARY_PATH 管理
