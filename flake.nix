@@ -35,7 +35,10 @@
       vars = import vars-file.outPath;
       inherit (vars) username;
       inherit (vars) system;
-      pkgs = import nixpkgs { inherit system; };
+      pkgs = import nixpkgs {
+        inherit system;
+        config.allowBroken = true;
+      };
       homeDirectory =
         if pkgs.stdenv.isLinux then
           "/home/${username}"
