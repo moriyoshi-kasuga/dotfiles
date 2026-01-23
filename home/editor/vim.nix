@@ -1,7 +1,5 @@
 {
   pkgs,
-  vars,
-  dotfilesPath,
   ...
 }:
 
@@ -28,8 +26,6 @@ in
       vim-commentary
       fzf-vim
     ];
-    extraConfig = builtins.readFile (dotfilesPath + "/.vimrc") + ''
-      colorscheme catppuccin_${vars.catppuccinFlavor}
-    '';
+    extraConfig = builtins.readFile ../../dotfiles/.vimrc;
   };
 }

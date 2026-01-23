@@ -1,4 +1,10 @@
-{ pkgs, vars, ... }:
+{
+  pkgs,
+  system,
+  username,
+  homeDirectory,
+  ...
+}:
 
 {
   fonts.packages = [
@@ -10,11 +16,11 @@
       experimental-features = nix-command flakes
     '';
   };
-  nixpkgs.hostPlatform = vars.system;
+  nixpkgs.hostPlatform = system;
   system.stateVersion = 6;
-  system.primaryUser = "${vars.username}";
+  system.primaryUser = username;
 
-  users.users.${vars.username}.home = "${vars.homeDirectory}";
+  users.users.${username}.home = homeDirectory;
 
   imports = [
     ./dock.nix

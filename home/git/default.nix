@@ -1,4 +1,4 @@
-{ vars, ... }:
+{ gitIncludes, ... }:
 
 {
   programs.git = {
@@ -10,7 +10,7 @@
       push.default = "current";
     };
 
-    includes = vars.gitIncludes;
+    includes = gitIncludes;
   };
 
   programs.zsh.shellAliases = {

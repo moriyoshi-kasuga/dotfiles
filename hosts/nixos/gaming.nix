@@ -1,5 +1,5 @@
 {
-  vars,
+  username,
   ...
 }:
 
@@ -13,7 +13,7 @@
 
   programs.gamemode.enable = true;
 
-  users.users.${vars.username} = {
+  users.users.${username} = {
     extraGroups = [
       "gamemode"
     ];

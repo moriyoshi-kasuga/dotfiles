@@ -1,8 +1,8 @@
 {
   pkgs,
-  dotfilesPath,
-  vars,
+  rustypasteServer,
   config,
+  homeDirectory,
   ...
 }:
 
@@ -16,7 +16,7 @@ let
     unset __HM_SESS_VARS_SOURCED
     . "${config.home.profileDirectory}/etc/profile.d/hm-session-vars.sh"
   '';
-  zshConfigDefault = pkgs.lib.mkOrder 1000 (builtins.readFile (dotfilesPath + "/.zshrc"));
+  zshConfigDefault = pkgs.lib.mkOrder 1000 (builtins.readFile ../../dotfiles/.zshrc);
   zshConfigAfter = pkgs.lib.mkOrder 1500 ''
     if [[ -f $HOME/.local.zshrc ]]; then
       source $HOME/.local.zshrc
@@ -34,7 +34,7 @@ let
     fi
 
     # Defer heavy plugins
-    zsh-defer source ${vars.homeDirectory}/.zsh-scripts/mod.zsh
+    zsh-defer source ${homeDirectory}/.zsh-scripts/mod.zsh
 
     # Defer syntax highlighting to reduce startup time
     zsh-defer source ${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -82,11 +82,11 @@ in
       e = "exit";
       reload = "exec zsh";
       todo = "simplenvim ~/todo.md";
-      mypaste = "rpaste --server ${vars.rustypasteServer or ""}";
+      mypaste = "rpaste --server ${rustypasteServer}";
     };
   };
 
-  home.file.".zsh-scripts".source = dotfilesPath + "/zsh-scripts";
+  home.file.".zsh-scripts".source = ../../dotfiles/zsh-scripts;
 
   imports = [
     ./starship.nix
@@ -94,6 +94,5 @@ in
     ./eza.nix
     ./zoxide.nix
     ./direnv.nix
-    ./ai.nix
   ];
 }

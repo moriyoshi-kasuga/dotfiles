@@ -1,9 +1,9 @@
 {
-  vars,
+  username,
   ...
 }:
 
 {
-  networking.hostName = "${vars.username}-NixOS";
+  networking.hostName = "${username}-NixOS";
   networking.networkmanager.enable = true;
 }

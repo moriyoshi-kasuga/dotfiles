@@ -1,13 +1,13 @@
-{ vars, pkgs, ... }:
+{ username, pkgs, ... }:
 
 {
   catppuccin.cursors.enable = true;
 
   # ユーザーアカウント設定
-  users.users.${vars.username} = {
+  users.users.${username} = {
     isNormalUser = true;
-    description = "${vars.username}";
-    group = "${vars.username}";
+    description = username;
+    group = username;
     extraGroups = [
       "networkmanager"
       "wheel"
@@ -38,9 +38,9 @@
     ];
   };
 
-  users.groups.${vars.username} = {
-    name = "${vars.username}";
-    members = [ "${vars.username}" ];
+  users.groups.${username} = {
+    name = username;
+    members = [ username ];
     gid = 1000;
   };
 

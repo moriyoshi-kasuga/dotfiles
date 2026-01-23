@@ -16,6 +16,10 @@
       url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    vars-file = {
+      url = "file+file:///dev/null";
+      flake = false;
+    };
   };
 
   outputs =
@@ -24,11 +28,21 @@
       catppuccin,
       home-manager,
       nix-darwin,
+      vars-file,
       ...
     }:
     let
-      vars = builtins.fromJSON (builtins.getEnv "USER_NIX_VARS");
-      pkgs = import nixpkgs { inherit (vars) system; };
+      vars = import vars-file.outPath;
+      inherit (vars) username;
+      inherit (vars) system;
+      pkgs = import nixpkgs { inherit system; };
+      homeDirectory =
+        if pkgs.stdenv.isLinux then
+          "/home/${username}"
+        else if pkgs.stdenv.isDarwin then
+          "/Users/${username}"
+        else
+          abort "it system is not supported";
       homeModules = [
         catppuccin.homeModules.catppuccin
         ./home
@@ -40,16 +54,19 @@
       specialArgs = {
         inherit vars;
         inherit inputs;
-        dotfilesPath = builtins.toPath vars.dotfilesDir;
+        inherit username;
+        inherit system;
+        inherit homeDirectory;
+        inherit (vars) gitIncludes bigMonitor rustypasteServer;
       };
     in
     {
-      homeConfigurations.${vars.username} = home-manager.lib.homeManagerConfiguration {
+      homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         extraSpecialArgs = specialArgs;
         modules = homeModules;
       };
-      darwinConfigurations.${vars.username} = nix-darwin.lib.darwinSystem {
+      darwinConfigurations.${username} = nix-darwin.lib.darwinSystem {
         inherit specialArgs;
 
         modules = [
@@ -59,14 +76,14 @@
           {
             home-manager = {
               extraSpecialArgs = specialArgs;
-              users.${vars.username}.imports = homeModules;
+              users.${username}.imports = homeModules;
             };
           }
         ];
       };
-      nixosConfigurations.${vars.username} = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.${username} = nixpkgs.lib.nixosSystem {
+        inherit system;
         inherit specialArgs;
-        system = "${vars.system}";
 
         modules = [
           catppuccin.nixosModules.catppuccin
@@ -76,7 +93,7 @@
           {
             home-manager = {
               extraSpecialArgs = specialArgs;
-              users.${vars.username}.imports = homeModules;
+              users.${username}.imports = homeModules;
             };
           }
         ];

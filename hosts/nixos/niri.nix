@@ -1,7 +1,7 @@
 {
   pkgs,
   inputs,
-  vars,
+  username,
   ...
 }:
 
@@ -26,7 +26,7 @@
     quickshell
   ];
 
-  home-manager.users.${vars.username} = {
+  home-manager.users.${username} = {
     imports = [
       inputs.noctalia.homeModules.default
     ];

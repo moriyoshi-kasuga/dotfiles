@@ -1,4 +1,4 @@
-{ pkgs, dotfilesPath, ... }:
+{ pkgs, ... }:
 
 let
   shell = pkgs.lib.getExe pkgs.zsh;
@@ -13,10 +13,10 @@ in
     keyMode = "vi";
     shortcut = "t";
     inherit shell;
-    extraConfig = builtins.readFile (dotfilesPath + "/tmux.conf") + ''
+    extraConfig = builtins.readFile ../../dotfiles/tmux.conf + ''
       set -g default-command "${shell}"
     '';
   };
 
-  catppuccin.tmux.extraConfig = builtins.readFile (dotfilesPath + "/tmux.conf.catppuccin");
+  catppuccin.tmux.extraConfig = builtins.readFile ../../dotfiles/tmux.conf.catppuccin;
 }

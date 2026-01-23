@@ -1,23 +1,19 @@
 {
   pkgs,
-  vars,
-  dotfilesPath,
+  homeDirectory,
   config,
+  bigMonitor,
+  username,
   ...
 }:
 
 let
-  capitalize =
-    s:
-    pkgs.lib.toUpper (builtins.substring 0 1 s) + builtins.substring 1 (builtins.stringLength s - 1) s;
-  catppuccinFlavor = capitalize vars.catppuccinFlavor;
-  bigMonitor = vars.bigMonitor or false;
-  weztermConfigRaw = builtins.readFile (dotfilesPath + "/.wezterm.lua");
+  weztermConfigRaw = builtins.readFile ../dotfiles/.wezterm.lua;
   weztermConfig =
     builtins.replaceStrings
       [ "@COLORSCHEME@" "\"@BIGMONITOR@\"" ]
       [
-        "Catppuccin ${catppuccinFlavor}"
+        "Catppuccin Mocha"
         (if bigMonitor then "true" else "false")
       ]
       weztermConfigRaw;
@@ -25,14 +21,14 @@ in
 {
   catppuccin = {
     enable = true;
-    flavor = vars.catppuccinFlavor;
+    flavor = "mocha";
     accent = "sapphire";
   };
 
-  home.username = vars.username;
-  home.homeDirectory = vars.homeDirectory;
-
-  home.stateVersion = "25.05";
+  home = {
+    inherit username homeDirectory;
+    stateVersion = "25.05";
+  };
 
   home.packages = [
     pkgs.fastfetch
@@ -40,19 +36,18 @@ in
 
   home.file = {
     ".wezterm.lua".text = weztermConfig;
-    ".config/wezterm".source = config.lib.file.mkOutOfStoreSymlink (dotfilesPath + "/wezterm");
+    ".config/wezterm".source = config.lib.file.mkOutOfStoreSymlink ../dotfiles/wezterm;
     ".config/nvim" = {
-      source = config.lib.file.mkOutOfStoreSymlink (dotfilesPath + "/neovim");
+      source = config.lib.file.mkOutOfStoreSymlink ../dotfiles/neovim;
       force = true;
     };
     ".config/niri/config.kdl" = {
-      source = config.lib.file.mkOutOfStoreSymlink (dotfilesPath + "/niri/config.kdl");
+      source = config.lib.file.mkOutOfStoreSymlink ../dotfiles/niri/config.kdl;
       # Created default config by niri, so force overwrite
       force = true;
     };
-    ".config/opencode/opencode.json".source = config.lib.file.mkOutOfStoreSymlink (
-      dotfilesPath + "/opencode.json"
-    );
+    ".config/opencode/opencode.json".source =
+      config.lib.file.mkOutOfStoreSymlink ../dotfiles/opencode.json;
   };
 
   home.sessionVariables = {

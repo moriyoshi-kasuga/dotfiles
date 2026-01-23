@@ -3,7 +3,7 @@
 {
   imports = [
     # ハードウェアスキャン結果
-    /etc/nixos/hardware-configuration.nix
+    ./hardware-configuration.nix
 
     # NixOS システム設定モジュール
     ./boot.nix # ブートローダー設定

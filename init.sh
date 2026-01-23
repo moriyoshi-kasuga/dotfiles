@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-# options: flake, update, darwin, help
-
 OPTIONS=$1
 case $OPTIONS in
 flake) ;;
@@ -47,6 +45,7 @@ if [ ! -f "./vars.nix" ]; then
   exit 1
 fi
 
+VARS_FILE="$PWD/vars.nix"
 USERNAME=$(nix --extra-experimental-features 'nix-command' eval --raw --file ./vars.nix username)
 
 if [ -z "$USERNAME" ]; then
@@ -54,19 +53,13 @@ if [ -z "$USERNAME" ]; then
   exit 1
 fi
 
-VARS=$(nix --extra-experimental-features 'nix-command' eval --file ./vars.nix)
-
-dir="$(dirname "$(realpath "$0")")/dotfiles"
-
-VARS=$(nix --extra-experimental-features 'nix-command' eval --json --expr "$VARS // { dotfilesDir = $dir; }")
-
 echo 'Building Nix configuration...'
 case $OPTIONS in
 flake)
-  USER_NIX_VARS=$VARS nix --extra-experimental-features 'nix-command flakes' run --impure home-manager/master -- switch --impure --extra-experimental-features 'nix-command flakes' --flake .#"$USERNAME" --impure -b backup
+  nix --extra-experimental-features 'nix-command flakes' run home-manager/master -- switch --extra-experimental-features 'nix-command flakes' --flake .#"$USERNAME" -b backup --override-input vars-file "file+file://$VARS_FILE"
   ;;
 darwin)
-  sudo env USER_NIX_VARS="$VARS" NIXPKGS_ALLOW_BROKEN=1 nix --extra-experimental-features 'nix-command flakes' run --impure nix-darwin/master#darwin-rebuild -- switch --impure --flake .#"$USERNAME" --impure
+  sudo env NIXPKGS_ALLOW_BROKEN=1 nix --extra-experimental-features 'nix-command flakes' run nix-darwin/master#darwin-rebuild -- switch --flake .#"$USERNAME" --override-input vars-file "file+file://$VARS_FILE"
   ;;
 nixos)
   if [ "$1" == "--upgrade" ]; then
@@ -79,7 +72,7 @@ nixos)
     exit 1
   fi
   # shellcheck disable=SC2068
-  sudo env USER_NIX_VARS="$VARS" nixos-rebuild switch --flake .#"$USERNAME" --impure $@
+  sudo nixos-rebuild switch --flake .#"$USERNAME" --override-input vars-file "file+file://$VARS_FILE" $@
   ;;
 *) ;;
 esac

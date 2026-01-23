@@ -38,7 +38,7 @@ macOS と NixOS のための開発環境を構築する `dotfiles` です（Nix 
     cp vars.nix.example vars.nix
     ```
 
-    `vars.nix` 内で、`username`, `homeDirectory`, `system` などを設定してください。
+    `vars.nix` 内で、`username`, `system` などを設定してください。
 
     - **NixOS**: `system = "x86_64-linux"` または `"aarch64-linux"`
     - **macOS**: `system = "aarch64-darwin"` または `"x86_64-darwin"`
