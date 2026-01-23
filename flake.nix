@@ -55,12 +55,14 @@
       ++ [ ./home/pkg.nix ];
 
       specialArgs = {
+        inherit pkgs;
         inherit vars;
         inherit inputs;
         inherit username;
         inherit system;
         inherit homeDirectory;
-        inherit (vars) gitIncludes bigMonitor rustypasteServer;
+        inherit (vars) gitIncludes rustypasteServer;
+        bigMonitor = vars.bigMonitor or false;
       };
     in
     {
