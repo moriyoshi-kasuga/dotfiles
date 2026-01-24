@@ -44,4 +44,18 @@ return {
       { "<leader>gF", "<cmd>DiffviewFileHistory<CR>", desc = "Diffview File History (All)" },
     },
   },
+  {
+    "NeogitOrg/neogit",
+    lazy = true,
+    dependencies = {
+      "nvim-lua/plenary.nvim", -- required
+      "sindrets/diffview.nvim", -- optional - Diff integration
+
+      "ibhagwan/fzf-lua",
+    },
+    cmd = "Neogit",
+    keys = {
+      { "<C-.>", "<cmd>Neogit<cr>", desc = "Show Neogit UI" },
+    },
+  },
 }
