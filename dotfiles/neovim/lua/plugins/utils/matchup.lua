@@ -3,10 +3,6 @@ return {
   event = { "BufReadPost", "BufNewFile", "BufWritePost" },
   init = function()
     vim.g.matchup_treesitter_disabled = {
-      -- NOTE: disable markdown because so lag
-      -- ref: https://github.com/andymass/vim-matchup/issues/416
-      "markdown",
-
       -- highlight is noisy
       "haskell",
     }
