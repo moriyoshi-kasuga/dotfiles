@@ -55,7 +55,6 @@
       ++ [ ./home/pkg.nix ];
 
       specialArgs = {
-        inherit pkgs;
         inherit vars;
         inherit inputs;
         inherit username;
