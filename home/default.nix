@@ -4,6 +4,7 @@
   config,
   bigMonitor,
   username,
+  dotfilesPath,
   ...
 }:
 
@@ -36,18 +37,17 @@ in
 
   home.file = {
     ".wezterm.lua".text = weztermConfig;
-    ".config/wezterm".source = config.lib.file.mkOutOfStoreSymlink ../dotfiles/wezterm;
+    ".config/wezterm".source = ../dotfiles/wezterm;
     ".config/nvim" = {
-      source = config.lib.file.mkOutOfStoreSymlink ../dotfiles/neovim;
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/dotfiles/neovim";
       force = true;
     };
     ".config/niri/config.kdl" = {
-      source = config.lib.file.mkOutOfStoreSymlink ../dotfiles/niri/config.kdl;
+      source = ../dotfiles/niri/config.kdl;
       # Created default config by niri, so force overwrite
       force = true;
     };
-    ".config/opencode/opencode.json".source =
-      config.lib.file.mkOutOfStoreSymlink ../dotfiles/opencode.json;
+    ".config/opencode/opencode.json".source = ../dotfiles/opencode.json;
   };
 
   home.sessionVariables = {
