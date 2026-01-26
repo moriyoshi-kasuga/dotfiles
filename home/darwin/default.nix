@@ -4,7 +4,4 @@
     llvmPackages.bintools
     nsis
   ];
-
-  pkgPackages = [
-  ];
 }

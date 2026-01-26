@@ -51,8 +51,7 @@
         ./home
       ]
       ++ (if pkgs.stdenv.isLinux then [ ./home/linux ] else [ ])
-      ++ (if pkgs.stdenv.isDarwin then [ ./home/darwin ] else [ ])
-      ++ [ ./home/pkg.nix ];
+      ++ (if pkgs.stdenv.isDarwin then [ ./home/darwin ] else [ ]);
 
       specialArgs = {
         inherit vars;

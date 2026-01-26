@@ -119,7 +119,6 @@ macOS と NixOS のための開発環境を構築する `dotfiles` です（Nix 
 ├── init.sh                   # セットアップスクリプト
 ├── home/                     # Home Manager 設定
 │   ├── default.nix           # Home Manager メイン設定
-│   ├── pkg.nix               # PKG_CONFIG_PATH と LD_LIBRARY_PATH 管理
 │   ├── editor/               # エディタ設定 (Neovim, Vim)
 │   ├── git/                  # Git, Lazygit, Delta 設定
 │   ├── lang/                 # 言語別開発環境 (Rust, Python, Go, Node.js など)

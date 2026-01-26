@@ -4,7 +4,6 @@
   config,
   bigMonitor,
   username,
-  dotfilesPath,
   ...
 }:
 

@@ -21,6 +21,7 @@
     ./virtualisation.nix # 仮想化設定
     ./niri.nix # Niri ウィンドウマネージャー設定
     ./sddm.nix # SDDM ログイン画面設定
+    ./ld.nix
   ];
 
   home-manager.backupFileExtension = "nixbackup";

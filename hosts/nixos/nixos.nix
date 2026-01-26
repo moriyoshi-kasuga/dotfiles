@@ -2,9 +2,6 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  # Allow dynamic linking for NixOS
-  programs.nix-ld.enable = true;
-
   nix = {
     # Enable Nix flakes and nix command line tool
     settings.experimental-features = [
