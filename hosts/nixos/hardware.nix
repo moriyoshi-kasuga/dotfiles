@@ -1,64 +1,72 @@
-{
-  # グラフィックス設定
-  hardware.graphics.enable = true;
+{ pkgs, ... }:
 
-  # NVIDIA GPU 設定
+{
+  hardware.graphics.enable = true;
   hardware.nvidia = {
     open = true;
+    # サスペンド・復帰時の安定性を向上
     powerManagement.enable = true;
+    # 完全にオフにするのではなく、安定重視の設定
     powerManagement.finegrained = false;
+    
     nvidiaSettings = true;
     modesetting.enable = true;
-
-    # NVIDIA Optimus (Intel + NVIDIA) 設定
+    
     prime = {
       offload = {
         enable = true;
         enableOffloadCmd = true;
       };
-
       intelBusId = "PCI:0:2:0";
       nvidiaBusId = "PCI:1:0:0";
     };
   };
-  services = {
-    # X11 ディスプレイサーバー設定
-    xserver = {
-      enable = true;
-      xkb = {
-        layout = "us";
-        variant = "";
-      };
-      videoDrivers = [
-        "modesetting"
-        "nvidia"
-      ];
-    };
 
-    # Libinput (タッチパッド・マウス) サポート
-    libinput.enable = true;
-
-    # USB hotplug と HID デバイスのサポート
-    udev = {
-      enable = true;
-      extraRules = ''
-        # すべてのHID入力デバイスの自動サスペンドを無効化
-        ACTION=="add", SUBSYSTEM=="usb", DRIVER=="usbhid", TEST=="power/control", ATTR{power/control}="on"
-
-        # 入力デバイスのACL設定
-        KERNEL=="event[0-9]*", SUBSYSTEM=="input", TAG+="uaccess"
-
-        # マウスとキーボードの追加サポート
-        SUBSYSTEM=="input", GROUP="input", MODE="0660"
-        SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_device", MODE="0664"
-      '';
-    };
-    upower.enable = true;
-
-    # logind設定
-    logind.settings.Login.HandlePowerKey = "ignore";
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    audio.enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    wireplumber.enable = true;
   };
 
-  # 電源管理設定
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+    settings.General = {
+      Enable = "Source,Sink,Media,Socket";
+      Experimental = true;
+    };
+  };
+  services.blueman.enable = true;
+
   powerManagement.enable = true;
+  services = {
+    libinput.enable = true;
+    upower.enable = true;
+    logind.settings.Login.HandlePowerKey = "ignore";
+    udev.extraRules = ''
+      ACTION=="add", SUBSYSTEM=="usb", DRIVER=="usbhid", TEST=="power/control", ATTR{power/control}="on"
+      KERNEL=="event[0-9]*", SUBSYSTEM=="input", TAG+="uaccess"
+      SUBSYSTEM=="input", GROUP="input", MODE="0660"
+      SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_device", MODE="0664"
+    '';
+  };
+
+  virtualisation.docker = {
+    enable = true;
+    rootless = {
+      enable = true;
+      setSocketVariable = true;
+    };
+  };
+
+  environment.systemPackages = with pkgs; [
+    alsa-utils
+    pulseaudio
+    easyeffects
+    helvum
+  ];
 }

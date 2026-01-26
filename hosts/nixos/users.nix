@@ -1,9 +1,8 @@
 { username, pkgs, ... }:
 
 {
-  catppuccin.cursors.enable = true;
+  programs.zsh.enable = true;
 
-  # ユーザーアカウント設定
   users.users.${username} = {
     isNormalUser = true;
     description = username;
@@ -14,26 +13,18 @@
       "input"
       "audio"
       "video"
+      "gamemode"
     ];
     shell = pkgs.zsh;
     packages = with pkgs; [
-      # ブラウザ
       brave
       firefox
-
-      # ターミナル
       wezterm
       wl-clipboard
-
-      # コミュニケーション
       discord
       slack
-
-      # クリエイティブツール
-      aseprite # ピクセルアートエディタ
-      ldtk # レベルデザインツールキット
-
-      # Minecraft Launcher
+      aseprite
+      ldtk
       prismlauncher
     ];
   };
@@ -44,24 +35,48 @@
     gid = 1000;
   };
 
-  programs.thunar.enable = true;
-  programs.thunar.plugins = with pkgs.xfce; [
-    thunar-archive-plugin
-    thunar-volman
-  ];
-  programs.xfconf.enable = true;
-  services.gvfs.enable = true; # Mount, trash, and other functionalities
-  services.tumbler.enable = true; # Thumbnail support for images
-
-  # Zsh シェルの有効化
-  programs.zsh.enable = true;
-
-  # システム全体のパッケージ
+  # System-wide packages
   environment.systemPackages = with pkgs; [
     vim-full
     wget
     appimage-run
+    # LD related
+    pkg-config
+    zlib
+    zstd
+    stdenv.cc.cc
+    curl
+    openssl
+    ffmpeg
+    udev
+    lua5_4
+    libssh
   ];
+
+  # Gaming
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true;
+    dedicatedServer.openFirewall = true;
+  };
+  programs.gamemode.enable = true;
+
+  # File Manager / UI Utils
+  programs.thunar = {
+    enable = true;
+    plugins = with pkgs.xfce; [
+      thunar-archive-plugin
+      thunar-volman
+    ];
+  };
+  programs.xfconf.enable = true;
+  services.gvfs.enable = true;
+  services.tumbler.enable = true;
+
+  # Nix-LD
+  programs.nix-ld.enable = true;
+
+  catppuccin.cursors.enable = true;
 
   xdg.mime = {
     enable = true;
