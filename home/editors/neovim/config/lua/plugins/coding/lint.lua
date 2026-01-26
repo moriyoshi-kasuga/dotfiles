@@ -7,7 +7,6 @@ return {
       local lint = require("lint")
 
       lint.linters_by_ft = {
-        nix = { "statix" },
         sh = { "shellcheck" },
         bash = { "shellcheck" },
         python = { "ruff" },
