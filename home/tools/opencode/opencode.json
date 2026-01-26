@@ -7,8 +7,11 @@
       "terraform *": "deny",
       "gh *": "ask",
       "rm *": "ask",
+      "git *": "deny",
       "git push *": "ask",
       "nix *": "ask",
+      "nix-shell --run \"cargo build\"": "allow",
+      "nix-shell --run \"cargo check\"": "allow",
       "nixos-rebuild *": "deny",
     }
   },
