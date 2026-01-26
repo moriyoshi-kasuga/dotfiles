@@ -16,7 +16,7 @@ let
     unset __HM_SESS_VARS_SOURCED
     . "${config.home.profileDirectory}/etc/profile.d/hm-session-vars.sh"
   '';
-  zshConfigDefault = pkgs.lib.mkOrder 1000 (builtins.readFile ../../dotfiles/.zshrc);
+  zshConfigDefault = pkgs.lib.mkOrder 1000 (builtins.readFile ./zshrc);
   zshConfigAfter = pkgs.lib.mkOrder 1500 ''
     if [[ -f $HOME/.local.zshrc ]]; then
       source $HOME/.local.zshrc
@@ -86,7 +86,7 @@ in
     };
   };
 
-  home.file.".zsh-scripts".source = ../../dotfiles/zsh-scripts;
+  home.file.".zsh-scripts".source = ./scripts;
 
   imports = [
     ./starship.nix

@@ -26,6 +26,6 @@ in
       vim-commentary
       fzf-vim
     ];
-    extraConfig = builtins.readFile ../../dotfiles/.vimrc;
+    extraConfig = builtins.readFile ./vimrc;
   };
 }

@@ -13,10 +13,10 @@ in
     keyMode = "vi";
     shortcut = "t";
     inherit shell;
-    extraConfig = builtins.readFile ../../dotfiles/tmux.conf + ''
+    extraConfig = builtins.readFile ./tmux.conf + ''
       set -g default-command "${shell}"
     '';
   };
 
-  catppuccin.tmux.extraConfig = builtins.readFile ../../dotfiles/tmux.conf.catppuccin;
+  catppuccin.tmux.extraConfig = builtins.readFile ./tmux.conf.catppuccin;
 }

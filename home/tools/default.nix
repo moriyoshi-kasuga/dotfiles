@@ -2,9 +2,10 @@
 
 {
   imports = [
-    ./tmux.nix
+    ./tmux
     ./docker.nix
     ./tff.nix
+    ./git
   ];
 
   home.packages = with pkgs; [
@@ -43,4 +44,6 @@
       fdh = "fd -H -E '.git'";
     };
   };
+
+  xdg.configFile."opencode/opencode.json".source = ./opencode/opencode.json;
 }

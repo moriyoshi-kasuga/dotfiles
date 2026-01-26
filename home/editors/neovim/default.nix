@@ -1,5 +1,6 @@
 {
   pkgs,
+  config,
   ...
 }:
 
@@ -71,4 +72,6 @@ in
   programs.zsh.shellAliases = {
     v = "nvim";
   };
+
+  xdg.configFile."nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/home/editors/neovim/config";
 }

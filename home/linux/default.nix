@@ -1,6 +1,10 @@
 { pkgs, ... }:
 
 {
+  imports = [
+    ./niri
+  ];
+
   home.packages = with pkgs; [
     (writeShellScriptBin "pbpaste" ''
       wl-paste --no-newline
