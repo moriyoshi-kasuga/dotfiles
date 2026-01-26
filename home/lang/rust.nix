@@ -40,11 +40,8 @@
     bacon
     tokei
     uv
-    sccache
     cyme
   ];
-
-  home.sessionVariables.RUSTC_WRAPPER = "${pkgs.sccache}/bin/sccache";
 
   programs.zsh.shellAliases = {
     typos = "typos --config ~/.config/typos.toml";
