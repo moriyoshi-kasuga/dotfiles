@@ -54,6 +54,7 @@
       ++ (if pkgs.stdenv.isDarwin then [ ./home/darwin ] else [ ]);
 
       specialArgs = {
+        inherit pkgs;
         inherit vars;
         inherit inputs;
         inherit username;
@@ -70,6 +71,7 @@
         modules = homeModules;
       };
       darwinConfigurations.${username} = nix-darwin.lib.darwinSystem {
+        inherit pkgs;
         inherit specialArgs;
 
         modules = [
