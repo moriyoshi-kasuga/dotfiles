@@ -12,6 +12,9 @@
   programs.zsh.envExtra = ''
     source "$HOME/.cargo/env"
   '';
+  programs.fish.shellInit = ''
+    fish_add_path $HOME/.cargo/bin
+  '';
 
   home.packages = with pkgs; [
     cargo-msrv
