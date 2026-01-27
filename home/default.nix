@@ -1,8 +1,6 @@
 {
   pkgs,
   homeDirectory,
-  config,
-  bigMonitor,
   username,
   ...
 }:
@@ -31,7 +29,7 @@
   programs.home-manager.enable = true;
 
   imports = [
-    ./shells/zsh
+    ./shells
     ./tools
     ./lang
     ./editors

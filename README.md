@@ -11,7 +11,7 @@ macOS と NixOS のための開発環境を構築する `dotfiles` です（Nix 
 - **クロスプラットフォーム**: macOS (nix-darwin) と NixOS をサポート。
 - **簡単なセットアップ**: `vars.nix` を設定し `./init.sh` を実行するだけで、環境構築が完了します。
 - **Home Manager**: 設定ファイル（ドットファイル）とパッケージ管理を Home Manager で一元管理します。
-- **モダンなツール群**: `zsh`, `neovim`, `tmux`, `wezterm` などを中心に、生産性を高めるためのモダンなツールを厳選しています。
+- **モダンなツール群**: `zsh`, `fish`, `neovim`, `tmux`, `wezterm` などを中心に、生産性を高めるためのモダンなツールを厳選しています。
 - **NixOS システム統合**: NixOS 上では、デスクトップ環境、フォント、仮想化などのシステムレベル設定も管理します。
 
 ## ✅ Prerequisites (前提条件)

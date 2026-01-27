@@ -69,9 +69,10 @@ in
     taplo
   ];
 
-  programs.zsh.shellAliases = {
+  home.shellAliases = {
     v = "nvim";
   };
 
-  xdg.configFile."nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/home/editors/neovim/config";
+  xdg.configFile."nvim".source =
+    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/home/editors/neovim/config";
 }

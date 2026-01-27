@@ -43,7 +43,7 @@
     cyme
   ];
 
-  programs.zsh.shellAliases = {
+  home.shellAliases = {
     typos = "typos --config ~/.config/typos.toml";
   };
 }

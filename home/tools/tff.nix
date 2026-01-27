@@ -20,4 +20,8 @@
   programs.zsh.initContent = ''
     eval "$(tagged_file_flow init zsh)"
   '';
+
+  programs.fish.interactiveShellInit = ''
+    tagged_file_flow init fish | source
+  '';
 }

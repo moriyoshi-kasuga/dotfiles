@@ -40,9 +40,10 @@
     bat.enable = true;
     jq.enable = true;
     lazydocker.enable = true;
-    zsh.shellAliases = {
-      fdh = "fd -H -E '.git'";
-    };
+  };
+
+  home.shellAliases = {
+    fdh = "fd -H -E \".git\"";
   };
 
   xdg.configFile."opencode/opencode.json".source = ./opencode/opencode.json;

@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 let
-  shell = pkgs.lib.getExe pkgs.zsh;
+  shell = pkgs.lib.getExe pkgs.fish;
 in
 {
   programs.tmux = {

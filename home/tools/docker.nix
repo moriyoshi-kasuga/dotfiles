@@ -1,5 +1,5 @@
 {
-  programs.zsh.shellAliases = {
+  home.shellAliases = {
     d = "docker";
     dc = "docker compose";
     dcps = "docker compose ps";
