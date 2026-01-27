@@ -65,7 +65,7 @@
   # File Manager / UI Utils
   programs.thunar = {
     enable = true;
-    plugins = with pkgs.xfce; [
+    plugins = with pkgs; [
       thunar-archive-plugin
       thunar-volman
     ];

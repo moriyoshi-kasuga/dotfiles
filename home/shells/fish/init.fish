@@ -6,16 +6,16 @@ function _run_cdi
 end
 
 function fish_user_key_bindings
-    bind \cg _run_cdi
-    bind -M insert ctrl-o 'edit_command_buffer'
-    
-    for mode in default insert visual
-        fish_default_key_bindings -M $mode
-    end
-    fish_vi_key_bindings --no-erase
-    if test "$__fish_active_key_bindings" = fish_vi_key_bindings
-        bind -M insert -m default jk force-repaint
-    end
+  bind -M insert ctrl-g _run_cdi
+  bind -M insert ctrl-o 'edit_command_buffer'
+  
+  for mode in default insert visual
+    fish_default_key_bindings -M $mode
+  end
+  fish_vi_key_bindings --no-erase
+  if test "$__fish_active_key_bindings" = fish_vi_key_bindings
+    bind -M insert -m default jk force-repaint
+  end
 end
 
 function dcr
