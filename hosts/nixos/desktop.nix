@@ -17,14 +17,23 @@
     grim
     slurp
     (xwayland-satellite.override { withSystemd = false; })
-    gtk4
-    gtk4-layer-shell
     quickshell
+    libnotify
+    mako
+    qt6Packages.qt6ct
   ];
 
   environment.sessionVariables = {
+    # Input Method
+    XMODIFIERS = "@im=fcitx";
+    QT_IM_MODULE = "wayland;fcitx";
+    QT_IM_MODULES = "wayland;fcitx"; # Qt6
+
+    # Qt settings
+    QT_QPA_PLATFORM = "wayland";
+    QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
+
     # Wayland Common
-    QT_QPA_PLATFORM = "wayland;xcb";
     SDL_VIDEODRIVER = "wayland";
     XDG_SESSION_TYPE = "wayland";
     CLUTTER_BACKEND = "wayland";
@@ -37,10 +46,12 @@
     GBM_BACKEND = "nvidia-drm";
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
     LIBVA_DRIVER_NAME = "nvidia";
+  };
 
-    # Input Method
-    QT_IM_MODULE = "fcitx";
-    XMODIFIERS = "@im=fcitx";
+  qt = {
+    enable = true;
+    style = "adwaita";
+    platformTheme = "gnome";
   };
 
   i18n.inputMethod = {
@@ -50,7 +61,6 @@
       waylandFrontend = true;
       addons = with pkgs; [
         fcitx5-mozc
-        fcitx5-gtk
       ];
     };
   };
@@ -118,36 +128,87 @@
         bar = {
           density = "compact";
           position = "top";
-          showCapsule = false;
+          useSeparateOpacity = true;
+          backgroundOpacity = 0.2;
+          showCapsule = true;
+          capsuleOpacity = 1;
+          showOutline = false;
+          floating = false;
           widgets = {
             left = [
               {
                 id = "ControlCenter";
                 useDistroLogo = true;
               }
-              { id = "WiFi"; }
               { id = "Bluetooth"; }
             ];
             center = [
               {
-                hideUnoccupied = false;
                 id = "Workspace";
+                hideUnoccupied = false;
                 labelMode = "none";
               }
             ];
             right = [
-              { id = "Volume"; }
               {
-                formatHorizontal = "HH:mm";
+                id = "Volume";
+                displayMode = "alwaysShow";
+              }
+              {
                 id = "Clock";
-                useMonospacedFont = true;
-                usePrimaryColor = true;
+                formatHorizontal = "HH:mm ddd, MMM dd";
+                formatVertical = "HH mm - dd MM";
+                tooltipFormat = "HH:mm ddd, MMM dd";
               }
               { id = "NotificationHistory"; }
             ];
           };
         };
-        appLauncher.terminalCommand = "wezterm -e";
+        colorSchemes = {
+          predefinedScheme = "Catppuccin";
+        };
+        general = {
+          enableShadows = false;
+          dimmerOpacity = 0.2;
+        };
+        controlCenter = {
+          position = "top_center";
+          cards = [
+            {
+              enabled = true;
+              id = "profile-card";
+            }
+            {
+              enabled = true;
+              id = "shortcuts-card";
+            }
+            {
+              enabled = true;
+              id = "audio-card";
+            }
+            {
+              enabled = true;
+              id = "media-sysmon-card";
+            }
+          ];
+        };
+        dock = {
+          enabled = false;
+        };
+        appLauncher = {
+          terminalCommand = "wezterm -e";
+          showCategories = false;
+          iconMode = "native";
+        };
+        notifications = {
+          sounds = {
+            enabled = true;
+          };
+        };
+        location = {
+          name = "Tokyo";
+          weatherEnabled = false;
+        };
         ui = {
           fontDefault = "CommitMono Nerd Font";
           fontFixed = "CommitMono Nerd Font";
@@ -156,4 +217,3 @@
     };
   };
 }
-
