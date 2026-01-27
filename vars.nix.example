@@ -2,7 +2,7 @@
 # Edit this file to set your own variables.
 {
   username = "user";
-  system = "aarch64-darwin";
+  system = "x86_64-linux";
   
   # ref: https://nix-community.github.io/home-manager/options.xhtml#opt-programs.git.includes
   gitIncludes = [
