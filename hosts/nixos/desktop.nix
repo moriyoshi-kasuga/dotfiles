@@ -198,7 +198,7 @@
         appLauncher = {
           terminalCommand = "wezterm -e";
           showCategories = false;
-          iconMode = "native";
+          enableSettingsSearch = false;
         };
         notifications = {
           sounds = {
