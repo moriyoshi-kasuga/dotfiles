@@ -20,7 +20,15 @@
   system.stateVersion = 6;
   system.primaryUser = username;
 
-  users.users.${username}.home = homeDirectory;
+  programs.zsh.enable = true;
+  programs.fish.enable = true;
+
+  environment.shells = [ pkgs.fish ];
+
+  users.users.${username} = {
+    home = homeDirectory;
+    shell = pkgs.fish;
+  };
 
   imports = [
     ./dock.nix
