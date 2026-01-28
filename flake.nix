@@ -58,7 +58,6 @@
       ++ (if pkgs.stdenv.isDarwin then [ ./home/darwin ] else [ ]);
 
       specialArgs = {
-        inherit pkgs;
         inherit vars;
         inherit inputs;
         inherit username;
@@ -84,6 +83,7 @@
           home-manager.darwinModules.home-manager
           {
             home-manager = {
+              useGlobalPkgs = true;
               extraSpecialArgs = specialArgs;
               users.${username}.imports = homeModules;
             };
@@ -101,6 +101,7 @@
           home-manager.nixosModules.home-manager
           {
             home-manager = {
+              useGlobalPkgs = true;
               extraSpecialArgs = specialArgs;
               users.${username}.imports = homeModules;
             };

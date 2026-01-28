@@ -1,11 +1,17 @@
-{ username, ... }:
+{
+  pkgs,
+  username,
+  ...
+}:
 
 {
   nixpkgs.config.allowUnfree = true;
-
   nix = {
     settings = {
-      experimental-features = [ "nix-command" "flakes" ];
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
       auto-optimise-store = true;
     };
     optimise.automatic = true;
@@ -60,7 +66,17 @@
 
   services = {
     openssh.enable = true;
-    printing.enable = true;
+    printing = {
+      enable = true;
+      drivers = with pkgs; [
+        epson-inkjet-printer-workforce-840-series
+      ];
+    };
+    avahi = {
+      enable = true;
+      nssmdns4 = true;
+      openFirewall = true;
+    };
     tailscale.enable = true;
   };
 }
