@@ -29,7 +29,7 @@ in
 
   home.packages = with pkgs; [
     (pkgs.writeShellScriptBin "simplenvim" ''
-      NVIM_SIMPLE_MODE=1 exec ${neovimCmd} "$@"
+      env NVIM_SIMPLE_MODE=1 ${neovimCmd} "$@"
     '')
 
     # shell
