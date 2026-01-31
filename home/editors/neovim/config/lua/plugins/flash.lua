@@ -3,6 +3,9 @@ return {
   ---@type Flash.Config
   opts = {
     modes = {
+      jump = {
+        enabled = false,
+      },
       char = {
         enabled = false,
       },
@@ -12,14 +15,6 @@ return {
     },
   },
   keys = {
-    {
-      "s",
-      mode = { "n", "x", "o" },
-      function()
-        require("flash").jump()
-      end,
-      desc = "Flash",
-    },
     {
       "R",
       mode = { "n", "o", "x" },
