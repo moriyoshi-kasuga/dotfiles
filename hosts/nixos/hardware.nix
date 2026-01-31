@@ -8,10 +8,10 @@
     powerManagement.enable = true;
     # 完全にオフにするのではなく、安定重視の設定
     powerManagement.finegrained = false;
-    
+
     nvidiaSettings = true;
     modesetting.enable = true;
-    
+
     prime = {
       offload = {
         enable = true;
@@ -55,11 +55,16 @@
     '';
   };
 
-  virtualisation.docker = {
-    enable = true;
-    rootless = {
+  virtualisation = {
+    docker = {
       enable = true;
-      setSocketVariable = true;
+      rootless = {
+        enable = true;
+        setSocketVariable = true;
+      };
+    };
+    waydroid = {
+      enable = true;
     };
   };
 
@@ -68,5 +73,6 @@
     pulseaudio
     easyeffects
     helvum
+    waydroid-helper
   ];
 }
