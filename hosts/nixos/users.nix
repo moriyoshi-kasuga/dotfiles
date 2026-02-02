@@ -27,6 +27,7 @@
       aseprite
       ldtk
       prismlauncher
+      imhex
     ];
   };
 
