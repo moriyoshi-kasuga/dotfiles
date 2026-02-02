@@ -12,6 +12,9 @@ local tab = {
   rust = {
     width = 4,
   },
+  python = {
+    width = 4,
+  },
   make = {
     width = 8,
     expandtab = false,

@@ -51,7 +51,7 @@ return {
           show_with_menu = false,
         },
 
-        accept = { auto_brackets = { enabled = false } },
+        accept = { auto_brackets = { enabled = true } },
 
         documentation = {
           auto_show = true,
