@@ -32,6 +32,7 @@
     bottom
     just
     tailspin
+    hexyl
   ];
 
   programs = {
