@@ -28,6 +28,7 @@
       ldtk
       prismlauncher
       imhex
+      zathura
     ];
   };
 
