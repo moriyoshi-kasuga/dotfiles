@@ -46,9 +46,40 @@ function M.register_fonts(opts)
   end
 end
 
+local font_definitions = {
+  ["font-commit"] = function(config)
+    config.font =
+      wezterm.font("CommitMono Nerd Font Mono", { weight = "Regular", stretch = "Normal", style = "Normal" })
+    config.font_size = 18
+  end,
+  ["font-jetbrains"] = function(config)
+    config.font = wezterm.font({
+      family = "JetBrains Mono",
+      weight = "Regular",
+      stretch = "Normal",
+      style = "Normal",
+      harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
+    })
+    config.font_size = 15
+  end,
+  ["font-monaspace-krypton"] = function(config)
+    config.font =
+      wezterm.font("MonaspiceKr Nerd Font Mono", { weight = "Regular", stretch = "Normal", style = "Normal" })
+    config.font_size = 16.3
+  end,
+  ["font-monaspace-neon"] = function(config)
+    config.font =
+      wezterm.font("MonaspiceNe Nerd Font Mono", { weight = "Regular", stretch = "Normal", style = "Normal" })
+    config.font_size = 16.3
+  end,
+}
+
 function M.select(config, name)
   local font = M.fonts[name]
-  require("fonts." .. font.mod)(config, font.opts)
+  local mod = font.mod
+  if font_definitions[mod] then
+    font_definitions[mod](config, font.opts)
+  end
 end
 
 function M.selector_action()
