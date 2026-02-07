@@ -49,6 +49,7 @@ return {
         "taplo",
         "just",
         "asm_lsp",
+        "gopls",
 
         -- vscode-html-language-server
         "html",

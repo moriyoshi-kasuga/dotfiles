@@ -63,6 +63,7 @@ in
     just-lsp
     hadolint
     actionlint
+    gopls
     typos-lsp
     asm-lsp
     # tombiが新しいtoml lspとしてあるが、sortの無効化が保守的だったり、configが不完全のためtaploを使用する
