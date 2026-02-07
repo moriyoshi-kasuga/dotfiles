@@ -13,7 +13,6 @@ let
 in
 {
   xdg.configFile = {
-    "wezterm/fonts".source = ./config/fonts;
     "wezterm/font.lua".source = ./config/font.lua;
     "wezterm/wezterm.lua".text = weztermConfig;
   };
