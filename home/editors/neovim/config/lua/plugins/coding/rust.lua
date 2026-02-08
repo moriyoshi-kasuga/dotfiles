@@ -1,7 +1,7 @@
 return {
   {
     "mrcjkb/rustaceanvim",
-    version = "^6",
+    version = "^7",
     ft = { "rust" },
     opts = {
       tools = {
@@ -25,6 +25,18 @@ return {
         end,
         default_settings = {
           ["rust-analyzer"] = {
+            completion = {
+              snippets = {
+                custom = {
+                  Arrow = {
+                    postfix = "arrow",
+                    body = "(*${receiver})",
+                    description = "like c arrow useful snippets",
+                    scope = "expr",
+                  },
+                },
+              },
+            },
             cargo = {
               allFeatures = true,
               loadOutDirsFromCheck = true,
