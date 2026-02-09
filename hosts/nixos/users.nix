@@ -21,19 +21,19 @@ let
     systemd
 
     # My own additions
-    xorg.libXcomposite
-    xorg.libXtst
-    xorg.libXrandr
-    xorg.libXext
-    xorg.libX11
-    xorg.libXfixes
+    libxcomposite
+    libxtst
+    libxrandr
+    libxext
+    libx11
+    libxfixes
     libGL
     libva
     pipewire
-    xorg.libxcb
-    xorg.libXdamage
-    xorg.libxshmfence
-    xorg.libXxf86vm
+    libxcb
+    libxdamage
+    libxshmfence
+    libxxf86vm
     libelf
     ffmpeg
     udev
