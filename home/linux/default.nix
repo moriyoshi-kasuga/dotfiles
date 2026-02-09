@@ -15,10 +15,7 @@
     (writeShellScriptBin "open" ''
       xdg-open "$@"
     '')
-    (writeShellScriptBin "wigo" ''
-      RUSTFLAGS="-Clinker=clang -Clink-args=--ld-path=wild" cargo $@
-    '')
-    wild-unwrapped
+    lld
     xdg-utils
     docker
     docker-compose
