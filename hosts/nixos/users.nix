@@ -27,6 +27,8 @@ let
     libxext
     libx11
     libxfixes
+    libxkbcommon
+    libxi
     libGL
     libva
     pipewire
