@@ -95,9 +95,21 @@ in
     libraries = library;
   };
 
-  # ref: https://github.com/NixOS/nixpkgs/blob/nixos-unstable/nixos/modules/programs/nix-ld.nix#L42
   environment.sessionVariables = {
+    # ref: https://github.com/NixOS/nixpkgs/blob/nixos-unstable/nixos/modules/programs/nix-ld.nix#L42
     LD_LIBRARY_PATH = "/run/current-system/sw/share/nix-ld/lib";
+
+    PKG_CONFIG_PATH =
+      let
+        getPkgConfigPath =
+          pkg:
+          let
+            path = "${pkg.dev or pkg}/lib/pkgconfig";
+          in
+          if builtins.pathExists path then path else null;
+        pkgConfigPaths = builtins.filter (x: x != null) (map getPkgConfigPath library);
+      in
+      pkgs.lib.concatStringsSep ":" pkgConfigPaths;
   };
 
   # Gaming
