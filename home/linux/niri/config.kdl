@@ -302,6 +302,7 @@ binds {
   Alt+T { spawn "noctalia-shell" "ipc" "call" "bar" "toggle"; }
   Alt+M { spawn "noctalia-shell" "ipc" "call" "volume" "muteInput"; }
   Alt+E { spawn "noctalia-shell" "ipc" "call" "volume" "togglePanel"; }
+  Alt+B { spawn "noctalia-shell" "ipc" "call" "bluetooth" "togglePanel"; }
   // XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+"; }
   // XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-"; }
   XF86AudioMute        allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
