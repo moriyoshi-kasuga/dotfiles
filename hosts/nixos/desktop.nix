@@ -128,6 +128,7 @@
         bar = {
           density = "compact";
           position = "top";
+          displayMode = "auto_hide";
           useSeparateOpacity = true;
           backgroundOpacity = 0.2;
           showCapsule = true;
