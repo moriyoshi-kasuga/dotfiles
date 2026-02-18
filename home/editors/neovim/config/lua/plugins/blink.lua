@@ -27,7 +27,7 @@ return {
         ["<C-b>"] = { "scroll_documentation_up", "fallback" },
         ["<C-f>"] = { "scroll_documentation_down", "fallback" },
 
-        ["<C-k>"] = { "show_signature", "hide_signature", "fallback" },
+        ["gk"] = { "show_signature", "hide_signature", "fallback" },
       },
 
       appearance = {
@@ -46,6 +46,13 @@ return {
           scrollbar = false,
         },
 
+        list = {
+          selection = {
+            preselect = false,
+            auto_insert = true,
+          },
+        },
+
         ghost_text = {
           enabled = false,
           show_with_menu = false,
@@ -55,7 +62,8 @@ return {
 
         documentation = {
           auto_show = true,
-          auto_show_delay_ms = 500,
+          auto_show_delay_ms = 100,
+          update_delay_ms = 50,
 
           window = {
             border = "rounded",
@@ -68,14 +76,21 @@ return {
       -- Default list of enabled providers defined so that you can extend it
       -- elsewhere in your config, without redefining it, due to `opts_extend`
       sources = {
-        default = { "lsp", "path", "snippets", "buffer" },
+        default = { "lsp", "lazydev", "path", "snippets", "buffer" },
         providers = {
           snippets = {
             min_keyword_length = 2,
           },
           buffer = {
-            min_keyword_length = 3,
             max_items = 5,
+          },
+          lsp = {
+            async = true,
+          },
+          lazydev = {
+            name = "LazyDev",
+            module = "lazydev.integrations.blink",
+            fallbacks = { "lsp" },
           },
         },
       },
