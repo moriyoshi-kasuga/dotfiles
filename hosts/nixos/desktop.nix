@@ -12,22 +12,20 @@
   environment.systemPackages = with pkgs; [
     wayland
     niri
-    qimgv
+    imv
     mpv
     grim
     slurp
-    (xwayland-satellite.override { withSystemd = false; })
-    quickshell
+    xwayland-satellite
     libnotify
     mako
-    qt6Packages.qt6ct
   ];
 
   environment.sessionVariables = {
     # Input Method
     XMODIFIERS = "@im=fcitx";
     QT_IM_MODULE = "wayland;fcitx";
-    QT_IM_MODULES = "wayland;fcitx"; # Qt6
+    QT_IM_MODULES = "wayland;fcitx";
 
     # Qt settings
     QT_QPA_PLATFORM = "wayland";
@@ -104,17 +102,12 @@
 
   xdg.portal = {
     enable = true;
-    # Niri は独自の portal を持たないため、適切な fallback を設定
     extraPortals = with pkgs; [
       xdg-desktop-portal-gnome
       xdg-desktop-portal-gtk
     ];
     config = {
-      common.default = [ "gtk" ];
-      niri.default = [
-        "gnome"
-        "gtk"
-      ];
+      common.default = [ "gnome;gtk" ];
     };
   };
 
