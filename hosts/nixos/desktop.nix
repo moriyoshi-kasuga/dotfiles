@@ -24,8 +24,11 @@
   environment.sessionVariables = {
     # Input Method
     XMODIFIERS = "@im=fcitx";
-    QT_IM_MODULE = "wayland;fcitx";
-    QT_IM_MODULES = "wayland;fcitx";
+    GTK_IM_MODULE = "fcitx";
+    QT_IM_MODULE = "fcitx";
+    QT_IM_MODULES = "fcitx";
+    SDL_IM_MODULE = "fcitx";
+    INPUT_METHOD = "fcitx";
 
     # Qt settings
     QT_QPA_PLATFORM = "wayland";
@@ -34,6 +37,8 @@
     # Wayland Common
     SDL_VIDEODRIVER = "wayland";
     XDG_SESSION_TYPE = "wayland";
+    XDG_CURRENT_DESKTOP = "niri";
+    XDG_SESSION_DESKTOP = "niri";
     CLUTTER_BACKEND = "wayland";
 
     # Chromium / Electron
@@ -51,6 +56,8 @@
     style = "adwaita";
     platformTheme = "gnome";
   };
+
+  programs.dconf.enable = true;
 
   i18n.inputMethod = {
     enable = true;
@@ -102,12 +109,19 @@
 
   xdg.portal = {
     enable = true;
+    xdgOpenUsePortal = true;
     extraPortals = with pkgs; [
       xdg-desktop-portal-gnome
       xdg-desktop-portal-gtk
     ];
     config = {
-      common.default = [ "gnome;gtk" ];
+      common = {
+        default = [
+          "gtk"
+          "gnome"
+        ];
+        "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
+      };
     };
   };
 

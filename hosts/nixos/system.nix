@@ -31,6 +31,7 @@
       "usbcore.autosuspend=-1"
       "nvidia_drm.modeset=1"
     ];
+    tmp.cleanOnBoot = true;
   };
 
   networking = {
@@ -44,6 +45,11 @@
   };
 
   time.timeZone = "Asia/Tokyo";
+
+  security = {
+    polkit.enable = true;
+    sudo.execWheelOnly = true;
+  };
 
   i18n = {
     defaultLocale = "en_US.UTF-8";
