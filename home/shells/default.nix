@@ -3,20 +3,10 @@
   rustypasteServer,
   ...
 }:
-let
-  fzfDefaultOptions = [
-    "--reverse"
-    "--style minimal"
-    "--tmux 55%,65%"
-  ];
-  fzfOpts = pkgs.lib.concatStringsSep " " fzfDefaultOptions;
-in
 {
   home.packages = with pkgs; [
     # use latest version
     bash
-
-    eza
   ];
 
   programs = {
@@ -36,9 +26,15 @@ in
     };
     direnv.enable = true;
     zoxide.enable = true;
+    eza.enable = true;
     fzf = {
       enable = true;
-      defaultOptions = fzfDefaultOptions;
+      tmux = {
+        enableShellIntegration = true;
+        shellIntegrationOptions = [
+          "-p 55%,65%"
+        ];
+      };
     };
   };
 
@@ -61,7 +57,6 @@ in
 
   home.sessionVariables = {
     _ZO_EXCLUDE_DIRS = "$HOME:/tmp/*:/var/*:/nix/*:/mnt/*";
-    _ZO_FZF_OPTS = fzfOpts;
     FZF_DEFAULT_COMMAND = "fd --hidden --type l --type f --type d --exclude .git --exclude .cache";
   };
 
