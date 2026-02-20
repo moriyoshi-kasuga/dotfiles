@@ -85,9 +85,9 @@ function timer
   end
   set -l total $argv[1]
   echo "Timer started for $total seconds..."
-  for i in (seq 1 $total)
-    sleep 1
+  for i in (seq 0 $total)
     printf "\r===== %d/%d seconds =====" $i $total
+    sleep 1
   end
   printf "\nTime's up!\n"
 end
