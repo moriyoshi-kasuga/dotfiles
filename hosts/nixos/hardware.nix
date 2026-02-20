@@ -22,6 +22,7 @@
     };
   };
 
+  services.xserver.videoDrivers = [ "nvidia" ];
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
