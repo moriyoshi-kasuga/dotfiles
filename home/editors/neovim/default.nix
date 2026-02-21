@@ -27,6 +27,8 @@ in
     ];
   };
 
+  programs.lazygit.settings.os.editPreset = "simplenvim";
+
   home.packages = with pkgs; [
     (pkgs.writeShellScriptBin "simplenvim" ''
       env NVIM_SIMPLE_MODE=1 ${neovimCmd} "$@"

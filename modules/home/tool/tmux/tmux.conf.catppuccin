@@ -1,0 +1,33 @@
+# Status
+set -g status-position top
+set -g status-interval 5
+
+set -g status-right-length 100
+set -g status-left-length 100
+
+set -g status-left ""
+set -g status-right "#{E:@catppuccin_status_session}"
+
+# Window
+set -g @catppuccin_window_status_style 'rounded'
+set -g @catppuccin_window_number_position 'left'
+
+set -g @catppuccin_window_text ' #W'
+set -g @catppuccin_window_number '#I'
+
+set -g @catppuccin_window_current_text ' #W'
+set -g @catppuccin_window_current_number '#I'
+
+# Pane
+set -g @catppuccin_pane_status_enabled 'yes'
+set -g @catppuccin_pane_border_status 'yes'
+
+# Icon
+set -g @catppuccin_window_flags 'icon'
+set -g @catppuccin_window_flags_icon_last '' # -
+set -g @catppuccin_window_flags_icon_current '' # *
+set -g @catppuccin_window_flags_icon_zoom ' ' # Z
+set -g @catppuccin_window_flags_icon_mark ' ' # M
+set -g @catppuccin_window_flags_icon_silent ' ' # ~
+set -g @catppuccin_window_flags_icon_activity ' ' # #
+set -g @catppuccin_window_flags_icon_bell ' ' # !

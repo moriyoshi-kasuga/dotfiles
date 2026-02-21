@@ -16,13 +16,13 @@ let
   };
   homeModules = [
     inputs.catppuccin.homeModules.catppuccin
-    (import ../modules/home/home.nix {
+    (import ../modules/home {
       inherit username homeDirectory;
     })
     module
   ];
   specialArgs = {
-    inherit inputs;
+    inherit inputs username system;
   };
   object =
     if "nixos" == host then
@@ -33,7 +33,7 @@ let
 
           modules = [
             inputs.catppuccin.nixosModules.catppuccin
-            ../modules/nixos/nixos.nix
+            ../modules/nixos
             module
 
             inputs.home-manager.nixosModules.home-manager
@@ -55,7 +55,7 @@ let
           inherit specialArgs;
 
           modules = [
-            ../modules/darwin/darwin.nix
+            ../modules/darwin
             module
 
             inputs.home-manager.darwinModules.home-manager

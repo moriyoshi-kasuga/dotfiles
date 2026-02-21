@@ -22,4 +22,12 @@
   home.packages = [
     pkgs.fastfetch
   ];
+
+  imports = [
+    ./editors
+    ./lang
+    ./shell
+    ./tool
+    ./wezterm
+  ];
 }

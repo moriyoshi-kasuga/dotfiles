@@ -1,0 +1,8 @@
+{ ... }:
+{
+  imports = [
+    ./darwin
+    ./dock
+    ./wezterm
+  ];
+}
