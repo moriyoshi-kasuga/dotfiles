@@ -1,24 +1,17 @@
 {
   pkgs,
-  lib,
-  config,
+  mkModule,
   ...
 }:
 
-with lib;
 let
-  program = "neovim";
-  cfg = config.modules."${program}";
-
   treesitterGrammars = pkgs.vimPlugins.nvim-treesitter.withAllGrammars;
   neovim = pkgs.neovim-unwrapped;
   neovimCmd = pkgs.lib.getExe neovim;
 in
-{
-  options.modules."${program}" = {
-    enable = mkEnableOption program;
-  };
-  config = mkIf cfg.enable {
+mkModule {
+  name = "neovim";
+  module = {
     catppuccin.nvim.enable = false;
 
     programs.neovim = {
@@ -31,7 +24,7 @@ in
         "${treesitterGrammars}"
       ];
 
-      extraPackages = [
+      extraPackages = with pkgs; [
         treesitterGrammars
 
         # shell

@@ -1,21 +1,12 @@
 {
   pkgs,
-  lib,
-  config,
-  rustypasteServer,
+  mkModule,
   ...
 }:
 
-with lib;
-let
-  program = "shell";
-  cfg = config.modules."${program}";
-in
-{
-  options.modules."${program}" = {
-    enable = mkEnableOption program;
-  };
-  config = mkIf cfg.enable {
+mkModule {
+  name = "shell";
+  module = {
     home.packages = with pkgs; [
       # use latest version
       bash
@@ -60,7 +51,6 @@ in
       "..." = "cd ../../";
       e = "exit";
       todo = "simplenvim ~/todo.md";
-      mypaste = "rpaste --server ${rustypasteServer}";
 
       l = "eza";
       ll = "eza --long --git";

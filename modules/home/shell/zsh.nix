@@ -1,19 +1,11 @@
 {
-  lib,
-  config,
+  mkModule,
   ...
 }:
 
-with lib;
-let
-  program = "zsh";
-  cfg = config.modules."${program}";
-in
-{
-  options.modules."${program}" = {
-    enable = mkEnableOption program;
-  };
-  config = mkIf cfg.enable {
+mkModule {
+  name = "zsh";
+  module = {
     module.shell.enable = true;
 
     programs.zsh = {
