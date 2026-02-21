@@ -45,7 +45,6 @@ return {
 
         "bashls",
         "jsonls",
-        "typos_lsp",
         "taplo",
         "just",
         "asm_lsp",
