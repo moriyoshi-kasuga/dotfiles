@@ -83,6 +83,7 @@
           {
             home-manager = {
               useGlobalPkgs = true;
+              useUserPackages = true;
               extraSpecialArgs = specialArgs;
               users.${username}.imports = homeModules;
             };
@@ -101,6 +102,7 @@
           {
             home-manager = {
               useGlobalPkgs = true;
+              useUserPackages = true;
               extraSpecialArgs = specialArgs;
               users.${username}.imports = homeModules;
             };
