@@ -1,6 +1,7 @@
 { ... }:
 
 {
+  name,
   inputs,
   system,
   host,
@@ -14,6 +15,7 @@ let
     inherit system;
     config.allowBroken = true;
   };
+  mkModule = import ./mkModule.nix;
   homeModules = [
     inputs.catppuccin.homeModules.catppuccin
     (import ../modules/home {
@@ -22,12 +24,17 @@ let
     module
   ];
   specialArgs = {
-    inherit inputs username system;
+    inherit
+      inputs
+      username
+      system
+      mkModule
+      ;
   };
   object =
     if "nixos" == host then
       {
-        nixosConfigurations.${username} = inputs.nixpkgs.lib.nixosSystem {
+        nixosConfigurations.${name} = inputs.nixpkgs.lib.nixosSystem {
           inherit system;
           inherit specialArgs;
 
@@ -50,7 +57,7 @@ let
       }
     else if "darwin" == host then
       {
-        darwinConfigurations.${username} = inputs.nix-darwin.lib.darwinSystem {
+        darwinConfigurations.${name} = inputs.nix-darwin.lib.darwinSystem {
           inherit pkgs;
           inherit specialArgs;
 
@@ -72,7 +79,7 @@ let
       }
     else if "home" == host then
       {
-        homeConfigurations.${username} = inputs.home-manager.lib.homeManagerConfiguration {
+        homeConfigurations.${name} = inputs.home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           extraSpecialArgs = specialArgs;
           modules = homeModules;
