@@ -4,7 +4,7 @@
 }:
 
 mkModule {
-  name = "lazygit";
+  name = "tool.git.lazygit";
   module = {
     programs.lazygit = {
       enable = true;

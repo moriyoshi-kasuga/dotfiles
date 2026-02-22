@@ -4,9 +4,9 @@
 }:
 
 mkModule {
-  name = "fish";
+  name = "shell.fish";
   module = {
-    module.shell.enable = true;
+    modules.shell.enable = true;
     programs.fish = {
       enable = true;
       interactiveShellInit = builtins.readFile ./init.fish;

@@ -1,8 +1,10 @@
 { ... }:
 {
   imports = [
-    ./darwin
+    ./base
     ./dock
     ./wezterm
+    ./finder
+    ./shell
   ];
 }

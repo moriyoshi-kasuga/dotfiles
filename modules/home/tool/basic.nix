@@ -5,7 +5,7 @@
 }:
 
 mkModule {
-  name = "basic-tool";
+  name = "tool.basic";
   module = {
     home.packages = with pkgs; [
       ripgrep

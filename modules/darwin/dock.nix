@@ -4,7 +4,7 @@
 }:
 
 mkModule {
-  name = "dock";
+  name = "gui.dock";
   module = {
     system.defaults.dock = {
       autohide = true;

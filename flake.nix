@@ -33,8 +33,15 @@
       host = "nixos";
       username = "mori";
       homeDirectory = "/home/mori";
-      module = {
-        module.fish.enable = true;
+      modules = {
+        modules.shell.fish.enable = true;
+        modules.shell.fish.default = true;
+        modules.shell.zsh.enable = true;
+        modules.editors.neovim.enable = true;
+        modules.tool.basic.enable = true;
+        modules.tool.git.enable = true;
+        modules.tool.tmux.enable = true;
+        modules.term.wezterm.enable = true;
       };
     }
     // mkPlatform {
@@ -44,8 +51,15 @@
       host = "darwin";
       username = "mori";
       homeDirectory = "/Users/mori";
-      module = {
-        module.fish.enable = true;
+      modules = {
+        modules.shell.fish.enable = true;
+        modules.shell.fish.default = true;
+        modules.shell.zsh.enable = true;
+        modules.editors.neovim.enable = true;
+        modules.tool.basic.enable = true;
+        modules.tool.git.enable = true;
+        modules.tool.tmux.enable = true;
+        modules.term.wezterm.enable = true;
       };
     };
 }

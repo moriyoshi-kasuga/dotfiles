@@ -2,12 +2,11 @@
 {
   imports = [
     ./c
-    ./default
     ./fsharp
     ./go
     ./haskell
     ./jvm
-    ./nixlang
+    ./nix
     ./node
     ./python
     ./rust

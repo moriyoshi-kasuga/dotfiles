@@ -20,7 +20,6 @@ mkModule {
       enable = true;
       inherit package;
     };
-    environment.shells = [ package ];
 
     users.users.${username}.shell = mkIf cfg.default package;
   };

@@ -5,7 +5,7 @@
 }:
 
 mkModule {
-  name = "fsharp";
+  name = "lang.fsharp";
   module = {
     home.packages = with pkgs; [
       dotnet-sdk

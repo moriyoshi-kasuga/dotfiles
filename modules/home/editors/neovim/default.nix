@@ -10,7 +10,7 @@ let
   neovimCmd = pkgs.lib.getExe neovim;
 in
 mkModule {
-  name = "neovim";
+  name = "editors.neovim";
   module = {
     catppuccin.nvim.enable = false;
 

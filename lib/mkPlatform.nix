@@ -7,7 +7,7 @@
   host,
   username,
   homeDirectory,
-  module,
+  modules,
 }:
 
 let
@@ -16,65 +16,82 @@ let
     config.allowBroken = true;
   };
   mkModule = import ./mkModule.nix;
-  homeModules = [
-    inputs.catppuccin.homeModules.catppuccin
-    (import ../modules/home {
-      inherit username homeDirectory;
-    })
-    module
-  ];
+
   specialArgs = {
     inherit
       inputs
       username
+      homeDirectory
+      host
       system
       mkModule
       ;
   };
+
+  commonModules = [
+    ../modules
+  ];
+
+  homeModules = [
+    inputs.catppuccin.homeModules.catppuccin
+    ../modules/home
+    {
+      modules.home.base.enable = true;
+    }
+    modules
+  ];
+
+  hostHomeManager = {
+    home-manager = {
+      useGlobalPkgs = true;
+      useUserPackages = true;
+      extraSpecialArgs = specialArgs;
+      users.${username}.imports = homeModules;
+    };
+  };
+
+  nixosModules = [
+    inputs.catppuccin.nixosModules.catppuccin
+    ../modules/nixos
+
+    inputs.home-manager.nixosModules.home-manager
+    hostHomeManager
+    {
+      modules.nixos.base.enable = true;
+    }
+    modules
+  ];
+
+  darwinModules = [
+    ../modules/darwin
+
+    inputs.home-manager.darwinModules.home-manager
+    hostHomeManager
+    {
+      modules.darwin.base.enable = true;
+    }
+    modules
+  ];
+
   object =
     if "nixos" == host then
       {
         nixosConfigurations.${name} = inputs.nixpkgs.lib.nixosSystem {
           inherit system;
-          inherit specialArgs;
-
-          modules = [
-            inputs.catppuccin.nixosModules.catppuccin
-            ../modules/nixos
-            module
-
-            inputs.home-manager.nixosModules.home-manager
-            {
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                extraSpecialArgs = specialArgs;
-                users.${username}.imports = homeModules;
-              };
-            }
-          ];
+          specialArgs = specialArgs // {
+            inherit pkgs;
+          };
+          modules = commonModules ++ nixosModules;
         };
       }
     else if "darwin" == host then
       {
         darwinConfigurations.${name} = inputs.nix-darwin.lib.darwinSystem {
           inherit pkgs;
-          inherit specialArgs;
-
-          modules = [
-            ../modules/darwin
-            module
-
-            inputs.home-manager.darwinModules.home-manager
-            {
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                extraSpecialArgs = specialArgs;
-                users.${username}.imports = homeModules;
-              };
-            }
-          ];
+          specialArgs = specialArgs // {
+            inherit pkgs;
+          };
+          modules = commonModules ++ darwinModules;
         };
       }
     else if "home" == host then
@@ -82,7 +99,7 @@ let
         homeConfigurations.${name} = inputs.home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           extraSpecialArgs = specialArgs;
-          modules = homeModules;
+          modules = commonModules ++ homeModules;
         };
       }
     else

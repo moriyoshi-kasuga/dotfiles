@@ -4,7 +4,7 @@
 }:
 
 mkModule {
-  name = "docker";
+  name = "tool.docker";
   module = {
     home.shellAliases = {
       d = "docker";

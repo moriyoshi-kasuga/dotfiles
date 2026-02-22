@@ -6,7 +6,7 @@
 }:
 
 mkModule {
-  name = "wezterm";
+  name = "term.wezterm";
   module = {
     users.users.${username}.packages = [
       pkgs.wezterm

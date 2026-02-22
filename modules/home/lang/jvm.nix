@@ -5,7 +5,7 @@
 }:
 
 mkModule {
-  name = "jvm";
+  name = "lang.jvm";
   module = {
     home.packages = with pkgs; [
       jdk21_headless

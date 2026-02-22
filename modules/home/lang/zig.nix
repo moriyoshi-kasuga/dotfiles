@@ -5,7 +5,7 @@
 }:
 
 mkModule {
-  name = "zig";
+  name = "lang.zig";
   module = {
     home.packages = with pkgs; [
       zig

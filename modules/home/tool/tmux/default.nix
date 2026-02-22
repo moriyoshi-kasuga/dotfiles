@@ -1,7 +1,7 @@
 {
   mkModule,
   pkgs,
-  defaultShell,
+  defaultShell ? pkgs.fish,
   ...
 }:
 
@@ -9,7 +9,7 @@ let
   shell = pkgs.lib.getExe defaultShell;
 in
 mkModule {
-  name = "tmux";
+  name = "tool.tmux";
   module = {
     programs.tmux = {
       enable = true;

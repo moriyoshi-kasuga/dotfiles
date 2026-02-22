@@ -4,9 +4,9 @@
 }:
 
 mkModule {
-  name = "zsh";
+  name = "shell.zsh";
   module = {
-    module.shell.enable = true;
+    modules.shell.enable = true;
 
     programs.zsh = {
       enable = true;

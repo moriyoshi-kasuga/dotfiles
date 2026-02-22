@@ -7,5 +7,6 @@
     ./basic
     ./docker
     ./tff
+    ./opencode
   ];
 }

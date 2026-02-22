@@ -5,7 +5,7 @@
 }:
 
 mkModule {
-  name = "node";
+  name = "lang.node";
   module = {
     home.packages = with pkgs; [
       nodejs_latest

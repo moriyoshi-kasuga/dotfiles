@@ -4,7 +4,7 @@
 }:
 
 mkModule {
-  name = "finder";
+  name = "gui.finder";
   module = {
     system.defaults.finder = {
       AppleShowAllExtensions = true;

@@ -5,7 +5,7 @@
 }:
 
 mkModule {
-  name = "c";
+  name = "lang.c";
   module = {
     home.packages = with pkgs; [
       gnumake

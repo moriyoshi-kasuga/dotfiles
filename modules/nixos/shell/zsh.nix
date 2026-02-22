@@ -8,19 +8,18 @@
 
 with lib;
 let
-  package = pkgs.fish;
+  package = pkgs.zsh;
 in
 mkModule {
-  name = "shell.fish";
+  name = "shell.zsh";
   options = {
     default = mkEnableOption "Use zsh to default shell";
   };
   module = cfg: {
-    programs.fish = {
+    programs.zsh = {
       enable = true;
       inherit package;
     };
-    environment.shells = [ package ];
 
     users.users.${username}.shell = mkIf cfg.default package;
   };

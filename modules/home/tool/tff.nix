@@ -5,7 +5,7 @@
 }:
 
 mkModule {
-  name = "tff";
+  name = "tool.tff";
   module = {
     home.packages = [
       (pkgs.rustPlatform.buildRustPackage rec {

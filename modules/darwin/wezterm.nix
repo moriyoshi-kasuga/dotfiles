@@ -4,7 +4,7 @@
 }:
 
 mkModule {
-  name = "wezterm";
+  name = "term.wezterm";
   module = {
     homebrew.casks = [
       "wezterm"

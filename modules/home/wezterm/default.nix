@@ -17,7 +17,7 @@ let
       weztermConfigRaw;
 in
 mkModule {
-  name = "wezterm";
+  name = "term.wezterm";
   module = {
     xdg.configFile = {
       "wezterm/font.lua".source = ./config/font.lua;

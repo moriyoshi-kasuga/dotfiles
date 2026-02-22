@@ -4,7 +4,7 @@
 }:
 
 mkModule {
-  name = "git";
+  name = "tool.git";
   module = {
     programs.git = {
       enable = true;

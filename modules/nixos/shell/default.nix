@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ./base.nix
-    ./wezterm.nix
+    ./fish
+    ./zsh
   ];
 }

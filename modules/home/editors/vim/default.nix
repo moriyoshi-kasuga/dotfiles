@@ -5,7 +5,7 @@
 }:
 
 mkModule {
-  name = "vim";
+  name = "editors.vim";
   module = {
     catppuccin.vim.enable = false;
     programs.vim = {

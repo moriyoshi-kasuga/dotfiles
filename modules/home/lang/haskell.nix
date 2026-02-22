@@ -5,7 +5,7 @@
 }:
 
 mkModule {
-  name = "haskell";
+  name = "lang.haskell";
   module = {
     home.packages = with pkgs; [
       ghc

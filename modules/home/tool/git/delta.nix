@@ -9,7 +9,7 @@ let
   cmd = pkgs.lib.getExe package;
 in
 mkModule {
-  name = "delta";
+  name = "tool.git.delta";
   module = {
     home.packages = [
       package

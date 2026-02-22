@@ -5,7 +5,7 @@
 }:
 
 mkModule {
-  name = "nixlang";
+  name = "lang.nix";
   module = {
     home.packages = with pkgs; [
       nixd

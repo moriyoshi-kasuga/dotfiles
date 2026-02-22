@@ -5,7 +5,7 @@
 }:
 
 mkModule {
-  name = "rust";
+  name = "lang.rust";
   module = {
     home.packages = with pkgs; [
       cargo-msrv
