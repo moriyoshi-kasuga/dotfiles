@@ -34,14 +34,10 @@
       username = "mori";
       homeDirectory = "/home/mori";
       modules = {
+        module.base.enable = true;
         modules.shell.fish.enable = true;
         modules.shell.fish.default = true;
         modules.shell.zsh.enable = true;
-        modules.editors.neovim.enable = true;
-        modules.tool.basic.enable = true;
-        modules.tool.git.enable = true;
-        modules.tool.tmux.enable = true;
-        modules.term.wezterm.enable = true;
       };
     }
     // mkPlatform {
@@ -52,14 +48,10 @@
       username = "mori";
       homeDirectory = "/Users/mori";
       modules = {
+        module.base.enable = true;
         modules.shell.fish.enable = true;
         modules.shell.fish.default = true;
         modules.shell.zsh.enable = true;
-        modules.editors.neovim.enable = true;
-        modules.tool.basic.enable = true;
-        modules.tool.git.enable = true;
-        modules.tool.tmux.enable = true;
-        modules.term.wezterm.enable = true;
       };
     };
 }

@@ -1,9 +1,0 @@
-{ ... }:
-
-{
-  imports = [
-    ./shell
-    ./fish
-    ./zsh
-  ];
-}

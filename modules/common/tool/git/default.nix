@@ -1,0 +1,7 @@
+{
+  imports = [
+    ./delta
+    ./git
+    ./lazygit
+  ];
+}

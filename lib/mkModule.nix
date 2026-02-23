@@ -1,19 +1,49 @@
 {
-  lib,
-  config,
-  ...
+  # options name, split by dot
+  name,
+  # spatial options
+  options ? { },
+  # for all module config
+  commonModule ? { },
+  # with home-manager (home-manager for linux and darwin)
+  homeModule ? { },
+  # with home-manger (home-manager for linux)
+  linuxHomeModule ? { },
+  # with nixosConfiguration (include unique nixos config)
+  nixosModule ? { },
+  # with home-manager (home-manager for darwin)
+  darwinHomeModule ? { },
+  # with nix-darwin (include GUI and mac config)
+  darwinModule ? { },
 }:
 
 {
-  name,
-  module,
-  options ? { },
+  lib,
+  config,
+  platform,
+  ...
 }:
 
 with lib;
 
 let
-  # name を path に正規化
+  module =
+    if "home" == platform then
+      recursiveUpdate homeModule (
+        if "nixos" == host then
+          linuxHomeModule
+        else if "darwin" == host then
+          darwinHomeModule
+        else
+          { }
+      )
+    else if "nixos" == platform then
+      nixosModule
+    else if "darwin" == platform then
+      darwinModule
+    else
+      abort "Invalid platform: ${platform}";
+
   path =
     if builtins.isList name then
       name
@@ -24,24 +54,19 @@ let
 
   optionPath = [ "modules" ] ++ path;
 
-  # cfg 参照
   cfg = attrByPath optionPath { } config;
 
-  # enable option
-  enableOption = setAttrByPath optionPath {
+  mergedOption = recursiveUpdate {
     enable = mkEnableOption (concatStringsSep "." path);
-  };
+  } options;
 
-  # extra options
-  extraOptions =
-    let
-      evaluated = if builtins.isFunction options then options { inherit lib config; } else options;
-    in
-    setAttrByPath optionPath evaluated;
+  attrOptions = setAttrByPath optionPath mergedOption;
 
+  common = if lib.isFunction commonModule then commonModule cfg else commonModule;
+  module' = if lib.isFunction module then module cfg else module;
 in
 {
-  options = recursiveUpdate enableOption extraOptions;
+  options = attrOptions;
 
-  config = mkIf cfg.enable (module cfg);
+  config = mkIf cfg.enable (recursiveUpdate common module');
 }

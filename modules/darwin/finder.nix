@@ -4,8 +4,8 @@
 }:
 
 mkModule {
-  name = "gui.finder";
-  module = {
+  name = "darwin.finder";
+  darwinModule = {
     system.defaults.finder = {
       AppleShowAllExtensions = true;
       AppleShowAllFiles = true;

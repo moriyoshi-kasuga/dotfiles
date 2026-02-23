@@ -4,8 +4,8 @@
 }:
 
 mkModule {
-  name = "homebrew";
-  module = {
+  name = "darwin.homebrew";
+  darwinModule = {
     homebrew = {
       enable = true;
       onActivation = {

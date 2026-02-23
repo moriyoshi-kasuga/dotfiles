@@ -1,8 +1,0 @@
-{ ... }:
-{
-  imports = [
-    ./delta
-    ./git
-    ./lazygit
-  ];
-}

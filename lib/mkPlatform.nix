@@ -1,5 +1,3 @@
-{ ... }:
-
 {
   name,
   inputs,
@@ -32,12 +30,8 @@ let
     ../modules
   ];
 
-  homeModules = [
+  homeModules = commonModules ++ [
     inputs.catppuccin.homeModules.catppuccin
-    ../modules/home
-    {
-      modules.home.base.enable = true;
-    }
     modules
   ];
 
@@ -45,31 +39,24 @@ let
     home-manager = {
       useGlobalPkgs = true;
       useUserPackages = true;
-      extraSpecialArgs = specialArgs;
+      extraSpecialArgs = specialArgs // {
+        platform = "home";
+      };
       users.${username}.imports = homeModules;
     };
   };
 
   nixosModules = [
     inputs.catppuccin.nixosModules.catppuccin
-    ../modules/nixos
 
     inputs.home-manager.nixosModules.home-manager
     hostHomeManager
-    {
-      modules.nixos.base.enable = true;
-    }
     modules
   ];
 
   darwinModules = [
-    ../modules/darwin
-
     inputs.home-manager.darwinModules.home-manager
     hostHomeManager
-    {
-      modules.darwin.base.enable = true;
-    }
     modules
   ];
 
@@ -80,6 +67,7 @@ let
           inherit system;
           specialArgs = specialArgs // {
             inherit pkgs;
+            platform = "nixos";
           };
           modules = commonModules ++ nixosModules;
         };
@@ -90,6 +78,7 @@ let
           inherit pkgs;
           specialArgs = specialArgs // {
             inherit pkgs;
+            platform = "darwin";
           };
           modules = commonModules ++ darwinModules;
         };
@@ -98,7 +87,9 @@ let
       {
         homeConfigurations.${name} = inputs.home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
-          extraSpecialArgs = specialArgs;
+          extraSpecialArgs = specialArgs // {
+            platform = "home";
+          };
           modules = commonModules ++ homeModules;
         };
       }

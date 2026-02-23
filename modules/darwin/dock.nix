@@ -4,8 +4,8 @@
 }:
 
 mkModule {
-  name = "gui.dock";
-  module = {
+  name = "darwin.dock";
+  darwinModule = {
     system.defaults.dock = {
       autohide = true;
       show-recents = false;

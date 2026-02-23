@@ -12,3 +12,4 @@
   home-manager.backupFileExtension = "nixbackup";
   system.stateVersion = "25.05";
 }
+

@@ -1,7 +1,5 @@
 {
   imports = [
-    ./dock
     ./wezterm
-    ./finder
   ];
 }
