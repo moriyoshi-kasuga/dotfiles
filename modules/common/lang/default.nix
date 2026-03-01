@@ -5,7 +5,6 @@
     ./go
     ./haskell
     ./jvm
-    ./nix
     ./node
     ./python
     ./rust

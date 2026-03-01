@@ -30,7 +30,7 @@ mkModule {
       pkgs.fastfetch
     ];
   };
-  nixosHomeModule = {
+  linuxHomeModule = {
     home.packages = with pkgs; [
       (writeShellScriptBin "pbpaste" ''
         wl-paste --no-newline

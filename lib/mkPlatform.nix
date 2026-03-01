@@ -26,13 +26,24 @@ let
       ;
   };
 
-  commonModules = [
-    ../modules
-  ];
+  resolveModules = import ./resolveModules.nix;
+
+  commonModules =
+    resolveModules
+      (
+        specialArgs
+        // {
+          inherit pkgs;
+          lib = pkgs.lib;
+        }
+      )
+      [
+        modules
+        ../modules
+      ];
 
   homeModules = commonModules ++ [
     inputs.catppuccin.homeModules.catppuccin
-    modules
   ];
 
   hostHomeManager = {
@@ -51,13 +62,11 @@ let
 
     inputs.home-manager.nixosModules.home-manager
     hostHomeManager
-    modules
   ];
 
   darwinModules = [
     inputs.home-manager.darwinModules.home-manager
     hostHomeManager
-    modules
   ];
 
   object =

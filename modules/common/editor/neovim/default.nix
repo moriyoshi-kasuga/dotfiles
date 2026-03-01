@@ -54,6 +54,7 @@ mkModule {
 
         # single package for each lang
         nixd
+        nixfmt
         fsautocomplete
         just-lsp
         hadolint

@@ -5,9 +5,8 @@
 }:
 
 mkModule {
-  name = "editors.vim";
+  name = "editor.vim";
   homeModule = {
-    catppuccin.vim.enable = false;
     programs.vim = {
       enable = true;
       plugins = with pkgs.vimPlugins; [

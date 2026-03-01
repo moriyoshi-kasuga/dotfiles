@@ -1,6 +1,6 @@
 {
   imports = [
-    ./home
+    ./common
     ./nixos
     ./darwin
   ];

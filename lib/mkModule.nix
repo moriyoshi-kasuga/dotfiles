@@ -21,6 +21,7 @@
   lib,
   config,
   platform,
+  host,
   ...
 }:
 
@@ -64,9 +65,30 @@ let
 
   common = if lib.isFunction commonModule then commonModule cfg else commonModule;
   module' = if lib.isFunction module then module cfg else module;
+  normalizeImport =
+    value:
+    if builtins.isPath value || builtins.isString value then
+      let
+        path = toString value;
+        nixPath = "${path}.nix";
+      in
+      if builtins.pathExists path then
+        path
+      else if builtins.pathExists nixPath then
+        nixPath
+      else
+        value
+    else
+      value;
+  commonImports = builtins.map normalizeImport (common.imports or [ ]);
+  moduleImports = builtins.map normalizeImport (module'.imports or [ ]);
+  commonConfig = builtins.removeAttrs common [ "imports" ];
+  moduleConfig = builtins.removeAttrs module' [ "imports" ];
 in
 {
+  imports = commonImports ++ moduleImports;
+
   options = attrOptions;
 
-  config = mkIf cfg.enable (recursiveUpdate common module');
+  config = mkIf cfg.enable (recursiveUpdate commonConfig moduleConfig);
 }

@@ -15,10 +15,10 @@ mkModule {
         push.default = "current";
       };
 
-      includes = {
+      includes = [{contents={
         user.email = "moriyoshi.kasuga1218@gmail.com";
         user.name = "moriyoshi-kasuga";
-      };
+      };}];
     };
 
     home.shellAliases = {

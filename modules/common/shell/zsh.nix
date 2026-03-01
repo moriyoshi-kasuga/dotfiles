@@ -1,12 +1,14 @@
 {
   lib,
+  pkgs,
   mkModule,
+  username,
   ...
 }:
 
 with lib;
 let
-  package = pkgs.fish;
+  package = pkgs.zsh;
 in
 mkModule {
   name = "shell.zsh";
@@ -15,13 +17,11 @@ mkModule {
   };
   commonModule = {
     modules.shell.enable = true;
-    programs.zsh = {
-      enable = true;
-      inherit package;
-    };
+    programs.zsh.enable = true;
   };
   homeModule = {
     programs.zsh = {
+      inherit package;
       enableCompletion = false;
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
@@ -61,6 +61,7 @@ mkModule {
     };
   };
   nixosModule = cfg: {
+    programs.zsh.package = package;
     users.users.${username}.shell = mkIf cfg.default package;
   };
   darwinModule = cfg: {
