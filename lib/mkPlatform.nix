@@ -75,7 +75,6 @@ let
         nixosConfigurations.${name} = inputs.nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = specialArgs // {
-            inherit pkgs;
             platform = "nixos";
           };
           modules = commonModules ++ nixosModules;

@@ -26,7 +26,6 @@ mkModule {
     };
   };
   nixosModule = cfg: {
-    programs.fish.package = package;
     users.users.${username}.shell = mkIf cfg.default package;
   };
   darwinModule = cfg: {

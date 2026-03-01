@@ -43,9 +43,6 @@ let
   ];
 in
 {
-  programs.zsh.enable = true;
-  programs.fish.enable = true;
-
   users.users.${username} = {
     isNormalUser = true;
     description = username;
@@ -58,7 +55,6 @@ in
       "video"
       "gamemode"
     ];
-    shell = pkgs.fish;
     packages = with pkgs; [
       brave
       firefox

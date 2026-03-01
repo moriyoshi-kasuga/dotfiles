@@ -61,7 +61,6 @@ mkModule {
     };
   };
   nixosModule = cfg: {
-    programs.zsh.package = package;
     users.users.${username}.shell = mkIf cfg.default package;
   };
   darwinModule = cfg: {
