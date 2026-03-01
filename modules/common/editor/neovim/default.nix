@@ -60,7 +60,6 @@ mkModule {
         hadolint
         actionlint
         gopls
-        typos-lsp
         asm-lsp
         taplo
       ];
