@@ -19,93 +19,56 @@
       url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    vars-file = {
-      url = "file+file:///dev/null";
-      flake = false;
-    };
   };
 
   outputs =
-    inputs@{
-      nixpkgs,
-      catppuccin,
-      home-manager,
-      nix-darwin,
-      vars-file,
-      ...
-    }:
+    inputs:
     let
-      vars = import vars-file.outPath;
-      inherit (vars) username;
-      inherit (vars) system;
-      pkgs = import nixpkgs {
-        inherit system;
-        config.allowBroken = true;
-      };
-      homeDirectory =
-        if pkgs.stdenv.isLinux then
-          "/home/${username}"
-        else if pkgs.stdenv.isDarwin then
-          "/Users/${username}"
-        else
-          abort "it system is not supported";
-      homeModules = [
-        catppuccin.homeModules.catppuccin
-        ./home
-      ]
-      ++ (if pkgs.stdenv.isLinux then [ ./home/linux ] else [ ])
-      ++ (if pkgs.stdenv.isDarwin then [ ./home/darwin ] else [ ]);
-
-      specialArgs = {
-        inherit vars;
-        inherit inputs;
-        inherit username;
-        inherit system;
-        inherit homeDirectory;
-        inherit (vars) gitIncludes rustypasteServer;
-        bigMonitor = vars.bigMonitor or false;
-      };
+      mkPlatform = import ./lib/mkPlatform.nix;
     in
-    {
-      homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        extraSpecialArgs = specialArgs;
-        modules = homeModules;
+    mkPlatform {
+      name = "desktop";
+      inherit inputs;
+      system = "x86_64-linux";
+      host = "nixos";
+      username = "mori";
+      homeDirectory = "/home/mori";
+      modules = {
+        modules.base.enable = true;
+        modules.shell.enable = true;
+        modules.shell.fish.default = true;
+        modules.lang.enable = true;
+        modules.editor.enable = true;
+        modules.tool.enable = true;
+        modules.tool.git.enable = true;
+        modules.term.wezterm.enable = true;
+
+        modules.nixos.enable = true;
       };
-      darwinConfigurations.${username} = nix-darwin.lib.darwinSystem {
-        inherit pkgs;
-        inherit specialArgs;
-
-        modules = [
-          ./hosts/darwin
-
-          home-manager.darwinModules.home-manager
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              extraSpecialArgs = specialArgs;
-              users.${username}.imports = homeModules;
-            };
-          }
+      nixosConfig = {
+        imports = [
+          ./hosts/desktop/hardware-configuration.nix
         ];
       };
-      nixosConfigurations.${username} = nixpkgs.lib.nixosSystem {
-        inherit system;
-        inherit specialArgs;
+    }
+    // mkPlatform {
+      name = "laptop";
+      inherit inputs;
+      system = "aarch64-darwin";
+      host = "darwin";
+      username = "mori";
+      homeDirectory = "/Users/mori";
+      modules = {
+        modules.base.enable = true;
+        modules.shell.enable = true;
+        modules.shell.fish.default = true;
+        modules.lang.enable = true;
+        modules.editor.enable = true;
+        modules.tool.enable = true;
+        modules.tool.git.enable = true;
+        modules.term.wezterm.enable = true;
 
-        modules = [
-          catppuccin.nixosModules.catppuccin
-          ./hosts/nixos
-
-          home-manager.nixosModules.home-manager
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              extraSpecialArgs = specialArgs;
-              users.${username}.imports = homeModules;
-            };
-          }
-        ];
+        modules.darwin.enable = true;
       };
     };
 }

@@ -1,4 +1,3 @@
-test.sh
 .DS_Store
 *.zwc
-vars.nix
+.cachenix
