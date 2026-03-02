@@ -11,6 +11,7 @@ let
 in
 mkModule {
   name = "editor.neovim";
+  inheritModule = "editor";
   homeModule = {
     catppuccin.nvim.enable = false;
 

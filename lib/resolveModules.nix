@@ -1,45 +1,23 @@
 specialArgs: modules:
 
 let
-  importPath =
+  loadModule =
     module:
-    let
-      modulePath = toString module;
-      moduleNixPath = "${modulePath}.nix";
-    in
-    if builtins.pathExists modulePath then
-      {
-        found = true;
-        path = modulePath;
-      }
-    else if builtins.pathExists moduleNixPath then
-      {
-        found = true;
-        path = moduleNixPath;
-      }
+    if builtins.isPath module || builtins.isString module then
+      if builtins.pathExists module then import module else module
     else
-      {
-        found = false;
-        path = modulePath;
-      };
+      module;
 
   collectModules =
     module:
     let
-      current =
-        if builtins.isPath module || builtins.isString module then
-          let
-            resolved = importPath module;
-          in
-          if resolved.found then import resolved.path else module
-        else
-          module;
+      current = loadModule module;
     in
     if builtins.isFunction current then
       let
         functionArgs = builtins.functionArgs current;
       in
-      if builtins.hasAttr "mkModule" functionArgs then
+      if builtins.hasAttr "mkModule" functionArgs || builtins.hasAttr "mkEnableOption" functionArgs then
         collectModules (current specialArgs)
       else
         [ current ]

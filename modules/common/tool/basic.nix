@@ -6,6 +6,7 @@
 
 mkModule {
   name = "tool.basic";
+  inheritModule = "tool";
   homeModule = {
     home.packages = with pkgs; [
       ripgrep

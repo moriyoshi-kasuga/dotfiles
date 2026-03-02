@@ -12,11 +12,11 @@ let
 in
 mkModule {
   name = "shell.fish";
+  inheritModule = "shell";
   options = {
     default = mkEnableOption "Use zsh to default shell";
   };
   commonModule = {
-    modules.shell.enable = true;
     programs.fish.enable = true;
   };
   homeModule = {

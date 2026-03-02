@@ -10,6 +10,7 @@ let
 in
 mkModule {
   name = "tool.tmux";
+  inheritModule = "tool";
   homeModule = {
     programs.tmux = {
       enable = true;

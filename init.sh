@@ -1,85 +1,123 @@
 #!/usr/bin/env bash
 
-OPTIONS=$1
-case $OPTIONS in
-flake) ;;
-nixos) ;;
-darwin) ;;
-update)
+set -euo pipefail
+
+usage() {
+  cat <<'EOF'
+Usage: ./init.sh <command>
+
+Commands:
+  flake    Apply Home Manager configuration
+  nixos    Apply NixOS configuration
+  darwin   Apply nix-darwin configuration
+  update   Update flake inputs
+  help     Show this help message
+EOF
+}
+
+require_nix() {
+  if ! command -v nix >/dev/null 2>&1; then
+    echo 'Nix is not installed or not in PATH.'
+    echo 'Install: https://nixos.org/download.html'
+    exit 1
+  fi
+}
+
+read_username() {
+  local username
+  read -r -p "Please input name: " username
+  if [ -z "${username}" ]; then
+    echo 'Username is required.'
+    exit 1
+  fi
+  echo "${username}"
+}
+
+run_flake_update() {
   echo 'Updating Nix configuration...'
   nix --extra-experimental-features 'nix-command flakes' flake update
   echo 'Nix configuration updated.'
-  exit 0
-  ;;
-help)
-  echo 'Usage: ./init.sh [option]'
-  echo 'Options:'
-  echo '  flake    - Apply the Nix configuration using flakes'
-  echo '  nixos    - Apply the Nix configuration on NixOS'
-  echo '  update  - Update the Nix configuration'
-  echo '  darwin  - Apply the Nix configuration on macOS'
-  echo '  help    - Show this help message'
-  exit 0
-  ;;
-*)
-  if [ -z "$OPTIONS" ]; then
-    echo 'No option provided.'
-  else
-    echo "Unknown option: $OPTIONS"
-  fi
-  echo 'Use ./init.sh help to see available options.'
-  exit 1
-  ;;
-esac
+}
 
-shift
+run_home_manager() {
+  local username=$1
+  nix --extra-experimental-features 'nix-command flakes' \
+    run home-manager/master -- \
+    switch --extra-experimental-features 'nix-command flakes' --flake .#"${username}" -b backup
+}
 
-if ! command -v nix &>/dev/null; then
-  echo 'Nix is not installed or not in PATH'
-  echo 'If you not have Nix installed, goto https://nixos.org/download.html'
-  exit 1
-fi
+run_darwin() {
+  local username=$1
+  sudo nix --extra-experimental-features 'nix-command flakes' \
+    run nix-darwin/master#darwin-rebuild -- \
+    switch --flake .#"${username}"
+}
 
-if [ ! -f "./vars.nix" ]; then
-  echo 'vars.nix not found, please copy from vars.nix.example. and edit it to your needs.'
-  exit 1
-fi
+run_nixos() {
+  local username=$1
+  local extra=${2-}
 
-VARS_FILE="$PWD/vars.nix"
-USERNAME=$(nix --extra-experimental-features 'nix-command' eval --raw --file ./vars.nix username)
-
-if [ -z "$USERNAME" ]; then
-  echo 'Username not set in vars.nix, please edit it to your needs.'
-  exit 1
-fi
-
-echo 'Building Nix configuration...'
-case $OPTIONS in
-flake)
-  nix --extra-experimental-features 'nix-command flakes' run home-manager/master -- switch --extra-experimental-features 'nix-command flakes' --flake .#"$USERNAME" -b backup --override-input vars-file "file+file://$VARS_FILE"
-  ;;
-darwin)
-  sudo env NIXPKGS_ALLOW_BROKEN=1 nix --extra-experimental-features 'nix-command flakes' run nix-darwin/master#darwin-rebuild -- switch --flake .#"$USERNAME" --override-input vars-file "file+file://$VARS_FILE"
-  ;;
-nixos)
-  if [ "$1" == "--upgrade" ]; then
-    echo 'Upgrading NixOS system...'
-  elif [ -z "$1" ]; then
-    echo 'Applying NixOS configuration...'
-  else
-    echo "Unknown argument for nixos option: $1"
+  if [ -n "${extra}" ] && [ "${extra}" != "--upgrade" ]; then
+    echo "Unknown argument for nixos: ${extra}"
     echo 'Usage: ./init.sh nixos [--upgrade]'
     exit 1
   fi
-  # shellcheck disable=SC2068
-  sudo nixos-rebuild switch --flake .#"$USERNAME" --override-input vars-file "file+file://$VARS_FILE" $@
-  ;;
-*) ;;
-esac
 
-SUCCESS=$?
-if [ $SUCCESS -ne 0 ]; then
-  echo 'Failed to apply Nix configuration.'
-  exit $SUCCESS
-fi
-echo 'Backing up existing configuration files...'
+  if [ "${extra}" = "--upgrade" ]; then
+    echo 'Upgrading NixOS system...'
+  else
+    echo 'Applying NixOS configuration...'
+  fi
+
+  # shellcheck disable=SC2068
+  sudo nixos-rebuild switch --flake .#"${username}"
+}
+
+main() {
+  local command=${1-}
+  if [ -z "${command}" ]; then
+    echo 'No command provided.'
+    echo 'Use ./init.sh help to see available commands.'
+    exit 1
+  fi
+
+  case "${command}" in
+  help)
+    usage
+    exit 0
+    ;;
+  update)
+    require_nix
+    run_flake_update
+    exit 0
+    ;;
+  flake | nixos | darwin)
+    require_nix
+    ;;
+  *)
+    echo "Unknown command: ${command}"
+    echo 'Use ./init.sh help to see available commands.'
+    exit 1
+    ;;
+  esac
+
+  shift
+
+  local username
+  username=$(read_username)
+  echo "Building Nix configuration...: ${username}"
+
+  case "${command}" in
+  flake)
+    run_home_manager "${username}"
+    ;;
+  darwin)
+    run_darwin "${username}"
+    ;;
+  nixos)
+    run_nixos "${username}" "${1-}"
+    ;;
+  esac
+}
+
+main "$@"

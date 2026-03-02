@@ -6,6 +6,7 @@
 
 mkModule {
   name = "editor.vim";
+  inheritModule = "editor";
   homeModule = {
     programs.vim = {
       enable = true;

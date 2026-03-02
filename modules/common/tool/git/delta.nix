@@ -10,6 +10,7 @@ let
 in
 mkModule {
   name = "tool.git.delta";
+  inheritModule = "tool.git";
   homeModule = {
     home.packages = [
       package

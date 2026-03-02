@@ -4,7 +4,8 @@
 }:
 
 mkModule {
-  name = "tool.git";
+  name = "tool.git.basic";
+  inheritModule = "tool.git";
   homeModule = {
     programs.git = {
       enable = true;
@@ -15,10 +16,14 @@ mkModule {
         push.default = "current";
       };
 
-      includes = [{contents={
-        user.email = "moriyoshi.kasuga1218@gmail.com";
-        user.name = "moriyoshi-kasuga";
-      };}];
+      includes = [
+        {
+          contents = {
+            user.email = "moriyoshi.kasuga1218@gmail.com";
+            user.name = "moriyoshi-kasuga";
+          };
+        }
+      ];
     };
 
     home.shellAliases = {

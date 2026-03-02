@@ -5,7 +5,8 @@
 }:
 
 mkModule {
-  name = "shell";
+  name = "shell.basic";
+  inheritModule = "shell";
   homeModule = {
     home.packages = with pkgs; [
       # use latest version

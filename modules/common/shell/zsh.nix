@@ -12,11 +12,12 @@ let
 in
 mkModule {
   name = "shell.zsh";
+  inheritModule = "shell";
   options = {
     default = mkEnableOption "Use zsh to default shell";
   };
   commonModule = {
-    modules.shell.enable = true;
+    modules.shell.basic.enable = true;
     programs.zsh.enable = true;
   };
   homeModule = {

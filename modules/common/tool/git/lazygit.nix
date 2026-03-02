@@ -5,6 +5,7 @@
 
 mkModule {
   name = "tool.git.lazygit";
+  inheritModule = "tool.git";
   homeModule = {
     programs.lazygit = {
       enable = true;

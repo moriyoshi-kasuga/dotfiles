@@ -6,6 +6,7 @@
 
 mkModule {
   name = "lang.rust";
+  inheritModule = "lang";
   homeModule = {
     home.packages = with pkgs; [
       cargo-msrv

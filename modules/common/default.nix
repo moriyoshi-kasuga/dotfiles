@@ -1,6 +1,6 @@
 {
   imports = [
-    ./base
+    ./base.nix
     ./editor
     ./lang
     ./shell

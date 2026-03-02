@@ -45,9 +45,11 @@ mkModule {
     ];
   };
   nixosModule = {
-    nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-      "nvidia-x11"
-    ];
+    nixpkgs.config.allowUnfreePredicate =
+      pkg:
+      builtins.elem (lib.getName pkg) [
+        "nvidia-x11"
+      ];
 
     home-manager.backupFileExtension = "nixbackup";
     system.stateVersion = version;

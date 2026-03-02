@@ -5,6 +5,7 @@
 
 mkModule {
   name = "darwin.dock";
+  inheritModule = "darwin";
   darwinModule = {
     system.defaults.dock = {
       autohide = true;

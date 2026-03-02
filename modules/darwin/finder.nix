@@ -5,6 +5,7 @@
 
 mkModule {
   name = "darwin.finder";
+  inheritModule = "darwin";
   darwinModule = {
     system.defaults.finder = {
       AppleShowAllExtensions = true;

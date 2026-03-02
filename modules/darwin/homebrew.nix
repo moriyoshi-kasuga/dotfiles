@@ -5,6 +5,7 @@
 
 mkModule {
   name = "darwin.homebrew";
+  inheritModule = "darwin";
   darwinModule = {
     homebrew = {
       enable = true;

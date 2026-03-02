@@ -6,6 +6,8 @@
   username,
   homeDirectory,
   modules,
+  darwinConfig ? { },
+  nixosConfig ? { },
 }:
 
 let
@@ -24,23 +26,20 @@ let
       system
       mkModule
       ;
+    mkEnableOption = pkgs.lib.mkEnableOption;
   };
 
   resolveModules = import ./resolveModules.nix;
 
-  commonModules =
-    resolveModules
-      (
-        specialArgs
-        // {
-          inherit pkgs;
-          lib = pkgs.lib;
-        }
-      )
-      [
-        modules
-        ../modules
-      ];
+  resolvedArgs = specialArgs // {
+    inherit pkgs;
+    lib = pkgs.lib;
+  };
+
+  commonModules = resolveModules resolvedArgs [
+    modules
+    ../modules
+  ];
 
   homeModules = commonModules ++ [
     inputs.catppuccin.homeModules.catppuccin
@@ -58,6 +57,8 @@ let
   };
 
   nixosModules = [
+    nixosConfig
+
     inputs.catppuccin.nixosModules.catppuccin
 
     inputs.home-manager.nixosModules.home-manager
@@ -65,6 +66,8 @@ let
   ];
 
   darwinModules = [
+    darwinConfig
+
     inputs.home-manager.darwinModules.home-manager
     hostHomeManager
   ];

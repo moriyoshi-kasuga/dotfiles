@@ -5,6 +5,7 @@
 
 mkModule {
   name = "tool.docker";
+  inheritModule = "tool";
   homeModule = {
     home.shellAliases = {
       d = "docker";

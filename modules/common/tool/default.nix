@@ -1,10 +1,14 @@
+{ mkEnableOption, ... }:
+
 {
+  options.modules.tool.enable = mkEnableOption "enable tool settings";
+
   imports = [
     ./git
     ./tmux
-    ./basic
-    ./docker
-    ./opencode
-    ./tff
+    ./basic.nix
+    ./docker.nix
+    ./opencode.nix
+    ./tff.nix
   ];
 }

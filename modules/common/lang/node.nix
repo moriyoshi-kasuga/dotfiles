@@ -6,6 +6,7 @@
 
 mkModule {
   name = "lang.node";
+  inheritModule = "lang";
   homeModule = {
     home.packages = with pkgs; [
       nodejs_latest

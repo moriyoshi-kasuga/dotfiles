@@ -1,7 +1,11 @@
+{ mkEnableOption, ... }:
+
 {
+  options.modules.tool.git.enable = mkEnableOption "enable git settings";
+
   imports = [
-    ./delta
-    ./git
-    ./lazygit
+    ./basic.nix
+    ./delta.nix
+    ./lazygit.nix
   ];
 }

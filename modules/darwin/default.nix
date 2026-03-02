@@ -1,6 +1,11 @@
+{ mkEnableOption, ... }:
+
 {
+  options.modules.darwin.enable = mkEnableOption "enable darwin settings";
+
   imports = [
-    ./dock
-    ./finder
+    ./dock.nix
+    ./finder.nix
+    ./homebrew.nix
   ];
 }

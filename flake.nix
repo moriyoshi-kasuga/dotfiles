@@ -35,20 +35,20 @@
       homeDirectory = "/home/mori";
       modules = {
         modules.base.enable = true;
-        modules.shell.fish.enable = true;
+        modules.shell.enable = true;
         modules.shell.fish.default = true;
-        modules.shell.zsh.enable = true;
-        modules.editor.neovim.enable = true;
-        modules.editor.vim.enable = true;
-        modules.tool.basic.enable = true;
-        modules.tool.tmux.enable = true;
-        modules.tool.tff.enable = true;
+        modules.lang.enable = true;
+        modules.editor.enable = true;
+        modules.tool.enable = true;
         modules.tool.git.enable = true;
-        modules.tool.git.lazygit.enable = true;
-        modules.tool.git.delta.enable = true;
         modules.term.wezterm.enable = true;
 
         modules.nixos.enable = true;
+      };
+      nixosConfig = {
+        imports = [
+          ./hosts/desktop/hardware-configuration.nix
+        ];
       };
     }
     // mkPlatform {
@@ -60,18 +60,15 @@
       homeDirectory = "/Users/mori";
       modules = {
         modules.base.enable = true;
-        modules.shell.fish.enable = true;
+        modules.shell.enable = true;
         modules.shell.fish.default = true;
-        modules.shell.zsh.enable = true;
-        modules.editor.neovim.enable = true;
-        modules.editor.vim.enable = true;
-        modules.tool.basic.enable = true;
-        modules.tool.tmux.enable = true;
-        modules.tool.tff.enable = true;
+        modules.lang.enable = true;
+        modules.editor.enable = true;
+        modules.tool.enable = true;
         modules.tool.git.enable = true;
-        modules.tool.git.lazygit.enable = true;
-        modules.tool.git.delta.enable = true;
         modules.term.wezterm.enable = true;
+
+        modules.darwin.enable = true;
       };
     };
 }

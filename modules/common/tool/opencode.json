@@ -1,0 +1,55 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "default_agent": "plan",
+  "permission": {
+    "bash": {
+      "cargo run *": "deny",
+      "terraform *": "deny",
+      "gh *": "ask",
+      "rm *": "ask",
+      "git *": "deny",
+      "git push *": "ask",
+      "nix *": "ask",
+      "nix-shell --run \"cargo build\"": "allow",
+      "nix-shell --run \"cargo check\"": "allow",
+      "nixos-rebuild *": "deny",
+    }
+  },
+  "agent": {
+    "plan": {
+      "mode": "primary",
+      "prompt": "日本語で作業をしてください。",
+      "tools": {
+        "write": false,
+        "edit": false,
+        "bash": false
+      }
+    },
+    "build": {
+      "mode": "primary",
+      "prompt": "日本語で作業をしてください。",
+      "tools": {
+        "read": true,
+        "write": true,
+        "edit": true,
+        "grep": true,
+        "glob": true,
+        "list": true,
+        "webfetch": true,
+        "patch": true,
+        "todoread": true,
+        "todowrite": true,
+        "bash": true,
+      }
+    },
+    "code-reviewer": {
+      "description": "Reviews code for best practices and potential issues",
+      "mode": "subagent",
+      "prompt": "You are a code reviewer. Focus on security, performance, and maintainability.",
+      "tools": {
+        "write": false,
+        "edit": false
+      }
+    }
+  }
+}

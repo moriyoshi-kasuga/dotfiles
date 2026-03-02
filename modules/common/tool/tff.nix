@@ -6,6 +6,7 @@
 
 mkModule {
   name = "tool.tff";
+  inheritModule = "tool";
   homeModule = {
     home.packages = [
       (pkgs.rustPlatform.buildRustPackage rec {

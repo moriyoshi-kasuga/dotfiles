@@ -6,6 +6,7 @@
 
 mkModule {
   name = "lang.python";
+  inheritModule = "lang";
   homeModule = {
     home.packages = with pkgs; [
       python3
