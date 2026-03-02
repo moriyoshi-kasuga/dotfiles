@@ -17,6 +17,8 @@ vim.opt.rtp:prepend(lazypath)
 
 -- Setup lazy.nvim
 require("lazy").setup({
+  -- TODO: 美しくないからいいの思いついたら修正する
+  lockfile = "~/dotfiles/nvim-config/lazy-lock.json",
   install = {
     missing = true,
   },
