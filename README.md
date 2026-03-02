@@ -17,11 +17,14 @@ cd ~/dotfiles
 ## Apply
 
 ```sh
-./init.sh nixos   # NixOS
-./init.sh darwin  # macOS
-./init.sh flake   # Home Manager only
-./init.sh update  # flake update
+just apply nixos   # NixOS
+just apply darwin  # macOS
+just apply flake   # Home Manager only
+just update        # flake update
 ```
+
+初回実行で入力したコマンド種別とユーザー名は `.cachenix` に保存されます。
+次回以降は `just apply` のみで前回値を再利用します。
 
 ## License
 
