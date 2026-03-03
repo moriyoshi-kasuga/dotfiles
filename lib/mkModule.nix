@@ -29,23 +29,6 @@
 with lib;
 
 let
-  module =
-    if "home" == platform then
-      recursiveUpdate homeModule (
-        if "nixos" == host then
-          linuxHomeModule
-        else if "darwin" == host then
-          darwinHomeModule
-        else
-          { }
-      )
-    else if "nixos" == platform then
-      nixosModule
-    else if "darwin" == platform then
-      darwinModule
-    else
-      abort "Invalid platform: ${platform}";
-
   path =
     if isList name then
       name
@@ -57,6 +40,26 @@ let
   optionPath = [ "modules" ] ++ path;
 
   cfg = attrByPath optionPath { } config;
+
+  fnArgs = { inherit cfg config; };
+  evalModule = module: if lib.isFunction module then module fnArgs else module;
+
+  module =
+    if "home" == platform then
+      recursiveUpdate (evalModule homeModule) (
+        if "nixos" == host then
+          evalModule linuxHomeModule
+        else if "darwin" == host then
+          evalModule darwinHomeModule
+        else
+          { }
+      )
+    else if "nixos" == platform then
+      evalModule nixosModule
+    else if "darwin" == platform then
+      evalModule darwinModule
+    else
+      abort "Invalid platform: ${platform}";
 
   inheritPath =
     if inheritModule == "" then
@@ -84,15 +87,13 @@ let
 
   attrOptions = setAttrByPath optionPath mergedOption;
 
-  common = if lib.isFunction commonModule then commonModule cfg else commonModule;
-  module' = if lib.isFunction module then module cfg else module;
+  common = evalModule commonModule;
 
   commonImports = common.imports or [ ];
-  moduleImports = module'.imports or [ ];
+  moduleImports = module.imports or [ ];
 
   commonConfig = removeAttrs common [ "imports" ];
-  moduleConfig = removeAttrs module' [ "imports" ];
-
+  moduleConfig = removeAttrs module [ "imports" ];
 in
 {
   imports = commonImports ++ moduleImports;

@@ -25,11 +25,15 @@ mkModule {
       interactiveShellInit = builtins.readFile ./init.fish;
     };
   };
-  nixosModule = cfg: {
-    users.users.${username}.shell = mkIf cfg.default package;
-  };
-  darwinModule = cfg: {
-    environment.shells = [ package ];
-    users.users.${username}.shell = mkIf cfg.default package;
-  };
+  nixosModule =
+    { cfg, ... }:
+    {
+      users.users.${username}.shell = mkIf cfg.default package;
+    };
+  darwinModule =
+    { cfg, ... }:
+    {
+      environment.shells = [ package ];
+      users.users.${username}.shell = mkIf cfg.default package;
+    };
 }
