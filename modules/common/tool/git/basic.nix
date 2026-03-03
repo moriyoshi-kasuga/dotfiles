@@ -1,4 +1,5 @@
 {
+  pkgs,
   mkModule,
   ...
 }:
@@ -25,6 +26,10 @@ mkModule {
         }
       ];
     };
+
+    home.packages = with pkgs; [
+      gh
+    ];
 
     home.shellAliases = {
       g = "git";
