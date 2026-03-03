@@ -8,12 +8,18 @@ let
   treesitterGrammars = pkgs.vimPlugins.nvim-treesitter.withAllGrammars;
   neovim = pkgs.neovim-unwrapped;
   neovimCmd = pkgs.lib.getExe neovim;
+
+  Lombok = pkgs.lombok;
 in
 mkModule {
   name = "editor.neovim";
   inheritModule = "editor";
   homeModule = {
     catppuccin.nvim.enable = false;
+
+    home.sessionVariables = {
+      JDTLS_JVM_ARGS = "-javaagent:" + Lombok + "/share/java/lombok.jar";
+    };
 
     programs.neovim = {
       enable = true;
@@ -48,6 +54,7 @@ mkModule {
 
         # jvm langs
         jdt-language-server
+        Lombok
         metals
 
         # HTML/CSS/JSON

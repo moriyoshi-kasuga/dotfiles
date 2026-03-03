@@ -27,6 +27,7 @@ return {
         sh = { "shfmt" },
         bash = { "shfmt" },
         python = { "ruff_format" },
+        java = { "spotless_gradle" },
       },
 
       formatters = {

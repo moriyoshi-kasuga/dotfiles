@@ -49,6 +49,7 @@ return {
         "just",
         "asm_lsp",
         "gopls",
+        "jdtls",
 
         -- vscode-html-language-server
         "html",
