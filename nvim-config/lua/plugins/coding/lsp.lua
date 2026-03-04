@@ -128,8 +128,6 @@ return {
           map("n", "gK", vim.lsp.buf.signature_help, "Signature Help")
           map("i", "<C-k>", vim.lsp.buf.signature_help, "Signature Help")
 
-          map("n", "<leader>cr", vim.lsp.buf.rename, "Rename")
-
           -- Show line diagnostics
           map("n", "<leader>cd", vim.diagnostic.open_float, "Line Diagnostics")
 

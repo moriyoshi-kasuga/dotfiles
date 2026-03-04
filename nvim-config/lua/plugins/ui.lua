@@ -4,6 +4,18 @@ end
 
 return {
   {
+    "saecki/live-rename.nvim",
+    keys = {
+      {
+        "<leader>cr",
+        function()
+          require("live-rename").rename()
+        end,
+        desc = "rename",
+      },
+    },
+  },
+  {
     "folke/noice.nvim",
     event = "UIEnter",
     opts = {
