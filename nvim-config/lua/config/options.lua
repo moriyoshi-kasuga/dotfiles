@@ -1,5 +1,7 @@
 local is_simple_mode = require("config.util").is_in_simple_mode()
 
+vim.lsp.log._set_filename("/tmp/nvim/lsp.log")
+
 vim.opt.backup = true
 local backup_dir = vim.fn.expand(vim.fn.stdpath("cache") .. "/.vim_backup")
 if vim.fn.isdirectory(backup_dir) == 0 then
