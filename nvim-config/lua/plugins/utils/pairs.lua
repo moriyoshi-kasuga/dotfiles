@@ -13,6 +13,7 @@ return {
       "rust",
       "cpp",
       "c",
+      "java",
     }):with_pair(
       -- regex will make it so that it will auto-pair on
       -- `a<` but not `a <`
