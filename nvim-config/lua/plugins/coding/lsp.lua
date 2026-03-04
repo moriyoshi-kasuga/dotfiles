@@ -50,6 +50,7 @@ return {
         "asm_lsp",
         "gopls",
         "jdtls",
+        "buf_ls",
 
         -- vscode-html-language-server
         "html",

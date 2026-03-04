@@ -13,5 +13,6 @@
     ./python.nix
     ./rust.nix
     ./zig.nix
+    ./buf.nix
   ];
 }

@@ -63,9 +63,10 @@ mkModule {
           # HTML/CSS/JSON
           vscode-langservers-extracted
 
-          # single package for each lang
+          # nix
           nixd
           nixfmt
+          # single package for each lang
           fsautocomplete
           just-lsp
           hadolint
