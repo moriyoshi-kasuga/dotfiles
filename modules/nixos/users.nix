@@ -128,6 +128,16 @@ in
   services.gvfs.enable = true;
   services.tumbler.enable = true;
 
+  # Dictionary
+  services.dictd = {
+    enable = true;
+    DBs = with pkgs.dictdDBs; [
+      wordnet
+      jpn2eng
+      eng2jpn
+    ];
+  };
+
   catppuccin.cursors.enable = true;
 
   xdg.mime = {
