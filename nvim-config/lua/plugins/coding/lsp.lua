@@ -51,6 +51,7 @@ return {
         "gopls",
         "jdtls",
         "buf_ls",
+        "elmls",
 
         -- vscode-html-language-server
         "html",

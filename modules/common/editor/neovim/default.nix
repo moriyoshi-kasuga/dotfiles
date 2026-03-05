@@ -66,6 +66,11 @@ mkModule {
           # nix
           nixd
           nixfmt
+
+          # elm
+          elmPackages.elm-language-server
+          elmPackages.elm-format
+
           # single package for each lang
           fsautocomplete
           just-lsp

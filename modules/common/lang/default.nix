@@ -14,5 +14,6 @@
     ./rust.nix
     ./zig.nix
     ./buf.nix
+    ./elm.nix
   ];
 }
