@@ -41,7 +41,7 @@ local function pad_lines(lines)
 end
 
 return {
-  name = "Hover Docs",
+  name = "lsp-docs",
   priority = 1000,
   enabled = function(bufnr)
     return #vim.lsp.get_clients({ bufnr = bufnr }) > 0
