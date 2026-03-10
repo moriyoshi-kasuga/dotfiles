@@ -4,9 +4,7 @@
   hardware.graphics.enable = true;
   hardware.nvidia = {
     open = true;
-    # サスペンド・復帰時の安定性を向上
     powerManagement.enable = true;
-    # 完全にオフにするのではなく、安定重視の設定
     powerManagement.finegrained = false;
 
     nvidiaSettings = true;
@@ -22,9 +20,19 @@
     };
   };
 
+  swapDevices = [
+    {
+      device = "/var/lib/swapfile";
+      size = 32 * 1024; # 32GB in MB
+    }
+  ];
+
   boot.kernelModules = [ "nvidia-uvm" ];
   hardware.nvidia-container-toolkit.enable = true;
-  services.xserver.videoDrivers = [ "nvidia" ];
+  services.xserver.videoDrivers = [
+    "modesetting"
+    "nvidia"
+  ];
 
   security.rtkit.enable = true;
   services.pipewire = {
@@ -46,11 +54,17 @@
   };
   services.blueman.enable = true;
 
+  services.power-profiles-daemon.enable = true;
   powerManagement.enable = true;
   services = {
     libinput.enable = true;
     upower.enable = true;
-    logind.settings.Login.HandlePowerKey = "ignore";
+    logind.settings.Login = {
+      HandlePowerKey = "ignore";
+      LidSwitch = "suspend-then-hibernate";
+      PowerKey = "hibernate";
+      PowerKeyLongPress = "poweroff";
+    };
     udev.extraRules = ''
       ACTION=="add", SUBSYSTEM=="usb", DRIVER=="usbhid", TEST=="power/control", ATTR{power/control}="on"
       KERNEL=="event[0-9]*", SUBSYSTEM=="input", TAG+="uaccess"
