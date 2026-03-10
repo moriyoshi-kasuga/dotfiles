@@ -29,7 +29,6 @@
     };
     kernelParams = [
       "usbcore.autosuspend=-1"
-      "nvidia_drm.modeset=1"
     ];
     tmp.cleanOnBoot = true;
   };
