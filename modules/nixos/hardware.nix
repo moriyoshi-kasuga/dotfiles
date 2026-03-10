@@ -1,7 +1,15 @@
 { pkgs, ... }:
 
 {
-  hardware.graphics.enable = true;
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+    extraPackages = with pkgs; [
+      nvidia-vaapi-driver
+      libva-vdpau-driver
+      libvdpau-va-gl
+    ];
+  };
   hardware.nvidia = {
     open = true;
     powerManagement.enable = true;
@@ -27,6 +35,12 @@
     }
   ];
 
+  boot.initrd.kernelModules = [
+    "nvidia"
+    "nvidia_modeset"
+    "nvidia_uvm"
+    "nvidia_drm"
+  ];
   boot.kernelModules = [ "nvidia-uvm" ];
   hardware.nvidia-container-toolkit.enable = true;
   services.xserver.videoDrivers = [
@@ -90,7 +104,6 @@
     alsa-utils
     pulseaudio
     easyeffects
-    helvum
     waydroid-helper
   ];
 }

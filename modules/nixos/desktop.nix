@@ -24,7 +24,6 @@
   environment.sessionVariables = {
     # Input Method
     XMODIFIERS = "@im=fcitx";
-    GTK_IM_MODULE = "fcitx";
     QT_IM_MODULE = "fcitx";
     QT_IM_MODULES = "fcitx";
     SDL_IM_MODULE = "fcitx";
@@ -41,14 +40,19 @@
     XDG_SESSION_DESKTOP = "niri";
     CLUTTER_BACKEND = "wayland";
 
-    # Chromium / Electron
+    # Chromium / Electron / Firefox
     NIXOS_OZONE_WL = "1";
     ELECTRON_OZONE_PLATFORM_HINT = "auto";
+    MOZ_ENABLE_WAYLAND = "1";
 
     # NVIDIA
     GBM_BACKEND = "nvidia-drm";
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
     LIBVA_DRIVER_NAME = "nvidia";
+    # Fix for hardware video acceleration with NVIDIA
+    NVD_BACKEND = "direct";
+    # Sometimes needed for cursor on NVIDIA
+    WLR_NO_HARDWARE_CURSORS = "1";
   };
 
   qt = {
@@ -116,11 +120,13 @@
     ];
     config = {
       common = {
+        default = [ "gtk" ];
+      };
+      niri = {
         default = [
-          "gtk"
           "gnome"
+          "gtk"
         ];
-        "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
       };
     };
   };

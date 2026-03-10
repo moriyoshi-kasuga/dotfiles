@@ -29,6 +29,8 @@
     };
     kernelParams = [
       "usbcore.autosuspend=-1"
+      "nvidia-drm.modeset=1"
+      "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
     ];
     tmp.cleanOnBoot = true;
   };
