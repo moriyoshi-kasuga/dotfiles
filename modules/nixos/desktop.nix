@@ -213,6 +213,8 @@
           terminalCommand = "wezterm -e";
           showCategories = false;
           enableSettingsSearch = false;
+          enableWindowsSearch = false;
+          enableSessionSearch = false;
         };
         notifications = {
           sounds = {
