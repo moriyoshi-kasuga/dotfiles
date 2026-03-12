@@ -17,7 +17,7 @@ mkModule {
       duf
       tldr
       zip
-      unzip
+      unzipNLS
       lnav
       bottom
       just
