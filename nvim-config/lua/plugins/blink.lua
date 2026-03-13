@@ -1,3 +1,8 @@
+local sources_default = { "lazydev", "lsp", "path", "snippets", "buffer" }
+if require("config.util").is_in_simple_mode() then
+  table.remove(sources_default, 1)
+end
+
 return {
   {
     "saghen/blink.cmp",
@@ -26,8 +31,6 @@ return {
 
         ["<C-b>"] = { "scroll_documentation_up", "fallback" },
         ["<C-f>"] = { "scroll_documentation_down", "fallback" },
-
-        ["gk"] = { "show_signature", "hide_signature", "fallback" },
       },
 
       appearance = {
@@ -49,7 +52,7 @@ return {
         list = {
           selection = {
             preselect = true,
-            auto_insert = true,
+            auto_insert = false,
           },
         },
 
@@ -58,12 +61,11 @@ return {
           show_with_menu = false,
         },
 
-        accept = { auto_brackets = { enabled = true } },
+        accept = { auto_brackets = { enabled = false } },
 
         documentation = {
           auto_show = true,
           auto_show_delay_ms = 100,
-          update_delay_ms = 50,
 
           window = {
             border = "rounded",
@@ -71,12 +73,15 @@ return {
         },
       },
 
-      signature = { window = { border = "rounded" } },
+      signature = {
+        enabled = true,
+        window = { border = "rounded" },
+      },
 
       -- Default list of enabled providers defined so that you can extend it
       -- elsewhere in your config, without redefining it, due to `opts_extend`
       sources = {
-        default = { "lsp", "lazydev", "path", "snippets", "buffer" },
+        default = sources_default,
         providers = {
           snippets = {
             min_keyword_length = 2,
@@ -84,13 +89,10 @@ return {
           buffer = {
             max_items = 5,
           },
-          lsp = {
-            async = true,
-          },
           lazydev = {
             name = "LazyDev",
             module = "lazydev.integrations.blink",
-            fallbacks = { "lsp" },
+            score_offset = 100,
           },
         },
       },
