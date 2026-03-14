@@ -18,6 +18,7 @@ mkModule {
       cargo-udeps
       cargo-outdated
       cargo-deny
+      cargo-show-asm
 
       mdbook
       mdbook-admonish
