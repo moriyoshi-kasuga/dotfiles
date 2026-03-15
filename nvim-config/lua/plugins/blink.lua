@@ -9,8 +9,6 @@ return {
     version = "1.*",
     event = { "InsertEnter", "CmdLineEnter" },
 
-    ---@module 'blink.cmp'
-    ---@type blink.cmp.Config
     opts = {
       keymap = {
         -- set to 'none' to disable the 'default' preset
@@ -41,19 +39,10 @@ return {
       },
 
       completion = {
-        keyword = { range = "full" },
-
         menu = {
           border = "rounded",
           scrolloff = 1,
           scrollbar = false,
-        },
-
-        list = {
-          selection = {
-            preselect = true,
-            auto_insert = false,
-          },
         },
 
         ghost_text = {
@@ -61,11 +50,9 @@ return {
           show_with_menu = false,
         },
 
-        accept = { auto_brackets = { enabled = false } },
-
         documentation = {
           auto_show = true,
-          auto_show_delay_ms = 100,
+          auto_show_delay_ms = 500,
 
           window = {
             border = "rounded",
@@ -74,7 +61,6 @@ return {
       },
 
       signature = {
-        enabled = true,
         window = { border = "rounded" },
       },
 
