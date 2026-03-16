@@ -9,7 +9,7 @@ mkModule {
   inheritModule = "lang";
   homeModule = {
     home.packages = with pkgs; [
-      nodejs_latest
+      nodejs
       bun
     ];
 

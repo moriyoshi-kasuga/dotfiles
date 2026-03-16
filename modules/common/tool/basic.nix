@@ -8,6 +8,11 @@ mkModule {
   name = "tool.basic";
   inheritModule = "tool";
   homeModule = {
+    programs.man = {
+      enable = true;
+      package = pkgs.man;
+    };
+
     home.packages = with pkgs; [
       ripgrep
       jid
