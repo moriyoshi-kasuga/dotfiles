@@ -209,6 +209,9 @@
         dock = {
           enabled = false;
         };
+        network = {
+          wifiEnabled = true;
+        };
         appLauncher = {
           terminalCommand = "wezterm -e";
           showCategories = false;
