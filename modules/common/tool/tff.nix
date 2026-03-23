@@ -11,16 +11,16 @@ mkModule {
     home.packages = [
       (pkgs.rustPlatform.buildRustPackage rec {
         pname = "TaggedFileFlow";
-        version = "3.0.0";
+        version = "3.0.1";
 
         src = pkgs.fetchFromGitHub {
           owner = "moriyoshi-kasuga";
           repo = "TaggedFileFlow";
           rev = "v${version}";
-          hash = "sha256-TrKhemh+ZL51v//x24CYritSACtSjpomHFNYH2pn7z8=";
+          hash = "sha256-ez7g8CLEIW5OpKtaIzwLPgBhLhfmaHbCS07YxjgqHWc=";
         };
 
-        cargoHash = "sha256-a4kAnj+t0027k2nEeEBG1BZXqjjdY5gHYGomZCSoHfE=";
+        cargoHash = "sha256-js04R0ujCN76llEbylb9O0YBtMNhtFQQs0IziuCzy2o=";
       })
     ];
 
