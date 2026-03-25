@@ -69,16 +69,24 @@ return {
       sources = {
         default = sources_default,
         providers = {
-          snippets = {
-            min_keyword_length = 2,
-          },
           buffer = {
             max_items = 5,
+            score_offset = 10,
+          },
+          lsp = {
+            score_offset = 25,
+          },
+          path = {
+            score_offset = 100,
+          },
+          snippets = {
+            score_offset = 10,
+            min_keyword_length = 2,
           },
           lazydev = {
             name = "LazyDev",
             module = "lazydev.integrations.blink",
-            score_offset = 100,
+            score_offset = 50,
           },
         },
       },
