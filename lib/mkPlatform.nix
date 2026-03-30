@@ -6,6 +6,7 @@
   username,
   homeDirectory,
   modules,
+  homeConfig ? { },
   darwinConfig ? { },
   nixosConfig ? { },
 }:
@@ -13,7 +14,10 @@
 let
   pkgs = import inputs.nixpkgs {
     inherit system;
-    config.allowBroken = true;
+    config = {
+      allowBroken = true;
+      allowUnfree = true;
+    };
   };
   mkModule = import ./mkModule.nix;
 
@@ -41,8 +45,11 @@ let
     ../modules
   ];
 
+  expandHomeConfig = homeConfig pkgs;
+
   homeModules = commonModules ++ [
     inputs.catppuccin.homeModules.catppuccin
+    expandHomeConfig
   ];
 
   hostHomeManager = {

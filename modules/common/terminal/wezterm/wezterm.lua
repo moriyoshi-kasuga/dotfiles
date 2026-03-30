@@ -1,6 +1,6 @@
 local wezterm = require("wezterm")
 
-local big_monitor = "@BIGMONITOR@"
+local big_monitor = true
 
 local config = {}
 

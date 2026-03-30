@@ -1,5 +1,6 @@
 {
   mkModule,
+  pkgs,
   ...
 }:
 
@@ -19,6 +20,12 @@ mkModule {
         "discord"
         "slack"
         "figma"
+      ];
+    };
+
+    fonts = {
+      packages = with pkgs; [
+        nerd-fonts.jetbrains-mono
       ];
     };
   };

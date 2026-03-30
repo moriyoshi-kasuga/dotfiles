@@ -75,5 +75,12 @@
 
         modules.darwin.enable = true;
       };
+      homeConfig = pkgs: {
+        home.packages = with pkgs; [
+          claude-code
+          lua5_4
+          luarocks
+        ];
+      };
     };
 }
