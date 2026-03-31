@@ -25,16 +25,31 @@ if wezterm.target_triple ~= "x86_64-unknown-linux-gnu" then
   config.native_macos_fullscreen_mode = true
 end
 
----- フォントの設定
-local font = require("font")
-font.register_fonts({
-  { name = "JetBrains Mono", mod = "font-jetbrains", default = true },
-  { name = "Monaspace Neon", mod = "font-monaspace-neon" },
-  { name = "Monaspace Krypton", mod = "font-monaspace-krypton" },
-  { name = "CommitMono", mod = "font-commit" },
+config.font = wezterm.font_with_fallback({
+  {
+    family = "JetBrainsMono Nerd Font",
+    weight = "Regular",
+    stretch = "Normal",
+    style = "Normal",
+    harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
+  },
+  {
+    family = "Noto Sans CJK JP",
+    weight = "DemiLight",
+    stretch = "Normal",
+    style = "Normal",
+  },
+  "Noto Color Emoji",
 })
-font.load_default(config)
-config.adjust_window_size_when_changing_font_size = false
+config.font_size = 15
+config.adjust_window_size_when_changing_font_size = true
+config.set_environment_variables = {
+  LANG = "ja_JP.UTF-8",
+  LC_ALL = "ja_JP.UTF-8",
+}
+config.cell_width = 1.0
+config.line_height = 1.0
+config.use_cap_height_to_scale_fallback_fonts = true
 
 if big_monitor then
   config.window_padding = {
@@ -97,11 +112,6 @@ config.keys = {
     key = "v",
     mods = "CTRL",
     action = wezterm.action.PasteFrom("Clipboard"),
-  },
-  {
-    key = "f",
-    mods = "CMD",
-    action = font.selector_action(),
   },
   {
     key = "+",

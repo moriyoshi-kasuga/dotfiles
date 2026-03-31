@@ -22,7 +22,6 @@ mkModule {
   name = "term.wezterm";
   homeModule = {
     xdg.configFile = {
-      "wezterm/font.lua".source = ./config/font.lua;
       "wezterm/wezterm.lua".text = weztermConfig;
     };
   };
