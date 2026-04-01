@@ -69,7 +69,8 @@ run_nixos() {
     echo 'Applying NixOS configuration...'
   fi
 
-  sudo nixos-rebuild switch --flake .#"${name}" "${extra}" \
+  # shellcheck disable=SC2086
+  sudo nixos-rebuild switch --flake .#"${name}" ${extra} \
     --override-input vars-file "file+file://$VARS_FILE"
 }
 

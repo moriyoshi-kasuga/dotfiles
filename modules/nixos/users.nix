@@ -125,6 +125,7 @@ in
       thunar-volman
     ];
   };
+  services.udisks2.enable = true;
   programs.xfconf.enable = true;
   services.gvfs.enable = true;
   services.tumbler.enable = true;
