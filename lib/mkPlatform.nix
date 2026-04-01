@@ -19,6 +19,7 @@ let
       allowUnfree = true;
     };
   };
+  vars = import inputs.vars-file.outPath;
   mkModule = import ./mkModule.nix;
 
   specialArgs = {
@@ -29,6 +30,7 @@ let
       host
       system
       mkModule
+      vars
       ;
     mkEnableOption = pkgs.lib.mkEnableOption;
   };

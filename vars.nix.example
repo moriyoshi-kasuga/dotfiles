@@ -1,0 +1,8 @@
+# This file is an example of how to define variables for a secret Nix configuration.
+# Edit this file to set your own variables.
+{
+  # ref: https://nix-community.github.io/home-manager/options.xhtml#opt-programs.git.includes
+  gitIncludes = [
+  
+  ];
+}

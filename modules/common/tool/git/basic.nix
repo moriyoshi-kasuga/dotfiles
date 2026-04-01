@@ -1,6 +1,7 @@
 {
   pkgs,
   mkModule,
+  vars,
   ...
 }:
 
@@ -17,14 +18,7 @@ mkModule {
         push.default = "current";
       };
 
-      includes = [
-        {
-          contents = {
-            user.email = "moriyoshi.kasuga1218@gmail.com";
-            user.name = "moriyoshi-kasuga";
-          };
-        }
-      ];
+      includes = vars.gitIncludes;
     };
 
     home.packages = with pkgs; [

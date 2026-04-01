@@ -24,6 +24,10 @@
       url = "github:noctalia-dev/noctalia-qs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    vars-file = {
+      url = "file+file:///dev/null";
+      flake = false;
+    };
   };
 
   outputs =

@@ -2,6 +2,14 @@
 
 set -euo pipefail
 
+VARS_FILE="$PWD/vars.nix"
+
+if [ ! -f "${VARS_FILE}" ]; then
+  echo "Error: ${VARS_FILE} not found."
+  echo "Copy vars.nix.example to vars.nix and customize it with your settings."
+  exit 1
+fi
+
 usage() {
   cat <<'EOF'
 Usage: ./init.sh <command> [name] [options]
@@ -33,14 +41,16 @@ run_home_manager() {
   local name=$1
   nix --extra-experimental-features 'nix-command flakes' \
     run home-manager/master -- \
-    switch --extra-experimental-features 'nix-command flakes' --flake .#"${name}" -b backup
+    switch --extra-experimental-features 'nix-command flakes' --flake .#"${name}" -b backup \
+    --override-input vars-file "file+file://$VARS_FILE"
 }
 
 run_darwin() {
   local name=$1
   sudo nix --extra-experimental-features 'nix-command flakes' \
     run nix-darwin/master#darwin-rebuild -- \
-    switch --flake .#"${name}"
+    switch --flake .#"${name}" \
+    --override-input vars-file "file+file://$VARS_FILE"
 }
 
 run_nixos() {
@@ -59,7 +69,8 @@ run_nixos() {
     echo 'Applying NixOS configuration...'
   fi
 
-  sudo nixos-rebuild switch --flake .#"${name}"
+  sudo nixos-rebuild switch --flake .#"${name}" "${extra}" \
+    --override-input vars-file "file+file://$VARS_FILE"
 }
 
 main() {

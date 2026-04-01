@@ -9,6 +9,8 @@ macOS / NixOS 向けの Nix Flakes + Home Manager 構成です。
 
 ## Setup
 
+`$HOME/dotfiles` にcloneすることを前提としています。
+
 ```sh
 git clone --depth 1 https://github.com/moriyoshi-kasuga/dotfiles.git ~/dotfiles
 cd ~/dotfiles
