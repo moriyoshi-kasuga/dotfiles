@@ -34,8 +34,8 @@ config.font = wezterm.font_with_fallback({
     harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
   },
   {
-    family = "Noto Sans CJK JP",
-    weight = "DemiLight",
+    family = "Noto Sans Mono CJK JP",
+    weight = "Regular",
     stretch = "Normal",
     style = "Normal",
   },
