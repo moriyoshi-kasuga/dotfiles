@@ -4,14 +4,14 @@ set -euo pipefail
 
 usage() {
   cat <<'EOF'
-Usage: ./init.sh <command>
+Usage: ./init.sh <command> [name] [options]
 
 Commands:
-  flake    Apply Home Manager configuration
-  nixos    Apply NixOS configuration
-  darwin   Apply nix-darwin configuration
-  update   Update flake inputs
-  help     Show this help message
+  flake <name>            Apply Home Manager configuration
+  nixos <name> [--upgrade] Apply NixOS configuration
+  darwin <name>           Apply nix-darwin configuration
+  update                      Update flake inputs
+  help                        Show this help message
 EOF
 }
 
@@ -23,16 +23,6 @@ require_nix() {
   fi
 }
 
-read_username() {
-  local username
-  read -r -p "Please input name: " username
-  if [ -z "${username}" ]; then
-    echo 'Username is required.'
-    exit 1
-  fi
-  echo "${username}"
-}
-
 run_flake_update() {
   echo 'Updating Nix configuration...'
   nix --extra-experimental-features 'nix-command flakes' flake update
@@ -40,26 +30,26 @@ run_flake_update() {
 }
 
 run_home_manager() {
-  local username=$1
+  local name=$1
   nix --extra-experimental-features 'nix-command flakes' \
     run home-manager/master -- \
-    switch --extra-experimental-features 'nix-command flakes' --flake .#"${username}" -b backup
+    switch --extra-experimental-features 'nix-command flakes' --flake .#"${name}" -b backup
 }
 
 run_darwin() {
-  local username=$1
+  local name=$1
   sudo nix --extra-experimental-features 'nix-command flakes' \
     run nix-darwin/master#darwin-rebuild -- \
-    switch --flake .#"${username}"
+    switch --flake .#"${name}"
 }
 
 run_nixos() {
-  local username=$1
+  local name=$1
   local extra=${2-}
 
   if [ -n "${extra}" ] && [ "${extra}" != "--upgrade" ]; then
     echo "Unknown argument for nixos: ${extra}"
-    echo 'Usage: ./init.sh nixos [--upgrade]'
+    echo 'Usage: ./init.sh nixos <name> [--upgrade]'
     exit 1
   fi
 
@@ -69,15 +59,14 @@ run_nixos() {
     echo 'Applying NixOS configuration...'
   fi
 
-  # shellcheck disable=SC2068
-  sudo nixos-rebuild switch --flake .#"${username}"
+  sudo nixos-rebuild switch --flake .#"${name}"
 }
 
 main() {
   local command=${1-}
   if [ -z "${command}" ]; then
     echo 'No command provided.'
-    echo 'Use ./init.sh help to see available commands.'
+    usage
     exit 1
   fi
 
@@ -96,26 +85,29 @@ main() {
     ;;
   *)
     echo "Unknown command: ${command}"
-    echo 'Use ./init.sh help to see available commands.'
+    usage
     exit 1
     ;;
   esac
 
-  shift
+  local name=${2-}
+  if [ -z "${name}" ]; then
+    echo 'name is required.'
+    usage
+    exit 1
+  fi
 
-  local username
-  username=$(read_username)
-  echo "Building Nix configuration...: ${username}"
+  echo "Building Nix configuration...: ${name}"
 
   case "${command}" in
   flake)
-    run_home_manager "${username}"
+    run_home_manager "${name}"
     ;;
   darwin)
-    run_darwin "${username}"
+    run_darwin "${name}"
     ;;
   nixos)
-    run_nixos "${username}" "${1-}"
+    run_nixos "${name}" "${3-}"
     ;;
   esac
 }
