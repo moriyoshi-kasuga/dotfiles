@@ -1,7 +1,5 @@
 local wezterm = require("wezterm")
 
-local big_monitor = true
-
 local config = {}
 
 if wezterm.config_builder then
@@ -12,7 +10,7 @@ config.disable_default_key_bindings = true
 config.enable_tab_bar = false
 config.hide_tab_bar_if_only_one_tab = true
 
-config.color_scheme = "@COLORSCHEME@" --binding by nix
+config.color_scheme = "Catppuccin Mocha"
 
 -- Linuxはniriを使うのでフルスクリーンで起動しないようにする
 if wezterm.target_triple ~= "x86_64-unknown-linux-gnu" then
@@ -43,15 +41,11 @@ config.font = wezterm.font_with_fallback({
 })
 config.font_size = 15
 config.adjust_window_size_when_changing_font_size = true
-config.set_environment_variables = {
-  LANG = "ja_JP.UTF-8",
-  LC_ALL = "ja_JP.UTF-8",
-}
 config.cell_width = 1.0
 config.line_height = 1.0
 config.use_cap_height_to_scale_fallback_fonts = true
 
-if big_monitor then
+if "@BIGMONITOR@" then
   config.window_padding = {
     left = 180,
     right = 180,

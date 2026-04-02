@@ -86,5 +86,35 @@
           luarocks
         ];
       };
+    }
+    // mkPlatform {
+      name = "job";
+      inherit inputs;
+      system = "aarch64-darwin";
+      host = "darwin";
+      username = "mori";
+      homeDirectory = "/Users/mori";
+      modules = {
+        modules.base.enable = true;
+        modules.shell.enable = true;
+        modules.shell.fish.default = true;
+        modules.lang.enable = true;
+        modules.editor.enable = true;
+        modules.tool.enable = true;
+        modules.tool.git.enable = true;
+        modules.term.wezterm = {
+          enable = true;
+          bigMonitor = true;
+        };
+
+        modules.darwin.enable = true;
+      };
+      homeConfig = pkgs: {
+        home.packages = with pkgs; [
+          claude-code
+          lua5_4
+          luarocks
+        ];
+      };
     };
 }

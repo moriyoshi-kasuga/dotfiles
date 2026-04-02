@@ -1,30 +1,35 @@
 {
   mkModule,
   username,
+  lib,
   pkgs,
   ...
 }:
 
-let
-  weztermConfigRaw = builtins.readFile ./wezterm.lua;
-  weztermConfig =
-    builtins.replaceStrings
-      [ "@COLORSCHEME@" "\"@BIGMONITOR@\"" ]
-      [
-        "Catppuccin Mocha"
-        "false"
-        # WIP: ここは後でもっと管理しやすく定義する、optionでsizeを要求するように改善する
-        # (if bigMonitor then "true" else "false")
-      ]
-      weztermConfigRaw;
-in
+with lib;
+
 mkModule {
   name = "term.wezterm";
-  homeModule = {
-    xdg.configFile = {
-      "wezterm/wezterm.lua".text = weztermConfig;
-    };
+  options = {
+    bigMonitor = mkEnableOption "Create a padding for big monitor";
   };
+  homeModule =
+    { cfg, ... }:
+    let
+      weztermConfigRaw = builtins.readFile ./wezterm.lua;
+      weztermConfig =
+        builtins.replaceStrings
+          [ "\"@BIGMONITOR@\"" ]
+          [
+            (if cfg.bigMonitor then "true" else "false")
+          ]
+          weztermConfigRaw;
+    in
+    {
+      xdg.configFile = {
+        "wezterm/wezterm.lua".text = weztermConfig;
+      };
+    };
   nixosModule = {
     users.users.${username}.packages = [
       pkgs.wezterm
