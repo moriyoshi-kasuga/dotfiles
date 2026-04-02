@@ -29,6 +29,7 @@ mkModule {
       tailspin
       hexyl
       marp-cli
+      mise
     ];
 
     programs = {
