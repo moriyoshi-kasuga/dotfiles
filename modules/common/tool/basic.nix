@@ -30,6 +30,7 @@ mkModule {
       hexyl
       marp-cli
       mise
+      prek
     ];
 
     programs = {
