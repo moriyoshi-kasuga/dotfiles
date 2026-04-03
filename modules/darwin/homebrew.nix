@@ -20,6 +20,7 @@ mkModule {
         "discord"
         "slack"
         "figma"
+        "zed"
       ];
     };
 
