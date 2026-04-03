@@ -25,6 +25,11 @@ return {
         checkbox = {
           enabled = false,
         },
+        html = {
+          comment = {
+            conceal = false,
+          },
+        },
       },
     },
     {
