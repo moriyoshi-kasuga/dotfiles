@@ -36,10 +36,8 @@ return {
         },
       },
 
-      -- Disable auto-formatting on save (as requested)
+      -- 不要のため無効化
       format_on_save = false,
-
-      -- Format after these milliseconds of no cursor movement
       format_after_save = false,
     },
   },

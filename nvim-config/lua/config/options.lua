@@ -83,6 +83,7 @@ vim.opt.wildignorecase = true
 -- セッション保存項目の最適化
 vim.opt.sessionoptions = "buffers,curdir,tabpages,winsize,help,globals,skiprtp"
 
+-- Linuxでもnixでpbcopyコマンドを提供しているので問題ない
 vim.g.clipboard = vim.env.SSH_CONNECTION and "" or "pbcopy"
 vim.g.editorconfig = true
 
