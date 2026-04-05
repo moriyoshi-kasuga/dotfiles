@@ -32,10 +32,10 @@ return {
         width = 0.75,
         row = 0.5,
         col = 0.5,
-        border = "rounded",
+        border = "single",
         preview = {
           default = "bat",
-          border = "rounded",
+          border = "single",
           wrap = "nowrap",
           hidden = "nohidden",
           vertical = "down:60%",

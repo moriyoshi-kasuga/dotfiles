@@ -40,7 +40,7 @@ return {
 
       completion = {
         menu = {
-          border = "rounded",
+          border = "single",
           scrolloff = 1,
           scrollbar = false,
         },
@@ -55,13 +55,13 @@ return {
           auto_show_delay_ms = 500,
 
           window = {
-            border = "rounded",
+            border = "single",
           },
         },
       },
 
       signature = {
-        window = { border = "rounded" },
+        window = { border = "single" },
       },
 
       -- Default list of enabled providers defined so that you can extend it

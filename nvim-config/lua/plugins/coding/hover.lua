@@ -20,7 +20,7 @@ return {
       "config.hover-providers.word",
     },
     preview_opts = {
-      border = "rounded",
+      border = "single",
       max_height = 25,
       max_width = 120,
       wrap = true,
