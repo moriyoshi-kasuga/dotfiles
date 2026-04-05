@@ -41,7 +41,6 @@
     "nvidia_uvm"
     "nvidia_drm"
   ];
-  boot.kernelModules = [ "nvidia-uvm" ];
   hardware.nvidia-container-toolkit.enable = true;
   services.xserver.videoDrivers = [
     "modesetting"

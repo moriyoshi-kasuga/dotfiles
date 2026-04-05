@@ -54,26 +54,25 @@ mkModule {
     home-manager.backupFileExtension = "nixbackup";
     system.stateVersion = version;
 
-    users.users.${username} = {
-      isNormalUser = true;
-      description = username;
-      group = username;
-      extraGroups = [
-        "networkmanager"
-        "wheel"
-        "input"
-        "audio"
-        "video"
-      ];
-      packages = with pkgs; [
-        wl-clipboard
-      ];
-    };
-
-    nix.settings.experimental-features = [
-      "nix-command"
-      "flakes"
+    users.users.${username}.packages = [
+      pkgs.wl-clipboard
     ];
+
+    nix = {
+      settings = {
+        experimental-features = [
+          "nix-command"
+          "flakes"
+        ];
+        auto-optimise-store = true;
+      };
+      optimise.automatic = true;
+      gc = {
+        automatic = true;
+        dates = "weekly";
+        options = "--delete-older-than 14d";
+      };
+    };
   };
   darwinModule = {
     nix.extraOptions = ''

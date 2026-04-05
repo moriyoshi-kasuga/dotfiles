@@ -58,8 +58,6 @@ in
     packages = with pkgs; [
       brave
       firefox
-      wezterm
-      wl-clipboard
       discord
       slack
       aseprite

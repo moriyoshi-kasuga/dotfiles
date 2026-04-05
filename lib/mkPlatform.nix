@@ -19,6 +19,7 @@ let
       allowUnfree = true;
     };
   };
+  lib = pkgs.lib;
   vars = import inputs.vars-file.outPath;
   mkModule = import ./mkModule.nix;
 
@@ -47,11 +48,11 @@ let
     ../modules
   ];
 
-  expandHomeConfig = homeConfig pkgs;
+  evalConfig = config: if lib.isFunction config then config pkgs else config;
 
   homeModules = commonModules ++ [
     inputs.catppuccin.homeModules.catppuccin
-    expandHomeConfig
+    (evalConfig homeConfig)
   ];
 
   hostHomeManager = {
@@ -66,7 +67,7 @@ let
   };
 
   nixosModules = [
-    nixosConfig
+    (evalConfig nixosConfig)
 
     inputs.catppuccin.nixosModules.catppuccin
 
@@ -75,7 +76,7 @@ let
   ];
 
   darwinModules = [
-    darwinConfig
+    (evalConfig darwinConfig)
 
     inputs.home-manager.darwinModules.home-manager
     hostHomeManager
@@ -97,7 +98,6 @@ let
         darwinConfigurations.${name} = inputs.nix-darwin.lib.darwinSystem {
           inherit pkgs;
           specialArgs = specialArgs // {
-            inherit pkgs;
             platform = "darwin";
           };
           modules = commonModules ++ darwinModules;
