@@ -27,6 +27,7 @@ mkModule {
       trunk
       dioxus-cli
       wasm-bindgen-cli
+      wasm-pack
 
       sea-orm-cli
 
