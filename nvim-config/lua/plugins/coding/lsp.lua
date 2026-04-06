@@ -126,7 +126,6 @@ return {
 
           -- Hover and signature help
           map("n", "gk", vim.lsp.buf.signature_help, "Signature Help")
-          map("n", "gK", vim.lsp.buf.signature_help, "Signature Help")
           map("i", "<C-k>", vim.lsp.buf.signature_help, "Signature Help")
 
           -- Show line diagnostics

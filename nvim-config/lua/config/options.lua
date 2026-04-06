@@ -18,6 +18,7 @@ vim.opt.splitkeep = "cursor"
 -- disable nvim intro
 vim.opt.shortmess:append("sI")
 
+vim.opt.termguicolors = true
 vim.opt.laststatus = 3
 vim.opt.wrap = false
 vim.opt.number = true
@@ -62,7 +63,7 @@ vim.opt.smartcase = true
 vim.opt.incsearch = true
 vim.opt.hlsearch = true
 vim.opt.wrapscan = true
-vim.opt.wildmode = { list = "longest" }
+vim.opt.wildmode = { "list:longest" }
 
 if is_simple_mode then
   -- Simple mode: minimal history and no persistent state
@@ -84,7 +85,13 @@ vim.opt.wildignorecase = true
 vim.opt.sessionoptions = "buffers,curdir,tabpages,winsize,help,globals,skiprtp"
 
 -- Linuxでもnixでpbcopyコマンドを提供しているので問題ない
-vim.g.clipboard = vim.env.SSH_CONNECTION and "" or "pbcopy"
+vim.g.clipboard = vim.env.SSH_CONNECTION and nil
+  or {
+    name = "pbcopy",
+    copy = { ["+"] = "pbcopy", ["*"] = "pbcopy" },
+    paste = { ["+"] = "pbpaste", ["*"] = "pbpaste" },
+    cache_enabled = 0,
+  }
 vim.g.editorconfig = true
 
 -- disable some default providers

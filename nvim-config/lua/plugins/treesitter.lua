@@ -181,18 +181,4 @@ return {
       },
     },
   },
-  {
-    "andersevenrud/nvim_context_vt",
-    event = "LspAttach",
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
-    opts = {
-      disable_virtual_lines = true,
-      disable_ft = {
-        "markdown",
-        "markdown_inline",
-        "yaml",
-        "toml",
-      },
-    },
-  },
 }
