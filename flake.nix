@@ -43,7 +43,6 @@
       username = "mori";
       homeDirectory = "/home/mori";
       modules = {
-        modules.base.enable = true;
         modules.shell.enable = true;
         modules.shell.fish.default = true;
         modules.lang.enable = true;
@@ -51,8 +50,6 @@
         modules.tool.enable = true;
         modules.tool.git.enable = true;
         modules.term.wezterm.enable = true;
-
-        modules.nixos.enable = true;
       };
       nixosConfig = {
         imports = [
@@ -68,7 +65,6 @@
       username = "mori";
       homeDirectory = "/Users/mori";
       modules = {
-        modules.base.enable = true;
         modules.shell.enable = true;
         modules.shell.fish.default = true;
         modules.lang.enable = true;
@@ -76,14 +72,10 @@
         modules.tool.enable = true;
         modules.tool.git.enable = true;
         modules.term.wezterm.enable = true;
-
-        modules.darwin.enable = true;
       };
       homeConfig = pkgs: {
         home.packages = with pkgs; [
           claude-code
-          lua5_4
-          luarocks
         ];
       };
     }
@@ -95,25 +87,29 @@
       username = "mori";
       homeDirectory = "/Users/mori";
       modules = {
-        modules.base.enable = true;
-        modules.shell.enable = true;
-        modules.shell.fish.default = true;
-        modules.lang.enable = true;
+        modules.shell = {
+          enable = true;
+          fish.default = true;
+        };
+        modules.lang = {
+          c.enable = true;
+          node.enable = true;
+          python.enable = true;
+          rust.enable = true;
+        };
         modules.editor.enable = true;
-        modules.tool.enable = true;
-        modules.tool.git.enable = true;
+        modules.tool = {
+          enable = true;
+          git.enable = true;
+        };
         modules.term.wezterm = {
           enable = true;
           bigMonitor = true;
         };
-
-        modules.darwin.enable = true;
       };
       homeConfig = pkgs: {
         home.packages = with pkgs; [
           claude-code
-          lua5_4
-          luarocks
         ];
       };
     };

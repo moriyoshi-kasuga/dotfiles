@@ -15,5 +15,6 @@
     ./zig.nix
     ./buf.nix
     ./elm.nix
+    ./lua.nix
   ];
 }

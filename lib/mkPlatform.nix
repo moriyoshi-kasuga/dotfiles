@@ -44,6 +44,9 @@ let
   };
 
   commonModules = resolveModules resolvedArgs [
+    {
+      modules.base.enable = true;
+    }
     modules
     ../modules
   ];
@@ -68,6 +71,9 @@ let
 
   nixosModules = [
     (evalConfig nixosConfig)
+    {
+      modules.nixos.enable = true;
+    }
 
     inputs.catppuccin.nixosModules.catppuccin
 
@@ -77,6 +83,9 @@ let
 
   darwinModules = [
     (evalConfig darwinConfig)
+    {
+      modules.darwin.enable = true;
+    }
 
     inputs.home-manager.darwinModules.home-manager
     hostHomeManager

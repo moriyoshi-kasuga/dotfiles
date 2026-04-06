@@ -5,16 +5,12 @@
 }:
 
 mkModule {
-  name = "lang.c";
+  name = "lang.lua";
   inheritModule = "lang";
   homeModule = {
     home.packages = with pkgs; [
-      gnumake
-      lld
-      cmake
-      ninja
-      clang-tools
-      clang
+      lua5_4
+      luarocks
     ];
   };
 }

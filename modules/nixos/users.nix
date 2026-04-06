@@ -39,7 +39,6 @@ let
     libelf
     ffmpeg
     udev
-    lua5_4
   ];
 in
 {

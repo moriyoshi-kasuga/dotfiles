@@ -49,8 +49,8 @@ if "@BIGMONITOR@" then
   config.window_padding = {
     left = 180,
     right = 180,
-    top = 180,
-    bottom = 0,
+    top = 100,
+    bottom = 80,
   }
 else
   config.window_padding = {

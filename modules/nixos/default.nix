@@ -14,13 +14,9 @@ mkModule {
     };
 
     home.packages = with pkgs; [
-      lld
       xdg-utils
       docker
       docker-compose
-      clang-tools
-      clang
-      gcc-unwrapped
     ];
 
     programs.zathura = {
