@@ -16,6 +16,19 @@ return {
     },
   },
   {
+    "rcarriga/nvim-notify",
+    event = "VeryLazy",
+    opts = {
+      timeout = 3000,
+      render = "minimal",
+      stages = "fade_in_slide_out",
+    },
+    config = function(_, opts)
+      vim.notify = require("notify")
+      require("notify").setup(opts)
+    end,
+  },
+  {
     "echasnovski/mini.icons",
     config = function(_, opts)
       require("mini.icons").setup(opts)
