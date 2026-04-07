@@ -9,7 +9,6 @@ return {
     config = function()
       -- Setup capabilities for blink.cmp
       local capabilities = vim.lsp.protocol.make_client_capabilities()
-      capabilities.textDocument.completion.completionItem.snippetSupport = true
 
       -- Merge blink.cmp capabilities
       local ok, blink = pcall(require, "blink.cmp")

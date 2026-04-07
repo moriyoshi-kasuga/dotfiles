@@ -9,7 +9,6 @@ if vim.fn.isdirectory(backup_dir) == 0 then
 end
 vim.opt.backupdir = backup_dir
 vim.opt.swapfile = false
-vim.opt.writebackup = true
 vim.opt.autoread = true
 vim.opt.hidden = true
 vim.opt.mouse = ""
@@ -28,14 +27,13 @@ vim.opt.cursorcolumn = false
 vim.opt.virtualedit = "block"
 vim.opt.visualbell = false
 vim.opt.errorbells = false
-vim.opt.showmatch = false
 vim.opt.updatetime = 200
 vim.opt.timeoutlen = 1000
 vim.opt.scrolloff = 4
 vim.opt.sidescrolloff = 8
 vim.opt.completeopt = "menu,menuone,noselect"
 vim.opt.pumheight = 10
-vim.opt.grepprg = "rg --vimgrep"
+vim.opt.grepprg = "rg --vimgrep --smart-case"
 vim.opt.grepformat = "%f:%l:%c:%m"
 
 if is_simple_mode then

@@ -27,7 +27,7 @@ map("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move Up" })
 -- Deleting without yanking empty line
 map("n", "dd", function()
   return vim.api.nvim_get_current_line():match("^$") ~= nil and '"_dd' or "dd"
-end, { noremap = true, expr = true, desc = "Don't yank empty line to clipboard" })
+end, { expr = true, desc = "Don't yank empty line to clipboard" })
 
 -- Move to window using the <ctrl> hjkl keys
 map("n", "<C-h>", "<C-w>h", { desc = "Go to Left Window" })
@@ -59,8 +59,6 @@ map("n", "<leader><Tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
 map("n", "<leader><Tab>o", "<cmd>tabonly<cr>", { desc = "Close Other Tab" })
 map("n", "<leader><Tab>n", "<cmd>tabnext<cr>", { desc = "Tab Next" })
 map("n", "<leader><Tab>p", "<cmd>tabprevious<cr>", { desc = "Tab Prev" })
-map("n", "[t", "<cmd>tabprevious<cr>", { desc = "Prev Tab" })
-map("n", "]t", "<cmd>tabnext<cr>", { desc = "Next Tab" })
 
 map("n", "=", [[<cmd>vertical resize +5<cr>]], { desc = "Increase window width" })
 map("n", "-", [[<cmd>vertical resize -5<cr>]], { desc = "Decrease window width" })
