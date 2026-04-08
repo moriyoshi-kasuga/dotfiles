@@ -32,6 +32,12 @@ require("lazy").setup({
       enabled = true,
     },
     rtp = {
+      paths = vim.tbl_filter(function(p)
+        return p ~= ""
+      end, {
+        vim.env.TREESITTER_PATH or "",
+        vim.env.TREESITTER_GRAMMARS or "",
+      }),
       disabled_plugins = {
         "gzip",
         "matchparen",

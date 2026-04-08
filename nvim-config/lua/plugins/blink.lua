@@ -38,6 +38,13 @@ return {
         nerd_font_variant = "mono",
       },
 
+      cmdline = {
+        keymap = {
+          ["<Tab>"] = { "show", "accept" },
+        },
+        completion = { menu = { auto_show = false } },
+      },
+
       completion = {
         menu = {
           border = "single",

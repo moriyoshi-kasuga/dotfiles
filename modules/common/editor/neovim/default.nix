@@ -6,7 +6,12 @@
 }:
 
 let
-  treesitterGrammars = pkgs.vimPlugins.nvim-treesitter.withAllGrammars;
+  treesitter = pkgs.vimPlugins.nvim-treesitter;
+  treesitterGrammars = treesitter.withAllGrammars;
+  grammarsPath = pkgs.symlinkJoin {
+    name = "nvim-treesitter-grammars";
+    paths = treesitterGrammars.dependencies;
+  };
   neovim = pkgs.neovim-unwrapped;
   neovimCmd = pkgs.lib.getExe neovim;
 
@@ -24,19 +29,24 @@ mkModule {
         JDTLS_JVM_ARGS = "-javaagent:" + Lombok + "/share/java/lombok.jar";
       };
 
+      programs.mise.globalConfig.tools = {
+        tree-sitter = "0.26.8";
+      };
+
       programs.neovim = {
         enable = true;
         package = neovim;
 
         extraWrapperArgs = [
           "--set"
+          "TREESITTER_PATH"
+          "${treesitter}/runtime"
+          "--set"
           "TREESITTER_GRAMMARS"
-          "${treesitterGrammars}"
+          "${grammarsPath}"
         ];
 
         extraPackages = with pkgs; [
-          treesitterGrammars
-
           # shell
           bash-language-server
           shellcheck

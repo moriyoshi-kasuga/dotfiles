@@ -26,7 +26,7 @@ map("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move Up" })
 
 -- Deleting without yanking empty line
 map("n", "dd", function()
-  return vim.api.nvim_get_current_line():match("^$") ~= nil and '"_dd' or "dd"
+  return vim.api.nvim_get_current_line():match("^%s*$") ~= nil and '"_dd' or "dd"
 end, { expr = true, desc = "Don't yank empty line to clipboard" })
 
 -- Move to window using the <ctrl> hjkl keys

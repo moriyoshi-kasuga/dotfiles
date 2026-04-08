@@ -1,5 +1,6 @@
 local is_simple_mode = require("config.util").is_in_simple_mode()
 
+-- privateだが問題ない
 vim.lsp.log._set_filename("/tmp/nvim-lsp.log")
 
 vim.opt.backup = true
@@ -28,7 +29,7 @@ vim.opt.virtualedit = "block"
 vim.opt.visualbell = false
 vim.opt.errorbells = false
 vim.opt.updatetime = 200
-vim.opt.timeoutlen = 1000
+vim.opt.timeoutlen = 500
 vim.opt.scrolloff = 4
 vim.opt.sidescrolloff = 8
 vim.opt.completeopt = "menu,menuone,noselect"
@@ -97,11 +98,6 @@ vim.g.loaded_node_provider = 0
 vim.g.loaded_python3_provider = 0
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0
-
-local treesitter_grammars = vim.env.TREESITTER_GRAMMARS
-if treesitter_grammars then
-  vim.opt.runtimepath:append(treesitter_grammars)
-end
 
 -- Disable loading of built-in markdown syntax (use treesitter instead)
 vim.g.markdown_fenced_languages = {}

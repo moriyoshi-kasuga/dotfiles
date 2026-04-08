@@ -15,27 +15,20 @@ mkModule {
       cargo-tauri
       cargo-release
       cargo-audit
-      cargo-udeps
       cargo-outdated
       cargo-deny
       cargo-show-asm
+      cargo-make
 
-      mdbook
-      mdbook-admonish
-      mdbook-mermaid
-
-      trunk
-      dioxus-cli
-      wasm-bindgen-cli
+      wasm-bindgen-cli_0_2_108
       wasm-pack
+      worker-build
 
-      sea-orm-cli
-
-      just
-      bacon
       tokei
       uv
       cyme
+      hyperfine
+      oha
     ];
   };
 }

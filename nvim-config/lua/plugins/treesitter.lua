@@ -1,16 +1,18 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
-    event = { "VeryLazy", "BufReadPost", "BufNewFile", "BufWritePre" },
+    lazy = false,
     branch = "main",
-    init = function()
+    config = function()
+      require("nvim-treesitter").setup({
+        auto_install = false,
+      })
+
       vim.api.nvim_create_autocmd("FileType", {
         callback = function(args)
-          if args.file == "markdown" or args.file == "markdown_inline" then
-            return
+          if vim.api.nvim_buf_line_count(args.buf) <= 50000 then
+            pcall(vim.treesitter.start, args.buf)
           end
-          -- ignore error
-          pcall(vim.treesitter.start, args.buf)
         end,
       })
     end,

@@ -77,7 +77,9 @@ return {
               vim.notify("failed to get oil dir", 2)
               return
             end
-            require("config.terminal").toggle(oil_dir)
+            Snacks.terminal(nil, {
+              cwd = oil_dir,
+            })
           end,
           mode = "n",
           nowait = true,

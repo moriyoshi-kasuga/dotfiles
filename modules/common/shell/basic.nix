@@ -16,6 +16,7 @@ mkModule {
     programs = {
       starship = {
         enable = true;
+        enableZshIntegration = false;
         settings = {
           add_newline = false;
 
@@ -28,11 +29,18 @@ mkModule {
           aws.disabled = true;
         };
       };
-      direnv.enable = true;
-      zoxide.enable = true;
+      direnv = {
+        enable = true;
+        enableZshIntegration = false;
+      };
+      zoxide = {
+        enableZshIntegration = false;
+        enable = true;
+      };
       eza.enable = true;
       fzf = {
         enable = true;
+        enableZshIntegration = false;
         tmux = {
           enableShellIntegration = true;
           shellIntegrationOptions = [

@@ -10,6 +10,3 @@ require("config.autocmds")
 
 -- plugins
 require("config.lazy")
-
--- my customs
-require("config.terminal")

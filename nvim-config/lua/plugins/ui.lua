@@ -18,6 +18,9 @@ return {
   {
     "folke/noice.nvim",
     event = "UIEnter",
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+    },
     opts = {
       lsp = {
         -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
@@ -88,7 +91,7 @@ return {
     },
   },
   {
-    "echasnovski/mini.icons",
+    "nvim-mini/mini.icons",
     config = function(_, opts)
       require("mini.icons").setup(opts)
       -- mock nvim-web-devicons to use mini.icons instead
@@ -99,7 +102,7 @@ return {
     "nvim-lualine/lualine.nvim",
     event = "UIEnter",
     dependencies = {
-      "echasnovski/mini.icons",
+      "nvim-mini/mini.icons",
     },
     opts = {
       extensions = { "fzf", "oil" },

@@ -29,7 +29,6 @@ mkModule {
       tailspin
       hexyl
       marp-cli
-      mise
       prek
     ];
 
@@ -39,6 +38,15 @@ mkModule {
       bat.enable = true;
       jq.enable = true;
       lazydocker.enable = true;
+
+      mise = {
+        enable = true;
+        globalConfig = {
+          settings = {
+            not_found_auto_install = true;
+          };
+        };
+      };
     };
 
     home.shellAliases = {
