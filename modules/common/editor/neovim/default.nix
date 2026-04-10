@@ -62,8 +62,9 @@ mkModule {
 
           # ts
           svelte-language-server
-          tailwindcss-language-server
+          astro-language-server
           vtsls
+          tailwindcss-language-server
 
           # jvm langs
           jdt-language-server

@@ -33,6 +33,8 @@ return {
       vim.lsp.enable({
         "svelte",
         "vtsls",
+        "astro",
+        "tailwindcss",
 
         "clangd",
         "ty",
