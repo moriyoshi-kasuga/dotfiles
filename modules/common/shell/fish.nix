@@ -29,9 +29,6 @@ mkModule {
     { cfg, ... }:
     {
       users.users.${username}.shell = mkIf cfg.default package;
-      environment.variables = {
-        LIBRARY_PATH = "${pkgs.libiconv}/lib:/usr/lib";
-      };
     };
   darwinModule =
     { cfg, ... }:

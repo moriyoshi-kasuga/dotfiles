@@ -32,5 +32,13 @@ mkModule {
         noto-fonts-color-emoji
       ];
     };
+
+    environment.systemPackages = with pkgs; [
+      xcodegen
+      libimobiledevice
+      swift
+      cocoapods
+      xcodes
+    ];
   };
 }

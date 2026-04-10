@@ -106,6 +106,7 @@
           enable = true;
           bigMonitor = true;
         };
+        modules.library.enable = true;
       };
       homeConfig = pkgs: {
         home.packages = with pkgs; [
