@@ -30,8 +30,8 @@ mkModule {
       gb = "git branch";
       gbd = "git branch -d";
       gcm = "git commit -m";
-      gc = "git switch -c";
-      gcb = "git checkout -b";
+      gc = "git switch";
+      gcb = "git switch -c";
       gl = "git log --oneline --graph --decorate";
     };
   };
