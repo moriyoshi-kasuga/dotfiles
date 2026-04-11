@@ -35,83 +35,86 @@
     let
       mkPlatform = import ./lib/mkPlatform.nix;
     in
-    mkPlatform {
-      name = "desktop";
-      inherit inputs;
-      system = "x86_64-linux";
-      host = "nixos";
-      username = "mori";
-      homeDirectory = "/home/mori";
-      modules = {
-        modules.shell.enable = true;
-        modules.shell.fish.default = true;
-        modules.lang.enable = true;
-        modules.editor.enable = true;
-        modules.tool.enable = true;
-        modules.tool.git.enable = true;
-        modules.term.wezterm.enable = true;
-      };
-      nixosConfig = {
-        imports = [
-          ./hosts/desktop/hardware-configuration.nix
-        ];
-      };
-    }
-    // mkPlatform {
-      name = "laptop";
-      inherit inputs;
-      system = "aarch64-darwin";
-      host = "darwin";
-      username = "mori";
-      homeDirectory = "/Users/mori";
-      modules = {
-        modules.shell.enable = true;
-        modules.shell.fish.default = true;
-        modules.lang.enable = true;
-        modules.editor.enable = true;
-        modules.tool.enable = true;
-        modules.tool.git.enable = true;
-        modules.term.wezterm.enable = true;
-      };
-      homeConfig = pkgs: {
-        home.packages = with pkgs; [
-          claude-code
-        ];
-      };
-    }
-    // mkPlatform {
-      name = "job";
-      inherit inputs;
-      system = "aarch64-darwin";
-      host = "darwin";
-      username = "mori";
-      homeDirectory = "/Users/mori";
-      modules = {
-        modules.shell = {
-          enable = true;
-          fish.default = true;
+    mkPlatform [
+      {
+        name = "desktop";
+        inherit inputs;
+        system = "x86_64-linux";
+        host = "nixos";
+        username = "mori";
+        homeDirectory = "/home/mori";
+        modules = {
+          modules.shell.enable = true;
+          modules.shell.fish.default = true;
+          modules.lang.enable = true;
+          modules.editor.enable = true;
+          modules.tool.enable = true;
+          modules.tool.git.enable = true;
+          modules.term.wezterm.enable = true;
         };
-        modules.lang = {
-          c.enable = true;
-          node.enable = true;
-          python.enable = true;
-          rust.enable = true;
+        nixosConfig = {
+          imports = [
+            ./hosts/desktop/hardware-configuration.nix
+          ];
         };
-        modules.editor.enable = true;
-        modules.tool = {
-          enable = true;
-          git.enable = true;
+      }
+      {
+        name = "laptop";
+        inherit inputs;
+        system = "aarch64-darwin";
+        host = "darwin";
+        username = "mori";
+        homeDirectory = "/Users/mori";
+        modules = {
+          modules.shell.enable = true;
+          modules.shell.fish.default = true;
+          modules.lang.enable = true;
+          modules.editor.enable = true;
+          modules.tool.enable = true;
+          modules.tool.git.enable = true;
+          modules.term.wezterm.enable = true;
         };
-        modules.term.wezterm = {
-          enable = true;
-          bigMonitor = true;
+        homeConfig = pkgs: {
+          home.packages = with pkgs; [
+            claude-code
+          ];
         };
-        modules.library.enable = true;
-      };
-      homeConfig = pkgs: {
-        home.packages = with pkgs; [
-          claude-code
-        ];
-      };
-    };
+      }
+      {
+        name = "job";
+        inherit inputs;
+        system = "aarch64-darwin";
+        host = "darwin";
+        username = "mori";
+        homeDirectory = "/Users/mori";
+        modules = {
+          modules.shell = {
+            enable = true;
+            fish.default = true;
+          };
+          modules.lang = {
+            c.enable = true;
+            node.enable = true;
+            python.enable = true;
+            rust.enable = true;
+            haskell.enable = true;
+          };
+          modules.editor.enable = true;
+          modules.tool = {
+            enable = true;
+            git.enable = true;
+          };
+          modules.term.wezterm = {
+            enable = true;
+            bigMonitor = true;
+          };
+          modules.library.enable = true;
+        };
+        homeConfig = pkgs: {
+          home.packages = with pkgs; [
+            claude-code
+          ];
+        };
+      }
+    ];
 }
