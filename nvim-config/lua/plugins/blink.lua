@@ -14,13 +14,11 @@ return {
         -- set to 'none' to disable the 'default' preset
         preset = "none",
 
-        ["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
-        ["<C-e>"] = { "cancel", "fallback" },
+        ["<C-space>"] = { "show", "cancel" },
         ["<C-y>"] = { "select_and_accept", "fallback" },
         ["<S-CR>"] = { "fallback" },
         ["<C-CR>"] = { "fallback" },
         ["<CR>"] = { "accept", "fallback" },
-
         ["<Tab>"] = { "snippet_forward", "fallback" },
         ["<S-Tab>"] = { "snippet_backward", "fallback" },
 

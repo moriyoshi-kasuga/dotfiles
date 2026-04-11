@@ -1,5 +1,7 @@
 local map = vim.keymap.set
 
+map("i", "<C-e>", "<esc>o")
+
 map("n", "<leader>bo", function()
   local win_bufs = {}
   for _, win in ipairs(vim.api.nvim_list_wins()) do
