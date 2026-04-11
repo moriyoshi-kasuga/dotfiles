@@ -41,11 +41,11 @@ map("n", "<leader>wv", "<C-w>v", { desc = "Vertical split" })
 map("n", "<leader>ws", "<C-w>s", { desc = "Horizontal split" })
 map("n", "<leader>wo", "<C-w>o", { desc = "Close Other window" })
 
-map("n", "<leader>h", "<cmd>noh<CR>", { desc = "clear highlights" })
+map("n", "<leader>h", "<cmd>noh<CR>", { desc = "Clear Highlights" })
 
 -- better indenting
-map("x", "<", "<gv")
-map("x", ">", ">gv")
+map("x", "<", "<gv", { desc = "Indent Left" })
+map("x", ">", ">gv", { desc = "Indent Right" })
 
 -- Add undo break-points
 map("i", ",", ",<c-g>u")

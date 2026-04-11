@@ -11,7 +11,7 @@ return {
         function()
           require("live-rename").rename()
         end,
-        desc = "rename",
+        desc = "Rename",
       },
     },
   },
