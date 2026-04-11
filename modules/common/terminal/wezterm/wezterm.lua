@@ -45,21 +45,27 @@ config.cell_width = 1.0
 config.line_height = 1.0
 config.use_cap_height_to_scale_fallback_fonts = true
 
+local default_padding
 if "@BIGMONITOR@" then
-  config.window_padding = {
+  default_padding = {
     left = 180,
     right = 180,
     top = 100,
     bottom = 80,
   }
 else
-  config.window_padding = {
+  default_padding = {
     left = 0,
     right = 0,
     top = 0,
     bottom = 0,
   }
 end
+
+config.window_padding = default_padding
+
+local zero_padding = { left = 0, right = 0, top = 0, bottom = 0 }
+local padding_zeroed = false
 
 -- ショートカットキー設定
 config.keys = {
@@ -141,6 +147,18 @@ config.keys = {
     key = "l",
     mods = "CMD",
     action = wezterm.action.ShowDebugOverlay,
+  },
+  {
+    key = "f",
+    mods = "CMD",
+    action = wezterm.action_callback(function(window, _)
+      if padding_zeroed then
+        window:set_config_overrides({ window_padding = default_padding })
+      else
+        window:set_config_overrides({ window_padding = zero_padding })
+      end
+      padding_zeroed = not padding_zeroed
+    end),
   },
 }
 
