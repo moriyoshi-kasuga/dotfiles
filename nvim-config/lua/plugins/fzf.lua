@@ -92,59 +92,24 @@ return {
       },
     }
   end,
+  -- stylua: ignore
   keys = {
     { ",", desc = "FzfLua" },
-    {
-      ",s",
-      function()
-        require("fzf-lua").files()
-      end,
-      desc = "Find Files",
-    },
-    {
-      ",r",
-      function()
-        require("fzf-lua").live_grep()
-      end,
-      desc = "Grep",
-    },
-    {
-      ",B",
-      function()
-        require("fzf-lua").lgrep_curbuf()
-      end,
-      desc = "Grep Buffers",
-    },
-    {
-      ",w",
-      function()
-        require("fzf-lua").grep_cword()
-      end,
-      desc = "Grep String",
-      mode = "n",
-    },
-    {
-      ",w",
-      function()
-        require("fzf-lua").grep_visual()
-      end,
-      desc = "Grep String",
-      mode = "x",
-    },
-    {
-      ",b",
-      function()
-        require("fzf-lua").buffers()
-      end,
-      desc = "Buffers",
-    },
-    {
-      ",c",
-      function()
-        require("fzf-lua").colorschemes()
-      end,
-      desc = "Colorscheme",
-    },
+    { "ga", function() require("fzf-lua").lsp_code_actions() end, desc = "Code Actions" },
+    { "gd", function() require("fzf-lua").lsp_definitions() end, desc = "Goto Definition" },
+    { "gD", function() require("fzf-lua").lsp_declarations() end, desc = "Goto Declaration" },
+    { "gr", function() require("fzf-lua").lsp_references() end, desc = "References" },
+    { "gI", function() require("fzf-lua").lsp_implementations() end, desc = "Goto Implementation" },
+    { "gy", function() require("fzf-lua").lsp_typedefs() end, desc = "Goto T[y]pe Definition" },
+    { "gsi", function() require("fzf-lua").lsp_incoming_calls() end, desc = "Call[s] Incoming" },
+    { "gso", function() require("fzf-lua").lsp_outgoing_calls() end, desc = "Call[s] Outgoing" },
+    { ",s", function() require("fzf-lua").files() end, desc = "Find Files" },
+    { ",r", function() require("fzf-lua").live_grep() end, desc = "Grep" },
+    { ",B", function() require("fzf-lua").lgrep_curbuf() end, desc = "Grep Buffers" },
+    { ",w", function() require("fzf-lua").grep_cword() end, desc = "Grep String", mode = "n" },
+    { ",w", function() require("fzf-lua").grep_visual() end, desc = "Grep String", mode = "x" },
+    { ",b", function() require("fzf-lua").buffers() end, desc = "Buffers" },
+    { ",c", function() require("fzf-lua").colorschemes() end, desc = "Colorscheme" },
     {
       ",f",
       function()
@@ -162,104 +127,20 @@ return {
       end,
       desc = "Open Folder by Oil",
     },
-    {
-      ",h",
-      function()
-        require("fzf-lua").help_tags()
-      end,
-      desc = "Help Pages",
-    },
-    {
-      ",j",
-      function()
-        require("fzf-lua").jumps()
-      end,
-      desc = "Jumplist",
-    },
-    {
-      ",k",
-      function()
-        require("fzf-lua").keymaps()
-      end,
-      desc = "Keymaps",
-    },
-    {
-      ",m",
-      function()
-        require("fzf-lua").marks()
-      end,
-      desc = "Marks",
-    },
-    {
-      ",P",
-      function()
-        require("fzf-lua").commands()
-      end,
-      desc = "Commands",
-    },
-    {
-      ",q",
-      function()
-        require("fzf-lua").quickfix()
-      end,
-      desc = "Quickfix",
-    },
-    {
-      ",R",
-      function()
-        require("fzf-lua").resume()
-      end,
-      desc = "Resume",
-    },
-    {
-      ",d",
-      function()
-        require("fzf-lua").diagnostics_document()
-      end,
-      desc = "Diagnostics (Buffer)",
-    },
-    {
-      ",D",
-      function()
-        require("fzf-lua").diagnostics_workspace()
-      end,
-      desc = "Diagnostics (Workspace)",
-    },
-    {
-      ",e",
-      function()
-        require("fzf-lua").diagnostics_document({ severity_only = "ERROR" })
-      end,
-      desc = "Error (Buffer)",
-    },
-    {
-      ",E",
-      function()
-        require("fzf-lua").diagnostics_workspace({ severity_only = "ERROR" })
-      end,
-      desc = "Error (Workspace)",
-    },
-    {
-      ",gs",
-      function()
-        require("fzf-lua").git_status()
-      end,
-      desc = "Git Status",
-    },
-    {
-      ",t",
-      function()
-        require("todo-comments.fzf").todo()
-      end,
-      desc = "Todo",
-    },
-    {
-      ",T",
-      function()
-        require("todo-comments.fzf").todo({ keywords = { "TODO", "FIX", "FIXME" } })
-      end,
-      desc = "Todo/Fix/Fixme",
-    },
+    { ",h", function() require("fzf-lua").help_tags() end, desc = "Help Pages" },
+    { ",j", function() require("fzf-lua").jumps() end, desc = "Jumplist" },
+    { ",k", function() require("fzf-lua").keymaps() end, desc = "Keymaps" },
+    { ",m", function() require("fzf-lua").marks() end, desc = "Marks" },
+    { ",P", function() require("fzf-lua").commands() end, desc = "Commands" },
+    { ",q", function() require("fzf-lua").quickfix() end, desc = "Quickfix" },
+    { ",R", function() require("fzf-lua").resume() end, desc = "Resume" },
+    { ",d", function() require("fzf-lua").diagnostics_document() end, desc = "Diagnostics (Buffer)" },
+    { ",D", function() require("fzf-lua").diagnostics_workspace() end, desc = "Diagnostics (Workspace)" },
+    { ",e", function() require("fzf-lua").diagnostics_document({ severity_only = { vim.diagnostic.Severity.ERROR } }) end, desc = "Error (Buffer)" },
+    { ",E", function() require("fzf-lua").diagnostics_workspace({ severity_only = { vim.diagnostic.Severity.ERROR } }) end, desc = "Error (Workspace)" },
+    { ",gs", function() require("fzf-lua").git_status() end, desc = "Git Status" },
+    { ",t", function() require("todo-comments.fzf").todo() end, desc = "Todo" },
+    { ",T", function() require("todo-comments.fzf").todo({ keywords = { "TODO", "FIX", "FIXME" } }) end, desc = "Todo/Fix/Fixme" },
     {
       ",v",
       function()

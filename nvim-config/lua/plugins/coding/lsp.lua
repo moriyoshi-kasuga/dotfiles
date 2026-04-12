@@ -96,51 +96,17 @@ return {
               vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = 0 }), { bufnr = 0 })
             end, "Toggle Inlay Hints")
           end
-
-          local fzf = require("fzf-lua")
-
-          -- Navigation with fzf-lua
-          map("n", "ga", function()
-            fzf.lsp_code_actions()
-          end, "Code Actions")
-          map("n", "gd", function()
-            fzf.lsp_definitions()
-          end, "Goto Definition")
-          map("n", "gD", function()
-            fzf.lsp_declarations()
-          end, "Goto Declaration")
-          map("n", "gr", function()
-            fzf.lsp_references()
-          end, "References")
-          map("n", "gI", function()
-            fzf.lsp_implementations()
-          end, "Goto Implementation")
-          map("n", "gy", function()
-            fzf.lsp_typedefs()
-          end, "Goto T[y]pe Definition")
-          map("n", "gsi", function()
-            fzf.lsp_incoming_calls()
-          end, "Call[s] Incoming")
-          map("n", "gso", function()
-            fzf.lsp_outgoing_calls()
-          end, "Call[s] Outgoing")
-
-          -- Hover and signature help
-          map("n", "gk", vim.lsp.buf.signature_help, "Signature Help")
-          map("i", "<C-k>", vim.lsp.buf.signature_help, "Signature Help")
-
-          -- Show line diagnostics
-          map("n", "<leader>cd", vim.diagnostic.open_float, "Line Diagnostics")
-
-          -- Diagnostic navigation
-          map("n", "[d", function()
-            vim.diagnostic.jump({ count = -1, float = true })
-          end, "Previous Diagnostic")
-          map("n", "]d", function()
-            vim.diagnostic.jump({ count = 1, float = true })
-          end, "Next Diagnostic")
         end,
       })
     end,
+
+    -- stylua: ignore
+    keys = {
+      { "gk", function() vim.lsp.buf.signature_help() end, desc = "Signature Help" },
+      { "<C-k>", function() vim.lsp.buf.signature_help() end, desc = "Signature Help", mode = "i" },
+      { "<leader>cd", function() vim.diagnostic.open_float() end, desc = "Line Diagnostics" },
+      { "[d", function() vim.diagnostic.jump({ count = -1, float = true }) end, desc = "Previous Diagnostic" },
+      { "]d", function() vim.diagnostic.jump({ count = 1, float = true }) end, desc = "Next Diagnostic" },
+    },
   },
 }
