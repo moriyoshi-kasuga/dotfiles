@@ -98,6 +98,7 @@
             python.enable = true;
             rust.enable = true;
             haskell.enable = true;
+            go.enable = true;
           };
           modules.editor.enable = true;
           modules.tool = {

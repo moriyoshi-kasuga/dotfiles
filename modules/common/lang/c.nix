@@ -17,4 +17,9 @@ mkModule {
       clang
     ];
   };
+  darwinHomeModule = {
+    home.packages = with pkgs; [
+      cctools
+    ];
+  };
 }
