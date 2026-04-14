@@ -42,18 +42,21 @@ let
   cfg = attrByPath optionPath { } config;
 
   fnArgs = { inherit cfg config; };
-  evalModule = module: if lib.isFunction module then module fnArgs else module;
+  evalModule = module: if isFunction module then module fnArgs else module;
 
   module =
     if "home" == platform then
-      recursiveUpdate (evalModule homeModule) (
-        if "nixos" == host then
-          evalModule linuxHomeModule
-        else if "darwin" == host then
-          evalModule darwinHomeModule
-        else
-          { }
-      )
+      mkMerge [
+        (evalModule homeModule)
+        (
+          if "nixos" == host then
+            evalModule linuxHomeModule
+          else if "darwin" == host then
+            evalModule darwinHomeModule
+          else
+            { }
+        )
+      ]
     else if "nixos" == platform then
       evalModule nixosModule
     else if "darwin" == platform then
@@ -100,5 +103,8 @@ in
 
   options = attrOptions;
 
-  config = mkIf effectiveEnable (recursiveUpdate commonConfig moduleConfig);
+  config = mkIf effectiveEnable (mkMerge [
+    commonConfig
+    moduleConfig
+  ]);
 }

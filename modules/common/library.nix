@@ -10,19 +10,20 @@ mkModule {
   options = {
     libs = lib.mkOption {
       type = lib.types.listOf lib.types.package;
-      default = with pkgs; [
-        ffmpeg
-        openssl
-        sqlite
-        icu
-        lua5_4
-      ];
+      default = [ ];
       description = "Additional packages";
     };
   };
   homeModule =
     { cfg, ... }:
     {
+      modules.library.libs = with pkgs; [
+        ffmpeg
+        openssl
+        sqlite
+        icu
+        lua5_4
+      ];
       home.packages = cfg.libs;
       home.sessionVariables = rec {
         PKG_CONFIG_PATH =
@@ -36,8 +37,8 @@ mkModule {
               if builtins.pathExists path then path else null;
             pkgConfigPaths = builtins.filter (x: x != null) (map getPkgConfigPath cfg.libs);
           in
-          pkgs.lib.concatStringsSep ":" pkgConfigPaths;
-        LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath cfg.libs;
+          lib.concatStringsSep ":" pkgConfigPaths;
+        LD_LIBRARY_PATH = lib.makeLibraryPath cfg.libs;
         LIBRARY_PATH = LD_LIBRARY_PATH;
       };
     };
