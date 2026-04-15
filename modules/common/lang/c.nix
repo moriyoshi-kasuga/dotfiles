@@ -13,8 +13,7 @@ mkModule {
       lld
       cmake
       ninja
-      clang-tools
-      clang
+      llvmPackages.clang-unwrapped
     ];
   };
   darwinHomeModule = {

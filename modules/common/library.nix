@@ -48,6 +48,8 @@ mkModule {
   darwinHomeModule = {
     modules.library.libs = with pkgs; [
       libiconv
+      llvm
+      nsis
     ];
   };
 }
