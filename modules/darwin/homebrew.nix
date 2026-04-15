@@ -21,6 +21,7 @@ mkModule {
         "slack"
         "figma"
         "zed"
+        "macfuse"
       ];
     };
 
