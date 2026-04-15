@@ -31,6 +31,9 @@ return {
         },
         hover = {
           opts = {
+            win_options = {
+              wrap = false,
+            },
             border = {
               style = "single",
             },
@@ -38,6 +41,9 @@ return {
         },
         signature = {
           opts = {
+            win_options = {
+              wrap = false,
+            },
             border = {
               style = "single",
             },
