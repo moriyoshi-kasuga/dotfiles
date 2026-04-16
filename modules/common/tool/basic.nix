@@ -10,7 +10,8 @@ mkModule {
   homeModule = {
     programs.man = {
       enable = true;
-      package = pkgs.man;
+      generateCaches = true;
+      package = pkgs.man-db;
     };
 
     home.packages = with pkgs; [
