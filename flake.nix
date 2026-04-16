@@ -44,12 +44,17 @@
         username = "mori";
         homeDirectory = "/home/mori";
         modules = {
-          modules.shell.enable = true;
-          modules.shell.fish.default = true;
+          modules.shell = {
+            enable = true;
+            fish.default = true;
+          };
           modules.lang.enable = true;
           modules.editor.enable = true;
-          modules.tool.enable = true;
-          modules.tool.git.enable = true;
+          modules.tool = {
+            enable = true;
+            git.enable = true;
+            claude-code.enable = true;
+          };
           modules.term.wezterm.enable = true;
         };
         nixosConfig = {
@@ -66,12 +71,17 @@
         username = "mori";
         homeDirectory = "/Users/mori";
         modules = {
-          modules.shell.enable = true;
-          modules.shell.fish.default = true;
+          modules.shell = {
+            enable = true;
+            fish.default = true;
+          };
           modules.lang.enable = true;
           modules.editor.enable = true;
-          modules.tool.enable = true;
-          modules.tool.git.enable = true;
+          modules.tool = {
+            enable = true;
+            git.enable = true;
+            claude-code.enable = true;
+          };
           modules.term.wezterm.enable = true;
         };
         homeConfig = pkgs: {
@@ -104,6 +114,7 @@
           modules.tool = {
             enable = true;
             git.enable = true;
+            claude-code.enable = true;
           };
           modules.term.wezterm = {
             enable = true;
