@@ -48,10 +48,10 @@ config.use_cap_height_to_scale_fallback_fonts = true
 local default_padding
 if "@BIGMONITOR@" then
   default_padding = {
-    left = 180,
-    right = 180,
+    left = 300,
+    right = 100,
     top = 100,
-    bottom = 80,
+    bottom = 0,
   }
 else
   default_padding = {
