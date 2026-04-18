@@ -22,12 +22,27 @@
 
   networking = {
     hostName = "${username}-NixOS";
-    networkmanager.enable = true;
+    nameservers = [
+      "1.1.1.1"
+      "8.8.8.8"
+    ];
+    networkmanager = {
+      enable = true;
+      dns = "systemd-resolved";
+    };
     firewall = {
       enable = true;
       trustedInterfaces = [ "tailscale0" ];
       allowedUDPPorts = [ 41641 ];
     };
+  };
+
+  services.resolved = {
+    enable = true;
+    dnssec = "false";
+    extraConfig = ''
+      DNSStubListener=yes
+    '';
   };
 
   time.timeZone = "Asia/Tokyo";
