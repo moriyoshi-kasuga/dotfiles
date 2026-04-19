@@ -56,6 +56,7 @@
             claude-code.enable = true;
           };
           modules.term.wezterm.enable = true;
+          modules.library.enable = true;
         };
         nixosConfig = {
           imports = [
@@ -83,6 +84,7 @@
             claude-code.enable = true;
           };
           modules.term.wezterm.enable = true;
+          modules.library.enable = true;
         };
         homeConfig = pkgs: {
           home.packages = with pkgs; [
