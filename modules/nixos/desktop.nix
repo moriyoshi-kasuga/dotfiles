@@ -57,8 +57,8 @@
 
   qt = {
     enable = true;
-    style = "adwaita";
-    platformTheme = "gnome";
+    style = "kvantum";
+    platformTheme = "qt5ct";
   };
 
   programs.dconf.enable = true;
@@ -165,6 +165,45 @@
 
   home-manager.users.${username} = {
     imports = [ inputs.noctalia.homeModules.default ];
+
+    catppuccin.kvantum.enable = true;
+
+    gtk = {
+      enable = true;
+      theme = {
+        name = "adw-gtk3-dark";
+        package = pkgs.adw-gtk3;
+      };
+    };
+
+    dconf.settings = {
+      "org/gnome/desktop/interface" = {
+        color-scheme = "prefer-dark";
+        gtk-theme = "adw-gtk3-dark";
+        icon-theme = "Papirus-Dark";
+      };
+    };
+
+    xdg.configFile."qt5ct/qt5ct.conf".text = ''
+      [Appearance]
+      style=kvantum
+      icon_theme=Papirus-Dark
+
+      [Interface]
+      buttonbox_layout=0
+      menus_have_icons=true
+      toolbutton_style=4
+    '';
+    xdg.configFile."qt6ct/qt6ct.conf".text = ''
+      [Appearance]
+      style=kvantum
+      icon_theme=Papirus-Dark
+
+      [Interface]
+      buttonbox_layout=0
+      menus_have_icons=true
+      toolbutton_style=4
+    '';
     programs.noctalia-shell = {
       enable = true;
       settings = {

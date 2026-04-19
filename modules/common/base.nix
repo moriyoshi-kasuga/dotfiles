@@ -13,14 +13,15 @@ let
 in
 mkModule {
   name = "base";
-  homeModule = {
-    programs.home-manager.enable = true;
-
+  commonModule = {
     catppuccin = {
       enable = true;
       flavor = "mocha";
       accent = "sapphire";
     };
+  };
+  homeModule = {
+    programs.home-manager.enable = true;
 
     home = {
       inherit username homeDirectory;
