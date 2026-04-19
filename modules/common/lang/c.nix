@@ -14,6 +14,7 @@ mkModule {
       cmake
       ninja
       llvmPackages.clang-unwrapped
+      binutils
     ];
   };
   darwinHomeModule = {
