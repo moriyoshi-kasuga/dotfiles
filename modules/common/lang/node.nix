@@ -1,5 +1,6 @@
 {
   mkModule,
+  pkgs,
   ...
 }:
 
@@ -8,8 +9,17 @@ mkModule {
   inheritModule = "lang";
   homeModule = {
     programs.mise.globalConfig.tools = {
-      node = "25.9.0";
       bun = "1.3.11";
     };
+  };
+  darwinHomeModule = {
+    programs.mise.globalConfig.tools = {
+      node = "24.15.0";
+    };
+  };
+  linuxHomeModule = {
+    home.packages = with pkgs; [
+      nodejs_24
+    ];
   };
 }
