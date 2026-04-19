@@ -25,6 +25,9 @@ mkModule {
     home = {
       inherit username homeDirectory;
       stateVersion = version;
+      sessionVariables = {
+        XDG_CONFIG_HOME = "${homeDirectory}/.config";
+      };
     };
 
     home.packages = [
