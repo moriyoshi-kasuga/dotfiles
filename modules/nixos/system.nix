@@ -39,10 +39,6 @@
 
   services.resolved = {
     enable = true;
-    dnssec = "false";
-    extraConfig = ''
-      DNSStubListener=yes
-    '';
   };
 
   time.timeZone = "Asia/Tokyo";
