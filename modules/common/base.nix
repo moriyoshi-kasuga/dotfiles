@@ -10,17 +10,16 @@
 
 let
   version = "26.05";
+  catppuccin = {
+    enable = true;
+    flavor = "mocha";
+    accent = "sapphire";
+  };
 in
 mkModule {
   name = "base";
-  commonModule = {
-    catppuccin = {
-      enable = true;
-      flavor = "mocha";
-      accent = "sapphire";
-    };
-  };
   homeModule = {
+    inherit catppuccin;
     programs.home-manager.enable = true;
 
     home = {
@@ -49,6 +48,7 @@ mkModule {
     ];
   };
   nixosModule = {
+    inherit catppuccin;
     nixpkgs.config.allowUnfreePredicate =
       pkg:
       builtins.elem (lib.getName pkg) [
