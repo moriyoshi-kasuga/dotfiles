@@ -1,5 +1,6 @@
 {
   pkgs,
+  lib,
   mkModule,
   ...
 }:
@@ -13,8 +14,8 @@ mkModule {
       lld
       cmake
       ninja
-      binutils
-      gcc
+      (lib.hiPrio gcc)
+      (lib.lowPrio binutils)
     ];
   };
   darwinHomeModule = {
