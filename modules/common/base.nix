@@ -34,6 +34,13 @@ mkModule {
       pkgs.fastfetch
     ];
   };
+  darwinHomeModule = {
+    home.packages = with pkgs; [
+      (writeShellScriptBin "notify" ''
+        osascript -e "display notification \"$1\" with title \"''\${2:-Notification}\""
+      '')
+    ];
+  };
   linuxHomeModule = {
     home.packages = with pkgs; [
       (writeShellScriptBin "pbpaste" ''
