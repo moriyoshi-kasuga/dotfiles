@@ -26,7 +26,7 @@ local tab = {
     width = 4,
   },
   go = {
-    width = 8,
+    width = 4,
     expandtab = false,
   },
 }
