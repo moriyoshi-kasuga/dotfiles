@@ -75,11 +75,15 @@ mkModule {
       libxtst
       libxrandr
       libxext
+      libxinerama
       libx11
+      libxcursor
       libxfixes
       libxkbcommon
       libxi
       libGL
+      mesa
+      alsa-lib
       libva
       pipewire
       libxcb
