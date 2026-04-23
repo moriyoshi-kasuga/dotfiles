@@ -111,6 +111,11 @@ function pyvenv --description "Python virtual environment handler"
     return 1
   end
 
+  if not command -q uv
+    __pyvenv_error "uv not found"
+    return 1
+  end
+
   switch $argv[1]
 
     case init
@@ -119,16 +124,11 @@ function pyvenv --description "Python virtual environment handler"
         return 1
       end
 
-      if not command -q python3
-        __pyvenv_error "python3 not found"
-        return 1
-      end
-
-      python3 -m venv $VENV_DIR
+      uv venv $VENV_DIR
       or return 1
 
       touch $REQUIREMENTS_FILE
-      echo "source $VENV_DIR/bin/activate.fish" > $ENVRC_FILE
+      echo "layout python" > $ENVRC_FILE
 
       if command -q direnv
         direnv allow .
@@ -149,12 +149,7 @@ function pyvenv --description "Python virtual environment handler"
         return 1
       end
 
-      if not test -x $VENV_DIR/bin/pip
-        __pyvenv_error "pip not found inside virtualenv"
-        return 1
-      end
-
-      $VENV_DIR/bin/pip install -r $REQUIREMENTS_FILE
+      uv pip install --python $VENV_DIR/bin/python -r $REQUIREMENTS_FILE
       or return 1
 
       __pyvenv_info "Packages installed from $REQUIREMENTS_FILE"
@@ -165,12 +160,7 @@ function pyvenv --description "Python virtual environment handler"
         return 1
       end
 
-      if not test -x $VENV_DIR/bin/pip
-        __pyvenv_error "pip not found inside virtualenv"
-        return 1
-      end
-
-      $VENV_DIR/bin/pip freeze > $REQUIREMENTS_FILE
+      uv pip freeze --python $VENV_DIR/bin/python > $REQUIREMENTS_FILE
       or return 1
 
       __pyvenv_info "Package list saved to $REQUIREMENTS_FILE"
