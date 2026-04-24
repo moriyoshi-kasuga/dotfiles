@@ -47,7 +47,7 @@ run_home_manager() {
 
 run_darwin() {
   local name=$1
-  sudo nix --extra-experimental-features 'nix-command flakes' \
+  sudo -H nix --extra-experimental-features 'nix-command flakes' \
     run nix-darwin/master#darwin-rebuild -- \
     switch --flake .#"${name}" \
     --override-input vars-file "file+file://$VARS_FILE"
