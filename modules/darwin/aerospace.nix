@@ -80,8 +80,8 @@ mkModule {
               cmd-slash = "layout tiles horizontal vertical";
               cmd-comma = "layout accordion horizontal vertical";
 
-              # Fullscreen (niri: Alt+F / Alt+Shift+F)
-              cmd-f = "fullscreen";
+              # Fullscreen
+              cmd-shift-f = "fullscreen";
 
               # Switch floating and tiling
               cmd-shift-space = "layout floating tiling";

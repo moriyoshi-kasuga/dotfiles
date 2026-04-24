@@ -9,19 +9,9 @@ end
 config.disable_default_key_bindings = true
 config.enable_tab_bar = false
 config.hide_tab_bar_if_only_one_tab = true
+config.window_decorations = "RESIZE"
 
 config.color_scheme = "Catppuccin Mocha"
-
--- Linuxはniriを使うのでフルスクリーンで起動しないようにする
-if wezterm.target_triple ~= "x86_64-unknown-linux-gnu" then
-  -- 最初からフルスクリーンで起動
-  local mux = wezterm.mux
-  wezterm.on("gui-startup", function()
-    local _, pane, window = mux.spawn_window({})
-    window:gui_window():perform_action(wezterm.action.ToggleFullScreen, pane)
-  end)
-  config.native_macos_fullscreen_mode = true
-end
 
 config.font = wezterm.font_with_fallback({
   {
@@ -72,11 +62,6 @@ config.keys = {
   {
     key = "Enter",
     mods = "CMD",
-    action = wezterm.action.ToggleFullScreen,
-  },
-  {
-    key = "Enter",
-    mods = "SUPER",
     action = wezterm.action.ToggleFullScreen,
   },
   {
@@ -150,7 +135,7 @@ config.keys = {
   },
   {
     key = "f",
-    mods = "CMD",
+    mods = "CMD|SHIFT",
     action = wezterm.action_callback(function(window, _)
       if padding_zeroed then
         window:set_config_overrides({ window_padding = default_padding })
