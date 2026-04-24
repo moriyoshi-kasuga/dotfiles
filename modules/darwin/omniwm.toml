@@ -8,7 +8,7 @@ version = 5
 mode = "dark"
 
 [borders]
-enabled = true
+enabled = false
 width = 5.0
 
 [borders.color]
@@ -62,7 +62,7 @@ monitorOrder = []
 [niri]
 alwaysCenterSingleColumn = true
 centerFocusedColumn = "never"
-columnWidthPresets = [0.3333333333333333, 0.5, 0.66]
+columnWidthPresets = [0.3333333333333333, 0.5, 0.6666666666666667, 1.0]
 infiniteLoop = false
 maxVisibleColumns = 2
 maxWindowsPerColumn = 3
@@ -91,7 +91,7 @@ useWorkspaceId = false
 [workspaceBar]
 backgroundOpacity = 0.1
 deduplicateAppIcons = false
-enabled = true
+enabled = false
 height = 24.0
 hideEmptyWorkspaces = false
 labelFontSize = 12.0
@@ -272,11 +272,11 @@ id = "workspaceBackAndForth"
 
 [[hotkeys]]
 binding = "Command+U"
-id = "switchWorkspace.next"
+id = "switchWorkspace.previous"
 
 [[hotkeys]]
 binding = "Command+I"
-id = "switchWorkspace.previous"
+id = "switchWorkspace.next"
 
 [[hotkeys]]
 binding = "Command+H"
@@ -403,7 +403,7 @@ binding = "Control+Command+Shift+Right Arrow"
 id = "moveColumn.right"
 
 [[hotkeys]]
-binding = "Command+W"
+binding = "Unassigned"
 id = "toggleColumnTabbed"
 
 [[hotkeys]]
