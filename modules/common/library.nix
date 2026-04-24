@@ -92,7 +92,18 @@ mkModule {
       libxxf86vm
       libelf
       udev
-      librsvg
+      gdk-pixbuf
+      gobject-introspection
+      gtk3
+      gio-sharp
+      cairo
+      at-spi2-atk
+      atkmm
+      libsoup_3
+      harfbuzz
+      pango
+      pangomm
+      glib
       webkitgtk_4_1
     ];
   };
