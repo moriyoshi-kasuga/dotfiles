@@ -195,116 +195,50 @@ minHeight = 320.0
 minWidth = 660.0
 
 [[hotkeys]]
-binding = "Command+1"
-id = "switchWorkspace.0"
-
-[[hotkeys]]
-binding = "Command+Control+1"
-id = "moveToWorkspace.0"
-
-[[hotkeys]]
-binding = "Command+2"
-id = "switchWorkspace.1"
-
-[[hotkeys]]
-binding = "Command+Control+2"
-id = "moveToWorkspace.1"
-
-[[hotkeys]]
-binding = "Command+3"
-id = "switchWorkspace.2"
-
-[[hotkeys]]
-binding = "Command+Control+3"
-id = "moveToWorkspace.2"
-
-[[hotkeys]]
-binding = "Command+4"
-id = "switchWorkspace.3"
-
-[[hotkeys]]
-binding = "Command+Control+4"
-id = "moveToWorkspace.3"
-
-[[hotkeys]]
-binding = "Command+5"
-id = "switchWorkspace.4"
-
-[[hotkeys]]
-binding = "Command+Control+5"
-id = "moveToWorkspace.4"
-
-[[hotkeys]]
-binding = "Command+6"
-id = "switchWorkspace.5"
-
-[[hotkeys]]
-binding = "Command+Control+6"
-id = "moveToWorkspace.5"
-
-[[hotkeys]]
-binding = "Command+7"
-id = "switchWorkspace.6"
-
-[[hotkeys]]
-binding = "Command+Control+7"
-id = "moveToWorkspace.6"
-
-[[hotkeys]]
-binding = "Command+8"
-id = "switchWorkspace.7"
-
-[[hotkeys]]
-binding = "Command+Control+8"
-id = "moveToWorkspace.7"
-
-[[hotkeys]]
-binding = "Command+9"
-id = "switchWorkspace.8"
-
-[[hotkeys]]
-binding = "Command+Control+9"
-id = "moveToWorkspace.8"
-
-[[hotkeys]]
-binding = "Control+Command+Tab"
-id = "workspaceBackAndForth"
-
-[[hotkeys]]
-binding = "Command+U"
-id = "switchWorkspace.previous"
-
-[[hotkeys]]
-binding = "Command+I"
-id = "switchWorkspace.next"
-
-[[hotkeys]]
 binding = "Command+H"
 id = "focus.left"
-
 [[hotkeys]]
 binding = "Command+J"
 id = "focus.down"
-
 [[hotkeys]]
 binding = "Command+K"
 id = "focus.up"
-
 [[hotkeys]]
 binding = "Command+L"
 id = "focus.right"
 
 [[hotkeys]]
-binding = "Command+Tab"
-id = "focusPrevious"
+binding = "Command+Control+H"
+id = "moveColumn.left"
+[[hotkeys]]
+binding = "Command+Control+J"
+id = "move.down"
+[[hotkeys]]
+binding = "Command+Control+K"
+id = "move.up"
+[[hotkeys]]
+binding = "Command+Control+L"
+id = "moveColumn.right"
 
 [[hotkeys]]
-binding = "Unassigned"
-id = "focusDownOrLeft"
+binding = "Command+Shift+H"
+id = "moveColumn.left"
+[[hotkeys]]
+binding = "Command+Shift+J"
+id = "move.down"
+[[hotkeys]]
+binding = "Command+Shift+K"
+id = "move.up"
+[[hotkeys]]
+binding = "Command+Shift+L"
+id = "moveColumn.right"
 
 [[hotkeys]]
-binding = "Unassigned"
-id = "focusUpOrRight"
+binding = "Command+U"
+id = "switchWorkspace.previous"
+[[hotkeys]]
+binding = "Command+I"
+id = "switchWorkspace.next"
 
 [[hotkeys]]
 binding = "Control+Command+Shift+Up Arrow"
@@ -321,58 +255,6 @@ id = "moveColumnToWorkspaceUp"
 [[hotkeys]]
 binding = "Control+Command+U"
 id = "moveColumnToWorkspaceDown"
-
-[[hotkeys]]
-binding = "Unassigned"
-id = "moveColumnToWorkspace.0"
-
-[[hotkeys]]
-binding = "Unassigned"
-id = "moveColumnToWorkspace.1"
-
-[[hotkeys]]
-binding = "Unassigned"
-id = "moveColumnToWorkspace.2"
-
-[[hotkeys]]
-binding = "Unassigned"
-id = "moveColumnToWorkspace.3"
-
-[[hotkeys]]
-binding = "Unassigned"
-id = "moveColumnToWorkspace.4"
-
-[[hotkeys]]
-binding = "Unassigned"
-id = "moveColumnToWorkspace.5"
-
-[[hotkeys]]
-binding = "Unassigned"
-id = "moveColumnToWorkspace.6"
-
-[[hotkeys]]
-binding = "Unassigned"
-id = "moveColumnToWorkspace.7"
-
-[[hotkeys]]
-binding = "Unassigned"
-id = "moveColumnToWorkspace.8"
-
-[[hotkeys]]
-binding = "Control+Command+H"
-id = "move.left"
-
-[[hotkeys]]
-binding = "Control+Command+J"
-id = "move.down"
-
-[[hotkeys]]
-binding = "Control+Command+K"
-id = "move.up"
-
-[[hotkeys]]
-binding = "Control+Command+L"
-id = "move.right"
 
 [[hotkeys]]
 binding = "Control+Command+Tab"
