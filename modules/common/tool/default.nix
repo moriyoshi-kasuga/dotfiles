@@ -8,7 +8,6 @@
     ./tmux
     ./basic.nix
     ./docker.nix
-    ./opencode.nix
     ./tff.nix
     ./claude-code
   ];

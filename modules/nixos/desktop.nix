@@ -184,7 +184,7 @@
       };
     };
 
-    xdg.configFile."qt5ct/qt5ct.conf".text = ''
+    home.file.".config/qt5ct/qt5ct.conf".text = ''
       [Appearance]
       style=kvantum
       icon_theme=Papirus-Dark
@@ -194,7 +194,7 @@
       menus_have_icons=true
       toolbutton_style=4
     '';
-    xdg.configFile."qt6ct/qt6ct.conf".text = ''
+    home.file.".config/qt6ct/qt6ct.conf".text = ''
       [Appearance]
       style=kvantum
       icon_theme=Papirus-Dark

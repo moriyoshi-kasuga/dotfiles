@@ -26,8 +26,8 @@ mkModule {
           weztermConfigRaw;
     in
     {
-      xdg.configFile = {
-        "wezterm/wezterm.lua".text = weztermConfig;
+      home.file = {
+        ".config/wezterm/wezterm.lua".text = weztermConfig;
       };
     };
   nixosModule = {

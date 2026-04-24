@@ -107,7 +107,7 @@ mkModule {
         EDITOR = "simplenvim";
       };
 
-      xdg.configFile."nvim".source =
+      home.file.".config/nvim".source =
         config.lib.file.mkOutOfStoreSymlink "${homeDirectory}/dotfiles/nvim-config";
     };
 }

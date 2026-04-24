@@ -7,7 +7,7 @@ mkModule {
   name = "darwin.omniwm";
   inheritModule = "darwin";
   homeModule = {
-    xdg.configFile."omniwm/settings.toml" = {
+    home.file.".config/omniwm/settings.toml" = {
       source = ./omniwm.toml;
       force = true;
     };
