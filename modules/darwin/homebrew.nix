@@ -1,15 +1,24 @@
 {
   mkModule,
   pkgs,
+  username,
   ...
 }:
 
 mkModule {
   name = "darwin.homebrew";
   inheritModule = "darwin";
+  homeModule = {
+    programs.fish = {
+      interactiveShellInit = ''
+        /opt/homebrew/bin/brew shellenv | source
+      '';
+    };
+  };
   darwinModule = {
     homebrew = {
       enable = true;
+      user = username;
       onActivation = {
         autoUpdate = true;
       };

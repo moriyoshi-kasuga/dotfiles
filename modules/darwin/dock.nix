@@ -17,5 +17,6 @@ mkModule {
       mineffect = "scale";
       launchanim = false;
     };
+    system.defaults.spaces.spans-displays = true;
   };
 }
