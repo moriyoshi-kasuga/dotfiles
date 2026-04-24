@@ -166,6 +166,9 @@
   home-manager.users.${username} = {
     imports = [ inputs.noctalia.homeModules.default ];
 
+    # fcitx5 configuration (Confirmed working)
+    # i18n.inputMethod is handled in the system-level config above
+
     catppuccin.kvantum.enable = true;
 
     gtk = {
@@ -184,6 +187,10 @@
       };
     };
 
+    home.file.".config/niri/config.kdl" = {
+      source = ./config.kdl;
+      force = true;
+    };
     home.file.".config/qt5ct/qt5ct.conf".text = ''
       [Appearance]
       style=kvantum
@@ -208,15 +215,17 @@
       enable = true;
       settings = {
         bar = {
-          density = "compact";
+          density = "mini";
           position = "top";
           displayMode = "auto_hide";
           useSeparateOpacity = true;
-          backgroundOpacity = 0.2;
+          backgroundOpacity = 0.5;
           showCapsule = true;
-          capsuleOpacity = 1;
           showOutline = false;
-          floating = false;
+          capsuleOpacity = 0.8;
+          autoHideDelay = 150;
+          autoShowDelay = 500;
+          floating = true;
           widgets = {
             left = [
               {
@@ -229,10 +238,11 @@
               {
                 id = "Workspace";
                 hideUnoccupied = false;
-                labelMode = "none";
+                labelMode = "index";
               }
             ];
             right = [
+              { id = "Media"; }
               {
                 id = "Volume";
                 displayMode = "alwaysShow";
@@ -248,11 +258,13 @@
           };
         };
         colorSchemes = {
-          predefinedScheme = "Catppuccin";
+          predefinedScheme = "Ayu";
         };
         general = {
-          enableShadows = false;
-          dimmerOpacity = 0.2;
+          enableShadows = true;
+          dimmerOpacity = 0.3;
+          shadowDirection = "bottom";
+          boxBorderEnabled = true;
         };
         controlCenter = {
           position = "top_center";
@@ -298,8 +310,9 @@
           weatherEnabled = false;
         };
         ui = {
-          fontDefault = "CommitMono Nerd Font";
-          fontFixed = "CommitMono Nerd Font";
+          fontDefault = "JetBrains Mono Nerd Font";
+          fontFixed = "JetBrains Mono Nerd Font";
+          borderRadius = 12;
         };
       };
     };

@@ -8,11 +8,6 @@
 mkModule {
   name = "nixos";
   linuxHomeModule = {
-    home.file.".config/niri/config.kdl" = {
-      source = ./config.kdl;
-      force = true;
-    };
-
     home.packages = with pkgs; [
       xdg-utils
       docker
