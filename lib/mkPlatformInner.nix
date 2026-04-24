@@ -65,7 +65,14 @@ let
       extraSpecialArgs = specialArgs // {
         platform = "home";
       };
-      users.${username}.imports = homeModules;
+      users.${username}.imports =
+        homeModules
+        ++ lib.optionals ("darwin" == host) [
+          { modules.darwin.enable = true; }
+        ]
+        ++ lib.optionals ("nixos" == host) [
+          { modules.nixos.enable = true; }
+        ];
     };
   };
 
