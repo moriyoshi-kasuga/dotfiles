@@ -9,7 +9,10 @@ end
 config.disable_default_key_bindings = true
 config.enable_tab_bar = false
 config.hide_tab_bar_if_only_one_tab = true
-config.window_decorations = "RESIZE"
+
+if wezterm.target_triple ~= "x86_64-unknown-linux-gnu" then
+  config.window_decorations = "RESIZE"
+end
 
 config.color_scheme = "Catppuccin Mocha"
 
