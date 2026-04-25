@@ -138,11 +138,6 @@ config.keys = {
     action = wezterm.action.ResetFontSize,
   },
   {
-    key = "l",
-    mods = "CMD",
-    action = wezterm.action.ShowDebugOverlay,
-  },
-  {
     key = "f",
     mods = "CMD|SHIFT",
     action = wezterm.action_callback(function(window, _)

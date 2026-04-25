@@ -7,6 +7,6 @@
     ./dock.nix
     ./finder.nix
     ./homebrew.nix
-    ./omniwm.nix
+    ./aerospace.nix
   ];
 }
