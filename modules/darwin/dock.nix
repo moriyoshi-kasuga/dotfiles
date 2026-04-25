@@ -19,10 +19,6 @@ mkModule {
       };
     in
     {
-      home.packages = [
-        pkgs.coreutils # shuf用
-      ];
-
       home.file.".local/bin/wallpaper-rotate".text = ''
         #!/usr/bin/env bash
         FILE=$(find "${wallpapers}" -type f -iname "*.jpg" -o -iname "*.png" | shuf -n 1)

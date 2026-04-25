@@ -44,6 +44,12 @@
         username = "mori";
         homeDirectory = "/home/mori";
         modules = {
+          modules.base.enable = true;
+          modules.nixos = {
+            enable = true;
+            gui.enable = true;
+          };
+
           modules.shell = {
             enable = true;
             fish.default = true;
@@ -57,6 +63,9 @@
           };
           modules.term.wezterm.enable = true;
           modules.library.enable = true;
+        };
+        homeConfig = {
+          imports = [ inputs.noctalia.homeModules.default ];
         };
         nixosConfig = {
           imports = [
@@ -72,6 +81,9 @@
         username = "mori";
         homeDirectory = "/Users/mori";
         modules = {
+          modules.base.enable = true;
+          modules.darwin.enable = true;
+
           modules.shell = {
             enable = true;
             fish.default = true;
@@ -86,11 +98,6 @@
           modules.term.wezterm.enable = true;
           modules.library.enable = true;
         };
-        homeConfig = pkgs: {
-          home.packages = with pkgs; [
-            claude-code
-          ];
-        };
       }
       {
         name = "job";
@@ -100,6 +107,9 @@
         username = "mori";
         homeDirectory = "/Users/mori";
         modules = {
+          modules.base.enable = true;
+          modules.darwin.enable = true;
+
           modules.shell = {
             enable = true;
             fish.default = true;
@@ -123,11 +133,6 @@
             bigMonitor = true;
           };
           modules.library.enable = true;
-        };
-        homeConfig = pkgs: {
-          home.packages = with pkgs; [
-            claude-code
-          ];
         };
       }
     ];

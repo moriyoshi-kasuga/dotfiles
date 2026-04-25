@@ -15,6 +15,9 @@ mkModule {
     };
 
     home.packages = with pkgs; [
+      xdg-utils
+      coreutils
+
       ripgrep
       jid
       tailspin

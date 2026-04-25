@@ -44,9 +44,6 @@ let
   };
 
   commonModules = resolveModules resolvedArgs [
-    {
-      modules.base.enable = true;
-    }
     modules
     ../modules
   ];
@@ -65,22 +62,12 @@ let
       extraSpecialArgs = specialArgs // {
         platform = "home";
       };
-      users.${username}.imports =
-        homeModules
-        ++ lib.optionals ("darwin" == host) [
-          { modules.darwin.enable = true; }
-        ]
-        ++ lib.optionals ("nixos" == host) [
-          { modules.nixos.enable = true; }
-        ];
+      users.${username}.imports = homeModules;
     };
   };
 
   nixosModules = [
     (evalConfig nixosConfig)
-    {
-      modules.nixos.enable = true;
-    }
 
     inputs.catppuccin.nixosModules.catppuccin
 
@@ -90,9 +77,6 @@ let
 
   darwinModules = [
     (evalConfig darwinConfig)
-    {
-      modules.darwin.enable = true;
-    }
 
     inputs.home-manager.darwinModules.home-manager
     hostHomeManager
