@@ -26,7 +26,7 @@ set -g @catppuccin_window_number "#I"
 set -g @catppuccin_window_current_text " #W"
 set -g @catppuccin_window_current_number "#I"
 # Status settings
-set -g @catppuccin_date_time_text "%H:%M"
+set -g @catppuccin_date_time_text " %H:%M"
 
 # Pane
 set -g @catppuccin_pane_status_enabled "yes"
