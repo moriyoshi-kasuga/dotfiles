@@ -85,6 +85,25 @@ return {
           nowait = true,
           desc = "Open Terminal",
         },
+        ["<leader>sr"] = {
+          function()
+            local _, oil_dir = pcall(require("oil").get_current_dir)
+            if not oil_dir then
+              vim.notify("failed to get oil dir", 2)
+              return
+            end
+            local grug = require("grug-far")
+            grug.open({
+              transient = true,
+              prefills = {
+                paths = oil_dir,
+              },
+            })
+          end,
+          mode = "n",
+          nowait = true,
+          desc = "Open Terminal",
+        },
         ["-"] = { "actions.parent", mode = "n" },
         ["<leader>e"] = { "actions.parent", mode = "n" },
         ["_"] = { "actions.open_cwd", mode = "n" },
