@@ -333,9 +333,8 @@ binds {
   Alt+I              { focus-workspace-up; }
   Alt+Ctrl+U         { move-column-to-workspace-down; }
   Alt+Ctrl+I         { move-column-to-workspace-up; }
-
-  Alt+Shift+U         { move-workspace-down; }
-  Alt+Shift+I         { move-workspace-up; }
+  Alt+Shift+U        { move-workspace-down; }
+  Alt+Shift+I        { move-workspace-up; }
 
   Alt+WheelScrollDown      cooldown-ms=150 { focus-workspace-down; }
   Alt+WheelScrollUp        cooldown-ms=150 { focus-workspace-up; }
