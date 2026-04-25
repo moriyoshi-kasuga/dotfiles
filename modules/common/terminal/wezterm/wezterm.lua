@@ -16,7 +16,6 @@ end
 
 config.color_scheme = "Catppuccin Mocha"
 config.window_background_opacity = 0.90
-config.macos_window_background_blur = 20
 config.inactive_pane_hsb = {
   saturation = 1.0,
   brightness = 1.0,
