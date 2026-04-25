@@ -18,5 +18,6 @@ mkModule {
       launchanim = false;
     };
     system.defaults.spaces.spans-displays = true;
+    system.defaults.NSGlobalDomain._HIHideMenuBar = true;
   };
 }
