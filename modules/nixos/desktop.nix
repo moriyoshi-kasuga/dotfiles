@@ -332,6 +332,8 @@ in
             enabled = true;
           };
           enableBatteryToast = true;
+          enableKeyboardLayoutToast = false;
+          enableMediaToast = false;
         };
         location = {
           name = "Tokyo";
