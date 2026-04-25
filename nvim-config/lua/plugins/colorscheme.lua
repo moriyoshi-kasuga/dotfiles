@@ -5,6 +5,13 @@ return {
   name = "catppuccin",
   ---@type CatppuccinOptions
   opts = {
+    flavour = "mocha",
+    transparent_background = true,
+    float = {
+      transparent = true,
+      solid = false,
+    },
+    term_colors = true,
     lsp_styles = {
       underlines = {
         errors = { "undercurl" },

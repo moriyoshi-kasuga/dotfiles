@@ -43,7 +43,6 @@ return {
           layout = "vertical",
         },
       },
-      fzf_colors = true,
       defaults = {
         formatter = "path.filename_first",
       },

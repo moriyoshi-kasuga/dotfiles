@@ -5,6 +5,14 @@
   ...
 }:
 
+let
+  wallpapers = pkgs.fetchFromGitHub {
+    owner = "orangci";
+    repo = "walls";
+    rev = "f61033f92cc24c60aebd306e113eb2aacd498c0f";
+    hash = "sha256-2/dZGA5IoYANTUlR0I/GUtO8GeOlzAHouyjtKuVvcl4=";
+  };
+in
 {
   programs.niri.enable = true;
   programs.xwayland.enable = true;
@@ -215,17 +223,21 @@
       enable = true;
       settings = {
         bar = {
-          density = "mini";
+          density = "default";
           position = "top";
           displayMode = "auto_hide";
           useSeparateOpacity = true;
-          backgroundOpacity = 0.5;
+          backgroundOpacity = 0.6;
           showCapsule = true;
-          showOutline = false;
+          showOutline = true;
           capsuleOpacity = 0.8;
           autoHideDelay = 150;
           autoShowDelay = 500;
           floating = true;
+          marginVertical = 4;
+          marginHorizontal = 4;
+          frameRadius = 16;
+          frameThickness = 2;
           widgets = {
             left = [
               {
@@ -242,7 +254,7 @@
               }
             ];
             right = [
-              { id = "Media"; }
+              { id = "SystemMonitor"; }
               {
                 id = "Volume";
                 displayMode = "alwaysShow";
@@ -257,8 +269,14 @@
             ];
           };
         };
+        wallpaper = {
+          enabled = true;
+          overviewEnabled = true;
+          directory = "${wallpapers}";
+          automationEnabled = true;
+        };
         colorSchemes = {
-          predefinedScheme = "Ayu";
+          predefinedScheme = "Catppuccin";
         };
         general = {
           enableShadows = true;
@@ -283,6 +301,14 @@
             }
             {
               enabled = true;
+              id = "brightness-card";
+            }
+            {
+              enabled = true;
+              id = "weather-card";
+            }
+            {
+              enabled = true;
               id = "media-sysmon-card";
             }
           ];
@@ -299,20 +325,23 @@
           enableSettingsSearch = false;
           enableWindowsSearch = false;
           enableSessionSearch = false;
+          iconMode = "tabler";
         };
         notifications = {
           sounds = {
             enabled = true;
           };
+          enableBatteryToast = true;
         };
         location = {
           name = "Tokyo";
-          weatherEnabled = false;
+          weatherEnabled = true;
+          autoLocate = true;
         };
         ui = {
           fontDefault = "JetBrains Mono Nerd Font";
           fontFixed = "JetBrains Mono Nerd Font";
-          borderRadius = 12;
+          borderRadius = 16;
         };
       };
     };

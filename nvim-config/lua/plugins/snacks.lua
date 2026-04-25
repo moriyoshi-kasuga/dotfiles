@@ -13,6 +13,15 @@ return {
     zen = { enabled = true },
     words = { enabled = true },
 
+    terminal = {
+      win = {
+        style = "terminal",
+        wo = {
+          winblend = 0,
+        },
+      },
+    },
+
     notifier = { enabled = false },
     explorer = { enabled = false },
     picker = { enabled = false },
