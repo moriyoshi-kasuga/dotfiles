@@ -48,6 +48,7 @@
           modules.nixos = {
             enable = true;
             gui.enable = true;
+            network.hostName = "Mori-NixOS";
           };
 
           modules.shell = {

@@ -1,26 +1,34 @@
 {
   mkModule,
-  username,
+  lib,
   ...
 }:
 
 mkModule {
   name = "nixos.network";
   inheritModule = "nixos";
-  nixosModule = {
-    services.resolved.enable = true;
-
-    networking = {
-      hostName = "${username}-NixOS";
-      nameservers = [
-        "1.1.1.1"
-        "8.8.8.8"
-      ];
-      networkmanager = {
-        enable = true;
-        dns = "systemd-resolved";
-      };
-      firewall.enable = true;
+  options = {
+    hostName = lib.mkOption {
+      type = lib.types.str;
+      description = "NixOS's HostName";
     };
   };
+  nixosModule =
+    { cfg, ... }:
+    {
+      services.resolved.enable = true;
+
+      networking = {
+        hostName = cfg.hostName;
+        nameservers = [
+          "1.1.1.1"
+          "8.8.8.8"
+        ];
+        networkmanager = {
+          enable = true;
+          dns = "systemd-resolved";
+        };
+        firewall.enable = true;
+      };
+    };
 }
