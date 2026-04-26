@@ -67,6 +67,7 @@ input {
 
 cursor {
   xcursor-size 24
+  xcursor-theme "catppuccin-mocha-sapphire-cursors"
   hide-when-typing
   hide-after-inactive-ms 10000
 }
@@ -92,7 +93,7 @@ output "HDMI-A-1" {
 // https://yalter.github.io/niri/Configuration:-Layout
 layout {
   // Set gaps around windows in logical pixels.
-  gaps 0
+  gaps 13
 
   // When to center a column when changing focus, options are:
   // - "never", default behavior, focusing an off-screen column will keep at the left
@@ -256,16 +257,10 @@ window-rule {
   open-floating true
 }
 
-// Example: block out two password managers from screen capture.
-// (This example rule is commented out with a "/-" in front.)
-/-window-rule {
-  match app-id=r#"^org\.keepassxc\.KeePassXC$"#
-  match app-id=r#"^org\.gnome\.World\.Secrets$"#
+window-rule {
+  geometry-corner-radius 16
 
-  block-out-from "screen-capture"
-
-  // Use this instead if you want them visible on third-party screenshot tools.
-  // block-out-from "screencast"
+  clip-to-geometry true
 }
 
 window-rule {
@@ -274,10 +269,6 @@ window-rule {
   border {
     on
   }
-  
-  geometry-corner-radius 16
-
-  clip-to-geometry true
 }
 
 binds {

@@ -1,6 +1,7 @@
 {
   mkModule,
   pkgs,
+  lib,
   ...
 }:
 
@@ -33,7 +34,7 @@ mkModule {
             useSeparateOpacity = true;
             backgroundOpacity = 0.6;
             showCapsule = true;
-            showOutline = true;
+            showOutline = false;
             showOnWorkspaceSwitch = false;
             capsuleOpacity = 0.8;
             autoHideDelay = 150;
@@ -174,17 +175,16 @@ mkModule {
       enable = true;
       xdgOpenUsePortal = true;
       extraPortals = with pkgs; [
+        xdg-desktop-portal-wlr
         xdg-desktop-portal-gnome
-        xdg-desktop-portal-gtk
       ];
       config = {
         common = {
-          default = [ "gtk" ];
+          default = [ "wlr" ];
         };
         niri = {
-          default = [
-            "gnome"
-            "gtk"
+          default = lib.mkForce [
+            "wlr"
           ];
         };
       };
