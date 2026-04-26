@@ -83,7 +83,10 @@
         homeDirectory = "/Users/mori";
         modules = {
           modules.base.enable = true;
-          modules.darwin.enable = true;
+          modules.darwin = {
+            enable = true;
+            tailscale.enable = true;
+          };
 
           modules.shell = {
             enable = true;

@@ -8,5 +8,6 @@
     ./finder.nix
     ./homebrew.nix
     ./aerospace.nix
+    ./tailscale.nix
   ];
 }
