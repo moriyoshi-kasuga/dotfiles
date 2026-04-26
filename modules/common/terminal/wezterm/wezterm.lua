@@ -1,4 +1,5 @@
 local wezterm = require("wezterm")
+local act = wezterm.action
 
 local config = {}
 
@@ -6,24 +7,23 @@ if wezterm.config_builder then
   config = wezterm.config_builder()
 end
 
+-- --- General Settings ---
 config.disable_default_key_bindings = true
-config.enable_tab_bar = false
 config.hide_tab_bar_if_only_one_tab = true
-
-if wezterm.target_triple ~= "x86_64-unknown-linux-gnu" then
-  config.window_decorations = "RESIZE"
+config.check_for_updates = false
+config.scrollback_lines = 10000
+if wezterm.target_triple:find("linux") then
+  config.enable_wayland = true
 end
 
+-- --- Appearance ---
 config.color_scheme = "Catppuccin Mocha"
 
-local window_background_opacity = 0.90
-config.window_background_opacity = window_background_opacity
-local enabled_transparent = true
-
-config.inactive_pane_hsb = {
-  saturation = 1.0,
-  brightness = 1.0,
-}
+config.font_size = 15
+config.adjust_window_size_when_changing_font_size = true
+config.cell_width = 1.0
+config.line_height = 1.0
+config.use_cap_height_to_scale_fallback_fonts = true
 
 config.font = wezterm.font_with_fallback({
   {
@@ -41,12 +41,23 @@ config.font = wezterm.font_with_fallback({
   },
   "Noto Color Emoji",
 })
-config.font_size = 15
-config.adjust_window_size_when_changing_font_size = true
-config.cell_width = 1.0
-config.line_height = 1.0
-config.use_cap_height_to_scale_fallback_fonts = true
 
+-- Window settings
+if wezterm.target_triple:find("darwin") then
+  config.window_decorations = "RESIZE"
+end
+
+local window_background_opacity = 0.90
+config.window_background_opacity = window_background_opacity
+local enabled_transparent = true
+
+-- Tab bar
+config.enable_tab_bar = false
+config.hide_tab_bar_if_only_one_tab = true
+config.use_fancy_tab_bar = false
+config.tab_bar_at_bottom = false
+
+-- Padding handling
 local default_padding
 if "@BIGMONITOR@" then
   default_padding = {
@@ -63,83 +74,24 @@ else
     bottom = 0,
   }
 end
-
 config.window_padding = default_padding
-
 local zero_padding = { left = 0, right = 0, top = 0, bottom = 0 }
 local padding_zeroed = false
 
--- ショートカットキー設定
+-- --- Keybindings ---
 config.keys = {
-  {
-    key = "Enter",
-    mods = "CMD",
-    action = wezterm.action.ToggleFullScreen,
-  },
-  {
-    key = "¥",
-    action = wezterm.action({ SendString = "\\" }),
-  },
-  {
-    key = "c",
-    mods = "CMD",
-    action = wezterm.action.CopyTo("Clipboard"),
-  },
-  {
-    key = "v",
-    mods = "CMD",
-    action = wezterm.action.PasteFrom("Clipboard"),
-  },
-  {
-    key = "c",
-    mods = "SUPER",
-    action = wezterm.action.CopyTo("Clipboard"),
-  },
-  {
-    key = "v",
-    mods = "SUPER",
-    action = wezterm.action.PasteFrom("Clipboard"),
-  },
-  {
-    key = "c",
-    mods = "CTRL|SHIFT",
-    action = wezterm.action.CopyTo("Clipboard"),
-  },
-  {
-    key = "v",
-    mods = "CTRL",
-    action = wezterm.action.PasteFrom("Clipboard"),
-  },
-  {
-    key = "+",
-    mods = "CMD",
-    action = wezterm.action.IncreaseFontSize,
-  },
-  {
-    key = "-",
-    mods = "CMD",
-    action = wezterm.action.DecreaseFontSize,
-  },
-  {
-    key = ".",
-    mods = "CMD",
-    action = wezterm.action.ResetFontSize,
-  },
-  {
-    key = "=",
-    mods = "SUPER",
-    action = wezterm.action.IncreaseFontSize,
-  },
-  {
-    key = "-",
-    mods = "SUPER",
-    action = wezterm.action.DecreaseFontSize,
-  },
-  {
-    key = ".",
-    mods = "SUPER",
-    action = wezterm.action.ResetFontSize,
-  },
+  -- Japanese backslash
+  { key = "¥", action = act.SendString("\\") },
+
+  -- Font size
+  { key = "=", mods = "CMD", action = act.IncreaseFontSize },
+  { key = "-", mods = "CMD", action = act.DecreaseFontSize },
+  { key = ".", mods = "CMD", action = act.ResetFontSize },
+
+  -- Paste
+  { key = "v", mods = "CTRL", action = act.PasteFrom("Clipboard") },
+
+  -- Toggles
   {
     key = "T",
     mods = "CMD|SHIFT",
