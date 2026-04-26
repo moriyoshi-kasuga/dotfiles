@@ -27,6 +27,7 @@ mkModule {
 
       home.sessionVariables = {
         JDTLS_JVM_ARGS = "-javaagent:" + Lombok + "/share/java/lombok.jar";
+        MANPAGER = "simplenvim +MAN!";
       };
 
       programs.mise.globalConfig.tools = {
