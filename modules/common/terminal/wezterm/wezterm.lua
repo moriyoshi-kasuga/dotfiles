@@ -137,7 +137,7 @@ config.keys = {
     action = wezterm.action.ResetFontSize,
   },
   {
-    key = "f",
+    key = "o",
     mods = "CMD|SHIFT",
     action = wezterm.action_callback(function(window, _)
       if padding_zeroed then
