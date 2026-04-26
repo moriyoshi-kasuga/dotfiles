@@ -15,7 +15,11 @@ if wezterm.target_triple ~= "x86_64-unknown-linux-gnu" then
 end
 
 config.color_scheme = "Catppuccin Mocha"
-config.window_background_opacity = 0.90
+
+local window_background_opacity = 0.90
+config.window_background_opacity = window_background_opacity
+local enabled_transparent = true
+
 config.inactive_pane_hsb = {
   saturation = 1.0,
   brightness = 1.0,
@@ -135,6 +139,18 @@ config.keys = {
     key = ".",
     mods = "SUPER",
     action = wezterm.action.ResetFontSize,
+  },
+  {
+    key = "T",
+    mods = "CMD|SHIFT",
+    action = wezterm.action_callback(function(window, _)
+      if enabled_transparent then
+        window:set_config_overrides({ window_background_opacity = 1.0 })
+      else
+        window:set_config_overrides({ window_background_opacity = window_background_opacity })
+      end
+      enabled_transparent = not enabled_transparent
+    end),
   },
   {
     key = "o",
