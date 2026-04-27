@@ -54,6 +54,6 @@ mkModule {
       launchanim = false;
     };
     system.defaults.spaces.spans-displays = true;
-    system.defaults.NSGlobalDomain._HIHideMenuBar = true;
+    system.defaults.NSGlobalDomain._HIHideMenuBar = false;
   };
 }
