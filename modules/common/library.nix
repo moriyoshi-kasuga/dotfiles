@@ -91,7 +91,9 @@ mkModule {
       libxshmfence
       libxxf86vm
       libelf
+      libinput
       udev
+
       gdk-pixbuf
       gobject-introspection
       gtk3
