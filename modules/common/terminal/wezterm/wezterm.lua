@@ -47,7 +47,13 @@ if wezterm.target_triple:find("darwin") then
   config.window_decorations = "RESIZE"
 end
 
-local window_background_opacity = 0.90
+local window_background_opacity
+if wezterm.target_triple:find("darwin") then
+  window_background_opacity = 0.8
+  config.macos_window_background_blur = 20
+else
+  window_background_opacity = 0.9
+end
 config.window_background_opacity = window_background_opacity
 local enabled_transparent = true
 
@@ -117,5 +123,9 @@ config.keys = {
     end),
   },
 }
+
+if wezterm.target_triple:find("darwin") then
+  table.insert(config.keys, { key = "v", mods = "CMD", action = act.PasteFrom("Clipboard") })
+end
 
 return config
