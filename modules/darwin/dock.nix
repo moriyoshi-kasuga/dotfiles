@@ -21,13 +21,34 @@ mkModule {
     {
       home.file.".local/bin/wallpaper-rotate".text = ''
         #!/usr/bin/env bash
-        FILE=$(find "${wallpapers}" -type f -iname "*.jpg" -o -iname "*.png" | shuf -n 1)
+        CACHE_FILE="$HOME/.cache/wallpaper-used"
+        mkdir -p "$(dirname "$CACHE_FILE")"
+        touch "$CACHE_FILE"
 
-        /usr/bin/osascript <<EOF
-        tell application "System Events"
-          set picture of every desktop to "$FILE"
-        end tell
+        # 全ファイルを検索してソート
+        ALL_FILES=$(fd . "${wallpapers}" -d 1 -t f -e jpg -e png | sort)
+
+        # 未使用のファイルのみを抽出 (comm -23 は 1つ目のリストにのみ存在する行を表示)
+        REMAINING=$(comm -23 <(echo "$ALL_FILES") <(sort "$CACHE_FILE"))
+
+        # 残りがない場合はキャッシュをクリアして全リストを使用
+        if [[ -z "$REMAINING" ]]; then
+          : >"$CACHE_FILE"
+          REMAINING="$ALL_FILES"
+        fi
+
+        # ランダムに1つ選択
+        FILE=$(shuf -n 1 <<<"$REMAINING")
+
+        if [[ -n "$FILE" ]]; then
+          /usr/bin/osascript <<EOF
+            tell application "System Events"
+              set picture of every desktop to "$FILE"
+            end tell
         EOF
+          # 使用済みとしてキャッシュに追加
+          echo "$FILE" >>"$CACHE_FILE"
+        fi
       '';
 
       home.file.".local/bin/wallpaper-rotate".executable = true;
