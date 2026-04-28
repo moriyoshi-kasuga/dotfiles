@@ -7,5 +7,6 @@
     ./shell
     ./terminal
     ./tool
+    ./wallpaper.nix
   ];
 }

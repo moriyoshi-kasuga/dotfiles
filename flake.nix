@@ -64,6 +64,7 @@
           };
           modules.term.wezterm.enable = true;
           modules.library.enable = true;
+          modules.wallpaper.enable = true;
         };
         homeConfig = {
           imports = [ inputs.noctalia.homeModules.default ];
@@ -101,6 +102,7 @@
           };
           modules.term.wezterm.enable = true;
           modules.library.enable = true;
+          modules.wallpaper.enable = true;
         };
       }
       {
