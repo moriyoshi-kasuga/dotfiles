@@ -8,7 +8,6 @@
     ./audio.nix
     ./basic.nix
     ./bluetooth.nix
-    ./docker.nix
     ./i18n.nix
     ./network.nix
     ./tailscale.nix

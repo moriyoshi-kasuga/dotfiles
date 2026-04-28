@@ -21,4 +21,20 @@ mkModule {
       dcbnc = "docker compose build --no-cache";
     };
   };
+  nixosModule = {
+    virtualisation = {
+      docker = {
+        enable = true;
+        rootless = {
+          enable = true;
+          setSocketVariable = true;
+        };
+      };
+    };
+  };
+  darwinModule = {
+    homebrew.casks = [
+      "docker-desktop"
+    ];
+  };
 }
