@@ -94,6 +94,8 @@ mkModule {
       libinput
       udev
 
+      libev
+      libevdev
       gdk-pixbuf
       gobject-introspection
       gtk3
