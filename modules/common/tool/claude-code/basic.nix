@@ -20,7 +20,6 @@ mkModule {
           disableAutoMode = "disable";
           allow = [
             # filesystem read-only
-            "Bash(ls)"
             "Bash(ls *)"
             "Bash(find *)"
             "Bash(fd *)"
@@ -36,28 +35,44 @@ mkModule {
             "Bash(diff *)"
             "Bash(stat *)"
             "Bash(du *)"
-            # search
+            "Bash(tokei *)"
             "Bash(grep *)"
             "Bash(rg *)"
             "Bash(fzf *)"
-            # modern alternatives
             "Bash(eza *)"
+            "Bash(jq *)"
+            "Bash(which *)"
+            "Bash(tldr *)"
             # git read-only
-            "Bash(git status)"
             "Bash(git status *)"
-            "Bash(git log)"
             "Bash(git log *)"
-            "Bash(git diff)"
             "Bash(git diff *)"
-            "Bash(git show)"
             "Bash(git show *)"
             "Bash(git branch)"
             "Bash(git stash list)"
+            # cargo (rust)
+            "Bash(cargo build *)"
+            "Bash(cargo clippy *)"
+            "Bash(cargo fmt *)"
+            "Bash(cargo check *)"
+            "Bash(cargo test *)"
+            "Bash(cargo nextest *)"
+            "Bash(cargo doc *)"
+            # js and ts
+            "Bash(npm run lint)"
+            "Bash(bun run lint)"
+            "Bash(npm run lint:fix)"
+            "Bash(bun run lint:fix)"
+            "Bash(npm run check)"
+            "Bash(bun run check)"
+            "Bash(npm run format)"
+            "Bash(bun run format)"
           ];
           deny = [
             "Bash(sudo *)"
             "Bash(rm -rf *)"
             "Bash(chmod 777 *)"
+            "Bash(cargo publish *)"
             "Read(.env*)"
             "Read(id_rsa)"
             "Read(id_ed25519)"
