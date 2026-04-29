@@ -64,6 +64,7 @@
           };
           modules.term.wezterm.enable = true;
           modules.library.enable = true;
+          modules.font.enable = true;
           modules.wallpaper.enable = true;
         };
         homeConfig = {
@@ -102,6 +103,7 @@
           };
           modules.term.wezterm.enable = true;
           modules.library.enable = true;
+          modules.font.enable = true;
           modules.wallpaper.enable = true;
         };
       }
@@ -139,6 +141,8 @@
             bigMonitor = true;
           };
           modules.library.enable = true;
+          modules.font.enable = true;
+          modules.wallpaper.enable = true;
         };
       }
     ];

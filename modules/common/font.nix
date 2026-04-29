@@ -1,21 +1,30 @@
 {
-  mkModule,
   pkgs,
+  mkModule,
   ...
 }:
 
+let
+  packages = with pkgs; [
+    nerd-fonts.jetbrains-mono
+
+    maple-mono.NormalNL-NF
+
+    noto-fonts
+    noto-fonts-cjk-sans
+    noto-fonts-color-emoji
+  ];
+in
 mkModule {
-  name = "nixos.font";
-  inheritModule = "nixos";
+  name = "font";
+  darwinHomeModule = {
+    fonts = {
+      inherit packages;
+    };
+  };
   nixosModule = {
     fonts = {
-      packages = with pkgs; [
-        nerd-fonts.jetbrains-mono
-
-        noto-fonts
-        noto-fonts-cjk-sans
-        noto-fonts-color-emoji
-      ];
+      inherit packages;
       fontconfig.defaultFonts = {
         emoji = [ "Noto Color Emoji" ];
         serif = [

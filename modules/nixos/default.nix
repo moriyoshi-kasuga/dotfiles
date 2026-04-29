@@ -9,7 +9,6 @@
     ./basic.nix
     ./bluetooth.nix
     ./docker.nix
-    ./font.nix
     ./i18n.nix
     ./network.nix
     ./tailscale.nix

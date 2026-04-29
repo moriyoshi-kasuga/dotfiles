@@ -93,10 +93,6 @@ mkModule {
     system.stateVersion = 6;
     system.primaryUser = username;
 
-    fonts.packages = [
-      pkgs.nerd-fonts.jetbrains-mono
-    ];
-
     users.users.${username}.home = homeDirectory;
   };
 }

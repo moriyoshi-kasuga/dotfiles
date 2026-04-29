@@ -27,7 +27,7 @@ config.use_cap_height_to_scale_fallback_fonts = true
 
 config.font = wezterm.font_with_fallback({
   {
-    family = "JetBrainsMono Nerd Font",
+    family = "Maple Mono Normal NL NF",
     weight = "Regular",
     stretch = "Normal",
     style = "Normal",

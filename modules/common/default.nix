@@ -8,5 +8,6 @@
     ./terminal
     ./tool
     ./wallpaper.nix
+    ./font.nix
   ];
 }
