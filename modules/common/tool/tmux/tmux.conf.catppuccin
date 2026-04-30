@@ -1,8 +1,8 @@
 # Status
 set -g status-position top
 set -g status-interval 5
-set -g status-style "bg=default"
 set -g status-bg default
+set -g status-style bg=default
 
 set -g status-right-length 100
 set -g status-left-length 100
@@ -14,8 +14,8 @@ set -ag status-right "#{E:@catppuccin_status_date_time}"
 # Catppuccin theme transparency
 set -g @catppuccin_window_status_style "custom"
 
-set -g @catppuccin_window_left_separator "#[bg=default,fg=#{@thm_surface_0}]#[bg=#{@thm_surface_0},fg=#{@thm_fg}]"
-set -g @catppuccin_window_middle_separator "#[fg=#{@thm_surface_0}]█"
+set -g @catppuccin_window_left_separator "#[bg=default,fg=#{@thm_overlay_2}]#[bg=#{@thm_overlay_2},fg=#{@thm_surface_0}]"
+set -g @catppuccin_window_middle_separator "#[fg=#{@thm_overlay_2}]█"
 set -g @catppuccin_window_right_separator "#[bg=default,fg=#{@thm_surface_0}]"
 set -g @catppuccin_window_current_left_separator "#[bg=default,fg=#{@thm_mauve}]#[bg=#{@thm_mauve},fg=#{@thm_bg}]"
 set -g @catppuccin_window_current_middle_separator "#[fg=#{@thm_mauve}]█"
