@@ -142,7 +142,10 @@
           };
           modules.library.enable = true;
           modules.font.enable = true;
-          modules.wallpaper.enable = true;
+          modules.wallpaper={
+            enable = true;
+            isCatppuccin = true;
+          };
         };
       }
     ];

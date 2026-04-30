@@ -1,19 +1,30 @@
 {
   pkgs,
+  lib,
   mkModule,
   ...
 }:
 
 let
-  wallpaperSrc = pkgs.fetchFromGitHub {
-    owner = "orangci";
-    repo = "walls";
-    rev = "f61033f92cc24c60aebd306e113eb2aacd498c0f";
-    hash = "sha256-2/dZGA5IoYANTUlR0I/GUtO8GeOlzAHouyjtKuVvcl4=";
-  };
-
   mkRotateScript =
-    setWallpaperCmd:
+    isCatppuccin: setWallpaperCmd:
+    let
+      wallpaperSrc =
+        if isCatppuccin then
+          pkgs.fetchFromGitHub {
+            owner = "orangci";
+            repo = "walls-catppuccin-mocha";
+            rev = "7bfdf10d16ad3a689f9f0cf3a0930da3d1a245a8";
+            hash = "sha256-N+MZHSRcwOldS5Ai8B3YfKquKs9oeUW/GkV1iKM5+i8=";
+          }
+        else
+          pkgs.fetchFromGitHub {
+            owner = "orangci";
+            repo = "walls";
+            rev = "f61033f92cc24c60aebd306e113eb2aacd498c0f";
+            hash = "sha256-2/dZGA5IoYANTUlR0I/GUtO8GeOlzAHouyjtKuVvcl4=";
+          };
+    in
     pkgs.writeShellApplication {
       name = "wallpaper-rotate";
       runtimeInputs = [ pkgs.fd ];
@@ -53,9 +64,13 @@ let
 in
 mkModule {
   name = "wallpaper";
+  options = {
+    isCatppuccin = lib.mkEnableOption "color";
+  };
   darwinHomeModule =
+    { cfg, ... }:
     let
-      darwinRotate = mkRotateScript ''
+      darwinRotate = mkRotateScript cfg.isCatppuccin ''
         /usr/bin/osascript -e "tell application \"System Events\" to set picture of every desktop to \"$FILE\""
       '';
     in
@@ -72,8 +87,9 @@ mkModule {
       };
     };
   linuxHomeModule =
+    { cfg, ... }:
     let
-      nixosRotate = mkRotateScript ''
+      nixosRotate = mkRotateScript cfg.isCatppuccin ''
         noctalia-shell ipc call wallpaper set "$FILE"
       '';
     in
