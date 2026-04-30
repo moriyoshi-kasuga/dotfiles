@@ -26,6 +26,8 @@ mkModule {
         mode = {
           main = {
             binding = {
+              cmd-q = "close";
+
               # Focus (niri: Alt+H/J/K/L)
               cmd-h = "focus left";
               cmd-l = "focus right";
