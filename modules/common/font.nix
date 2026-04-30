@@ -17,7 +17,7 @@ let
 in
 mkModule {
   name = "font";
-  darwinHomeModule = {
+  darwinModule = {
     fonts = {
       inherit packages;
     };
