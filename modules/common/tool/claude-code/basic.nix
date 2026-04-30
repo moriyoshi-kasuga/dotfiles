@@ -89,7 +89,10 @@ mkModule {
         claude-code
       ];
       home.file = (builtins.listToAttrs commandList) // {
-        ".claude/settings.json".text = builtins.toJSON settings;
+        ".claude/settings.json" = {
+          force = true;
+          text = builtins.toJSON settings;
+        };
       };
     };
 }
