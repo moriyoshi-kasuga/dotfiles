@@ -2,7 +2,6 @@ if require("config.util").is_in_simple_mode() then
   return {}
 end
 
----@type LazySpec
 return {
   "ibhagwan/fzf-lua",
   dependencies = {
@@ -143,15 +142,23 @@ return {
     {
       ",v",
       function()
+        local result = vim.fn.fnamemodify(vim.fn.expand("%:p"), ":.")
+        vim.fn.setreg("+", result)
+        vim.fn.setreg("*", result)
+        vim.notify("Copied: " .. result, vim.log.levels.INFO)
+      end
+    },
+    {
+      ",V",
+      function()
         local fzf = require("fzf-lua")
         local filepath = vim.fn.expand("%:p")
         local filename = vim.fn.expand("%:t")
 
         local paths = {
-          { label = "Absolute", value = filepath },
-          { label = "Relative to CWD", value = vim.fn.fnamemodify(filepath, ":.") },
-          { label = "Relative to HOME", value = vim.fn.fnamemodify(filepath, ":~") },
           { label = "Filename only", value = filename },
+          { label = "Absolute", value = filepath },
+          { label = "Relative to HOME", value = vim.fn.fnamemodify(filepath, ":~") },
         }
 
         local entries = vim.tbl_map(function(item)
