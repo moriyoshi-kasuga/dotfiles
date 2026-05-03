@@ -19,16 +19,6 @@ mkModule {
       cargo-deny
       cargo-show-asm
       cargo-make
-
-      wasm-bindgen-cli_0_2_108
-      wasm-pack
-      worker-build
-
-      tokei
-      uv
-      cyme
-      hyperfine
-      oha
     ];
   };
 }

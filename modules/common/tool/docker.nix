@@ -7,6 +7,8 @@ mkModule {
   name = "tool.docker";
   inheritModule = "tool";
   homeModule = {
+    programs.lazydocker.enable = true;
+
     home.shellAliases = {
       d = "docker";
       dc = "docker compose";

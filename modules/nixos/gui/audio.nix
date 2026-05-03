@@ -6,8 +6,8 @@
 }:
 
 mkModule {
-  name = "nixos.audio";
-  inheritModule = "nixos";
+  name = "nixos.gui.audio";
+  inheritModule = "nixos.gui";
   nixosModule = {
     users.users.${username}.extraGroups = [
       "audio"

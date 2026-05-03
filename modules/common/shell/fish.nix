@@ -14,7 +14,7 @@ mkModule {
   name = "shell.fish";
   inheritModule = "shell";
   options = {
-    default = mkEnableOption "Use zsh to default shell";
+    default = mkEnableOption "Use fish as default shell";
   };
   commonModule = {
     programs.fish.enable = true;

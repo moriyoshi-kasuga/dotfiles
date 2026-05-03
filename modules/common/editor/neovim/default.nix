@@ -102,6 +102,7 @@ mkModule {
 
       home.shellAliases = {
         v = "nvim";
+        todo = "simplenvim ~/todo.md";
       };
 
       home.sessionVariables = {

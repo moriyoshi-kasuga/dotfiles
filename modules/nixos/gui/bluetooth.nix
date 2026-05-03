@@ -4,8 +4,8 @@
 }:
 
 mkModule {
-  name = "nixos.bluetooth";
-  inheritModule = "nixos";
+  name = "nixos.gui.bluetooth";
+  inheritModule = "nixos.gui";
   nixosModule = {
     hardware.bluetooth = {
       enable = true;

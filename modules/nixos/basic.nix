@@ -11,12 +11,7 @@ mkModule {
   nixosModule = {
     nixpkgs.config.allowUnfree = true;
 
-    xdg.mime.enable = true;
-
-    services.libinput.enable = true;
-    services.udisks2.enable = true;
     services.dbus.enable = true;
-    services.upower.enable = true;
     services.openssh.enable = true;
 
     environment.systemPackages = with pkgs; [
@@ -32,18 +27,7 @@ mkModule {
       tmp.cleanOnBoot = true;
     };
 
-    services.power-profiles-daemon.enable = true;
-    powerManagement.enable = true;
-
-    services.logind.settings.Login = {
-      HandlePowerKey = "ignore";
-      LidSwitch = "suspend-then-hibernate";
-      PowerKey = "hibernate";
-      PowerKeyLongPress = "poweroff";
-    };
-
     security = {
-      polkit.enable = true;
       sudo.execWheelOnly = true;
     };
 

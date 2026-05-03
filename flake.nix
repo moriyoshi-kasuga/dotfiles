@@ -62,7 +62,7 @@
             git.enable = true;
             claude-code.enable = true;
           };
-          modules.term.wezterm.enable = true;
+          modules.terminal.wezterm.enable = true;
           modules.library.enable = true;
           modules.font.enable = true;
           modules.wallpaper.enable = true;
@@ -128,7 +128,7 @@
             git.enable = true;
             claude-code.enable = true;
           };
-          modules.term.wezterm.enable = true;
+          modules.terminal.wezterm.enable = true;
           modules.library.enable = true;
           modules.font.enable = true;
           modules.wallpaper.enable = true;
@@ -154,6 +154,7 @@
             node.enable = true;
             python.enable = true;
             rust.enable = true;
+            wasm.enable = true;
             haskell.enable = true;
             go.enable = true;
           };
@@ -163,7 +164,7 @@
             git.enable = true;
             claude-code.enable = true;
           };
-          modules.term.wezterm = {
+          modules.terminal.wezterm = {
             enable = true;
             bigMonitor = true;
           };

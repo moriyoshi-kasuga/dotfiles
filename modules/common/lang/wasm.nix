@@ -5,13 +5,13 @@
 }:
 
 mkModule {
-  name = "lang.python";
+  name = "lang.wasm";
   inheritModule = "lang";
   homeModule = {
     home.packages = with pkgs; [
-      python3
-      python3Packages.pip
-      uv
+      wasm-bindgen-cli_0_2_108
+      wasm-pack
+      worker-build
     ];
   };
 }

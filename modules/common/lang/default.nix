@@ -16,5 +16,6 @@
     ./buf.nix
     ./elm.nix
     ./lua.nix
+    ./wasm.nix
   ];
 }

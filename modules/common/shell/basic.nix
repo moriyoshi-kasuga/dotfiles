@@ -62,7 +62,6 @@ mkModule {
       ".." = "cd ../";
       "..." = "cd ../../";
       e = "exit";
-      todo = "simplenvim ~/todo.md";
 
       l = "eza";
       ll = "eza --long --git";

@@ -65,7 +65,8 @@ config.tab_bar_at_bottom = false
 
 -- Padding handling
 local default_padding
-if "@BIGMONITOR@" then
+---@diagnostic disable-next-line: undefined-global
+if BIG_MONITOR then
   default_padding = {
     left = 300,
     right = 100,

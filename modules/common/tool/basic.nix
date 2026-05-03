@@ -15,7 +15,6 @@ mkModule {
     };
 
     home.packages = with pkgs; [
-      xdg-utils
       coreutils
 
       ripgrep
@@ -30,10 +29,13 @@ mkModule {
       lnav
       bottom
       just
-      tailspin
       hexyl
       marp-cli
       prek
+
+      tokei
+      hyperfine
+      oha
     ];
 
     programs = {
@@ -41,7 +43,6 @@ mkModule {
       fd.enable = true;
       bat.enable = true;
       jq.enable = true;
-      lazydocker.enable = true;
 
       mise = {
         enable = true;
@@ -56,5 +57,11 @@ mkModule {
     home.shellAliases = {
       fdh = "fd -H -E \".git\"";
     };
+  };
+  linuxHomeModule = {
+    home.packages = with pkgs; [
+      xdg-utils
+      cyme
+    ];
   };
 }
