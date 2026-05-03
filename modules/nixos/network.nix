@@ -17,6 +17,7 @@ mkModule {
     { cfg, ... }:
     {
       services.resolved.enable = true;
+      services.openssh.enable = true;
 
       networking = {
         hostName = cfg.hostName;

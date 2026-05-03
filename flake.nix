@@ -102,6 +102,14 @@
             git.enable = true;
           };
         };
+        homeConfig = {
+          imports = [ inputs.noctalia.homeModules.default ];
+        };
+        nixosConfig = {
+          imports = [
+            ./hosts/sv-main/hardware-configuration.nix
+          ];
+        };
       }
       {
         name = "laptop";
