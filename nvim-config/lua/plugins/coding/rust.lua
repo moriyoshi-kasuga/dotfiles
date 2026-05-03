@@ -50,7 +50,8 @@ return {
             procMacro = {
               enable = true,
               ignored = {
-                ["async-trait"] = { "async_trait" },
+                -- if uncomment, missing signature. because commented
+                -- ["async-trait"] = { "async_trait" },
                 ["tauri_macros"] = { "generate_context" },
                 ["sqlx_macros"] = { "test" },
                 ["tokio_macros"] = { "test", "main" },
