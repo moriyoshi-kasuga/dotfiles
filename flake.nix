@@ -77,6 +77,33 @@
         };
       }
       {
+        name = "sv-main";
+        inherit inputs;
+        system = "x86_64-linux";
+        host = "nixos";
+        username = "sv-main";
+        homeDirectory = "/home/sv-main";
+        modules = {
+          modules.base.enable = true;
+          modules.nixos = {
+            enable = true;
+            network.hostName = "sv-main";
+          };
+          modules.shell = {
+            enable = true;
+            fish.default = true;
+          };
+          modules.lang = {
+            c.enable = true;
+          };
+          modules.editor.enable = true;
+          modules.tool = {
+            enable = true;
+            git.enable = true;
+          };
+        };
+      }
+      {
         name = "laptop";
         inherit inputs;
         system = "aarch64-darwin";
@@ -142,7 +169,7 @@
           };
           modules.library.enable = true;
           modules.font.enable = true;
-          modules.wallpaper={
+          modules.wallpaper = {
             enable = true;
             isCatppuccin = true;
           };
