@@ -10,14 +10,12 @@ mkModule {
   homeModule = {
     home.packages = with pkgs; [
       jdk21_headless
-
       gradle
 
       scala-next
       sbt
       coursier
-      scalafmt
-      scalafix
+      metals
     ];
   };
 }

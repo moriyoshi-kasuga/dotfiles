@@ -1,12 +1,20 @@
 return {
   {
     "scalameta/nvim-metals",
-    ft = { "scala", "sbt" },
+    ft = { "scala", "sbt", "java" },
     opts = function()
       local metals_config = require("metals").bare_config()
       -- metals_config.on_attach = function(client, bufnr)
       --   -- your on_attach function
       -- end
+
+      metals_config.settings = {
+        -- provide by nix
+        useGlobalExecutable = true,
+
+        serverVersion = "2.0.0-M2",
+        serverProperties = { "-Xmx4g" },
+      }
 
       return metals_config
     end,
