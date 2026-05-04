@@ -52,7 +52,7 @@ if wezterm.target_triple:find("darwin") then
   window_background_opacity = 0.8
   config.macos_window_background_blur = 20
 else
-  window_background_opacity = 0.9
+  window_background_opacity = 0.95
 end
 config.window_background_opacity = window_background_opacity
 local enabled_transparent = true
