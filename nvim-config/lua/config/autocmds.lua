@@ -11,6 +11,44 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   end,
 })
 
+-- auto reload file when changed outside nvim
+vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
+  group = augroup("checktime"),
+  callback = function()
+    if vim.o.buftype ~= "nofile" then
+      vim.cmd("checktime")
+    end
+  end,
+})
+
+-- resize splits when terminal is resized
+vim.api.nvim_create_autocmd("VimResized", {
+  group = augroup("resize_splits"),
+  callback = function()
+    local current_tab = vim.fn.tabpagenr()
+    vim.cmd("tabdo wincmd =")
+    vim.cmd("tabnext " .. current_tab)
+  end,
+})
+
+-- close utility windows with q
+vim.api.nvim_create_autocmd("FileType", {
+  group = augroup("close_with_q"),
+  pattern = {
+    "help",
+    "lspinfo",
+    "notify",
+    "qf",
+    "startuptime",
+    "checkhealth",
+    "man",
+  },
+  callback = function(event)
+    vim.bo[event.buf].buflisted = false
+    vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
+  end,
+})
+
 if is_simple_mode then
   return
 end

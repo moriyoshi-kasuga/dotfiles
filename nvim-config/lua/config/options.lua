@@ -49,6 +49,7 @@ else
   vim.opt.foldlevel = 99
 end
 
+vim.opt.smoothscroll = true
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
@@ -62,7 +63,7 @@ vim.opt.smartcase = true
 vim.opt.incsearch = true
 vim.opt.hlsearch = true
 vim.opt.wrapscan = true
-vim.opt.wildmode = { "list:longest" }
+vim.opt.wildmode = "longest:full,full"
 
 if is_simple_mode then
   -- Simple mode: minimal history and no persistent state
@@ -75,6 +76,7 @@ else
   vim.opt.shada = "!,'50,<10,s5,h"
   vim.opt.undofile = true
   vim.opt.undolevels = 10000
+  vim.opt.jumpoptions = "view"
 end
 
 -- コマンドライン補完
