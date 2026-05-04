@@ -71,7 +71,6 @@ return {
         "just",
         "asm_lsp",
         "gopls",
-        "jdtls",
         "buf_ls",
         "elmls",
 

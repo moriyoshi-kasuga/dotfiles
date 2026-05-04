@@ -26,7 +26,6 @@ mkModule {
       catppuccin.nvim.enable = false;
 
       home.sessionVariables = {
-        JDTLS_JVM_ARGS = "-javaagent:" + Lombok + "/share/java/lombok.jar";
         MANPAGER = "simplenvim +Man!";
       };
 
@@ -68,8 +67,6 @@ mkModule {
           tailwindcss-language-server
 
           # jvm langs
-          jdt-language-server
-          Lombok
           metals
 
           # HTML/CSS/JSON
