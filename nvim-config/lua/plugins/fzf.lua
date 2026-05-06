@@ -137,8 +137,15 @@ return {
     { ",e", function() require("fzf-lua").diagnostics_document({ severity_only = vim.diagnostic.severity.ERROR }) end, desc = "Error (Buffer)" },
     { ",E", function() require("fzf-lua").diagnostics_workspace({ severity_only = vim.diagnostic.severity.ERROR }) end, desc = "Error (Workspace)" },
     { ",gs", function() require("fzf-lua").git_status() end, desc = "Git Status" },
+    { ",gc", function() require("fzf-lua").git_commits() end, desc = "Git Commits" },
+    { ",gC", function() require("fzf-lua").git_bcommits() end, desc = "Git Buffer Commits" },
+    { ",gb", function() require("fzf-lua").git_branches() end, desc = "Git Branches" },
     { ",t", function() require("todo-comments.fzf").todo() end, desc = "Todo" },
     { ",T", function() require("todo-comments.fzf").todo({ keywords = { "TODO", "FIX", "FIXME" } }) end, desc = "Todo/Fix/Fixme" },
+    { ",o", function() require("fzf-lua").oldfiles() end, desc = "Recent Files" },
+    { ",l", function() require("fzf-lua").lsp_document_symbols() end, desc = "Document Symbols" },
+    { ",L", function() require("fzf-lua").lsp_live_workspace_symbols() end, desc = "Workspace Symbols" },
+    { ",y", function() require("fzf-lua").registers() end, desc = "Registers" },
     {
       ",v",
       function()
