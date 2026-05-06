@@ -1,26 +1,43 @@
+vim.api.nvim_create_autocmd("FileType", {
+  callback = function(args)
+    if vim.api.nvim_buf_line_count(args.buf) <= 50000 then
+      pcall(vim.treesitter.start, args.buf)
+      vim.bo[args.buf].indentexpr = "v:lua.vim.treesitter.foldexpr()"
+    end
+  end,
+})
+
 return {
   {
     "nvim-treesitter/nvim-treesitter",
     lazy = false,
     branch = "main",
-    config = function()
-      require("nvim-treesitter").setup({
-        auto_install = false,
-      })
+    opts = {
+      auto_install = false,
+    },
+  },
 
-      vim.api.nvim_create_autocmd("FileType", {
-        callback = function(args)
-          if vim.api.nvim_buf_line_count(args.buf) <= 50000 then
-            pcall(vim.treesitter.start, args.buf)
-          end
+  {
+    "nvim-treesitter/nvim-treesitter-context",
+    event = "BufReadPost",
+    opts = {
+      max_lines = 3,
+      min_window_height = 20,
+      trim_scope = "outer",
+    },
+    keys = {
+      {
+        "[x",
+        function()
+          require("treesitter-context").go_to_context(vim.v.count1)
         end,
-      })
-    end,
+        desc = "Jump to context",
+      },
+    },
   },
 
   {
     "nvim-treesitter/nvim-treesitter-textobjects",
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
     branch = "main",
     opts = {
       move = {
