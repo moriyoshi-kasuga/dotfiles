@@ -65,7 +65,11 @@
           modules.terminal.wezterm.enable = true;
           modules.library.enable = true;
           modules.font.enable = true;
-          modules.wallpaper.enable = true;
+          modules.wallpaper = {
+            enable = true;
+            owner = "dharmx";
+            repo = "walls";
+          };
         };
         homeConfig = {
           imports = [ inputs.noctalia.homeModules.default ];
@@ -139,7 +143,11 @@
           modules.terminal.wezterm.enable = true;
           modules.library.enable = true;
           modules.font.enable = true;
-          modules.wallpaper.enable = true;
+          modules.wallpaper = {
+            enable = true;
+            owner = "orangci";
+            repo = "walls-catppuccin-mocha";
+          };
         };
       }
       {
@@ -180,7 +188,8 @@
           modules.font.enable = true;
           modules.wallpaper = {
             enable = true;
-            isCatppuccin = true;
+            owner = "orangci";
+            repo = "walls-catppuccin-mocha";
           };
         };
       }
