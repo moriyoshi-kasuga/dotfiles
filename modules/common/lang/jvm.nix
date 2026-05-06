@@ -9,7 +9,7 @@ mkModule {
   inheritModule = "lang";
   homeModule = {
     home.packages = with pkgs; [
-      jdk21_headless
+      jdk21
       gradle
 
       scala-next
