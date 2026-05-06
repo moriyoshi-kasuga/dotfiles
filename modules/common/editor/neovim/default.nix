@@ -63,6 +63,8 @@ mkModule {
           tailwindcss-language-server
 
           # jvm langs
+          jdt-language-server
+          Lombok
           metals
 
           # HTML/CSS/JSON
