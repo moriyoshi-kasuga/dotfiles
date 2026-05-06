@@ -41,7 +41,7 @@ let
 
   cfg = attrByPath optionPath { } config;
 
-  fnArgs = { inherit cfg config; };
+  fnArgs = { inherit cfg config lib; };
   evalModule = module: if isFunction module then module fnArgs else module;
 
   module =

@@ -21,7 +21,7 @@ mkModule {
   name = "editor.neovim";
   inheritModule = "editor";
   homeModule =
-    { config, ... }:
+    { config, lib, ... }:
     {
       catppuccin.nvim.enable = false;
 
@@ -102,6 +102,12 @@ mkModule {
         MANPAGER = "simplenvim +Man!";
         EDITOR = "simplenvim";
       };
+
+      # Prevent programs.neovim from generating init.lua inside the symlinked dir.
+      # home-manager sorts files by path length and processes .config/nvim first,
+      # so realpath -m on .config/nvim/init.lua resolves through the out-of-store
+      # symlink to /home/mori/dotfiles/nvim-config/init.lua — outside $realOut.
+      xdg.configFile."nvim/init.lua" = lib.mkForce { enable = false; };
 
       home.file.".config/nvim".source =
         config.lib.file.mkOutOfStoreSymlink "${homeDirectory}/dotfiles/nvim-config";
