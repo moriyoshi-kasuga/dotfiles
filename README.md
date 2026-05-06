@@ -31,10 +31,10 @@ cp vars.nix.example vars.nix
 ## Apply
 
 ```sh
-./init.sh nixos   <name>           # NixOS
-./init.sh darwin  <name>           # macOS
-./init.sh flake   <name>           # Home Manager only
-./init.sh update                   # flake update
+./init.sh nixos   <name>   # NixOS
+./init.sh darwin  <name>   # macOS
+./init.sh flake   <name>   # Home Manager only
+./init.sh update           # flake update
 ```
 
 ## Hosts

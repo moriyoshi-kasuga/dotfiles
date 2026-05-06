@@ -71,11 +71,13 @@ inheritModule = "tool.git";
 **`inheritModule` に祖父を指定する場合**: 親とは独立して制御したいが、上位の一括有効化には含めたいとき。
 
 ```nix
-# lang.rust.wasm は lang.enable = true のとき自動有効化するが、
+# lang.wasm は lang.enable = true のとき自動有効化するが、
 # lang.rust.enable = true だけでは有効化しない (サーバーで rust は使うが wasm は不要)
-name = "lang.rust.wasm";
+name = "lang.wasm";
 inheritModule = "lang";
 ```
+
+> **注意**: 親の `enable` が `true` の場合、子モジュールを個別に `false` にしても無効化できません (`effectiveEnable = cfg.enable || inheritedCfg.enable`)。個別に制御する必要がある場合は親の `enable` を使わず、子モジュールを個別に列挙してください（`flake.nix` の `job` ホストの `modules.lang` がその例）。
 
 **`inheritModule` を省略する場合**: 常に明示的な `enable = true` が必要なとき。
 
@@ -84,7 +86,7 @@ inheritModule = "lang";
 # → flake.nix で tool.claude-code.enable = true を明示する
 name = "tool.claude-code.basic";
 inheritModule = "tool.claude-code";
-# tool/default.nix で options.modules.tool.claude-code.enable を別途定義
+# tool/claude-code/default.nix で options.modules.tool.claude-code.enable を別途定義
 ```
 
 ---
@@ -171,7 +173,7 @@ mkModule {
 | `terminal.wezterm` | 明示 | WezTerm。`bigMonitor` オプションあり |
 | `lang` | `modules.lang.enable` | 全言語を一括有効化 |
 | `lang.rust` | `lang.enable` or 明示 | cargo 開発ツール群 |
-| `lang.rust.wasm` | `lang.enable` or 明示 | wasm-pack・wasm-bindgen |
+| `lang.wasm` | `lang.enable` or 明示 | wasm-pack・wasm-bindgen |
 | `lang.{go,c,python,...}` | `lang.enable` or 明示 | 各言語ツールチェーン |
 | `tool` | `modules.tool.enable` | 全ツールを一括有効化 |
 | `tool.basic` | `tool.enable` or 明示 | ripgrep・bat・fd・jq・mise・yazi 等 |

@@ -39,10 +39,12 @@ run_flake_update() {
 
 run_home_manager() {
   local name=$1
-  nix --extra-experimental-features 'nix-command flakes' \
-    run home-manager/master -- \
-    switch --extra-experimental-features 'nix-command flakes' --flake .#"${name}" -b backup \
-    --override-input vars-file "file+file://$VARS_FILE"
+  local activation
+  activation=$(nix --extra-experimental-features 'nix-command flakes' \
+    build --no-link --print-out-paths \
+    --override-input vars-file "file+file://$VARS_FILE" \
+    ".#homeConfigurations.${name}.activationPackage")
+  HOME_MANAGER_BACKUP_EXT=backup "$activation/activate"
 }
 
 run_darwin() {

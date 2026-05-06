@@ -56,13 +56,13 @@ effectiveEnable = cfg.enable || inheritedCfg.enable
 modules.lang.enable = true
   → lang.go       (inheritModule = "lang") が有効化
   → lang.rust     (inheritModule = "lang") が有効化
-  → lang.rust.wasm (inheritModule = "lang") が有効化
+  → lang.wasm     (inheritModule = "lang") が有効化
   → lang.node     (inheritModule = "lang") が有効化
   ...
 
 modules.lang.rust.enable = true (明示)
   → lang.rust のみ有効化
-  → lang.rust.wasm は有効化されない (inheritModule = "lang" であるため)
+  → lang.wasm は有効化されない (inheritModule = "lang" であるため)
 ```
 
 ### プラットフォームルーティング

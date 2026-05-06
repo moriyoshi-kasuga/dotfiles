@@ -110,7 +110,7 @@ else if "home" == host then
       extraSpecialArgs = specialArgs // {
         platform = "home";
       };
-      modules = commonModules ++ homeModules;
+      modules = homeModules;
     };
   }
 else
