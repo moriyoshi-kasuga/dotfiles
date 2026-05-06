@@ -3,93 +3,111 @@ if require("config.util").is_in_simple_mode() then
 end
 
 return {
-  "ibhagwan/fzf-lua",
-  dependencies = {
-    "nvim-mini/mini.icons",
+  {
+    "folke/trouble.nvim",
+    cmd = "Trouble",
+    opts = { focus = true },
+    -- stylua: ignore
+    keys = {
+      { "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnostics (Trouble)" },
+      { "<leader>xX", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Buffer Diagnostics (Trouble)" },
+      { "<leader>cs", "<cmd>Trouble symbols toggle<cr>", desc = "Symbols (Trouble)" },
+      { "<leader>cl", "<cmd>Trouble lsp toggle<cr>", desc = "LSP References (Trouble)" },
+      { "<leader>xL", "<cmd>Trouble loclist toggle<cr>", desc = "Location List (Trouble)" },
+      { "<leader>xQ", "<cmd>Trouble qflist toggle<cr>", desc = "Quickfix List (Trouble)" },
+    },
   },
-  cmd = "FzfLua",
-  opts = function()
-    local fzf = require("fzf-lua")
+  {
+    "ibhagwan/fzf-lua",
+    dependencies = {
+      "nvim-mini/mini.icons",
+      "folke/trouble.nvim",
+    },
+    cmd = "FzfLua",
+    opts = function()
+      local fzf = require("fzf-lua")
 
-    fzf.register_ui_select()
+      fzf.register_ui_select()
 
-    local keymap = fzf.config.defaults.keymap
-    keymap.fzf["ctrl-u"] = "half-page-up"
-    keymap.fzf["ctrl-d"] = "half-page-down"
-    keymap.fzf["ctrl-f"] = "preview-page-down"
-    keymap.fzf["ctrl-b"] = "preview-page-up"
-    keymap.builtin["<c-f>"] = "preview-page-down"
-    keymap.builtin["<c-b>"] = "preview-page-up"
+      local keymap = fzf.config.defaults.keymap
+      keymap.fzf["ctrl-u"] = "half-page-up"
+      keymap.fzf["ctrl-d"] = "half-page-down"
+      keymap.fzf["ctrl-f"] = "preview-page-down"
+      keymap.fzf["ctrl-b"] = "preview-page-up"
+      keymap.builtin["<c-f>"] = "preview-page-down"
+      keymap.builtin["<c-b>"] = "preview-page-up"
 
-    local actions = fzf.actions
+      fzf.config.defaults.actions.files["ctrl-q"] = require("trouble.sources.fzf").actions.open
 
-    ---@type fzf-lua.config
-    ---@diagnostic disable-next-line: missing-fields
-    return {
-      winopts = {
-        height = 0.85,
-        width = 0.75,
-        row = 0.5,
-        col = 0.5,
-        border = "single",
-        preview = {
-          default = "bat",
+      local actions = fzf.actions
+
+      ---@type fzf-lua.config
+      ---@diagnostic disable-next-line: missing-fields
+      return {
+        winopts = {
+          height = 0.85,
+          width = 0.75,
+          row = 0.5,
+          col = 0.5,
           border = "single",
-          wrap = "nowrap",
-          hidden = "nohidden",
-          vertical = "down:60%",
-          horizontal = "right:60%",
-          layout = "vertical",
+          preview = {
+            default = "bat",
+            border = "single",
+            wrap = "nowrap",
+            hidden = "nohidden",
+            vertical = "down:60%",
+            horizontal = "right:60%",
+            layout = "vertical",
+          },
         },
-      },
-      defaults = {
-        formatter = "path.filename_first",
-      },
-      fzf_opts = {
-        ["--no-scrollbar"] = true,
-        ["--layout"] = "reverse",
-        ["--info"] = "inline",
-        ["--ansi"] = "",
-        ["--multi"] = "",
-      },
-      files = {
-        prompt = "Files> ",
-        fd_opts = [[--color=never --type f --hidden --follow --exclude .git]],
-        actions = {
-          ["default"] = actions.file_edit,
+        defaults = {
+          formatter = "path.filename_first",
         },
-      },
-      grep = {
-        prompt = "Grep> ",
-        input_prompt = "Grep For> ",
-        rg_opts = [[--column --line-number --no-heading --color=always --smart-case --max-columns=4096 --hidden -g "!.git"]],
-        actions = {
-          ["default"] = actions.file_edit,
+        fzf_opts = {
+          ["--no-scrollbar"] = true,
+          ["--layout"] = "reverse",
+          ["--info"] = "inline",
+          ["--ansi"] = "",
+          ["--multi"] = "",
         },
-      },
-      buffers = {
-        prompt = "Buffers> ",
-        actions = {
-          ["default"] = actions.buf_edit,
-          ["ctrl-d"] = { fn = actions.buf_del, reload = true },
+        files = {
+          prompt = "Files> ",
+          fd_opts = [[--color=never --type f --hidden --follow --exclude .git]],
+          actions = {
+            ["default"] = actions.file_edit,
+          },
         },
-      },
-      lsp = {
-        prompt_postfix = "> ",
-        cwd_only = false,
-        async_or_timeout = 5000,
-        file_icons = true,
-        git_icons = false,
-        lsp_icons = true,
-      },
-      diagnostics = {
-        prompt = "Diagnostics> ",
-        file_icons = true,
-        git_icons = false,
-        diag_icons = true,
-      },
-    }
-  end,
+        grep = {
+          prompt = "Grep> ",
+          input_prompt = "Grep For> ",
+          rg_opts = [[--column --line-number --no-heading --color=always --smart-case --max-columns=4096 --hidden -g "!.git"]],
+          actions = {
+            ["default"] = actions.file_edit,
+          },
+        },
+        buffers = {
+          prompt = "Buffers> ",
+          actions = {
+            ["default"] = actions.buf_edit,
+            ["ctrl-d"] = { fn = actions.buf_del, reload = true },
+          },
+        },
+        lsp = {
+          prompt_postfix = "> ",
+          cwd_only = false,
+          async_or_timeout = 5000,
+          file_icons = true,
+          git_icons = false,
+          lsp_icons = true,
+        },
+        diagnostics = {
+          prompt = "Diagnostics> ",
+          file_icons = true,
+          git_icons = false,
+          diag_icons = true,
+        },
+      }
+    end,
   -- stylua: ignore
   keys = {
     { ",", desc = "FzfLua" },
@@ -200,5 +218,6 @@ return {
       end,
       desc = "Copy Current Buf Path",
     },
+  },
   },
 }
