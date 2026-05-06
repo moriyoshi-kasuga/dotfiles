@@ -16,7 +16,6 @@ local tab = {
       "python",
       "java",
       "kotlin",
-      "scala",
       "swift",
       "c",
       "cpp",
