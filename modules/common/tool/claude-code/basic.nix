@@ -43,6 +43,7 @@ mkModule {
             "Bash(jq *)"
             "Bash(which *)"
             "Bash(tldr *)"
+            "Bash(nix search *)"
             # git read-only
             "Bash(git status *)"
             "Bash(git log *)"
@@ -50,6 +51,7 @@ mkModule {
             "Bash(git show *)"
             "Bash(git branch)"
             "Bash(git stash list)"
+            "Bash(gh pr diff *)"
             # cargo (rust)
             "Bash(cargo build *)"
             "Bash(cargo clippy *)"
