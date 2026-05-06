@@ -16,7 +16,7 @@ Usage: ./init.sh <command> [name] [options]
 
 Commands:
   flake <name>            Apply Home Manager configuration
-  nixos <name> [--upgrade] Apply NixOS configuration
+  nixos <name> [--boot]   Apply NixOS configuration
   darwin <name>           Apply nix-darwin configuration
   update                      Update flake inputs
   help                        Show this help message
@@ -57,21 +57,19 @@ run_nixos() {
   local name=$1
   local extra=${2-}
 
-  if [ -n "${extra}" ] && [ "${extra}" != "--upgrade" ]; then
+  if [ -z "${extra}" ]; then
+    # shellcheck disable=SC2086
+    sudo -H nixos-rebuild switch --flake .#"${name}" \
+      --override-input vars-file "file+file://$VARS_FILE"
+  elif [ "${extra}" == "--boot" ]; then
+    # shellcheck disable=SC2086
+    sudo -H nixos-rebuild boot --flake .#"${name}" \
+      --override-input vars-file "file+file://$VARS_FILE"
+  else
     echo "Unknown argument for nixos: ${extra}"
-    echo 'Usage: ./init.sh nixos <name> [--upgrade]'
+    echo 'Usage: ./init.sh nixos <name> [--boot]'
     exit 1
   fi
-
-  if [ "${extra}" = "--upgrade" ]; then
-    echo 'Upgrading NixOS system...'
-  else
-    echo 'Applying NixOS configuration...'
-  fi
-
-  # shellcheck disable=SC2086
-  sudo -H nixos-rebuild switch --flake .#"${name}" ${extra} \
-    --override-input vars-file "file+file://$VARS_FILE"
 }
 
 main() {
