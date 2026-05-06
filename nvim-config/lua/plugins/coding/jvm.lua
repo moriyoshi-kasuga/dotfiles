@@ -22,7 +22,12 @@ return {
 
       return metals_config
     end,
+    dependencies = { "mfussenegger/nvim-dap" },
     config = function(self, metals_config)
+      metals_config.on_attach = function(_, _)
+        require("metals").setup_dap()
+      end
+
       local nvim_metals_group = vim.api.nvim_create_augroup("nvim-metals", { clear = true })
       vim.api.nvim_create_autocmd("FileType", {
         pattern = self.ft,
