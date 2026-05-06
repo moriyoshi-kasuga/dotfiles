@@ -25,10 +25,6 @@ mkModule {
     {
       catppuccin.nvim.enable = false;
 
-      home.sessionVariables = {
-        MANPAGER = "simplenvim +Man!";
-      };
-
       programs.mise.globalConfig.tools = {
         tree-sitter = "0.26.8";
       };
@@ -103,6 +99,7 @@ mkModule {
       };
 
       home.sessionVariables = {
+        MANPAGER = "simplenvim +Man!";
         EDITOR = "simplenvim";
       };
 
