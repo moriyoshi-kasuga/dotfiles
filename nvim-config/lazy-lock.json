@@ -50,6 +50,7 @@
   "snacks.nvim": { "branch": "main", "commit": "ad9ede6a9cddf16cedbd31b8932d6dcdee9b716e" },
   "todo-comments.nvim": { "branch": "main", "commit": "31e3c38ce9b29781e4422fc0322eb0a21f4e8668" },
   "treesj": { "branch": "main", "commit": "5fa4e7ba3517f8fe743bb4488f9e9c7ce83330fc" },
+  "trouble.nvim": { "branch": "main", "commit": "bd67efe408d4816e25e8491cc5ad4088e708a69a" },
   "undotree": { "branch": "master", "commit": "6fa6b57cda8459e1e4b2ca34df702f55242f4e4d" },
   "vim-matchup": { "branch": "master", "commit": "dccb2d12ef2a703d2f076b3cda36a3339449d1eb" },
   "which-key.nvim": { "branch": "main", "commit": "3aab2147e74890957785941f0c1ad87d0a44c15a" },
