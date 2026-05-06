@@ -15,26 +15,14 @@ input {
 
   keyboard {
     repeat-delay 200
-    repeat-rate 25
+    repeat-rate 30
     xkb {
     }
   }
 
-  // Next sections include libinput settings.
-  // Omitting settings disables them, or leaves them at their default values.
-  // All commented-out settings here are examples, not defaults.
   touchpad {
-    // off
     tap
-    // dwt
-    // dwtp
-    // drag false
-    // drag-lock
     natural-scroll
-    // accel-speed 0.2
-    // accel-profile "flat"
-    // scroll-method "two-finger"
-    // disabled-on-external-mouse
   }
 
   mouse {
@@ -56,13 +44,6 @@ input {
     // scroll-button-lock
     // middle-emulation
   }
-
-  // Uncomment this to make the mouse warp to the center of newly focused windows.
-  // warp-mouse-to-focus
-
-  // Focus windows and outputs automatically when moving the mouse into them.
-  // Setting max-scroll-amount="0%" makes it work only on windows already fully on screen.
-  // focus-follows-mouse max-scroll-amount="0%"
 }
 
 cursor {
@@ -94,6 +75,13 @@ output "HDMI-A-1" {
 layout {
   // Set gaps around windows in logical pixels.
   gaps 13
+
+  struts {
+    left 5
+    right 5
+    top 0
+    bottom 1
+  }
 
   // When to center a column when changing focus, options are:
   // - "never", default behavior, focusing an off-screen column will keep at the left
@@ -187,18 +175,6 @@ layout {
 
     // You can also change the shadow color and opacity.
     color "#0007"
-  }
-
-  // Struts shrink the area occupied by windows, similarly to layer-shell panels.
-  // You can think of them as a kind of outer gaps. They are set in logical pixels.
-  // Left and right struts will cause the next window to the side to always be visible.
-  // Top and bottom struts will simply add outer gaps in addition to the area occupied by
-  // layer-shell panels and regular gaps.
-  struts {
-    // left 64
-    // right 64
-    // top 64
-    // bottom 64
   }
 }
 
@@ -337,21 +313,6 @@ binds {
   Alt+Shift+U        { move-workspace-down; }
   Alt+Shift+I        { move-workspace-up; }
 
-  Alt+WheelScrollDown      cooldown-ms=150 { focus-workspace-down; }
-  Alt+WheelScrollUp        cooldown-ms=150 { focus-workspace-up; }
-  Alt+Ctrl+WheelScrollDown cooldown-ms=150 { move-column-to-workspace-down; }
-  Alt+Ctrl+WheelScrollUp   cooldown-ms=150 { move-column-to-workspace-up; }
-
-  Alt+WheelScrollRight      { focus-column-right; }
-  Alt+WheelScrollLeft       { focus-column-left; }
-  Alt+Ctrl+WheelScrollRight { move-column-right; }
-  Alt+Ctrl+WheelScrollLeft  { move-column-left; }
-
-  Alt+Shift+WheelScrollDown      { focus-column-right; }
-  Alt+Shift+WheelScrollUp        { focus-column-left; }
-  Alt+Ctrl+Shift+WheelScrollDown { move-column-right; }
-  Alt+Ctrl+Shift+WheelScrollUp   { move-column-left; }
-
   Alt+BracketLeft  { consume-or-expel-window-left; }
   Alt+BracketRight { consume-or-expel-window-right; }
 
@@ -363,10 +324,7 @@ binds {
   Alt+Ctrl+R { reset-window-height; }
   Alt+F { maximize-column; }
   Alt+Shift+F { fullscreen-window; }
-
-  // Expand the focused column to space not taken up by other fully visible columns.
-  // Makes the column "fill the rest of the space".
-  Alt+Ctrl+F { expand-column-to-available-width; }
+  Alt+Ctrl+F { maximize-window-to-edges; }
 
   Alt+C { center-column; }
 
@@ -395,10 +353,6 @@ binds {
   // The allow-inhibiting=false property can be applied to other binds as well,
   // which ensures niri always processes them, even when an inhibitor is active.
   Alt+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
-
-  // The quit action will show a confirmation dialog to avoid accidental exits.
-  Alt+Shift+E { quit; }
-  Ctrl+Alt+Delete { quit; }
 
   // Powers off the monitors. To turn them back on, do any input like
   // moving the mouse or pressing any other key.
