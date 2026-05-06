@@ -1,4 +1,22 @@
 return {
+  root_dir = function(fname)
+    -- Defer to metals when this is a Scala project
+    if vim.fs.root(fname, { "build.sbt" }) then
+      return nil
+    end
+    return vim.fs.root(fname, {
+      "build.xml",
+      "pom.xml",
+      "settings.gradle",
+      "settings.gradle.kts",
+      ".git",
+    })
+  end,
+
+  init_options = {
+    jvm_args = vim.env.LOMBOK_JAR and { "-javaagent:" .. vim.env.LOMBOK_JAR } or {},
+  },
+
   settings = {
     java = {
       format = {
@@ -6,8 +24,6 @@ return {
         settings = {
           url = "https://raw.githubusercontent.com/google/styleguide/refs/heads/gh-pages/eclipse-java-google-style.xml",
           profile = "GoogleStyle",
-          -- url = "https://raw.githubusercontent.com/redhat-developer/vscode-java/refs/heads/master/formatters/eclipse-formatter.xml",
-          -- profile = "Eclipse",
         },
       },
       eclipse = {

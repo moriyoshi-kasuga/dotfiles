@@ -40,6 +40,9 @@ mkModule {
           "--set"
           "TREESITTER_GRAMMARS"
           "${grammarsPath}"
+          "--set"
+          "LOMBOK_JAR"
+          "${Lombok}/share/java/lombok.jar"
         ];
 
         extraPackages = with pkgs; [

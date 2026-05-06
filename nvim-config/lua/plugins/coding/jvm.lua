@@ -4,16 +4,20 @@ return {
     ft = { "scala", "sbt", "java" },
     opts = function()
       local metals_config = require("metals").bare_config()
-      -- metals_config.on_attach = function(client, bufnr)
-      --   -- your on_attach function
-      -- end
 
       metals_config.settings = {
-        -- provide by nix
+        -- provided by nix
         useGlobalExecutable = true,
 
         serverVersion = "2.0.0-M2",
         serverProperties = { "-Xmx4g" },
+        showImplicitArguments = true,
+        showImplicitConversionsAndClasses = true,
+        showInferredType = true,
+        excludedPackages = {
+          "akka.actor.typed.javadsl",
+          "com.github.swagger.akka.javadsl",
+        },
       }
 
       return metals_config
@@ -23,7 +27,10 @@ return {
       vim.api.nvim_create_autocmd("FileType", {
         pattern = self.ft,
         callback = function()
-          require("metals").initialize_or_attach(metals_config)
+          -- Only attach metals when build.sbt exists (Scala project)
+          if vim.fs.root(vim.api.nvim_buf_get_name(0), { "build.sbt" }) then
+            require("metals").initialize_or_attach(metals_config)
+          end
         end,
         group = nvim_metals_group,
       })
