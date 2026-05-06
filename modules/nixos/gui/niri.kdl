@@ -147,7 +147,7 @@ layout {
 
   border {
     off
-    
+
     width 2
     active-gradient from="#cba6f7" to="#89b4fa" angle=45
     inactive-color "#313244"
@@ -247,6 +247,12 @@ animations {
 // Find more information on the wiki:
 // https://yalter.github.io/niri/Configuration:-Window-Rules
 
+window-rule {
+  geometry-corner-radius 16
+
+  clip-to-geometry true
+}
+
 // Open the Firefox picture-in-picture player as floating by default.
 window-rule {
   // This app-id regular expression will work for both:
@@ -258,14 +264,19 @@ window-rule {
 }
 
 window-rule {
-  geometry-corner-radius 16
-
-  clip-to-geometry true
+  match app-id="org.wezfurlong.wezterm"
+  
+  background-effect {
+    xray true
+    blur true
+    noise 0.05
+    saturation 3
+  }
 }
 
 window-rule {
   match is-floating=true
-  
+
   border {
     on
   }
