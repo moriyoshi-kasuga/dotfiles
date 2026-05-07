@@ -20,6 +20,7 @@ mkModule {
   };
   darwinHomeModule = {
     home.packages = with pkgs; [
+      libcxx
       cctools
     ];
   };
