@@ -34,8 +34,27 @@ let
       text = ''
         CACHE_DIR="$HOME/.cache/wallpaper-rotate"
         CACHE_FILE="$CACHE_DIR/shown.txt"
+        STOP_FLAG="$CACHE_DIR/stopped"
 
         mkdir -p "$CACHE_DIR"
+
+        case "''${1:-}" in
+          --stop)
+            touch "$STOP_FLAG"
+            echo "wallpaper rotation stopped"
+            exit 0
+            ;;
+          --start)
+            rm -f "$STOP_FLAG"
+            echo "wallpaper rotation started"
+            exit 0
+            ;;
+        esac
+
+        if [ -f "$STOP_FLAG" ]; then
+          exit 0
+        fi
+
         touch "$CACHE_FILE"
 
         mapfile -t ALL_WALLPAPERS < <(fd . -t f -e png -e jpg ${wallpaperSrc})
