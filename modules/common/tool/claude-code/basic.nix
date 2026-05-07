@@ -84,6 +84,18 @@ mkModule {
           ];
         };
         cleanupPeriodDays = 30;
+        hooks = {
+          Stop = [
+            {
+              hooks = [
+                {
+                  type = "command";
+                  command = "notify 'Task completed' 'Claude Code'";
+                }
+              ];
+            }
+          ];
+        };
       };
     in
     {
