@@ -165,15 +165,7 @@
             enable = true;
             fish.default = true;
           };
-          modules.lang = {
-            c.enable = true;
-            node.enable = true;
-            python.enable = true;
-            rust.enable = true;
-            wasm.enable = true;
-            haskell.enable = true;
-            go.enable = true;
-          };
+          modules.lang.enable = true;
           modules.editor.enable = true;
           modules.tool = {
             enable = true;
