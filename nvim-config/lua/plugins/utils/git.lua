@@ -13,7 +13,7 @@ return {
       }
 
       return {
-        use_icons = false, -- required nvim-web-devicons
+        use_icons = true,
         show_help_hints = false,
         hooks = {
           diff_buf_read = function()
@@ -48,14 +48,56 @@ return {
     "NeogitOrg/neogit",
     lazy = true,
     dependencies = {
-      "nvim-lua/plenary.nvim", -- required
-      "sindrets/diffview.nvim", -- optional - Diff integration
+      "nvim-lua/plenary.nvim",
+      "sindrets/diffview.nvim",
 
       "ibhagwan/fzf-lua",
     },
     cmd = "Neogit",
     keys = {
       { "<C-.>", "<cmd>Neogit<cr>", desc = "Show Neogit UI" },
+    },
+  },
+  {
+    "pwntester/octo.nvim",
+    cmd = "Octo",
+    opts = {
+      picker = "fzf-lua",
+      enable_builtin = true,
+    },
+    keys = {
+      {
+        "<leader>oi",
+        "<CMD>Octo issue list<CR>",
+        desc = "List GitHub Issues",
+      },
+      {
+        "<leader>op",
+        "<CMD>Octo pr list<CR>",
+        desc = "List GitHub PullRequests",
+      },
+      {
+        "<leader>od",
+        "<CMD>Octo discussion list<CR>",
+        desc = "List GitHub Discussions",
+      },
+      {
+        "<leader>on",
+        "<CMD>Octo notification list<CR>",
+        desc = "List GitHub Notifications",
+      },
+      {
+        "<leader>os",
+        function()
+          require("octo.utils").create_base_search_command({ include_current_repo = true })
+        end,
+        desc = "Search GitHub",
+      },
+    },
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "ibhagwan/fzf-lua",
+      "nvim-tree/nvim-web-devicons",
     },
   },
 }
