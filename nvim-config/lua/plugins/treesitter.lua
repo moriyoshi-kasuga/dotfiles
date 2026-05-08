@@ -2,7 +2,6 @@ vim.api.nvim_create_autocmd("FileType", {
   callback = function(args)
     if vim.api.nvim_buf_line_count(args.buf) <= 50000 then
       pcall(vim.treesitter.start, args.buf)
-      vim.bo[args.buf].indentexpr = "v:lua.vim.treesitter.foldexpr()"
     end
   end,
 })
