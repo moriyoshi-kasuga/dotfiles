@@ -9,13 +9,15 @@ mkModule {
   inheritModule = "lang";
   homeModule = {
     home.packages = with pkgs; [
-      jdk21
+      jdk25
       gradle
 
       scala-next
       sbt
-      coursier
-      metals
+      mill
+      (metals.override {
+        jre = jdk25;
+      })
     ];
   };
 }

@@ -1,7 +1,7 @@
 return {
   {
     "scalameta/nvim-metals",
-    ft = { "scala", "sbt", "java" },
+    ft = { "scala", "sbt", "java", "mill" },
     opts = function()
       local metals_config = require("metals").bare_config()
 
@@ -32,8 +32,8 @@ return {
       vim.api.nvim_create_autocmd("FileType", {
         pattern = self.ft,
         callback = function()
-          -- Only attach metals when build.sbt exists (Scala project)
-          if vim.fs.root(vim.api.nvim_buf_get_name(0), { "build.sbt" }) then
+          -- Only attach metals when build.sbt or build.mill exists (Scala project)
+          if vim.fs.root(vim.api.nvim_buf_get_name(0), { "build.sbt", "build.mill" }) then
             require("metals").initialize_or_attach(metals_config)
           end
         end,
