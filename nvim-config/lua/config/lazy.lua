@@ -18,12 +18,13 @@ vim.opt.rtp:prepend(lazypath)
 -- Setup lazy.nvim
 require("lazy").setup({
   install = {
-    missing = true,
+    missing = not require("config.util").is_in_simple_mode(),
   },
   spec = {
     { import = "plugins" },
     { import = "plugins.utils" },
     require("config.util").is_in_simple_mode() and {} or { import = "plugins.coding" },
+    require("config.util").is_in_simple_mode() and {} or { import = "plugins.utils-great" },
   },
   change_detection = { enabled = false },
   checker = { enabled = false },
