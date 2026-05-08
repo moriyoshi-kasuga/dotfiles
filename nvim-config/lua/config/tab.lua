@@ -14,8 +14,6 @@ local tab = {
     extensions = {
       "rust",
       "python",
-      "java",
-      "kotlin",
       "swift",
       "c",
       "cpp",
