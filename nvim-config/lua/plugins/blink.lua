@@ -30,20 +30,24 @@ return {
       },
 
       appearance = {
-        use_nvim_cmp_as_default = false,
-        -- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
-        -- Adjusts spacing to ensure icons are aligned
         nerd_font_variant = "mono",
       },
 
       cmdline = {
-        keymap = {
-          ["<Tab>"] = { "show", "accept" },
+        keymap = { preset = "cmdline" },
+        sources = { "buffer", "cmdline" },
+        completion = {
+          menu = { auto_show = false },
+          ghost_text = { enabled = false },
         },
-        completion = { menu = { auto_show = false } },
       },
 
       completion = {
+        accept = {
+          auto_brackets = {
+            enabled = false,
+          },
+        },
         menu = {
           border = "single",
           scrolloff = 1,
@@ -51,13 +55,11 @@ return {
         },
 
         ghost_text = {
-          enabled = false,
           show_with_menu = false,
         },
 
         documentation = {
           auto_show = true,
-          auto_show_delay_ms = 500,
 
           window = {
             border = "single",
@@ -66,6 +68,7 @@ return {
       },
 
       signature = {
+        enabled = true,
         window = { border = "single" },
       },
 
@@ -80,6 +83,7 @@ return {
           },
           lsp = {
             score_offset = 25,
+            fallbacks = { "buffer" },
           },
           path = {
             score_offset = 100,
