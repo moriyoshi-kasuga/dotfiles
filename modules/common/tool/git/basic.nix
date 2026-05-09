@@ -23,6 +23,7 @@ mkModule {
 
     home.packages = with pkgs; [
       gh
+      git-filter-repo
     ];
 
     home.shellAliases = {
