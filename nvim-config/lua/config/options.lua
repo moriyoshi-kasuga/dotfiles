@@ -1,5 +1,7 @@
 local is_simple_mode = require("config.util").is_in_simple_mode()
 
+vim.o.winborder = "single"
+
 -- privateだが問題ない
 vim.lsp.log._set_filename("/tmp/nvim-lsp.log")
 
@@ -20,7 +22,7 @@ vim.opt.shortmess:append("sI")
 
 vim.opt.termguicolors = true
 vim.opt.laststatus = 3
-vim.opt.wrap = false
+vim.opt.wrap = true
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.cursorline = false

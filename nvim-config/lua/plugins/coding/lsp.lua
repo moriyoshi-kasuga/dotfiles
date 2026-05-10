@@ -125,7 +125,6 @@ return {
     keys = {
       { "gk", function() vim.lsp.buf.signature_help() end, desc = "Signature Help" },
       { "gl", function() vim.lsp.codelens.run() end, desc = "CoreLens" },
-      { "<C-k>", function() vim.lsp.buf.signature_help() end, desc = "Signature Help", mode = "i" },
       { "<leader>cd", function() vim.diagnostic.open_float() end, desc = "Line Diagnostics" },
       { "[d", function() vim.diagnostic.jump({ count = -1, float = true }) end, desc = "Previous Diagnostic" },
       { "]d", function() vim.diagnostic.jump({ count = 1, float = true }) end, desc = "Next Diagnostic" },

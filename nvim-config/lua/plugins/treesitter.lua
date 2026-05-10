@@ -20,6 +20,7 @@ return {
     "nvim-treesitter/nvim-treesitter-context",
     event = "BufReadPost",
     opts = {
+      enable = false,
       max_lines = 3,
       min_window_height = 20,
       trim_scope = "outer",

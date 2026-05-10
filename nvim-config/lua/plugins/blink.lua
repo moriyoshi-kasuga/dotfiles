@@ -14,6 +14,7 @@ return {
         -- set to 'none' to disable the 'default' preset
         preset = "none",
 
+        ["<C-k>"] = { "show_signature", "hide_signature", "fallback" },
         ["<C-space>"] = { "show", "cancel" },
         ["<C-y>"] = { "select_and_accept", "fallback" },
         ["<S-CR>"] = { "fallback" },
@@ -69,7 +70,10 @@ return {
 
       signature = {
         enabled = true,
-        window = { border = "single" },
+        window = {
+          border = "single",
+          show_documentation = false,
+        },
       },
 
       -- Default list of enabled providers defined so that you can extend it

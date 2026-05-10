@@ -11,6 +11,9 @@ return {
       ---@module 'render-markdown'
       opts = {
         render_modes = true,
+        sign = {
+          enabled = false,
+        },
         heading = {
           width = "block",
           sign = false,

@@ -20,6 +20,13 @@ return {
         information = { "undercurl" },
       },
     },
+    custom_highlights = function(colors)
+      return {
+        RenderMarkdownCode = { bg = colors.base },
+        RenderMarkdownCodeInfo = { bg = colors.base },
+        RenderMarkdownCodeBorder = { bg = colors.base },
+      }
+    end,
     integrations = {
       blink = true,
       flash = true,
@@ -30,7 +37,12 @@ return {
       nvim_surround = true,
       blink_cmp = true,
       diffview = true,
+      neogit = true,
       render_markdown = true,
+      octo = true,
+      snacks = {
+        enabled = true,
+      },
     },
   },
   config = function(_, opts)
