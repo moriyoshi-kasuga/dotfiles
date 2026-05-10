@@ -5,6 +5,14 @@ return {
     opts = function()
       local metals_config = require("metals").bare_config()
 
+      metals_config.on_attach = function(_, bufnr)
+        vim.keymap.set("n", "<leader>cm", function()
+          require("metals").new_scala_file()
+        end, { buf = bufnr })
+
+        require("metals").setup_dap()
+      end
+
       metals_config.settings = {
         -- provided by nix
         useGlobalExecutable = true,
@@ -24,10 +32,6 @@ return {
     end,
     dependencies = { "mfussenegger/nvim-dap" },
     config = function(self, metals_config)
-      metals_config.on_attach = function(_, _)
-        require("metals").setup_dap()
-      end
-
       local nvim_metals_group = vim.api.nvim_create_augroup("nvim-metals", { clear = true })
       vim.api.nvim_create_autocmd("FileType", {
         pattern = self.ft,

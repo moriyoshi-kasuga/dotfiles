@@ -114,6 +114,19 @@ return {
         ["R"] = "actions.refresh",
         ["g."] = { "actions.toggle_hidden", mode = "n" },
         ["g\\"] = { "actions.toggle_trash", mode = "n" },
+        ["<leader>cm"] = {
+          function()
+            local _, oil_dir = pcall(require("oil").get_current_dir)
+            if not oil_dir then
+              vim.notify("failed to get oil dir", 2)
+              return
+            end
+            require("metals").new_scala_file({ oil_dir })
+          end,
+          mode = "n",
+          nowait = true,
+          desc = "Create Scala File",
+        },
       },
       use_default_keymaps = false,
     },
