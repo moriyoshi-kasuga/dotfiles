@@ -44,46 +44,96 @@ return {
       end,
     })
 
-    ---@type table<number, {token:lsp.ProgressToken, msg:string, done:boolean}[]>
+    ---@type table<number, { token:lsp.ProgressToken, msg:string, done:boolean }[]>
     local progress = vim.defaulttable()
+
+    local spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
+
+    ---@param client vim.lsp.Client
+    ---@param value table
+    local function should_skip(client, value)
+      if client.name ~= "metals" then
+        return false
+      end
+
+      -- metals の高頻度 report を完全に無視
+      if value.kind == "report" then
+        return true
+      end
+
+      local text = table.concat({
+        value.title or "",
+        value.message or "",
+      }, " ")
+
+      -- dependency compile spam
+      if text:find("%.metals/readonly/dependencies") then
+        return true
+      end
+
+      if text:find("^Compiled ") then
+        return true
+      end
+
+      if text:find("Indexing complete!") then
+        return true
+      end
+
+      return false
+    end
+
     vim.api.nvim_create_autocmd("LspProgress", {
-      ---@param ev {data: {client_id: integer, params: lsp.ProgressParams}}
       callback = function(ev)
         local client = vim.lsp.get_client_by_id(ev.data.client_id)
-        local value = ev.data.params.value --[[@as {percentage?: number, title?: string, message?: string, kind: "begin" | "report" | "end"}]]
+        local value = ev.data.params.value
+
         if not client or type(value) ~= "table" then
           return
         end
+
+        if should_skip(client, value) then
+          return
+        end
+
         local p = progress[client.id]
+
+        local msg = ("%s%s"):format(value.title or "", value.message and (" %s"):format(value.message) or "")
+
+        if value.percentage then
+          msg = ("[%3d%%] %s"):format(value.percentage, msg)
+        end
 
         for i = 1, #p + 1 do
           if i == #p + 1 or p[i].token == ev.data.params.token then
             p[i] = {
               token = ev.data.params.token,
-              msg = ("[%3d%%] %s%s"):format(
-                value.kind == "end" and 100 or value.percentage or 100,
-                value.title or "",
-                value.message and (" **%s**"):format(value.message) or ""
-              ),
+              msg = msg,
               done = value.kind == "end",
             }
             break
           end
         end
 
-        local msg = {} ---@type string[]
+        local messages = {}
+
         progress[client.id] = vim.tbl_filter(function(v)
-          return table.insert(msg, v.msg) or not v.done
+          table.insert(messages, v.msg)
+          return not v.done
         end, p)
 
-        local spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
-        vim.notify(table.concat(msg, "\n"), vim.log.levels.INFO, {
-          id = "lsp_progress",
-          title = client.name,
-          opts = function(notif)
-            notif.icon = #progress[client.id] == 0 and " "
-              or spinner[math.floor(vim.uv.hrtime() / (1e6 * 80)) % #spinner + 1]
+        if #messages == 0 then
+          Snacks.notifier.hide("lsp_progress_" .. client.id)
+          return
+        end
+
+        Snacks.notifier.notify(table.concat(messages, "\n"), "info", {
+          id = "lsp_progress_" .. client.id,
+          title = "LSP • " .. client.name,
+          timeout = false,
+          keep = function()
+            return #progress[client.id] > 0
           end,
+          icon = spinner[math.floor(vim.uv.hrtime() / (1e6 * 80)) % #spinner + 1],
         })
       end,
     })
