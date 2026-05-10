@@ -2,6 +2,8 @@ local map = vim.keymap.set
 
 map("i", "<C-e>", "<esc>o")
 
+map("n", "<leader>n", "<cmd>enew | set ft=markdown<cr>", { desc = "New Blank Buf with md" })
+
 map("n", "<leader>bo", function()
   local win_bufs = {}
   for _, win in ipairs(vim.api.nvim_list_wins()) do
@@ -61,6 +63,8 @@ map("n", "<leader><Tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
 map("n", "<leader><Tab>o", "<cmd>tabonly<cr>", { desc = "Close Other Tab" })
 map("n", "<leader><Tab>n", "<cmd>tabnext<cr>", { desc = "Tab Next" })
 map("n", "<leader><Tab>p", "<cmd>tabprevious<cr>", { desc = "Tab Prev" })
+map("n", "<leader><Tab>c", "<cmd>tabnew<cr>", { desc = "Tab New" })
+map("n", "<leader><Tab><Tab>", "<cmd>tabnew<cr>", { desc = "Tab New" })
 
 map("n", "=", [[<cmd>vertical resize +5<cr>]], { desc = "Increase window width" })
 map("n", "-", [[<cmd>vertical resize -5<cr>]], { desc = "Decrease window width" })
