@@ -16,6 +16,35 @@ return {
     },
   },
   {
+    "j-hui/fidget.nvim",
+    event = "UIEnter",
+    opts = {
+      notification = { override_vim_notify = true },
+      progress = {
+        ignore = {
+          function(msg)
+            if msg == nil or msg.title == nil then
+              return false
+            end
+            return msg.lsp_client.name == "metals" and string.find(msg.title, "Compiling ")
+          end,
+        },
+      },
+    },
+    keys = {
+      {
+        "<leader>sna",
+        "<cmd>Fidget history<cr>",
+        desc = "Notification History",
+      },
+      {
+        "<leader>snd",
+        "<cmd>Fidget clear<cr>",
+        desc = "Dismiss All Notification",
+      },
+    },
+  },
+  {
     "nvim-mini/mini.icons",
     opts = {},
     lazy = true,

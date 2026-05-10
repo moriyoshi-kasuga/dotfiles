@@ -5,6 +5,8 @@ return {
     opts = function()
       local metals_config = require("metals").bare_config()
 
+      metals_config.init_options.statusBarProvider = "on"
+
       metals_config.on_attach = function(_, bufnr)
         vim.keymap.set("n", "<leader>cm", function()
           require("metals").new_scala_file()
