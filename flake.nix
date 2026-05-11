@@ -145,8 +145,8 @@
           modules.font.enable = true;
           modules.wallpaper = {
             enable = true;
-            owner = "orangci";
-            repo = "walls-catppuccin-mocha";
+            owner = "dharmx";
+            repo = "walls";
           };
         };
       }
@@ -180,8 +180,8 @@
           modules.font.enable = true;
           modules.wallpaper = {
             enable = true;
-            owner = "orangci";
-            repo = "walls-catppuccin-mocha";
+            owner = "dharmx";
+            repo = "walls";
           };
         };
       }
