@@ -10,12 +10,12 @@ mkModule {
   inheritModule = "tool.claude-code";
   homeModule =
     let
-      commandFiles = builtins.readDir ./commands;
+      commandFiles = builtins.attrNames (builtins.readDir ./commands);
       allowSkills = map (x: "Skill(${x})") commandFiles;
       commandList = map (x: {
         name = ".claude/skills/" + (lib.removeSuffix ".md" x) + "/SKILL.md";
         value.source = ./commands + ("/" + x);
-      }) (builtins.attrNames commandFiles);
+      }) commandFiles;
 
       settings = {
         permissions = {
@@ -72,7 +72,7 @@ mkModule {
             "Bash(npm run format)"
             "Bash(bun run format)"
           ]
-          + allowSkills;
+          ++ allowSkills;
           deny = [
             "Bash(sudo *)"
             "Bash(rm -rf *)"
