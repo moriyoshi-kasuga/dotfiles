@@ -11,7 +11,7 @@ mkModule {
   homeModule =
     let
       commandFiles = builtins.attrNames (builtins.readDir ./commands);
-      allowSkills = map (x: "Skill(${x})") commandFiles;
+      allowSkills = map (x: "Skill(${lib.removeSuffix ".md" x})") commandFiles;
       commandList = map (x: {
         name = ".claude/skills/" + (lib.removeSuffix ".md" x) + "/SKILL.md";
         value.source = ./commands + ("/" + x);
