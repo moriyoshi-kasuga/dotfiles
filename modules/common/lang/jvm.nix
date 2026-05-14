@@ -4,20 +4,42 @@
   ...
 }:
 
+let
+  java = pkgs.graalvmPackages.graalvm-ce;
+in
 mkModule {
   name = "lang.jvm";
   inheritModule = "lang";
   homeModule = {
-    home.packages = with pkgs; [
-      jdk25
-      gradle
-
-      scala-next
-      sbt
-      mill
-      (metals.override {
-        jre = jdk25;
-      })
-    ];
+    home.sessionVariables = {
+      MILL_JVM_VERSION = "system";
+    };
+    programs.java = {
+      enable = true;
+      package = java;
+    };
+    home.packages =
+      with pkgs;
+      [
+        (gradle.override {
+          jre = java;
+        })
+        (scala-next.override {
+          scala = pkgs.scala.override { jre = java; };
+        })
+        (sbt.override {
+          jre = java;
+        })
+        (mill.override {
+          jre = java;
+        })
+        (coursier.override {
+          jre = java;
+        })
+        (metals.override {
+          jre = java;
+        })
+      ]
+      ++ [ java ];
   };
 }
