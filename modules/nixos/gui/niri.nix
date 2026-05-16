@@ -9,15 +9,6 @@ mkModule {
   name = "nixos.gui.niri";
   inheritModule = "nixos.gui";
   linuxHomeModule = {
-    home.packages = with pkgs; [
-      (writeShellScriptBin "notify" ''
-        if [ $# -eq 1 ]; then
-          notify-send --urgency low "$1"
-        else
-          notify-send --urgency low --app-name "$2" "$1"
-        fi
-      '')
-    ];
     home.file.".config/niri/config.kdl" = {
       source = ./niri.kdl;
       force = true;

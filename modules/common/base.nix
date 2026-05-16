@@ -43,6 +43,16 @@ mkModule {
   };
   linuxHomeModule = {
     home.packages = with pkgs; [
+      (writeShellScriptBin "notify" ''
+        if [ $# -eq 1 ]; then
+          notify-send --urgency low --transient --expire-time=5000 \
+            --icon=dialog-information "$1"
+        else
+          notify-send --urgency low --transient --expire-time=5000 \
+            --icon=dialog-information --app-name "$2" "$1"
+        fi
+      '')
+
       (writeShellScriptBin "pbpaste" ''
         wl-paste --no-newline
       '')
