@@ -71,9 +71,16 @@ mkModule {
             "Bash(bun run check)"
             "Bash(npm run format)"
             "Bash(bun run format)"
+            # scala
+            "Bash(mill *.compile)"
+            "Bash(mill *.assembly)"
+            "Bash(mill *.test)"
+            "Bash(mill *.fix)"
+            "Bash(mill mill.scalalib.scalafmt/)"
           ]
           ++ allowSkills;
           deny = [
+            "Bash(terraform *)"
             "Bash(sudo *)"
             "Bash(rm -rf *)"
             "Bash(chmod 777 *)"
