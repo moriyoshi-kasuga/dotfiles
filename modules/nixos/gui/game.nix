@@ -17,6 +17,7 @@ mkModule {
         discord
         prismlauncher
         appimage-run
+        r2modman
       ];
     };
 
