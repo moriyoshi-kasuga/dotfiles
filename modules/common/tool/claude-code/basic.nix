@@ -88,6 +88,17 @@ mkModule {
         };
         cleanupPeriodDays = 30;
         hooks = {
+          Notification = [
+            {
+              matcher = "";
+              hooks = [
+                {
+                  type = "command";
+                  command = "notify 'Require operation' 'Claude Code'";
+                }
+              ];
+            }
+          ];
           Stop = [
             {
               hooks = [
