@@ -14,8 +14,6 @@ let
   };
   neovim = pkgs.neovim-unwrapped;
   neovimCmd = pkgs.lib.getExe neovim;
-
-  Lombok = pkgs.lombok;
 in
 mkModule {
   name = "editor.neovim";
@@ -40,9 +38,6 @@ mkModule {
           "--set"
           "TREESITTER_GRAMMARS"
           "${grammarsPath}"
-          "--set"
-          "LOMBOK_JAR"
-          "${Lombok}/share/java/lombok.jar"
         ];
 
         extraPackages = with pkgs; [
@@ -64,11 +59,6 @@ mkModule {
           astro-language-server
           vtsls
           tailwindcss-language-server
-
-          # jvm langs
-          jdt-language-server
-          Lombok
-          metals
 
           # HTML/CSS/JSON
           vscode-langservers-extracted

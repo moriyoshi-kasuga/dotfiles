@@ -114,14 +114,14 @@ return {
         ["R"] = "actions.refresh",
         ["g."] = { "actions.toggle_hidden", mode = "n" },
         ["g\\"] = { "actions.toggle_trash", mode = "n" },
-        ["<leader>cm"] = {
+        ["<leader>mm"] = {
           function()
             local _, oil_dir = pcall(require("oil").get_current_dir)
             if not oil_dir then
               vim.notify("failed to get oil dir", 2)
               return
             end
-            require("metals").new_scala_file({ oil_dir })
+            require("metals").new_scala_file(vim.uri_from_fname(oil_dir))
           end,
           mode = "n",
           nowait = true,

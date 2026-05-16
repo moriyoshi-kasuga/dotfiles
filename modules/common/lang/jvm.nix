@@ -24,9 +24,6 @@ mkModule {
         (gradle.override {
           jre = java;
         })
-        (scala-next.override {
-          scala = pkgs.scala.override { jre = java; };
-        })
         (sbt.override {
           jre = java;
         })
@@ -36,7 +33,16 @@ mkModule {
         (coursier.override {
           jre = java;
         })
+        (jdt-language-server.override {
+          jdk = java;
+        })
         (metals.override {
+          jre = java;
+        })
+        (scala-next.override {
+          scala = pkgs.scala.override { jre = java; };
+        })
+        (scala-cli.override {
           jre = java;
         })
       ]
