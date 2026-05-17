@@ -81,6 +81,15 @@ return {
         "cssls",
       })
 
+      -- Suppress diagnostics published for files under .metals/
+      local orig_publish_diags = vim.lsp.handlers["textDocument/publishDiagnostics"]
+      vim.lsp.handlers["textDocument/publishDiagnostics"] = function(err, result, ctx, config)
+        if result and result.uri and result.uri:find("/.metals/", 1, true) then
+          return
+        end
+        orig_publish_diags(err, result, ctx, config)
+      end
+
       -- Configure diagnostics
       vim.diagnostic.config({
         virtual_text = true,
