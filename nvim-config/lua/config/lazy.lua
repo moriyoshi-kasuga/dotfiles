@@ -24,7 +24,7 @@ require("lazy").setup({
     { import = "plugins" },
     { import = "plugins.utils" },
     require("config.util").is_in_simple_mode() and {} or { import = "plugins.coding" },
-    require("config.util").is_in_simple_mode() and {} or { import = "plugins.utils-great" },
+    require("config.util").is_in_simple_mode() and {} or { import = "plugins.utils-extra" },
   },
   change_detection = { enabled = false },
   checker = { enabled = false },
