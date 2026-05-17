@@ -51,12 +51,9 @@ mkModule {
       "nvidia"
     ];
     environment.sessionVariables = {
-      GBM_BACKEND = "nvidia-drm";
       __GLX_VENDOR_LIBRARY_NAME = "nvidia";
       LIBVA_DRIVER_NAME = "nvidia";
-      # Fix for hardware video acceleration with NVIDIA
       NVD_BACKEND = "direct";
-      # Sometimes needed for cursor on NVIDIA
       WLR_NO_HARDWARE_CURSORS = "1";
     };
   };
