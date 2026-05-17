@@ -117,6 +117,10 @@ mkModule {
             }
           ];
         };
+        language = "Japanese";
+        env = {
+          IS_DEMO = 1;
+        };
       };
     in
     {
