@@ -115,7 +115,15 @@ mkModule {
     { cfg, ... }:
     let
       rotateScript = mkRotateScript cfg.owner cfg.repo ''
-        /usr/bin/osascript -e "tell application \"System Events\" to set picture of every desktop to \"$FILE\""
+        /usr/bin/osascript \
+          -e "tell application \"System Events\"" \
+          -e "repeat with d in desktops" \
+          -e "tell d" \
+          -e "set picture to \"$FILE\"" \
+          -e "set |picture scaling| to 0" \
+          -e "end tell" \
+          -e "end repeat" \
+          -e "end tell"
       '';
     in
     {
