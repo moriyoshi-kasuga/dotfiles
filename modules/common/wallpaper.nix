@@ -30,7 +30,10 @@ let
     in
     pkgs.writeShellApplication {
       name = "wallpaper-rotate";
-      runtimeInputs = [ pkgs.fd ];
+      runtimeInputs = [
+        pkgs.fd
+        pkgs.yazi
+      ];
       text = ''
         CACHE_DIR="$HOME/.cache/wallpaper-rotate"
         CACHE_FILE="$CACHE_DIR/shown.txt"
@@ -47,6 +50,18 @@ let
           --start)
             rm -f "$STOP_FLAG"
             echo "wallpaper rotation started"
+            exit 0
+            ;;
+          --choice)
+            CHOOSER_FILE=$(mktemp)
+            yazi ${wallpaperSrc} --chooser-file "$CHOOSER_FILE"
+            FILE=$(cat "$CHOOSER_FILE")
+            rm -f "$CHOOSER_FILE"
+            if [ -z "$FILE" ]; then
+              echo "No file selected" >&2
+              exit 1
+            fi
+            ${setWallpaperCmd}
             exit 0
             ;;
         esac
