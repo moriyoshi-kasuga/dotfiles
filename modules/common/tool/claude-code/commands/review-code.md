@@ -1,6 +1,6 @@
 ---
 description: 指定されたコード・ファイルをレビューする
-argument-hint: <ファイルパス | PR番号 | 対象の説明>
+argument-hint: <ファイルパス | 対象の説明>
 allowed-tools: Read, Glob, Grep
 ---
 
@@ -9,7 +9,6 @@ allowed-tools: Read, Glob, Grep
 **対象**: $ARGUMENTS
 
 > ファイルパスが指定されている場合はそのファイルを対象にします。
-> `#123` 形式の場合は `gh pr diff 123` で差分を取得します。
 > 未指定の場合は `git diff HEAD` のステージ済み変更を対象にします。
 
 ## レビュー観点
