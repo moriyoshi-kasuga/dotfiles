@@ -101,7 +101,7 @@ mkModule {
               hooks = [
                 {
                   type = "command";
-                  command = "notify \"$(jq -r '.message // \"Require operation\"')\" 'Claude Code'";
+                  command = "msg=$(jq -r '.message // \"Require operation\"'); [ \"$msg\" != \"Claude is waiting for your input\" ] && notify \"$msg\" 'Claude Code'";
                 }
               ];
             }
