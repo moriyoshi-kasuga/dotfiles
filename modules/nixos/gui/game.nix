@@ -15,9 +15,9 @@ mkModule {
       ];
       packages = with pkgs; [
         discord
-        prismlauncher
         appimage-run
         r2modman
+        modrinth-app
       ];
     };
 
