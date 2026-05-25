@@ -109,6 +109,7 @@ mkModule {
       pangomm
       glib
       webkitgtk_4_1
+      wayland
     ];
   };
 }
