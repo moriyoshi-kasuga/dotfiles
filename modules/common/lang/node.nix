@@ -9,7 +9,7 @@ mkModule {
   inheritModule = "lang";
   homeModule = {
     programs.mise.globalConfig.tools = {
-      bun = "1.3.11";
+      deno = "2.8.0";
     };
   };
   darwinHomeModule = {
