@@ -74,13 +74,13 @@ output "HDMI-A-1" {
 // https://yalter.github.io/niri/Configuration:-Layout
 layout {
   // Set gaps around windows in logical pixels.
-  gaps 13
+  gaps 18
 
   struts {
-    left 5
-    right 5
-    top 0
-    bottom 1
+    left 0
+    right 0
+    top -5
+    bottom -4
   }
 
   // When to center a column when changing focus, options are:
