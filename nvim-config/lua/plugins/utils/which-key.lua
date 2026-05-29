@@ -20,7 +20,7 @@ return {
       { "<leader>u", group = "ui" },
 
       -- Tab
-      { "<leader><Tab>", group = "tab" },
+      { "<C-g>", group = "tab" },
 
       -- Test (Neotest)
       { "<leader>t", group = "test" },
