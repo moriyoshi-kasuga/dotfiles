@@ -81,6 +81,50 @@
         };
       }
       {
+        name = "laptop-nixos";
+        inherit inputs;
+        system = "x86_64-linux";
+        host = "nixos";
+        username = "mori";
+        homeDirectory = "/home/mori";
+        modules = {
+          modules.base.enable = true;
+          modules.nixos = {
+            enable = true;
+            gui.enable = true;
+            network.hostName = "Mori-Laptop-NixOS";
+          };
+
+          modules.shell = {
+            enable = true;
+            fish.default = true;
+          };
+          modules.lang.enable = true;
+          modules.editor.enable = true;
+          modules.tool = {
+            enable = true;
+            git.enable = true;
+            claude-code.enable = true;
+          };
+          modules.terminal.wezterm.enable = true;
+          modules.library.enable = true;
+          modules.font.enable = true;
+          modules.wallpaper = {
+            enable = true;
+            owner = "dharmx";
+            repo = "walls";
+          };
+        };
+        homeConfig = {
+          imports = [ inputs.noctalia.homeModules.default ];
+        };
+        nixosConfig = {
+          imports = [
+            ./hosts/laptop-nixos/hardware-configuration.nix
+          ];
+        };
+      }
+      {
         name = "sv-main";
         inherit inputs;
         system = "x86_64-linux";
@@ -116,7 +160,7 @@
         };
       }
       {
-        name = "laptop";
+        name = "laptop-mac";
         inherit inputs;
         system = "aarch64-darwin";
         host = "darwin";
