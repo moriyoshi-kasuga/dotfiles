@@ -6,7 +6,6 @@
 
 mkModule {
   name = "nixos.gui.nvidia";
-  inheritModule = "nixos.gui";
   nixosModule = {
     boot.kernelParams = [
       "nvidia-drm.modeset=1"

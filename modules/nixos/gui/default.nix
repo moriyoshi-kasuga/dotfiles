@@ -12,6 +12,7 @@
     ./i18n.nix
     ./niri.nix
     ./nvidia.nix
+    ./amd.nix
     ./qt.nix
     ./sddm.nix
     ./thunar.nix

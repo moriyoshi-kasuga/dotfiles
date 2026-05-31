@@ -48,6 +48,7 @@
           modules.nixos = {
             enable = true;
             gui.enable = true;
+            gui.amd.enable = true;
             network.hostName = "Mori-NixOS";
           };
 
@@ -92,6 +93,7 @@
           modules.nixos = {
             enable = true;
             gui.enable = true;
+            gui.nvidia.enable = true;
             network.hostName = "Mori-Laptop-NixOS";
           };
 
