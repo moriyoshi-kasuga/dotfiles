@@ -96,6 +96,9 @@ config.keys = {
   { key = "-", mods = "CMD", action = act.DecreaseFontSize },
   { key = ".", mods = "CMD", action = act.ResetFontSize },
 
+  -- Window
+  { key = "n", mods = "CMD", action = act.SpawnWindow },
+
   -- Paste
   { key = "v", mods = "CTRL", action = act.PasteFrom("Clipboard") },
 
