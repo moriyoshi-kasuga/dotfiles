@@ -27,5 +27,10 @@ mkModule {
     };
 
     catppuccin.tmux.extraConfig = builtins.readFile ./tmux.conf.catppuccin;
+
+    home.file.".config/tmux/new-session.fish" = {
+      source = ./new-session.fish;
+      executable = true;
+    };
   };
 }
