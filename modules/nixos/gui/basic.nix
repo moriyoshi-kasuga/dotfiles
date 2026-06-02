@@ -19,10 +19,12 @@ mkModule {
     powerManagement.enable = true;
 
     services.logind.settings.Login = {
-      HandlePowerKey = "ignore";
-      LidSwitch = "suspend-then-hibernate";
-      PowerKey = "hibernate";
-      PowerKeyLongPress = "poweroff";
+      HandlePowerKey = "hibernate";
+      HandlePowerKeyLongPress = "poweroff";
+      HandleSuspendKey = "suspend";
+      HandleHibernateKey = "hibernate";
+      HandleLidSwitch = "suspend-then-hibernate";
+      HibernateDelaySec = "3600";
     };
 
     security.polkit.enable = true;

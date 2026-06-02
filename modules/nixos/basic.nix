@@ -53,11 +53,10 @@ mkModule {
       enable = true;
     };
 
-    swapDevices = [
-      {
-        device = "/var/lib/swapfile";
-        size = 8 * 1024; # MB
-      }
-    ];
+    zramSwap = {
+      enable = true;
+      algorithm = "zstd";
+      memoryPercent = 50;
+    };
   };
 }

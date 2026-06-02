@@ -13,21 +13,28 @@
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
+  # Ryzen 9700X: AMD P-State EPP (hardware-guided frequency scaling)
+  boot.kernelParams = [ "amd_pstate=active" ];
+
+  # Hibernate via swap partition
+  boot.resumeDevice = "/dev/disk/by-uuid/1c6b591b-7f35-4527-b72a-0924593a1af5";
+
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/c28253ad-8343-4e40-8f7c-d4b193148cdb";
       fsType = "btrfs";
+      options = [ "compress=zstd:1" "noatime" "space_cache=v2" ];
     };
 
   fileSystems."/home" =
     { device = "/dev/disk/by-uuid/c28253ad-8343-4e40-8f7c-d4b193148cdb";
       fsType = "btrfs";
-      options = [ "subvol=home" ];
+      options = [ "subvol=home" "compress=zstd:1" "noatime" "space_cache=v2" ];
     };
 
   fileSystems."/nix" =
     { device = "/dev/disk/by-uuid/c28253ad-8343-4e40-8f7c-d4b193148cdb";
       fsType = "btrfs";
-      options = [ "subvol=nix" ];
+      options = [ "subvol=nix" "compress=zstd:1" "noatime" "space_cache=v2" ];
     };
 
   fileSystems."/boot" =
