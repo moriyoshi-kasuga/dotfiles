@@ -2,7 +2,7 @@
 description: GitHub PRのdiffとコメントを取得して他者のコードをレビューする
 argument-hint: <PR URL | PR番号>
 # gh apiはallowed-toolsに入れない（ユーザーがacceptする）
-allowed-tools: Read, Glob, Grep, Bash(jq *), Bash(gh pr view *), Bash(gh pr diff *), Bash(mktemp *)
+allowed-tools: Read, Read(//tmp/*), Glob, Grep, Bash(jq *), Bash(gh pr view *), Bash(gh pr diff *), Bash(mktemp *)
 ---
 
 # PR コードレビュー
