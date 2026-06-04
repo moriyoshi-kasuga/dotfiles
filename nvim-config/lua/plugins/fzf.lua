@@ -181,9 +181,9 @@ return {
         local filename = vim.fn.expand("%:t")
 
         local paths = {
-          { label = "Filename only", value = filename },
           { label = "Absolute", value = filepath },
           { label = "Relative to HOME", value = vim.fn.fnamemodify(filepath, ":~") },
+          { label = "Filename only", value = filename },
         }
 
         local entries = vim.tbl_map(function(item)
