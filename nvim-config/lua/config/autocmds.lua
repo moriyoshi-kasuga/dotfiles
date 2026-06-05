@@ -53,6 +53,16 @@ if is_simple_mode then
   return
 end
 
+-- switch to treesitter-based folding on first buffer open
+vim.api.nvim_create_autocmd("BufReadPost", {
+  group = augroup("treesitter_fold"),
+  once = true,
+  callback = function()
+    vim.opt.foldmethod = "expr"
+    vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+  end,
+})
+
 -- go to last loc when opening a buffer
 vim.api.nvim_create_autocmd("BufReadPost", {
   group = augroup("last_loc"),

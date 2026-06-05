@@ -2,9 +2,6 @@ local is_simple_mode = require("config.util").is_in_simple_mode()
 
 vim.o.winborder = "single"
 
--- privateだが問題ない
-vim.lsp.log._set_filename("/tmp/nvim-lsp.log")
-
 vim.opt.backup = true
 local backup_dir = vim.fn.expand(vim.fn.stdpath("cache") .. "/.vim_backup")
 if vim.fn.isdirectory(backup_dir) == 0 then
@@ -44,9 +41,8 @@ if is_simple_mode then
   vim.opt.foldmethod = "manual"
   vim.opt.foldenable = false
 else
-  -- Full mode: treesitter-based folding
-  vim.opt.foldmethod = "expr"
-  vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+  -- Full mode: treesitter-based folding (deferred to avoid early vim.treesitter load)
+  vim.opt.foldmethod = "manual"
   vim.opt.foldenable = false
   vim.opt.foldlevel = 99
 end

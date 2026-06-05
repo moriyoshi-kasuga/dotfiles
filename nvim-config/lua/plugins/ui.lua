@@ -17,10 +17,15 @@ return {
   },
   {
     "j-hui/fidget.nvim",
+    -- using to lsp progress and notifnication
     event = "UIEnter",
     opts = {
-      notification = { override_vim_notify = true },
+      notification = {
+        override_vim_notify = true,
+        history_size = 64,
+      },
       progress = {
+        poll_rate = 0,
         ignore = {
           function(msg)
             if msg == nil or msg.title == nil then
