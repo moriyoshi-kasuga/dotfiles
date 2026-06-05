@@ -3,14 +3,13 @@ return {
     Lua = {
       runtime = {
         version = "LuaJIT",
-        pathStrict = true,
-        path = { "?.lua", "?/init.lua" },
       },
       codeLens = {
         enable = true,
       },
       completion = {
         callSnippet = "Replace",
+        showWord = "Disable",
       },
       doc = {
         privateName = { "^_" },
@@ -22,6 +21,9 @@ return {
         paramName = "Disable",
         semicolon = "Disable",
         arrayIndex = "Disable",
+      },
+      workspace = {
+        checkThirdParty = false,
       },
       format = {
         enable = false,
