@@ -97,11 +97,11 @@ mkModule {
         hooks = {
           Notification = [
             {
-              matcher = "";
+              matcher = "permission_prompt";
               hooks = [
                 {
                   type = "command";
-                  command = "msg=$(jq -r '.message // \"Require operation\"'); [ \"$msg\" != \"Claude is waiting for your input\" ] && notify \"$msg\" 'Claude Code'";
+                  command = "jq -r '.message // \"Require operation\"' | xargs -I {} notify {} 'Claude Code'";
                 }
               ];
             }
