@@ -3,7 +3,7 @@ return {
   dependencies = {
     "echasnovski/mini.icons",
   },
-  event = "UIEnter",
+  event = "VeryLazy",
   config = function()
     local palette = require("catppuccin.palettes").get_palette("mocha")
 

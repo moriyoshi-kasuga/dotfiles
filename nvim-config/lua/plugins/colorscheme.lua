@@ -6,6 +6,7 @@ return {
   ---@type CatppuccinOptions
   opts = {
     flavour = "mocha",
+    compile = { enabled = true },
     transparent_background = true,
     float = {
       transparent = true,

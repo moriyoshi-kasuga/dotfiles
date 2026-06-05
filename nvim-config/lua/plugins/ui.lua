@@ -17,8 +17,7 @@ return {
   },
   {
     "j-hui/fidget.nvim",
-    -- using to lsp progress and notifnication
-    event = "UIEnter",
+    event = "LspAttach",
     opts = {
       notification = {
         override_vim_notify = true,
@@ -65,7 +64,7 @@ return {
   },
   {
     "nvim-lualine/lualine.nvim",
-    event = "UIEnter",
+    event = "VeryLazy",
     dependencies = {
       "nvim-mini/mini.icons",
     },

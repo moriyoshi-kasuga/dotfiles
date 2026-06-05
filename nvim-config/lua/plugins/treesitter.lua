@@ -9,7 +9,7 @@ vim.api.nvim_create_autocmd("FileType", {
 return {
   {
     "nvim-treesitter/nvim-treesitter",
-    lazy = false,
+    event = "VeryLazy",
     branch = "main",
     opts = {
       auto_install = false,
