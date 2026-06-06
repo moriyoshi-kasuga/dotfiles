@@ -64,7 +64,7 @@ return {
   },
   {
     "nvim-lualine/lualine.nvim",
-    event = "VeryLazy",
+    event = "UIEnter",
     dependencies = {
       "nvim-mini/mini.icons",
     },
