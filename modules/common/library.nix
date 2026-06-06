@@ -70,6 +70,11 @@ mkModule {
       util-linux
       xz
 
+      # Cross Platform 3D Graphics API
+      vulkan-loader
+      # For debugging around vulkan
+      vulkan-tools
+
       # My own additions
       libxcomposite
       libxtst
