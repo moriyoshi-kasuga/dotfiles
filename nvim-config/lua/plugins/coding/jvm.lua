@@ -81,9 +81,100 @@ return {
     "mfussenegger/nvim-jdtls",
     ft = "java",
     config = function()
-      require("jdtls").start_or_attach({
-        cmd = { "jdtls" },
-        root_dir = vim.fs.root(0, { "gradlew", "build.gradle", "build.gradle.kts", ".git", "mvnw" }),
+      local workspace_base = vim.env.HOME .. "/.local/share/jdtls/workspaces"
+
+      local group = vim.api.nvim_create_augroup("nvim-jdtls", { clear = true })
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = "java",
+        group = group,
+        callback = function()
+          local fname = vim.api.nvim_buf_get_name(0)
+
+          -- Defer to metals when this is a Scala project
+          if vim.fs.root(fname, { "build.sbt", "build.mill" }) then
+            return
+          end
+
+          local root_dir = vim.fs.root(fname, {
+            "build.xml",
+            "pom.xml",
+            "settings.gradle",
+            "settings.gradle.kts",
+            "gradlew",
+            "mvnw",
+            ".git",
+          })
+
+          if not root_dir then
+            return
+          end
+
+          local project_name = vim.fn.fnamemodify(root_dir, ":p:h:t")
+          local workspace_dir = workspace_base .. "/" .. project_name
+
+          local ok, blink = pcall(require, "blink.cmp")
+          local capabilities = ok and blink.get_lsp_capabilities() or vim.lsp.protocol.make_client_capabilities()
+
+          require("jdtls").start_or_attach({
+            cmd = { "jdtls", "-data", workspace_dir },
+            root_dir = root_dir,
+            capabilities = capabilities,
+
+            init_options = {
+              jvm_args = vim.env.LOMBOK_JAR and { "-javaagent:" .. vim.env.LOMBOK_JAR } or {},
+            },
+
+            on_attach = function(_, bufnr)
+              local map = function(mode, keys, fn, desc)
+                vim.keymap.set(mode, keys, fn, { buffer = bufnr, desc = desc, silent = true })
+              end
+
+              map("n", "<leader>jo", require("jdtls").organize_imports, "Organize Imports")
+            end,
+
+            settings = {
+              java = {
+                format = {
+                  enabled = false,
+                  settings = {
+                    url = "https://raw.githubusercontent.com/google/styleguide/refs/heads/gh-pages/eclipse-java-google-style.xml",
+                    profile = "GoogleStyle",
+                  },
+                },
+                eclipse = {
+                  downloadSources = true,
+                },
+                configuration = {
+                  updateBuildConfiguration = "interactive",
+                },
+                maven = {
+                  downloadSources = true,
+                },
+                inlayHints = {
+                  parameterNames = {
+                    enabled = "all",
+                  },
+                },
+                implementationsCodeLens = {
+                  enabled = false,
+                },
+                referencesCodeLens = {
+                  enabled = false,
+                },
+                signatureHelp = {
+                  enabled = true,
+                },
+                contentProvider = { preferred = "fernflower" },
+                completion = {
+                  favoriteStaticMembers = {
+                    "java.util.Objects.requireNonNull",
+                    "java.util.Objects.requireNonNullElse",
+                  },
+                },
+              },
+            },
+          })
+        end,
       })
     end,
   },
