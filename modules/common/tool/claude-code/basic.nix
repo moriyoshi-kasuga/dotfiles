@@ -117,6 +117,7 @@ mkModule {
             }
           ];
         };
+        tui = "default";
         language = "Japanese";
         env = {
           IS_DEMO = 1;
