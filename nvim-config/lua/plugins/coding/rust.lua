@@ -22,6 +22,8 @@ return {
           map("<leader>ce", "<cmd>RustLsp explainError<cr>", "Explain Error")
           map("<leader>co", "<cmd>RustLsp expandMacro<cr>", "Expand Macro")
           map("<leader>cp", "<cmd>RustLsp parentModule<cr>", "Parent Module")
+          map("<leader>cJ", "<cmd>RustLsp joinLines<cr>", "Join Lines")
+          map("<leader>cH", "<cmd>RustLsp hover actions<cr>", "Hover Actions")
         end,
         default_settings = {
           ["rust-analyzer"] = {
@@ -49,17 +51,56 @@ return {
             },
             procMacro = {
               enable = true,
-              ignored = {
-                ["async-trait"] = { "async_trait" },
-                ["tauri_macros"] = { "generate_context" },
-                ["sqlx_macros"] = { "test" },
-                ["tokio_macros"] = { "test", "main" },
+              -- 無効にすると型エラーなどがでる
+              -- ignored = {
+              --   ["async-trait"] = { "async_trait" },
+              --   ["tauri_macros"] = { "generate_context" },
+              --   ["sqlx_macros"] = { "test" },
+              --   ["tokio_macros"] = { "test", "main" },
+              -- },
+            },
+            imports = {
+              granularity = {
+                group = "module",
               },
             },
-
-            -- clippyは非常に重いため、cargo checkで代用する
+            inlayHints = {
+              chainingHints = { enable = true },
+              closingBraceHints = { enable = true, minLines = 25 },
+              closureReturnTypeHints = { enable = "with_block" },
+              lifetimeElisionHints = {
+                enable = "skip_trivial",
+                useParameterNames = true,
+              },
+              maxLength = 25,
+              parameterHints = { enable = true },
+              reborrowHints = { enable = "closure" },
+              typeHints = { enable = true },
+            },
+            hover = {
+              actions = {
+                references = { enable = true },
+                run = { enable = true },
+                debug = { enable = true },
+                implementations = { enable = true },
+              },
+              memoryLayout = {
+                niches = true,
+                size = "both",
+                alignment = "hexadecimal",
+                offset = "hexadecimal",
+              },
+            },
+            lens = {
+              enable = true,
+              run = { enable = true },
+              debug = { enable = true },
+              implementations = { enable = true },
+            },
+            -- clippyは重いが非常に有用。--no-depsでdependency checkをスキップして高速化
             check = {
               command = "clippy",
+              extraArgs = { "--no-deps" },
             },
             checkOnSave = true,
             files = {
@@ -117,5 +158,33 @@ return {
         hover = true,
       },
     },
+    config = function(_, opts)
+      local crates = require("crates")
+      crates.setup(opts)
+
+      local function set_keymaps(bufnr)
+        local function map(lhs, rhs, desc)
+          vim.keymap.set("n", lhs, rhs, { silent = true, desc = desc, buffer = bufnr })
+        end
+        map("<leader>cv", crates.show_versions_popup, "Crate Versions")
+        map("<leader>cf", crates.show_features_popup, "Crate Features")
+        map("<leader>ci", crates.show_dependencies_popup, "Crate Dependencies")
+        map("<leader>cu", crates.update_crate, "Update Crate")
+        map("<leader>cU", crates.update_all_crates, "Update All Crates")
+        map("<leader>cg", crates.upgrade_crate, "Upgrade Crate")
+        map("<leader>cG", crates.upgrade_all_crates, "Upgrade All Crates")
+        map("<leader>co", crates.open_crates_io, "Open crates.io")
+        map("<leader>cx", crates.open_documentation, "Open docs.rs")
+        map("<leader>cr", crates.open_repository, "Open Repository")
+      end
+
+      set_keymaps(vim.api.nvim_get_current_buf())
+      vim.api.nvim_create_autocmd("BufRead", {
+        pattern = "Cargo.toml",
+        callback = function(ev)
+          set_keymaps(ev.buf)
+        end,
+      })
+    end,
   },
 }
