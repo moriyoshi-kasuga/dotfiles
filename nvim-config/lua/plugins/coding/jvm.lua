@@ -135,7 +135,7 @@ return {
             settings = {
               java = {
                 format = {
-                  enabled = false,
+                  enabled = true,
                   settings = {
                     url = "https://raw.githubusercontent.com/google/styleguide/refs/heads/gh-pages/eclipse-java-google-style.xml",
                     profile = "GoogleStyle",
@@ -144,9 +144,7 @@ return {
                 eclipse = {
                   downloadSources = true,
                 },
-                configuration = {
-                  updateBuildConfiguration = "interactive",
-                },
+                configuration = { updateBuildConfiguration = "interactive" },
                 maven = {
                   downloadSources = true,
                 },
