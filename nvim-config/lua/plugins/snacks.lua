@@ -14,6 +14,8 @@ return {
     words = { enabled = true },
 
     terminal = {
+      start_insert = true,
+      auto_insert = false,
       win = {
         style = "terminal",
         wo = {
