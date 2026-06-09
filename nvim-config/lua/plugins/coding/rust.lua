@@ -69,12 +69,11 @@ return {
               closingBraceHints = { enable = true, minLines = 25 },
               closureReturnTypeHints = { enable = "with_block" },
               lifetimeElisionHints = {
-                enable = "skip_trivial",
-                useParameterNames = true,
+                enable = "never",
               },
               maxLength = 25,
               parameterHints = { enable = true },
-              reborrowHints = { enable = "closure" },
+              reborrowHints = { enable = "never" },
               typeHints = { enable = true },
             },
             hover = {
