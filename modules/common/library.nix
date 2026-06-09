@@ -51,6 +51,11 @@ mkModule {
       llvm
       nsis
     ];
+    home.sessionVariablesExtra = ''
+      export SDKROOT="$(xcrun --show-sdk-path)"
+      export CC_aarch64_apple_darwin=/usr/bin/cc
+      export CXX_aarch64_apple_darwin=/usr/bin/c++
+    '';
   };
   nixosModule = {
     environment.systemPackages = with pkgs; [
