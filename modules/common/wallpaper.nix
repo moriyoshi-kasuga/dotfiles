@@ -142,7 +142,7 @@ mkModule {
     { cfg, ... }:
     let
       rotateScript = mkRotateScript cfg.owner cfg.repo ''
-        noctalia-shell ipc call wallpaper set "$FILE"
+        noctalia msg wallpaper-set "$FILE"
       '';
     in
     {

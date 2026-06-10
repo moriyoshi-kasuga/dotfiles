@@ -1,6 +1,7 @@
 {
   mkModule,
   pkgs,
+  inputs,
   ...
 }:
 
@@ -13,131 +14,94 @@ mkModule {
       force = true;
     };
 
-    programs.noctalia-shell = {
+    programs.noctalia = {
       enable = true;
       settings = {
+        shell = {
+          font_family = "JetBrains Mono Nerd Font";
+
+          panel = {
+            borders = true;
+            launcher_categories = false;
+          };
+
+          shadow = {
+            direction = "down";
+          };
+        };
+
         bar = {
-          density = "default";
-          position = "top";
-          displayMode = "auto_hide";
-          useSeparateOpacity = true;
-          backgroundOpacity = 0.6;
-          showCapsule = true;
-          showOutline = false;
-          showOnWorkspaceSwitch = false;
-          capsuleOpacity = 0.8;
-          autoHideDelay = 150;
-          autoShowDelay = 500;
-          floating = true;
-          marginVertical = 4;
-          marginHorizontal = 4;
-          frameRadius = 16;
-          frameThickness = 2;
+          order = [ "widgets" ];
           widgets = {
-            left = [
-              {
-                id = "ControlCenter";
-                useDistroLogo = true;
-              }
-              { id = "Bluetooth"; }
+            position = "top";
+            auto_hide = true;
+            reserve_space = false;
+            background_opacity = 0.6;
+            capsule = true;
+            capsule_opacity = 0.8;
+            radius = 16;
+            margin_edge = 4;
+            margin_ends = 4;
+
+            start = [
+              "control-center"
+              "bluetooth"
             ];
-            center = [
-              {
-                id = "Workspace";
-                hideUnoccupied = false;
-                labelMode = "index";
-              }
-            ];
-            right = [
-              { id = "SystemMonitor"; }
-              {
-                id = "Volume";
-                displayMode = "alwaysShow";
-              }
-              {
-                id = "Clock";
-                formatHorizontal = "HH:mm ddd, MMM dd";
-                formatVertical = "HH mm - dd MM";
-                tooltipFormat = "HH:mm ddd, MMM dd";
-              }
-              { id = "NotificationHistory"; }
+            center = [ "workspaces" ];
+            end = [
+              "cpu"
+              "ram"
+              "volume"
+              "clock"
+              "notifications"
             ];
           };
         };
+
+        widget = {
+          clock = {
+            type = "clock";
+            format = "{:%H:%M %a, %b %d}";
+            vertical_format = "{:%H %M - %d %m}";
+            tooltip_format = "{:%H:%M %a, %b %d}";
+          };
+          cpu = {
+            type = "sysmon";
+            stat = "cpu_usage";
+          };
+          ram = {
+            type = "sysmon";
+            stat = "ram_used";
+          };
+        };
+
+        theme = {
+          source = "builtin";
+          builtin = "Catppuccin";
+        };
+
         wallpaper = {
           enabled = true;
-          overviewEnabled = true;
-          automationEnabled = false;
+          automation = {
+            enabled = false;
+          };
         };
-        colorSchemes = {
-          predefinedScheme = "Catppuccin";
-        };
-        general = {
-          enableShadows = true;
-          dimmerOpacity = 0.3;
-          shadowDirection = "bottom";
-          boxBorderEnabled = true;
-        };
-        controlCenter = {
-          position = "top_center";
-          cards = [
-            {
-              enabled = true;
-              id = "profile-card";
-            }
-            {
-              enabled = true;
-              id = "shortcuts-card";
-            }
-            {
-              enabled = true;
-              id = "audio-card";
-            }
-            {
-              enabled = true;
-              id = "brightness-card";
-            }
-            {
-              enabled = true;
-              id = "weather-card";
-            }
-            {
-              enabled = true;
-              id = "media-sysmon-card";
-            }
-          ];
-        };
+
         dock = {
           enabled = false;
         };
-        network = {
-          wifiEnabled = true;
+
+        weather = {
+          enabled = true;
         };
-        appLauncher = {
-          terminalCommand = "wezterm -e";
-          showCategories = false;
-          enableSettingsSearch = false;
-          enableWindowsSearch = false;
-          enableSessionSearch = false;
-          iconMode = "tabler";
-        };
-        notifications = {
-          sounds = {
-            enabled = true;
-          };
-          enableBatteryToast = true;
-          enableKeyboardLayoutToast = false;
-          enableMediaToast = false;
-        };
+
         location = {
-          name = "Tokyo";
-          weatherEnabled = true;
-          autoLocate = true;
+          auto_locate = true;
+          address = "Tokyo";
         };
-        ui = {
-          fontDefault = "JetBrains Mono Nerd Font";
-          fontFixed = "JetBrains Mono Nerd Font";
-          borderRadius = 16;
+
+        audio = {
+          enable_sounds = true;
         };
       };
     };
@@ -148,6 +112,8 @@ mkModule {
     programs.dconf.enable = true;
 
     environment.systemPackages = with pkgs; [
+      inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
+
       wayland
       niri
       imv
@@ -171,7 +137,10 @@ mkModule {
           default = [ "gtk" ];
         };
         niri = {
-          default = [ "gnome" "gtk" ];
+          default = [
+            "gnome"
+            "gtk"
+          ];
           "org.freedesktop.impl.portal.ScreenCast" = [ "gnome" ];
           "org.freedesktop.impl.portal.Screenshot" = [ "gnome" ];
         };

@@ -177,7 +177,7 @@ layout {
 // See the binds section below for more spawn examples.
 
 spawn-at-startup "easyeffects" "--service-mode" "-q"
-spawn-at-startup "noctalia-shell"
+spawn-at-startup "noctalia"
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
@@ -256,20 +256,20 @@ binds {
 
   Alt+Slash { spawn "wezterm"; }
 
-  Alt+S { spawn "noctalia-shell" "ipc" "call" "controlCenter" "toggle"; }
-  Alt+Space hotkey-overlay-title="Launcher" { spawn "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
-  Super+Alt+L hotkey-overlay-title="SessionMenu" { spawn "noctalia-shell" "ipc" "call" "sessionMenu" "toggle"; }
-  Super+L { spawn "noctalia-shell" "ipc" "call" "lockScreen" "lock"; }
+  Alt+S { spawn "noctalia" "msg" "panel-toggle" "control-center"; }
+  Alt+Space hotkey-overlay-title="Launcher" { spawn "noctalia" "msg" "panel-toggle" "launcher"; }
+  Super+Alt+L hotkey-overlay-title="SessionMenu" { spawn "noctalia" "msg" "panel-toggle" "session"; }
+  Super+L { spawn "noctalia" "msg" "session" "lock"; }
 
-  Alt+P { spawn "noctalia-shell" "ipc" "call" "calendar" "toggle"; }
-  Alt+N { spawn "noctalia-shell" "ipc" "call" "notifications" "toggleHistory"; }
-  Alt+T { spawn "noctalia-shell" "ipc" "call" "bar" "toggle"; }
-  Alt+M { spawn "noctalia-shell" "ipc" "call" "volume" "muteInput"; }
-  Alt+E { spawn "noctalia-shell" "ipc" "call" "volume" "togglePanel"; }
-  Alt+B { spawn "noctalia-shell" "ipc" "call" "bluetooth" "togglePanel"; }
+  Alt+Shift+C { spawn "noctalia" "msg" "panel-toggle" "clipboard"; }
+  Alt+P { spawn "noctalia" "msg" "panel-toggle" "control-center" "calendar"; }
+  Alt+N { spawn "noctalia" "msg" "panel-toggle" "control-center" "notifications"; }
+  Alt+M { spawn "noctalia" "msg" "mic-mute"; }
+  Alt+E { spawn "noctalia" "msg" "panel-toggle" "control-center" "audio"; }
+  Alt+B { spawn "noctalia" "msg" "panel-toggle" "control-center" "bluetooth"; }
 
-  // XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+"; }
-  // XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-"; }
+  // XF86AudioRaiseVolume allow-when-locked=true { spawn "noctalia" "msg" "volume-up"; }
+  // XF86AudioLowerVolume allow-when-locked=true { spawn "noctalia" "msg" "volume-down"; }
   XF86AudioMute        allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
   XF86AudioMicMute     allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
 
@@ -357,8 +357,7 @@ debug {
   honor-xdg-activation-with-invalid-serial
 }
 
-// Set the overview wallpaper on the backdrop.
 layer-rule {
-  match namespace="^noctalia-overview*"
+  match namespace="^noctalia-backdrop"
   place-within-backdrop true
 }
