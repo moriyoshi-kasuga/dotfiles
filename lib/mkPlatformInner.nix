@@ -18,6 +18,7 @@ let
       allowBroken = true;
       allowUnfree = true;
     };
+    overlays = [ inputs.nix-claude-code.overlays.default ];
   };
   lib = pkgs.lib;
   vars = import inputs.vars-file.outPath;

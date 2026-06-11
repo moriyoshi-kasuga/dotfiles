@@ -23,6 +23,10 @@
       url = "file+file:///dev/null";
       flake = false;
     };
+    nix-claude-code = {
+      url = "github:ryoppippi/nix-claude-code";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =

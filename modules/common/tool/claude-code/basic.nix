@@ -125,9 +125,10 @@ mkModule {
       };
     in
     {
-      home.packages = with pkgs; [
-        claude-code
-      ];
+      programs.claude-code = {
+        enable = true;
+        package = pkgs.claude-code;
+      };
       home.file = (builtins.listToAttrs commandList) // {
         ".claude/settings.json" = {
           force = true;
