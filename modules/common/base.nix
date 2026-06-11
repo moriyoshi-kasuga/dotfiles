@@ -12,6 +12,7 @@ let
   version = "26.05";
   catppuccin = {
     enable = true;
+    autoEnable = true;
     flavor = "mocha";
     accent = "sapphire";
   };
