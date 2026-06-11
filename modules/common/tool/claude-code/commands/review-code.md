@@ -1,7 +1,7 @@
 ---
 description: 指定されたコード・ファイルをレビューする。ファイルの読み取りのみ行い、コードは変更しない。PRのレビューは /pr-review を使うこと。
-argument-hint: <ファイルパス | git diff | 対象の説明>
-allowed-tools: Read, Glob, Grep, Bash(git diff *), Bash(git log *)
+argument-hint: <ファイルパス | git diff | コミットハッシュ | 対象の説明>
+allowed-tools: Read, Glob, Grep, Bash(git diff *), Bash(git log *), Bash(git show *)
 ---
 
 # コードレビュー

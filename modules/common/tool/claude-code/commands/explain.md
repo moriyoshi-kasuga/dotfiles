@@ -1,7 +1,7 @@
 ---
 description: 指定されたコード・ファイル・関数の動作を、呼び出しフロー・設計意図・依存関係まで含めて説明する。コードの変更は行わない。
 argument-hint: <ファイルパス | 関数名 | 処理の説明>
-allowed-tools: Read, Glob, Grep, Bash(git log *), Bash(git blame *)
+allowed-tools: Read, Glob, Grep, Bash(git log *), Bash(git blame *), Bash(git show *)
 ---
 
 # コード説明

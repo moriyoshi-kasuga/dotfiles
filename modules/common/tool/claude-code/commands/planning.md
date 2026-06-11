@@ -1,7 +1,8 @@
 ---
 description: コードベースをツールで読み取り専用で探索し、改善提案を複数の選択肢として比較・提示する。実装は行わない。コード参照が不要な純粋な設計相談は /think を使うこと。
 argument-hint: <ディレクトリパス> | <テーマ> | <ディレクトリパス + テーマ>
-allowed-tools: Read, Glob, Grep, Bash
+# 読み取り専用スキルのため Bash は俯瞰用の安全なコマンドのみ許可する
+allowed-tools: Read, Glob, Grep, Bash(ls *), Bash(find *), Bash(tree *), Bash(wc *), Bash(git log *), Bash(git ls-files *), Bash(git diff *)
 ---
 
 # 改善提案

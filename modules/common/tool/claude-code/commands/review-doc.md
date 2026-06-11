@@ -1,7 +1,7 @@
 ---
 description: 技術記事・ドキュメント・スキル定義ファイルをレビューする。ファイルの読み取りのみ行い、書き直しは行わない。
 argument-hint: <ファイルパス | URL | テキスト>
-allowed-tools: Read, Glob, WebFetch
+allowed-tools: Read, Glob, Grep, WebFetch
 ---
 
 # ドキュメントレビュー
