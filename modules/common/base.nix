@@ -96,9 +96,15 @@ mkModule {
     };
   };
   darwinModule = {
-    nix.extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
+    nix = {
+      extraOptions = ''
+        experimental-features = nix-command flakes
+      '';
+      settings.trusted-users = [
+        "root"
+        username
+      ];
+    };
     nixpkgs.hostPlatform = system;
     system.stateVersion = 6;
     system.primaryUser = username;
