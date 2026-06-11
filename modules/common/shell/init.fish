@@ -2,6 +2,8 @@ set -U fish_greeting ""
 
 complete -c simplenvim --wraps nvim
 
+fish_add_path ~/.local/bin
+
 function _run_cdi
   zi
   commandline -f repaint
