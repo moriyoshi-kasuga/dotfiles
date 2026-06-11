@@ -19,6 +19,7 @@ mkModule {
     home.packages = with pkgs; [
       rustup
 
+      cargo-hack
       cargo-msrv
       cargo-nextest
       cargo-udeps
