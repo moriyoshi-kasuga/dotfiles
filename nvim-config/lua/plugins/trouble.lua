@@ -10,12 +10,11 @@ return {
     -- stylua: ignore
     keys = {
       -- diagnostics
-      { "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnostics (Trouble)" },
-      { "<leader>xX", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Buffer Diagnostics (Trouble)" },
+      { ",x", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Buffer Diagnostics (Trouble)" },
+      { ",X", "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnostics (Trouble)" },
       -- symbols / LSP
-      { "<leader>cs", "<cmd>Trouble symbols toggle<cr>", desc = "Symbols (Trouble)" },
-      { "<leader>cl", "<cmd>Trouble lsp toggle<cr>", desc = "LSP Definitions/References (Trouble)" },
-      { "gR", "<cmd>Trouble lsp_references toggle<cr>", desc = "References (Trouble)" },
+      { "gsa", "<cmd>Trouble symbols toggle<cr>", desc = "Symbols (Trouble)" },
+      { "gR", "<cmd>Trouble lsp<cr>", desc = "LSP Definitions/References (Trouble)" },
       -- list
       { "<leader>xL", "<cmd>Trouble loclist toggle<cr>", desc = "Location List (Trouble)" },
       { "<leader>xQ", "<cmd>Trouble qflist toggle<cr>", desc = "Quickfix List (Trouble)" },
