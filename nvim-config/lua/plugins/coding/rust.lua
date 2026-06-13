@@ -17,6 +17,78 @@ return {
           local function map(lhs, rhs, desc)
             vim.keymap.set("n", lhs, rhs, { silent = true, desc = desc, buffer = bufnr })
           end
+
+          local function show_memory_layout()
+            local ra = require("rustaceanvim.rust_analyzer")
+            local clients = ra.get_active_rustaceanvim_clients(bufnr)
+            if #clients == 0 then
+              vim.notify("rust-analyzer not attached", vim.log.levels.WARN)
+              return
+            end
+            local params = vim.lsp.util.make_position_params(0, clients[1].offset_encoding or "utf-8")
+            ra.buf_request(bufnr, "rust-analyzer/viewRecursiveMemoryLayout", params, function(err, result)
+              if err then
+                vim.notify("Memory layout: " .. tostring(err.message), vim.log.levels.ERROR)
+                return
+              end
+              if not result or not result.nodes or #result.nodes == 0 then
+                vim.notify("No type under cursor", vim.log.levels.INFO)
+                return
+              end
+
+              local nodes = result.nodes
+              local root = nodes[1]
+              local lines = {
+                "  Memory Layout: " .. root.typename,
+                string.rep("─", 52),
+                string.format("  %-6s  %-4s  %-5s  %s", "Offset", "Size", "Align", "Field"),
+                string.rep("─", 52),
+              }
+
+              local function visit(idx0, abs_offset, depth)
+                local node = nodes[idx0 + 1]
+                if not node or node.size == 0 then
+                  return
+                end
+                local name = (node.itemName ~= "" and node.itemName or "<unnamed>")
+                local indent = string.rep("  ", depth)
+                table.insert(
+                  lines,
+                  string.format(
+                    "  0x%04x  %4d  %5d  %s%s: %s",
+                    abs_offset,
+                    node.size,
+                    node.alignment,
+                    indent,
+                    name,
+                    node.typename
+                  )
+                )
+                for c = 0, (node.childrenLen or 0) - 1 do
+                  local child_idx0 = node.childrenStart + c
+                  local child = nodes[child_idx0 + 1]
+                  if child then
+                    visit(child_idx0, abs_offset + child.offset, depth + 1)
+                  end
+                end
+              end
+
+              visit(0, 0, 0)
+              table.insert(lines, string.rep("─", 52))
+
+              Snacks.win({
+                text = lines,
+                title = " Memory Layout ",
+                width = 0.55,
+                height = 0.45,
+                border = "rounded",
+                wo = { wrap = false, spell = false },
+                bo = { modifiable = false },
+                keys = { q = "close" },
+              })
+            end)
+          end
+
           map("<leader>cx", "<cmd>RustLsp openDocs<cr>", "Open docs")
           map("<leader>cm", "<cmd>RustLsp rebuildProcMacros<cr>", "Rebuild ProcMacros")
           map("<leader>ce", "<cmd>RustLsp explainError<cr>", "Explain Error")
@@ -25,6 +97,7 @@ return {
           map("<leader>cJ", "<cmd>RustLsp joinLines<cr>", "Join Lines")
           map("<leader>cH", "<cmd>RustLsp hover actions<cr>", "Hover Actions")
           map("gsr", "<cmd>RustLsp relatedDiagnostics<cr>", "Related Diagnostics")
+          map("<leader>cl", show_memory_layout, "Memory Layout")
         end,
         default_settings = {
           ["rust-analyzer"] = {
