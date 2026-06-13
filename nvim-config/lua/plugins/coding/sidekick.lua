@@ -59,10 +59,15 @@ return {
     {
       "<leader>as",
       function()
-        require("sidekick.cli").send({ name = "claude", msg = "{file}" })
+        local entry = require("oil").get_cursor_entry()
+        local dir = require("oil").get_current_dir()
+        if entry and dir then
+          require("sidekick.cli").send({ name = "claude", msg = dir .. entry.name })
+        end
       end,
-      desc = "Add file",
-      ft = { "NvimTree", "neo-tree", "oil", "minifiles", "netrw" },
+      ft = "oil",
+      mode = "n",
+      desc = "Send oil entry to Claude",
     },
     {
       "<leader>aa",
