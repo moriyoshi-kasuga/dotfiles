@@ -24,6 +24,7 @@ return {
           map("<leader>cp", "<cmd>RustLsp parentModule<cr>", "Parent Module")
           map("<leader>cJ", "<cmd>RustLsp joinLines<cr>", "Join Lines")
           map("<leader>cH", "<cmd>RustLsp hover actions<cr>", "Hover Actions")
+          map("gsr", "<cmd>RustLsp relatedDiagnostics<cr>", "Related Diagnostics")
         end,
         default_settings = {
           ["rust-analyzer"] = {
