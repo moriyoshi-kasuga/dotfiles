@@ -39,7 +39,6 @@ return {
         require("sidekick.cli").focus({ name = "claude" })
       end,
       desc = "Focus Claude",
-      mode = { "n", "t", "i", "x" },
     },
     {
       "<leader>ab",
