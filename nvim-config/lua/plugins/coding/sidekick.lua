@@ -61,7 +61,7 @@ return {
         local entry = require("oil").get_cursor_entry()
         local dir = require("oil").get_current_dir()
         if entry and dir then
-          require("sidekick.cli").send({ name = "claude", msg = dir .. entry.name })
+          require("sidekick.cli").send({ name = "claude", msg = "@" .. dir .. entry.name })
         end
       end,
       ft = "oil",
