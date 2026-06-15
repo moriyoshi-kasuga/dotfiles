@@ -43,14 +43,14 @@ return {
     {
       "<leader>ab",
       function()
-        require("sidekick.cli").send({ name = "claude", msg = "{file}" })
+        require("sidekick.cli").send({ name = "claude", msg = "{file}", focus = false })
       end,
       desc = "Add current buffer",
     },
     {
       "<leader>as",
       function()
-        require("sidekick.cli").send({ name = "claude", msg = "{selection}" })
+        require("sidekick.cli").send({ name = "claude", msg = "{selection}", focus = false })
       end,
       mode = "v",
       desc = "Send to Claude",
@@ -61,7 +61,7 @@ return {
         local entry = require("oil").get_cursor_entry()
         local dir = require("oil").get_current_dir()
         if entry and dir then
-          require("sidekick.cli").send({ name = "claude", msg = "@" .. dir .. entry.name })
+          require("sidekick.cli").send({ name = "claude", msg = "@" .. dir .. entry.name, focus = false })
         end
       end,
       ft = "oil",
