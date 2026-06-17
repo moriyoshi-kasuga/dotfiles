@@ -18,6 +18,7 @@ mkModule {
       }) commandFiles;
 
       settings = {
+        model = "claude-opus-4-8";
         permissions = {
           disableAutoMode = "disable";
           allow = [
