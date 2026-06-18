@@ -178,7 +178,11 @@
             enable = true;
             fish.default = true;
           };
-          modules.lang.enable = true;
+          modules.lang = {
+            c.enable = true;
+            rust.enable = true;
+            node.enable = true;
+          };
           modules.editor.enable = true;
           modules.tool = {
             enable = true;
