@@ -14,6 +14,9 @@ let
   };
   neovim = pkgs.neovim-unwrapped;
   neovimCmd = pkgs.lib.getExe neovim;
+  # astro/svelte language servers need a TypeScript SDK to fall back on.
+  # Under Nix there is no global `typescript`, so we expose its path explicitly.
+  tsdkPath = "${pkgs.typescript}/lib/node_modules/typescript/lib";
 in
 mkModule {
   name = "editor.neovim";
@@ -38,6 +41,9 @@ mkModule {
           "--set"
           "TREESITTER_GRAMMARS"
           "${grammarsPath}"
+          "--set"
+          "TSDK_PATH"
+          tsdkPath
         ];
 
         extraPackages = with pkgs; [
@@ -55,10 +61,13 @@ mkModule {
           ruff
 
           # ts
+          # NOTE: deno (denols) is provided via mise, not Nix.
           svelte-language-server
           astro-language-server
           vtsls
           tailwindcss-language-server
+          # TypeScript SDK that astro/svelte language servers fall back on (TSDK_PATH).
+          typescript
 
           # HTML/CSS/JSON
           vscode-langservers-extracted
