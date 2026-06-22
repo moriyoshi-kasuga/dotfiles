@@ -32,6 +32,7 @@ mkModule {
       hexyl
       marp-cli
       prek
+      graphviz
 
       tokei
       hyperfine
