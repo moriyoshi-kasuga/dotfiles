@@ -66,15 +66,21 @@ output "DP-3" {
 // Find more information on the wiki:
 // https://yalter.github.io/niri/Configuration:-Layout
 layout {
-  // Set gaps around windows in logical pixels.
-  gaps 18
-
+  gaps 0
   struts {
     left 0
     right 0
-    top -5
-    bottom -4
+    top 0
+    bottom 0
   }
+  // gaps 18
+  //
+  // struts {
+  //   left 0
+  //   right 0
+  //   top -5
+  //   bottom -4
+  // }
 
   // When to center a column when changing focus, options are:
   // - "never", default behavior, focusing an off-screen column will keep at the left
@@ -216,11 +222,11 @@ animations {
 // Find more information on the wiki:
 // https://yalter.github.io/niri/Configuration:-Window-Rules
 
-window-rule {
-  geometry-corner-radius 16
-
-  clip-to-geometry true
-}
+// window-rule {
+//   geometry-corner-radius 16
+//
+//   clip-to-geometry true
+// }
 
 // Open the Firefox picture-in-picture player as floating by default.
 window-rule {

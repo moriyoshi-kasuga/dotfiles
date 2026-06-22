@@ -8,6 +8,7 @@ return {
     flavour = "mocha",
     compile = { enabled = true },
     transparent_background = true,
+    -- transparent_background = true,
     float = {
       transparent = true,
       solid = false,
@@ -21,13 +22,13 @@ return {
         information = { "undercurl" },
       },
     },
-    custom_highlights = function(colors)
-      return {
-        RenderMarkdownCode = { bg = colors.base },
-        RenderMarkdownCodeInfo = { bg = colors.base },
-        RenderMarkdownCodeBorder = { bg = colors.base },
-      }
-    end,
+    -- custom_highlights = function(colors)
+    --   return {
+    --     RenderMarkdownCode = { bg = colors.base },
+    --     RenderMarkdownCodeInfo = { bg = colors.base },
+    --     RenderMarkdownCodeBorder = { bg = colors.base },
+    --   }
+    -- end,
     integrations = {
       blink = true,
       flash = true,
