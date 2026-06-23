@@ -13,15 +13,25 @@ mkModule {
         on-focused-monitor-changed = [ ];
         gaps = {
           inner = {
-            horizontal = 10;
-            vertical = 10;
+            horizontal = 0;
+            vertical = 0;
           };
           outer = {
-            left = 10;
-            bottom = 10;
-            top = 10;
-            right = 10;
+            left = 0;
+            bottom = 0;
+            top = 0;
+            right = 0;
           };
+          # inner = {
+          #   horizontal = 10;
+          #   vertical = 10;
+          # };
+          # outer = {
+          #   left = 10;
+          #   bottom = 10;
+          #   top = 10;
+          #   right = 10;
+          # };
         };
         mode = {
           main = {
