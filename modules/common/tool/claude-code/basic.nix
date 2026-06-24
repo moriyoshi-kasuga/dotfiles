@@ -103,7 +103,7 @@ mkModule {
               hooks = [
                 {
                   type = "command";
-                  command = "jq -r '.message // \"Require operation\"' | xargs -I {} notify {} 'Claude Code'";
+                  command = "jq -r '.message // \"Require operation\"' | fish --login -c \"xargs -I {} notify {} 'Claude Code'\"";
                 }
               ];
             }
@@ -113,7 +113,7 @@ mkModule {
               hooks = [
                 {
                   type = "command";
-                  command = "notify 'Task completed' 'Claude Code'";
+                  command = "fish --login -c \"notify 'Task completed' 'Claude Code'\"";
                 }
               ];
             }
