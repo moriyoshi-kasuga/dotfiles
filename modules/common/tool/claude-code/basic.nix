@@ -20,7 +20,7 @@ mkModule {
       settings = {
         model = "claude-sonnet-4-6";
         permissions = {
-          disableArtifact = "true";
+          disableArtifact = true;
           disableAutoMode = "disable";
           allow = [
             # filesystem read-only
