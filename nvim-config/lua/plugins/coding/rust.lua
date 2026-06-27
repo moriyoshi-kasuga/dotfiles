@@ -102,9 +102,6 @@ return {
         default_settings = {
           ["rust-analyzer"] = {
             completion = {
-              callable = {
-                snippets = "none",
-              },
               snippets = {
                 custom = {
                   Arrow = {
