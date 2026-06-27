@@ -17,5 +17,6 @@
     ./sddm.nix
     ./thunar.nix
     ./zathura.nix
+    ./zed.nix
   ];
 }
