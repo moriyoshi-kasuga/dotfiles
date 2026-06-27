@@ -105,6 +105,7 @@ return {
         "gopls",
         "buf_ls",
         "elmls",
+        "tinymist",
 
         -- vscode-html-language-server
         "html",

@@ -88,6 +88,7 @@ mkModule {
           gopls
           asm-lsp
           taplo
+          tinymist
         ];
       };
 

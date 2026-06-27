@@ -33,6 +33,7 @@ mkModule {
       marp-cli
       prek
       graphviz
+      typst
 
       tokei
       hyperfine
