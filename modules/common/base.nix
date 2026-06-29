@@ -48,10 +48,10 @@ mkModule {
         : "''${DBUS_SESSION_BUS_ADDRESS:=unix:path=/run/user/$(id -u)/bus}"
         export DBUS_SESSION_BUS_ADDRESS
         if [ $# -eq 1 ]; then
-          notify-send --urgency low --transient --expire-time=5000 \
+          ${pkgs.libnotify}/bin/notify-send --urgency low --transient --expire-time=5000 \
             --category=x-generic --icon=dialog-information "$1"
         else
-          notify-send --urgency low --transient --expire-time=5000 \
+          ${pkgs.libnotify}/bin/notify-send --urgency low --transient --expire-time=5000 \
             --category=x-generic --icon=dialog-information --app-name "$2" "$1"
         fi
       '')

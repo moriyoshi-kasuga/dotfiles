@@ -2,6 +2,7 @@
   pkgs,
   mkModule,
   lib,
+  username,
   ...
 }:
 
@@ -103,7 +104,7 @@ mkModule {
               hooks = [
                 {
                   type = "command";
-                  command = "jq -r '.message // \"Require operation\"' | fish --login -c \"xargs -I {} notify {} 'Claude Code'\"";
+                  command = "${pkgs.jq}/bin/jq -r '.message // \"Require operation\"' | ${pkgs.findutils}/bin/xargs -I {} /etc/profiles/per-user/${username}/bin/notify {} 'Claude Code'";
                 }
               ];
             }
@@ -113,7 +114,7 @@ mkModule {
               hooks = [
                 {
                   type = "command";
-                  command = "fish --login -c \"notify 'Task completed' 'Claude Code'\"";
+                  command = "/etc/profiles/per-user/${username}/bin/notify 'Task completed' 'Claude Code'";
                 }
               ];
             }
