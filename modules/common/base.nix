@@ -45,7 +45,7 @@ mkModule {
   linuxHomeModule = {
     home.packages = with pkgs; [
       (writeShellScriptBin "notify" ''
-        : "''${DBUS_SESSION_BUS_ADDRESS:=unix:path=/run/user/$(id -u)/bus}"
+        : "''${DBUS_SESSION_BUS_ADDRESS:=unix:path=/run/user/$(${pkgs.coreutils}/bin/id -u)/bus}"
         export DBUS_SESSION_BUS_ADDRESS
         if [ $# -eq 1 ]; then
           ${pkgs.libnotify}/bin/notify-send --urgency low --transient --expire-time=5000 \
