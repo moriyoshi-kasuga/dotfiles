@@ -17,6 +17,10 @@ mkModule {
     programs.noctalia = {
       enable = true;
       settings = {
+        bar.widgets.enabled = false;
+        dock.enabled = false;
+        weather.enabled = true;
+
         shell = {
           font_family = "JetBrains Mono Nerd Font";
 
@@ -30,32 +34,9 @@ mkModule {
           };
         };
 
-        bar = {
-          order = [ "widgets" ];
-          widgets = {
-            position = "top";
-            auto_hide = true;
-            reserve_space = false;
-            background_opacity = 0.6;
-            capsule = true;
-            capsule_opacity = 0.8;
-            radius = 16;
-            margin_edge = 4;
-            margin_ends = 4;
-
-            start = [
-              "control-center"
-              "bluetooth"
-            ];
-            center = [ "workspaces" ];
-            end = [
-              "cpu"
-              "ram"
-              "volume"
-              "clock"
-              "notifications"
-            ];
-          };
+        control_center = {
+          sidebar = "none";
+          sidebar_section = "none";
         };
 
         widget = {
@@ -85,14 +66,6 @@ mkModule {
           automation = {
             enabled = false;
           };
-        };
-
-        dock = {
-          enabled = false;
-        };
-
-        weather = {
-          enabled = true;
         };
 
         location = {
