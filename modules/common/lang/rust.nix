@@ -32,4 +32,12 @@ mkModule {
       cargo-make
     ];
   };
+  darwinHomeModule = {
+    # GNU ld (from hiPrio gcc in lang.c) does not emit __unwind_info in Mach-O,
+    # so panic unwinding (catch_unwind / #[should_panic]) silently aborts.
+    # Force Cargo to use Apple's ld64-backed cc for the native Darwin target.
+    home.sessionVariablesExtra = ''
+      export CARGO_TARGET_AARCH64_APPLE_DARWIN_LINKER="$(xcrun --find cc)"
+    '';
+  };
 }
