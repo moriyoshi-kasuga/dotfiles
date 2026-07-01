@@ -19,7 +19,6 @@ mkModule {
       }) commandFiles;
 
       settings = {
-        model = "claude-sonnet-4-6";
         permissions = {
           disableArtifact = true;
           disableAutoMode = "disable";
