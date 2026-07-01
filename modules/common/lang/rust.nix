@@ -23,6 +23,7 @@ mkModule {
       cargo-msrv
       cargo-nextest
       cargo-udeps
+      cargo-machete
       cargo-tauri
       cargo-release
       cargo-audit
