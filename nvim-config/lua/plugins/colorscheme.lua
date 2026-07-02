@@ -7,10 +7,9 @@ return {
   opts = {
     flavour = "mocha",
     compile = { enabled = true },
-    transparent_background = true,
-    -- transparent_background = true,
+    transparent_background = false,
     float = {
-      transparent = true,
+      transparent = false,
       solid = false,
     },
     term_colors = true,

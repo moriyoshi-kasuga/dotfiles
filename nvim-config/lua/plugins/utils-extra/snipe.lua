@@ -1,9 +1,16 @@
 return {
   "leath-dub/snipe.nvim",
-  opts = {},
+  opts = {
+    ui = {
+      position = "center",
+    },
+    navigate = {
+      cancel_snipe = "q",
+    },
+  },
   keys = {
     {
-      "gb",
+      ",a",
       function()
         require("snipe").open_buffer_menu()
       end,
