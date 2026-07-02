@@ -80,6 +80,16 @@ end
 -- コマンドライン補完
 vim.opt.wildignorecase = true
 
+-- 未保存のまま :q した時にエラーで止めず確認ダイアログを出す
+vim.opt.confirm = true
+
+-- 末尾の空白・タブなどを可視化
+vim.opt.list = true
+vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
+
+-- diffview.nvim 等での行内差分をより正確に
+vim.opt.diffopt:append("linematch:60")
+
 -- セッション保存項目の最適化
 vim.opt.sessionoptions = "buffers,curdir,tabpages,winsize,help,globals,skiprtp"
 
