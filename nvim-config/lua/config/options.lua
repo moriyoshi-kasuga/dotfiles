@@ -95,7 +95,18 @@ vim.opt.sessionoptions = "buffers,curdir,tabpages,winsize,help,globals,skiprtp"
 
 -- Linuxでもnixでpbcopyコマンドを提供しているので問題ない
 -- SSH接続時はローカルのpbcopyが使えないのでOSC52でホスト側クリップボードに転送する
-vim.g.clipboard = vim.env.SSH_CONNECTION and require("vim.ui.clipboard.osc52")
+vim.g.clipboard = vim.env.SSH_CONNECTION
+    and {
+      name = "OSC 52",
+      copy = {
+        ["+"] = require("vim.ui.clipboard.osc52").copy("+"),
+        ["*"] = require("vim.ui.clipboard.osc52").copy("*"),
+      },
+      paste = {
+        ["+"] = require("vim.ui.clipboard.osc52").paste("+"),
+        ["*"] = require("vim.ui.clipboard.osc52").paste("*"),
+      },
+    }
   or {
     name = "pbcopy",
     copy = { ["+"] = "pbcopy", ["*"] = "pbcopy" },
