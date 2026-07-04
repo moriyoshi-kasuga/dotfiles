@@ -15,7 +15,7 @@ mkModule {
     };
     catppuccin.sddm = {
       enable = true;
-      flavor = "mocha";
+      flavor = "macchiato";
       accent = "sapphire";
       font = "JetBrains Mono";
       fontSize = "10";

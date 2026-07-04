@@ -5,7 +5,7 @@ return {
   name = "catppuccin",
   ---@type CatppuccinOptions
   opts = {
-    flavour = "mocha",
+    flavour = "macchiato",
     compile = { enabled = true },
     transparent_background = false,
     float = {
@@ -48,6 +48,6 @@ return {
   },
   config = function(_, opts)
     require("catppuccin").setup(opts)
-    vim.cmd("colorscheme catppuccin-mocha")
+    vim.cmd("colorscheme catppuccin-macchiato")
   end,
 }

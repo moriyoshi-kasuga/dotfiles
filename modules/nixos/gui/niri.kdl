@@ -48,7 +48,7 @@ input {
 
 cursor {
   xcursor-size 24
-  xcursor-theme "catppuccin-mocha-sapphire-cursors"
+  xcursor-theme "catppuccin-macchiato-sapphire-cursors"
   hide-when-typing
   hide-after-inactive-ms 10000
 }

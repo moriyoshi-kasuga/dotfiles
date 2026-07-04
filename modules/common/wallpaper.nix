@@ -7,7 +7,7 @@
 
 let
   wallpaperMap = {
-    "orangci/walls-catppuccin-mocha" = {
+    "orangci/walls-catppuccin-macchiato" = {
       rev = "7bfdf10d16ad3a689f9f0cf3a0930da3d1a245a8";
       hash = "sha256-N+MZHSRcwOldS5Ai8B3YfKquKs9oeUW/GkV1iKM5+i8=";
     };

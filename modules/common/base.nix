@@ -13,7 +13,7 @@ let
   catppuccin = {
     enable = true;
     autoEnable = true;
-    flavor = "mocha";
+    flavor = "macchiato";
     accent = "sapphire";
   };
 in

@@ -55,7 +55,7 @@ cp vars.nix.example vars.nix
 | **Terminal** | [WezTerm](https://wezterm.org) |
 | **Editor** | [Neovim](https://neovim.io) |
 | **Shell** | [Fish](https://fishshell.com) |
-| **Theme** | [Catppuccin Mocha](https://github.com/catppuccin/catppuccin) |
+| **Theme** | [Catppuccin Macchiato](https://github.com/catppuccin/catppuccin) |
 | **Font** | Maple Mono Normal NL NF / JetBrains Mono Nerd Font |
 
 ## Module Hierarchy
