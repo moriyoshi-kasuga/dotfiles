@@ -109,7 +109,6 @@ mkModule {
       gdk-pixbuf
       gobject-introspection
       gtk3
-      gio-sharp
       cairo
       at-spi2-atk
       atkmm

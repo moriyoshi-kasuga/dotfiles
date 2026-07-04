@@ -16,9 +16,15 @@ mkModule {
       fish_add_path ~/.cargo/bin
     '';
 
+    # mold is a fallback: `cargo build --config 'target."cfg(target_os = \"linux\")".rustflags=["-C","link-arg=-fuse-ld=mold"]'`
+    # if wild fails to link a specific crate.
+    home.file.".cargo/config.toml".text = ''
+      [target.'cfg(target_os = "linux")']
+      rustflags = ["-C", "link-arg=-fuse-ld=wild"]
+    '';
+
     home.packages = with pkgs; [
       rustup
-      mold
       wild
 
       cargo-hack

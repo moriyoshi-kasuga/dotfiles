@@ -14,7 +14,7 @@ mkModule {
       lld
       cmake
       ninja
-      (lib.hiPrio gcc)
+      (lib.hiPrio gcc16)
       (lib.lowPrio binutils)
     ];
   };
@@ -23,5 +23,15 @@ mkModule {
       libcxx
       cctools
     ];
+  };
+  linuxHomeModule = {
+    home.packages = with pkgs; [
+      mold
+    ];
+    home.sessionVariables = {
+      CFLAGS = "-fuse-ld=mold";
+      CXXFLAGS = "-fuse-ld=mold";
+      LDFLAGS = "-fuse-ld=mold";
+    };
   };
 }
