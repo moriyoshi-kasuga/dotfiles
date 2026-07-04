@@ -94,13 +94,16 @@ vim.opt.diffopt:append("linematch:60")
 vim.opt.sessionoptions = "buffers,curdir,tabpages,winsize,help,globals,skiprtp"
 
 -- Linuxでもnixでpbcopyコマンドを提供しているので問題ない
-vim.g.clipboard = vim.env.SSH_CONNECTION and nil
+-- SSH接続時はローカルのpbcopyが使えないのでOSC52でホスト側クリップボードに転送する
+vim.g.clipboard = vim.env.SSH_CONNECTION and require("vim.ui.clipboard.osc52")
   or {
     name = "pbcopy",
     copy = { ["+"] = "pbcopy", ["*"] = "pbcopy" },
     paste = { ["+"] = "pbpaste", ["*"] = "pbpaste" },
     cache_enabled = 0,
   }
+vim.opt.clipboard = "unnamedplus"
+
 vim.g.editorconfig = true
 
 -- disable some default providers
