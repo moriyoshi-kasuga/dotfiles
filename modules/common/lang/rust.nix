@@ -18,6 +18,8 @@ mkModule {
 
     home.packages = with pkgs; [
       rustup
+      mold
+      wild
 
       cargo-hack
       cargo-msrv
