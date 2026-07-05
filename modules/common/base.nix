@@ -60,7 +60,7 @@ mkModule {
         wl-paste --no-newline
       '')
       (writeShellScriptBin "pbcopy" ''
-        wl-copy --trim-newline
+        wl-copy
       '')
       (writeShellScriptBin "open" ''
         xdg-open "$@"
