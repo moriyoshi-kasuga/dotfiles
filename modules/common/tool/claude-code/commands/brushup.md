@@ -1,7 +1,7 @@
 ---
 description: 動く状態の荒削りな実装を受け取り、品質を全面的に引き上げる。命名・エラーハンドリング・コメント・モジュール分割など細部を磨き上げ、必要であれば機能的な改善も行う。Rust特化。
 argument-hint: <ファイルパス | 対象箇所の説明>
-allowed-tools: Read, Glob, Grep, Edit, Write, Bash(git diff *), Bash(git status *), Bash(git log *)
+allowed-tools: Read, Glob, Grep, Edit, Write, Bash(git diff *), Bash(git status *), Bash(git log *), Bash(cargo check *), Bash(cargo test *), Bash(cargo clippy *), Bash(cargo fmt *)
 ---
 
 # ブラッシュアップ（Rust特化）
@@ -13,13 +13,13 @@ allowed-tools: Read, Glob, Grep, Edit, Write, Bash(git diff *), Bash(git status 
 
 ## このスキルの位置づけ
 
-| スキル | 機能変更 | コード変更 | 主な用途 |
+| スキル | 機能変更 | 既存設計の扱い | 主な用途 |
 |---|---|---|---|
-| `refactor` | 行わない | 行う | 動いているコードの内部構造を安全に整理 |
-| `review-code` | 行わない | 行わない | 問題点の指摘・提案のみ |
-| **`brushup`** | **行ってよい** | **行う** | 荒削りな実装を全面的に磨き上げる |
+| `refactor` | 行わない | 維持する | 動いているコードの内部構造を安全に整理 |
+| **`brushup`** | **行ってよい** | **意図を最優先で尊重** | 荒削りな実装を全面的に磨き上げる |
+| `rewrite` | 大胆に行う | 参考に留める | ゼロベースで最良の設計に完全に書き直す |
 
-基盤ロジックは実装者の意図を尊重しつつ、細部の品質を全面的に引き上げる。
+基盤ロジックは実装者の意図を尊重しつつ、細部の品質を全面的に引き上げる。指摘のみで変更しない場合は `review-code` を使う。
 
 ## 方針
 
@@ -72,8 +72,9 @@ allowed-tools: Read, Glob, Grep, Edit, Write, Bash(git diff *), Bash(git status 
 
 - `for` ループをイテレータチェーンで書けないか（`map` / `filter` / `flat_map` / `fold` / `any` / `all`）
 - インデックスアクセス（`v[i]`）を `iter().enumerate()` に置き換えられないか
-- `match` / `if let` / `while let` / `matches!` の使い分けが適切か
+- `match` / `if let` / `let-else` / `while let` / `matches!` の使い分けが適切か
   - 1パターンのみ → `if let`
+  - パターン不一致で早期リターン → `let-else`
   - 真偽値のみ → `matches!`
   - 複数パターン → `match`
 - `collect::<Vec<_>>()` に型推論が効いているか（冗長な型注釈になっていないか）
@@ -100,7 +101,15 @@ allowed-tools: Read, Glob, Grep, Edit, Write, Bash(git diff *), Bash(git status 
 - `Box<[T]>` / `Rc<[T]>` など固定長が確定後に `Vec<T>` を使い続けていないか
 - 引数に `&str` の代わりに `impl AsRef<str>` / `impl AsRef<Path>` を使えるか
 
-### 7. コメント・ドキュメント
+### 7. 並行・非同期（該当する場合）
+
+- `std::sync::Mutex` のガードを `.await` をまたいで保持していないか（`tokio::sync::Mutex` への変更か、ロック範囲の見直し）
+- async fn 内でブロッキング呼び出し（`std::fs` / `std::thread::sleep` / 重い CPU 処理）をしていないか → `spawn_blocking` / 非同期版 API
+- `tokio::spawn` の `JoinHandle` を放置してエラー・panic を握りつぶしていないか
+- マルチスレッド文脈で `Rc` / `RefCell` を使っていないか（`Arc` / `Mutex` / `RwLock`）
+- チャネル・`Notify` で済む箇所に共有状態＋ロックを使っていないか
+
+### 8. コメント・ドキュメント
 
 AI生成コードは過剰なコメントになりがちなので、ブラッシュアップ時に積極的に整理する。
 
@@ -110,21 +119,26 @@ AI生成コードは過剰なコメントになりがちなので、ブラッシ
 - 公開 API のドキュメントコメントは目的と契約（引数・戻り値・エラー条件のうちシグネチャから読み取れないもの）に絞る
 - `unsafe` ブロックに Safety コメント（`// SAFETY:`）があるか
 
-### 8. 細部の堅牢性
+### 9. 細部の堅牢性
 
 - 境界値・空スライス・空 `Vec`・`None` の考慮漏れがないか
+- 数値変換の `as` キャストが切り捨て・符号反転を起こしうる箇所で使われていないか → `try_into()` / `From`
+- オーバーフローしうる算術に `checked_*` / `saturating_*` / `wrapping_*` の検討が要らないか
 - マジックナンバー・マジック文字列を `const` / `static` に切り出せるか
 - デッドコード・未使用 `use` / 未使用変数（`_` prefix か削除）
 - `#[allow(...)]` に理由コメントがあるか
+- `#[must_use]` を付けるべき戻り値・型はないか
 - `unsafe` の使用範囲が最小化されているか
 - `panic!` / `unreachable!` / `todo!` / `unimplemented!` が本番コードに残っていないか
 
 ## 実行手順
 
 1. **現状把握** — 対象コードを読み、実装者の意図・基盤ロジックを把握する
-2. **改善点の洗い出し** — チェックリストに沿って問題点を列挙する
-3. **段階的ブラッシュアップ** — 観点ごとに変更を適用する
-4. **大きな変更の判断** — アーキテクチャや仕様に影響する改善は実装せず提案として記録する
+2. **グリーン確認** — `cargo check`（テストがあれば `cargo test` も）で変更前の状態を確認する
+3. **改善点の洗い出し** — チェックリストに沿って問題点を列挙する
+4. **段階的ブラッシュアップ** — 観点ごとに変更を適用し、各区切りで `cargo check` を通す
+5. **仕上げの検証** — `cargo clippy` の指摘を解消し、`cargo test` と `cargo fmt` を実行する
+6. **大きな変更の判断** — アーキテクチャや仕様に影響する改善は実装せず提案として記録する
 
 ## 出力形式
 
@@ -132,10 +146,14 @@ AI生成コードは過剰なコメントになりがちなので、ブラッシ
 
 変更箇所ごとに：
 
-- **変更観点**: 命名 / エラーハンドリング / 所有権・借用 / イディオム / 型・トレイト / パフォーマンス / コメント / 堅牢性
+- **変更観点**: 命名 / エラーハンドリング / 所有権・借用 / イディオム / 型・トレイト / パフォーマンス / 並行・非同期 / コメント / 堅牢性
 - **変更理由**: なぜこの変更が改善か
 - **変更前**: 修正前のコード（簡潔に）
 - **変更後**: 改善後のコード（簡潔に）
+
+### 検証結果
+
+`cargo check` / `cargo clippy` / `cargo test` の結果。
 
 ### 提案（未実施）
 
