@@ -25,7 +25,6 @@ mkModule {
 
     home.packages = with pkgs; [
       rustup
-      wild
 
       cargo-hack
       cargo-msrv
@@ -48,5 +47,8 @@ mkModule {
     home.sessionVariablesExtra = ''
       export CARGO_TARGET_AARCH64_APPLE_DARWIN_LINKER="$(xcrun --find cc)"
     '';
+  };
+  linuxHomeModule = {
+    home.packages = [ pkgs.wild ];
   };
 }
