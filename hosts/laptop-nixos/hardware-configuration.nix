@@ -4,7 +4,7 @@
 { config, lib, pkgs, modulesPath, ... }:
 
 {
-  boot.kernelPackages = pkgs.linuxKernel.packages.linux_7_0;
+  boot.kernelPackages = pkgs.linuxKernel.packages.linux_7_1;
   
   imports =
     [ (modulesPath + "/installer/scan/not-detected.nix")
