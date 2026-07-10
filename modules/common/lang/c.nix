@@ -14,8 +14,7 @@ mkModule {
       lld
       cmake
       ninja
-      (lib.hiPrio gcc16)
-      (lib.lowPrio binutils)
+      clang
     ];
   };
   darwinHomeModule = {
