@@ -124,6 +124,7 @@ mkModule {
         language = "Japanese";
         env = {
           IS_DEMO = 1;
+          CLAUDE_CODE_SHELL = "${pkgs.bash}/bin/bash";
         };
       };
     in
