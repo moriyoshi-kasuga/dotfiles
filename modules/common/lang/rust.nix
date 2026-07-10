@@ -39,6 +39,7 @@ mkModule {
       cargo-show-asm
       cargo-make
       cargo-llvm-lines
+      cargo-depgraph
     ];
   };
   darwinHomeModule = {
