@@ -14,7 +14,7 @@ mkModule {
       lld
       cmake
       ninja
-      clang
+      (lib.hiPrio clang)
     ];
   };
   darwinHomeModule = {
