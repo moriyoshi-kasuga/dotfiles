@@ -23,6 +23,7 @@ mkModule {
           disableArtifact = true;
           disableAutoMode = "disable";
           allow = [
+            "Read(//tmp/**)"
             # filesystem read-only
             "Bash(ls *)"
             "Bash(find *)"
