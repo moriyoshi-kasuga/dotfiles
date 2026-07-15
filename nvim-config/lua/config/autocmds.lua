@@ -12,11 +12,26 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 -- auto reload file when changed outside nvim
+-- inlay hints are toggled off/on around checktime to avoid a race between the
+-- async inlayHint response and the reloaded buffer content (nvim_buf_set_extmark
+-- "Invalid 'col'" crash, seen with rust-analyzer)
 vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
   group = augroup("checktime"),
   callback = function()
     if vim.o.buftype ~= "nofile" then
+      local bufnr = vim.api.nvim_get_current_buf()
+      local was_enabled = vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr })
+      if was_enabled then
+        vim.lsp.inlay_hint.enable(false, { bufnr = bufnr })
+      end
       vim.cmd("checktime")
+      if was_enabled then
+        vim.defer_fn(function()
+          if vim.api.nvim_buf_is_valid(bufnr) then
+            vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+          end
+        end, 30)
+      end
     end
   end,
 })
