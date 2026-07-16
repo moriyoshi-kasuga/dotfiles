@@ -78,6 +78,15 @@ vim.api.nvim_create_autocmd("BufReadPost", {
   end,
 })
 
+-- render-markdown.nvim's conceal (hidden heading markers, etc.) needs conceallevel >= 1
+vim.api.nvim_create_autocmd("FileType", {
+  group = augroup("markdown_conceal"),
+  pattern = "markdown",
+  callback = function()
+    vim.opt_local.conceallevel = 2
+  end,
+})
+
 -- go to last loc when opening a buffer
 vim.api.nvim_create_autocmd("BufReadPost", {
   group = augroup("last_loc"),

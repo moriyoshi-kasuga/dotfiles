@@ -6,10 +6,17 @@ return {
   opts = {
     bigfile = { enabled = true },
     dashboard = { enabled = true },
-    indent = { enabled = true },
+    indent = {
+      enabled = true,
+      scope = {
+        enabled = false,
+      },
+      chunk = {
+        enabled = false,
+      },
+    },
     input = { enabled = true },
     quickfile = { enabled = true },
-    scope = { enabled = true },
     zen = { enabled = true },
     words = { enabled = true },
 

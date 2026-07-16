@@ -28,31 +28,8 @@ return {
         capabilities = capabilities,
       })
 
-      -- vtsls does not enable inlay hints on its own; turn them on so the
-      -- LspAttach hook (which only toggles visibility) actually has hints to show.
-      local ts_inlay_hints = {
-        parameterNames = { enabled = "literals", suppressWhenArgumentMatchesName = true },
-        parameterTypes = { enabled = true },
-        variableTypes = { enabled = true, suppressWhenTypeMatchesName = true },
-        propertyDeclarationTypes = { enabled = true },
-        functionLikeReturnTypes = { enabled = true },
-        enumMemberValues = { enabled = true },
-      }
-      vim.lsp.config("vtsls", {
-        settings = {
-          typescript = { inlayHints = ts_inlay_hints },
-          javascript = { inlayHints = ts_inlay_hints },
-        },
-      })
-
-      -- astro-language-server has no bundled TypeScript and, under Nix, no global
-      -- install to discover. Hand it the SDK path exported via TSDK_PATH.
-      local tsdk = vim.env.TSDK_PATH
-      if tsdk and tsdk ~= "" then
-        vim.lsp.config("astro", {
-          init_options = { typescript = { tsdk = tsdk } },
-        })
-      end
+      -- Per-server settings (vtsls, astro, lua_ls, nixd, ...) live under after/lsp/*.lua
+      -- and are merged in automatically; this file only handles cross-server setup.
 
       -- denols and vtsls coexist safely: lspconfig attaches denols only inside a
       -- deno.json/deno.lock project and makes vtsls stand down there, so enabling

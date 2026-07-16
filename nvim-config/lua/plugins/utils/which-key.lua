@@ -25,9 +25,23 @@ return {
       -- Test (Neotest)
       { "<leader>t", group = "test" },
 
+      -- Debug (nvim-dap)
+      { "<leader>d", group = "dap" },
+
+      -- Scala / Java (metals, jdtls)
+      { "<leader>m", group = "scala/java" },
+
+      -- GitHub (octo.nvim)
+      { "<leader>o", group = "octo" },
+
+      -- Peek (overlook.nvim)
+      { "<leader>p", group = "peek" },
+
+      -- Trouble
+      { "<leader>x", group = "trouble" },
+
       -- Search / Replace
       { "<leader>s", group = "search" },
-      { "<leader>sn", group = "noice" },
 
       -- FZF / Find
       { ",", group = "find" },
