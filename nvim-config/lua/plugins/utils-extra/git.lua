@@ -1,47 +1,13 @@
 return {
   {
-    "sindrets/diffview.nvim",
-    opts = function()
-      local actions = require("diffview.actions")
-
-      local next = { "n", "<C-n>", actions.select_next_entry, { desc = "Open the diff for the next file" } }
-      local prev = {
-        "n",
-        "<C-p>",
-        actions.select_prev_entry,
-        { desc = "Open the diff for the previous file" },
-      }
-
-      return {
-        use_icons = true,
-        show_help_hints = false,
-        hooks = {
-          diff_buf_read = function()
-            vim.opt_local.wrap = true
-          end,
-        },
-        keymaps = {
-          view = {
-            next,
-            prev,
-          },
-          file_panel = {
-            next,
-            prev,
-          },
-        },
-      }
-    end,
+    "esmuellert/codediff.nvim",
+    cmd = "CodeDiff",
+    opts = {},
     keys = {
-      { "<leader>gd", "<cmd>DiffviewOpen<CR>", desc = "Diffview Open" },
-      { "<leader>gf", "<cmd>DiffviewFileHistory %<CR>", desc = "Diffview File History", mode = { "n" } },
-      {
-        "<leader>gf",
-        ":'<,'>DiffviewFileHistory<CR>",
-        desc = "Diffview Range History",
-        mode = { "v" },
-      },
-      { "<leader>gF", "<cmd>DiffviewFileHistory<CR>", desc = "Diffview File History (All)" },
+      { "<leader>gd", "<cmd>CodeDiff file HEAD<CR>", desc = "CodeDiff Open (Buffer)" },
+      { "<leader>gD", "<cmd>CodeDiff<CR>", desc = "CodeDiff Open (All)" },
+      { "<leader>gf", "<cmd>CodeDiff history %<CR>", desc = "CodeDiff File History (Current)" },
+      { "<leader>gF", "<cmd>CodeDiff history<CR>", desc = "CodeDiff File History (All)" },
     },
   },
   {
@@ -49,7 +15,7 @@ return {
     lazy = true,
     dependencies = {
       "nvim-lua/plenary.nvim",
-      "sindrets/diffview.nvim",
+      "esmuellert/codediff.nvim",
 
       "ibhagwan/fzf-lua",
     },
