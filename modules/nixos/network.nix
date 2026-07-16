@@ -17,10 +17,9 @@ mkModule {
     { cfg, ... }:
     {
       services.resolved.enable = true;
-      services.openssh.enable = true;
 
       networking = {
-        hostName = cfg.hostName;
+        inherit (cfg) hostName;
         nameservers = [
           "1.1.1.1"
           "8.8.8.8"

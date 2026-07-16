@@ -31,10 +31,9 @@ cp vars.nix.example vars.nix
 ## Apply
 
 ```sh
-./init.sh nixos   <name>   # NixOS
-./init.sh darwin  <name>   # macOS
-./init.sh flake   <name>   # Home Manager only
-./init.sh update           # flake update
+./init.sh nixos   <name> [--boot]   # NixOS
+./init.sh darwin  <name>            # macOS
+./init.sh update                    # flake update
 ```
 
 ## Hosts
@@ -42,11 +41,14 @@ cp vars.nix.example vars.nix
 | Name | OS | 用途 |
 | :--- | :--- | :--- |
 | `desktop` | NixOS (x86_64) | メインデスクトップ (GUI) |
+| `laptop-nixos` | NixOS (x86_64) | ノートPC (NixOS, GUI) |
 | `sv-main` | NixOS (x86_64) | サーバー (GUI なし) |
-| `laptop` | macOS (aarch64) | ノートPC |
+| `laptop-mac` | macOS (aarch64) | ノートPC (macOS) |
 | `job` | macOS (aarch64) | 仕事用 |
 
 ## Environment
+
+unixpornではなく、コーディングのための設定です。
 
 | Component | Software |
 | :--- | :--- |

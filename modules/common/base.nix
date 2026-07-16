@@ -1,5 +1,4 @@
 {
-  lib,
   pkgs,
   mkModule,
   username,
@@ -69,12 +68,6 @@ mkModule {
   };
   nixosModule = {
     inherit catppuccin;
-    nixpkgs.config.allowUnfreePredicate =
-      pkg:
-      builtins.elem (lib.getName pkg) [
-        "nvidia-x11"
-      ];
-
     home-manager.backupFileExtension = "nixbackup";
     system.stateVersion = version;
 

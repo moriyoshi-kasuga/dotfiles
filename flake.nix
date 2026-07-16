@@ -27,14 +27,70 @@
       url = "github:ryoppippi/nix-claude-code";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    wallpapers = {
+      url = "github:dharmx/walls";
+      flake = false;
+    };
   };
 
   outputs =
     inputs:
     let
       mkPlatform = import ./lib/mkPlatform.nix;
+
+      systems = [
+        "x86_64-linux"
+        "aarch64-darwin"
+      ];
+      eachSystem =
+        f:
+        builtins.listToAttrs (
+          map (system: {
+            name = system;
+            value = f (import inputs.nixpkgs { inherit system; });
+          }) systems
+        );
+
+      devTools =
+        pkgs: with pkgs; [
+          nixfmt
+          statix
+          deadnix
+          stylua
+          shellcheck
+        ];
+
+      extraOutputs = {
+        formatter = eachSystem (pkgs: pkgs.nixfmt-tree);
+
+        checks = eachSystem (pkgs: {
+          lint =
+            pkgs.runCommand "lint"
+              {
+                nativeBuildInputs = devTools pkgs;
+                src = inputs.self;
+              }
+              ''
+                cd "$src"
+                statix check .
+                deadnix --fail flake.nix lib modules
+                # hosts/ contains generated hardware configs; leave them as-is
+                nixfmt --check $(find . -name '*.nix' -not -path './hosts/*')
+                stylua --check --indent-type Spaces --indent-width 2 nvim-config
+                shellcheck init.sh
+                touch $out
+              '';
+        });
+
+        devShells = eachSystem (pkgs: {
+          default = pkgs.mkShell {
+            packages = devTools pkgs ++ [ pkgs.nixd ];
+          };
+        });
+      };
     in
-    mkPlatform [
+    extraOutputs
+    // mkPlatform [
       {
         name = "desktop";
         inherit inputs;
@@ -65,14 +121,7 @@
           modules.terminal.wezterm.enable = true;
           modules.library.enable = true;
           modules.font.enable = true;
-          modules.wallpaper = {
-            enable = true;
-            owner = "dharmx";
-            repo = "walls";
-          };
-        };
-        homeConfig = {
-          imports = [ inputs.noctalia.homeModules.default ];
+          modules.wallpaper.enable = true;
         };
         nixosConfig = {
           imports = [
@@ -110,14 +159,7 @@
           modules.terminal.wezterm.enable = true;
           modules.library.enable = true;
           modules.font.enable = true;
-          modules.wallpaper = {
-            enable = true;
-            owner = "dharmx";
-            repo = "walls";
-          };
-        };
-        homeConfig = {
-          imports = [ inputs.noctalia.homeModules.default ];
+          modules.wallpaper.enable = true;
         };
         nixosConfig = {
           imports = [
@@ -150,9 +192,6 @@
             enable = true;
             git.enable = true;
           };
-        };
-        homeConfig = {
-          imports = [ inputs.noctalia.homeModules.default ];
         };
         nixosConfig = {
           imports = [
@@ -192,11 +231,7 @@
           modules.terminal.wezterm.enable = true;
           modules.library.enable = true;
           modules.font.enable = true;
-          modules.wallpaper = {
-            enable = true;
-            owner = "dharmx";
-            repo = "walls";
-          };
+          modules.wallpaper.enable = true;
         };
       }
       {
@@ -227,11 +262,7 @@
           };
           modules.library.enable = true;
           modules.font.enable = true;
-          modules.wallpaper = {
-            enable = true;
-            owner = "dharmx";
-            repo = "walls";
-          };
+          modules.wallpaper.enable = true;
         };
       }
     ];

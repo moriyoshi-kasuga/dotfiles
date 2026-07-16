@@ -124,7 +124,8 @@
         "nix-darwin": "nix-darwin",
         "nixpkgs": "nixpkgs",
         "noctalia": "noctalia",
-        "vars-file": "vars-file"
+        "vars-file": "vars-file",
+        "wallpapers": "wallpapers"
       }
     },
     "vars-file": {
@@ -137,6 +138,22 @@
       "original": {
         "type": "file",
         "url": "file:///dev/null"
+      }
+    },
+    "wallpapers": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1709702900,
+        "narHash": "sha256-M96jJy3L0a+VkJ+DcbtrRAquwDWaIG9hAUxenr/TcQU=",
+        "owner": "dharmx",
+        "repo": "walls",
+        "rev": "6bf4d733ebf2b484a37c17d742eb47e5139e6a14",
+        "type": "github"
+      },
+      "original": {
+        "owner": "dharmx",
+        "repo": "walls",
+        "type": "github"
       }
     }
   },

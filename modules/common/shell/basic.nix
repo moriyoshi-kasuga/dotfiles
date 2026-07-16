@@ -50,6 +50,8 @@ mkModule {
       };
     };
 
+    # fzf は catppuccin/nix に任せず手書き: 背景を端末の透過に合わせるため
+    # bg:-1 / fg:-1 が必要で、モジュール側のテーマだと上書きされてしまう。
     catppuccin.fzf.enable = false;
 
     home.sessionVariables = {

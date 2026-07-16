@@ -80,12 +80,22 @@ let
     else
       attrByPath ([ "modules" ] ++ inheritPath) { } config;
 
-  effectiveEnable = cfg.enable || inheritedCfg.enable;
-
   # -------------------------
 
+  # enable defaults to the parent module's enable, so enabling a parent
+  # enables all children while still allowing per-host opt-out
+  # (e.g. modules.tool.docker.enable = false).
   mergedOption = recursiveUpdate {
-    enable = mkEnableOption (concatStringsSep "." path);
+    enable = mkOption {
+      type = types.bool;
+      default = inheritedCfg.enable;
+      defaultText =
+        if inheritPath == null then
+          literalExpression "false"
+        else
+          literalExpression "config.modules.${concatStringsSep "." inheritPath}.enable";
+      description = "Whether to enable modules.${concatStringsSep "." path}.";
+    };
   } options;
 
   attrOptions = setAttrByPath optionPath mergedOption;
@@ -103,7 +113,7 @@ in
 
   options = attrOptions;
 
-  config = mkIf effectiveEnable (mkMerge [
+  config = mkIf cfg.enable (mkMerge [
     commonConfig
     moduleConfig
   ]);

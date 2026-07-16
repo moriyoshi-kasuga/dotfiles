@@ -1,0 +1,3 @@
+disabled = ["repeated_keys"]
+# hosts/ contains generated hardware configs
+ignore = ["hosts", "vars.nix"]

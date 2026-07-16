@@ -46,23 +46,28 @@ flake.nix
 ### 有効化ロジック
 
 ```nix
-effectiveEnable = cfg.enable || inheritedCfg.enable
+enable = mkOption {
+  type = types.bool;
+  default = inheritedCfg.enable;  # 親モジュールの enable がデフォルト値
+};
 ```
 
-`modules.<name>.enable = true` が直接セットされているか、`inheritModule` で指定した親の `enable` が true のとき、このモジュールが有効になります。
+`enable` のデフォルト値が `inheritModule` で指定した親の `enable` になります。
+親を有効化すると子も有効になり、子に明示的な値をセットすればそれが優先されます（オプトアウト可能）。
 
 **例:**
 ```
 modules.lang.enable = true
   → lang.go       (inheritModule = "lang") が有効化
   → lang.rust     (inheritModule = "lang") が有効化
-  → lang.wasm     (inheritModule = "lang") が有効化
-  → lang.node     (inheritModule = "lang") が有効化
   ...
 
 modules.lang.rust.enable = true (明示)
   → lang.rust のみ有効化
-  → lang.wasm は有効化されない (inheritModule = "lang" であるため)
+  → lang.wasm は有効化されない (lang.enable = false のため)
+
+modules.tool.enable = true; modules.tool.docker.enable = false;
+  → tool 配下は有効化されるが docker のみ無効 (オプトアウト)
 ```
 
 ### プラットフォームルーティング
@@ -155,12 +160,16 @@ specialArgs: modules: [module, ...]
 
 ### 処理フロー
 
-1. `pkgs = import inputs.nixpkgs { inherit system; allowBroken = true; allowUnfree = true; }`
-2. `vars = import inputs.vars-file.outPath` — 外部変数ファイルをロード
+1. `pkgs = import inputs.nixpkgs { inherit system; allowUnfree = true; }` (overlay 適用済み)
+2. `vars = import inputs.vars-file.outPath` — 外部変数ファイルをロード (空ならデフォルト値にフォールバック)
 3. `resolveModules` で `[modules, ../modules]` を展開してフラットなリストを生成
-4. `platform = "home"` で homeModules を構成 (catppuccin + homeConfig を追加)
+4. `platform = "home"` で homeModules を構成 (catppuccin + (Linux のみ) noctalia + homeConfig を追加)
 5. `platform = "nixos"/"darwin"` でシステム評価用モジュールを構成
 6. 対応する `nixosSystem` / `darwinSystem` / `homeManagerConfiguration` を返す
+
+NixOS では `{ nixpkgs.pkgs = pkgs; }` を渡し、手順 1 の pkgs をモジュールシステムでもそのまま使います
+(nixpkgs の二重インスタンス化を避けるため)。そのため各モジュール内の `nixpkgs.config.*` / `nixpkgs.overlays`
+は効きません。overlay や config の変更は `lib/mkPlatformInner.nix` の import 箇所で行ってください。
 
 ---
 
@@ -185,6 +194,9 @@ vars-file = {
   flake = false;
 };
 ```
+
+override なし (空ファイル) のときは `mkPlatformInner` がデフォルト値 (`gitIncludes = []`) に
+フォールバックするため、`nix flake check` や CI・nixd での評価はそのまま通ります。
 
 ```sh
 # 適用時に実際の vars.nix を注入

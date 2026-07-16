@@ -9,10 +9,15 @@ mkModule {
   name = "nixos.basic";
   inheritModule = "nixos";
   nixosModule = {
-    nixpkgs.config.allowUnfree = true;
-
     services.dbus.enable = true;
-    services.openssh.enable = true;
+    services.openssh = {
+      enable = true;
+      settings = {
+        PasswordAuthentication = false;
+        KbdInteractiveAuthentication = false;
+        PermitRootLogin = "no";
+      };
+    };
 
     environment.systemPackages = with pkgs; [
       vim-full

@@ -1,25 +1,17 @@
 {
   mkModule,
-  pkgs,
   ...
 }:
 
-let
-  package = pkgs.delta;
-  cmd = pkgs.lib.getExe package;
-in
 mkModule {
   name = "tool.git.delta";
   inheritModule = "tool.git";
   homeModule = {
-    home.packages = [
-      package
-    ];
-
-    programs.git.iniContent = {
-      core.pager = "${cmd} --diff-so-fancy";
-      interactive.diffFilter = "${cmd} --diff-so-fancy --color-only";
-      delta = {
+    programs.delta = {
+      enable = true;
+      enableGitIntegration = true;
+      options = {
+        diff-so-fancy = true;
         line-numbers = true;
         navigate = true;
       };

@@ -4,7 +4,10 @@ let
   loadModule =
     module:
     if builtins.isPath module || builtins.isString module then
-      if builtins.pathExists module then import module else abort "resolveModules: path not found: ${toString module}"
+      if builtins.pathExists module then
+        import module
+      else
+        abort "resolveModules: path not found: ${toString module}"
     else
       module;
 

@@ -77,7 +77,7 @@ name = "lang.wasm";
 inheritModule = "lang";
 ```
 
-> **注意**: 親の `enable` が `true` の場合、子モジュールを個別に `false` にしても無効化できません (`effectiveEnable = cfg.enable || inheritedCfg.enable`)。個別に制御する必要がある場合は親の `enable` を使わず、子モジュールを個別に列挙してください（`flake.nix` の `job` ホストの `modules.lang` がその例）。
+> **補足**: 子モジュールの `enable` は「デフォルト値が親の `enable`」として定義されているため、親を `true` にしたまま子を明示的に `false` にすればオプトアウトできます (例: `modules.tool.enable = true; modules.tool.docker.enable = false;`)。
 
 **`inheritModule` を省略する場合**: 常に明示的な `enable = true` が必要なとき。
 
@@ -183,7 +183,7 @@ mkModule {
 | `tool.claude-code` | 明示 | Claude Code CLI・スキル設定・権限設定 |
 | `library` | `modules.library.enable` | 共有ライブラリ・PKG_CONFIG_PATH・LD_LIBRARY_PATH |
 | `font` | `modules.font.enable` | JetBrains Mono NF・Maple Mono・Noto CJK |
-| `wallpaper` | `modules.wallpaper.enable` | 壁紙ローテーション。`isCatppuccin` オプションあり |
+| `wallpaper` | `modules.wallpaper.enable` | 壁紙ローテーション。画像は `wallpapers` flake input で管理 |
 
 ### nixos (NixOS専用)
 

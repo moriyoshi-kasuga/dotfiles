@@ -1,33 +1,16 @@
 {
   pkgs,
-  lib,
+  inputs,
   mkModule,
   ...
 }:
 
 let
-  wallpaperMap = {
-    "orangci/walls-catppuccin-macchiato" = {
-      rev = "7bfdf10d16ad3a689f9f0cf3a0930da3d1a245a8";
-      hash = "sha256-N+MZHSRcwOldS5Ai8B3YfKquKs9oeUW/GkV1iKM5+i8=";
-    };
-    "dharmx/walls" = {
-      rev = "6bf4d733ebf2b484a37c17d742eb47e5139e6a14";
-      hash = "sha256-M96jJy3L0a+VkJ+DcbtrRAquwDWaIG9hAUxenr/TcQU=";
-    };
-  };
+  # Pinned via the `wallpapers` flake input; updated by `./init.sh update`.
+  wallpaperSrc = inputs.wallpapers.outPath;
 
   mkRotateScript =
-    owner: repo: setWallpaperCmd:
-    let
-      key = "${owner}/${repo}";
-      wallpaperDef = wallpaperMap.${key} or (throw "wallpaper not found: ${key}");
-      wallpaperSrc = pkgs.fetchFromGitHub {
-        inherit owner repo;
-        rev = wallpaperDef.rev;
-        hash = wallpaperDef.hash;
-      };
-    in
+    setWallpaperCmd:
     pkgs.writeShellApplication {
       name = "wallpaper-rotate";
       runtimeInputs = [
@@ -101,20 +84,9 @@ let
 in
 mkModule {
   name = "wallpaper";
-  options = {
-    owner = lib.mkOption {
-      type = lib.types.str;
-      description = "repository owner";
-    };
-    repo = lib.mkOption {
-      type = lib.types.str;
-      description = "repository name";
-    };
-  };
   darwinHomeModule =
-    { cfg, ... }:
     let
-      rotateScript = mkRotateScript cfg.owner cfg.repo ''
+      rotateScript = mkRotateScript ''
         /usr/bin/osascript \
           -e "tell application \"System Events\"" \
           -e "repeat with d in desktops" \
@@ -139,9 +111,8 @@ mkModule {
       };
     };
   linuxHomeModule =
-    { cfg, ... }:
     let
-      rotateScript = mkRotateScript cfg.owner cfg.repo ''
+      rotateScript = mkRotateScript ''
         noctalia msg wallpaper-set "$FILE"
       '';
     in

@@ -48,9 +48,9 @@ mkModule {
 
       mise = {
         enable = true;
-        package = pkgs.mise.overrideAttrs (oldAttrs: {
+        package = pkgs.mise.overrideAttrs {
           doCheck = false;
-        });
+        };
         globalConfig = {
           settings = {
             not_found_auto_install = true;

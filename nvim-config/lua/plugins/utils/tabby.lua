@@ -8,7 +8,7 @@ return {
     local palette = require("catppuccin.palettes").get_palette("macchiato")
 
     local theme = {
-      fill   = { fg = palette.surface2, bg = "none" },
+      fill = { fg = palette.surface2, bg = "none" },
       active = { fg = palette.mauve, bg = palette.surface0, style = "bold" },
       normal = { fg = palette.overlay1, bg = "none" },
     }

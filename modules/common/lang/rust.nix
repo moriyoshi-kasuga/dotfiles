@@ -9,11 +9,11 @@ mkModule {
   inheritModule = "lang";
   homeModule = {
     programs.zsh.initContent = ''
-      export PATH="$PATH:~/.cargo/bin"
+      export PATH="$PATH:$HOME/.cargo/bin"
     '';
 
     programs.fish.interactiveShellInit = ''
-      fish_add_path ~/.cargo/bin
+      fish_add_path -g ~/.cargo/bin
     '';
 
     # mold is a fallback: `cargo build --config 'target."cfg(target_os = \"linux\")".rustflags=["-C","link-arg=-fuse-ld=mold"]'`

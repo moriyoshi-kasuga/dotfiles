@@ -16,6 +16,12 @@ mkModule {
         init.defaultBranch = "main";
         merge.conflictStyle = "zdiff3";
         push.default = "current";
+        pull.rebase = true;
+        fetch.prune = true;
+        rebase.autostash = true;
+        diff.algorithm = "histogram";
+        rerere.enabled = true;
+        branch.sort = "-committerdate";
       };
 
       includes = vars.gitIncludes;

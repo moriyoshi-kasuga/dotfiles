@@ -15,11 +15,10 @@ usage() {
 Usage: ./init.sh <command> [name] [options]
 
 Commands:
-  flake <name>            Apply Home Manager configuration
   nixos <name> [--boot]   Apply NixOS configuration
   darwin <name>           Apply nix-darwin configuration
-  update                      Update flake inputs
-  help                        Show this help message
+  update                  Update flake inputs
+  help                    Show this help message
 EOF
 }
 
@@ -37,21 +36,16 @@ run_flake_update() {
   echo 'Nix configuration updated.'
 }
 
-run_home_manager() {
-  local name=$1
-  local activation
-  activation=$(nix --extra-experimental-features 'nix-command flakes' \
-    build --no-link --print-out-paths \
-    --override-input vars-file "file+file://$VARS_FILE" \
-    ".#homeConfigurations.${name}.activationPackage")
-  HOME_MANAGER_BACKUP_EXT=backup "$activation/activate"
-}
-
 run_darwin() {
   local name=$1
-  sudo -H nix --extra-experimental-features 'nix-command flakes' \
-    run nix-darwin/master#darwin-rebuild -- \
-    switch --flake .#"${name}" \
+  local system
+  # Build the system first so darwin-rebuild comes from the flake's own
+  # pinned nix-darwin instead of an unpinned nix-darwin/master.
+  system=$(nix --extra-experimental-features 'nix-command flakes' \
+    build --no-link --print-out-paths \
+    --override-input vars-file "file+file://$VARS_FILE" \
+    ".#darwinConfigurations.${name}.system")
+  sudo -H "$system/sw/bin/darwin-rebuild" switch --flake .#"${name}" \
     --override-input vars-file "file+file://$VARS_FILE"
 }
 
@@ -92,7 +86,7 @@ main() {
     run_flake_update
     exit 0
     ;;
-  flake | nixos | darwin)
+  nixos | darwin)
     require_nix
     ;;
   *)
@@ -112,9 +106,6 @@ main() {
   echo "Building Nix configuration...: ${name}"
 
   case "${command}" in
-  flake)
-    run_home_manager "${name}"
-    ;;
   darwin)
     run_darwin "${name}"
     ;;

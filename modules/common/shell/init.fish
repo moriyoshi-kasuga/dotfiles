@@ -1,8 +1,8 @@
-set -U fish_greeting ""
+set -g fish_greeting ""
 
 complete -c simplenvim --wraps nvim
 
-fish_add_path ~/.local/bin
+fish_add_path -g ~/.local/bin
 
 function _run_cdi
   zi
@@ -15,10 +15,6 @@ function fish_user_key_bindings
     bind -M $mode ctrl-g _run_cdi
     bind -M $mode ctrl-o 'edit_command_buffer'
   end
-  # fish_vi_key_bindings --no-erase
-  # if test "$__fish_active_key_bindings" = fish_vi_key_bindings
-  #   bind -M insert -m default jk force-repaint
-  # end
 end
 
 function dcr

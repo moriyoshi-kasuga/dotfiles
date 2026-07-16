@@ -51,13 +51,6 @@ if is_darwin then
   config.window_decorations = "RESIZE"
 end
 
--- config.window_background_opacity = 0.92
--- if is_darwin then
---   config.macos_window_background_blur = 20
--- else
---   -- the blur is provided by niri
--- end
-
 -- Tab bar
 config.enable_tab_bar = false
 
@@ -119,11 +112,6 @@ config.keys = {
   { key = "PageDown", mods = "SHIFT", action = act.ScrollByPage(1) },
 
   -- Toggles
-  -- {
-  --   key = "T",
-  --   mods = "CMD|SHIFT",
-  --   action = toggle_override("window_background_opacity", 1.0),
-  -- },
   {
     key = "o",
     mods = "CMD|SHIFT",

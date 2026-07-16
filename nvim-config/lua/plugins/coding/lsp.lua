@@ -116,24 +116,16 @@ return {
     end,
 
     init = function()
-      -- LSP keybindings on attach
       vim.api.nvim_create_autocmd("LspAttach", {
         callback = function(args)
-          local buffer = args.buf
           local client = vim.lsp.get_client_by_id(args.data.client_id)
           if not client then
             return
           end
 
-          local map = function(mode, lhs, rhs, desc)
-            vim.keymap.set(mode, lhs, rhs, { buffer = buffer, desc = desc, silent = true })
-          end
-
+          -- toggle keymap is provided by Snacks.toggle.inlay_hints() (<leader>uh)
           if client:supports_method("textDocument/inlayHint") then
             vim.lsp.inlay_hint.enable(true, { bufnr = args.buf })
-            map("n", "<leader>uh", function()
-              vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = 0 }), { bufnr = 0 })
-            end, "Toggle Inlay Hints")
           end
         end,
       })

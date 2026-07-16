@@ -15,13 +15,19 @@ let
   pkgs = import inputs.nixpkgs {
     inherit system;
     config = {
-      allowBroken = true;
       allowUnfree = true;
     };
     overlays = [ inputs.nix-claude-code.overlays.default ];
   };
-  lib = pkgs.lib;
-  vars = import inputs.vars-file.outPath;
+  inherit (pkgs) lib;
+
+  # vars-file defaults to an empty file (file+file:///dev/null); fall back to
+  # defaults so evaluation (nix flake check, CI, nixd) works without override.
+  vars =
+    if builtins.readFile inputs.vars-file.outPath == "" then
+      { gitIncludes = [ ]; }
+    else
+      import inputs.vars-file.outPath;
   mkModule = import ./mkModule.nix;
 
   specialArgs = {
@@ -40,8 +46,7 @@ let
   resolveModules = import ./resolveModules.nix;
 
   resolvedArgs = specialArgs // {
-    inherit pkgs;
-    lib = pkgs.lib;
+    inherit pkgs lib;
   };
 
   commonModules = resolveModules resolvedArgs [
@@ -51,10 +56,13 @@ let
 
   evalConfig = config: if lib.isFunction config then config pkgs else config;
 
-  homeModules = commonModules ++ [
-    inputs.catppuccin.homeModules.catppuccin
-    (evalConfig homeConfig)
-  ];
+  homeModules =
+    commonModules
+    ++ [ inputs.catppuccin.homeModules.catppuccin ]
+    # niri module references programs.noctalia, so the option must exist on
+    # every Linux home configuration even when the GUI is disabled.
+    ++ lib.optionals ("nixos" == host) [ inputs.noctalia.homeModules.default ]
+    ++ [ (evalConfig homeConfig) ];
 
   hostHomeManager = {
     home-manager = {
@@ -69,6 +77,10 @@ let
 
   nixosModules = [
     (evalConfig nixosConfig)
+
+    # Reuse the nixpkgs instance imported above (with overlays and config)
+    # instead of letting the module system instantiate a second one.
+    { nixpkgs.pkgs = pkgs; }
 
     inputs.catppuccin.nixosModules.catppuccin
 
