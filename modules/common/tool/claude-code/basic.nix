@@ -11,12 +11,32 @@ mkModule {
   inheritModule = "tool.claude-code";
   homeModule =
     let
-      commandFiles = builtins.attrNames (builtins.readDir ./commands);
-      allowSkills = map (x: "Skill(${lib.removeSuffix ".md" x})") commandFiles;
-      commandList = map (x: {
-        name = ".claude/skills/" + (lib.removeSuffix ".md" x) + "/SKILL.md";
-        value.source = ./commands + ("/" + x);
-      }) commandFiles;
+      # commands/ 直下は「1ファイル = 1スキル」(name.md -> skills/name/SKILL.md) だが、
+      # 参照ファイル（言語別設計方針など）を伴うスキルはディレクトリで表現する
+      # (commands/name/ 配下のファイルをそのまま skills/name/ 直下にコピーする。
+      # エントリポイントは commands/name/SKILL.md という名前で置く)。
+      commandEntries = builtins.readDir ./commands;
+      skillNames = lib.mapAttrsToList (
+        name: type: if type == "directory" then name else lib.removeSuffix ".md" name
+      ) commandEntries;
+      allowSkills = map (x: "Skill(${x})") skillNames;
+      commandList = lib.concatLists (
+        lib.mapAttrsToList (
+          name: type:
+          if type == "directory" then
+            map (file: {
+              name = ".claude/skills/${name}/${file}";
+              value.source = ./commands + "/${name}/${file}";
+            }) (builtins.attrNames (builtins.readDir (./commands + "/${name}")))
+          else
+            [
+              {
+                name = ".claude/skills/" + (lib.removeSuffix ".md" name) + "/SKILL.md";
+                value.source = ./commands + ("/" + name);
+              }
+            ]
+        ) commandEntries
+      );
 
       settings = {
         permissions = {
