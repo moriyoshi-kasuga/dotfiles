@@ -38,14 +38,9 @@ run_flake_update() {
 
 run_darwin() {
   local name=$1
-  local system
-  # Build the system first so darwin-rebuild comes from the flake's own
-  # pinned nix-darwin instead of an unpinned nix-darwin/master.
-  system=$(nix --extra-experimental-features 'nix-command flakes' \
-    build --no-link --print-out-paths \
-    --override-input vars-file "file+file://$VARS_FILE" \
-    ".#darwinConfigurations.${name}.system")
-  sudo -H "$system/sw/bin/darwin-rebuild" switch --flake .#"${name}" \
+  sudo -H nix --extra-experimental-features 'nix-command flakes' \
+    run nix-darwin/master#darwin-rebuild -- \
+    switch --flake .#"${name}" \
     --override-input vars-file "file+file://$VARS_FILE"
 }
 
