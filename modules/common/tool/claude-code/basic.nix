@@ -43,9 +43,12 @@ mkModule {
         permissions = {
           disableArtifact = true;
           disableAutoMode = "disable";
+          additionalDirectories = [
+            "/nix/store"
+          ];
           allow = [
-            "Read(/${homeDirectory}/.claude/skills/**)"
-            "Read(//tmp/**)"
+            "Read(${homeDirectory}/.claude/skills/**)"
+            "Read(/tmp/**)"
             # filesystem read-only
             "Bash(ls *)"
             "Bash(find *)"
