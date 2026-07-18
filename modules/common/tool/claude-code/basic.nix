@@ -3,6 +3,7 @@
   mkModule,
   lib,
   username,
+  homeDirectory,
   ...
 }:
 
@@ -43,6 +44,7 @@ mkModule {
           disableArtifact = true;
           disableAutoMode = "disable";
           allow = [
+            "Read(/${homeDirectory}/.claude/skills/**)"
             "Read(//tmp/**)"
             # filesystem read-only
             "Bash(ls *)"
