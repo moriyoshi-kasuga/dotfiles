@@ -10,8 +10,15 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
+  environment.sessionVariables = {
+    # Prefer the discrete GPU (RX 9060 XT) over the iGPU as the primary
+    # render/scanout device for niri and its Wayland/EGL clients.
+    WLR_DRM_DEVICES = "/dev/dri/by-path/pci-0000:03:00.0-card:/dev/dri/by-path/pci-0000:10:00.0-card";
+    DRI_PRIME=1;
+  };
+
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "uas" "usb_storage" "sd_mod" ];
-  boot.initrd.kernelModules = [ ];
+  boot.initrd.kernelModules = [ "amdgpu"];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
