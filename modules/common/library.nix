@@ -5,6 +5,60 @@
   ...
 }:
 
+let
+  linuxLibs = with pkgs; [
+    zlib
+    zstd
+    stdenv.cc.cc
+    attr
+    bzip2
+    libxml2
+    acl
+    libsodium
+    util-linux
+    xz
+    vulkan-loader
+    vulkan-tools
+    libxcomposite
+    libxtst
+    libxrandr
+    libxext
+    libxinerama
+    libx11
+    libxcursor
+    libxfixes
+    libxkbcommon
+    libxi
+    libGL
+    libxrender
+    mesa
+    alsa-lib
+    libva
+    pipewire
+    libxcb
+    libxdamage
+    libxshmfence
+    libxxf86vm
+    libelf
+    libinput
+    udev
+    libev
+    libevdev
+    gdk-pixbuf
+    gobject-introspection
+    gtk3
+    cairo
+    at-spi2-atk
+    atkmm
+    libsoup_3
+    harfbuzz
+    pango
+    pangomm
+    glib
+    webkitgtk_4_1
+    wayland
+  ];
+in
 mkModule {
   name = "library";
   options = {
@@ -61,64 +115,9 @@ mkModule {
     environment.systemPackages = with pkgs; [
       pkg-config
     ];
+    programs.nix-ld.libraries = linuxLibs;
   };
   linuxHomeModule = {
-    modules.library.libs = with pkgs; [
-      zlib
-      zstd
-      stdenv.cc.cc
-      attr
-      bzip2
-      libxml2
-      acl
-      libsodium
-      util-linux
-      xz
-
-      # Cross Platform 3D Graphics API
-      vulkan-loader
-      # For debugging around vulkan
-      vulkan-tools
-
-      # My own additions
-      libxcomposite
-      libxtst
-      libxrandr
-      libxext
-      libxinerama
-      libx11
-      libxcursor
-      libxfixes
-      libxkbcommon
-      libxi
-      libGL
-      mesa
-      alsa-lib
-      libva
-      pipewire
-      libxcb
-      libxdamage
-      libxshmfence
-      libxxf86vm
-      libelf
-      libinput
-      udev
-
-      libev
-      libevdev
-      gdk-pixbuf
-      gobject-introspection
-      gtk3
-      cairo
-      at-spi2-atk
-      atkmm
-      libsoup_3
-      harfbuzz
-      pango
-      pangomm
-      glib
-      webkitgtk_4_1
-      wayland
-    ];
+    modules.library.libs = linuxLibs;
   };
 }

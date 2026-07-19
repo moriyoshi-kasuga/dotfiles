@@ -22,6 +22,7 @@ mkModule {
     environment.systemPackages = with pkgs; [
       vim-full
       wget
+      pciutils
     ];
 
     boot = {
