@@ -1,11 +1,13 @@
 return {
   "folke/sidekick.nvim",
   opts = {
+    nes = { enabled = false },
     cli = {
       mux = {
         enabled = false,
       },
       win = {
+        layout = "bottom",
         keys = {
           buffers = false,
           files = false,
@@ -42,8 +44,24 @@ return {
       function()
         require("sidekick.cli").send({ name = "claude", msg = "{selection}", focus = false })
       end,
-      mode = "v",
-      desc = "Send to Claude",
+      mode = "x",
+      desc = "Send text to Claude",
+    },
+    {
+      "<leader>al",
+      function()
+        require("sidekick.cli").send({ name = "claude", msg = "{line}", focus = false })
+      end,
+      mode = { "n", "x" },
+      desc = "Send line to Claude",
+    },
+    {
+      "<leader>ap",
+      function()
+        require("sidekick.cli").prompt()
+      end,
+      mode = { "n", "x" },
+      desc = "Sidekick Select Prompt",
     },
     {
       "<leader>as",
@@ -57,13 +75,6 @@ return {
       ft = "oil",
       mode = "n",
       desc = "Send oil entry to Claude",
-    },
-    {
-      "<leader>aa",
-      function()
-        require("sidekick").nes_jump_or_apply()
-      end,
-      desc = "Accept diff",
     },
     {
       "<leader>ad",

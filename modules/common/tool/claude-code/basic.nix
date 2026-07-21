@@ -117,9 +117,9 @@ mkModule {
             "Read(.env*)"
             "Read(id_rsa)"
             "Read(id_ed25519)"
-            "Write(.env)"
-            "Write(.env *)"
-            "Write(**/secrets/**)"
+            "Edit(.env)"
+            "Edit(.env.*)"
+            "Edit(**/secrets/**)"
           ];
         };
         cleanupPeriodDays = 30;

@@ -1,5 +1,5 @@
 ---
-description: バグの根本原因を体系的に特定し修正方針を提示する。コードの読み取りと git 調査を行うが、実際の修正は行わない。
+description: バグの根本原因を体系的に特定し修正方針を提示する。コードの読み取りやコマンド実行と git 調査を行うが、実際の修正は行わない。
 argument-hint: <エラーメッセージ | ファイルパス | 症状の説明>
 allowed-tools: Read, Glob, Grep, Bash(git log *), Bash(git diff *), Bash(git blame *), Bash(git show *)
 ---

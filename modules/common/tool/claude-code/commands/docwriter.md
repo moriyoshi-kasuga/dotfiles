@@ -10,7 +10,7 @@ allowed-tools: Read, Glob, Grep, Edit, Write, Bash(git diff *), Bash(git status 
 
 ## 前提
 
-既存のコメント・ドキュメントはコードの変更に追従していないことが多く、当てにできません。
+既存のコメント・ドキュメントはコードの変更に追従していないことが多く、当てにしない。
 そのため既存の文章は参考にせず、現在のコードの型・シグネチャ・制御フローのみを根拠に、必要な部分だけをゼロから書き直します。
 ドキュメントは書くほど保守コストになるため、量より正確さを優先し、原則として最小限に留めます。
 
@@ -33,7 +33,6 @@ allowed-tools: Read, Glob, Grep, Edit, Write, Bash(git diff *), Bash(git status 
 
 ## 改行・整形規則
 
-- 1文（句点・ピリオドで終わる単位）は改行せず1行で書く。画面幅に合わせた機械的な折り返しはしない。
 - 改行してよいのは、箇条書きの項目間、セクション見出しの前後、コードブロックの前後、および1文が150文字を超え途中で区切る必要がある場合のみ。
 - 段落の途中に無駄な空行を挟まない。
 
@@ -43,7 +42,7 @@ allowed-tools: Read, Glob, Grep, Edit, Write, Bash(git diff *), Bash(git status 
 2. 対象範囲の既存コメント（`//`, `/* */`, `///`, `//!`）を一度すべて削除する。
 3. コメントを削除したコード（型・シグネチャ・制御フロー）だけを見て、必要な doc コメント・SAFETY コメント・doctest をゼロから設計する。
 4. 改行・整形規則に沿って文章を整える。
-5. `cargo test` を実行し、doctest が通ることを確認する。`cargo clippy` と `cargo fmt` も実行する。
+5. `cargo test --doc` を実行し、doctest が通ることを確認する。
 6. 変更内容を報告する。
 
 ## 出力形式
@@ -56,4 +55,4 @@ allowed-tools: Read, Glob, Grep, Edit, Write, Bash(git diff *), Bash(git status 
 
 ### 検証結果
 
-`cargo test`（doctest 含む）の実行結果と、不自然な改行がないか確認した旨を報告する。
+`cargo test --doc` の実行結果と、不自然な改行がないか確認した旨を報告する。
