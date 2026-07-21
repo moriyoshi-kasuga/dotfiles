@@ -38,6 +38,7 @@ mkModule {
       tokei
       hyperfine
       oha
+      kalker
     ];
 
     programs = {
