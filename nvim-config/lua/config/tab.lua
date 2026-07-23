@@ -25,6 +25,7 @@ local tab = {
       "nim",
       "just",
       "dosbatch",
+      "markdown",
       "sql",
     },
     width = 4,
