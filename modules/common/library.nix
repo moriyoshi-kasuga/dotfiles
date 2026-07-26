@@ -72,6 +72,7 @@ mkModule {
     { cfg, ... }:
     {
       modules.library.libs = with pkgs; [
+        imagemagick
         ffmpeg
         curl
         openssl
