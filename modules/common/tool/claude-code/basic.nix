@@ -83,6 +83,7 @@ mkModule {
             "Bash(git stash list)"
             "Bash(gh pr diff *)"
             # cargo (rust)
+            "Bash(rustc *)"
             "Bash(cargo build *)"
             "Bash(cargo clippy *)"
             "Bash(cargo fmt *)"
