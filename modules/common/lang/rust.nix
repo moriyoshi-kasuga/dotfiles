@@ -21,6 +21,9 @@ mkModule {
     home.file.".cargo/config.toml".text = ''
       [target.'cfg(target_os = "linux")']
       rustflags = ["-C", "link-arg=-fuse-ld=wild"]
+
+      [net]
+      git-fetch-with-cli = true
     '';
 
     home.packages = with pkgs; [
