@@ -17,7 +17,18 @@ mkModule {
         discord
         appimage-run
         r2modman
-        modrinth-app
+        # modrinth-app: upstream postBuild misuses `wrapGAppsHook` as a
+        # command; fix not yet merged, so patch it here as a stopgap.
+        # symlinkJoin folds postBuild into buildCommand, so patch that instead.
+        (modrinth-app.overrideAttrs (old: {
+          buildCommand =
+            lib.replaceStrings
+              [ "wrapGAppsHook" ]
+              [
+                ''wrapGApp "$out/bin/ModrinthApp"''
+              ]
+              old.buildCommand;
+        }))
       ];
     };
 
