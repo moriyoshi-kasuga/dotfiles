@@ -2,7 +2,7 @@
 description: 既存実装を「参考」に留め、後方互換性・破壊的変更を一切気にせず、ゼロベースで最良の Rust 設計を考えて完全に書き直す。まず rewrite 設計を提案し、accept されたら全面的にリライトする。
 argument-hint: <ファイルパス | 対象箇所の説明>
 # Edit / Write は意図的に入れない: フェーズ1（accept 前）の誤書き込みを防ぎ、最初の書き込み時の許可プロンプトが accept の二重ゲートになる
-allowed-tools: Read, Glob, Grep, Bash(git diff *), Bash(git status *), Bash(git log *), Bash(cargo check *), Bash(cargo test *), Bash(cargo clippy *), Bash(cargo fmt *)
+allowed-tools: Read, Glob, Grep, Bash(git diff *), Bash(git status *), Bash(git log *), Bash(cargo check *), Bash(cargo test *), Bash(cargo clippy *), Bash(cargo fmt *), Skill
 ---
 
 # 完全リライト（Rust）
@@ -28,6 +28,7 @@ allowed-tools: Read, Glob, Grep, Bash(git diff *), Bash(git status *), Bash(git 
 
 ファイルへの書き込みは一切せず、以下を「出力形式」の順に提案する。
 
+0. `Skill(rust-coder)` を読み込み、共通の設計方針・コメント方針・検証手順を確認する
 1. **要件の抽出** — 入出力・副作用・エラー条件・利用箇所から「外から見て何を達成しているか」を言語化する。内部構造・アルゴリズム選択は参考にとどめ、要件と切り分ける
 2. **既存設計の問題点** — なぜ改善ではなく書き直すべきか、根本的な限界を挙げる
 3. **新設計** — ゼロベースで考えた最良の Rust 設計を、モジュール分割・型設計・トレイト境界・主要シグネチャで示す。一意に定まる部分は確定案として書く
@@ -43,24 +44,18 @@ allowed-tools: Read, Glob, Grep, Bash(git diff *), Bash(git status *), Bash(git 
 6. 各論点で採用する方針を1行で復唱する（例: `論点1=A（推奨） / 論点2=C`）
 7. 既存実装を捨て、確定した設計で書き直す
 8. 破壊的変更で壊れる呼び出し元を、新インターフェースに合わせて修正する
-9. `cargo check` → `cargo clippy` → `cargo test` の順に green にし、最後に `cargo fmt`。旧設計に依存して壊れる既存テストは、意図（＝要件）を維持したまま新設計に沿って書き直す
+9. `cargo check` → `cargo clippy` → `cargo test` の順に green にし、最後に `cargo fmt`。旧設計に依存して壊れる既存テストは、意図（＝要件）を維持したまま新設計に沿って書き直す。新設計とは無関係な既存の不具合が別途見つかった場合は、その場で直さず `/thought-bug` での原因特定を提案する
 
 ## 設計の指針（Rust）
 
-- 実行時チェック・アサーションで守る不変条件は、型（newtype・enum・ジェネリクス境界）で「不正な状態を表現不可能にする」方向に倒す。ライフサイクル・状態遷移があるなら typestate も検討する
-- `pub` の範囲を見直して公開 API を最小化し、不要な `clone()`/アロケーションを設計段階で排除する。イテレータ・ゼロコスト抽象を活かし、リソース管理は RAII（`Drop`）に任せて明示的な cleanup 呼び出しを利用者に要求しない
+一般的な設計方針は `rust-coder` スキル（手順0で読み込み済み）に従う。以下は rewrite（ゼロベース設計）固有の観点。
+
+- ライフサイクル・状態遷移があるなら typestate も検討する
 - 同期 API か非同期 API かを設計段階で決めて混在させない（ブロッキング処理は `spawn_blocking` に隔離）。共有はロックより所有権・チャネルで設計し、ロックを使うなら `.await` をまたがない粒度に切る
-- イテレータチェーン・`match`/`if let`/`let-else`/`matches!` の適切な使い分け、derive で済むトレイトの derive、マジックナンバー・マジック文字列の定数化
 
 ## コメント方針
 
-コメントは書いた瞬間からコードと乖離する「負債」である。AI生成コードは過剰になりがちなので、書き直しの段階で徹底的に絞る。
-
-- WHAT/HOW は書かず、名前で表現しきれない非自明な WHY（隠れた制約・仕様上の理由・不具合への回避策など）だけを、リポジトリ内の情報だけで理解できる形で残す。会話の引き写し、Issue番号のような陳腐化する外部参照、`UnsafeCell` の `Send`/`Sync` 手動実装のような標準的イディオムの説明は書かない
-- doc コメント（`///`/`//!`）は公開 API のみ。引数や挙動の詳細は prose ではなく `# Examples` の動作する doctest に逃がす。`# Errors`/`# Panics`/`# Safety` は非自明な条件がある場合のみ設け、箇条書きより doctest（`should_panic`、`Err` を返す例）での実演を優先する。他の型・関数への言及は `` [`Type`] `` で intra-doc link にする
-- `// SAFETY:` は `unsafe` で非自明な不変条件がある場合のみ要点を簡潔に（`transmute` の layout 保証なら `same layout` 程度で十分）
-- 英語のみでコメントする方針の場合は ASCII のみを使い、em dash（—）や矢印（→ など）は使わない。文の区切りは `,` または `.` のみで、`;` は使わない
-- rustfmt はコメントを再整形しないため、1文は改行せず1行で書き、画面幅に合わせた機械的な折り返しはしない。改行は箇条書き項目間・見出し前後・コードブロック前後、または150文字超の文を読点等でやむを得ず区切る場合のみ。段落途中に無駄な空行を挟まない
+`rust-coder` スキルのコメント方針に従う。書き直しの段階では既存コメントを一旦白紙で見直し、新設計に対して非自明な WHY だけを残す。
 
 ## 出力形式
 

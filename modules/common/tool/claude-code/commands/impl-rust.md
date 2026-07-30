@@ -2,7 +2,7 @@
 description: grill-me や planning 等で事前に確定した仕様・修正計画を入力とし、その仕様に忠実にRust実装を行う。設計判断は行わず、仕様が目的レベルで曖昧な箇所のみ実装前に質問する。仕様が規定しない実装細部の技術選択は自分で判断する。
 argument-hint: <仕様書ファイルパス | 実装対象の説明（未指定なら直前の会話で確定した仕様）>
 # Edit / Write を意図的に許可: 仕様は事前に確定済みのため提案フェーズのゲートを設けない（曖昧点は AskUserQuestion で都度確認する）
-allowed-tools: Read, Glob, Grep, Edit, Write, Bash(git diff *), Bash(git status *), Bash(git log *), Bash(cargo check *), Bash(cargo test *), Bash(cargo clippy *), Bash(cargo fmt *), AskUserQuestion
+allowed-tools: Read, Glob, Grep, Edit, Write, Bash(git diff *), Bash(git status *), Bash(git log *), Bash(cargo check *), Bash(cargo test *), Bash(cargo clippy *), Bash(cargo fmt *), AskUserQuestion, Skill
 ---
 
 # 仕様準拠実装（Rust）
@@ -17,32 +17,18 @@ allowed-tools: Read, Glob, Grep, Edit, Write, Bash(git diff *), Bash(git status 
 
 提案フェーズは持たない。`Edit`/`Write` は最初から使い、曖昧点の確認だけ実装着手前に済ませる。
 
+0. `Skill(rust-coder)` を読み込み、共通の設計方針・コメント方針・検証手順を確認する
 1. 仕様を確定する。存在しない場合は中断してユーザーに伝える
 2. 実装対象の入出力・振る舞い・エラー条件・制約を箇条書きで復唱し、認識のズレをこの時点で表面化させる
 3. 目的レベルで曖昧・矛盾・欠落している箇所があれば `AskUserQuestion` で確認する。実装細部の技術選択はここで確認せず手順5で決める
 4. 実装対象周辺の命名規約・モジュール構成・エラー型・依存関係を `Read`/`Grep` で把握し、仕様を実現する上でその流儀に合わせる
 5. 仕様通りに実装する。仕様が規定していない技術選択は、決めた内容を出力形式に記録する
-6. `cargo check` → `cargo clippy` → `cargo test` の順に green にし、最後に `cargo fmt`
+6. `cargo check` → `cargo clippy` → `cargo test` の順に green にし、最後に `cargo fmt`。失敗が今回の実装対象と無関係な既存の不具合に起因すると分かった場合、その場で直さず中断し `/thought-bug` での原因特定を提案する
 7. 仕様の各項目が満たされているかを自己検証し、満たせなかった項目は「要確認」として明示する
 
 ## 実装方針（Rust）
 
-仕様が型・API・エラー表現を規定している場合はそちらを優先し、規定がない範囲でのみ以下を判断基準にする。
-
-- 実行時チェックで守るくらいなら型（newtype・enum・ジェネリクス境界）で不正な状態を表現不可能にする
-- `pub` の範囲は仕様が要求する最小限。不要な `clone()`/アロケーションを避け、イテレータ・ゼロコスト抽象を使い、リソース管理は RAII（`Drop`）に任せる
-- イテレータチェーン・`match`/`if let`/`let-else`/`matches!` の適切な使い分け、derive で済むトレイトの derive、マジックナンバー・マジック文字列の定数化
-- 命名規約・モジュール構成・エラー型（`thiserror`/`anyhow` の使い分けなど）は既存コードの流儀に合わせ、前例がない新規箇所でのみ自分の判断で決める
-- 既存の関連コードとシグネチャ・振る舞いが矛盾する変更が必要になった場合、それ自体が仕様の曖昧点なので手順3に戻って確認する
-
-## コメント方針
-
-コメントは書いた瞬間からコードと乖離する「負債」である。AI生成コードは過剰になりがちなので徹底的に絞る。名前で表現しきれない非自明な WHY（隠れた制約・仕様上の理由・不具合への回避策など）だけを、リポジトリ内の情報だけで理解できる形で残す。会話の引き写し、Issue番号のような陳腐化する外部参照、標準的イディオムの説明（`UnsafeCell` の `Send`/`Sync` 手動実装など）は書かない。
-
-- doc コメント（`///`/`//!`）は公開 API のみ。引数や挙動の詳細は prose ではなく `# Examples` の動作する doctest に逃がす。`# Errors`/`# Panics`/`# Safety` は非自明な条件がある場合のみ設け、箇条書きより doctest（`should_panic`、`Err` を返す例）での実演を優先する。他の型・関数への言及は `` [`Type`] `` で intra-doc link にする
-- `// SAFETY:` は `unsafe` で非自明な不変条件がある場合のみ要点を簡潔に（`transmute` の layout 保証なら `same layout` 程度で十分）
-- 英語のみでコメントする方針の場合は ASCII のみを使い、em dash（—）や矢印（→ など）は使わない。文の区切りは `,` または `.` のみで、`;` は使わない
-- rustfmt はコメントを再整形しないため、1文は改行せず1行で書く。改行は箇条書き項目間・見出し前後・コードブロック前後、または150文字超の文をやむを得ず区切る場合のみ
+`rust-coder` スキル（手順0で読み込み済み）の設計方針・コメント方針に従う。仕様が型・API・エラー表現を規定している場合はそちらを優先し、規定がない範囲でのみ `rust-coder` の判断基準を使う。既存の関連コードとシグネチャ・振る舞いが矛盾する変更が必要になった場合、それ自体が仕様の曖昧点なので手順3に戻って確認する。
 
 ## 出力形式
 

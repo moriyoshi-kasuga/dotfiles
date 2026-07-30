@@ -2,7 +2,7 @@
 description: 設計思想（責務分割・不変条件・依存の向き）は保ったまま、公開APIの使い勝手（シグネチャ・引数・返り値・エラー型・命名・標準トレイト実装・モジュール公開経路）を改善する。破壊的変更は許容し、利用箇所は追従修正する。rewrite のようなゼロベース再設計でも、brushup のような非公開実装限定の磨き上げでもない中間。まず refine 設計を提案し、accept されたら実行する。
 argument-hint: <ファイルパス | 対象箇所の説明>
 # Edit / Write は意図的に入れない: フェーズ1（accept 前）の誤書き込みを防ぎ、最初の書き込み時の許可プロンプトが accept の二重ゲートになる
-allowed-tools: Read, Glob, Grep, Bash(git diff *), Bash(git status *), Bash(git log *), Bash(cargo check *), Bash(cargo test *), Bash(cargo clippy *), Bash(cargo fmt *), Bash(cargo doc *)
+allowed-tools: Read, Glob, Grep, Bash(git diff *), Bash(git status *), Bash(git log *), Bash(cargo check *), Bash(cargo test *), Bash(cargo clippy *), Bash(cargo fmt *), Bash(cargo doc *), Skill
 ---
 
 # 公開APIの洗練（Rust）
@@ -32,6 +32,7 @@ allowed-tools: Read, Glob, Grep, Bash(git diff *), Bash(git status *), Bash(git 
 
 ファイルへの書き込みは一切せず、以下を「出力形式」の順に提案する。
 
+0. `Skill(rust-coder)` を読み込み、共通の設計方針・コメント方針・検証手順を確認する
 1. **保つ思想の言語化** — 責務分割・不変条件・依存の向き・基本方針・意図的な非対応を言語化する。これが「変えてはいけない軸」になる。ここで思想自体の破綻に気づいたら上記に従って中断する
 2. **公開面の棚卸し** — `pub` なシグネチャ・型・フィールド・モジュール公開経路・実装済みの標準トレイトを一覧にする。改善の対象範囲であり、同時に破壊的変更の全量でもある
 3. **呼び出し側の実地調査** — `Grep` で利用箇所を集めて実際のコードを読み、繰り返し現れる変換（`.to_string()`/`.clone()`/`.collect()`）、意味の読めない引数（bool リテラル・同型の連続引数）、毎回書かれる定型の前処理・後処理、エラーハンドリングの不自然さを具体的に拾う。利用箇所が存在しない場合は代表的な利用シナリオを自分で書き起こして代用し、その旨を提案に明記する
@@ -50,7 +51,7 @@ allowed-tools: Read, Glob, Grep, Bash(git diff *), Bash(git status *), Bash(git 
 9. 各論点で採用する方針を1行で復唱する（例: `論点1=A（推奨） / 論点2=C`）
 10. 確定した設計で公開面を書き換える。内部実装は新しい公開面を成立させるのに必要な範囲だけ追従させる
 11. 壊れる呼び出し元を新APIに合わせて修正し、Before/After で示した After そのものになっているか確認する
-12. `cargo check` → `cargo clippy` → `cargo test` の順に green にし、最後に `cargo fmt`。旧APIに依存して壊れる既存テストは、検証している振る舞いを維持したまま新APIに沿って書き直す。doctest も公開APIの一部なので更新する
+12. `cargo check` → `cargo clippy` → `cargo test` の順に green にし、最後に `cargo fmt`。旧APIに依存して壊れる既存テストは、検証している振る舞いを維持したまま新APIに沿って書き直す。doctest も公開APIの一部なので更新する。今回の変更と無関係な既存の不具合が別途見つかった場合は、その場で直さず `/thought-bug` での原因特定を提案する
 
 ## 使いにくさの観点（Rust）
 
@@ -92,13 +93,7 @@ derive で済むものが未実装なら、それだけで「Rust として普�
 
 ## コメント方針
 
-公開APIを変えると既存の doc コメントは高確率で嘘になるため、変更した公開面の doc は必ず点検する。コメントは書いた瞬間からコードと乖離する「負債」なので徹底的に絞る。
-
-- WHAT/HOW は書かず、名前で表現しきれない非自明な WHY（隠れた制約・仕様上の理由・不具合への回避策など）だけを、リポジトリ内の情報だけで理解できる形で残す。会話の引き写し、Issue番号のような陳腐化する外部参照、`UnsafeCell` の `Send`/`Sync` 手動実装のような標準的イディオムの説明は書かない
-- doc コメント（`///`/`//!`）は公開 API のみ。引数や挙動の詳細は prose ではなく `# Examples` の動作する doctest に逃がす。`# Errors`/`# Panics`/`# Safety` は非自明な条件がある場合のみ設け、箇条書きより doctest（`should_panic`、`Err` を返す例）での実演を優先する。他の型・関数への言及は `` [`Type`] `` で intra-doc link にする。refine では doctest が「新しいAPIがどれだけ短く書けるか」の実演も兼ねるため、Before/After の After をそのまま doctest にできることが多い
-- `// SAFETY:` は `unsafe` で非自明な不変条件がある場合のみ要点を簡潔に（`transmute` の layout 保証なら `same layout` 程度で十分）
-- 英語のみでコメントする方針の場合は ASCII のみを使い、em dash（—）や矢印（→ など）は使わない。文の区切りは `,` または `.` のみで、`;` は使わない
-- rustfmt はコメントを再整形しないため、1文は改行せず1行で書き、画面幅に合わせた機械的な折り返しはしない。改行は箇条書き項目間・見出し前後・コードブロック前後、または150文字超の文を読点等でやむを得ず区切る場合のみ。段落途中に無駄な空行を挟まない
+`rust-coder` スキルのコメント方針に従う。公開APIを変えると既存の doc コメントは高確率で嘘になるため、変更した公開面の doc は必ず点検する。refine では doctest が「新しいAPIがどれだけ短く書けるか」の実演も兼ねるため、Before/After の After をそのまま doctest にできることが多い。
 
 ## 出力形式
 
