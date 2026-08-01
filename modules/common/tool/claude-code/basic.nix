@@ -109,7 +109,6 @@ mkModule {
           ]
           ++ allowSkills;
           deny = [
-            "Task"
             "Bash(git push *)"
             "Bash(terraform *)"
             "Bash(sudo *)"
