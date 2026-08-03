@@ -14,13 +14,12 @@ mkModule {
       lld
       cmake
       ninja
-      (lib.hiPrio clang)
+      (lib.hiPrio llvmPackages.clang-unwrapped)
     ];
   };
   darwinHomeModule = {
     home.packages = with pkgs; [
       libcxx
-      cctools
     ];
   };
   linuxHomeModule = {
