@@ -14,17 +14,18 @@ mkModule {
       lld
       cmake
       ninja
-      (lib.hiPrio llvmPackages.clang-unwrapped)
     ];
   };
   darwinHomeModule = {
     home.packages = with pkgs; [
       libcxx
+      (lib.hiPrio llvmPackages.clang-unwrapped)
     ];
   };
   linuxHomeModule = {
     home.packages = with pkgs; [
       mold
+      (lib.hiPrio clang)
     ];
     home.sessionVariables = {
       CFLAGS = "-fuse-ld=mold";
