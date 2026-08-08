@@ -39,6 +39,7 @@ mkModule {
       hyperfine
       oha
       kalker
+      poppler-utils
     ];
 
     programs = {
