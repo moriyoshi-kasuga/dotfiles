@@ -57,6 +57,13 @@ vim.api.nvim_create_autocmd("FileType", {
     "startuptime",
     "checkhealth",
     "man",
+    "checkhealth",
+    "dap-float",
+    "dbout",
+    "neotest-output",
+    "neotest-output-panel",
+    "neotest-summary",
+    "grug-far",
   },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
