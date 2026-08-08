@@ -37,6 +37,7 @@ allowed-tools: Read, Glob, Grep
 
 書き方:
 
+- 関数・構造体・enum・トレイトなどアイテムへの説明は公開/非公開を問わず `///`（モジュールなら `//!`）で書く。非公開でも doctest と IDE hover で活用できるため `//` に落とさない。`//` はアイテムに紐付かない箇所（関数内部のロジックの補足など）限定
 - 引数や挙動の詳細は prose ではなく `# Examples` の動作する doctest に逃がす
 - `# Errors`/`# Panics`/`# Safety` は非自明な条件がある場合のみ設け、箇条書きより doctest（`should_panic`、`Err` を返す例）での実演を優先する
 - 他の型・関数への言及は `` [`Type`] `` で intra-doc link にする
