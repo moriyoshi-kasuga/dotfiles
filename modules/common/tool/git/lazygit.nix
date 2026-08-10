@@ -16,9 +16,9 @@ mkModule {
           mainPanelSplitMode = "vertical";
         };
         git = {
-          pagers = [
+          diffRenderers = [
             {
-              pager = "delta --dark --paging=never --diff-so-fancy";
+              command = "delta --dark --paging=never --diff-so-fancy";
             }
           ];
         };
