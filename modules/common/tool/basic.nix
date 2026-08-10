@@ -50,9 +50,12 @@ mkModule {
 
       mise = {
         enable = true;
-        package = pkgs.mise.overrideAttrs {
+        # HACK: avoid fail compile. temporary override
+        # ref: https://github.com/NixOS/nixpkgs/blob/master/pkgs/by-name/mi/mise/package.nix
+        package = pkgs.mise.overrideAttrs (old: {
           doCheck = false;
-        };
+          nativeBuildInputs = old.nativeBuildInputs ++ [ pkgs.cmake ];
+        });
         globalConfig = {
           settings = {
             not_found_auto_install = true;
