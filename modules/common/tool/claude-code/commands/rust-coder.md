@@ -44,7 +44,6 @@ allowed-tools: Read, Glob, Grep
 - `// SAFETY:` は `unsafe` で非自明な不変条件がある場合のみ要点を簡潔に（`transmute` の layout 保証なら `same layout` 程度で十分）
 - 文の区切りは `,` または `.` を基本にする。文中の接続に `;` や半角 `:` を使う自然な英文体は妨げない（例: `descending (ties broken by holder name ascending); [Foo::bar] returns entries in that exact order`）。禁止するのは見出し語＋コロンを並べる列挙調の強調表現であり、これは通常の文章に置き換える
 - 英語のみでコメントする方針の場合は ASCII のみを使い、em dash（—）や矢印（→ など）は使わない
-- rustfmt はコメントを再整形しないため、1文は改行せず1行で書く。改行してよいのは箇条書き項目間・見出し前後・コードブロック前後、または1文が150文字を超えやむを得ず区切る場合のみ。段落途中に無駄な空行を挟まない
 
 ## 検証手順
 
