@@ -1,5 +1,5 @@
 ---
-description: grill-me や planning 等で事前に確定した仕様・修正計画を入力とし、その仕様に忠実にRust実装を行う。設計判断は行わず、仕様が目的レベルで曖昧な箇所のみ実装前に質問する。仕様が規定しない実装細部の技術選択は自分で判断する。
+description: grill-me 等で事前に確定した仕様・修正計画を入力とし、その仕様に忠実にRust実装を行う。設計判断は行わず、仕様が目的レベルで曖昧な箇所のみ実装前に質問する。仕様が規定しない実装細部の技術選択は自分で判断する。
 argument-hint: <仕様書ファイルパス | 実装対象の説明（未指定なら直前の会話で確定した仕様）>
 # Edit / Write を意図的に許可: 仕様は事前に確定済みのため提案フェーズのゲートを設けない（曖昧点は AskUserQuestion で都度確認する）
 allowed-tools: Read, Glob, Grep, Edit, Write, Bash(git diff *), Bash(git status *), Bash(git log *), Bash(cargo check *), Bash(cargo test *), Bash(cargo clippy *), Bash(cargo fmt *), AskUserQuestion, Skill
@@ -9,7 +9,7 @@ allowed-tools: Read, Glob, Grep, Edit, Write, Bash(git diff *), Bash(git status 
 
 **対象**: $ARGUMENTS
 
-ファイルパスなら `Read` した内容、説明文ならそのテキストを仕様とする。未指定なら直前の会話で確定した仕様・修正計画（`/grill-me` `/planning` 等での合意内容）を仕様とする。確定した仕様が存在しない場合は、その旨を伝えて `/grill-me` または `/planning` を先に使うよう促し、中断する。
+ファイルパスなら `Read` した内容、説明文ならそのテキストを仕様とする。未指定なら直前の会話で確定した仕様・修正計画（`/grill-me` 等での合意内容）を仕様とする。確定した仕様が存在しない場合は、その旨を伝えて `/grill-me` を先に使うよう促し、中断する。
 
 ## 原則
 
