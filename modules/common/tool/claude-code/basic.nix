@@ -47,9 +47,10 @@ mkModule {
             "/nix/store"
           ];
           allow = [
-            "Read(${homeDirectory}/.claude/skills/**)"
-            "Read(/tmp/**)"
+            "Read(/${homeDirectory}/.claude/skills/**)"
+            "Read(//tmp/**)"
             # filesystem read-only
+            "Bash(date *)"
             "Bash(ls *)"
             "Bash(find *)"
             "Bash(fd *)"
