@@ -85,7 +85,7 @@ layout {
   }
 }
 
-spawn-at-startup "easyeffects" "--service-mode" "-q"
+spawn-at-startup "easyeffects" "--service-mode" "-w"
 spawn-at-startup "noctalia"
 
 hotkey-overlay {
