@@ -39,6 +39,11 @@ mkModule {
           sidebar_section = "none";
         };
 
+        osd.kinds = {
+          keyboard_layout = false;
+          media = false;
+        };
+
         widget = {
           clock = {
             type = "clock";
