@@ -1,12 +1,7 @@
-{
-  mkModule,
-  ...
-}:
+_:
 
-mkModule {
-  name = "tool.docker";
-  inheritModule = "tool";
-  homeModule = {
+{
+  flake.modules.homeManager."tool.docker" = {
     programs.lazydocker.enable = true;
 
     home.file.".config/docker/daemon.json".text = builtins.toJSON {
@@ -30,7 +25,8 @@ mkModule {
       dcbnc = "docker compose build --no-cache";
     };
   };
-  nixosModule = {
+
+  flake.modules.nixos."tool.docker" = {
     virtualisation = {
       docker = {
         enable = true;
@@ -53,7 +49,8 @@ mkModule {
       };
     };
   };
-  darwinModule = {
+
+  flake.modules.darwin."tool.docker" = {
     homebrew.casks = [
       "docker-desktop"
     ];

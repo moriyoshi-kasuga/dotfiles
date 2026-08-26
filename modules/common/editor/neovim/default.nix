@@ -1,28 +1,26 @@
-{
-  pkgs,
-  mkModule,
-  homeDirectory,
-  ...
-}:
+_:
 
-let
-  treesitter = pkgs.vimPlugins.nvim-treesitter;
-  treesitterGrammars = treesitter.withAllGrammars;
-  grammarsPath = pkgs.symlinkJoin {
-    name = "nvim-treesitter-grammars";
-    paths = treesitterGrammars.dependencies;
-  };
-  neovim = pkgs.neovim-unwrapped;
-  neovimCmd = pkgs.lib.getExe neovim;
-  # astro/svelte language servers need a TypeScript SDK to fall back on.
-  # Under Nix there is no global `typescript`, so we expose its path explicitly.
-  tsdkPath = "${pkgs.typescript}/lib/node_modules/typescript/lib";
-in
-mkModule {
-  name = "editor.neovim";
-  inheritModule = "editor";
-  homeModule =
-    { config, lib, ... }:
+{
+  flake.modules.homeManager."editor.neovim" =
+    {
+      pkgs,
+      config,
+      lib,
+      ...
+    }:
+    let
+      treesitter = pkgs.vimPlugins.nvim-treesitter;
+      treesitterGrammars = treesitter.withAllGrammars;
+      grammarsPath = pkgs.symlinkJoin {
+        name = "nvim-treesitter-grammars";
+        paths = treesitterGrammars.dependencies;
+      };
+      neovim = pkgs.neovim-unwrapped;
+      neovimCmd = pkgs.lib.getExe neovim;
+      # astro/svelte language servers need a TypeScript SDK to fall back on.
+      # Under Nix there is no global `typescript`, so we expose its path explicitly.
+      tsdkPath = "${pkgs.typescript}/lib/node_modules/typescript/lib";
+    in
     {
       catppuccin.nvim.enable = false;
 
@@ -115,6 +113,6 @@ mkModule {
       xdg.configFile."nvim/init.lua" = lib.mkForce { enable = false; };
 
       home.file.".config/nvim".source =
-        config.lib.file.mkOutOfStoreSymlink "${homeDirectory}/dotfiles/nvim-config";
+        config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/nvim-config";
     };
 }

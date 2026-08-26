@@ -1,12 +1,7 @@
-{
-  mkModule,
-  ...
-}:
+_:
 
-mkModule {
-  name = "nixos.gui.bluetooth";
-  inheritModule = "nixos.gui";
-  nixosModule = {
+{
+  flake.modules.nixos."gui.bluetooth" = {
     hardware.bluetooth = {
       enable = true;
       powerOnBoot = true;

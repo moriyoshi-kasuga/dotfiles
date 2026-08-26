@@ -1,12 +1,7 @@
-{
-  mkModule,
-  ...
-}:
+_:
 
-mkModule {
-  name = "darwin.dock";
-  inheritModule = "darwin";
-  darwinModule = {
+{
+  flake.modules.darwin.dock = {
     system.defaults.dock = {
       autohide = true;
       show-recents = false;

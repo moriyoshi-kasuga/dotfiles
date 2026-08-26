@@ -1,15 +1,11 @@
-{
-  pkgs,
-  mkModule,
-  ...
-}:
+_:
 
-mkModule {
-  name = "lang.zig";
-  inheritModule = "lang";
-  homeModule = {
-    home.packages = with pkgs; [
-      zig
-    ];
-  };
+{
+  flake.modules.homeManager."lang.zig" =
+    { pkgs, ... }:
+    {
+      home.packages = with pkgs; [
+        zig
+      ];
+    };
 }

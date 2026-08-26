@@ -1,12 +1,7 @@
-{
-  mkModule,
-  ...
-}:
+_:
 
-mkModule {
-  name = "darwin.tailscale";
-  inheritModule = "darwin";
-  darwinModule = {
+{
+  flake.modules.darwin.tailscale = {
     services.tailscale.enable = true;
   };
 }

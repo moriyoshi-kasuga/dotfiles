@@ -1,39 +1,23 @@
-{
-  lib,
-  pkgs,
-  mkModule,
-  username,
-  ...
-}:
+_:
 
-with lib;
-let
-  package = pkgs.fish;
-in
-mkModule {
-  name = "shell.fish";
-  inheritModule = "shell";
-  options = {
-    default = mkEnableOption "Use fish as default shell";
-  };
-  commonModule = {
+{
+  flake.modules.homeManager."shell.fish" =
+    { pkgs, ... }:
+    {
+      programs.fish = {
+        package = pkgs.fish;
+        interactiveShellInit = builtins.readFile ./init.fish;
+      };
+    };
+
+  flake.modules.nixos."shell.fish" = {
     programs.fish.enable = true;
   };
-  homeModule = {
-    programs.fish = {
-      inherit package;
-      interactiveShellInit = builtins.readFile ./init.fish;
-    };
-  };
-  nixosModule =
-    { cfg, ... }:
+
+  flake.modules.darwin."shell.fish" =
+    { pkgs, ... }:
     {
-      users.users.${username}.shell = mkIf cfg.default package;
-    };
-  darwinModule =
-    { cfg, ... }:
-    {
-      environment.shells = [ package ];
-      users.users.${username}.shell = mkIf cfg.default package;
+      programs.fish.enable = true;
+      environment.shells = [ pkgs.fish ];
     };
 }

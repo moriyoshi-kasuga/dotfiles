@@ -1,24 +1,20 @@
+_:
+
 {
-  mkModule,
-  pkgs,
-  ...
-}:
+  flake.modules.nixos."gui.thunar" =
+    { pkgs, ... }:
+    {
+      programs.thunar = {
+        enable = true;
+        plugins = with pkgs; [
+          thunar-archive-plugin
+          thunar-volman
+        ];
+      };
+      programs.xfconf.enable = true;
+      services.gvfs.enable = true;
+      services.tumbler.enable = true;
 
-mkModule {
-  name = "nixos.gui.thunar";
-  inheritModule = "nixos.gui";
-  nixosModule = {
-    programs.thunar = {
-      enable = true;
-      plugins = with pkgs; [
-        thunar-archive-plugin
-        thunar-volman
-      ];
+      xdg.mime.defaultApplications."inode/directory" = [ "thunar.desktop" ];
     };
-    programs.xfconf.enable = true;
-    services.gvfs.enable = true;
-    services.tumbler.enable = true;
-
-    xdg.mime.defaultApplications."inode/directory" = [ "thunar.desktop" ];
-  };
 }

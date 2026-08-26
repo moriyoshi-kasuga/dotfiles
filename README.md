@@ -80,7 +80,7 @@ modules/
 │   ├── network.nix       # NetworkManager・ホスト名・DNS
 │   ├── i18n.nix          # タイムゾーン・ロケール
 │   ├── tailscale.nix     # Tailscale VPN
-│   └── gui/              # GUI 環境 (nixos.gui.enable = true のみ有効化)
+│   └── gui/              # GUI 環境
 │       ├── basic.nix     # libinput・polkit・upower・電源管理
 │       ├── niri.nix      # Niri compositor + Noctalia shell
 │       ├── audio.nix     # PipeWire
@@ -95,8 +95,10 @@ modules/
     └── ...               # finder / tailscale
 ```
 
-モジュールは `modules.<name>.enable = true` で個別有効化、または親モジュールの `enable = true` で一括有効化されます。
-詳細は [`docs/architecture.md`](docs/architecture.md) を参照してください。
+このリポジトリは [dendritic pattern](https://github.com/vic/import-tree) を採用しており、`modules/` 以下のすべての `.nix` ファイルは
+[flake-parts](https://flake.parts) モジュールです（`import-tree` が再帰的に import します）。各ファイルは
+`flake.modules.<nixos|darwin|homeManager>.<aspect>` に自身を登録し、`modules/hosts/<name>.nix` がホストごとに
+使う aspect を明示的に import して `nixosConfigurations` / `darwinConfigurations` を組み立てます。
 
 ## License
 

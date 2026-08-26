@@ -1,34 +1,19 @@
-{
-  mkModule,
-  lib,
-  ...
-}:
+_:
 
-mkModule {
-  name = "nixos.network";
-  inheritModule = "nixos";
-  options = {
-    hostName = lib.mkOption {
-      type = lib.types.str;
-      description = "NixOS's HostName";
+{
+  flake.modules.nixos.network = {
+    services.resolved.enable = true;
+
+    networking = {
+      nameservers = [
+        "1.1.1.1"
+        "8.8.8.8"
+      ];
+      networkmanager = {
+        enable = true;
+        dns = "systemd-resolved";
+      };
+      firewall.enable = true;
     };
   };
-  nixosModule =
-    { cfg, ... }:
-    {
-      services.resolved.enable = true;
-
-      networking = {
-        inherit (cfg) hostName;
-        nameservers = [
-          "1.1.1.1"
-          "8.8.8.8"
-        ];
-        networkmanager = {
-          enable = true;
-          dns = "systemd-resolved";
-        };
-        firewall.enable = true;
-      };
-    };
 }

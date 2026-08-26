@@ -1,15 +1,11 @@
-{
-  pkgs,
-  mkModule,
-  ...
-}:
+_:
 
-mkModule {
-  name = "lang.elm";
-  inheritModule = "lang";
-  homeModule = {
-    home.packages = with pkgs; [
-      elmPackages.elm
-    ];
-  };
+{
+  flake.modules.homeManager."lang.elm" =
+    { pkgs, ... }:
+    {
+      home.packages = with pkgs; [
+        elmPackages.elm
+      ];
+    };
 }

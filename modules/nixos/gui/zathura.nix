@@ -1,12 +1,7 @@
-{
-  mkModule,
-  ...
-}:
+_:
 
-mkModule {
-  name = "nixos.gui.zathura";
-  inheritModule = "nixos.gui";
-  homeModule = {
+{
+  flake.modules.homeManager."gui.zathura" = {
     programs.zathura = {
       enable = true;
       # ref: https://sheepla.github.io/sheepla-note/posts/zathura-introduction/

@@ -1,12 +1,7 @@
-{
-  mkModule,
-  ...
-}:
+_:
 
-mkModule {
-  name = "nixos.gui.basic";
-  inheritModule = "nixos.gui";
-  nixosModule = {
+{
+  flake.modules.nixos."gui.basic" = {
     catppuccin.cursors.enable = true;
 
     xdg.mime.enable = true;

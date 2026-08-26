@@ -1,25 +1,14 @@
-{
-  mkModule,
-  pkgs,
-  ...
-}:
+_:
 
-mkModule {
-  name = "lang.node";
-  inheritModule = "lang";
-  homeModule = {
-    programs.mise.globalConfig.tools = {
-      deno = "2.8.0";
+{
+  flake.modules.homeManager."lang.node" =
+    { pkgs, lib, ... }:
+    {
+      programs.mise.globalConfig.tools = {
+        deno = "2.8.0";
+      }
+      // lib.optionalAttrs pkgs.stdenv.isDarwin { node = "24.15.0"; };
+
+      home.packages = lib.optionals pkgs.stdenv.isLinux [ pkgs.nodejs_24 ];
     };
-  };
-  darwinHomeModule = {
-    programs.mise.globalConfig.tools = {
-      node = "24.15.0";
-    };
-  };
-  linuxHomeModule = {
-    home.packages = with pkgs; [
-      nodejs_24
-    ];
-  };
 }

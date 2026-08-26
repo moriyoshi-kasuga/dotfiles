@@ -1,12 +1,7 @@
-{
-  mkModule,
-  ...
-}:
+_:
 
-mkModule {
-  name = "nixos.i18n";
-  inheritModule = "nixos";
-  nixosModule = {
+{
+  flake.modules.nixos.i18n = {
     time.timeZone = "Asia/Tokyo";
 
     i18n = {

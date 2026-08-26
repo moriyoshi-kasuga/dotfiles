@@ -1,12 +1,7 @@
-{
-  mkModule,
-  ...
-}:
+_:
 
-mkModule {
-  name = "tool.git.delta";
-  inheritModule = "tool.git";
-  homeModule = {
+{
+  flake.modules.homeManager."tool.git.delta" = {
     programs.delta = {
       enable = true;
       enableGitIntegration = true;

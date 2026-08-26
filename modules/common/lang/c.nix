@@ -1,36 +1,35 @@
-{
-  pkgs,
-  lib,
-  mkModule,
-  ...
-}:
+_:
 
-mkModule {
-  name = "lang.c";
-  inheritModule = "lang";
-  homeModule = {
-    home.packages = with pkgs; [
-      gnumake
-      lld
-      cmake
-      ninja
-    ];
-  };
-  darwinHomeModule = {
-    home.packages = with pkgs; [
-      libcxx
-      (lib.hiPrio llvmPackages.clang-unwrapped)
-    ];
-  };
-  linuxHomeModule = {
-    home.packages = with pkgs; [
-      mold
-      (lib.hiPrio clang)
-    ];
-    home.sessionVariables = {
-      CFLAGS = "-fuse-ld=mold";
-      CXXFLAGS = "-fuse-ld=mold";
-      LDFLAGS = "-fuse-ld=mold";
+{
+  flake.modules.homeManager."lang.c" =
+    { pkgs, lib, ... }:
+    {
+      home.packages =
+        (with pkgs; [
+          gnumake
+          lld
+          cmake
+          ninja
+        ])
+        ++ lib.optionals pkgs.stdenv.isDarwin (
+          with pkgs;
+          [
+            libcxx
+            (lib.hiPrio llvmPackages.clang-unwrapped)
+          ]
+        )
+        ++ lib.optionals pkgs.stdenv.isLinux (
+          with pkgs;
+          [
+            mold
+            (lib.hiPrio clang)
+          ]
+        );
+
+      home.sessionVariables = lib.mkIf pkgs.stdenv.isLinux {
+        CFLAGS = "-fuse-ld=mold";
+        CXXFLAGS = "-fuse-ld=mold";
+        LDFLAGS = "-fuse-ld=mold";
+      };
     };
-  };
 }

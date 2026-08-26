@@ -1,14 +1,7 @@
-{
-  mkModule,
-  pkgs,
-  inputs,
-  ...
-}:
+{ inputs, ... }:
 
-mkModule {
-  name = "nixos.gui.niri";
-  inheritModule = "nixos.gui";
-  linuxHomeModule = {
+{
+  flake.modules.homeManager."gui.niri" = {
     home.file.".config/niri/config.kdl" = {
       source = ./niri.kdl;
       force = true;
@@ -84,59 +77,62 @@ mkModule {
       };
     };
   };
-  nixosModule = {
-    programs.niri.enable = true;
-    programs.xwayland.enable = true;
-    programs.dconf.enable = true;
 
-    environment.systemPackages = with pkgs; [
-      inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
+  flake.modules.nixos."gui.niri" =
+    { pkgs, ... }:
+    {
+      programs.niri.enable = true;
+      programs.xwayland.enable = true;
+      programs.dconf.enable = true;
 
-      wayland
-      niri
-      imv
-      mpv
-      grim
-      slurp
-      xwayland-satellite
-      libnotify
-      mako
-    ];
+      environment.systemPackages = with pkgs; [
+        inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
 
-    xdg.portal = {
-      enable = true;
-      xdgOpenUsePortal = true;
-      extraPortals = with pkgs; [
-        xdg-desktop-portal-gnome
-        xdg-desktop-portal-gtk
+        wayland
+        niri
+        imv
+        mpv
+        grim
+        slurp
+        xwayland-satellite
+        libnotify
+        mako
       ];
-      config = {
-        common = {
-          default = [ "gtk" ];
-        };
-        niri = {
-          default = [
-            "gnome"
-            "gtk"
-          ];
-          "org.freedesktop.impl.portal.ScreenCast" = [ "gnome" ];
-          "org.freedesktop.impl.portal.Screenshot" = [ "gnome" ];
+
+      xdg.portal = {
+        enable = true;
+        xdgOpenUsePortal = true;
+        extraPortals = with pkgs; [
+          xdg-desktop-portal-gnome
+          xdg-desktop-portal-gtk
+        ];
+        config = {
+          common = {
+            default = [ "gtk" ];
+          };
+          niri = {
+            default = [
+              "gnome"
+              "gtk"
+            ];
+            "org.freedesktop.impl.portal.ScreenCast" = [ "gnome" ];
+            "org.freedesktop.impl.portal.Screenshot" = [ "gnome" ];
+          };
         };
       };
-    };
 
-    environment.sessionVariables = {
-      # Wayland Common
-      SDL_VIDEODRIVER = "wayland";
-      XDG_SESSION_TYPE = "wayland";
-      XDG_CURRENT_DESKTOP = "niri";
-      XDG_SESSION_DESKTOP = "niri";
-      CLUTTER_BACKEND = "wayland";
+      environment.sessionVariables = {
+        # Wayland Common
+        SDL_VIDEODRIVER = "wayland";
+        XDG_SESSION_TYPE = "wayland";
+        XDG_CURRENT_DESKTOP = "niri";
+        XDG_SESSION_DESKTOP = "niri";
+        CLUTTER_BACKEND = "wayland";
 
-      # Chromium / Electron / Firefox
-      NIXOS_OZONE_WL = "1";
-      ELECTRON_OZONE_PLATFORM_HINT = "auto";
-      MOZ_ENABLE_WAYLAND = "1";
+        # Chromium / Electron / Firefox
+        NIXOS_OZONE_WL = "1";
+        ELECTRON_OZONE_PLATFORM_HINT = "auto";
+        MOZ_ENABLE_WAYLAND = "1";
+      };
     };
-  };
 }

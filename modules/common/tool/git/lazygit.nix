@@ -1,12 +1,7 @@
-{
-  mkModule,
-  ...
-}:
+_:
 
-mkModule {
-  name = "tool.git.lazygit";
-  inheritModule = "tool.git";
-  homeModule = {
+{
+  flake.modules.homeManager."tool.git.lazygit" = {
     programs.lazygit = {
       enable = true;
       settings = {

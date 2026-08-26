@@ -1,16 +1,12 @@
-{
-  pkgs,
-  mkModule,
-  ...
-}:
+_:
 
-mkModule {
-  name = "lang.haskell";
-  inheritModule = "lang";
-  homeModule = {
-    home.packages = with pkgs; [
-      ghc
-      haskell-language-server
-    ];
-  };
+{
+  flake.modules.homeManager."lang.haskell" =
+    { pkgs, ... }:
+    {
+      home.packages = with pkgs; [
+        ghc
+        haskell-language-server
+      ];
+    };
 }

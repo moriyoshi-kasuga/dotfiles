@@ -1,18 +1,13 @@
-{
-  mkModule,
-  username,
-  pkgs,
-  ...
-}:
+_:
 
-mkModule {
-  name = "nixos.gui.zed";
-  inheritModule = "nixos.gui";
-  nixosModule = {
-    users.users.${username} = {
-      packages = with pkgs; [
-        zed-editor-fhs
-      ];
+{
+  flake.modules.nixos."gui.zed" =
+    { config, pkgs, ... }:
+    {
+      users.users.${config.people.primaryUser} = {
+        packages = with pkgs; [
+          zed-editor-fhs
+        ];
+      };
     };
-  };
 }

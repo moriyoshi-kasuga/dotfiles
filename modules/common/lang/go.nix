@@ -1,15 +1,11 @@
-{
-  pkgs,
-  mkModule,
-  ...
-}:
+_:
 
-mkModule {
-  name = "lang.go";
-  inheritModule = "lang";
-  homeModule = {
-    home.packages = with pkgs; [
-      go
-    ];
-  };
+{
+  flake.modules.homeManager."lang.go" =
+    { pkgs, ... }:
+    {
+      home.packages = with pkgs; [
+        go
+      ];
+    };
 }

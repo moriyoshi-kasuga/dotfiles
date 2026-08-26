@@ -1,12 +1,7 @@
-{
-  mkModule,
-  ...
-}:
+_:
 
-mkModule {
-  name = "darwin.finder";
-  inheritModule = "darwin";
-  darwinModule = {
+{
+  flake.modules.darwin.finder = {
     system.defaults.finder = {
       AppleShowAllExtensions = true;
       AppleShowAllFiles = true;

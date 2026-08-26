@@ -1,16 +1,12 @@
-{
-  pkgs,
-  mkModule,
-  ...
-}:
+_:
 
-mkModule {
-  name = "lang.buf";
-  inheritModule = "lang";
-  homeModule = {
-    home.packages = with pkgs; [
-      buf
-      protobuf
-    ];
-  };
+{
+  flake.modules.homeManager."lang.buf" =
+    { pkgs, ... }:
+    {
+      home.packages = with pkgs; [
+        buf
+        protobuf
+      ];
+    };
 }

@@ -1,17 +1,13 @@
-{
-  pkgs,
-  mkModule,
-  ...
-}:
+_:
 
-mkModule {
-  name = "lang.python";
-  inheritModule = "lang";
-  homeModule = {
-    home.packages = with pkgs; [
-      python3
-      python3Packages.pip
-      uv
-    ];
-  };
+{
+  flake.modules.homeManager."lang.python" =
+    { pkgs, ... }:
+    {
+      home.packages = with pkgs; [
+        python3
+        python3Packages.pip
+        uv
+      ];
+    };
 }

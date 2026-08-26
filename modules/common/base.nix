@@ -1,11 +1,4 @@
-{
-  pkgs,
-  mkModule,
-  username,
-  homeDirectory,
-  system,
-  ...
-}:
+{ inputs, vars, ... }:
 
 let
   version = "26.05";
@@ -16,95 +9,130 @@ let
     accent = "sapphire";
   };
 in
-mkModule {
-  name = "base";
-  homeModule = {
-    inherit catppuccin;
-    programs.home-manager.enable = true;
+{
+  flake.modules.homeManager.base =
+    {
+      pkgs,
+      config,
+      lib,
+      ...
+    }:
+    {
+      imports = [ inputs.catppuccin.homeModules.catppuccin ];
 
-    home = {
-      inherit username homeDirectory;
-      stateVersion = version;
-      sessionVariables = {
-        XDG_CONFIG_HOME = "${homeDirectory}/.config";
+      inherit catppuccin;
+      programs.home-manager.enable = true;
+
+      home.stateVersion = version;
+      home.sessionVariables = {
+        XDG_CONFIG_HOME = "${config.home.homeDirectory}/.config";
       };
-    };
 
-    home.packages = [
-      pkgs.fastfetch
-    ];
-  };
-  darwinHomeModule = {
-    home.packages = with pkgs; [
-      (writeShellScriptBin "notify" ''
-        osascript -e "display notification \"$1\" with title \"''\${2:-Notification}\""
-      '')
-    ];
-  };
-  linuxHomeModule = {
-    home.packages = with pkgs; [
-      (writeShellScriptBin "notify" ''
-        : "''${DBUS_SESSION_BUS_ADDRESS:=unix:path=/run/user/$(${pkgs.coreutils}/bin/id -u)/bus}"
-        export DBUS_SESSION_BUS_ADDRESS
-        if [ $# -eq 1 ]; then
-          ${pkgs.libnotify}/bin/notify-send --urgency normal --expire-time=5000 \
-            --category=x-generic --icon=dialog-information "$1"
-        else
-          ${pkgs.libnotify}/bin/notify-send --urgency normal --expire-time=5000 \
-            --category=x-generic --icon=dialog-information --app-name "$2" "$1"
-        fi
-      '')
+      home.packages = [
+        pkgs.fastfetch
+      ]
+      ++ lib.optionals pkgs.stdenv.isDarwin [
+        (pkgs.writeShellScriptBin "notify" ''
+          osascript -e "display notification \"$1\" with title \"''\${2:-Notification}\""
+        '')
+      ]
+      ++ lib.optionals pkgs.stdenv.isLinux [
+        (pkgs.writeShellScriptBin "notify" ''
+          : "''${DBUS_SESSION_BUS_ADDRESS:=unix:path=/run/user/$(${pkgs.coreutils}/bin/id -u)/bus}"
+          export DBUS_SESSION_BUS_ADDRESS
+          if [ $# -eq 1 ]; then
+            ${pkgs.libnotify}/bin/notify-send --urgency normal --expire-time=5000 \
+              --category=x-generic --icon=dialog-information "$1"
+          else
+            ${pkgs.libnotify}/bin/notify-send --urgency normal --expire-time=5000 \
+              --category=x-generic --icon=dialog-information --app-name "$2" "$1"
+          fi
+        '')
 
-      (writeShellScriptBin "pbpaste" ''
-        wl-paste --no-newline
-      '')
-      (writeShellScriptBin "pbcopy" ''
-        wl-copy
-      '')
-      (writeShellScriptBin "open" ''
-        xdg-open "$@"
-      '')
-    ];
-  };
-  nixosModule = {
-    inherit catppuccin;
-    home-manager.backupFileExtension = "nixbackup";
-    system.stateVersion = version;
-
-    users.users.${username}.packages = [
-      pkgs.wl-clipboard
-    ];
-
-    nix = {
-      settings = {
-        experimental-features = [
-          "nix-command"
-          "flakes"
-        ];
-        auto-optimise-store = true;
-      };
-      optimise.automatic = true;
-      gc = {
-        automatic = true;
-        dates = "weekly";
-        options = "--delete-older-than 14d";
-      };
-    };
-  };
-  darwinModule = {
-    nix = {
-      extraOptions = ''
-        experimental-features = nix-command flakes
-      '';
-      settings.trusted-users = [
-        "root"
-        username
+        (pkgs.writeShellScriptBin "pbpaste" ''
+          wl-paste --no-newline
+        '')
+        (pkgs.writeShellScriptBin "pbcopy" ''
+          wl-copy
+        '')
+        (pkgs.writeShellScriptBin "open" ''
+          xdg-open "$@"
+        '')
       ];
     };
-    nixpkgs.hostPlatform = system;
-    system.stateVersion = 6;
-    system.primaryUser = username;
 
-    users.users.${username}.home = homeDirectory;
-  };
+  flake.modules.nixos.base =
+    {
+      pkgs,
+      config,
+      lib,
+      ...
+    }:
+    {
+      imports = [
+        inputs.catppuccin.nixosModules.catppuccin
+        inputs.home-manager.nixosModules.home-manager
+      ];
+
+      options.people.primaryUser = lib.mkOption {
+        type = lib.types.str;
+        description = "Primary user of this NixOS host.";
+      };
+
+      config = {
+        inherit catppuccin;
+        nixpkgs.overlays = [ inputs.nix-claude-code.overlays.default ];
+        nixpkgs.config.allowUnfree = true;
+
+        home-manager.useGlobalPkgs = true;
+        home-manager.useUserPackages = true;
+        home-manager.backupFileExtension = "nixbackup";
+        home-manager.extraSpecialArgs = { inherit vars; };
+        home-manager.sharedModules = [
+          inputs.noctalia.homeModules.default
+        ];
+
+        system.stateVersion = version;
+
+        users.users.${config.people.primaryUser}.packages = [
+          pkgs.wl-clipboard
+        ];
+
+        nix = {
+          settings = {
+            experimental-features = [
+              "nix-command"
+              "flakes"
+            ];
+            auto-optimise-store = true;
+          };
+          optimise.automatic = true;
+          gc = {
+            automatic = true;
+            dates = "weekly";
+            options = "--delete-older-than 14d";
+          };
+        };
+      };
+    };
+
+  flake.modules.darwin.base =
+    { ... }:
+    {
+      imports = [ inputs.home-manager.darwinModules.home-manager ];
+
+      nixpkgs.overlays = [ inputs.nix-claude-code.overlays.default ];
+      nixpkgs.config.allowUnfree = true;
+
+      home-manager.useGlobalPkgs = true;
+      home-manager.useUserPackages = true;
+      home-manager.extraSpecialArgs = { inherit vars; };
+
+      nix = {
+        extraOptions = ''
+          experimental-features = nix-command flakes
+        '';
+      };
+      system.stateVersion = 6;
+    };
 }

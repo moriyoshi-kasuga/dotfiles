@@ -1,15 +1,11 @@
-{
-  pkgs,
-  mkModule,
-  ...
-}:
+_:
 
-mkModule {
-  name = "lang.fsharp";
-  inheritModule = "lang";
-  homeModule = {
-    home.packages = with pkgs; [
-      dotnet-sdk
-    ];
-  };
+{
+  flake.modules.homeManager."lang.fsharp" =
+    { pkgs, ... }:
+    {
+      home.packages = with pkgs; [
+        dotnet-sdk
+      ];
+    };
 }

@@ -1,12 +1,7 @@
-{
-  mkModule,
-  ...
-}:
+_:
 
-mkModule {
-  name = "darwin.aerospace";
-  inheritModule = "darwin";
-  darwinModule = {
+{
+  flake.modules.darwin.aerospace = {
     services.aerospace = {
       enable = true;
       settings = {

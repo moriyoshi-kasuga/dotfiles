@@ -1,16 +1,12 @@
-{
-  pkgs,
-  mkModule,
-  ...
-}:
+_:
 
-mkModule {
-  name = "lang.lua";
-  inheritModule = "lang";
-  homeModule = {
-    home.packages = with pkgs; [
-      lua5_4
-      luarocks
-    ];
-  };
+{
+  flake.modules.homeManager."lang.lua" =
+    { pkgs, ... }:
+    {
+      home.packages = with pkgs; [
+        lua5_4
+        luarocks
+      ];
+    };
 }

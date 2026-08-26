@@ -1,75 +1,71 @@
+_:
+
 {
-  pkgs,
-  mkModule,
-  ...
-}:
+  flake.modules.homeManager."shell.basic" =
+    { pkgs, ... }:
+    {
+      home.packages = with pkgs; [
+        # use latest version
+        bash
+      ];
 
-mkModule {
-  name = "shell.basic";
-  inheritModule = "shell";
-  homeModule = {
-    home.packages = with pkgs; [
-      # use latest version
-      bash
-    ];
+      programs = {
+        starship = {
+          enable = true;
+          enableZshIntegration = false;
+          settings = {
+            add_newline = false;
 
-    programs = {
-      starship = {
-        enable = true;
-        enableZshIntegration = false;
-        settings = {
-          add_newline = false;
+            package.disabled = true;
 
-          package.disabled = true;
-
-          java.disabled = true;
-          kotlin.disabled = true;
-          gradle.disabled = true;
-          scala.disabled = true;
-          aws.disabled = true;
+            java.disabled = true;
+            kotlin.disabled = true;
+            gradle.disabled = true;
+            scala.disabled = true;
+            aws.disabled = true;
+          };
+        };
+        direnv = {
+          enable = true;
+          enableZshIntegration = false;
+        };
+        zoxide = {
+          enableZshIntegration = false;
+          enable = true;
+        };
+        eza.enable = true;
+        fzf = {
+          enable = true;
+          enableZshIntegration = false;
+          tmux = {
+            enableShellIntegration = true;
+            shellIntegrationOptions = [
+              "-p 55%,65%"
+            ];
+          };
         };
       };
-      direnv = {
-        enable = true;
-        enableZshIntegration = false;
+
+      # fzf は catppuccin/nix に任せず手書き: 背景を端末の透過に合わせるため
+      # bg:-1 / fg:-1 が必要で、モジュール側のテーマだと上書きされてしまう。
+      catppuccin.fzf.enable = false;
+
+      home.sessionVariables = {
+        _ZO_EXCLUDE_DIRS = "$HOME:/tmp/*:/var/*:/nix/*:/mnt/*";
+        FZF_DEFAULT_COMMAND = "fd --hidden --type l --type f --type d --exclude .git --exclude .cache";
+        FZF_DEFAULT_OPTS = "--color=bg:-1,bg+:-1,hl:#ed8796,hl+:#ed8796,fg:-1,fg+:-1,header:-1,info:#c6a0f6,pointer:#f4dbd6,marker:#f4dbd6,prompt:#c6a0f6,spinner:#f4dbd6 --prompt='λ ' --pointer='▶' --marker='✓'";
       };
-      zoxide = {
-        enableZshIntegration = false;
-        enable = true;
-      };
-      eza.enable = true;
-      fzf = {
-        enable = true;
-        enableZshIntegration = false;
-        tmux = {
-          enableShellIntegration = true;
-          shellIntegrationOptions = [
-            "-p 55%,65%"
-          ];
-        };
+
+      home.shellAliases = {
+        ".." = "cd ../";
+        "..." = "cd ../../";
+        e = "exit";
+
+        l = "eza";
+        ll = "eza --long --git";
+        la = "eza --all";
+        lsa = "eza --all --long";
+        lt = "eza --tree --git-ignore";
       };
     };
-
-    # fzf は catppuccin/nix に任せず手書き: 背景を端末の透過に合わせるため
-    # bg:-1 / fg:-1 が必要で、モジュール側のテーマだと上書きされてしまう。
-    catppuccin.fzf.enable = false;
-
-    home.sessionVariables = {
-      _ZO_EXCLUDE_DIRS = "$HOME:/tmp/*:/var/*:/nix/*:/mnt/*";
-      FZF_DEFAULT_COMMAND = "fd --hidden --type l --type f --type d --exclude .git --exclude .cache";
-      FZF_DEFAULT_OPTS = "--color=bg:-1,bg+:-1,hl:#ed8796,hl+:#ed8796,fg:-1,fg+:-1,header:-1,info:#c6a0f6,pointer:#f4dbd6,marker:#f4dbd6,prompt:#c6a0f6,spinner:#f4dbd6 --prompt='λ ' --pointer='▶' --marker='✓'";
-    };
-
-    home.shellAliases = {
-      ".." = "cd ../";
-      "..." = "cd ../../";
-      e = "exit";
-
-      l = "eza";
-      ll = "eza --long --git";
-      la = "eza --all";
-      lsa = "eza --all --long";
-      lt = "eza --tree --git-ignore";
-    };
-  };
 }

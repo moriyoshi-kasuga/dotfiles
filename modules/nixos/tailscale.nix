@@ -1,12 +1,7 @@
-{
-  mkModule,
-  ...
-}:
+_:
 
-mkModule {
-  name = "nixos.tailscale";
-  inheritModule = "nixos";
-  nixosModule = {
+{
+  flake.modules.nixos.tailscale = {
     services.tailscale.enable = true;
 
     networking = {

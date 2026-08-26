@@ -1,45 +1,41 @@
+_:
+
 {
-  pkgs,
-  mkModule,
-  vars,
-  ...
-}:
+  flake.modules.homeManager."tool.git.basic" =
+    { pkgs, vars, ... }:
+    {
+      programs.git = {
+        enable = true;
 
-mkModule {
-  name = "tool.git.basic";
-  inheritModule = "tool.git";
-  homeModule = {
-    programs.git = {
-      enable = true;
+        settings = {
+          init.defaultBranch = "main";
+          merge.conflictStyle = "zdiff3";
+          push.default = "current";
+          pull.rebase = true;
+          fetch.prune = true;
+          rebase.autostash = true;
+          diff.algorithm = "histogram";
+          rerere.enabled = true;
+          branch.sort = "-committerdate";
+        };
 
-      settings = {
-        init.defaultBranch = "main";
-        merge.conflictStyle = "zdiff3";
-        push.default = "current";
-        pull.rebase = true;
-        fetch.prune = true;
-        rebase.autostash = true;
-        diff.algorithm = "histogram";
-        rerere.enabled = true;
-        branch.sort = "-committerdate";
+        # ref: https://nix-community.github.io/home-manager/options.xhtml#opt-programs.git.includes
+        includes = vars.gitIncludes;
       };
 
-      includes = vars.gitIncludes;
-    };
+      home.packages = with pkgs; [
+        gh
+        git-filter-repo
+      ];
 
-    home.packages = with pkgs; [
-      gh
-      git-filter-repo
-    ];
-
-    home.shellAliases = {
-      g = "git";
-      gb = "git branch";
-      gbd = "git branch -d";
-      gcm = "git commit -m";
-      gc = "git switch";
-      gcb = "git switch -c";
-      gl = "git log --oneline --graph --decorate";
+      home.shellAliases = {
+        g = "git";
+        gb = "git branch";
+        gbd = "git branch -d";
+        gcm = "git commit -m";
+        gc = "git switch";
+        gcb = "git switch -c";
+        gl = "git log --oneline --graph --decorate";
+      };
     };
-  };
 }

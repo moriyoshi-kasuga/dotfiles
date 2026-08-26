@@ -1,16 +1,13 @@
-{
-  pkgs,
-  mkModule,
-  lib,
-  username,
-  homeDirectory,
-  ...
-}:
+_:
 
-mkModule {
-  name = "tool.claude-code.basic";
-  inheritModule = "tool.claude-code";
-  homeModule =
+{
+  flake.modules.homeManager."tool.claude-code.basic" =
+    {
+      pkgs,
+      lib,
+      config,
+      ...
+    }:
     let
       # commands/ 直下は「1ファイル = 1スキル」(name.md -> skills/name/SKILL.md) だが、
       # 参照ファイル（言語別設計方針など）を伴うスキルはディレクトリで表現する
@@ -47,7 +44,7 @@ mkModule {
             "/nix/store"
           ];
           allow = [
-            "Read(/${homeDirectory}/.claude/skills/**)"
+            "Read(/${config.home.homeDirectory}/.claude/skills/**)"
             "Read(//tmp/**)"
             # filesystem read-only
             "Bash(date *)"
@@ -131,7 +128,7 @@ mkModule {
               hooks = [
                 {
                   type = "command";
-                  command = "${pkgs.jq}/bin/jq -r '.message // \"Require operation\"' | ${pkgs.findutils}/bin/xargs -I {} /etc/profiles/per-user/${username}/bin/notify {} 'Claude Code'";
+                  command = "${pkgs.jq}/bin/jq -r '.message // \"Require operation\"' | ${pkgs.findutils}/bin/xargs -I {} /etc/profiles/per-user/${config.home.username}/bin/notify {} 'Claude Code'";
                 }
               ];
             }
@@ -141,7 +138,7 @@ mkModule {
               hooks = [
                 {
                   type = "command";
-                  command = "/etc/profiles/per-user/${username}/bin/notify 'Task completed' 'Claude Code'";
+                  command = "/etc/profiles/per-user/${config.home.username}/bin/notify 'Task completed' 'Claude Code'";
                 }
               ];
             }
