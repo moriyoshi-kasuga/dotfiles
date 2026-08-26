@@ -5,6 +5,7 @@ _:
     { pkgs, ... }:
     {
       programs.fish = {
+        enable = true;
         package = pkgs.fish;
         interactiveShellInit = builtins.readFile ./init.fish;
       };
