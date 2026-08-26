@@ -8,17 +8,7 @@ in
   flake.darwinConfigurations.job = inputs.nix-darwin.lib.darwinSystem {
     system = "aarch64-darwin";
     modules = [
-      darwin.base
-      darwin.aerospace
-      darwin.dock
-      darwin.finder
-      darwin.homebrew
-      darwin.tailscale
-      darwin.font
-      darwin."shell.fish"
-      darwin."shell.zsh"
-      darwin."terminal.wezterm"
-      darwin."tool.docker"
+      darwin."host.common"
       (
         { pkgs, ... }:
         {
@@ -35,37 +25,9 @@ in
             home.homeDirectory = "/Users/mori";
             modules.terminal.wezterm.bigMonitor = true;
             imports = [
-              home.base
+              home."profile.core"
+              home."profile.lang-full"
               home."darwin.homebrew"
-              home."editor.neovim"
-              home."editor.vim"
-              home."lang.buf"
-              home."lang.c"
-              home."lang.elm"
-              home."lang.fsharp"
-              home."lang.go"
-              home."lang.haskell"
-              home."lang.jvm"
-              home."lang.lua"
-              home."lang.node"
-              home."lang.python"
-              home."lang.rust"
-              home."lang.wasm"
-              home."lang.zig"
-              home.library
-              home."shell.basic"
-              home."shell.fish"
-              home."shell.zsh"
-              home."terminal.wezterm"
-              home."tool.basic"
-              home."tool.claude-code.basic"
-              home."tool.docker"
-              home."tool.git.basic"
-              home."tool.git.delta"
-              home."tool.git.lazygit"
-              home."tool.tff"
-              home."tool.tmux"
-              home.wallpaper
             ];
           };
         }
