@@ -7,8 +7,8 @@ _:
       programs.mise.globalConfig.tools = {
         deno = "2.8.0";
       }
-      // lib.optionalAttrs pkgs.stdenv.isDarwin { node = "24.15.0"; };
+      // lib.optionalAttrs pkgs.stdenv.hostPlatform.isDarwin { node = "24.15.0"; };
 
-      home.packages = lib.optionals pkgs.stdenv.isLinux [ pkgs.nodejs_24 ];
+      home.packages = lib.optionals pkgs.stdenv.hostPlatform.isLinux [ pkgs.nodejs_24 ];
     };
 }

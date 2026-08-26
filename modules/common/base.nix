@@ -31,12 +31,12 @@ in
       home.packages = [
         pkgs.fastfetch
       ]
-      ++ lib.optionals pkgs.stdenv.isDarwin [
+      ++ lib.optionals pkgs.stdenv.hostPlatform.isDarwin [
         (pkgs.writeShellScriptBin "notify" ''
           osascript -e "display notification \"$1\" with title \"''\${2:-Notification}\""
         '')
       ]
-      ++ lib.optionals pkgs.stdenv.isLinux [
+      ++ lib.optionals pkgs.stdenv.hostPlatform.isLinux [
         (pkgs.writeShellScriptBin "notify" ''
           : "''${DBUS_SESSION_BUS_ADDRESS:=unix:path=/run/user/$(${pkgs.coreutils}/bin/id -u)/bus}"
           export DBUS_SESSION_BUS_ADDRESS

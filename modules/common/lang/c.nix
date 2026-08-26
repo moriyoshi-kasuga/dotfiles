@@ -11,14 +11,14 @@ _:
           cmake
           ninja
         ])
-        ++ lib.optionals pkgs.stdenv.isDarwin (
+        ++ lib.optionals pkgs.stdenv.hostPlatform.isDarwin (
           with pkgs;
           [
             libcxx
             (lib.hiPrio llvmPackages.clang-unwrapped)
           ]
         )
-        ++ lib.optionals pkgs.stdenv.isLinux (
+        ++ lib.optionals pkgs.stdenv.hostPlatform.isLinux (
           with pkgs;
           [
             mold
@@ -26,7 +26,7 @@ _:
           ]
         );
 
-      home.sessionVariables = lib.mkIf pkgs.stdenv.isLinux {
+      home.sessionVariables = lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
         CFLAGS = "-fuse-ld=mold";
         CXXFLAGS = "-fuse-ld=mold";
         LDFLAGS = "-fuse-ld=mold";

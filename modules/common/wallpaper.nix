@@ -82,7 +82,7 @@ in
   flake.modules.homeManager.wallpaper =
     { pkgs, lib, ... }:
     lib.mkMerge [
-      (lib.mkIf pkgs.stdenv.isDarwin (
+      (lib.mkIf pkgs.stdenv.hostPlatform.isDarwin (
         let
           rotateScript = mkRotateScript pkgs ''
             /usr/bin/osascript \
@@ -109,7 +109,7 @@ in
           };
         }
       ))
-      (lib.mkIf pkgs.stdenv.isLinux (
+      (lib.mkIf pkgs.stdenv.hostPlatform.isLinux (
         let
           rotateScript = mkRotateScript pkgs ''
             noctalia msg wallpaper-set "$FILE"

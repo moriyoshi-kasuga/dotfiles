@@ -42,12 +42,12 @@ _:
           cargo-llvm-lines
           cargo-depgraph
         ])
-        ++ lib.optionals pkgs.stdenv.isLinux [ pkgs.wild ];
+        ++ lib.optionals pkgs.stdenv.hostPlatform.isLinux [ pkgs.wild ];
 
       # Ensure Cargo links with Apple's ld64-backed cc for the native Darwin target,
       # since a GNU ld-based toolchain silently breaks panic unwinding
       # (catch_unwind / #[should_panic]) by omitting __unwind_info in Mach-O.
-      home.sessionVariablesExtra = lib.mkIf pkgs.stdenv.isDarwin ''
+      home.sessionVariablesExtra = lib.mkIf pkgs.stdenv.hostPlatform.isDarwin ''
         export CARGO_TARGET_AARCH64_APPLE_DARWIN_LINKER="$(xcrun --find cc)"
       '';
     };

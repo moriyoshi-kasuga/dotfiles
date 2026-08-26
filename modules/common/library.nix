@@ -105,7 +105,7 @@ in
             LIBRARY_PATH = LD_LIBRARY_PATH;
           };
         }
-        (lib.mkIf pkgs.stdenv.isDarwin {
+        (lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
           modules.library.libs = with pkgs; [
             libiconv
             llvm
@@ -117,7 +117,7 @@ in
             export CXX_aarch64_apple_darwin=/usr/bin/c++
           '';
         })
-        (lib.mkIf pkgs.stdenv.isLinux {
+        (lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
           modules.library.libs = linuxLibs pkgs;
         })
       ];

@@ -38,7 +38,7 @@ _:
           kalker
           poppler-utils
         ])
-        ++ lib.optionals pkgs.stdenv.isLinux (
+        ++ lib.optionals pkgs.stdenv.hostPlatform.isLinux (
           with pkgs;
           [
             xdg-utils
