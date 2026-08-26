@@ -27,8 +27,7 @@
             cd "$src"
             statix check .
             deadnix --fail flake.nix modules
-            # hosts/ contains generated hardware configs; leave them as-is
-            nixfmt --check $(find . -name '*.nix' -not -path './hosts/*')
+            nixfmt --check
             stylua --check --indent-type Spaces --indent-width 2 nvim-config
             shellcheck init.sh
             touch $out
