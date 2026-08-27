@@ -20,7 +20,11 @@
     # Prefer the discrete GPU (RX 9060 XT) over the iGPU as the primary
     # render/scanout device for niri and its Wayland/EGL clients.
     WLR_DRM_DEVICES = "/dev/dri/by-path/pci-0000:03:00.0-card:/dev/dri/by-path/pci-0000:10:00.0-card";
-    DRI_PRIME = 1;
+    # boot_vga is the iGPU (10:00.0), so the numeric "1" index is ambiguous;
+    # pin OpenGL PRIME offload to the dGPU's PCI bus ID explicitly.
+    DRI_PRIME = "pci-0000_03_00_0";
+    # Vulkan clients (incl. Proton/DXVK) consult this before DRI_PRIME.
+    MESA_VK_DEVICE_SELECT = "1002:7590";
   };
 
   boot.initrd.availableKernelModules = [
