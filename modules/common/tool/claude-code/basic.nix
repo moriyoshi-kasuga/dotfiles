@@ -112,7 +112,22 @@ _:
               }
             ];
           };
-          tui = "default";
+          tui = "fullscreen";
+          bindings = [
+            # {
+            #   context = "Chat";
+            #   bindings = {
+            #     "ctrl+j" = null;
+            #   };
+            # }
+            {
+              context = "Scroll";
+              bindings = {
+                "ctrl+d" = "scroll:lineDown";
+                "ctrl+u" = "scroll:lineUp";
+              };
+            }
+          ];
           language = "Japanese";
           env = {
             IS_DEMO = "1";
