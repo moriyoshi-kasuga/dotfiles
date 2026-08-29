@@ -11,7 +11,7 @@ _:
       programs.claude-code = {
         enable = true;
         package = pkgs.claude-code;
-        commandsDir = ./commands;
+        commandsDir = ../../../../skills;
         settings = {
           disableArtifact = true;
           permissions = {
@@ -130,7 +130,6 @@ _:
           ];
           language = "Japanese";
           env = {
-            IS_DEMO = "1";
             CLAUDE_CODE_SHELL = "${pkgs.bash}/bin/bash";
           };
         };
