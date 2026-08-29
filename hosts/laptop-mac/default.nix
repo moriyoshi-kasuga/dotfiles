@@ -13,10 +13,6 @@ in
         { pkgs, ... }:
         {
           system.primaryUser = "mori";
-          nix.settings.trusted-users = [
-            "root"
-            "mori"
-          ];
           users.users.mori.home = "/Users/mori";
           users.users.mori.shell = pkgs.fish;
 

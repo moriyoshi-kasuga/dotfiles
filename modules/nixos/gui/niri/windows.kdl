@@ -1,0 +1,25 @@
+// Firefox/Brave picture-in-picture player should float.
+window-rule {
+  match app-id=r#"firefox$"# title="^Picture-in-Picture$"
+  match app-id=r#"brave$"# title="^Picture-in-Picture$"
+  open-floating true
+}
+
+window-rule {
+  match app-id="org.wezfurlong.wezterm"
+
+  background-effect {
+    xray true
+    blur true
+    noise 0.05
+    saturation 3
+  }
+}
+
+window-rule {
+  match is-floating=true
+
+  border {
+    on
+  }
+}

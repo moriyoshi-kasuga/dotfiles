@@ -1,0 +1,19 @@
+input {
+  mod-key "Super"
+
+  keyboard {
+    repeat-delay 200
+    repeat-rate 30
+    xkb {
+    }
+  }
+
+  touchpad {
+    tap
+    natural-scroll
+  }
+
+  mouse {
+    middle-emulation
+  }
+}

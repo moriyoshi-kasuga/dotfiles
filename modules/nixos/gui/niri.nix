@@ -2,9 +2,39 @@
 
 {
   flake.modules.homeManager."gui.niri" = {
-    home.file.".config/niri/config.kdl" = {
-      source = ./niri.kdl;
-      force = true;
+    home.file = {
+      ".config/niri/config.kdl" = {
+        source = ./niri/config.kdl;
+        force = true;
+      };
+      ".config/niri/config/misc.kdl" = {
+        source = ./niri/misc.kdl;
+        force = true;
+      };
+      ".config/niri/config/input.kdl" = {
+        source = ./niri/input.kdl;
+        force = true;
+      };
+      ".config/niri/config/output.kdl" = {
+        source = ./niri/output.kdl;
+        force = true;
+      };
+      ".config/niri/config/layout.kdl" = {
+        source = ./niri/layout.kdl;
+        force = true;
+      };
+      ".config/niri/config/windows.kdl" = {
+        source = ./niri/windows.kdl;
+        force = true;
+      };
+      ".config/niri/config/layers.kdl" = {
+        source = ./niri/layers.kdl;
+        force = true;
+      };
+      ".config/niri/config/binds.kdl" = {
+        source = ./niri/binds.kdl;
+        force = true;
+      };
     };
 
     programs.noctalia = {

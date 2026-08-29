@@ -47,6 +47,7 @@ _:
               "Bash(which *)"
               "Bash(tldr *)"
               "Bash(nix search *)"
+              "Bash(nix flake check *)"
               # git read-only
               "Bash(git status *)"
               "Bash(git log *)"

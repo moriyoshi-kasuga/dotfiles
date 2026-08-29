@@ -1,0 +1,7 @@
+include "config/misc.kdl"
+include "config/input.kdl"
+include "config/output.kdl"
+include "config/layout.kdl"
+include "config/windows.kdl"
+include "config/layers.kdl"
+include "config/binds.kdl"

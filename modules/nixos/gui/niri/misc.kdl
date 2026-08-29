@@ -1,0 +1,34 @@
+environment {
+  ELECTRON_OZONE_PLATFORM_HINT "auto"
+}
+
+animations {
+    off
+}
+
+gestures {
+  hot-corners {
+    off
+  }
+}
+
+cursor {
+  xcursor-size 24
+  xcursor-theme "catppuccin-macchiato-sapphire-cursors"
+  hide-when-typing
+  hide-after-inactive-ms 10000
+}
+
+spawn-at-startup "easyeffects" "--service-mode" "-w"
+spawn-at-startup "noctalia"
+
+hotkey-overlay {
+  skip-at-startup
+}
+
+screenshot-path "~/Pictures/Screenshots/Screenshot-from-%Y-%m-%d-%H-%M-%S.png";
+
+debug {
+  // Allows notification actions and window activation from Noctalia.
+  honor-xdg-activation-with-invalid-serial
+}

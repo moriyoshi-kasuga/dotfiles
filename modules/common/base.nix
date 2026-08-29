@@ -8,6 +8,16 @@ let
     flavor = "macchiato";
     accent = "sapphire";
   };
+  nixSettings = {
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
+    auto-optimise-store = true;
+  };
+  nixRegistry = {
+    nixpkgs.flake = inputs.nixpkgs;
+  };
 in
 {
   flake.modules.homeManager.base =
@@ -99,19 +109,14 @@ in
         ];
 
         nix = {
-          settings = {
-            experimental-features = [
-              "nix-command"
-              "flakes"
-            ];
-            auto-optimise-store = true;
-          };
+          settings = nixSettings;
           optimise.automatic = true;
           gc = {
             automatic = true;
             dates = "weekly";
             options = "--delete-older-than 7d";
           };
+          registry = nixRegistry;
         };
 
         documentation.enable = false;
@@ -131,9 +136,13 @@ in
       home-manager.extraSpecialArgs = { inherit vars; };
 
       nix = {
-        extraOptions = ''
-          experimental-features = nix-command flakes
-        '';
+        settings = nixSettings;
+        optimise.automatic = true;
+        gc = {
+          automatic = true;
+          options = "--delete-older-than 7d";
+        };
+        registry = nixRegistry;
       };
       system.stateVersion = 6;
     };

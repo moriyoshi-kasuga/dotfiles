@@ -22,10 +22,10 @@ in
       nixos."gui.bluetooth"
       nixos."gui.brave"
       nixos."gui.game"
+      nixos."gui.greetd"
       nixos."gui.i18n"
       nixos."gui.niri"
       nixos."gui.qt"
-      nixos."gui.sddm"
       nixos."gui.thunar"
       nixos."gui.zed"
     ];

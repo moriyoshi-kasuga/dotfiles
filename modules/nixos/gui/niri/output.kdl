@@ -1,0 +1,7 @@
+// Run `niri msg outputs` to list all outputs and their modes.
+output "DP-3" {
+  mode "1920x1080@164.917"
+  scale 1
+  transform "normal"
+  position x=0 y=0
+}

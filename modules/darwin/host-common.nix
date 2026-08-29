@@ -19,5 +19,10 @@ in
       darwin."terminal.wezterm"
       darwin."tool.docker"
     ];
+
+    nix.settings.trusted-users = [
+      "root"
+      "mori"
+    ];
   };
 }
