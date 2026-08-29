@@ -10,6 +10,7 @@ in
     modules = [
       nixos."host.desktop"
       nixos."gui.amd"
+      nixos."gui.claude-desktop"
       ./hardware-configuration.nix
       (
         { pkgs, ... }:
