@@ -126,7 +126,6 @@
         slurp
         xwayland-satellite
         libnotify
-        mako
       ];
 
       xdg.portal = {
