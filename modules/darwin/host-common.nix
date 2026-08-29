@@ -11,6 +11,7 @@ in
       darwin.dock
       darwin.finder
       darwin.homebrew
+      darwin."ios-dev"
       darwin.tailscale
       darwin.font
       darwin."shell.fish"

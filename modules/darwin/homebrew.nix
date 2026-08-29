@@ -10,7 +10,7 @@ _:
   };
 
   flake.modules.darwin.homebrew =
-    { pkgs, config, ... }:
+    { config, ... }:
     {
       homebrew = {
         enable = true;
@@ -29,13 +29,5 @@ _:
           "macfuse"
         ];
       };
-
-      environment.systemPackages = with pkgs; [
-        xcodegen
-        libimobiledevice
-        swift
-        cocoapods
-        xcodes
-      ];
     };
 }
