@@ -16,7 +16,7 @@ in
       nixos."shell.fish"
       nixos."shell.zsh"
       nixos."tool.docker"
-      ../../hosts/sv-main/hardware-configuration.nix
+      ./hardware-configuration.nix
       (
         { pkgs, ... }:
         {

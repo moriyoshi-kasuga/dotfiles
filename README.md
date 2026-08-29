@@ -94,12 +94,26 @@ modules/
     ├── aerospace.nix     # Aerospace ウィンドウマネージャー
     ├── dock.nix          # Dock 設定
     └── ...               # finder / tailscale
+
+profiles/                 # ホストに割り当てる Home Manager profile の束ね
+├── core.nix              # profile.core (shell / editor / tool の基本セット)
+├── desktop.nix           # profile.desktop (GUI 込みのフルセット)
+├── gui-common.nix        # profile.gui-common (WezTerm / wallpaper)
+└── lang-full.nix         # profile.lang-full (全言語ツールチェイン)
+
+hosts/                    # ホストごとの nixosConfigurations / darwinConfigurations
+├── desktop/              # default.nix + hardware-configuration.nix
+├── laptop-nixos/         # default.nix + hardware-configuration.nix
+├── sv-main/              # default.nix + hardware-configuration.nix
+├── laptop-mac/           # default.nix (macOS はハードウェア設定なし)
+└── job/                  # default.nix
 ```
 
-このリポジトリは [dendritic pattern](https://github.com/vic/import-tree) を採用しており、`modules/` 以下のすべての `.nix` ファイルは
-[flake-parts](https://flake.parts) モジュールです（`import-tree` が再帰的に import します）。各ファイルは
-`flake.modules.<nixos|darwin|homeManager>.<aspect>` に自身を登録し、`modules/hosts/<name>.nix` がホストごとに
-使う aspect を明示的に import して `nixosConfigurations` / `darwinConfigurations` を組み立てます。
+このリポジトリは [dendritic pattern](https://github.com/vic/import-tree) を採用しており、`modules/` と `profiles/` 以下のすべての
+`.nix` ファイルは [flake-parts](https://flake.parts) モジュールです（`import-tree` が再帰的に import します）。各ファイルは
+`flake.modules.<nixos|darwin|homeManager>.<aspect>` に自身を登録します。`hosts/<name>/default.nix` は使う aspect を明示的に
+import して `nixosConfigurations` / `darwinConfigurations` を組み立てるホスト定義ファイルで、こちらも同様に import-tree の対象ですが、
+`hardware-configuration.nix`（自動生成されるハードウェア設定）だけは flake-parts モジュールではないため import 対象から除外されています。
 
 ## License
 

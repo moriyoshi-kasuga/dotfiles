@@ -5,17 +5,17 @@ let
   home = inputs.self.modules.homeManager;
 in
 {
-  flake.nixosConfigurations.laptop-nixos = inputs.nixpkgs.lib.nixosSystem {
+  flake.nixosConfigurations.desktop = inputs.nixpkgs.lib.nixosSystem {
     system = "x86_64-linux";
     modules = [
       nixos."host.desktop"
-      nixos."gui.nvidia"
-      ../../hosts/laptop-nixos/hardware-configuration.nix
+      nixos."gui.amd"
+      ./hardware-configuration.nix
       (
         { pkgs, ... }:
         {
           people.primaryUser = "mori";
-          networking.hostName = "Mori-Laptop-NixOS";
+          networking.hostName = "Mori-NixOS";
           users.users.mori.shell = pkgs.fish;
 
           home-manager.users.mori = {

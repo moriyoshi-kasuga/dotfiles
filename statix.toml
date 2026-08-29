@@ -1,3 +1,3 @@
 disabled = ["repeated_keys"]
-# hosts/ contains generated hardware configs
-ignore = ["hosts", "vars.nix"]
+# hardware-configuration.nix is a generated file
+ignore = ["hardware-configuration.nix", "vars.nix"]
