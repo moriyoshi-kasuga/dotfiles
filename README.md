@@ -48,7 +48,7 @@ cp vars.nix.example vars.nix
 
 ## Environment
 
-unixpornではなく、コーディングのための設定です。
+unixpornではなく、シンプルさを保つための設定です。
 
 | Component | Software |
 | :--- | :--- |
@@ -89,7 +89,8 @@ modules/
 │       └── ...           # Qt / Brave / game / thunar / zathura / i18n (fcitx5)
 │
 └── darwin/               # macOS システム設定
-    ├── homebrew.nix      # Homebrew casks・iOS 開発ツール
+    ├── homebrew.nix      # Homebrew casks
+    ├── ios-dev.nix       # iOS 開発ツール (Xcode 関連)
     ├── aerospace.nix     # Aerospace ウィンドウマネージャー
     ├── dock.nix          # Dock 設定
     └── ...               # finder / tailscale

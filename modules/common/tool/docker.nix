@@ -1,15 +1,16 @@
 _:
 
+let
+  dns = [
+    "1.1.1.1"
+    "8.8.8.8"
+  ];
+in
 {
   flake.modules.homeManager."tool.docker" = {
     programs.lazydocker.enable = true;
 
-    home.file.".config/docker/daemon.json".text = builtins.toJSON {
-      dns = [
-        "1.1.1.1"
-        "8.8.8.8"
-      ];
-    };
+    home.file.".config/docker/daemon.json".text = builtins.toJSON { inherit dns; };
 
     home.shellAliases = {
       d = "docker";
@@ -30,21 +31,11 @@ _:
     virtualisation = {
       docker = {
         enable = true;
-        daemon.settings = {
-          dns = [
-            "1.1.1.1"
-            "8.8.8.8"
-          ];
-        };
+        daemon.settings = { inherit dns; };
         rootless = {
           enable = true;
           setSocketVariable = true;
-          daemon.settings = {
-            dns = [
-              "1.1.1.1"
-              "8.8.8.8"
-            ];
-          };
+          daemon.settings = { inherit dns; };
         };
       };
     };

@@ -17,6 +17,11 @@ let
         WALLPAPER_SRC = wallpaperSrc;
         SET_WALLPAPER_CMD = setWallpaperCmd;
       };
+      excludeShellChecks = [
+        "SC2016"
+        "SC2089"
+        "SC2090"
+      ];
       text = builtins.readFile ./wallpaper-rotate.sh;
     };
 in

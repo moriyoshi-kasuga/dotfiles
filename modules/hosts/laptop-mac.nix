@@ -25,6 +25,7 @@ in
             home.homeDirectory = "/Users/mori";
             imports = [
               home."profile.core"
+              home."profile.gui-common"
               home."darwin.homebrew"
               home."lang.c"
               home."lang.node"

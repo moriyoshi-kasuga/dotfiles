@@ -26,6 +26,7 @@ in
             modules.terminal.wezterm.bigMonitor = true;
             imports = [
               home."profile.core"
+              home."profile.gui-common"
               home."profile.lang-full"
               home."darwin.homebrew"
             ];

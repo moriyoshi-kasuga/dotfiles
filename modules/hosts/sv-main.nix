@@ -28,20 +28,8 @@ in
             home.username = "sv-main";
             home.homeDirectory = "/home/sv-main";
             imports = [
-              home.base
-              home."editor.neovim"
-              home."editor.vim"
+              home."profile.core"
               home."lang.c"
-              home."shell.basic"
-              home."shell.fish"
-              home."shell.zsh"
-              home."tool.basic"
-              home."tool.docker"
-              home."tool.git.basic"
-              home."tool.git.delta"
-              home."tool.git.lazygit"
-              home."tool.tff"
-              home."tool.tmux"
             ];
           };
         }

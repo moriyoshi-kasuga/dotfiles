@@ -7,7 +7,7 @@
       pkgs = import inputs.nixpkgs { inherit system; };
 
       devTools = with pkgs; [
-        nixfmt
+        nixfmt-tree
         statix
         deadnix
         stylua
@@ -27,7 +27,7 @@
             cd "$src"
             statix check .
             deadnix --fail flake.nix modules
-            nixfmt --check
+            treefmt --fail-on-change --no-cache --walk filesystem --tree-root .
             stylua --check --indent-type Spaces --indent-width 2 nvim-config
             shellcheck init.sh
             touch $out

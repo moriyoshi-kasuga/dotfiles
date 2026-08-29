@@ -13,7 +13,6 @@ in
       home."shell.basic"
       home."shell.fish"
       home."shell.zsh"
-      home."terminal.wezterm"
       home."tool.basic"
       home."tool.claude-code.basic"
       home."tool.docker"
@@ -22,7 +21,6 @@ in
       home."tool.git.lazygit"
       home."tool.tff"
       home."tool.tmux"
-      home.wallpaper
     ];
   };
 }
