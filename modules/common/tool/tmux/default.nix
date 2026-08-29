@@ -12,7 +12,7 @@ _:
         baseIndex = 1;
         escapeTime = 0;
         clock24 = true;
-        mouse = false;
+        mouse = true;
         keyMode = "vi";
         shortcut = "t";
         inherit shell;
