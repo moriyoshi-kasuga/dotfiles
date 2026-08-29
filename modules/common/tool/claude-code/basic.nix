@@ -15,7 +15,6 @@ _:
         settings = {
           disableArtifact = true;
           permissions = {
-            disableAutoMode = "disable";
             additionalDirectories = [
               "/nix/store"
             ];
