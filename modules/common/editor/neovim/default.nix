@@ -20,6 +20,10 @@ _:
       # astro/svelte language servers need a TypeScript SDK to fall back on.
       # Under Nix there is no global `typescript`, so we expose its path explicitly.
       tsdkPath = "${pkgs.typescript}/lib/node_modules/typescript/lib";
+      # Lets vtsls load astro's tsserver plugin so plain .ts/.js files can see
+      # types from imported .astro components (bundled inside the LSP package).
+      astroTsPluginPath =
+        "${pkgs.astro-language-server}/lib/node_modules/astro-language-server/packages/language-tools/ts-plugin";
     in
     {
       catppuccin.nvim.enable = false;
@@ -42,6 +46,9 @@ _:
           "--set"
           "TSDK_PATH"
           tsdkPath
+          "--set"
+          "ASTRO_TS_PLUGIN_PATH"
+          astroTsPluginPath
         ];
 
         extraPackages = with pkgs; [
@@ -70,6 +77,11 @@ _:
           # HTML/CSS/JSON
           vscode-langservers-extracted
 
+          # frontend formatting (JS/TS/CSS/HTML/JSON/YAML/Markdown/Svelte/Astro)
+          # NOTE: eslint (linting) is expected to come from each project's own
+          # node_modules; vscode-eslint-language-server above resolves it there.
+          prettier
+
           # nix
           nixd
           nixfmt
@@ -87,6 +99,7 @@ _:
           asm-lsp
           taplo
           tinymist
+          clang-tools
         ];
       };
 
