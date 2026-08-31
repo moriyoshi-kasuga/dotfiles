@@ -8,8 +8,6 @@ in
     imports = [
       home."lang.buf"
       home."lang.c"
-      home."lang.elm"
-      home."lang.fsharp"
       home."lang.go"
       home."lang.haskell"
       home."lang.jvm"
@@ -18,7 +16,6 @@ in
       home."lang.python"
       home."lang.rust"
       home."lang.wasm"
-      home."lang.zig"
     ];
   };
 }
