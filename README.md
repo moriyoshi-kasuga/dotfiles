@@ -88,18 +88,23 @@ modules/
 │       ├── sddm.nix      # ディスプレイマネージャー
 │       └── ...           # Qt / Brave / game / thunar / zathura / i18n (fcitx5)
 │
-└── darwin/               # macOS システム設定
-    ├── homebrew.nix      # Homebrew casks
-    ├── ios-dev.nix       # iOS 開発ツール (Xcode 関連)
-    ├── aerospace.nix     # Aerospace ウィンドウマネージャー
-    ├── dock.nix          # Dock 設定
-    └── ...               # finder / tailscale
+├── darwin/               # macOS システム設定
+│   ├── homebrew.nix      # Homebrew casks
+│   ├── ios-dev.nix       # iOS 開発ツール (Xcode 関連)
+│   ├── aerospace.nix     # Aerospace ウィンドウマネージャー
+│   ├── dock.nix          # Dock 設定
+│   └── ...               # finder / tailscale
+│
+└── flake/                # flake-parts 自体の設定 (開発者向け)
+    ├── options.nix       # 追加の flake-parts オプション定義
+    └── checks.nix        # lint / eval check・formatter・devShell
 
-profiles/                 # ホストに割り当てる Home Manager profile の束ね
+profiles/                 # ホストに割り当てる profile の束ね (Home Manager / NixOS システム設定)
 ├── core.nix              # profile.core (shell / editor / tool の基本セット)
 ├── desktop.nix           # profile.desktop (GUI 込みのフルセット)
 ├── gui-common.nix        # profile.gui-common (WezTerm / wallpaper)
-└── lang-full.nix         # profile.lang-full (全言語ツールチェイン)
+├── lang-full.nix         # profile.lang-full (全言語ツールチェイン)
+└── host-desktop.nix      # host.desktop (NixOS システム設定の集約)
 
 hosts/                    # ホストごとの nixosConfigurations / darwinConfigurations
 ├── desktop/              # default.nix + hardware-configuration.nix
