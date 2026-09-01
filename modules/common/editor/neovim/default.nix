@@ -22,8 +22,7 @@ _:
       tsdkPath = "${pkgs.typescript}/lib/node_modules/typescript/lib";
       # Lets vtsls load astro's tsserver plugin so plain .ts/.js files can see
       # types from imported .astro components (bundled inside the LSP package).
-      astroTsPluginPath =
-        "${pkgs.astro-language-server}/lib/node_modules/astro-language-server/packages/language-tools/ts-plugin";
+      astroTsPluginPath = "${pkgs.astro-language-server}/lib/node_modules/astro-language-server/packages/language-tools/ts-plugin";
     in
     {
       catppuccin.nvim.enable = false;
