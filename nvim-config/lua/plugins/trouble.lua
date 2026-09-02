@@ -14,7 +14,6 @@ return {
       { ",X", "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnostics (Trouble)" },
       -- symbols / LSP
       { "gsa", "<cmd>Trouble symbols toggle<cr>", desc = "Symbols (Trouble)" },
-      { "gR", "<cmd>Trouble lsp<cr>", desc = "LSP Definitions/References (Trouble)" },
       -- list
       { "<leader>xL", "<cmd>Trouble loclist toggle<cr>", desc = "Location List (Trouble)" },
       { "<leader>xQ", "<cmd>Trouble qflist toggle<cr>", desc = "Quickfix List (Trouble)" },

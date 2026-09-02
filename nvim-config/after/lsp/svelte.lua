@@ -8,4 +8,9 @@ end
 
 return {
   init_options = { typescript = { tsdk = tsdk } },
+  on_attach = function(_, bufnr)
+    vim.keymap.set("n", "gR", function()
+      require("config.util").lsp_locations_to_fzf(bufnr, "$/getFileReferences", vim.uri_from_bufnr(bufnr))
+    end, { silent = true, desc = "File References", buffer = bufnr })
+  end,
 }
