@@ -90,7 +90,7 @@ return {
 
       formatters = {
         stylua = {
-          prepend_args = { "--indent-type", "Spaces", "--indent-width", "2" },
+          prepend_args = { "--indent-type", "Spaces" },
         },
         prettier = {
           condition = function(_, ctx)
