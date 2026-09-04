@@ -19,8 +19,11 @@ _:
       HandleSuspendKey = "suspend";
       HandleHibernateKey = "hibernate";
       HandleLidSwitch = "suspend-then-hibernate";
-      HibernateDelaySec = "3600";
     };
+
+    # HibernateDelaySec belongs to sleep.conf's [Sleep] section, not
+    # logind.conf's [Login] section (systemd silently ignores it there).
+    systemd.sleep.settings.Sleep.HibernateDelaySec = 3600;
 
     security.polkit.enable = true;
   };

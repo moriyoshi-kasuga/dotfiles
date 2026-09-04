@@ -10,7 +10,7 @@
 }:
 
 {
-  boot.kernelPackages = pkgs.linuxKernel.packages.linux_7_1;
+  boot.kernelPackages = pkgs.linuxKernel.packages.linux_7_2;
 
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
@@ -40,8 +40,13 @@
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
-  # Ryzen 9700X: AMD P-State EPP (hardware-guided frequency scaling)
-  boot.kernelParams = [ "amd_pstate=active" ];
+  boot.kernelParams = [
+    # Ryzen 9700X: AMD P-State EPP (hardware-guided frequency scaling)
+    "amd_pstate=active"
+    # Avoid deep PCIe ASPM states, which cause link drops/stalls on the
+    # onboard RTL8125B (r8169) NIC.
+    "pcie_aspm.policy=performance"
+  ];
 
   # Hibernate via swap partition
   boot.resumeDevice = "/dev/disk/by-uuid/1c6b591b-7f35-4527-b72a-0924593a1af5";
