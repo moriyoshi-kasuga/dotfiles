@@ -44,6 +44,7 @@ _:
           "wheel"
           "input"
           "video"
+          "docker"
         ];
       };
 
