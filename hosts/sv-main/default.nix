@@ -24,6 +24,9 @@ in
           networking.hostName = "sv-main";
           users.users.sv-main.shell = pkgs.fish;
 
+          services.tailscale.extraSetFlags = [ "--ssh" ];
+          security.pam.services.remote = { };
+
           home-manager.users.sv-main = {
             home.username = "sv-main";
             home.homeDirectory = "/home/sv-main";
