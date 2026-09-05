@@ -19,6 +19,7 @@ in
       home."tool.git.basic"
       home."tool.git.delta"
       home."tool.git.lazygit"
+      home."tool.git.worktree"
       home."tool.tff"
       home."tool.tmux"
     ];
