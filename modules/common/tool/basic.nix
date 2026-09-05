@@ -6,7 +6,7 @@ _:
     {
       programs.man = {
         enable = true;
-        generateCaches = true;
+        generateCaches = false;
         package = pkgs.man-db;
       };
 

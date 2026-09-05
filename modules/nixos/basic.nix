@@ -17,6 +17,8 @@ _:
         };
       };
 
+      documentation.man.cache.enable = false;
+
       environment.systemPackages = with pkgs; [
         vim-full
         wget
