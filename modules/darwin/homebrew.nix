@@ -25,7 +25,6 @@ _:
           "discord"
           "slack"
           "figma"
-          "zed"
           "macfuse"
         ];
       };

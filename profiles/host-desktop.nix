@@ -27,7 +27,6 @@ in
       nixos."gui.niri"
       nixos."gui.qt"
       nixos."gui.thunar"
-      nixos."gui.zed"
     ];
   };
 }
