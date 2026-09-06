@@ -109,7 +109,10 @@ in
         ];
 
         nix = {
-          settings = nixSettings;
+          package = pkgs.nixVersions.latest;
+          settings = nixSettings // {
+            trusted-users = [ config.people.primaryUser ];
+          };
           optimise.automatic = true;
           gc = {
             automatic = true;
@@ -117,7 +120,10 @@ in
             options = "--delete-older-than 7d";
           };
           registry = nixRegistry;
+          channel.enable = false;
         };
+
+        programs.command-not-found.enable = false;
 
         documentation.enable = false;
       };

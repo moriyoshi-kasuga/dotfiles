@@ -85,7 +85,6 @@ modules/
 │       ├── niri.nix      # Niri compositor + Noctalia shell
 │       ├── audio.nix     # PipeWire
 │       ├── bluetooth.nix # Bluetooth
-│       ├── sddm.nix      # ディスプレイマネージャー
 │       └── ...           # Qt / Brave / game / thunar / zathura / i18n (fcitx5)
 │
 ├── darwin/               # macOS システム設定

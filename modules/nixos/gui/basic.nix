@@ -13,6 +13,8 @@ _:
     services.power-profiles-daemon.enable = true;
     powerManagement.enable = true;
 
+    services.gnome.gnome-keyring.enable = true;
+
     services.logind.settings.Login = {
       HandlePowerKey = "hibernate";
       HandlePowerKeyLongPress = "poweroff";

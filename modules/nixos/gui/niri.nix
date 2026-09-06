@@ -115,6 +115,8 @@
       programs.xwayland.enable = true;
       programs.dconf.enable = true;
 
+      security.pam.services.noctalia = { };
+
       environment.systemPackages = with pkgs; [
         inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
 
