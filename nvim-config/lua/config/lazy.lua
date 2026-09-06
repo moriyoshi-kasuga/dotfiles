@@ -16,15 +16,16 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 -- Setup lazy.nvim
+local is_simple_mode = require("config.util").is_in_simple_mode()
 require("lazy").setup({
   install = {
-    missing = not require("config.util").is_in_simple_mode(),
+    missing = not is_simple_mode,
   },
   spec = {
     { import = "plugins" },
     { import = "plugins.utils" },
-    require("config.util").is_in_simple_mode() and {} or { import = "plugins.coding" },
-    require("config.util").is_in_simple_mode() and {} or { import = "plugins.utils-extra" },
+    is_simple_mode and {} or { import = "plugins.coding" },
+    is_simple_mode and {} or { import = "plugins.utils-extra" },
   },
   change_detection = { enabled = false },
   checker = { enabled = false },
