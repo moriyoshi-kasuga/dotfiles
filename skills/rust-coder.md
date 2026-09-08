@@ -1,5 +1,5 @@
 ---
-description: grill-me / impl-rust / thought-bug / brushup / rewrite / refine / docwriter が共有するRustの設計方針・コメント方針・検証手順、およびスキル間の連携先を定めるリファレンス。引数を渡すと、他スキルに渡すまでもないちょっとした実装・修正をこの方針に従ってその場で直接行う単体実行にもなる。
+description: grill-me / impl-rust / thought-bug / rewrite / refine / docwriter が共有するRustの設計方針・コメント方針・検証手順、およびスキル間の連携先を定めるリファレンス。引数を渡すと、他スキルに渡すまでもないちょっとした実装・修正をこの方針に従ってその場で直接行う単体実行にもなる。
 argument-hint: (省略可。省略時は方針一覧を表示。指定時は対象を直接実装・修正する)
 allowed-tools: Read, Glob, Grep, Edit, Write, Bash(git diff *), Bash(git status *), Bash(git log *), Bash(cargo check *), Bash(cargo test *), Bash(cargo clippy *), Bash(cargo fmt *), AskUserQuestion
 ---
@@ -8,7 +8,7 @@ allowed-tools: Read, Glob, Grep, Edit, Write, Bash(git diff *), Bash(git status 
 
 **対象**: $ARGUMENTS
 
-`/impl-rust` `/brushup` `/rewrite` `/refine` `/docwriter` `/thought-bug` `/grill-me` の実行手順からは、共通の設計方針・コメント方針・検証手順として読み込まれる。各スキル固有の手順・出力形式は各スキル側の定義を優先し、ここに書かれた内容と矛盾する指示があればスキル側を優先する。
+`/impl-rust` `/rewrite` `/refine` `/docwriter` `/thought-bug` `/grill-me` の実行手順からは、共通の設計方針・コメント方針・検証手順として読み込まれる。各スキル固有の手順・出力形式は各スキル側の定義を優先し、ここに書かれた内容と矛盾する指示があればスキル側を優先する。
 
 `/rust-coder` を引数付きで直接実行した場合は、下記「単体実行」の手順に従ってその場で実装・修正する。引数なしで直接実行した場合は、以下の方針一覧をそのまま表示する。
 
@@ -51,11 +51,11 @@ allowed-tools: Read, Glob, Grep, Edit, Write, Bash(git diff *), Bash(git status 
 
 ## 検証手順
 
-`cargo check` → `cargo clippy` → `cargo test` → 最後に `cargo fmt`。既存テストが無修正で通ることを前提とするスキル（`/brushup` など）では、通らない場合にまず公開面へ踏み込んでいないかを疑う。
+`cargo check` → `cargo clippy` → `cargo test` → 最後に `cargo fmt`。
 
 ## 提案フェーズの共通ルール
 
-`/brushup` `/rewrite` `/refine` は2フェーズで進める。フェーズ1ではファイルへの書き込みを一切せず提案を出し、ユーザーの判断を待つ。
+`/rewrite` `/refine` は2フェーズで進める。フェーズ1ではファイルへの書き込みを一切せず提案を出し、ユーザーの判断を待つ。
 
 **対象の決め方** — パス・箇所の指定があればそれを対象にする（説明文なら `Glob`/`Grep` で特定し、提案の冒頭で対象を明示する）。未指定なら直前の作業対象または `git diff HEAD`。差分が無関係な複数の変更にまたがる場合は範囲を先に確認する。
 
@@ -77,7 +77,7 @@ allowed-tools: Read, Glob, Grep, Edit, Write, Bash(git diff *), Bash(git status 
 - 仕様確認も提案フェーズも要らないくらい小さい実装・修正をさくっと済ませたい → `/rust-coder` を引数付きで直接実行する（下記「単体実行」）
 - 要件・仕様が固まっていない → `/grill-me` で共通認識に到達し、仕様書を書き出す。Rust実装が対象なら `/impl-rust` にそのまま渡せる形にする
 - 確定した仕様に忠実に実装・修正する → `/impl-rust`
-- 公開API・外部から見た振る舞いを一切変えず非公開実装だけ磨く → `/brushup`
+- 公開API・外部から見た振る舞いを基本的に変えず非公開実装だけ磨く（Rust特化ではない汎用スキル） → `/brushup`
 - 設計思想（責務分割・不変条件・依存の向き）を保ったまま公開APIの使い勝手だけ改善する → `/refine`
 - 既存実装を参考程度に留め、ゼロベースで設計し直す → `/rewrite`
 - 既存コメント・docコメントの内容を当てにせず、コードから客観的に判断できる最小限のドキュメントに書き直す → `/docwriter`
@@ -87,7 +87,7 @@ allowed-tools: Read, Glob, Grep, Edit, Write, Bash(git diff *), Bash(git status 
 
 ## 単体実行（$ARGUMENTS 指定時）
 
-`/impl-rust` のような事前確定済み仕様書は前提にしない。ユーザーがその場で渡した要望・説明・パッチ片をそのまま対象とし、提案フェーズを設けずに直接実装・修正まで完結させる。「大きな設計判断を伴わない小さな変更」向けであり、複数の妥当な設計が競合する規模の変更だと気づいた場合は、その場で実装を進めず `/brushup` `/refine` `/rewrite` `/impl-rust` のどれが適するか（上記スキル連携を参照）をユーザーに提案して中断する。
+`/impl-rust` のような事前確定済み仕様書は前提にしない。ユーザーがその場で渡した要望・説明・パッチ片をそのまま対象とし、提案フェーズを設けずに直接実装・修正まで完結させる。「大きな設計判断を伴わない小さな変更」向けであり、複数の妥当な設計が競合する規模の変更だと気づいた場合は、その場で実装を進めず `/brushup`（汎用スキル） `/refine` `/rewrite` `/impl-rust` のどれが適するか（上記スキル連携を参照）をユーザーに提案して中断する。
 
 1. 対象を決める。ファイルパス・関数名・診断メッセージなどが指定されていればそれを対象にする。「直す/直して」のような対象が省略された指示のみの場合は直前の会話の対象または `git diff HEAD` を対象にする
 2. 対象コードを `Read`/`Grep` し、要望が指している変更点と周辺の命名規約・モジュール構成・エラー型の流儀を把握する
