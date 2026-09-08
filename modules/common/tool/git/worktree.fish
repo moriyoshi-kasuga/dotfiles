@@ -438,7 +438,6 @@ complete -c ja -f -n __fish_use_subcommand -a clean -d "Remove worktrees merged 
 
 complete -c ja -f -n "__fish_seen_subcommand_from cd del" -a "(__ja_complete_worktrees)"
 complete -c ja -f -n "__fish_seen_subcommand_from get" -a "(__ja_complete_remote_branches)"
-complete -c ja -f -n "__fish_seen_subcommand_from pr" -a "(__ja_complete_prs)"
 complete -c ja -n "__fish_seen_subcommand_from new" -s b -l base -d "Base ref to branch from (default: HEAD)" -rfa "(__ja_complete_all_refs)"
 complete -c ja -f -n "__fish_seen_subcommand_from del" -s f -l force -d "Remove even with uncommitted changes"
 complete -c ja -f -n "__fish_seen_subcommand_from clean" -s n -l dry-run -d "Show what would be removed without removing"
