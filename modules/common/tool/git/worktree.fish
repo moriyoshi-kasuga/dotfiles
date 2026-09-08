@@ -24,11 +24,52 @@ function __ja_require_worktree
 end
 
 function __ja_parent_branch
-  set -l current (git rev-parse --abbrev-ref HEAD)
-  git show-branch 2>/dev/null | grep '\*' | grep -vE "\[$current(\^|~|\])" | head -1 | awk -F'[]~^[]' '{print $2}'
+  # Finds the local branch whose tip is the nearest ancestor of the current
+  # branch, i.e. the branch `current` was most recently forked from.
+  set -l current (git branch --show-current)
+  if test -z "$current"
+    return 1
+  end
+
+  set -l best_branch ""
+  set -l best_base ""
+
+  for branch in (git for-each-ref --format='%(refname:short)' refs/heads/)
+    if test "$branch" = "$current"
+      continue
+    end
+
+    set -l base (git merge-base "$current" "$branch" 2>/dev/null)
+    if test -z "$base"
+      continue
+    end
+
+    set -l branch_sha (git rev-parse "$branch" 2>/dev/null)
+    if test "$base" != "$branch_sha"
+      # branch is not an ancestor of current; can't be its parent.
+      continue
+    end
+
+    if test -z "$best_base"
+      set best_base "$base"
+      set best_branch "$branch"
+      continue
+    end
+
+    # If best_base is an ancestor of base, base is the more recent (closer) fork point.
+    if git merge-base --is-ancestor "$best_base" "$base" 2>/dev/null
+      set best_base "$base"
+      set best_branch "$branch"
+    end
+  end
+
+  echo "$best_branch"
 end
 
 function __ja_new
+  argparse 'b/base=' -- $argv
+  or return 1
+
   set -l branch_name $argv[1]
   if test -z "$branch_name"
     set branch_name "wip-"(random)
@@ -39,9 +80,18 @@ function __ja_new
     return 1
   end
 
+  set -l base_ref HEAD
+  if set -q _flag_base
+    if not git rev-parse --verify --quiet "$_flag_base^{commit}" >/dev/null
+      echo "Error: Invalid base ref '$_flag_base'" >&2
+      return 1
+    end
+    set base_ref $_flag_base
+  end
+
   set -l worktree_path (__ja_worktree_path "$branch_name")
 
-  git worktree add --detach "$worktree_path" HEAD; or return 1
+  git worktree add --detach "$worktree_path" "$base_ref"; or return 1
 
   cd "$worktree_path"; or return 1
   git switch --create "$branch_name"
@@ -167,6 +217,9 @@ function __ja_mv
 end
 
 function __ja_del
+  argparse 'f/force' -- $argv
+  or return 1
+
   set -l branch_name $argv[1]
 
   if test -z "$branch_name"
@@ -181,7 +234,13 @@ function __ja_del
     cd (__ja_base_path); or return 1
   end
 
-  git worktree remove "$worktree_path"; or return 1
+  if set -q _flag_force
+    # A single --force only bypasses the dirty-worktree check; a locked
+    # worktree needs it passed twice.
+    git worktree remove --force --force "$worktree_path"; or return 1
+  else
+    git worktree remove "$worktree_path"; or return 1
+  end
 end
 
 function __ja_cd
@@ -223,6 +282,80 @@ function __ja_ls
   git worktree list $argv
 end
 
+function __ja_prune
+  git worktree prune -v $argv
+end
+
+function __ja_default_branch --description "Best-effort guess of the repo's default branch"
+  set -l ref (git symbolic-ref -q refs/remotes/origin/HEAD 2>/dev/null)
+  if test -n "$ref"
+    string replace 'refs/remotes/origin/' '' -- $ref
+    return
+  end
+
+  for candidate in main master
+    if git show-ref --verify --quiet "refs/heads/$candidate"
+      echo "$candidate"
+      return
+    end
+  end
+end
+
+function __ja_worktree_entries --description "Print '<path>\t<branch>' per worktree (branch empty if detached)"
+  git worktree list --porcelain | awk '
+    /^worktree / { path = substr($0, 10) }
+    /^branch refs\/heads\// { print path "\t" substr($0, 19); path = "" }
+    /^detached/ { print path "\t"; path = "" }
+  '
+end
+
+function __ja_clean --description "Remove worktrees whose branch is already merged into the default branch"
+  argparse 'n/dry-run' -- $argv
+  or return 1
+
+  set -l default_branch (__ja_default_branch)
+  if test -z "$default_branch"
+    echo "Error: Could not determine default branch" >&2
+    return 1
+  end
+
+  set -l base (__ja_base_path)
+  set -l current_path (git rev-parse --show-toplevel 2>/dev/null)
+  set -l merged (git for-each-ref --merged "$default_branch" --format='%(refname:short)' refs/heads/)
+
+  set -l cleaned 0
+  for entry in (__ja_worktree_entries)
+    set -l parts (string split \t -- $entry)
+    set -l path $parts[1]
+    set -l branch $parts[2]
+
+    if test "$path" = "$base"; or test -z "$branch"; or test "$branch" = "$default_branch"
+      continue
+    end
+    if not contains -- "$branch" $merged
+      continue
+    end
+
+    if set -q _flag_dry_run
+      echo "Would remove: $path [$branch]"
+      set cleaned (math $cleaned + 1)
+      continue
+    end
+
+    echo "Removing: $path [$branch]"
+    if test "$path" = "$current_path"
+      cd "$base"; or return 1
+      set current_path ""
+    end
+    git worktree remove "$path"; or continue
+    set cleaned (math $cleaned + 1)
+  end
+
+  if test "$cleaned" -eq 0
+    echo "Nothing to clean"
+  end
+end
+
 function ja --description "Git worktree helper"
   set -l cmd $argv[1]
   set -e argv[1]
@@ -246,19 +379,25 @@ function ja --description "Git worktree helper"
       __ja_home $argv
     case ls
       __ja_ls $argv
+    case prune
+      __ja_prune $argv
+    case clean
+      __ja_clean $argv
     case '*'
       echo "Usage: ja <command> [args]"
       echo ""
       echo "Commands:"
-      echo "  new [name]    Create new worktree + branch and cd (default: wip-<random>)"
-      echo "  get <branch>  Checkout remote branch as worktree"
-      echo "  pr <num|url>  Checkout GitHub PR as worktree (needs gh)"
-      echo "  extract       Extract current branch to worktree"
-      echo "  mv <name>     Rename current worktree + branch"
-      echo "  del [name]    Delete worktree (default: current)"
-      echo "  cd [name]     cd to worktree by name, or select with fzf"
-      echo "  home          Go back to base directory"
-      echo "  ls            List worktrees"
+      echo "  new [name] [-b base]  Create new worktree + branch and cd (default: wip-<random>)"
+      echo "  get <branch>          Checkout remote branch as worktree"
+      echo "  pr <num|url>          Checkout GitHub PR as worktree (needs gh)"
+      echo "  extract               Extract current branch to worktree"
+      echo "  mv <name>             Rename current worktree + branch"
+      echo "  del [name] [-f]       Delete worktree (default: current)"
+      echo "  cd [name]             cd to worktree by name, or select with fzf"
+      echo "  home                  Go back to base directory"
+      echo "  ls                    List worktrees"
+      echo "  prune                 Remove stale worktree administrative files"
+      echo "  clean [-n]            Remove worktrees whose branch is merged into the default branch"
       return 1
   end
 end
@@ -281,6 +420,10 @@ function __ja_complete_remote_branches --description "List remote branches on or
   git for-each-ref --format='%(refname:strip=3)' refs/remotes/origin 2>/dev/null | grep -v '^HEAD$'
 end
 
+function __ja_complete_all_refs --description "List local and remote branches"
+  git for-each-ref --format='%(refname:short)' refs/heads refs/remotes 2>/dev/null | grep -v '/HEAD$'
+end
+
 complete -c ja -f -n __fish_use_subcommand -a new -d "Create new worktree + branch"
 complete -c ja -f -n __fish_use_subcommand -a get -d "Checkout remote branch as worktree"
 complete -c ja -f -n __fish_use_subcommand -a pr -d "Checkout GitHub PR as worktree"
@@ -290,7 +433,12 @@ complete -c ja -f -n __fish_use_subcommand -a del -d "Delete worktree"
 complete -c ja -f -n __fish_use_subcommand -a cd -d "Select worktree with fzf"
 complete -c ja -f -n __fish_use_subcommand -a home -d "Go back to base directory"
 complete -c ja -f -n __fish_use_subcommand -a ls -d "List worktrees"
+complete -c ja -f -n __fish_use_subcommand -a prune -d "Remove stale worktree administrative files"
+complete -c ja -f -n __fish_use_subcommand -a clean -d "Remove worktrees merged into the default branch"
 
 complete -c ja -f -n "__fish_seen_subcommand_from cd del" -a "(__ja_complete_worktrees)"
 complete -c ja -f -n "__fish_seen_subcommand_from get" -a "(__ja_complete_remote_branches)"
 complete -c ja -f -n "__fish_seen_subcommand_from pr" -a "(__ja_complete_prs)"
+complete -c ja -n "__fish_seen_subcommand_from new" -s b -l base -d "Base ref to branch from (default: HEAD)" -rfa "(__ja_complete_all_refs)"
+complete -c ja -f -n "__fish_seen_subcommand_from del" -s f -l force -d "Remove even with uncommitted changes"
+complete -c ja -f -n "__fish_seen_subcommand_from clean" -s n -l dry-run -d "Show what would be removed without removing"
