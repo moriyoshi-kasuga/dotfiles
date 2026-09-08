@@ -6,7 +6,8 @@ end
 
 function __ja_worktree_path
   set -l base (__ja_base_path)
-  echo "$base@$argv[1]"
+  set -l safe_name (string replace -a '/' '-' -- $argv[1])
+  echo "$base@$safe_name"
 end
 
 function __ja_is_worktree
