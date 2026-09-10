@@ -37,6 +37,7 @@ _:
           oha
           kalker
           poppler-utils
+          mo-viewer
         ])
         ++ lib.optionals pkgs.stdenv.hostPlatform.isLinux (
           with pkgs;
