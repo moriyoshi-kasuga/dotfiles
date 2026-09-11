@@ -10,7 +10,7 @@
 }:
 
 {
-  boot.kernelPackages = pkgs.linuxKernel.packages.linux_7_1;
+  boot.kernelPackages = pkgs.linuxKernel.packages.linux_7_2;
 
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
