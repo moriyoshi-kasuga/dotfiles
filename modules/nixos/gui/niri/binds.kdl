@@ -3,17 +3,21 @@ binds {
 
   Alt+Slash { spawn "wezterm"; }
 
+  // Noctalia: panels
   Alt+S { spawn "noctalia" "msg" "panel-toggle" "control-center"; }
   Alt+Space hotkey-overlay-title="Launcher" { spawn "noctalia" "msg" "panel-toggle" "launcher"; }
-  Super+Alt+L hotkey-overlay-title="SessionMenu" { spawn "noctalia" "msg" "panel-toggle" "session"; }
-  Super+L { spawn "noctalia" "msg" "session" "lock"; }
-
   Alt+Shift+C { spawn "noctalia" "msg" "panel-toggle" "clipboard"; }
+  Super+Alt+L hotkey-overlay-title="SessionMenu" { spawn "noctalia" "msg" "panel-toggle" "session"; }
+
+  // Noctalia: control-center direct sections
   Alt+P { spawn "noctalia" "msg" "panel-toggle" "control-center" "calendar"; }
   Alt+N { spawn "noctalia" "msg" "panel-toggle" "control-center" "notifications"; }
-  Alt+M { spawn "noctalia" "msg" "mic-mute"; }
   Alt+E { spawn "noctalia" "msg" "panel-toggle" "control-center" "audio"; }
   Alt+B { spawn "noctalia" "msg" "panel-toggle" "control-center" "bluetooth"; }
+
+  // Noctalia: quick actions
+  Super+L { spawn "noctalia" "msg" "session" "lock"; }
+  Alt+M { spawn "noctalia" "msg" "mic-mute"; }
 
   XF86AudioMute        allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
   XF86AudioMicMute     allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }

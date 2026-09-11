@@ -22,8 +22,12 @@ _:
 
       # r8169 (Realtek RTL8111/8125) drops/renegotiates the link under EEE
       # power saving; disable it on interfaces using that driver.
+      # Use $name (the post-rename interface name) rather than
+      # $env{INTERFACE} (the pre-rename kernel name, e.g. eth0): by the time
+      # RUN+= actually executes, udev has already renamed the interface, so
+      # $env{INTERFACE} points at a device that no longer exists.
       services.udev.extraRules = ''
-        ACTION=="add", SUBSYSTEM=="net", DRIVERS=="r8169", RUN+="${pkgs.ethtool}/bin/ethtool --set-eee $env{INTERFACE} eee off"
+        ACTION=="add", SUBSYSTEM=="net", DRIVERS=="r8169", RUN+="${pkgs.ethtool}/bin/ethtool --set-eee $name eee off"
       '';
 
       # BBR handles loss/jitter on the last-mile link far better than cubic,

@@ -42,14 +42,17 @@
       settings = {
         bar.widgets.enabled = false;
         dock.enabled = false;
-        weather.enabled = true;
+        weather.enabled = false;
 
         shell = {
           font_family = "JetBrains Mono Nerd Font";
 
           panel = {
             borders = true;
-            launcher_categories = false;
+          };
+
+          launcher = {
+            categories = false;
           };
 
           shadow = {
@@ -65,23 +68,6 @@
         osd.kinds = {
           keyboard_layout = false;
           media = false;
-        };
-
-        widget = {
-          clock = {
-            type = "clock";
-            format = "{:%H:%M %a, %b %d}";
-            vertical_format = "{:%H %M - %d %m}";
-            tooltip_format = "{:%H:%M %a, %b %d}";
-          };
-          cpu = {
-            type = "sysmon";
-            stat = "cpu_usage";
-          };
-          ram = {
-            type = "sysmon";
-            stat = "ram_used";
-          };
         };
 
         theme = {

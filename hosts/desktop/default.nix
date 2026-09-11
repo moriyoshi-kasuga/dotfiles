@@ -19,6 +19,10 @@ in
           networking.hostName = "Mori-NixOS";
           users.users.mori.shell = pkgs.fish;
 
+          # RDNA4 dGPU (RX 9060 XT) is new hardware; keep firmware/microcode
+          # blobs up to date to reduce amdgpu instability (fence timeouts).
+          hardware.enableRedistributableFirmware = true;
+
           home-manager.users.mori = {
             home.username = "mori";
             home.homeDirectory = "/home/mori";

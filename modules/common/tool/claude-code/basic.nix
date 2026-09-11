@@ -81,6 +81,7 @@ _:
               "Bash(sudo *)"
               "Bash(chmod 777 *)"
               "Bash(cargo publish *)"
+              "Bash(nixos-rebuild switch *)"
               "Read(.env*)"
               "Read(id_rsa)"
               "Read(id_ed25519)"

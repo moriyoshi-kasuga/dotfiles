@@ -32,11 +32,6 @@ in
       docker = {
         enable = true;
         daemon.settings = { inherit dns; };
-        rootless = {
-          enable = true;
-          setSocketVariable = true;
-          daemon.settings = { inherit dns; };
-        };
       };
     };
   };
