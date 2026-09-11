@@ -39,6 +39,7 @@ _:
           poppler-utils
           mo-viewer
           supabase-cli
+          postgresql
         ])
         ++ lib.optionals pkgs.stdenv.hostPlatform.isLinux (
           with pkgs;
