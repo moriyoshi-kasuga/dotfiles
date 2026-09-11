@@ -38,6 +38,7 @@ _:
           kalker
           poppler-utils
           mo-viewer
+          supabase-cli
         ])
         ++ lib.optionals pkgs.stdenv.hostPlatform.isLinux (
           with pkgs;
