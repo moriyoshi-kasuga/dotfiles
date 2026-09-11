@@ -14,6 +14,7 @@ _:
         commandsDir = ../../../../skills;
         settings = {
           disableArtifact = true;
+          diffTool = "terminal";
           permissions = {
             additionalDirectories = [
               "/nix/store"
