@@ -193,7 +193,7 @@ return {
                 "**/.svelte-kit",
                 "**/build",
               },
-              watcher = "client",
+              watcher = "server",
             },
           },
         },
