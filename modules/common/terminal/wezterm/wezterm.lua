@@ -29,22 +29,40 @@ config.cell_width = 1.0
 config.line_height = 1.0
 config.use_cap_height_to_scale_fallback_fonts = true
 
-config.font = wezterm.font_with_fallback({
-  {
-    family = "Maple Mono Normal NL NF",
-    weight = "Regular",
-    stretch = "Normal",
-    style = "Normal",
-    harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
-  },
-  {
-    family = "Noto Sans Mono CJK JP",
-    weight = "Regular",
-    stretch = "Normal",
-    style = "Normal",
-  },
-  "Noto Color Emoji",
-})
+-- Sharper, more consistent glyph rendering across displays
+config.freetype_load_target = "Light"
+config.freetype_render_target = "HorizontalLcd"
+
+local ligature_features = { "calt=0", "clig=0", "liga=0" }
+
+-- Build a fallback stack for a given Maple Mono weight/style, so Bold and
+-- Italic use the font's real glyphs instead of wezterm-synthesized ones.
+local function maple_mono(weight, style)
+  return wezterm.font_with_fallback({
+    {
+      family = "Maple Mono Normal NL NF",
+      weight = weight,
+      stretch = "Normal",
+      style = style,
+      harfbuzz_features = ligature_features,
+    },
+    -- Emoji before CJK: symbols present in both should render in color.
+    "Noto Color Emoji",
+    {
+      family = "Noto Sans Mono CJK JP",
+      weight = "Regular",
+      stretch = "Normal",
+      style = "Normal",
+    },
+  })
+end
+
+config.font = maple_mono("Regular", "Normal")
+config.font_rules = {
+  { intensity = "Bold", italic = false, font = maple_mono("Bold", "Normal") },
+  { intensity = "Normal", italic = true, font = maple_mono("Regular", "Italic") },
+  { intensity = "Bold", italic = true, font = maple_mono("Bold", "Italic") },
+}
 
 -- Window settings
 if is_darwin then

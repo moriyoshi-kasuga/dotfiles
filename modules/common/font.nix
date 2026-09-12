@@ -3,8 +3,6 @@ _:
 let
   packages =
     pkgs: with pkgs; [
-      nerd-fonts.jetbrains-mono
-
       maple-mono.NormalNL-NF
 
       noto-fonts
@@ -34,7 +32,7 @@ in
             "Noto Sans CJK JP"
             "Noto Color Emoji"
           ];
-          monospace = [ "JetBrains Mono" ];
+          monospace = [ "Maple Mono Normal NL NF" ];
         };
       };
     };

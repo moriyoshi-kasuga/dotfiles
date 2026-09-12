@@ -45,7 +45,7 @@
         weather.enabled = false;
 
         shell = {
-          font_family = "JetBrains Mono Nerd Font";
+          font_family = "Maple Mono Normal NL NF";
 
           panel = {
             borders = true;
