@@ -27,5 +27,10 @@ _:
         source = ./new-session.fish;
         executable = true;
       };
+
+      home.file.".config/tmux/break-to-session.fish" = {
+        source = ./break-to-session.fish;
+        executable = true;
+      };
     };
 }
