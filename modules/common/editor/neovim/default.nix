@@ -19,7 +19,12 @@ _:
       neovimCmd = pkgs.lib.getExe neovim;
       # astro/svelte language servers need a TypeScript SDK to fall back on.
       # Under Nix there is no global `typescript`, so we expose its path explicitly.
-      tsdkPath = "${pkgs.typescript}/lib/node_modules/typescript/lib";
+      # `pkgs.typescript` now points at typescript_7 (the Go-based native compiler,
+      # https://github.com/microsoft/typescript-go), which ships only a `tsc` binary
+      # and .d.ts libs — no lib/node_modules/typescript/lib/tsserverlibrary.js. vtsls
+      # (and astro/svelte's ts-plugins) need that classic JS TSDK, so pin to
+      # typescript_5 explicitly instead of the `typescript` alias.
+      tsdkPath = "${pkgs.typescript_5}/lib/node_modules/typescript/lib";
       # vtsls forwards these paths to tsserver as `pluginProbeLocations` entries,
       # and tsserver resolves each plugin as `require(<path>/node_modules/<name>)`
       # (verified by direct tsserver testing) — it does NOT `require(<path>)`
@@ -166,7 +171,9 @@ _:
           vtsls
           tailwindcss-language-server
           # TypeScript SDK that astro/svelte language servers fall back on (TSDK_PATH).
-          typescript
+          # Must be the classic JS TSDK (typescript_5), not the `typescript` alias
+          # (typescript_7, the Go-based native compiler) — see tsdkPath above.
+          typescript_5
 
           # HTML/CSS/JSON
           vscode-langservers-extracted
