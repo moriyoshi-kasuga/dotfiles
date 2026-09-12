@@ -15,13 +15,6 @@ return {
         capabilities = vim.tbl_deep_extend("force", capabilities, blink.get_lsp_capabilities())
       end
 
-      -- Add file operation capabilities
-      capabilities.workspace = capabilities.workspace or {}
-      capabilities.workspace.fileOperations = {
-        didRename = true,
-        willRename = true,
-      }
-
       -- Configure LSP settings
       vim.lsp.config("*", {
         capabilities = capabilities,
