@@ -110,7 +110,8 @@ return {
     { ",B", function() require("fzf-lua").lgrep_curbuf() end, desc = "Grep Buffers" },
     { ",w", function() require("fzf-lua").grep_cword() end, desc = "Grep String", mode = "n" },
     { ",w", function() require("fzf-lua").grep_visual() end, desc = "Grep String", mode = "x" },
-    { ",b", function() require("fzf-lua").buffers() end, desc = "Buffers" },
+    -- 押しやすさを優先して、aにbindする
+    { ",a", function() require("fzf-lua").buffers() end, desc = "Buffers" },
     { ",c", function() require("fzf-lua").colorschemes() end, desc = "Colorscheme" },
     {
       ",f",
