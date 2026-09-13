@@ -7,20 +7,23 @@ return {
       "*",
       function()
         require("lasterisk").search()
+        require("hlslens").start()
       end,
     },
     {
       mode = "n",
       "g*",
       function()
-        require("lasterisk").search({ is_whole = false })
+        require("lasterisk").search({ is_whole = false, silent = true })
+        require("hlslens").start()
       end,
     },
     {
       mode = "x",
       "g*",
       function()
-        require("lasterisk").search({ is_whole = false })
+        require("lasterisk").search({ is_whole = false, silent = true })
+        require("hlslens").start()
       end,
     },
   },
