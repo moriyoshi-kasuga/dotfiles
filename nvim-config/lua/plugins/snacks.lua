@@ -117,10 +117,8 @@ return {
           width = 0.6,
           height = 0.6,
           wo = {
-            spell = false,
-            signcolumn = "yes",
+            -- 空白を入れて見やすくする
             statuscolumn = " ",
-            conceallevel = 3,
           },
         })
       end,
