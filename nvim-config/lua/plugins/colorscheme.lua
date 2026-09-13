@@ -29,6 +29,7 @@ return {
       fzf = true,
       nvim_surround = true,
       blink_cmp = true,
+      gitsigns = true,
       neogit = true,
       render_markdown = true,
       octo = true,

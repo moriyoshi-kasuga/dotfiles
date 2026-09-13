@@ -100,7 +100,7 @@ return {
             end
           end,
         },
-        lualine_b = { "branch", "diagnostics" },
+        lualine_b = { "branch", "diff", "diagnostics" },
         lualine_c = {
           {
             "filename",

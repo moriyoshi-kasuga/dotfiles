@@ -13,6 +13,9 @@ return {
       -- Git
       { "<leader>g", group = "git" },
 
+      -- Git Hunk (gitsigns.nvim)
+      { "<leader>h", group = "hunk" },
+
       -- Code / LSP
       { "<leader>c", group = "code" },
 
