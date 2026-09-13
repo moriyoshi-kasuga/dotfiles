@@ -58,7 +58,7 @@ unixpornではなく、シンプルさを保つための設定です。
 | **Editor** | [Neovim](https://neovim.io) |
 | **Shell** | [Fish](https://fishshell.com) |
 | **Theme** | [Catppuccin Macchiato](https://github.com/catppuccin/catppuccin) |
-| **Font** | Maple Mono Normal NL NF / JetBrains Mono Nerd Font |
+| **Font** | Maple Mono Normal NL NF |
 
 ## Module Hierarchy
 
@@ -72,7 +72,7 @@ modules/
 │   ├── lang/             # C / Node / Python / Go / Rust (+WASM) / Haskell / JVM / ...
 │   ├── tool/             # Git / tmux / Docker / Claude Code / ripgrep / bat / mise / ...
 │   ├── library.nix       # 開発用共有ライブラリ (LD_LIBRARY_PATH, PKG_CONFIG_PATH)
-│   ├── font.nix          # JetBrains Mono NF / Maple Mono / Noto CJK
+│   ├── font.nix          # Maple Mono / Noto CJK
 │   └── wallpaper.nix     # 壁紙ローテーション (systemd / launchd)
 │
 ├── nixos/                # NixOS システム設定

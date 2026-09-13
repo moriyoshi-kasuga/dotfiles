@@ -20,6 +20,7 @@ in
             home.username = "mori";
             home.homeDirectory = "/Users/mori";
             modules.terminal.wezterm.bigMonitor = true;
+            modules.font.monospace = "monaspace-neon";
             imports = [
               home."profile.core"
               home."profile.gui-common"

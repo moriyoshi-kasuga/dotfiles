@@ -3,6 +3,8 @@
 let
   nixos = inputs.self.modules.nixos;
   home = inputs.self.modules.homeManager;
+
+  monospaceFont = "monaspace-neon";
 in
 {
   flake.nixosConfigurations.desktop = inputs.nixpkgs.lib.nixosSystem {
@@ -23,9 +25,12 @@ in
           # blobs up to date to reduce amdgpu instability (fence timeouts).
           hardware.enableRedistributableFirmware = true;
 
+          modules.font.monospace = monospaceFont;
+
           home-manager.users.mori = {
             home.username = "mori";
             home.homeDirectory = "/home/mori";
+            modules.font.monospace = monospaceFont;
             imports = [
               home."profile.desktop"
             ];

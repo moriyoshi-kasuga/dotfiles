@@ -35,12 +35,22 @@ config.freetype_render_target = "HorizontalLcd"
 
 local ligature_features = { "calt=0", "clig=0", "liga=0" }
 
--- Build a fallback stack for a given Maple Mono weight/style, so Bold and
--- Italic use the font's real glyphs instead of wezterm-synthesized ones.
-local function maple_mono(weight, style)
-  return wezterm.font_with_fallback({
+local monospace_fonts = {
+  maple = { family = "Maple Mono Normal NL NF", fallback = true },
+  iosevka = { family = "IosevkaTerm Nerd Font Mono", fallback = true },
+  plemoljp = { family = "PlemolJP Console NF", fallback = false },
+  ["monaspace-neon"] = { family = "MonaspiceNe Nerd Font Mono", fallback = true },
+}
+
+---@diagnostic disable-next-line: undefined-global
+local monospace = monospace_fonts[MONOSPACE_FONT]
+
+-- Build a fallback stack for a given weight/style, so Bold and Italic use
+-- the font's real glyphs instead of wezterm-synthesized ones.
+local function monospace_font(weight, style)
+  local fallback = {
     {
-      family = "Maple Mono Normal NL NF",
+      family = monospace.family,
       weight = weight,
       stretch = "Normal",
       style = style,
@@ -48,20 +58,23 @@ local function maple_mono(weight, style)
     },
     -- Emoji before CJK: symbols present in both should render in color.
     "Noto Color Emoji",
-    {
+  }
+  if monospace.fallback then
+    table.insert(fallback, {
       family = "Noto Sans Mono CJK JP",
       weight = "Regular",
       stretch = "Normal",
       style = "Normal",
-    },
-  })
+    })
+  end
+  return wezterm.font_with_fallback(fallback)
 end
 
-config.font = maple_mono("Regular", "Normal")
+config.font = monospace_font("Regular", "Normal")
 config.font_rules = {
-  { intensity = "Bold", italic = false, font = maple_mono("Bold", "Normal") },
-  { intensity = "Normal", italic = true, font = maple_mono("Regular", "Italic") },
-  { intensity = "Bold", italic = true, font = maple_mono("Bold", "Italic") },
+  { intensity = "Bold", italic = false, font = monospace_font("Bold", "Normal") },
+  { intensity = "Normal", italic = true, font = monospace_font("Regular", "Italic") },
+  { intensity = "Bold", italic = true, font = monospace_font("Bold", "Italic") },
 }
 
 -- Window settings
