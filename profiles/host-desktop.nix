@@ -10,6 +10,7 @@ in
       nixos.basic
       nixos.i18n
       nixos.network
+      nixos.peripherals
       nixos.tailscale
       nixos.font
       nixos.library
