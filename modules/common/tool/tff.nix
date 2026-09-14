@@ -5,27 +5,23 @@ _:
     { pkgs, ... }:
     {
       home.packages = [
-        (pkgs.rustPlatform.buildRustPackage rec {
+        (pkgs.rustPlatform.buildRustPackage {
           pname = "TaggedFileFlow";
-          version = "3.0.2";
+          version = "4.0.0";
 
           src = pkgs.fetchFromGitHub {
             owner = "moriyoshi-kasuga";
             repo = "TaggedFileFlow";
-            rev = "v${version}";
-            hash = "sha256-TFMGPv2Wf1e5waFEXaYIGiQn8WK4tJFs07YyikBBWA8=";
+            rev = "a97e8e05cba6";
+            hash = "sha256-zE0Rt0taNZV5amtnA1Z3lMzzVQ/i3xWY9QX2WzYcl58=";
           };
 
-          cargoHash = "sha256-uFTioWESs/E8K/FPxVx8+D1oFDptG0uBE8YYHifHbz8=";
+          cargoHash = "sha256-KnByKNhuzT6keUZhD2l+qTRMarbH0n59osazD/TiTNw=";
         })
       ];
 
-      programs.zsh.initContent = ''
-        eval "$(tagged_file_flow init zsh)"
-      '';
-
       programs.fish.interactiveShellInit = ''
-        tagged_file_flow init fish | source
+        tff init fish --priority "jkliom" | source
       '';
     };
 }
