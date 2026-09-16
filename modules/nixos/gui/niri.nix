@@ -1,98 +1,103 @@
 { inputs, ... }:
 
+let
+  monospaceFamilies = import ../../../option/font-families.nix;
+in
 {
-  flake.modules.homeManager."gui.niri" = {
-    home.file = {
-      ".config/niri/config.kdl" = {
-        source = ./niri/config.kdl;
-        force = true;
+  flake.modules.homeManager."gui.niri" =
+    { config, ... }:
+    {
+      home.file = {
+        ".config/niri/config.kdl" = {
+          source = ./niri/config.kdl;
+          force = true;
+        };
+        ".config/niri/config/misc.kdl" = {
+          source = ./niri/misc.kdl;
+          force = true;
+        };
+        ".config/niri/config/input.kdl" = {
+          source = ./niri/input.kdl;
+          force = true;
+        };
+        ".config/niri/config/output.kdl" = {
+          source = ./niri/output.kdl;
+          force = true;
+        };
+        ".config/niri/config/layout.kdl" = {
+          source = ./niri/layout.kdl;
+          force = true;
+        };
+        ".config/niri/config/windows.kdl" = {
+          source = ./niri/windows.kdl;
+          force = true;
+        };
+        ".config/niri/config/layers.kdl" = {
+          source = ./niri/layers.kdl;
+          force = true;
+        };
+        ".config/niri/config/binds.kdl" = {
+          source = ./niri/binds.kdl;
+          force = true;
+        };
       };
-      ".config/niri/config/misc.kdl" = {
-        source = ./niri/misc.kdl;
-        force = true;
-      };
-      ".config/niri/config/input.kdl" = {
-        source = ./niri/input.kdl;
-        force = true;
-      };
-      ".config/niri/config/output.kdl" = {
-        source = ./niri/output.kdl;
-        force = true;
-      };
-      ".config/niri/config/layout.kdl" = {
-        source = ./niri/layout.kdl;
-        force = true;
-      };
-      ".config/niri/config/windows.kdl" = {
-        source = ./niri/windows.kdl;
-        force = true;
-      };
-      ".config/niri/config/layers.kdl" = {
-        source = ./niri/layers.kdl;
-        force = true;
-      };
-      ".config/niri/config/binds.kdl" = {
-        source = ./niri/binds.kdl;
-        force = true;
+
+      programs.noctalia = {
+        enable = true;
+        settings = {
+          bar.widgets.enabled = false;
+          dock.enabled = false;
+          weather.enabled = false;
+
+          shell = {
+            font_family = monospaceFamilies.${config.modules.font.monospace};
+
+            panel = {
+              borders = true;
+            };
+
+            launcher = {
+              categories = false;
+            };
+
+            shadow = {
+              direction = "down";
+            };
+          };
+
+          control_center = {
+            sidebar = "none";
+            sidebar_section = "none";
+          };
+
+          osd.kinds = {
+            keyboard_layout = false;
+            media = false;
+          };
+
+          theme = {
+            source = "builtin";
+            builtin = "Catppuccin";
+          };
+
+          wallpaper = {
+            enabled = true;
+            automation = {
+              enabled = false;
+            };
+          };
+
+          location = {
+            auto_locate = true;
+            address = "Tokyo";
+          };
+
+          audio = {
+            enable_sounds = true;
+          };
+        };
       };
     };
-
-    programs.noctalia = {
-      enable = true;
-      settings = {
-        bar.widgets.enabled = false;
-        dock.enabled = false;
-        weather.enabled = false;
-
-        shell = {
-          font_family = "Maple Mono Normal NL NF";
-
-          panel = {
-            borders = true;
-          };
-
-          launcher = {
-            categories = false;
-          };
-
-          shadow = {
-            direction = "down";
-          };
-        };
-
-        control_center = {
-          sidebar = "none";
-          sidebar_section = "none";
-        };
-
-        osd.kinds = {
-          keyboard_layout = false;
-          media = false;
-        };
-
-        theme = {
-          source = "builtin";
-          builtin = "Catppuccin";
-        };
-
-        wallpaper = {
-          enabled = true;
-          automation = {
-            enabled = false;
-          };
-        };
-
-        location = {
-          auto_locate = true;
-          address = "Tokyo";
-        };
-
-        audio = {
-          enable_sounds = true;
-        };
-      };
-    };
-  };
 
   flake.modules.nixos."gui.niri" =
     { pkgs, ... }:

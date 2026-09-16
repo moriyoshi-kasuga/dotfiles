@@ -13,13 +13,7 @@ let
       noto-fonts-color-emoji
     ];
 
-  # Fontconfig/wezterm family name for each selectable monospace font.
-  monospaceFamilies = {
-    maple = "Maple Mono Normal NL NF";
-    iosevka = "IosevkaTerm Nerd Font Mono";
-    plemoljp = "PlemolJP Console NF";
-    monaspace-neon = "MonaspiceNe Nerd Font Mono";
-  };
+  monospaceFamilies = import ./../../option/font-families.nix;
 in
 {
   flake.modules.darwin.font =
@@ -57,5 +51,10 @@ in
           monospace = [ monospaceFamilies.${config.modules.font.monospace} ];
         };
       };
+
+      # Propagate the system-wide choice to the user's home-manager config
+      # (e.g. wezterm) so hosts only need to set this option once.
+      config.home-manager.users.${config.people.primaryUser}.modules.font.monospace =
+        lib.mkDefault config.modules.font.monospace;
     };
 }

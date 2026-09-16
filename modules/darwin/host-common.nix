@@ -2,6 +2,7 @@
 
 let
   darwin = inputs.self.modules.darwin;
+  home = inputs.self.modules.homeManager;
 in
 {
   flake.modules.darwin."host.common" = {
@@ -19,6 +20,8 @@ in
       darwin."terminal.wezterm"
       darwin."tool.docker"
     ];
+
+    home-manager.sharedModules = [ home."darwin.homebrew" ];
 
     nix.settings.trusted-users = [
       "root"

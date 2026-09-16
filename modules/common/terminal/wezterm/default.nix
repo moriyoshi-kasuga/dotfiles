@@ -1,5 +1,8 @@
 _:
 
+let
+  monospaceFamilies = import ../../../../option/font-families.nix;
+in
 {
   flake.modules.homeManager."terminal.wezterm" =
     {
@@ -18,12 +21,7 @@ _:
       };
 
       options.modules.font.monospace = lib.mkOption {
-        type = lib.types.enum [
-          "maple"
-          "iosevka"
-          "plemoljp"
-          "monaspace-neon"
-        ];
+        type = lib.types.enum (builtins.attrNames monospaceFamilies);
         default = "maple";
         description = "Monospace programming font used in the terminal";
       };
