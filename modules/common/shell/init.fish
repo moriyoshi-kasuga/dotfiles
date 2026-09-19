@@ -126,7 +126,9 @@ function pyvenv --description "Python virtual environment handler"
       or return 1
 
       touch $REQUIREMENTS_FILE
-      echo "layout python" > $ENVRC_FILE
+      # layout python は traditional venv 前提で uv 製の venv を認識しないため、
+      # 直接 PATH_add で uv venv を有効化する
+      echo "PATH_add $VENV_DIR/bin" > $ENVRC_FILE
 
       if command -q direnv
         direnv allow .
