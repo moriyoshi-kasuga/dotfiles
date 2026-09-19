@@ -139,6 +139,7 @@ config.keys = {
   -- Scrollback
   { key = "f", mods = "CTRL|SHIFT", action = act.Search("CurrentSelectionOrEmptyString") },
   { key = "x", mods = "CTRL|SHIFT", action = act.ActivateCopyMode },
+  { key = "Space", mods = "CTRL|SHIFT", action = act.QuickSelect },
   { key = "PageUp", mods = "SHIFT", action = act.ScrollByPage(-1) },
   { key = "PageDown", mods = "SHIFT", action = act.ScrollByPage(1) },
 
