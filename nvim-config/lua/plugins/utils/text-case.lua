@@ -10,9 +10,6 @@ return {
   },
   cmd = {
     "Subs",
-    "TextCaseOpenTelescope",
-    "TextCaseOpenTelescopeQuickChange",
-    "TextCaseOpenTelescopeLSPChange",
     "TextCaseStartReplacingCommand",
   },
   event = "VeryLazy",
