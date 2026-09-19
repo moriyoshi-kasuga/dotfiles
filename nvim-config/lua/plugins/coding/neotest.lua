@@ -7,6 +7,12 @@ return {
     "nvim-treesitter/nvim-treesitter",
   },
   config = function()
+    -- cargo-nextest / cargo のプログレスバーは neotest の PTY 幅(120x40固定)で描画され、
+    -- 出力表示時にはエディタ全幅の別端末で再生されるため、幅の不一致でカーソル制御が
+    -- ずれて画面が崩れる。非対話キャプチャでは見えないバーなので無効化する。
+    vim.env.NEXTEST_SHOW_PROGRESS = "none"
+    vim.env.CARGO_TERM_PROGRESS_WHEN = "never"
+
     ---@diagnostic disable-next-line: missing-fields
     require("neotest").setup({
       status = {

@@ -95,13 +95,20 @@ return {
           map("<leader>co", "<cmd>RustLsp expandMacro<cr>", "Expand Macro")
           map("<leader>cp", "<cmd>RustLsp parentModule<cr>", "Parent Module")
           map("<leader>cJ", "<cmd>RustLsp joinLines<cr>", "Join Lines")
-          map("<leader>cH", "<cmd>RustLsp hover actions<cr>", "Hover Actions")
           map("gsr", "<cmd>RustLsp relatedDiagnostics<cr>", "Related Diagnostics")
           map("<leader>cl", show_memory_layout, "Memory Layout")
         end,
         default_settings = {
           ["rust-analyzer"] = {
+            typing = {
+              autoClosingAngleBrackets = { enable = true },
+            },
             completion = {
+              autoimport = { enable = true },
+              postfix = { enable = true },
+              callable = { snippets = "fill_arguments" },
+              fullFunctionSignatures = { enable = true },
+              privateEditable = { enable = true },
               snippets = {
                 custom = {
                   Arrow = {
@@ -121,10 +128,14 @@ return {
               },
             },
             diagnostics = {
+              enable = true,
+              experimental = { enable = true },
+              styleLints = { enable = true },
               disabled = { "macro-error", "proc-macro-disabled" },
             },
             procMacro = {
               enable = true,
+              attributes = { enable = true },
               -- 無効にすると型エラーなどがでる
               -- ignored = {
               --   ["async-trait"] = { "async_trait" },
@@ -137,8 +148,10 @@ return {
               granularity = {
                 group = "module",
               },
+              prefix = "self",
             },
             inlayHints = {
+              enable = true,
               chainingHints = { enable = true },
               closingBraceHints = { enable = true, minLines = 25 },
               closureReturnTypeHints = { enable = "with_block" },
@@ -148,14 +161,18 @@ return {
               maxLength = 25,
               parameterHints = { enable = true },
               reborrowHints = { enable = "never" },
-              typeHints = { enable = true },
+              typeHints = { enable = true, hideClosureInitialization = true },
+              bindingModeHints = { enable = true },
+              closureCaptureHints = { enable = true },
+              discriminantHints = { enable = "fieldless" },
+              rangeExclusiveHints = { enable = false },
             },
             hover = {
               actions = {
-                references = { enable = true },
-                run = { enable = true },
-                debug = { enable = true },
-                implementations = { enable = true },
+                references = { enable = false },
+                run = { enable = false },
+                debug = { enable = false },
+                implementations = { enable = false },
               },
               memoryLayout = {
                 niches = true,
