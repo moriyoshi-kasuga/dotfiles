@@ -18,6 +18,34 @@ let
   nixRegistry = {
     nixpkgs.flake = inputs.nixpkgs;
   };
+
+  # nixos/darwin 共通の nix.* 設定。ホスト固有の差分は settings/gc に対する `//` で追加する。
+  mkNixCommon =
+    {
+      extraSettings ? { },
+      extraGc ? { },
+    }:
+    {
+      settings = nixSettings // extraSettings;
+      optimise.automatic = true;
+      gc = {
+        automatic = true;
+        options = "--delete-older-than 7d";
+      }
+      // extraGc;
+      registry = nixRegistry;
+    };
+
+  nixpkgsCommon = {
+    overlays = [ inputs.nix-claude-code.overlays.default ];
+    config.allowUnfree = true;
+  };
+
+  homeManagerCommon = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    extraSpecialArgs = { inherit vars; };
+  };
 in
 {
   flake.modules.homeManager.base =
@@ -91,16 +119,14 @@ in
 
       config = {
         inherit catppuccin;
-        nixpkgs.overlays = [ inputs.nix-claude-code.overlays.default ];
-        nixpkgs.config.allowUnfree = true;
+        nixpkgs = nixpkgsCommon;
 
-        home-manager.useGlobalPkgs = true;
-        home-manager.useUserPackages = true;
-        home-manager.backupFileExtension = "nixbackup";
-        home-manager.extraSpecialArgs = { inherit vars; };
-        home-manager.sharedModules = [
-          inputs.noctalia.homeModules.default
-        ];
+        home-manager = homeManagerCommon // {
+          backupFileExtension = "nixbackup";
+          sharedModules = [
+            inputs.noctalia.homeModules.default
+          ];
+        };
 
         system.stateVersion = version;
 
@@ -108,20 +134,15 @@ in
           pkgs.wl-clipboard
         ];
 
-        nix = {
-          package = pkgs.nixVersions.latest;
-          settings = nixSettings // {
-            trusted-users = [ config.people.primaryUser ];
+        nix =
+          mkNixCommon {
+            extraSettings.trusted-users = [ config.people.primaryUser ];
+            extraGc.dates = "weekly";
+          }
+          // {
+            package = pkgs.nixVersions.latest;
+            channel.enable = false;
           };
-          optimise.automatic = true;
-          gc = {
-            automatic = true;
-            dates = "weekly";
-            options = "--delete-older-than 7d";
-          };
-          registry = nixRegistry;
-          channel.enable = false;
-        };
 
         programs.command-not-found.enable = false;
 
@@ -134,22 +155,11 @@ in
     {
       imports = [ inputs.home-manager.darwinModules.home-manager ];
 
-      nixpkgs.overlays = [ inputs.nix-claude-code.overlays.default ];
-      nixpkgs.config.allowUnfree = true;
+      nixpkgs = nixpkgsCommon;
 
-      home-manager.useGlobalPkgs = true;
-      home-manager.useUserPackages = true;
-      home-manager.extraSpecialArgs = { inherit vars; };
+      home-manager = homeManagerCommon;
 
-      nix = {
-        settings = nixSettings;
-        optimise.automatic = true;
-        gc = {
-          automatic = true;
-          options = "--delete-older-than 7d";
-        };
-        registry = nixRegistry;
-      };
+      nix = mkNixCommon { };
       system.stateVersion = 6;
     };
 }
