@@ -17,6 +17,7 @@ _:
         user = config.system.primaryUser;
         onActivation = {
           autoUpdate = true;
+          cleanup = "zap";
         };
         casks = [
           "brave-browser"
