@@ -13,7 +13,7 @@ let
       "nix-command"
       "flakes"
     ];
-    auto-optimise-store = true;
+    auto-optimise-store = false;
   };
   nixRegistry = {
     nixpkgs.flake = inputs.nixpkgs;
