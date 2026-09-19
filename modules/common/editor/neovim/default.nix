@@ -124,10 +124,6 @@ _:
     {
       catppuccin.nvim.enable = false;
 
-      programs.mise.globalConfig.tools = {
-        tree-sitter = "0.26.8";
-      };
-
       programs.neovim = {
         enable = true;
         package = neovim;
@@ -151,6 +147,8 @@ _:
         ];
 
         extraPackages = with pkgs; [
+          tree-sitter
+
           # shell
           bash-language-server
           shellcheck
