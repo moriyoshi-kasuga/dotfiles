@@ -12,6 +12,7 @@ in
       darwin.dock
       darwin.finder
       darwin.homebrew
+      darwin.keyboard
       darwin."ios-dev"
       darwin.tailscale
       darwin.font
