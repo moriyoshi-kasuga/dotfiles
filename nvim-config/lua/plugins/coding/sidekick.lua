@@ -3,6 +3,7 @@ return {
   opts = {
     nes = { enabled = false },
     cli = {
+      -- セッション永続化は使わない
       mux = {
         enabled = false,
       },
