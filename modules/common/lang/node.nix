@@ -6,6 +6,7 @@ _:
     {
       programs.mise.globalConfig.tools = {
         deno = "2.8.0";
+        pnpm = "12.4.2";
       }
       // lib.optionalAttrs pkgs.stdenv.hostPlatform.isDarwin { node = "24.15.0"; };
 
