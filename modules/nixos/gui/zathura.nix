@@ -2,6 +2,7 @@ _:
 
 {
   flake.modules.homeManager."gui.zathura" = {
+    catppuccin.zathura.enable = false;
     programs.zathura = {
       enable = true;
       # ref: https://sheepla.github.io/sheepla-note/posts/zathura-introduction/
@@ -20,8 +21,8 @@ _:
         map u scroll half-up
         map d scroll half-down
         map D toggle_page_mode
-        map K zoom in
-        map J zoom out
+        # 検索ハイライトを消す（vimのnohlsearch相当）
+        map \ nohlsearch
 
         # ステータスバーに表示されるファイルパスのホームディレクトリを ~ に変更
         set statusbar-home-tilde true
