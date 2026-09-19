@@ -5,6 +5,7 @@ _:
     { pkgs, ... }:
     {
       services.resolved.enable = true;
+      services.resolved.settings.Resolve.DNSOverTLS = "opportunistic";
 
       networking = {
         nameservers = [
