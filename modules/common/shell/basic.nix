@@ -28,6 +28,7 @@ _:
         direnv = {
           enable = true;
           enableZshIntegration = false;
+          nix-direnv.enable = true;
         };
         zoxide = {
           enableZshIntegration = false;
