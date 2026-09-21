@@ -49,7 +49,7 @@ let
       libsoup_3
       harfbuzz
       pango
-      pangomm
+      pangomm_2_48
       glib
       webkitgtk_4_1
       wayland
