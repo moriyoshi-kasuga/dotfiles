@@ -44,7 +44,7 @@ let
   homeManagerCommon = {
     useGlobalPkgs = true;
     useUserPackages = true;
-    extraSpecialArgs = { inherit vars; };
+    extraSpecialArgs = { inherit vars inputs; };
   };
 in
 {

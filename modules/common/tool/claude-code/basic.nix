@@ -1,4 +1,4 @@
-_:
+{ inputs, ... }:
 
 {
   flake.modules.homeManager."tool.claude-code.basic" =
@@ -8,10 +8,36 @@ _:
       ...
     }:
     {
+      imports = [ inputs.agent-skills-nix.homeManagerModules.default ];
+
+      programs.agent-skills = {
+        enable = true;
+        sources = {
+          mattpocock-engineering = {
+            input = "mattpocock-skills";
+            subdir = "skills/engineering";
+          };
+          mattpocock-in-progress = {
+            input = "mattpocock-skills";
+            subdir = "skills/in-progress";
+          };
+          mattpocock-misc = {
+            input = "mattpocock-skills";
+            subdir = "skills/misc";
+          };
+          mattpocock-productivity = {
+            input = "mattpocock-skills";
+            subdir = "skills/productivity";
+          };
+        };
+        skills.enableAll = true;
+        targets.claude.enable = true;
+      };
+
       programs.claude-code = {
         enable = true;
         package = pkgs.claude-code;
-        commandsDir = ../../../../skills;
+        commandsDir = ../../../../commands;
         settings = {
           disableArtifact = true;
           diffTool = "terminal";

@@ -1,5 +1,25 @@
 {
   "nodes": {
+    "agent-skills-nix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1789145426,
+        "narHash": "sha256-Wf+7Qzt8+nz4TXPCbWnMjOAdzbVM6blW9J6JP+YhSy8=",
+        "owner": "Kyure-A",
+        "repo": "agent-skills-nix",
+        "rev": "5133c874553c6c295654d8de4e3f62c95736b9c6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Kyure-A",
+        "repo": "agent-skills-nix",
+        "type": "github"
+      }
+    },
     "catppuccin": {
       "inputs": {
         "nixpkgs": [
@@ -112,6 +132,22 @@
         "type": "github"
       }
     },
+    "mattpocock-skills": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1789726349,
+        "narHash": "sha256-L3CpIT2DeI+fUFl9fcygojtQo2DzEen69rMD1XqR1vM=",
+        "owner": "mattpocock",
+        "repo": "skills",
+        "rev": "c55ee46073ed923f86ce59a5eb3b6d895095d1b7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mattpocock",
+        "repo": "skills",
+        "type": "github"
+      }
+    },
     "nix-claude-code": {
       "inputs": {
         "nixpkgs": [
@@ -220,11 +256,13 @@
     },
     "root": {
       "inputs": {
+        "agent-skills-nix": "agent-skills-nix",
         "catppuccin": "catppuccin",
         "claude-desktop": "claude-desktop",
         "flake-parts": "flake-parts_2",
         "home-manager": "home-manager",
         "import-tree": "import-tree",
+        "mattpocock-skills": "mattpocock-skills",
         "nix-claude-code": "nix-claude-code",
         "nix-darwin": "nix-darwin",
         "nixpkgs": "nixpkgs",
