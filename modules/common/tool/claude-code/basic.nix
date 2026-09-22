@@ -38,6 +38,14 @@
         enable = true;
         package = pkgs.claude-code;
         commandsDir = ../../../../commands;
+        rules = {
+          write-style = ''
+            装飾的なUnicode記号（emdash「—」・波ダッシュ「〜」・三点リーダー「…」・矢印「→」など、これらに限らない）は、
+            英語・日本語を問わずいかなる出力でも使わない。使ってよいのはASCII記号（`-`・`+`など）と、
+            日本語の通常の全角句読点・括弧類（「」『』、。・など、これらに限らない）だけ。
+            禁止した記号を`--`のようにASCII文字の組み合わせで模倣することも同様に禁止する
+          '';
+        };
         settings = {
           disableArtifact = true;
           diffTool = "terminal";
