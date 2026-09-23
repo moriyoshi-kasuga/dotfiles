@@ -4,9 +4,46 @@
   flake.modules.homeManager."tool.claude-code.basic" =
     {
       pkgs,
+      lib,
       config,
       ...
     }:
+    let
+      # Single source for both permissions.deny and the PreToolUse guard hook.
+      guardedCommands = [
+        "git push"
+        "terraform"
+        "sudo"
+        "cargo publish"
+        "nixos-rebuild switch"
+        "gh pr create"
+        "gh issue create"
+      ];
+      guardedReads = [
+        ".env"
+        ".env.*"
+      ];
+      guardedEdits = [
+        ".env"
+        ".env.*"
+      ];
+
+      preToolUseGuard = pkgs.writeShellApplication {
+        name = "claude-pre-tool-use-guard";
+        runtimeInputs = [
+          pkgs.jq
+          pkgs.gnugrep
+          pkgs.gnused
+          pkgs.coreutils
+        ];
+        runtimeEnv = {
+          GUARDED_COMMANDS = lib.concatLines guardedCommands;
+          GUARDED_READS = lib.concatLines guardedReads;
+          GUARDED_EDITS = lib.concatLines guardedEdits;
+        };
+        text = builtins.readFile ./pre-tool-use-guard.sh;
+      };
+    in
     {
       imports = [ inputs.agent-skills-nix.homeManagerModules.default ];
 
@@ -49,7 +86,12 @@
         settings = {
           disableArtifact = true;
           diffTool = "terminal";
+          attribution = {
+            commit = "";
+            pr = "";
+          };
           permissions = {
+            defaultMode = "auto";
             additionalDirectories = [
               "/nix/store"
             ];
@@ -109,30 +151,31 @@
               "Bash(npm run format)"
               "Bash(deno run format)"
             ];
-            deny = [
-              "Bash(git push *)"
-              "Bash(terraform *)"
-              "Bash(sudo *)"
-              "Bash(chmod 777 *)"
-              "Bash(cargo publish *)"
-              "Bash(nixos-rebuild switch *)"
-              "Read(.env*)"
-              "Read(id_rsa)"
-              "Read(id_ed25519)"
-              "Edit(.env)"
-              "Edit(.env.*)"
-              "Edit(**/secrets/**)"
-            ];
+            deny =
+              map (c: "Bash(${c} *)") guardedCommands
+              ++ map (g: "Read(${g})") guardedReads
+              ++ map (g: "Edit(${g})") guardedEdits;
           };
           cleanupPeriodDays = 30;
           hooks = {
+            PreToolUse = [
+              {
+                matcher = "Bash|Read|Edit|MultiEdit|Write|NotebookEdit";
+                hooks = [
+                  {
+                    type = "command";
+                    command = lib.getExe preToolUseGuard;
+                  }
+                ];
+              }
+            ];
             Notification = [
               {
                 matcher = "permission_prompt";
                 hooks = [
                   {
                     type = "command";
-                    command = "${pkgs.jq}/bin/jq -r '.message // \"Require operation\"' | ${pkgs.findutils}/bin/xargs -I {} /etc/profiles/per-user/${config.home.username}/bin/notify {} 'Claude Code'";
+                    command = "msg=$(${pkgs.jq}/bin/jq -r '.message // \"Require operation\"'); /etc/profiles/per-user/${config.home.username}/bin/notify \"$msg\" 'Claude Code'";
                   }
                 ];
               }
@@ -167,6 +210,7 @@
           language = "Japanese";
           env = {
             CLAUDE_CODE_SHELL = "${pkgs.bash}/bin/bash";
+            DISABLE_ERROR_REPORTING = "1";
           };
         };
       };
