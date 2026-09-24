@@ -24,7 +24,12 @@ in
             imports = [
               home."profile.core"
               home."profile.gui-common"
-              home."profile.lang-full"
+              home."lang.rust"
+              home."lang.wasm"
+              home."lang.node"
+              home."lang.lua"
+              home."lang.python"
+              home."lang.c"
             ];
           };
         }
