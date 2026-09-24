@@ -40,12 +40,10 @@ require("lazy").setup({
         vim.env.TREESITTER_PATH or "",
         vim.env.TREESITTER_GRAMMARS or "",
       }),
-      disabled_plugins = {
+      disabled_plugins = vim.list_extend({
         "gzip",
         "matchit",
         "matchparen",
-        "netrwPlugin",
-        "netrw",
         "tarPlugin",
         "tar",
         "tohtml",
@@ -54,7 +52,11 @@ require("lazy").setup({
         "zip",
         "rplugin",
         "spellfile",
-      },
+      }, is_simple_mode and {} or {
+        -- oil.nvim replaces netrw, but it is not installed in simple mode
+        "netrwPlugin",
+        "netrw",
+      }),
     },
   },
 })
