@@ -41,6 +41,10 @@
       url = "github:anthropics/skills";
       flake = false;
     };
+    leonardomso-rust-skills = {
+      url = "github:leonardomso/rust-skills";
+      flake = false;
+    };
     wallpapers = {
       url = "github:dharmx/walls";
       flake = false;

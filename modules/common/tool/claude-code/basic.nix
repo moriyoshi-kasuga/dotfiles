@@ -71,6 +71,11 @@
             subdir = "skills";
             idPrefix = "anthropic";
           };
+          rust-skills = {
+            input = "leonardomso-rust-skills";
+            filter.maxDepth = 0;
+            idPrefix = "rust-skills";
+          };
         };
         skills.enableAll = true;
         targets.claude.enable = true;
