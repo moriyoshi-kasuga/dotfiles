@@ -216,6 +216,30 @@ function __ja_mv
   cd "$new_path"
 end
 
+function __ja_land
+  __ja_require_worktree; or return 1
+
+  set -l branch_name (git branch --show-current)
+  if test -z "$branch_name"
+    echo "Error: Not on a branch (detached HEAD)" >&2
+    return 1
+  end
+
+  set -l base (__ja_base_path)
+  set -l home_branch (git -C "$base" branch --show-current)
+  if test -z "$home_branch"
+    echo "Error: Base directory is not on a branch (detached HEAD)" >&2
+    return 1
+  end
+
+  # On conflict, resolve with `git rebase --continue` and run this again.
+  git rebase "$home_branch"; or return 1
+
+  # home_branch is checked out in base, so advance it there rather than via
+  # update-ref, which would leave base's index and working tree behind.
+  git -C "$base" merge --ff-only "$branch_name"
+end
+
 function __ja_del
   argparse 'f/force' -- $argv
   or return 1
@@ -371,6 +395,8 @@ function ja --description "Git worktree helper"
       __ja_extract $argv
     case mv
       __ja_mv $argv
+    case land
+      __ja_land $argv
     case del
       __ja_del $argv
     case cd
@@ -392,6 +418,7 @@ function ja --description "Git worktree helper"
       echo "  pr <num|url>          Checkout GitHub PR as worktree (needs gh)"
       echo "  extract               Extract current branch to worktree"
       echo "  mv <name>             Rename current worktree + branch"
+      echo "  land                  Rebase current branch onto home branch and fast-forward it"
       echo "  del [name] [-f]       Delete worktree (default: current)"
       echo "  cd [name]             cd to worktree by name, or select with fzf"
       echo "  home                  Go back to base directory"
@@ -429,6 +456,7 @@ complete -c ja -f -n __fish_use_subcommand -a get -d "Checkout remote branch as 
 complete -c ja -f -n __fish_use_subcommand -a pr -d "Checkout GitHub PR as worktree"
 complete -c ja -f -n __fish_use_subcommand -a extract -d "Extract current branch to worktree"
 complete -c ja -f -n __fish_use_subcommand -a mv -d "Rename current worktree + branch"
+complete -c ja -f -n __fish_use_subcommand -a land -d "Rebase onto home branch and fast-forward it"
 complete -c ja -f -n __fish_use_subcommand -a del -d "Delete worktree"
 complete -c ja -f -n __fish_use_subcommand -a cd -d "Select worktree with fzf"
 complete -c ja -f -n __fish_use_subcommand -a home -d "Go back to base directory"
