@@ -37,6 +37,10 @@
       url = "github:mattpocock/skills";
       flake = false;
     };
+    anthropic-skills = {
+      url = "github:anthropics/skills";
+      flake = false;
+    };
     wallpapers = {
       url = "github:dharmx/walls";
       flake = false;

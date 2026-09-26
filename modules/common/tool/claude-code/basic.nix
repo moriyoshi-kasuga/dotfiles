@@ -66,6 +66,11 @@
             input = "mattpocock-skills";
             subdir = "skills/productivity";
           };
+          anthropic = {
+            input = "anthropic-skills";
+            subdir = "skills";
+            idPrefix = "anthropic";
+          };
         };
         skills.enableAll = true;
         targets.claude.enable = true;
