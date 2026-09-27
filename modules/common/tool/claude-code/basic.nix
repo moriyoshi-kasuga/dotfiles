@@ -43,58 +43,87 @@
         };
         text = builtins.readFile ./pre-tool-use-guard.sh;
       };
+
+      # Claude Code only loads skills/<name>/SKILL.md, so nested category
+      # directories are walked and flattened by skill directory name.
+      findSkills =
+        dir:
+        lib.concatMap (
+          name:
+          let
+            path = "${dir}/${name}";
+          in
+          if builtins.pathExists "${path}/SKILL.md" then
+            [ (lib.nameValuePair name path) ]
+          else
+            findSkills path
+        ) (lib.attrNames (lib.filterAttrs (_: type: type == "directory") (builtins.readDir dir)));
+
+      # The skills import packages/core/dist and try to `pnpm install` into the
+      # plugin root when it is missing, which fails in the read-only store, so
+      # core is prebuilt here. Hooks call bare `node`, pinned to an absolute
+      # path so they work without nodejs on PATH.
+      understandAnythingPlugin = pkgs.stdenv.mkDerivation (finalAttrs: {
+        pname = "understand-anything-plugin";
+        version = "2.9.7";
+        src = "${inputs.Egonex-AI-Understand-Anything}/understand-anything-plugin";
+        pnpmDeps = pkgs.fetchPnpmDeps {
+          inherit (finalAttrs) pname version src;
+          pnpm = pkgs.pnpm_10;
+          fetcherVersion = 3;
+          hash = "sha256-Zq6rdL+DJ3J9fm5yNPtHPygHTfIbOSLaX3M5emat+RY=";
+        };
+        nativeBuildInputs = [
+          pkgs.nodejs
+          pkgs.pnpmConfigHook
+          pkgs.pnpm_10
+        ];
+        buildPhase = ''
+          runHook preBuild
+          pnpm --filter @understand-anything/core build
+          runHook postBuild
+        '';
+        installPhase = ''
+          runHook preInstall
+          sed -i 's|\bnode |${lib.getExe pkgs.nodejs} |g' hooks/hooks.json
+          cp -r . $out
+          runHook postInstall
+        '';
+      });
+
+      skillList =
+        lib.concatMap findSkills [
+          # engineering and productivity come from the plugin manifest.
+          "${inputs.mattpocock-skills}/skills/in-progress"
+          "${inputs.mattpocock-skills}/skills/misc"
+          "${inputs.mattpocock-skills}/skills/engineering"
+          "${inputs.mattpocock-skills}/skills/productivity"
+          "${inputs.anthropic-skills}/skills"
+        ]
+        ++ [ (lib.nameValuePair "rust-skills" "${inputs.leonardomso-rust-skills}") ];
+
+      duplicateSkills = lib.attrNames (
+        lib.filterAttrs (_: v: builtins.length v > 1) (lib.groupBy (s: s.name) skillList)
+      );
     in
     {
-      imports = [ inputs.agent-skills-nix.homeManagerModules.default ];
-
-      programs.agent-skills = {
-        enable = true;
-        sources = {
-          mattpocock-engineering = {
-            input = "mattpocock-skills";
-            subdir = "skills/engineering";
-          };
-          mattpocock-in-progress = {
-            input = "mattpocock-skills";
-            subdir = "skills/in-progress";
-          };
-          mattpocock-misc = {
-            input = "mattpocock-skills";
-            subdir = "skills/misc";
-          };
-          mattpocock-productivity = {
-            input = "mattpocock-skills";
-            subdir = "skills/productivity";
-          };
-          anthropic = {
-            input = "anthropic-skills";
-            subdir = "skills";
-            idPrefix = "anthropic";
-          };
-          rust-skills = {
-            input = "leonardomso-rust-skills";
-            filter.maxDepth = 0;
-            idPrefix = "rust-skills";
-          };
-          superpowers = {
-            input = "obra-superpowers-skills";
-            subdir = "skills";
-            idPrefix = "superpowers";
-          };
-          Understand-Anything = {
-            input = "Egonex-AI-Understand-Anything";
-            idPrefix = "understand-anything-plugin
-/skills";
-          };
-        };
-        skills.enableAll = true;
-        targets.claude.enable = true;
-      };
+      assertions = [
+        {
+          assertion = duplicateSkills == [ ];
+          message = "duplicate Claude Code skill names: ${lib.concatStringsSep ", " duplicateSkills}";
+        }
+      ];
 
       programs.claude-code = {
         enable = true;
         package = pkgs.claude-code;
         commandsDir = ../../../../commands;
+        skills = lib.listToAttrs skillList;
+        plugins = {
+          mattpocock-skills = inputs.mattpocock-skills;
+          superpowers = inputs.obra-superpowers;
+          understand-anything = understandAnythingPlugin;
+        };
         rules = {
           write-style = ''
             装飾的なUnicode記号（現行の記号例のまま）は、英語・日本語を問わず使わない。

@@ -29,10 +29,6 @@
       url = "github:aaddrick/claude-desktop-debian";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    agent-skills-nix = {
-      url = "github:Kyure-A/agent-skills-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     mattpocock-skills = {
       url = "github:mattpocock/skills";
       flake = false;
@@ -45,8 +41,8 @@
       url = "github:leonardomso/rust-skills";
       flake = false;
     };
-    obra-superpowers-skills = {
-      url = "github:obra/superpowers-skills";
+    obra-superpowers = {
+      url = "github:obra/superpowers";
       flake = false;
     };
     Egonex-AI-Understand-Anything = {
