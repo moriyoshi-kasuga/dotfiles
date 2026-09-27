@@ -76,6 +76,16 @@
             filter.maxDepth = 0;
             idPrefix = "rust-skills";
           };
+          superpowers = {
+            input = "obra-superpowers-skills";
+            subdir = "skills";
+            idPrefix = "superpowers";
+          };
+          Understand-Anything = {
+            input = "Egonex-AI-Understand-Anything";
+            idPrefix = "understand-anything-plugin
+/skills";
+          };
         };
         skills.enableAll = true;
         targets.claude.enable = true;

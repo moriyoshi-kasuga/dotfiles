@@ -45,6 +45,14 @@
       url = "github:leonardomso/rust-skills";
       flake = false;
     };
+    obra-superpowers-skills = {
+      url = "github:obra/superpowers-skills";
+      flake = false;
+    };
+    Egonex-AI-Understand-Anything = {
+      url = "github:Egonex-AI/Understand-Anything";
+      flake = false;
+    };
     wallpapers = {
       url = "github:dharmx/walls";
       flake = false;
