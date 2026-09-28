@@ -120,7 +120,7 @@
         commandsDir = ../../../../commands;
         skills = lib.listToAttrs skillList;
         plugins = {
-          mattpocock-skills = inputs.mattpocock-skills;
+          inherit (inputs) mattpocock-skills;
           superpowers = inputs.obra-superpowers;
           understand-anything = understandAnythingPlugin;
         };

@@ -7,9 +7,10 @@ let
   # open (https://github.com/Supreeeme/xwayland-satellite/issues/156), so pin it to 0.8.1.
   # Drop this and the flake input once a fixed release lands in nixpkgs.
   xwaylandSatellitePinOverlay = final: prev: {
-    xwayland-satellite =
+    inherit
       (import inputs.nixpkgs-xwayland-satellite-pin { inherit (prev.stdenv.hostPlatform) system; })
-      .xwayland-satellite;
+      xwayland-satellite
+      ;
   };
 in
 {
