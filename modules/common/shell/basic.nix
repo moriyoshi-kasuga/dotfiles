@@ -1,8 +1,14 @@
-_:
+{ inputs, ... }:
 
 {
   flake.modules.homeManager."shell.basic" =
-    { pkgs, ... }:
+    { pkgs, config, ... }:
+    let
+      inherit (config.catppuccin) flavor;
+      palette =
+        (builtins.fromJSON (builtins.readFile "${inputs.catppuccin-palette}/palette.json"))
+        .${flavor}.colors;
+    in
     {
       home.packages = with pkgs; [
         # use latest version
@@ -23,6 +29,9 @@ _:
             gradle.disabled = true;
             scala.disabled = true;
             aws.disabled = true;
+
+            palette = "catppuccin_${flavor}";
+            palettes."catppuccin_${flavor}" = builtins.mapAttrs (_: color: color.hex) palette;
           };
         };
         direnv = {
@@ -50,6 +59,11 @@ _:
       # fzf は catppuccin/nix に任せず手書き: 背景を端末の透過に合わせるため
       # bg:-1 / fg:-1 が必要で、モジュール側のテーマだと上書きされてしまう。
       catppuccin.fzf.enable = false;
+
+      # starship も catppuccin/nix に任せず palette を直接渡す: モジュール側は IFD を使うため、
+      # 他プラットフォームの構成を評価する nix flake check が失敗する。
+      # https://github.com/catppuccin/nix/issues/392
+      catppuccin.starship.enable = false;
 
       home.sessionVariables = {
         _ZO_EXCLUDE_DIRS = "$HOME:/tmp/*:/var/*:/nix/*:/mnt/*";

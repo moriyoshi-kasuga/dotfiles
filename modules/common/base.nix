@@ -7,6 +7,9 @@ let
     autoEnable = true;
     flavor = "macchiato";
     accent = "sapphire";
+    # palette を derivation ではなく flake input から読ませて IFD を避ける (tty など)
+    # https://github.com/catppuccin/nix/issues/392
+    sources.palette = inputs.catppuccin-palette.outPath;
   };
   nixSettings = {
     experimental-features = [
