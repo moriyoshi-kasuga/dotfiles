@@ -270,6 +270,7 @@
           env = {
             CLAUDE_CODE_SHELL = "${pkgs.bash}/bin/bash";
             DISABLE_ERROR_REPORTING = "1";
+            CLAUDE_CODE_TMUX_TRUECOLOR = "1";
           };
         };
       };
