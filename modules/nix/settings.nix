@@ -13,6 +13,10 @@ let
           "flakes"
         ];
         auto-optimise-store = false;
+        # 大きなクロージャの substitute でバッファや並列数が詰まらないようにする
+        download-buffer-size = 268435456;
+        http-connections = 64;
+        max-substitution-jobs = 32;
       };
       optimise.automatic = true;
       gc = {

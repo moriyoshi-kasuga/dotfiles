@@ -38,6 +38,18 @@ _:
       boot.kernel.sysctl = {
         "net.core.default_qdisc" = "cake";
         "net.ipv4.tcp_congestion_control" = "bbr";
+
+        # The 4MB defaults cap SO_RCVBUF/SO_SNDBUF for QUIC and tailscale's
+        # UDP sockets, and the tcp_wmem ceiling limits uploads over
+        # high-RTT (overseas) paths. tcp_rmem's ceiling is already 32MB.
+        "net.core.rmem_max" = 16777216;
+        "net.core.wmem_max" = 16777216;
+        "net.ipv4.tcp_wmem" = "4096 16384 16777216";
+        # IPv4 goes through IPv4-over-IPv6 (path MTU 1460); recover from
+        # PMTU blackholes instead of stalling.
+        "net.ipv4.tcp_mtu_probing" = 1;
+        # Keep the cwnd of idle long-lived connections (HTTP/2 etc.).
+        "net.ipv4.tcp_slow_start_after_idle" = 0;
       };
     };
 }
