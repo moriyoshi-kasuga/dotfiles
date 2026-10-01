@@ -11,7 +11,7 @@ in
       nixos.pc
       nixos.amd
       nixos.claude-desktop
-      ./hardware-configuration.nix
+      ./_hardware-configuration.nix
       {
         people.primaryUser = "mori";
         networking.hostName = "Mori-NixOS";

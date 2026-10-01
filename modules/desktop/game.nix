@@ -25,7 +25,7 @@ _:
         remotePlay.openFirewall = true;
         dedicatedServer.openFirewall = true;
         extraCompatPackages = [ pkgs.proton-ge-bin ];
-        # DRI_PRIME=1 (see hosts/desktop/hardware-configuration.nix) makes
+        # DRI_PRIME=1 (see hosts/desktop/_hardware-configuration.nix) makes
         # steamwebhelper segfault on startup, so drop it inside Steam's FHS env.
         package = pkgs.steam.override {
           extraProfile = ''

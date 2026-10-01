@@ -10,7 +10,7 @@ in
     modules = [
       nixos.base
       nixos.server
-      ./hardware-configuration.nix
+      ./_hardware-configuration.nix
       {
         people.primaryUser = "sv-main";
         networking.hostName = "sv-main";

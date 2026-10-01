@@ -10,7 +10,7 @@ in
     modules = [
       nixos.pc
       nixos.nvidia
-      ./hardware-configuration.nix
+      ./_hardware-configuration.nix
       {
         people.primaryUser = "mori";
         networking.hostName = "Mori-Laptop-NixOS";

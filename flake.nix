@@ -85,7 +85,7 @@
       ];
       imports = [
         (inputs.import-tree ./modules)
-        (inputs.import-tree.filterNot (inputs.nixpkgs.lib.hasSuffix "hardware-configuration.nix") ./hosts)
+        (inputs.import-tree ./hosts)
       ];
       _module.args.vars = vars;
     }) [ "modules" ];
