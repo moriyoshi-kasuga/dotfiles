@@ -11,10 +11,10 @@ in
       darwin.pc
       {
         people.primaryUser = "mori";
+        style.fonts.monospace = "maple";
 
         people.home = {
-          modules.terminal.wezterm.bigMonitor = true;
-          modules.font.monospace = "maple";
+          terminal.wezterm.bigMonitor = true;
           imports = [
             home."lang.rust"
             home."lang.wasm"

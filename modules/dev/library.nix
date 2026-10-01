@@ -64,10 +64,10 @@ in
       ...
     }:
     let
-      cfg = config.modules.library;
+      cfg = config.library;
     in
     {
-      options.modules.library.libs = lib.mkOption {
+      options.library.libs = lib.mkOption {
         type = lib.types.listOf lib.types.package;
         default = [ ];
         description = "Additional packages";
@@ -75,7 +75,7 @@ in
 
       config = lib.mkMerge [
         {
-          modules.library.libs = with pkgs; [
+          library.libs = with pkgs; [
             imagemagick
             ffmpeg
             curl
@@ -106,7 +106,7 @@ in
           };
         }
         (lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
-          modules.library.libs = with pkgs; [
+          library.libs = with pkgs; [
             libiconv
             llvm
             nsis
@@ -118,7 +118,7 @@ in
           '';
         })
         (lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
-          modules.library.libs = linuxLibs pkgs;
+          library.libs = linuxLibs pkgs;
         })
       ];
     };

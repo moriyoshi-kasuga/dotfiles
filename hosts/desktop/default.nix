@@ -20,7 +20,7 @@ in
         # blobs up to date to reduce amdgpu instability (fence timeouts).
         hardware.enableRedistributableFirmware = true;
 
-        modules.font.monospace = "monaspace-neon";
+        style.fonts.monospace = "monaspace-neon";
 
         people.home.imports = [
           home."lang.buf"

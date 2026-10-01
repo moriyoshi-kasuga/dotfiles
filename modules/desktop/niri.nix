@@ -1,7 +1,6 @@
 { inputs, ... }:
 
 let
-  monospaceFamilies = import ../../option/font-families.nix;
   # FIXME:
   # xwayland-satellite 0.8.2 closes Steam's dropdown menus right after they
   # open (https://github.com/Supreeeme/xwayland-satellite/issues/156), so pin it to 0.8.1.
@@ -14,7 +13,7 @@ let
   };
 
   home =
-    { config, ... }:
+    { osConfig, ... }:
     {
       home.file = {
         ".config/niri/config.kdl" = {
@@ -59,7 +58,7 @@ let
           weather.enabled = false;
 
           shell = {
-            font_family = monospaceFamilies.${config.modules.font.monospace};
+            font_family = osConfig.style.fonts.monospaceFamily;
 
             panel = {
               borders = true;
