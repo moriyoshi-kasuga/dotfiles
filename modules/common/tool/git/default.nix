@@ -1,9 +1,14 @@
 _:
 
 {
-  flake.modules.homeManager."tool.git.basic" =
+  flake.modules.homeManager."tool.git" =
     { pkgs, vars, ... }:
     {
+      imports = [
+        ./_delta.nix
+        ./_lazygit.nix
+      ];
+
       programs.git = {
         enable = true;
 
@@ -37,5 +42,7 @@ _:
         gcb = "git switch -c";
         gl = "git log --oneline --graph --decorate";
       };
+
+      programs.fish.interactiveShellInit = builtins.readFile ./worktree.fish;
     };
 }

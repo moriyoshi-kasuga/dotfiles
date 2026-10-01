@@ -1,7 +1,7 @@
 _:
 
 {
-  flake.modules.homeManager."tool.basic" =
+  flake.modules.homeManager."tool.cli" =
     { pkgs, lib, ... }:
     {
       programs.man = {
@@ -27,19 +27,10 @@ _:
           bottom
           just
           hexyl
-          marp-cli
-          prek
-          graphviz
-          typst
 
           tokei
           hyperfine
-          oha
           kalker
-          poppler-utils
-          mo-viewer
-          supabase-cli
-          postgresql
         ])
         ++ lib.optionals pkgs.stdenv.hostPlatform.isLinux (
           with pkgs;

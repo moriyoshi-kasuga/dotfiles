@@ -1,7 +1,7 @@
 { inputs, ... }:
 
 {
-  flake.modules.homeManager."tool.claude-code.basic" =
+  flake.modules.homeManager."tool.claude-code" =
     {
       pkgs,
       lib,

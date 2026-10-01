@@ -10,16 +10,15 @@ in
       home."editor.neovim"
       home."editor.vim"
       home.library
-      home."shell.basic"
+      home.shell
       home."shell.fish"
       home."shell.zsh"
-      home."tool.basic"
-      home."tool.claude-code.basic"
+      home."tool.cli"
+      home."tool.claude-code"
+      home."tool.dev-service"
       home."tool.docker"
-      home."tool.git.basic"
-      home."tool.git.delta"
-      home."tool.git.lazygit"
-      home."tool.git.worktree"
+      home."tool.docs"
+      home."tool.git"
       home."tool.tff"
       home."tool.tmux"
     ];
