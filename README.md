@@ -66,6 +66,7 @@ unixpornではなく、シンプルさを保つための設定です。
 modules/
 ├── common/               # クロスプラットフォーム共通
 │   ├── base.nix          # Home Manager 基盤・Catppuccin
+│   ├── user.nix          # primaryUser と、そのユーザーの home-manager 設定 (people.*)
 │   ├── shell/            # Fish / Zsh / Starship / direnv / fzf / zoxide
 │   ├── editor/           # Neovim / Vim
 │   ├── terminal/         # WezTerm
@@ -76,7 +77,7 @@ modules/
 │   └── wallpaper.nix     # 壁紙ローテーション (systemd / launchd)
 │
 ├── nixos/                # NixOS システム設定
-│   ├── basic.nix         # ユーザー・sudo・SSH・Nix GC
+│   ├── system.nix        # ブートローダー・sudo・SSH・zram
 │   ├── network.nix       # NetworkManager・ホスト名・DNS
 │   ├── i18n.nix          # タイムゾーン・ロケール
 │   ├── tailscale.nix     # Tailscale VPN
@@ -98,12 +99,17 @@ modules/
     ├── options.nix       # 追加の flake-parts オプション定義
     └── checks.nix        # lint / eval check・formatter・devShell
 
-profiles/                 # ホストに割り当てる profile の束ね (Home Manager / NixOS システム設定)
-├── core.nix              # profile.core (shell / editor / tool の基本セット)
-├── desktop.nix           # profile.desktop (GUI 込みのフルセット)
-├── gui-common.nix        # profile.gui-common (WezTerm / wallpaper)
-├── lang-full.nix         # profile.lang-full (全言語ツールチェイン)
-└── host-desktop.nix      # host.desktop (NixOS システム設定の集約)
+profiles/                 # ホストに割り当てる profile の束ね (class ごとに profile.* を登録)
+├── home/
+│   ├── core.nix          # profile.core (shell / editor / tool の基本セット)
+│   ├── desktop.nix       # profile.desktop (GUI 込みのフルセット)
+│   ├── gui.nix           # profile.gui (WezTerm / wallpaper)
+│   └── lang-full.nix     # profile.lang-full (全言語ツールチェイン)
+├── nixos/
+│   ├── base.nix          # profile.base (サーバーにも使う NixOS の土台)
+│   └── desktop.nix       # profile.desktop (profile.base + GUI 環境)
+└── darwin/
+    └── base.nix          # profile.base (macOS ホスト共通)
 
 hosts/                    # ホストごとの nixosConfigurations / darwinConfigurations
 ├── desktop/              # default.nix + hardware-configuration.nix

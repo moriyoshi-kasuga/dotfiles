@@ -5,7 +5,7 @@ let
   home = inputs.self.modules.homeManager;
 in
 {
-  flake.modules.darwin."host.common" = {
+  flake.modules.darwin."profile.base" = {
     imports = [
       darwin.base
       darwin.user

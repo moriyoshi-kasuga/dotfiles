@@ -8,15 +8,7 @@ in
   flake.nixosConfigurations.sv-main = inputs.nixpkgs.lib.nixosSystem {
     system = "x86_64-linux";
     modules = [
-      nixos.base
-      nixos.user
-      nixos.basic
-      nixos.i18n
-      nixos.network
-      nixos.tailscale
-      nixos."shell.fish"
-      nixos."shell.zsh"
-      nixos."tool.docker"
+      nixos."profile.base"
       ./hardware-configuration.nix
       {
         people.primaryUser = "sv-main";

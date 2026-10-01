@@ -4,21 +4,13 @@ let
   nixos = inputs.self.modules.nixos;
 in
 {
-  flake.modules.nixos."host.desktop" = {
+  flake.modules.nixos."profile.desktop" = {
     imports = [
-      nixos.base
-      nixos.user
-      nixos.basic
-      nixos.i18n
-      nixos.network
+      nixos."profile.base"
       nixos.peripherals
-      nixos.tailscale
       nixos.font
       nixos.library
-      nixos."shell.fish"
-      nixos."shell.zsh"
       nixos."terminal.wezterm"
-      nixos."tool.docker"
       nixos."gui.audio"
       nixos."gui.basic"
       nixos."gui.bluetooth"

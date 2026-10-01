@@ -8,7 +8,7 @@ in
   flake.nixosConfigurations.laptop-nixos = inputs.nixpkgs.lib.nixosSystem {
     system = "x86_64-linux";
     modules = [
-      nixos."host.desktop"
+      nixos."profile.desktop"
       nixos."gui.nvidia"
       ./hardware-configuration.nix
       {

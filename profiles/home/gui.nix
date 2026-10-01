@@ -4,7 +4,7 @@ let
   home = inputs.self.modules.homeManager;
 in
 {
-  flake.modules.homeManager."profile.gui-common" = {
+  flake.modules.homeManager."profile.gui" = {
     imports = [
       home."terminal.wezterm"
       home.wallpaper
