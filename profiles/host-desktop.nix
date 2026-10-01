@@ -7,6 +7,7 @@ in
   flake.modules.nixos."host.desktop" = {
     imports = [
       nixos.base
+      nixos.user
       nixos.basic
       nixos.i18n
       nixos.network

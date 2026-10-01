@@ -12,28 +12,20 @@ in
       nixos."gui.amd"
       nixos."gui.claude-desktop"
       ./hardware-configuration.nix
-      (
-        { pkgs, ... }:
-        {
-          people.primaryUser = "mori";
-          networking.hostName = "Mori-NixOS";
-          users.users.mori.shell = pkgs.fish;
+      {
+        people.primaryUser = "mori";
+        networking.hostName = "Mori-NixOS";
 
-          # RDNA4 dGPU (RX 9060 XT) is new hardware; keep firmware/microcode
-          # blobs up to date to reduce amdgpu instability (fence timeouts).
-          hardware.enableRedistributableFirmware = true;
+        # RDNA4 dGPU (RX 9060 XT) is new hardware; keep firmware/microcode
+        # blobs up to date to reduce amdgpu instability (fence timeouts).
+        hardware.enableRedistributableFirmware = true;
 
-          modules.font.monospace = "monaspace-neon";
+        modules.font.monospace = "monaspace-neon";
 
-          home-manager.users.mori = {
-            home.username = "mori";
-            home.homeDirectory = "/home/mori";
-            imports = [
-              home."profile.desktop"
-            ];
-          };
-        }
-      )
+        people.home.imports = [
+          home."profile.desktop"
+        ];
+      }
     ];
   };
 }

@@ -2,10 +2,7 @@ _:
 
 {
   flake.modules.nixos.basic =
-    { pkgs, config, ... }:
-    let
-      username = config.people.primaryUser;
-    in
+    { pkgs, ... }:
     {
       services.dbus.enable = true;
       services.openssh = {
@@ -46,25 +43,6 @@ _:
       security = {
         sudo.execWheelOnly = true;
         sudo.keepTerminfo = true;
-      };
-
-      users.users.${username} = {
-        isNormalUser = true;
-        description = username;
-        group = username;
-        extraGroups = [
-          "networkmanager"
-          "wheel"
-          "input"
-          "video"
-          "docker"
-        ];
-      };
-
-      users.groups.${username} = {
-        name = username;
-        members = [ username ];
-        gid = 1000;
       };
 
       programs.nix-ld = {

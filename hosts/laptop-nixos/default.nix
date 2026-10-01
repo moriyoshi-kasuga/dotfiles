@@ -11,22 +11,14 @@ in
       nixos."host.desktop"
       nixos."gui.nvidia"
       ./hardware-configuration.nix
-      (
-        { pkgs, ... }:
-        {
-          people.primaryUser = "mori";
-          networking.hostName = "Mori-Laptop-NixOS";
-          users.users.mori.shell = pkgs.fish;
+      {
+        people.primaryUser = "mori";
+        networking.hostName = "Mori-Laptop-NixOS";
 
-          home-manager.users.mori = {
-            home.username = "mori";
-            home.homeDirectory = "/home/mori";
-            imports = [
-              home."profile.desktop"
-            ];
-          };
-        }
-      )
+        people.home.imports = [
+          home."profile.desktop"
+        ];
+      }
     ];
   };
 }

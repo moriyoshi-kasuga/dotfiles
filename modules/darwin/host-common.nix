@@ -8,6 +8,7 @@ in
   flake.modules.darwin."host.common" = {
     imports = [
       darwin.base
+      darwin.user
       darwin.aerospace
       darwin.dock
       darwin.finder
@@ -23,10 +24,5 @@ in
     ];
 
     home-manager.sharedModules = [ home."darwin.homebrew" ];
-
-    nix.settings.trusted-users = [
-      "root"
-      "mori"
-    ];
   };
 }

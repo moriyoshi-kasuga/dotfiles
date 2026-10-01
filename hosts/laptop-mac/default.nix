@@ -9,26 +9,17 @@ in
     system = "aarch64-darwin";
     modules = [
       darwin."host.common"
-      (
-        { pkgs, ... }:
-        {
-          system.primaryUser = "mori";
-          users.users.mori.home = "/Users/mori";
-          users.users.mori.shell = pkgs.fish;
+      {
+        people.primaryUser = "mori";
 
-          home-manager.users.mori = {
-            home.username = "mori";
-            home.homeDirectory = "/Users/mori";
-            imports = [
-              home."profile.core"
-              home."profile.gui-common"
-              home."lang.c"
-              home."lang.node"
-              home."lang.rust"
-            ];
-          };
-        }
-      )
+        people.home.imports = [
+          home."profile.core"
+          home."profile.gui-common"
+          home."lang.c"
+          home."lang.node"
+          home."lang.rust"
+        ];
+      }
     ];
   };
 }

@@ -22,14 +22,13 @@ let
     nixpkgs.flake = inputs.nixpkgs;
   };
 
-  # nixos/darwin 共通の nix.* 設定。ホスト固有の差分は settings/gc に対する `//` で追加する。
+  # nixos/darwin 共通の nix.* 設定。ホスト固有の差分は gc に対する `//` で追加する。
   mkNixCommon =
     {
-      extraSettings ? { },
       extraGc ? { },
     }:
     {
-      settings = nixSettings // extraSettings;
+      settings = nixSettings;
       optimise.automatic = true;
       gc = {
         automatic = true;
@@ -115,11 +114,6 @@ in
         inputs.home-manager.nixosModules.home-manager
       ];
 
-      options.people.primaryUser = lib.mkOption {
-        type = lib.types.str;
-        description = "Primary user of this NixOS host.";
-      };
-
       config = {
         inherit catppuccin;
         nixpkgs = nixpkgsCommon;
@@ -139,7 +133,6 @@ in
 
         nix =
           mkNixCommon {
-            extraSettings.trusted-users = [ config.people.primaryUser ];
             extraGc.dates = "weekly";
           }
           // {
