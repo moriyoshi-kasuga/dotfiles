@@ -9,6 +9,7 @@ in
     system = "aarch64-darwin";
     modules = [
       darwin.pc
+      darwin.ios-dev
       {
         people.primaryUser = "mori";
         style.fonts.monospace = "maple";

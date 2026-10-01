@@ -11,6 +11,7 @@ in
       nixos.pc
       nixos.amd
       nixos.claude-desktop
+      nixos.game
       ./_hardware-configuration.nix
       {
         people.primaryUser = "mori";
@@ -19,6 +20,13 @@ in
         # RDNA4 dGPU (RX 9060 XT) is new hardware; keep firmware/microcode
         # blobs up to date to reduce amdgpu instability (fence timeouts).
         hardware.enableRedistributableFirmware = true;
+
+        # This Zen 5 chip's bus-lock detection fires constantly under
+        # Chrome/Proton (tens of thousands of trapped+throttled
+        # instructions per minute per journalctl), tanking their
+        # performance for a mitigation that mainly matters on
+        # multi-tenant hosts, not a single-user desktop.
+        boot.kernelParams = [ "split_lock_detect=off" ];
 
         style.fonts.monospace = "monaspace-neon";
 

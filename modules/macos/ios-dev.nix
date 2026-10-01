@@ -1,7 +1,7 @@
 _:
 
 {
-  flake.modules.darwin.pc =
+  flake.modules.darwin.ios-dev =
     { pkgs, ... }:
     {
       environment.systemPackages = with pkgs; [

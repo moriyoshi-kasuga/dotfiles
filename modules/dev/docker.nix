@@ -36,7 +36,8 @@ in
     };
   };
 
-  flake.modules.darwin.base = {
+  # homebrew は darwin.pc でだけ有効にしている
+  flake.modules.darwin.pc = {
     homebrew.casks = [
       "docker-desktop"
     ];

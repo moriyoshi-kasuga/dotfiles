@@ -15,6 +15,11 @@ in
         people.primaryUser = "mori";
         networking.hostName = "Mori-Laptop-NixOS";
 
+        hardware.nvidia.prime = {
+          intelBusId = "PCI:0:2:0";
+          nvidiaBusId = "PCI:1:0:0";
+        };
+
         people.home.imports = [
           home."lang.buf"
           home."lang.c"

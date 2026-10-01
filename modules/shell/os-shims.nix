@@ -23,20 +23,27 @@ _:
                 --category=x-generic --icon=dialog-information --app-name "$2" "$1"
             fi
           '')
-
-          (pkgs.writeShellScriptBin "pbpaste" ''
-            wl-paste --no-newline
-          '')
-          (pkgs.writeShellScriptBin "pbcopy" ''
-            wl-copy
-          '')
-          (pkgs.writeShellScriptBin "open" ''
-            xdg-open "$@"
-          '')
         ];
     };
 
-  flake.modules.nixos.base =
+  # クリップボードと open は画面のある host でだけ意味がある
+  flake.modules.homeManager.pc =
+    { pkgs, lib, ... }:
+    {
+      home.packages = lib.optionals pkgs.stdenv.hostPlatform.isLinux [
+        (pkgs.writeShellScriptBin "pbpaste" ''
+          wl-paste --no-newline
+        '')
+        (pkgs.writeShellScriptBin "pbcopy" ''
+          wl-copy
+        '')
+        (pkgs.writeShellScriptBin "open" ''
+          xdg-open "$@"
+        '')
+      ];
+    };
+
+  flake.modules.nixos.pc =
     { pkgs, config, ... }:
     {
       users.users.${config.people.primaryUser}.packages = [

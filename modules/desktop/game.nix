@@ -1,7 +1,7 @@
 _:
 
 {
-  flake.modules.nixos.pc =
+  flake.modules.nixos.game =
     {
       config,
       pkgs,

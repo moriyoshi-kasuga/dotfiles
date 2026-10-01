@@ -65,37 +65,9 @@ in
             findSkills path
         ) (lib.attrNames (lib.filterAttrs (_: type: type == "directory") (builtins.readDir dir)));
 
-      # The skills import packages/core/dist and try to `pnpm install` into the
-      # plugin root when it is missing, which fails in the read-only store, so
-      # core is prebuilt here. Hooks call bare `node`, pinned to an absolute
-      # path so they work without nodejs on PATH.
-      understandAnythingPlugin = pkgs.stdenv.mkDerivation (finalAttrs: {
-        pname = "understand-anything-plugin";
-        version = "2.9.7";
-        src = "${inputs.Egonex-AI-Understand-Anything}/understand-anything-plugin";
-        pnpmDeps = pkgs.fetchPnpmDeps {
-          inherit (finalAttrs) pname version src;
-          pnpm = pkgs.pnpm_10;
-          fetcherVersion = 3;
-          hash = "sha256-Zq6rdL+DJ3J9fm5yNPtHPygHTfIbOSLaX3M5emat+RY=";
-        };
-        nativeBuildInputs = [
-          pkgs.nodejs
-          pkgs.pnpmConfigHook
-          pkgs.pnpm_10
-        ];
-        buildPhase = ''
-          runHook preBuild
-          pnpm --filter @understand-anything/core build
-          runHook postBuild
-        '';
-        installPhase = ''
-          runHook preInstall
-          sed -i 's|\bnode |${lib.getExe pkgs.nodejs} |g' hooks/hooks.json
-          cp -r . $out
-          runHook postInstall
-        '';
-      });
+      understandAnythingPlugin = pkgs.callPackage ./_understand-anything-plugin.nix {
+        src = inputs.Egonex-AI-Understand-Anything;
+      };
 
       skillList =
         lib.concatMap findSkills [

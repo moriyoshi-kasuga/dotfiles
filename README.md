@@ -81,7 +81,8 @@ unixpornではなく、シンプルさを保つための設定です。
 層に含めない任意の機能は、名前付きのモジュールとしてホストが個別に選びます。
 
 - homeManager: `lang.buf` / `lang.c` / `lang.go` / `lang.haskell` / `lang.jvm` / `lang.lua` / `lang.node` / `lang.python` / `lang.rust` / `lang.wasm`（`people.home.imports` で選ぶ）
-- nixos: `amd` / `nvidia` / `claude-desktop` / `server`
+- nixos: `amd` / `nvidia` / `claude-desktop` / `game` / `server`
+- darwin: `ios-dev`
 
 ### ディレクトリ
 
