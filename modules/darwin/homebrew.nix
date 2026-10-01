@@ -1,17 +1,20 @@
 _:
 
-{
-  flake.modules.homeManager."darwin.homebrew" = {
+let
+  home = {
     programs.fish = {
       interactiveShellInit = ''
         /opt/homebrew/bin/brew shellenv | source
       '';
     };
   };
-
-  flake.modules.darwin.homebrew =
+in
+{
+  flake.modules.darwin.pc =
     { config, ... }:
     {
+      people.home.imports = [ home ];
+
       homebrew = {
         enable = true;
         user = config.system.primaryUser;

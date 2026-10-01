@@ -26,7 +26,7 @@ let
     };
 in
 {
-  flake.modules.homeManager.wallpaper =
+  flake.modules.homeManager.pc =
     { pkgs, lib, ... }:
     lib.mkMerge [
       (lib.mkIf pkgs.stdenv.hostPlatform.isDarwin (

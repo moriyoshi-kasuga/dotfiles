@@ -1,17 +1,20 @@
 _:
 
-{
-  flake.modules.homeManager."gui.brave" = {
+let
+  home = {
     home.file.".config/brave-flags.conf".text = ''
       --enable-features=AcceleratedVideoDecodeLinuxGL,AcceleratedVideoEncoder
       --ozone-platform=wayland
       --disable-gpu-compositing
     '';
   };
-
-  flake.modules.nixos."gui.brave" =
+in
+{
+  flake.modules.nixos.pc =
     { pkgs, config, ... }:
     {
+      people.home.imports = [ home ];
+
       users.users.${config.people.primaryUser}.packages = [
         pkgs.brave
       ];

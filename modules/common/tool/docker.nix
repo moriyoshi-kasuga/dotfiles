@@ -7,7 +7,7 @@ let
   ];
 in
 {
-  flake.modules.homeManager."tool.docker" = {
+  flake.modules.homeManager.base = {
     programs.lazydocker.enable = true;
 
     home.file.".config/docker/daemon.json".text = builtins.toJSON { inherit dns; };
@@ -27,7 +27,7 @@ in
     };
   };
 
-  flake.modules.nixos."tool.docker" = {
+  flake.modules.nixos.base = {
     virtualisation = {
       docker = {
         enable = true;
@@ -36,7 +36,7 @@ in
     };
   };
 
-  flake.modules.darwin."tool.docker" = {
+  flake.modules.darwin.base = {
     homebrew.casks = [
       "docker-desktop"
     ];

@@ -1,7 +1,7 @@
 _:
 
 {
-  flake.modules.darwin.finder = {
+  flake.modules.darwin.pc = {
     system.defaults.finder = {
       AppleShowAllExtensions = true;
       AppleShowAllFiles = true;

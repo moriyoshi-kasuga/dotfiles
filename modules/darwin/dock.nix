@@ -1,7 +1,7 @@
 _:
 
 {
-  flake.modules.darwin.dock = {
+  flake.modules.darwin.pc = {
     system.defaults.dock = {
       autohide = true;
       show-recents = false;

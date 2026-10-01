@@ -37,7 +37,7 @@ let
     };
 in
 {
-  flake.modules.nixos.user = mkUserModule (username: {
+  flake.modules.nixos.base = mkUserModule (username: {
     users.users.${username} = {
       isNormalUser = true;
       description = username;
@@ -60,7 +60,7 @@ in
     nix.settings.trusted-users = [ username ];
   });
 
-  flake.modules.darwin.user = mkUserModule (username: {
+  flake.modules.darwin.base = mkUserModule (username: {
     system.primaryUser = username;
     users.users.${username}.home = "/Users/${username}";
 

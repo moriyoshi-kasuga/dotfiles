@@ -1,7 +1,7 @@
 _:
 
 {
-  flake.modules.nixos."gui.thunar" =
+  flake.modules.nixos.pc =
     { pkgs, ... }:
     {
       programs.thunar = {

@@ -1,7 +1,7 @@
 _:
 
 {
-  flake.modules.homeManager."tool.tff" =
+  flake.modules.homeManager.base =
     { pkgs, ... }:
     {
       home.packages = [

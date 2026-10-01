@@ -1,7 +1,7 @@
 _:
 
-{
-  flake.modules.homeManager."gui.qt" =
+let
+  home =
     { pkgs, ... }:
     {
       catppuccin.kvantum.enable = true;
@@ -43,8 +43,11 @@ _:
         toolbutton_style=4
       '';
     };
+in
+{
+  flake.modules.nixos.pc = {
+    people.home.imports = [ home ];
 
-  flake.modules.nixos."gui.qt" = {
     qt = {
       enable = true;
       style = "kvantum";

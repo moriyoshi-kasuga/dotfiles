@@ -1,7 +1,7 @@
 _:
 
 {
-  flake.modules.homeManager."editor.vim" =
+  flake.modules.homeManager.base =
     { pkgs, ... }:
     {
       programs.vim = {

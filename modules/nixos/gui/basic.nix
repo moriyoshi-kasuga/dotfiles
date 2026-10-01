@@ -1,7 +1,7 @@
 _:
 
 {
-  flake.modules.nixos."gui.basic" = {
+  flake.modules.nixos.pc = {
     catppuccin.cursors.enable = true;
 
     xdg.mime.enable = true;

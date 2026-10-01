@@ -1,7 +1,7 @@
 _:
 
 {
-  flake.modules.homeManager."tool.git" =
+  flake.modules.homeManager.base =
     { pkgs, vars, ... }:
     {
       imports = [

@@ -4,7 +4,7 @@ let
   monospaceFamilies = import ../../../../option/font-families.nix;
 in
 {
-  flake.modules.homeManager."terminal.wezterm" =
+  flake.modules.homeManager.pc =
     {
       lib,
       config,
@@ -35,7 +35,7 @@ in
       + builtins.readFile ./wezterm.lua;
     };
 
-  flake.modules.nixos."terminal.wezterm" =
+  flake.modules.nixos.pc =
     { pkgs, config, ... }:
     {
       users.users.${config.people.primaryUser}.packages = [
@@ -43,7 +43,7 @@ in
       ];
     };
 
-  flake.modules.darwin."terminal.wezterm" = {
+  flake.modules.darwin.pc = {
     homebrew.casks = [
       "wezterm"
     ];

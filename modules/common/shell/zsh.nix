@@ -1,7 +1,7 @@
 _:
 
 {
-  flake.modules.homeManager."shell.zsh" =
+  flake.modules.homeManager.base =
     { pkgs, ... }:
     {
       programs.zsh = {
@@ -27,11 +27,11 @@ _:
       };
     };
 
-  flake.modules.nixos."shell.zsh" = {
+  flake.modules.nixos.base = {
     programs.zsh.enable = true;
   };
 
-  flake.modules.darwin."shell.zsh" = {
+  flake.modules.darwin.base = {
     programs.zsh.enable = true;
   };
 }

@@ -8,7 +8,7 @@ in
   flake.nixosConfigurations.sv-main = inputs.nixpkgs.lib.nixosSystem {
     system = "x86_64-linux";
     modules = [
-      nixos."profile.base"
+      nixos.base
       ./hardware-configuration.nix
       {
         people.primaryUser = "sv-main";
@@ -18,7 +18,6 @@ in
         security.pam.services.remote = { };
 
         people.home.imports = [
-          home."profile.core"
           home."lang.c"
         ];
 

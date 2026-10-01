@@ -8,7 +8,7 @@ in
   flake.darwinConfigurations.job = inputs.nix-darwin.lib.darwinSystem {
     system = "aarch64-darwin";
     modules = [
-      darwin."profile.base"
+      darwin.pc
       {
         people.primaryUser = "mori";
 
@@ -16,8 +16,6 @@ in
           modules.terminal.wezterm.bigMonitor = true;
           modules.font.monospace = "maple";
           imports = [
-            home."profile.core"
-            home."profile.gui"
             home."lang.rust"
             home."lang.wasm"
             home."lang.node"

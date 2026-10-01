@@ -1,7 +1,7 @@
 _:
 
-{
-  flake.modules.homeManager."gui.zathura" = {
+let
+  home = {
     catppuccin.zathura.enable = false;
     programs.zathura = {
       enable = true;
@@ -51,4 +51,7 @@ _:
       '';
     };
   };
+in
+{
+  flake.modules.nixos.pc.people.home.imports = [ home ];
 }

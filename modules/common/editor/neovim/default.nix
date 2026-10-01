@@ -1,7 +1,7 @@
 _:
 
 {
-  flake.modules.homeManager."editor.neovim" =
+  flake.modules.homeManager.base =
     {
       pkgs,
       config,

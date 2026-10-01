@@ -1,7 +1,7 @@
 _:
 
 {
-  flake.modules.homeManager."tool.tmux" =
+  flake.modules.homeManager.base =
     { pkgs, ... }:
     let
       shell = pkgs.lib.getExe pkgs.fish;

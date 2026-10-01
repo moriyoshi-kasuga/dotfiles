@@ -1,7 +1,7 @@
 _:
 
 {
-  flake.modules.nixos.network =
+  flake.modules.nixos.base =
     { pkgs, ... }:
     {
       services.resolved.enable = true;

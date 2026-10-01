@@ -1,7 +1,7 @@
 _:
 
 {
-  flake.modules.nixos.peripherals =
+  flake.modules.nixos.pc =
     { pkgs, ... }:
     {
       # systemd's default hidraw uaccess rules only cover a narrow

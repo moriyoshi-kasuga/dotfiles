@@ -1,7 +1,7 @@
 _:
 
 {
-  flake.modules.homeManager."tool.cli" =
+  flake.modules.homeManager.base =
     { pkgs, lib, ... }:
     {
       programs.man = {

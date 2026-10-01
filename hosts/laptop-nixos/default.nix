@@ -8,15 +8,24 @@ in
   flake.nixosConfigurations.laptop-nixos = inputs.nixpkgs.lib.nixosSystem {
     system = "x86_64-linux";
     modules = [
-      nixos."profile.desktop"
-      nixos."gui.nvidia"
+      nixos.pc
+      nixos.nvidia
       ./hardware-configuration.nix
       {
         people.primaryUser = "mori";
         networking.hostName = "Mori-Laptop-NixOS";
 
         people.home.imports = [
-          home."profile.desktop"
+          home."lang.buf"
+          home."lang.c"
+          home."lang.go"
+          home."lang.haskell"
+          home."lang.jvm"
+          home."lang.lua"
+          home."lang.node"
+          home."lang.python"
+          home."lang.rust"
+          home."lang.wasm"
         ];
       }
     ];

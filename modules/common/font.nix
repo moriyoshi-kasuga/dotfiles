@@ -16,13 +16,13 @@ let
   monospaceFamilies = import ./../../option/font-families.nix;
 in
 {
-  flake.modules.darwin.font =
+  flake.modules.darwin.pc =
     { pkgs, ... }:
     {
       fonts.packages = packages pkgs;
     };
 
-  flake.modules.nixos.font =
+  flake.modules.nixos.pc =
     {
       lib,
       pkgs,

@@ -37,7 +37,7 @@
               chmod -R u+w ./src
               cd ./src
               statix check .
-              deadnix --fail --exclude '**/hardware-configuration.nix' flake.nix modules profiles hosts
+              deadnix --fail --exclude '**/hardware-configuration.nix' flake.nix modules hosts
               treefmt --fail-on-change --no-cache --walk filesystem --tree-root .
               stylua --check --indent-type Spaces --indent-width 2 nvim-config
               shellcheck init.sh

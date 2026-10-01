@@ -1,7 +1,7 @@
 _:
 
 {
-  flake.modules.nixos."gui.greetd" =
+  flake.modules.nixos.pc =
     { pkgs, ... }:
     {
       services.greetd = {

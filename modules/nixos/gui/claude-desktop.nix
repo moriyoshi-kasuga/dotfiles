@@ -1,7 +1,7 @@
 { inputs, ... }:
 
 {
-  flake.modules.nixos."gui.claude-desktop" =
+  flake.modules.nixos."claude-desktop" =
     { pkgs, ... }:
     {
       nixpkgs.overlays = [ inputs.claude-desktop.overlays.default ];

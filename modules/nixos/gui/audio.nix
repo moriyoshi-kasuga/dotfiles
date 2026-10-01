@@ -1,7 +1,7 @@
 _:
 
 {
-  flake.modules.nixos."gui.audio" =
+  flake.modules.nixos.pc =
     { config, pkgs, ... }:
     {
       users.users.${config.people.primaryUser}.extraGroups = [

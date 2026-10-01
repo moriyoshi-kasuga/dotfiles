@@ -1,7 +1,7 @@
 _:
 
 {
-  flake.modules.darwin.tailscale = {
+  flake.modules.darwin.base = {
     services.tailscale.enable = true;
   };
 }

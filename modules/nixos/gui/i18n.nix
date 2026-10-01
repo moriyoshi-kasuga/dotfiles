@@ -1,7 +1,7 @@
 _:
 
 {
-  flake.modules.nixos."gui.i18n" =
+  flake.modules.nixos.pc =
     { pkgs, ... }:
     {
       catppuccin.fcitx5.enable = true;

@@ -56,7 +56,7 @@ let
     ];
 in
 {
-  flake.modules.homeManager.library =
+  flake.modules.homeManager.base =
     {
       lib,
       pkgs,
@@ -123,7 +123,7 @@ in
       ];
     };
 
-  flake.modules.nixos.library =
+  flake.modules.nixos.pc =
     { pkgs, ... }:
     {
       environment.systemPackages = with pkgs; [

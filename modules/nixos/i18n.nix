@@ -1,7 +1,7 @@
 _:
 
 {
-  flake.modules.nixos.i18n = {
+  flake.modules.nixos.base = {
     time.timeZone = "Asia/Tokyo";
 
     i18n = {

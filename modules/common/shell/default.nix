@@ -1,7 +1,7 @@
 { inputs, ... }:
 
 {
-  flake.modules.homeManager.shell =
+  flake.modules.homeManager.base =
     { pkgs, config, ... }:
     let
       inherit (config.catppuccin) flavor;

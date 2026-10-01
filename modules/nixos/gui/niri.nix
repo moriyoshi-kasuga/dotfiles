@@ -12,9 +12,8 @@ let
       xwayland-satellite
       ;
   };
-in
-{
-  flake.modules.homeManager."gui.niri" =
+
+  home =
     { config, ... }:
     {
       home.file = {
@@ -108,10 +107,13 @@ in
         };
       };
     };
-
-  flake.modules.nixos."gui.niri" =
+in
+{
+  flake.modules.nixos.pc =
     { pkgs, ... }:
     {
+      people.home.imports = [ home ];
+
       nixpkgs.overlays = [ xwaylandSatellitePinOverlay ];
 
       programs.niri.enable = true;

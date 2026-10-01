@@ -1,7 +1,7 @@
 _:
 
 {
-  flake.modules.darwin.keyboard = {
+  flake.modules.darwin.pc = {
     system.defaults.NSGlobalDomain = {
       ApplePressAndHoldEnabled = false;
       KeyRepeat = 2;

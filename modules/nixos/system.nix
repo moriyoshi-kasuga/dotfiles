@@ -1,7 +1,7 @@
 _:
 
 {
-  flake.modules.nixos.system =
+  flake.modules.nixos.base =
     { pkgs, ... }:
     {
       services.dbus.enable = true;
