@@ -26,6 +26,11 @@ _:
           ]
         );
 
+      programs.neovim.extraPackages = with pkgs; [
+        clang-tools
+        asm-lsp
+      ];
+
       home.sessionVariables = lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
         CFLAGS = "-fuse-ld=mold";
         CXXFLAGS = "-fuse-ld=mold";

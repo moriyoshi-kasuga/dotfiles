@@ -9,5 +9,10 @@ _:
         python3Packages.pip
         uv
       ];
+
+      programs.neovim.extraPackages = with pkgs; [
+        ty
+        ruff
+      ];
     };
 }
