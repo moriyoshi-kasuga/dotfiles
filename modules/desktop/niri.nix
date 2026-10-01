@@ -5,7 +5,7 @@ let
   # xwayland-satellite 0.8.2 closes Steam's dropdown menus right after they
   # open (https://github.com/Supreeeme/xwayland-satellite/issues/156), so pin it to 0.8.1.
   # Drop this and the flake input once a fixed release lands in nixpkgs.
-  xwaylandSatellitePinOverlay = final: prev: {
+  xwaylandSatellitePinOverlay = _final: prev: {
     inherit
       (import inputs.nixpkgs-xwayland-satellite-pin { inherit (prev.stdenv.hostPlatform) system; })
       xwayland-satellite

@@ -76,7 +76,9 @@
         else
           import inputs.vars-file.outPath;
     in
-    inputs.flake-parts.lib.mkFlake { inherit inputs; } {
+    # `modules` is only consumed internally via `config.flake.modules`, and
+    # `nix flake check` warns about it as an unknown output, so drop it here.
+    removeAttrs (inputs.flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [
         "x86_64-linux"
         "aarch64-darwin"
@@ -86,5 +88,5 @@
         (inputs.import-tree.filterNot (inputs.nixpkgs.lib.hasSuffix "hardware-configuration.nix") ./hosts)
       ];
       _module.args.vars = vars;
-    };
+    }) [ "modules" ];
 }

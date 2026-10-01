@@ -5,7 +5,6 @@ _:
     {
       config,
       pkgs,
-      lib,
       ...
     }:
     {

@@ -1,7 +1,12 @@
-{ inputs, vars, ... }:
+{
+  config,
+  inputs,
+  vars,
+  ...
+}:
 
 let
-  inherit (inputs.self.modules) nixos darwin homeManager;
+  inherit (config.flake.modules) nixos darwin homeManager;
 
   homeManagerCommon = {
     useGlobalPkgs = true;

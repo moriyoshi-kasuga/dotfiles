@@ -1,8 +1,8 @@
-{ inputs, ... }:
+{ config, inputs, ... }:
 
 let
-  nixos = inputs.self.modules.nixos;
-  home = inputs.self.modules.homeManager;
+  nixos = config.flake.modules.nixos;
+  home = config.flake.modules.homeManager;
 in
 {
   flake.nixosConfigurations.laptop-nixos = inputs.nixpkgs.lib.nixosSystem {

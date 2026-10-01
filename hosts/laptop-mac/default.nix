@@ -1,8 +1,8 @@
-{ inputs, ... }:
+{ config, inputs, ... }:
 
 let
-  darwin = inputs.self.modules.darwin;
-  home = inputs.self.modules.homeManager;
+  darwin = config.flake.modules.darwin;
+  home = config.flake.modules.homeManager;
 in
 {
   flake.darwinConfigurations.laptop-mac = inputs.nix-darwin.lib.darwinSystem {
