@@ -15,6 +15,7 @@ _:
         mouse = true;
         keyMode = "vi";
         shortcut = "t";
+        terminal = "tmux-256color";
         inherit shell;
         extraConfig = builtins.readFile ./tmux.conf + ''
           set -g default-command "${shell}"

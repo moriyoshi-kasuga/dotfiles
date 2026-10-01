@@ -7,7 +7,8 @@ end
 
 set -l session_name (basename $selected_path)
 
-while tmux has-session -t "=$session_name" 2>/dev/null
+# tmux は `.` 以降をペイン指定として読むので、末尾に `:` を付けてセッション名に限定する
+while tmux has-session -t "=$session_name:" 2>/dev/null
     read -P "Session '$session_name' already exists. New name (empty to cancel): " -l new_name
     if test -z "$new_name"
         exit 0
@@ -17,7 +18,7 @@ end
 
 if test -n "$TMUX"
     tmux new-session -d -s "$session_name" -c "$selected_path"
-    tmux switch-client -t "$session_name"
+    tmux switch-client -t "=$session_name:"
 else
     tmux new-session -s "$session_name" -c "$selected_path"
 end
