@@ -1,7 +1,7 @@
 _:
 
 let
-  monospaceFamilies = import ../../../../option/font-families.nix;
+  monospaceFamilies = import ../../../option/font-families.nix;
 in
 {
   flake.modules.homeManager.pc =

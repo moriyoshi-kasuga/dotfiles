@@ -13,6 +13,7 @@ _:
       home.packages =
         (with pkgs; [
           coreutils
+          fastfetch
 
           ripgrep
           jid

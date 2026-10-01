@@ -13,7 +13,7 @@ let
       noto-fonts-color-emoji
     ];
 
-  monospaceFamilies = import ./../../option/font-families.nix;
+  monospaceFamilies = import ../../option/font-families.nix;
 in
 {
   flake.modules.darwin.pc =

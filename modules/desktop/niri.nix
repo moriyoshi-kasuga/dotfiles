@@ -1,7 +1,7 @@
 { inputs, ... }:
 
 let
-  monospaceFamilies = import ../../../option/font-families.nix;
+  monospaceFamilies = import ../../option/font-families.nix;
   # FIXME:
   # xwayland-satellite 0.8.2 closes Steam's dropdown menus right after they
   # open (https://github.com/Supreeeme/xwayland-satellite/issues/156), so pin it to 0.8.1.
@@ -112,7 +112,10 @@ in
   flake.modules.nixos.pc =
     { pkgs, ... }:
     {
-      people.home.imports = [ home ];
+      people.home.imports = [
+        inputs.noctalia.homeModules.default
+        home
+      ];
 
       nixpkgs.overlays = [ xwaylandSatellitePinOverlay ];
 

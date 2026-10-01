@@ -1,6 +1,12 @@
 { inputs, ... }:
 
+let
+  nixpkgs.overlays = [ inputs.nix-claude-code.overlays.default ];
+in
 {
+  flake.modules.nixos.base = { inherit nixpkgs; };
+  flake.modules.darwin.base = { inherit nixpkgs; };
+
   flake.modules.homeManager.base =
     {
       pkgs,
@@ -117,7 +123,7 @@
       programs.claude-code = {
         enable = true;
         package = pkgs.claude-code;
-        commandsDir = ../../../../commands;
+        commandsDir = ../../../commands;
         skills = lib.listToAttrs skillList;
         plugins = {
           inherit (inputs) mattpocock-skills;

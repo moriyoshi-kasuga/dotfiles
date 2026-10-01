@@ -123,6 +123,10 @@ in
       ];
     };
 
+  flake.modules.nixos.base = {
+    programs.nix-ld.enable = true;
+  };
+
   flake.modules.nixos.pc =
     { pkgs, ... }:
     {
