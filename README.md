@@ -62,68 +62,50 @@ unixpornではなく、シンプルさを保つための設定です。
 
 ## Module Hierarchy
 
-```
-modules/
-├── common/               # クロスプラットフォーム共通
-│   ├── base.nix          # Home Manager 基盤・Catppuccin
-│   ├── user.nix          # primaryUser と、そのユーザーの home-manager 設定 (people.*)
-│   ├── shell/            # Fish / Zsh / Starship / direnv / fzf / zoxide
-│   ├── editor/           # Neovim / Vim
-│   ├── terminal/         # WezTerm
-│   ├── lang/             # C / Node / Python / Go / Rust (+WASM) / Haskell / JVM / ...
-│   ├── tool/             # Git / tmux / Docker / Claude Code / ripgrep / bat / mise / ...
-│   ├── library.nix       # 開発用共有ライブラリ (LD_LIBRARY_PATH, PKG_CONFIG_PATH)
-│   ├── font.nix          # Maple Mono / Noto CJK
-│   └── wallpaper.nix     # 壁紙ローテーション (systemd / launchd)
-│
-├── nixos/                # NixOS システム設定
-│   ├── system.nix        # ブートローダー・sudo・SSH・zram
-│   ├── network.nix       # NetworkManager・ホスト名・DNS
-│   ├── i18n.nix          # タイムゾーン・ロケール
-│   ├── tailscale.nix     # Tailscale VPN
-│   └── gui/              # GUI 環境
-│       ├── basic.nix     # libinput・polkit・upower・電源管理
-│       ├── niri.nix      # Niri compositor + Noctalia shell
-│       ├── audio.nix     # PipeWire
-│       ├── bluetooth.nix # Bluetooth
-│       └── ...           # Qt / Brave / game / thunar / zathura / i18n (fcitx5)
-│
-├── darwin/               # macOS システム設定
-│   ├── homebrew.nix      # Homebrew casks
-│   ├── ios-dev.nix       # iOS 開発ツール (Xcode 関連)
-│   ├── aerospace.nix     # Aerospace ウィンドウマネージャー
-│   ├── dock.nix          # Dock 設定
-│   └── ...               # finder / tailscale
-│
-└── flake/                # flake-parts 自体の設定 (開発者向け)
-    ├── options.nix       # 追加の flake-parts オプション定義
-    └── checks.nix        # lint / eval check・formatter・devShell
+このリポジトリは [dendritic pattern](https://github.com/mightyiam/dendritic) を採用しています。
+`modules/` と `hosts/` 以下のすべての `.nix` ファイルは [flake-parts](https://flake.parts) モジュールで、
+[import-tree](https://github.com/vic/import-tree) が再帰的に import します
+（自動生成される `hardware-configuration.nix` だけは flake-parts モジュールではないため除外しています）。
 
-profiles/                 # ホストに割り当てる profile の束ね (class ごとに profile.* を登録)
-├── home/
-│   ├── core.nix          # profile.core (shell / editor / tool の基本セット)
-│   ├── desktop.nix       # profile.desktop (GUI 込みのフルセット)
-│   ├── gui.nix           # profile.gui (WezTerm / wallpaper)
-│   └── lang-full.nix     # profile.lang-full (全言語ツールチェイン)
-├── nixos/
-│   ├── base.nix          # profile.base (サーバーにも使う NixOS の土台)
-│   └── desktop.nix       # profile.desktop (profile.base + GUI 環境)
-└── darwin/
-    └── base.nix          # profile.base (macOS ホスト共通)
+### 層
 
-hosts/                    # ホストごとの nixosConfigurations / darwinConfigurations
-├── desktop/              # default.nix + hardware-configuration.nix
-├── laptop-nixos/         # default.nix + hardware-configuration.nix
-├── sv-main/              # default.nix + hardware-configuration.nix
-├── laptop-mac/           # default.nix (macOS はハードウェア設定なし)
-└── job/                  # default.nix
-```
+各ファイルは `flake.modules.<nixos|darwin|homeManager>.<層>` に設定を書き足します。層は次の 2 つです。
 
-このリポジトリは [dendritic pattern](https://github.com/vic/import-tree) を採用しており、`modules/` と `profiles/` 以下のすべての
-`.nix` ファイルは [flake-parts](https://flake.parts) モジュールです（`import-tree` が再帰的に import します）。各ファイルは
-`flake.modules.<nixos|darwin|homeManager>.<aspect>` に自身を登録します。`hosts/<name>/default.nix` は使う aspect を明示的に
-import して `nixosConfigurations` / `darwinConfigurations` を組み立てるホスト定義ファイルで、こちらも同様に import-tree の対象ですが、
-`hardware-configuration.nix`（自動生成されるハードウェア設定）だけは flake-parts モジュールではないため import 対象から除外されています。
+| 層 | 対象 | 内容 |
+| :--- | :--- | :--- |
+| `base` | 全ホスト | nix 設定、ユーザー、shell、editor、開発ツール、tailscale など |
+| `pc` | 画面を持つホスト | `base` に加えて terminal、font、壁紙、デスクトップ環境 (NixOS) / macOS の設定 |
+
+`modules/home-manager.nix` が OS 側の層と home 側の層をつないでいます。
+ホストは `nixos.pc` / `nixos.base` / `darwin.pc` のどれか 1 つを import するだけで、home 側の設定も揃います。
+
+層に含めない任意の機能は、名前付きのモジュールとしてホストが個別に選びます。
+
+- homeManager: `lang.buf` / `lang.c` / `lang.go` / `lang.haskell` / `lang.jvm` / `lang.lua` / `lang.node` / `lang.python` / `lang.rust` / `lang.wasm`（`people.home.imports` で選ぶ）
+- nixos: `amd` / `nvidia` / `claude-desktop` / `server`
+
+### ディレクトリ
+
+ディレクトリは OS ではなく機能ごとに分けています。どの OS 向けかは、ファイル内で書き足している class で分かります。
+
+- `modules/`
+  - `home-manager.nix`: home-manager の統合と層の配線
+  - `users.nix`: `people.primaryUser` / `people.home`
+  - `state-version.nix`: stateVersion
+  - `nix/`: nix の設定、nixpkgs
+  - `style/`: Catppuccin、フォント、壁紙ローテーション
+  - `shell/`: Fish / Zsh / Starship / direnv / fzf / zoxide、OS 差を埋める shim (`notify` / `pbcopy` など)
+  - `editor/`: Neovim / Vim
+  - `terminal/`: WezTerm
+  - `lang/`: 各言語のツールチェインと language server
+  - `dev/`: Git / tmux / Docker / Claude Code / CLI ツール / 開発用共有ライブラリ
+  - `desktop/`: Niri + Noctalia / greetd / PipeWire / Bluetooth / Qt / fcitx5 / Brave / game など (NixOS)
+  - `macos/`: Homebrew / Aerospace / Dock / Finder / キーボード / iOS 開発ツール
+  - `networking/`: NetworkManager・DNS、Tailscale
+  - `system/`: ブートローダー・sudo・SSH・zram・タイムゾーンとロケール、`server`
+  - `hardware/`: AMD / NVIDIA GPU、周辺機器
+  - `flake/`: flake-parts 自体の設定（lint / eval check・formatter・devShell）
+- `hosts/<name>/`: ホストごとの `nixosConfigurations` / `darwinConfigurations`（NixOS は `hardware-configuration.nix` も置く）
 
 ## License
 
