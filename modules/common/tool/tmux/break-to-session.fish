@@ -1,7 +1,7 @@
 #!/usr/bin/env fish
 
-set -l pane_id $argv[1]
-set -l pane_path $argv[2]
+set -l pane_id (tmux display-message -p '#{pane_id}')
+set -l pane_path (tmux display-message -p '#{pane_current_path}')
 
 set -l session_name (basename $pane_path)
 
@@ -15,6 +15,8 @@ end
 
 tmux new-session -d -s "$session_name" -c "$pane_path"
 set -l default_pane (tmux list-panes -t "$session_name" -F '#{pane_id}')
-tmux join-pane -s "$pane_id" -t "$session_name"
-tmux kill-pane -t "$default_pane"
-tmux switch-client -t "$session_name"
+# 元セッションのペインが1つだけだとjoin-paneで元セッションが消えてpopupごと終了するので、
+# 後続の操作が途中で止まらないよう1回のtmux呼び出しにまとめる
+tmux switch-client -t "$session_name" \; \
+    join-pane -s "$pane_id" -t "$default_pane" \; \
+    kill-pane -t "$default_pane"
