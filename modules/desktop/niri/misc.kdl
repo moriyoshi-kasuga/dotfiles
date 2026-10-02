@@ -32,4 +32,6 @@ screenshot-path "~/Pictures/Screenshots/Screenshot-from-%Y-%m-%d-%H-%M-%S.png";
 debug {
   // Allows notification actions and window activation from Noctalia.
   honor-xdg-activation-with-invalid-serial
+  // Nothing is connected to the iGPU, so keep niri off it entirely.
+  ignore-drm-device "/dev/dri/by-path/pci-0000:10:00.0-render"
 }

@@ -23,3 +23,11 @@ window-rule {
     on
   }
 }
+
+// Steam games (app-id is steam_app_<appid>) drive VRR on outputs with
+// variable-refresh-rate on-demand=true.
+window-rule {
+  match app-id=r#"^steam_app_"#
+  match app-id="gamescope"
+  variable-refresh-rate true
+}

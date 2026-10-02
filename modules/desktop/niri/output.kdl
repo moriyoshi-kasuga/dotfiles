@@ -1,7 +1,16 @@
-// Run `niri msg outputs` to list all outputs and their modes.
-output "DP-3" {
+output "Acer Technologies KG251Q T8ZSJ00785C7" {
   mode "1920x1080@164.917"
   scale 1
   transform "normal"
   position x=0 y=0
+  focus-at-startup
+  // Enabled only while a window-rule with variable-refresh-rate is visible.
+  variable-refresh-rate on-demand=true
+}
+
+output "PNP(ZSC) Display 000000001" {
+  mode "1920x1080@60.000"
+  scale 1
+  transform "normal"
+  position x=-1920 y=0
 }
