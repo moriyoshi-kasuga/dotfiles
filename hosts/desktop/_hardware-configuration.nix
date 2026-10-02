@@ -7,7 +7,8 @@
 }:
 
 {
-  boot.kernelPackages = pkgs.linuxKernel.packages.linux_7_2;
+  # RDNA4 (RX 9060 XT) の amdgpu 修正を早く取り込むため最新カーネルを追う
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
@@ -22,7 +23,7 @@
     "usb_storage"
     "sd_mod"
   ];
-  boot.initrd.kernelModules = [ "amdgpu" ];
+  boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
@@ -76,6 +77,12 @@
       "fmask=0077"
       "dmask=0077"
     ];
+  };
+
+  # 同じデバイス上のサブボリュームは 1 回の scrub でまとめて検査される
+  services.btrfs.autoScrub = {
+    enable = true;
+    fileSystems = [ "/" ];
   };
 
   swapDevices = [

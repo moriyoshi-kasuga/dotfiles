@@ -5,12 +5,18 @@ _:
     { pkgs, ... }:
     {
       services.resolved.enable = true;
-      services.resolved.settings.Resolve.DNSOverTLS = "opportunistic";
+      services.resolved.settings.Resolve = {
+        DNSOverTLS = "opportunistic";
+        # LAN 内での名前解決のなりすましを避ける
+        LLMNR = "no";
+        MulticastDNS = "no";
+      };
 
       networking = {
+        # `#` 以降は DoT で証明書を検証するためのサーバー名
         nameservers = [
-          "1.1.1.1"
-          "8.8.8.8"
+          "1.1.1.1#one.one.one.one"
+          "8.8.8.8#dns.google"
         ];
         networkmanager = {
           enable = true;
