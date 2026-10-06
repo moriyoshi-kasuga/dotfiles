@@ -28,6 +28,14 @@ in
         # multi-tenant hosts, not a single-user desktop.
         boot.kernelParams = [ "split_lock_detect=off" ];
 
+        # The MT7922's Bluetooth half sits on USB via btusb, which
+        # autosuspends it when idle; resuming it mid-stream causes audio
+        # dropouts and "ACL packet for unknown connection handle" errors.
+        # Power saving is irrelevant on a desktop.
+        boot.extraModprobeConfig = ''
+          options btusb enable_autosuspend=0
+        '';
+
         style.fonts.monospace = "monaspace-neon";
 
         people.home.imports = [
