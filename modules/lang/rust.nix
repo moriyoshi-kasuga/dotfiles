@@ -1,8 +1,11 @@
-_:
+{ inputs, ... }:
 
 {
   flake.modules.homeManager."lang.rust" =
     { pkgs, lib, ... }:
+    let
+      pkgsMaster = inputs.nixpkgs-master.legacyPackages.${pkgs.stdenv.hostPlatform.system};
+    in
     {
       programs.zsh.initContent = ''
         export PATH="$PATH:$HOME/.cargo/bin"
@@ -15,6 +18,12 @@ _:
       # mold is a fallback: `cargo build --config 'target."cfg(target_os = \"linux\")".rustflags=["-C","link-arg=-fuse-ld=mold"]'`
       # if wild fails to link a specific crate.
       home.file.".cargo/config.toml".text = ''
+        [env]
+        CARGO_INCREMENTAL = 0
+
+        [build]
+        rustc-wrapper = "kache"
+
         [target.'cfg(target_os = "linux")']
         rustflags = ["-C", "link-arg=-fuse-ld=wild"]
 
@@ -42,6 +51,7 @@ _:
           cargo-llvm-lines
           cargo-depgraph
         ])
+        ++ [ pkgsMaster.kache ]
         ++ lib.optionals pkgs.stdenv.hostPlatform.isLinux [ pkgs.wild ];
 
       # Ensure Cargo links with Apple's ld64-backed cc for the native Darwin target,
