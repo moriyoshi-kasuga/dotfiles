@@ -19,7 +19,7 @@
       # if wild fails to link a specific crate.
       home.file.".cargo/config.toml".text = ''
         [env]
-        CARGO_INCREMENTAL = 0
+        CARGO_INCREMENTAL = "0"
 
         [build]
         rustc-wrapper = "kache"
