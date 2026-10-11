@@ -280,33 +280,17 @@
     },
     "nixpkgs-master": {
       "locked": {
-        "lastModified": 1791701120,
-        "narHash": "sha256-h6SKvO4hUgkL4MhrH1oO7mSGvKDIvHFbb2p98rFXXw4=",
+        "lastModified": 1791716384,
+        "narHash": "sha256-TKNEYu4KIqZCQ1+HDkfk+5/J0IKg1rUM7bIexZyinp8=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "a0b3690edfa2fde0d521ed0692e7b5d0a1d2f904",
+        "rev": "759470ebac766f0adf036a79688c664a124ff157",
         "type": "github"
       },
       "original": {
         "owner": "nixos",
         "ref": "master",
         "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs-xwayland-satellite-pin": {
-      "locked": {
-        "lastModified": 1785602060,
-        "narHash": "sha256-z7D96eESRM4CPV/XtwpwFn8IDdfLAmxz6lVWrGYXvR4=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "a5cbcfe954791221bfffe2307f7d1a1bf61a871e",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "a5cbcfe954791221bfffe2307f7d1a1bf61a871e",
         "type": "github"
       }
     },
@@ -362,7 +346,6 @@
         "nix-darwin": "nix-darwin",
         "nixpkgs": "nixpkgs",
         "nixpkgs-master": "nixpkgs-master",
-        "nixpkgs-xwayland-satellite-pin": "nixpkgs-xwayland-satellite-pin",
         "noctalia": "noctalia",
         "obra-superpowers": "obra-superpowers",
         "vars-file": "vars-file",
