@@ -1,24 +1,6 @@
-{ inputs, ... }:
+{ ... }:
 
 let
-  # FIXME:
-  # xwayland-satellite 0.8.2 closes Steam's dropdown menus right after they
-  # open (https://github.com/Supreeeme/xwayland-satellite/issues/156), so pin it to 0.8.1.
-  # Drop this and the flake input once a fixed release lands in nixpkgs.
-  #
-  # Only the satellite itself is pinned. The pinned nixpkgs' Xwayland is built
-  # against an older glibc than the system mesa in /run/opengl-driver, so it
-  # cannot load the GPU driver: glamor falls back to software rendering, DRI3
-  # disappears, and Vulkan games under Proton exit at startup with
-  # "No DRI3 support detected".
-  xwaylandSatellitePinOverlay = _final: prev: {
-    xwayland-satellite =
-      (import inputs.nixpkgs-xwayland-satellite-pin {
-        inherit (prev.stdenv.hostPlatform) system;
-      }).xwayland-satellite.override
-        { inherit (prev) xwayland; };
-  };
-
   # config.kdl はこの順に config/*.kdl を include する。
   # 後の include ほど優先されるので、ホスト固有の設定 (host.kdl) は最後に置く。
   sharedConfigs = [
@@ -92,8 +74,6 @@ in
         desktop.niri.configDir = configDir;
 
         people.home.imports = [ home ];
-
-        nixpkgs.overlays = [ xwaylandSatellitePinOverlay ];
 
         programs.niri.enable = true;
         programs.xwayland.enable = true;

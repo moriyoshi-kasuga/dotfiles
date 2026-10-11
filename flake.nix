@@ -62,10 +62,6 @@
       url = "file+file:///dev/null";
       flake = false;
     };
-
-    # nixpkgs rev with xwayland-satellite 0.8.1.
-    # Only used by the overlay in modules/desktop/niri/default.nix.
-    nixpkgs-xwayland-satellite-pin.url = "github:nixos/nixpkgs/a5cbcfe954791221bfffe2307f7d1a1bf61a871e";
   };
 
   outputs =
