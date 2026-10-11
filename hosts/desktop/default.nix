@@ -40,6 +40,14 @@ in
           options btusb enable_autosuspend=0
         '';
 
+        # The USB condenser mic is the input here, so the earbuds should stay
+        # on A2DP. By default WirePlumber flips them to the low-quality HFP
+        # profile whenever any app opens their mic, and Proton games open a
+        # test stream on every capture device at startup.
+        services.pipewire.wireplumber.extraConfig."51-bluetooth-no-autoswitch"."wireplumber.settings" = {
+          "bluetooth.autoswitch-to-headset-profile" = false;
+        };
+
         style.fonts.monospace = "monaspace-neon";
 
         people.home.imports = [
