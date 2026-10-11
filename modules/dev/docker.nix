@@ -36,6 +36,13 @@ in
     };
   };
 
+  # 画面のある host では起動時に dockerd を立ち上げず、docker.socket 経由で初回利用時に起動する。
+  # 起動が network-online.target 待ちに引きずられず、使わない日はメモリも食わない。
+  # (常時稼働のコンテナを置く server では従来どおり起動時に立ち上げる)
+  flake.modules.nixos.pc = {
+    virtualisation.docker.enableOnBoot = false;
+  };
+
   # homebrew は darwin.pc でだけ有効にしている
   flake.modules.darwin.pc = {
     homebrew.casks = [

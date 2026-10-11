@@ -1,7 +1,7 @@
-environment {
-  ELECTRON_OZONE_PLATFORM_HINT "auto"
-  XMODIFIERS "@im=fcitx"
-}
+// Environment for spawned processes comes from the systemd user manager
+// (niri runs as niri.service), so no `environment {}` block here.
+// noctalia and easyeffects are systemd user services, not spawn-at-startup,
+// so they get restarted if they crash.
 
 animations {
     off
@@ -20,9 +20,6 @@ cursor {
   hide-after-inactive-ms 10000
 }
 
-spawn-at-startup "easyeffects" "--service-mode" "-w"
-spawn-at-startup "noctalia"
-
 hotkey-overlay {
   skip-at-startup
 }
@@ -32,6 +29,4 @@ screenshot-path "~/Pictures/Screenshots/Screenshot-from-%Y-%m-%d-%H-%M-%S.png";
 debug {
   // Allows notification actions and window activation from Noctalia.
   honor-xdg-activation-with-invalid-serial
-  // Nothing is connected to the iGPU, so keep niri off it entirely.
-  ignore-drm-device "/dev/dri/by-path/pci-0000:10:00.0-render"
 }

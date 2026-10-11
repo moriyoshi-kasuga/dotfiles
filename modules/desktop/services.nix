@@ -28,5 +28,10 @@ _:
     systemd.sleep.settings.Sleep.HibernateDelaySec = 3600;
 
     security.polkit.enable = true;
+
+    # Under sustained memory pressure, kill the heaviest unit in the user
+    # slice before the kernel OOM killer thrashes. noctalia launches apps as
+    # their own units, so a single app gets picked instead of the whole shell.
+    systemd.oomd.enableUserSlices = true;
   };
 }

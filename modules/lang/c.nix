@@ -31,7 +31,7 @@ _:
         asm-lsp
       ];
 
-      home.sessionVariables = lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
+      shell.interactiveVariables = lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
         CFLAGS = "-fuse-ld=mold";
         CXXFLAGS = "-fuse-ld=mold";
         LDFLAGS = "-fuse-ld=mold";

@@ -6,11 +6,11 @@ _:
     {
       catppuccin.fcitx5.enable = true;
 
-      # XMODIFIERS is set via the niri "environment" block (see
-      # modules/desktop/niri/misc.kdl) instead of here: its "@im=fcitx" value makes
-      # pam_env warn on every login/sudo ("Expandable variables must be
-      # wrapped in {}") since environment.sessionVariables is also exported
-      # through /etc/pam/environment.
+      # XMODIFIERS is not set here: its "@im=fcitx" value makes pam_env warn
+      # on every login/sudo ("Expandable variables must be wrapped in {}")
+      # since environment.sessionVariables is also exported through
+      # /etc/pam/environment. The fcitx5 module already puts it in
+      # environment.variables, which niri-session imports into systemd --user.
       environment.sessionVariables = {
         QT_IM_MODULE = "fcitx";
         QT_IM_MODULES = "fcitx";

@@ -17,9 +17,13 @@ in
         people.primaryUser = "mori";
         networking.hostName = "Mori-NixOS";
 
-        # RDNA4 dGPU (RX 9060 XT) is new hardware; keep firmware/microcode
-        # blobs up to date to reduce amdgpu instability (fence timeouts).
+        # Firmware for the RX 9060 XT (RDNA4), MT7922 and CPU microcode.
+        # The amdgpu fence timeouts and page faults seen earlier all came from
+        # the iGPU (0000:10:00.0), which is now disabled in the BIOS.
         hardware.enableRedistributableFirmware = true;
+
+        # Monitors and the iGPU guard; included after the shared niri config.
+        desktop.niri.extraConfig = builtins.readFile ./niri.kdl;
 
         # This Zen 5 chip's bus-lock detection fires constantly under
         # Chrome/Proton (tens of thousands of trapped+throttled

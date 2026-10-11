@@ -88,7 +88,7 @@ in
           ];
 
           home.packages = cfg.libs;
-          home.sessionVariables = rec {
+          shell.interactiveVariables = rec {
             PKG_CONFIG_PATH =
               let
                 getPkgConfigPath =

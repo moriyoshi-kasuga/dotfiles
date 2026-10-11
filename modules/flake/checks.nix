@@ -7,7 +7,7 @@
 
 {
   perSystem =
-    { pkgs, ... }:
+    { pkgs, system, ... }:
     let
       devTools = with pkgs; [
         nixfmt-tree
@@ -33,6 +33,12 @@
       # Evaluation is pure, so every configuration can be evaluated on any
       # system. This lets Linux CI catch broken darwin configurations too.
       allConfigs = config.flake.nixosConfigurations // config.flake.darwinConfigurations;
+
+      # eval-configs only evaluates, so build the niri config directories here
+      # to actually run `niri validate` on them.
+      niriConfigs = lib.filterAttrs (
+        _: cfg: cfg.config.programs.niri.enable && cfg.pkgs.stdenv.hostPlatform.system == system
+      ) config.flake.nixosConfigurations;
     in
     {
       formatter = pkgs.nixfmt-tree;
@@ -57,7 +63,10 @@
           }
           touch "$out"
         '';
-      };
+      }
+      // lib.mapAttrs' (
+        name: cfg: lib.nameValuePair "niri-config-${name}" cfg.config.desktop.niri.configDir
+      ) niriConfigs;
 
       devShells.default = pkgs.mkShell {
         packages = devTools ++ [ pkgs.nixd ];

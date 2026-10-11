@@ -1,9 +1,10 @@
 { inputs, ... }:
 
 let
-  # nixos/darwin 共通の nix.* 設定。ホスト固有の差分は gc に対する `//` で追加する。
+  # nixos/darwin 共通の nix.* 設定。OS 固有の差分は settings や gc に対する `//` で追加する。
   mkNixCommon =
     {
+      extraSettings ? { },
       extraGc ? { },
     }:
     {
@@ -20,7 +21,8 @@ let
         # ビルド中に空きが min-free を下回ったら max-free まで GC する
         min-free = 5 * 1024 * 1024 * 1024;
         max-free = 20 * 1024 * 1024 * 1024;
-      };
+      }
+      // extraSettings;
       optimise.automatic = true;
       gc = {
         automatic = true;
@@ -38,12 +40,28 @@ in
     {
       nix =
         mkNixCommon {
+          # 既定 (max-jobs = CPU 数, cores = 0 は全コア) だと 16 並列 x 16 スレッドまで膨らみ、
+          # メモリを使い切ってデスクトップごと固まる
+          extraSettings = {
+            max-jobs = 4;
+            cores = 8;
+          };
           extraGc.dates = "weekly";
         }
         // {
           package = pkgs.nixVersions.latest;
           channel.enable = false;
+          # ビルド中も対話的な処理を優先させる
+          daemonCPUSchedPolicy = "batch";
+          daemonIOSchedClass = "idle";
         };
+
+      # ビルドが暴走したときに止まるのはデスクトップではなくビルド側にする。
+      # MemoryHigh で reclaim して減速させ、それでも MemoryMax に達したら cgroup 内で OOM kill される。
+      systemd.services.nix-daemon.serviceConfig = {
+        MemoryHigh = "60%";
+        MemoryMax = "80%";
+      };
     };
 
   flake.modules.darwin.base = {

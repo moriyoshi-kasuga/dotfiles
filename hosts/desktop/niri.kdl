@@ -14,3 +14,10 @@ output "PNP(ZSC) Display 000000001" {
   transform "normal"
   position x=-1920 y=0
 }
+
+debug {
+  // The iGPU is disabled in the BIOS. Keep niri off it anyway in case a BIOS
+  // update or CMOS reset re-enables it: every amdgpu ring timeout/page fault
+  // seen on this machine came from the iGPU, never from the RX 9060 XT.
+  ignore-drm-device "/dev/dri/by-path/pci-0000:10:00.0-render"
+}
