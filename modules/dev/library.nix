@@ -1,7 +1,8 @@
 _:
 
 let
-  linuxLibs =
+  # 画面のない host でも、配布バイナリの実行やネイティブ拡張のビルドに要るライブラリ
+  headlessLinuxLibs =
     pkgs: with pkgs; [
       zlib
       zstd
@@ -13,6 +14,13 @@ let
       libsodium
       util-linux
       xz
+      libelf
+      libev
+    ];
+
+  # GUI アプリ (Tauri など) のビルドや実行に要るライブラリ
+  guiLinuxLibs =
+    pkgs: with pkgs; [
       vulkan-loader
       vulkan-tools
       libxcomposite
@@ -35,10 +43,8 @@ let
       libxdamage
       libxshmfence
       libxxf86vm
-      libelf
       libinput
       udev
-      libev
       libevdev
       gdk-pixbuf
       gobject-introspection
@@ -54,6 +60,19 @@ let
       webkitgtk_4_1
       wayland
     ];
+
+  darwinHome =
+    { pkgs, ... }:
+    {
+      library.libs = with pkgs; [
+        libiconv
+        llvm
+        nsis
+      ];
+      home.sessionVariablesExtra = ''
+        export SDKROOT="$(xcrun --show-sdk-path)"
+      '';
+    };
 in
 {
   flake.modules.homeManager.base =
@@ -64,75 +83,55 @@ in
       ...
     }:
     let
-      cfg = config.library;
+      inherit (config.library) libs;
     in
     {
       options.library.libs = lib.mkOption {
         type = lib.types.listOf lib.types.package;
         default = [ ];
-        description = "Additional packages";
+        description = "Libraries installed and exposed to compilers and the dynamic linker in interactive shells.";
       };
 
-      config = lib.mkMerge [
-        {
-          library.libs = with pkgs; [
-            imagemagick
-            ffmpeg
-            curl
-            openssl
-            libssh
-            sqlite
-            icu
-            lua5_4
-            pkg-config
-          ];
+      config = {
+        library.libs = with pkgs; [
+          imagemagick
+          ffmpeg
+          curl
+          openssl
+          libssh
+          sqlite
+          icu
+          pkg-config
+        ];
 
-          home.packages = cfg.libs;
-          shell.interactiveVariables = rec {
-            PKG_CONFIG_PATH =
-              let
-                getPkgConfigPath =
-                  pkg:
-                  let
-                    pcpath = pkg.dev or pkg;
-                    path = "${pcpath}/lib/pkgconfig";
-                  in
-                  if builtins.pathExists path then path else null;
-                pkgConfigPaths = builtins.filter (x: x != null) (map getPkgConfigPath cfg.libs);
-              in
-              lib.concatStringsSep ":" pkgConfigPaths;
-            LD_LIBRARY_PATH = lib.makeLibraryPath cfg.libs;
-            LIBRARY_PATH = LD_LIBRARY_PATH;
-          };
-        }
-        (lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
-          library.libs = with pkgs; [
-            libiconv
-            llvm
-            nsis
-          ];
-          home.sessionVariablesExtra = ''
-            export SDKROOT="$(xcrun --show-sdk-path)"
-            export CC_aarch64_apple_darwin=/usr/bin/cc
-            export CXX_aarch64_apple_darwin=/usr/bin/c++
-          '';
-        })
-        (lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
-          library.libs = linuxLibs pkgs;
-        })
-      ];
+        home.packages = libs;
+        shell.interactiveVariables = rec {
+          # 存在しないディレクトリは pkg-config が無視する。評価中に pathExists で
+          # 確かめると各ライブラリの dev 出力のビルドが必要になる (IFD)。
+          PKG_CONFIG_PATH = lib.makeSearchPathOutput "dev" "lib/pkgconfig" libs;
+          LD_LIBRARY_PATH = lib.makeLibraryPath libs;
+          LIBRARY_PATH = LD_LIBRARY_PATH;
+        };
+      };
     };
 
-  flake.modules.nixos.base = {
-    programs.nix-ld.enable = true;
-  };
+  # nix-ld と対話シェルの LD_LIBRARY_PATH には、層ごとに同じライブラリを入れる
+  flake.modules.nixos.base =
+    { pkgs, ... }:
+    {
+      programs.nix-ld = {
+        enable = true;
+        libraries = headlessLinuxLibs pkgs;
+      };
+      people.home.library.libs = headlessLinuxLibs pkgs;
+    };
 
   flake.modules.nixos.pc =
     { pkgs, ... }:
     {
-      environment.systemPackages = with pkgs; [
-        pkg-config
-      ];
-      programs.nix-ld.libraries = linuxLibs pkgs;
+      programs.nix-ld.libraries = guiLinuxLibs pkgs;
+      people.home.library.libs = guiLinuxLibs pkgs;
     };
+
+  flake.modules.darwin.base.people.home.imports = [ darwinHome ];
 }
