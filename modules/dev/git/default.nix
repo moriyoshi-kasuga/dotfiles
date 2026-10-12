@@ -2,7 +2,7 @@ _:
 
 {
   flake.modules.homeManager.base =
-    { pkgs, vars, ... }:
+    { pkgs, ... }:
     {
       imports = [
         ./_delta.nix
@@ -24,8 +24,9 @@ _:
           branch.sort = "-committerdate";
         };
 
-        # ref: https://nix-community.github.io/home-manager/options.xhtml#opt-programs.git.includes
-        includes = vars.gitIncludes;
+        # user.name / email などマシンごとの設定はリポジトリに入れず、このファイルに書く。
+        # ファイルが無ければ git は読み飛ばす。
+        includes = [ { path = "~/.config/git/local"; } ];
       };
 
       home.packages = with pkgs; [

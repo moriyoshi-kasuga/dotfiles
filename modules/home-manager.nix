@@ -1,9 +1,4 @@
-{
-  config,
-  inputs,
-  vars,
-  ...
-}:
+{ config, inputs, ... }:
 
 let
   inherit (config.flake.modules) nixos darwin homeManager;
@@ -11,7 +6,6 @@ let
   homeManagerCommon = {
     useGlobalPkgs = true;
     useUserPackages = true;
-    extraSpecialArgs = { inherit vars inputs; };
   };
 in
 {

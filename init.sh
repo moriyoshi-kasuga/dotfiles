@@ -2,16 +2,6 @@
 
 set -euo pipefail
 
-# vars.nix is passed as a `file+file://` input, which Nix caches for
-# `tarball-ttl` seconds. Rebuilds set it to 0 so edits are always picked up.
-VARS_FILE="$PWD/vars.nix"
-
-if [ ! -f "${VARS_FILE}" ]; then
-  echo "Error: ${VARS_FILE} not found."
-  echo "Copy vars.nix.example to vars.nix and customize it with your settings."
-  exit 1
-fi
-
 usage() {
   cat <<'EOF'
 Usage: ./init.sh <command> [name] [options]
@@ -42,9 +32,7 @@ run_darwin() {
   local name=$1
   sudo -H nix --extra-experimental-features 'nix-command flakes' \
     run nix-darwin/master#darwin-rebuild -- \
-    switch --flake .#"${name}" \
-    --override-input vars-file "file+file://$VARS_FILE" \
-    --option tarball-ttl 0
+    switch --flake .#"${name}"
 }
 
 run_nixos() {
@@ -52,15 +40,9 @@ run_nixos() {
   local extra=${2-}
 
   if [ -z "${extra}" ]; then
-    # shellcheck disable=SC2086
-    sudo -H nixos-rebuild switch --flake .#"${name}" \
-      --override-input vars-file "file+file://$VARS_FILE" \
-      --option tarball-ttl 0
+    sudo -H nixos-rebuild switch --flake .#"${name}"
   elif [ "${extra}" == "--boot" ]; then
-    # shellcheck disable=SC2086
-    sudo -H nixos-rebuild boot --flake .#"${name}" \
-      --override-input vars-file "file+file://$VARS_FILE" \
-      --option tarball-ttl 0
+    sudo -H nixos-rebuild boot --flake .#"${name}"
   else
     echo "Unknown argument for nixos: ${extra}"
     echo 'Usage: ./init.sh nixos <name> [--boot]'

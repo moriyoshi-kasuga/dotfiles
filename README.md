@@ -16,17 +16,16 @@ git clone --depth 1 https://github.com/moriyoshi-kasuga/dotfiles.git ~/dotfiles
 cd ~/dotfiles
 ```
 
-### vars.nix (必須)
+### git の個人設定
 
-`vars.nix` はビルドに必須です。`vars.nix.example` を参考に作成してください。
+`user.name` / `user.email` などマシンごとの git 設定はリポジトリに含めず、`~/.config/git/local` に書きます。
+git の設定がこのファイルを include しており、ファイルが無ければ読み飛ばされます。
 
-```sh
-cp vars.nix.example vars.nix
-# 内容を編集する
+```gitconfig
+[user]
+	name = Your Name
+	email = you@example.com
 ```
-
-`vars.nix` は `git.includes` などの個人設定を保持し、フレークの `vars-file` input として外部注入されます。
-リポジトリには **コミットしないでください**（`.gitignore` 済み）。
 
 ## Apply
 

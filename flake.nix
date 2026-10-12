@@ -58,21 +58,10 @@
       url = "github:dharmx/walls";
       flake = false;
     };
-    vars-file = {
-      url = "file+file:///dev/null";
-      flake = false;
-    };
   };
 
   outputs =
     inputs:
-    let
-      vars =
-        if builtins.readFile inputs.vars-file.outPath == "" then
-          { gitIncludes = [ ]; }
-        else
-          import inputs.vars-file.outPath;
-    in
     # `modules` is only consumed internally via `config.flake.modules`, and
     # `nix flake check` warns about it as an unknown output, so drop it here.
     removeAttrs (inputs.flake-parts.lib.mkFlake { inherit inputs; } {
@@ -84,6 +73,5 @@
         (inputs.import-tree ./modules)
         (inputs.import-tree ./hosts)
       ];
-      _module.args.vars = vars;
     }) [ "modules" ];
 }
