@@ -22,6 +22,8 @@ _:
         '';
       };
 
+      programs.fish.interactiveShellInit = builtins.readFile ./tmux.fish;
+
       catppuccin.tmux.extraConfig = builtins.readFile ./tmux.conf.catppuccin;
 
       home.file.".config/tmux/new-session.fish" = {

@@ -72,6 +72,10 @@ _:
         '')
       ];
 
+      programs.fish.interactiveShellInit = ''
+        complete -c simplenvim --wraps nvim
+      '';
+
       home.shellAliases = {
         v = "nvim";
         todo = "simplenvim ~/todo.md";

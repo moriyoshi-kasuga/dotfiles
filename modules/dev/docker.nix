@@ -25,6 +25,25 @@ in
       dcb = "docker compose build";
       dcbnc = "docker compose build --no-cache";
     };
+
+    # 上の alias で compose を作り直してログを追う
+    programs.fish.interactiveShellInit = ''
+      function dcr
+        if test (count $argv) -eq 0
+          dcd; and dcud; and dcl -f
+        else
+          dcd "$argv[1]"; and dcud "$argv[1]"; and dcl "$argv[1]" -f
+        end
+      end
+
+      function dcrb
+        if test (count $argv) -eq 0
+          dcd; and dcudb; and dcl -f
+        else
+          dcd "$argv[1]"; and dcudb "$argv[1]"; and dcl "$argv[1]" -f
+        end
+      end
+    '';
   };
 
   flake.modules.nixos.base = {
