@@ -15,17 +15,8 @@ _:
 
     services.gnome.gnome-keyring.enable = true;
 
-    services.logind.settings.Login = {
-      HandlePowerKey = "hibernate";
-      HandlePowerKeyLongPress = "poweroff";
-      HandleSuspendKey = "suspend";
-      HandleHibernateKey = "hibernate";
-      HandleLidSwitch = "suspend-then-hibernate";
-    };
-
-    # HibernateDelaySec belongs to sleep.conf's [Sleep] section, not
-    # logind.conf's [Login] section (systemd silently ignores it there).
-    systemd.sleep.settings.Sleep.HibernateDelaySec = 3600;
+    # 電源キーの短押しは host ごとに決める (hibernate できるかは swap 次第)
+    services.logind.settings.Login.HandlePowerKeyLongPress = "poweroff";
 
     security.polkit.enable = true;
 

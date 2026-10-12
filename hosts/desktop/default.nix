@@ -22,6 +22,10 @@ in
         # the iGPU (0000:10:00.0), which is now disabled in the BIOS.
         hardware.enableRedistributableFirmware = true;
 
+        # The swap partition and resumeDevice (hardware configuration) make
+        # hibernation possible here.
+        services.logind.settings.Login.HandlePowerKey = "hibernate";
+
         # Monitors and the iGPU guard; included after the shared niri config.
         desktop.niri.extraConfig = builtins.readFile ./niri.kdl;
 

@@ -15,6 +15,9 @@ in
         people.primaryUser = "mori";
         networking.hostName = "Mori-Laptop-NixOS";
 
+        # Only zram swap, so hibernation is impossible; the lid suspends by default.
+        services.logind.settings.Login.HandlePowerKey = "suspend";
+
         hardware.nvidia.prime = {
           intelBusId = "PCI:0:2:0";
           nvidiaBusId = "PCI:1:0:0";
