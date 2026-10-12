@@ -94,117 +94,117 @@ return {
         },
       }
     end,
-  -- stylua: ignore
-  keys = {
-    { ",", desc = "FzfLua" },
-    { "ga", function() require("fzf-lua").lsp_code_actions() end, desc = "Code Actions" },
-    { "gd", function() require("fzf-lua").lsp_definitions() end, desc = "Goto Definition" },
-    { "gD", function() require("fzf-lua").lsp_declarations() end, desc = "Goto Declaration" },
-    { "gr", function() require("fzf-lua").lsp_references() end, desc = "References" },
-    { "gI", function() require("fzf-lua").lsp_implementations() end, desc = "Goto Implementation" },
-    { "gy", function() require("fzf-lua").lsp_typedefs() end, desc = "Goto T[y]pe Definition" },
-    { "gsi", function() require("fzf-lua").lsp_incoming_calls() end, desc = "Call[s] Incoming" },
-    { "gso", function() require("fzf-lua").lsp_outgoing_calls() end, desc = "Call[s] Outgoing" },
-    { ",s", function() require("fzf-lua").files() end, desc = "Find Files" },
-    { ",r", function() require("fzf-lua").live_grep() end, desc = "Grep" },
-    { ",B", function() require("fzf-lua").lgrep_curbuf() end, desc = "Grep Buffers" },
-    { ",w", function() require("fzf-lua").grep_cword() end, desc = "Grep String", mode = "n" },
-    { ",w", function() require("fzf-lua").grep_visual() end, desc = "Grep String", mode = "x" },
-    -- 押しやすさを優先して、aにbindする
-    { ",a", function() require("fzf-lua").buffers() end, desc = "Buffers" },
-    { ",c", function() require("fzf-lua").colorschemes() end, desc = "Colorscheme" },
-    {
-      ",f",
-      function()
-        local fzf = require("fzf-lua")
-        fzf.fzf_exec("fd -H -E .git -t d", {
-          prompt = "Folders> ",
-          actions = {
-            ["default"] = function(selected)
-              if selected and selected[1] then
-                require("oil").open(selected[1])
-              end
-            end,
-          },
-        })
-      end,
-      desc = "Open Folder by Oil",
-    },
-    { ",h", function() require("fzf-lua").help_tags() end, desc = "Help Pages" },
-    { ",j", function() require("fzf-lua").jumps() end, desc = "Jumplist" },
-    { ",k", function() require("fzf-lua").keymaps() end, desc = "Keymaps" },
-    { ",m", function() require("fzf-lua").marks() end, desc = "Marks" },
-    { ",P", function() require("fzf-lua").commands() end, desc = "Commands" },
-    { ",q", function() require("fzf-lua").quickfix() end, desc = "Quickfix" },
-    { ",R", function() require("fzf-lua").resume() end, desc = "Resume" },
-    { ",d", function() require("fzf-lua").diagnostics_document() end, desc = "Diagnostics (Buffer)" },
-    { ",D", function() require("fzf-lua").diagnostics_workspace() end, desc = "Diagnostics (Workspace)" },
-    { ",e", function() require("fzf-lua").diagnostics_document({ severity_only = vim.diagnostic.severity.ERROR }) end, desc = "Error (Buffer)" },
-    { ",E", function() require("fzf-lua").diagnostics_workspace({ severity_only = vim.diagnostic.severity.ERROR }) end, desc = "Error (Workspace)" },
-    { ",gs", function() require("fzf-lua").git_status() end, desc = "Git Status" },
-    { ",gc", function() require("fzf-lua").git_commits() end, desc = "Git Commits" },
-    { ",gC", function() require("fzf-lua").git_bcommits() end, desc = "Git Buffer Commits" },
-    { ",gb", function() require("fzf-lua").git_branches() end, desc = "Git Branches" },
-    { ",t", function() require("todo-comments.fzf").todo() end, desc = "Todo" },
-    { ",T", function() require("todo-comments.fzf").todo({ keywords = { "TODO", "FIX", "FIXME" } }) end, desc = "Todo/Fix/Fixme" },
-    { ",o", function() require("fzf-lua").oldfiles() end, desc = "Recent Files" },
-    { ",l", function() require("fzf-lua").lsp_document_symbols() end, desc = "Document Symbols" },
-    { ",L", function() require("fzf-lua").lsp_live_workspace_symbols() end, desc = "Workspace Symbols" },
-    { ",y", function() require("fzf-lua").registers() end, desc = "Registers" },
-    {
-      ",v",
-      function()
-        local result = vim.fn.fnamemodify(vim.fn.expand("%:p"), ":.")
-        vim.fn.setreg("+", result)
-        vim.fn.setreg("*", result)
-        vim.notify("Copied: " .. result, vim.log.levels.INFO)
-      end
-    },
-    {
-      ",V",
-      function()
-        local fzf = require("fzf-lua")
-        local filepath = vim.fn.expand("%:p")
-        local filename = vim.fn.expand("%:t")
-
-        local paths = {
-          { label = "Absolute", value = filepath },
-          { label = "Relative to HOME", value = vim.fn.fnamemodify(filepath, ":~") },
-          { label = "Filename only", value = filename },
-        }
-
-        local entries = vim.tbl_map(function(item)
-          return string.format("%-20s %s", item.label, item.value)
-        end, paths)
-
-        fzf.fzf_exec(entries, {
-          prompt = "Copy Path> ",
-          winopts = { height = 0.4, width = 0.7 },
-          actions = {
-            ["default"] = function(selected)
-              if not selected or not selected[1] then
-                return
-              end
-              -- エントリーから実際のパスを抽出
-              local idx = nil
-              for i, entry in ipairs(entries) do
-                if entry == selected[1] then
-                  idx = i
-                  break
+    -- stylua: ignore
+    keys = {
+      { ",", desc = "FzfLua" },
+      { "ga", function() require("fzf-lua").lsp_code_actions() end, desc = "Code Actions" },
+      { "gd", function() require("fzf-lua").lsp_definitions() end, desc = "Goto Definition" },
+      { "gD", function() require("fzf-lua").lsp_declarations() end, desc = "Goto Declaration" },
+      { "gr", function() require("fzf-lua").lsp_references() end, desc = "References" },
+      { "gI", function() require("fzf-lua").lsp_implementations() end, desc = "Goto Implementation" },
+      { "gy", function() require("fzf-lua").lsp_typedefs() end, desc = "Goto T[y]pe Definition" },
+      { "gsi", function() require("fzf-lua").lsp_incoming_calls() end, desc = "Call[s] Incoming" },
+      { "gso", function() require("fzf-lua").lsp_outgoing_calls() end, desc = "Call[s] Outgoing" },
+      { ",s", function() require("fzf-lua").files() end, desc = "Find Files" },
+      { ",r", function() require("fzf-lua").live_grep() end, desc = "Grep" },
+      { ",B", function() require("fzf-lua").lgrep_curbuf() end, desc = "Grep Buffers" },
+      { ",w", function() require("fzf-lua").grep_cword() end, desc = "Grep String", mode = "n" },
+      { ",w", function() require("fzf-lua").grep_visual() end, desc = "Grep String", mode = "x" },
+      -- 押しやすさを優先して、aにbindする
+      { ",a", function() require("fzf-lua").buffers() end, desc = "Buffers" },
+      { ",c", function() require("fzf-lua").colorschemes() end, desc = "Colorscheme" },
+      {
+        ",f",
+        function()
+          local fzf = require("fzf-lua")
+          fzf.fzf_exec("fd -H -E .git -t d", {
+            prompt = "Folders> ",
+            actions = {
+              ["default"] = function(selected)
+                if selected and selected[1] then
+                  require("oil").open(selected[1])
                 end
-              end
-              if idx then
-                local result = paths[idx].value
-                vim.fn.setreg("+", result)
-                vim.fn.setreg("*", result)
-                vim.notify("Copied: " .. result, vim.log.levels.INFO)
-              end
-            end,
-          },
-        })
-      end,
-      desc = "Copy Current Buf Path",
+              end,
+            },
+          })
+        end,
+        desc = "Open Folder by Oil",
+      },
+      { ",h", function() require("fzf-lua").help_tags() end, desc = "Help Pages" },
+      { ",j", function() require("fzf-lua").jumps() end, desc = "Jumplist" },
+      { ",k", function() require("fzf-lua").keymaps() end, desc = "Keymaps" },
+      { ",m", function() require("fzf-lua").marks() end, desc = "Marks" },
+      { ",P", function() require("fzf-lua").commands() end, desc = "Commands" },
+      { ",q", function() require("fzf-lua").quickfix() end, desc = "Quickfix" },
+      { ",R", function() require("fzf-lua").resume() end, desc = "Resume" },
+      { ",d", function() require("fzf-lua").diagnostics_document() end, desc = "Diagnostics (Buffer)" },
+      { ",D", function() require("fzf-lua").diagnostics_workspace() end, desc = "Diagnostics (Workspace)" },
+      { ",e", function() require("fzf-lua").diagnostics_document({ severity_only = vim.diagnostic.severity.ERROR }) end, desc = "Error (Buffer)" },
+      { ",E", function() require("fzf-lua").diagnostics_workspace({ severity_only = vim.diagnostic.severity.ERROR }) end, desc = "Error (Workspace)" },
+      { ",gs", function() require("fzf-lua").git_status() end, desc = "Git Status" },
+      { ",gc", function() require("fzf-lua").git_commits() end, desc = "Git Commits" },
+      { ",gC", function() require("fzf-lua").git_bcommits() end, desc = "Git Buffer Commits" },
+      { ",gb", function() require("fzf-lua").git_branches() end, desc = "Git Branches" },
+      { ",t", function() require("todo-comments.fzf").todo() end, desc = "Todo" },
+      { ",T", function() require("todo-comments.fzf").todo({ keywords = { "TODO", "FIX", "FIXME" } }) end, desc = "Todo/Fix/Fixme" },
+      { ",o", function() require("fzf-lua").oldfiles() end, desc = "Recent Files" },
+      { ",l", function() require("fzf-lua").lsp_document_symbols() end, desc = "Document Symbols" },
+      { ",L", function() require("fzf-lua").lsp_live_workspace_symbols() end, desc = "Workspace Symbols" },
+      { ",y", function() require("fzf-lua").registers() end, desc = "Registers" },
+      {
+        ",v",
+        function()
+          local result = vim.fn.fnamemodify(vim.fn.expand("%:p"), ":.")
+          vim.fn.setreg("+", result)
+          vim.fn.setreg("*", result)
+          vim.notify("Copied: " .. result, vim.log.levels.INFO)
+        end
+      },
+      {
+        ",V",
+        function()
+          local fzf = require("fzf-lua")
+          local filepath = vim.fn.expand("%:p")
+          local filename = vim.fn.expand("%:t")
+
+          local paths = {
+            { label = "Absolute", value = filepath },
+            { label = "Relative to HOME", value = vim.fn.fnamemodify(filepath, ":~") },
+            { label = "Filename only", value = filename },
+          }
+
+          local entries = vim.tbl_map(function(item)
+            return string.format("%-20s %s", item.label, item.value)
+          end, paths)
+
+          fzf.fzf_exec(entries, {
+            prompt = "Copy Path> ",
+            winopts = { height = 0.4, width = 0.7 },
+            actions = {
+              ["default"] = function(selected)
+                if not selected or not selected[1] then
+                  return
+                end
+                -- エントリーから実際のパスを抽出
+                local idx = nil
+                for i, entry in ipairs(entries) do
+                  if entry == selected[1] then
+                    idx = i
+                    break
+                  end
+                end
+                if idx then
+                  local result = paths[idx].value
+                  vim.fn.setreg("+", result)
+                  vim.fn.setreg("*", result)
+                  vim.notify("Copied: " .. result, vim.log.levels.INFO)
+                end
+              end,
+            },
+          })
+        end,
+        desc = "Copy Current Buf Path",
+      },
     },
-  },
   },
 }
