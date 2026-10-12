@@ -23,10 +23,8 @@ in
           cleanup = "zap";
         };
         casks = [
-          "brave-browser"
           "raycast"
           "visual-studio-code"
-          "discord"
           "slack"
           "figma"
           "macfuse"

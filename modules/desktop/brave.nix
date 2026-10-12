@@ -25,4 +25,6 @@ in
         "x-scheme-handler/https" = [ "brave.desktop" ];
       };
     };
+
+  flake.modules.darwin.pc.homebrew.casks = [ "brave-browser" ];
 }

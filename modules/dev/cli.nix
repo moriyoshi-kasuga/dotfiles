@@ -1,8 +1,17 @@
 _:
 
+let
+  linuxHome =
+    { pkgs, ... }:
+    {
+      home.packages = [ pkgs.cyme ];
+    };
+in
 {
+  flake.modules.nixos.base.people.home.imports = [ linuxHome ];
+
   flake.modules.homeManager.base =
-    { pkgs, lib, ... }:
+    { pkgs, ... }:
     {
       programs.man = {
         enable = true;
@@ -10,36 +19,28 @@ _:
         package = pkgs.man-db;
       };
 
-      home.packages =
-        (with pkgs; [
-          coreutils
-          fastfetch
+      home.packages = with pkgs; [
+        coreutils
+        fastfetch
 
-          ripgrep
-          jid
-          tailspin
-          xh
-          dust
-          duf
-          tldr
-          zip
-          unzipNLS
-          lnav
-          bottom
-          just
-          hexyl
+        ripgrep
+        jid
+        tailspin
+        xh
+        dust
+        duf
+        tldr
+        zip
+        unzipNLS
+        lnav
+        bottom
+        just
+        hexyl
 
-          tokei
-          hyperfine
-          kalker
-        ])
-        ++ lib.optionals pkgs.stdenv.hostPlatform.isLinux (
-          with pkgs;
-          [
-            xdg-utils
-            cyme
-          ]
-        );
+        tokei
+        hyperfine
+        kalker
+      ];
 
       programs = {
         yazi.enable = true;

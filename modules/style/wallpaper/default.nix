@@ -24,64 +24,65 @@ let
       ];
       text = builtins.readFile ./wallpaper-rotate.sh;
     };
+
+  darwinHome =
+    { pkgs, ... }:
+    let
+      rotateScript = mkRotateScript pkgs ''
+        /usr/bin/osascript \
+          -e "tell application \"System Events\"" \
+          -e "repeat with d in desktops" \
+          -e "tell d" \
+          -e "set picture to \"$FILE\"" \
+          -e "set |picture scaling| to 0" \
+          -e "end tell" \
+          -e "end repeat" \
+          -e "end tell"
+      '';
+    in
+    {
+      home.packages = [ rotateScript ];
+
+      launchd.agents.wallpaper-rotate = {
+        enable = true;
+        config = {
+          ProgramArguments = [ "${rotateScript}/bin/wallpaper-rotate" ];
+          StartInterval = 5 * 60;
+          RunAtLoad = true;
+        };
+      };
+    };
+
+  # 壁紙の表示は noctalia (desktop/noctalia.nix、同じ nixos.pc) に任せる
+  linuxHome =
+    { pkgs, ... }:
+    let
+      rotateScript = mkRotateScript pkgs ''
+        noctalia msg wallpaper-set "$FILE"
+      '';
+    in
+    {
+      home.packages = [ rotateScript ];
+
+      systemd.user.timers."wallpaper" = {
+        Unit.Description = "Wallpaper rotation timer";
+        Timer = {
+          OnBootSec = "5m";
+          OnUnitActiveSec = "5m";
+        };
+        Install.WantedBy = [ "timers.target" ];
+      };
+
+      systemd.user.services."wallpaper" = {
+        Unit.Description = "Rotate wallpaper";
+        Service = {
+          Type = "oneshot";
+          ExecStart = "${rotateScript}/bin/wallpaper-rotate";
+        };
+      };
+    };
 in
 {
-  flake.modules.homeManager.pc =
-    { pkgs, lib, ... }:
-    lib.mkMerge [
-      (lib.mkIf pkgs.stdenv.hostPlatform.isDarwin (
-        let
-          rotateScript = mkRotateScript pkgs ''
-            /usr/bin/osascript \
-              -e "tell application \"System Events\"" \
-              -e "repeat with d in desktops" \
-              -e "tell d" \
-              -e "set picture to \"$FILE\"" \
-              -e "set |picture scaling| to 0" \
-              -e "end tell" \
-              -e "end repeat" \
-              -e "end tell"
-          '';
-        in
-        {
-          home.packages = [ rotateScript ];
-
-          launchd.agents.wallpaper-rotate = {
-            enable = true;
-            config = {
-              ProgramArguments = [ "${rotateScript}/bin/wallpaper-rotate" ];
-              StartInterval = 5 * 60;
-              RunAtLoad = true;
-            };
-          };
-        }
-      ))
-      (lib.mkIf pkgs.stdenv.hostPlatform.isLinux (
-        let
-          rotateScript = mkRotateScript pkgs ''
-            noctalia msg wallpaper-set "$FILE"
-          '';
-        in
-        {
-          home.packages = [ rotateScript ];
-
-          systemd.user.timers."wallpaper" = {
-            Unit.Description = "Wallpaper rotation timer";
-            Timer = {
-              OnBootSec = "5m";
-              OnUnitActiveSec = "5m";
-            };
-            Install.WantedBy = [ "timers.target" ];
-          };
-
-          systemd.user.services."wallpaper" = {
-            Unit.Description = "Rotate wallpaper";
-            Service = {
-              Type = "oneshot";
-              ExecStart = "${rotateScript}/bin/wallpaper-rotate";
-            };
-          };
-        }
-      ))
-    ];
+  flake.modules.darwin.pc.people.home.imports = [ darwinHome ];
+  flake.modules.nixos.pc.people.home.imports = [ linuxHome ];
 }

@@ -13,7 +13,6 @@ _:
           "gamemode"
         ];
         packages = with pkgs; [
-          discord
           appimage-run
           r2modman
           modrinth-app

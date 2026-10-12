@@ -98,7 +98,7 @@ unixpornではなく、シンプルさを保つための設定です。
   - `terminal/`: WezTerm
   - `lang/`: 各言語のツールチェインと language server
   - `dev/`: Git / tmux / Docker / Claude Code / CLI ツール / 開発用共有ライブラリ
-  - `desktop/`: Niri + Noctalia / greetd / PipeWire / Bluetooth / Qt / fcitx5 / Brave / game など (NixOS)
+  - `desktop/`: デスクトップ環境 (Niri + Noctalia / greetd / PipeWire / Bluetooth / Qt / fcitx5 / game など、NixOS) と GUI アプリ (Brave / Discord は macOS では Homebrew cask)
   - `macos/`: Homebrew / Aerospace / Dock / Finder / キーボード / iOS 開発ツール
   - `networking/`: NetworkManager・DNS、Tailscale
   - `system/`: ブートローダー・sudo・SSH・zram・タイムゾーンとロケール、`server`

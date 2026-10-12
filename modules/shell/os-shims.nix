@@ -1,53 +1,56 @@
 _:
 
-{
+let
   # macOS と Linux で同じ名前のコマンドを使えるようにする shim
-  flake.modules.homeManager.base =
-    { pkgs, lib, ... }:
+  darwinNotify =
+    { pkgs, ... }:
     {
-      home.packages =
-        lib.optionals pkgs.stdenv.hostPlatform.isDarwin [
-          (pkgs.writeShellScriptBin "notify" ''
-            osascript -e "display notification \"$1\" with title \"''\${2:-Notification}\""
-          '')
-        ]
-        ++ lib.optionals pkgs.stdenv.hostPlatform.isLinux [
-          (pkgs.writeShellScriptBin "notify" ''
-            : "''${DBUS_SESSION_BUS_ADDRESS:=unix:path=/run/user/$(${pkgs.coreutils}/bin/id -u)/bus}"
-            export DBUS_SESSION_BUS_ADDRESS
-            if [ $# -eq 1 ]; then
-              ${pkgs.libnotify}/bin/notify-send --urgency normal --expire-time=5000 \
-                --category=x-generic --icon=dialog-information "$1"
-            else
-              ${pkgs.libnotify}/bin/notify-send --urgency normal --expire-time=5000 \
-                --category=x-generic --icon=dialog-information --app-name "$2" "$1"
-            fi
-          '')
-        ];
+      home.packages = [
+        (pkgs.writeShellScriptBin "notify" ''
+          osascript -e "display notification \"$1\" with title \"''\${2:-Notification}\""
+        '')
+      ];
+    };
+
+  linuxNotify =
+    { pkgs, ... }:
+    {
+      home.packages = [
+        (pkgs.writeShellScriptBin "notify" ''
+          : "''${DBUS_SESSION_BUS_ADDRESS:=unix:path=/run/user/$(${pkgs.coreutils}/bin/id -u)/bus}"
+          export DBUS_SESSION_BUS_ADDRESS
+          if [ $# -eq 1 ]; then
+            ${pkgs.libnotify}/bin/notify-send --urgency normal --expire-time=5000 \
+              --category=x-generic --icon=dialog-information "$1"
+          else
+            ${pkgs.libnotify}/bin/notify-send --urgency normal --expire-time=5000 \
+              --category=x-generic --icon=dialog-information --app-name "$2" "$1"
+          fi
+        '')
+      ];
     };
 
   # クリップボードと open は画面のある host でだけ意味がある
-  flake.modules.homeManager.pc =
-    { pkgs, lib, ... }:
+  linuxDesktop =
+    { pkgs, ... }:
     {
-      home.packages = lib.optionals pkgs.stdenv.hostPlatform.isLinux [
-        (pkgs.writeShellScriptBin "pbpaste" ''
-          wl-paste --no-newline
+      home.packages = with pkgs; [
+        wl-clipboard
+        xdg-utils
+        (writeShellScriptBin "pbpaste" ''
+          ${wl-clipboard}/bin/wl-paste --no-newline
         '')
-        (pkgs.writeShellScriptBin "pbcopy" ''
-          wl-copy
+        (writeShellScriptBin "pbcopy" ''
+          ${wl-clipboard}/bin/wl-copy
         '')
-        (pkgs.writeShellScriptBin "open" ''
-          xdg-open "$@"
+        (writeShellScriptBin "open" ''
+          ${xdg-utils}/bin/xdg-open "$@"
         '')
       ];
     };
-
-  flake.modules.nixos.pc =
-    { pkgs, config, ... }:
-    {
-      users.users.${config.people.primaryUser}.packages = [
-        pkgs.wl-clipboard
-      ];
-    };
+in
+{
+  flake.modules.darwin.base.people.home.imports = [ darwinNotify ];
+  flake.modules.nixos.base.people.home.imports = [ linuxNotify ];
+  flake.modules.nixos.pc.people.home.imports = [ linuxDesktop ];
 }
