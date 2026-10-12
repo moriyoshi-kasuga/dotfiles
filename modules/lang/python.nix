@@ -8,6 +8,7 @@ _:
         python3
         python3Packages.pip
         uv
+        chromedriver
       ];
 
       programs.neovim.extraPackages = with pkgs; [
