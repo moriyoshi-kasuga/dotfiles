@@ -1,4 +1,4 @@
-{ ... }:
+_:
 
 let
   # config.kdl はこの順に config/*.kdl を include する。
