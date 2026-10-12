@@ -17,14 +17,8 @@ _:
         description = "Environment variables exported only in interactive shells.";
       };
 
-      config = {
-        programs.fish.interactiveShellInit = lib.concatStrings (
-          lib.mapAttrsToList (name: value: "set -gx ${name} ${lib.escapeShellArg value}\n") vars
-        );
-
-        programs.zsh.initContent = lib.concatStrings (
-          lib.mapAttrsToList (name: value: "export ${name}=${lib.escapeShellArg value}\n") vars
-        );
-      };
+      config.programs.fish.interactiveShellInit = lib.concatStrings (
+        lib.mapAttrsToList (name: value: "set -gx ${name} ${lib.escapeShellArg value}\n") vars
+      );
     };
 }

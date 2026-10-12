@@ -7,10 +7,6 @@
       pkgsMaster = inputs.nixpkgs-master.legacyPackages.${pkgs.stdenv.hostPlatform.system};
     in
     {
-      programs.zsh.initContent = ''
-        export PATH="$PATH:$HOME/.cargo/bin"
-      '';
-
       programs.fish.interactiveShellInit = ''
         fish_add_path -g ~/.cargo/bin
       '';

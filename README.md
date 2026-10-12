@@ -93,7 +93,7 @@ unixpornではなく、シンプルさを保つための設定です。
   - `state-version.nix`: stateVersion
   - `nix/`: nix の設定、nixpkgs
   - `style/`: Catppuccin、フォント、壁紙ローテーション
-  - `shell/`: Fish / Zsh / Starship / direnv / fzf / zoxide、OS 差を埋める shim (`notify` / `pbcopy` など)
+  - `shell/`: Fish / Starship / direnv / fzf / zoxide (zsh は system 側で有効にするだけ)、OS 差を埋める shim (`notify` / `pbcopy` など)
   - `editor/`: Neovim / Vim
   - `terminal/`: WezTerm
   - `lang/`: 各言語のツールチェインと language server

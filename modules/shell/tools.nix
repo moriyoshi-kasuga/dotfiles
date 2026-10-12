@@ -12,13 +12,9 @@ _:
       programs = {
         direnv = {
           enable = true;
-          enableZshIntegration = false;
           nix-direnv.enable = true;
         };
-        zoxide = {
-          enableZshIntegration = false;
-          enable = true;
-        };
+        zoxide.enable = true;
         eza.enable = true;
       };
 
