@@ -15,6 +15,7 @@
         deadnix
         stylua
         shellcheck
+        fish
       ];
 
       mkLint =
@@ -52,8 +53,17 @@
           chmod -R u+w "$TMPDIR/src"
           treefmt --fail-on-change --no-cache --walk filesystem --tree-root "$TMPDIR/src"
         '';
-        stylua = mkLint "stylua" "stylua --check --indent-type Spaces --indent-width 2 nvim-config";
-        shellcheck = mkLint "shellcheck" "shellcheck init.sh";
+        stylua = mkLint "stylua" "stylua --check --indent-type Spaces --indent-width 2 nvim-config modules";
+        # modules/ の .sh は writeShellApplication が bash で実行する。build 時の shellcheck は
+        # eval-configs では走らないので、ここで見る。
+        shellcheck = mkLint "shellcheck" ''
+          shellcheck --shell=bash init.sh
+          find modules -name '*.sh' -exec shellcheck --shell=bash {} +
+        '';
+        fish = mkLint "fish" ''
+          export HOME="$TMPDIR"
+          find modules -name '*.fish' -print0 | xargs -0 -n1 fish --no-execute
+        '';
 
         eval-configs = pkgs.runCommand "eval-configs" { } ''
           : ${
