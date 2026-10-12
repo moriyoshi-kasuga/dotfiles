@@ -20,7 +20,8 @@ if is_linux then
 end
 
 -- --- Appearance ---
-config.color_scheme = "Catppuccin Macchiato"
+---@diagnostic disable-next-line: undefined-global
+config.color_scheme = COLOR_SCHEME
 
 config.font_size = 15
 -- niri (tiling) manages window geometry; resizing on font change fights it

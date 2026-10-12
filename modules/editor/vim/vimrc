@@ -1,7 +1,6 @@
 " " highlight
 " unlet! skip_defaults_vim
 " source $VIMRUNTIME/defaults.vim
-colorscheme catppuccin_macchiato
 
 " option
 set encoding=utf-8

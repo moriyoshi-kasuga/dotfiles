@@ -6,7 +6,8 @@ return {
     name = "catppuccin",
     ---@type CatppuccinOptions
     opts = {
-      flavour = "macchiato",
+      -- Nix (modules/style/catppuccin.nix) が wrapper の環境変数で渡す
+      flavour = vim.env.CATPPUCCIN_FLAVOR or "macchiato",
       compile = { enabled = true },
       transparent_background = false,
       float = {
@@ -40,7 +41,7 @@ return {
     },
     config = function(_, opts)
       require("catppuccin").setup(opts)
-      vim.cmd("colorscheme catppuccin-macchiato")
+      vim.cmd("colorscheme catppuccin-" .. opts.flavour)
     end,
   },
   {

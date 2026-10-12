@@ -17,6 +17,7 @@ _:
       };
       neovim = pkgs.neovim-unwrapped;
       neovimCmd = pkgs.lib.getExe neovim;
+      inherit (config.catppuccin) flavor;
     in
     {
       catppuccin.nvim.enable = false;
@@ -32,6 +33,9 @@ _:
           "--set"
           "TREESITTER_GRAMMARS"
           "${grammarsPath}"
+          "--set"
+          "CATPPUCCIN_FLAVOR"
+          flavor
         ];
 
         extraPackages = with pkgs; [
@@ -68,7 +72,7 @@ _:
 
       home.packages = [
         (pkgs.writeShellScriptBin "simplenvim" ''
-          env NVIM_SIMPLE_MODE=1 ${neovimCmd} "$@"
+          env NVIM_SIMPLE_MODE=1 CATPPUCCIN_FLAVOR=${flavor} ${neovimCmd} "$@"
         '')
       ];
 

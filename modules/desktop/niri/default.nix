@@ -1,8 +1,9 @@
 _:
 
 let
-  # config.kdl はこの順に config/*.kdl を include する。
-  # 後の include ほど優先されるので、ホスト固有の設定 (host.kdl) は最後に置く。
+  # config.kdl はこの順に config/*.kdl を include し、その後に Nix の値から作る
+  # config (generatedConfigs) を include する。後の include ほど優先されるので、
+  # ホスト固有の設定 (host.kdl) は最後に置く。
   sharedConfigs = [
     "misc"
     "input"
@@ -22,14 +23,29 @@ in
     }:
     let
       cfg = config.desktop.niri;
+      inherit (config.catppuccin) cursors;
 
-      includedConfigs = sharedConfigs ++ lib.optional (cfg.extraConfig != "") "host";
+      generatedConfigs = [
+        {
+          # 他の cursor 設定は misc.kdl にあり、include 間でプロパティごとにマージされる
+          name = "cursor";
+          text = ''
+            cursor {
+              xcursor-theme "catppuccin-${cursors.flavor}-${cursors.accent}-cursors"
+            }
+          '';
+        }
+      ]
+      ++ lib.optional (cfg.extraConfig != "") {
+        name = "host";
+        text = cfg.extraConfig;
+      };
+
+      includedConfigs = sharedConfigs ++ map (c: c.name) generatedConfigs;
 
       configKdl = pkgs.writeText "config.kdl" (
         lib.concatMapStrings (name: "include \"config/${name}.kdl\"\n") includedConfigs
       );
-
-      hostKdl = pkgs.writeText "host.kdl" cfg.extraConfig;
 
       # 壊れた KDL を deploy しないよう、ビルド時に niri validate を通す
       configDir =
@@ -38,7 +54,9 @@ in
             mkdir -p $out/config
             cp ${configKdl} $out/config.kdl
             ${lib.concatMapStrings (name: "cp ${./. + "/${name}.kdl"} $out/config/${name}.kdl\n") sharedConfigs}
-            ${lib.optionalString (cfg.extraConfig != "") "cp ${hostKdl} $out/config/host.kdl"}
+            ${lib.concatMapStrings (
+              c: "cp ${pkgs.writeText "${c.name}.kdl" c.text} $out/config/${c.name}.kdl\n"
+            ) generatedConfigs}
             HOME=$TMPDIR niri validate -c $out/config.kdl
           '';
 

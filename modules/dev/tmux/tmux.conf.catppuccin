@@ -35,8 +35,8 @@ set -g @catppuccin_date_time_text " %H:%M"
 # Pane
 set -g @catppuccin_pane_status_enabled "yes"
 set -g @catppuccin_pane_border_status "yes"
-set -g @catppuccin_pane_border_style "fg=#313244"
-set -g @catppuccin_pane_active_border_style "fg=#cba6f7"
+set -g @catppuccin_pane_border_style "fg=#{@thm_surface_0}"
+set -g @catppuccin_pane_active_border_style "fg=#{@thm_mauve}"
 
 # Icon
 set -g @catppuccin_window_flags "icon"

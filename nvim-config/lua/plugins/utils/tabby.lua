@@ -5,7 +5,8 @@ return {
   },
   event = "VeryLazy",
   config = function()
-    local palette = require("catppuccin.palettes").get_palette("macchiato")
+    -- 引数なしだと読み込み済みの catppuccin の flavour を使う
+    local palette = require("catppuccin.palettes").get_palette()
 
     local theme = {
       fill = { fg = palette.surface2, bg = "none" },

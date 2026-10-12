@@ -2,7 +2,7 @@ _:
 
 {
   flake.modules.homeManager.base =
-    { pkgs, ... }:
+    { pkgs, config, ... }:
     {
       programs.vim = {
         enable = true;
@@ -23,7 +23,10 @@ _:
             };
           })
         ];
-        extraConfig = builtins.readFile ./vimrc;
+        extraConfig = ''
+          colorscheme catppuccin_${config.catppuccin.flavor}
+        ''
+        + builtins.readFile ./vimrc;
       };
     };
 }
