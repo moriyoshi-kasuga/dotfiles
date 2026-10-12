@@ -104,6 +104,7 @@ in
           slurp
           xwayland-satellite
           libnotify
+          brightnessctl
         ];
 
         # programs.niri が gnome portal と niri 向けの portal 設定 (ScreenCast や
