@@ -2,8 +2,10 @@ _:
 
 {
   flake.modules.nixos.base =
-    { pkgs, ... }:
+    { config, pkgs, ... }:
     {
+      users.users.${config.people.primaryUser}.extraGroups = [ "networkmanager" ];
+
       services.resolved.enable = true;
       services.resolved.settings.Resolve = {
         DNSOverTLS = "opportunistic";

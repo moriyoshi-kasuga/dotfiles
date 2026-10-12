@@ -6,7 +6,6 @@ let
 in
 {
   flake.nixosConfigurations.desktop = inputs.nixpkgs.lib.nixosSystem {
-    system = "x86_64-linux";
     modules = [
       nixos.pc
       nixos.amd
@@ -16,11 +15,6 @@ in
       {
         people.primaryUser = "mori";
         networking.hostName = "Mori-NixOS";
-
-        # Firmware for the RX 9060 XT (RDNA4), MT7922 and CPU microcode.
-        # The amdgpu fence timeouts and page faults seen earlier all came from
-        # the iGPU (0000:10:00.0), which is now disabled in the BIOS.
-        hardware.enableRedistributableFirmware = true;
 
         # The swap partition and resumeDevice (hardware configuration) make
         # hibernation possible here.

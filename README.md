@@ -86,6 +86,7 @@ unixpornではなく、シンプルさを保つための設定です。
 ### ディレクトリ
 
 ディレクトリは OS ではなく機能ごとに分けています。どの OS 向けかは、ファイル内で書き足している class で分かります。
+OS 固有の home 設定も `homeManager.*` の中で OS を判定せず、`nixos.*` / `darwin.*` から `people.home.imports` で入れます。
 
 - `modules/`
   - `home-manager.nix`: home-manager の統合と層の配線
@@ -97,11 +98,11 @@ unixpornではなく、シンプルさを保つための設定です。
   - `editor/`: Neovim / Vim
   - `terminal/`: WezTerm
   - `lang/`: 各言語のツールチェインと language server
-  - `dev/`: Git / tmux / Docker / Claude Code / CLI ツール / 開発用共有ライブラリ
+  - `dev/`: Git / tmux / Docker / Claude Code / CLI ツール / ドキュメント作成ツール / 開発用サービスの CLI / TaggedFileFlow / 開発用共有ライブラリ
   - `desktop/`: デスクトップ環境 (Niri + Noctalia / greetd / PipeWire / Bluetooth / Qt / fcitx5 / game など、NixOS) と GUI アプリ (Brave / Discord は macOS では Homebrew cask)
   - `macos/`: Homebrew / Aerospace / Dock / Finder / キーボード / iOS 開発ツール
   - `networking/`: NetworkManager・DNS、Tailscale
-  - `system/`: ブートローダー・sudo・SSH・zram・タイムゾーンとロケール、`server`
+  - `system/`: ブートローダー・sudo・SSH・zram・タイムゾーンとロケール・SMART / fwupd・D-Bus・ドキュメント・基本パッケージ、`server`
   - `hardware/`: AMD / NVIDIA GPU、周辺機器
   - `flake/`: flake-parts 自体の設定（lint / eval check・formatter・devShell）
 - `hosts/<name>/`: ホストごとの `nixosConfigurations` / `darwinConfigurations`

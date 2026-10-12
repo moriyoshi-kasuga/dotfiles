@@ -6,7 +6,6 @@ let
 in
 {
   flake.nixosConfigurations.sv-main = inputs.nixpkgs.lib.nixosSystem {
-    system = "x86_64-linux";
     modules = [
       nixos.base
       nixos.server

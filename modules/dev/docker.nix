@@ -10,8 +10,6 @@ in
   flake.modules.homeManager.base = {
     programs.lazydocker.enable = true;
 
-    home.file.".config/docker/daemon.json".text = builtins.toJSON { inherit dns; };
-
     home.shellAliases = {
       d = "docker";
       dc = "docker compose";
@@ -46,14 +44,18 @@ in
     '';
   };
 
-  flake.modules.nixos.base = {
-    virtualisation = {
-      docker = {
-        enable = true;
-        daemon.settings = { inherit dns; };
+  flake.modules.nixos.base =
+    { config, ... }:
+    {
+      virtualisation = {
+        docker = {
+          enable = true;
+          daemon.settings = { inherit dns; };
+        };
       };
+
+      users.users.${config.people.primaryUser}.extraGroups = [ "docker" ];
     };
-  };
 
   # 画面のある host では起動時に dockerd を立ち上げず、docker.socket 経由で初回利用時に起動する。
   # 起動が network-online.target 待ちに引きずられず、使わない日はメモリも食わない。

@@ -6,7 +6,6 @@ let
 in
 {
   flake.nixosConfigurations.laptop-nixos = inputs.nixpkgs.lib.nixosSystem {
-    system = "x86_64-linux";
     modules = [
       nixos.pc
       nixos.nvidia

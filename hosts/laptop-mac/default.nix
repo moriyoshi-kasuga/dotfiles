@@ -6,10 +6,10 @@ let
 in
 {
   flake.darwinConfigurations.laptop-mac = inputs.nix-darwin.lib.darwinSystem {
-    system = "aarch64-darwin";
     modules = [
       darwin.pc
       {
+        nixpkgs.hostPlatform = "aarch64-darwin";
         people.primaryUser = "mori";
 
         people.home.imports = [

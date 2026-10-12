@@ -43,11 +43,9 @@ in
       description = username;
       group = username;
       extraGroups = [
-        "networkmanager"
         "wheel"
         "input"
         "video"
-        "docker"
       ];
     };
 

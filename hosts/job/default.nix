@@ -6,11 +6,11 @@ let
 in
 {
   flake.darwinConfigurations.job = inputs.nix-darwin.lib.darwinSystem {
-    system = "aarch64-darwin";
     modules = [
       darwin.pc
       darwin.ios-dev
       {
+        nixpkgs.hostPlatform = "aarch64-darwin";
         people.primaryUser = "mori";
 
         people.home = {
