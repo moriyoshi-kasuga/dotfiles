@@ -12,7 +12,6 @@ in
       darwin.ios-dev
       {
         people.primaryUser = "mori";
-        style.fonts.monospace = "maple";
 
         people.home = {
           terminal.wezterm.bigMonitor = true;

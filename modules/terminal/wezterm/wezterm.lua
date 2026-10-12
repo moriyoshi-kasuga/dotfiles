@@ -36,15 +36,10 @@ config.freetype_render_target = "HorizontalLcd"
 
 local ligature_features = { "calt=0", "clig=0", "liga=0" }
 
-local monospace_fonts = {
-  maple = { family = "Maple Mono Normal NL NF", fallback = true },
-  iosevka = { family = "IosevkaTerm Nerd Font Mono", fallback = true },
-  plemoljp = { family = "PlemolJP Console NF", fallback = false },
-  ["monaspace-neon"] = { family = "MonaspiceNe Nerd Font Mono", fallback = true },
-}
-
+-- The font itself comes from style.fonts.monospace (modules/style/fonts.nix).
+-- Fonts without Japanese glyphs fall back to Noto CJK.
 ---@diagnostic disable-next-line: undefined-global
-local monospace = monospace_fonts[MONOSPACE_FONT]
+local monospace = { family = MONOSPACE_FAMILY, fallback = not MONOSPACE_HAS_CJK }
 
 -- Build a fallback stack for a given weight/style, so Bold and Italic use
 -- the font's real glyphs instead of wezterm-synthesized ones.

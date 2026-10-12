@@ -15,7 +15,7 @@ let
           weather.enabled = false;
 
           shell = {
-            font_family = osConfig.style.fonts.monospaceFamily;
+            font_family = osConfig.style.fonts.monospaceFont.family;
 
             # ランチャーから起動したアプリを noctalia の scope ではなく
             # app-<id>@<uuid>.service として起動する。noctalia の再起動や

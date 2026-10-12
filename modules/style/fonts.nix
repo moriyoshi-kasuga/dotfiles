@@ -1,41 +1,56 @@
 _:
 
 let
-  packages =
-    pkgs: with pkgs; [
-      maple-mono.NormalNL-NF
-      nerd-fonts.iosevka-term
-      plemoljp-nf
-      nerd-fonts.monaspace
+  # style.fonts.monospace で選べるフォント。package は pkgs を受け取る関数にして、
+  # option の型 (enum) が pkgs に依存しないようにする。
+  # cjk は日本語の字形を含むか: 含まないフォントは端末で Noto CJK に fallback させる。
+  monospaceFonts = {
+    maple = {
+      family = "Maple Mono Normal NL NF";
+      package = pkgs: pkgs.maple-mono.NormalNL-NF;
+      cjk = false;
+    };
+    iosevka = {
+      family = "IosevkaTerm Nerd Font Mono";
+      package = pkgs: pkgs.nerd-fonts.iosevka-term;
+      cjk = false;
+    };
+    plemoljp = {
+      family = "PlemolJP Console NF";
+      package = pkgs: pkgs.plemoljp-nf;
+      cjk = true;
+    };
+    "monaspace-neon" = {
+      family = "MonaspiceNe Nerd Font Mono";
+      package = pkgs: pkgs.nerd-fonts.monaspace;
+      cjk = false;
+    };
+  };
 
+  packages =
+    pkgs:
+    map (font: font.package pkgs) (builtins.attrValues monospaceFonts)
+    ++ (with pkgs; [
       noto-fonts
       noto-fonts-cjk-sans
       noto-fonts-color-emoji
-    ];
+    ]);
 
-  # style.fonts.monospace で選べるフォントと、その family 名
-  monospaceFamilies = {
-    maple = "Maple Mono Normal NL NF";
-    iosevka = "IosevkaTerm Nerd Font Mono";
-    plemoljp = "PlemolJP Console NF";
-    "monaspace-neon" = "MonaspiceNe Nerd Font Mono";
-  };
-
-  # home 側 (wezterm, niri など) は osConfig.style.fonts.* から読む
+  # home 側 (wezterm, noctalia) は osConfig.style.fonts.* から読む
   options =
     { lib, config, ... }:
     {
       options.style.fonts = {
         monospace = lib.mkOption {
-          type = lib.types.enum (builtins.attrNames monospaceFamilies);
+          type = lib.types.enum (builtins.attrNames monospaceFonts);
           default = "maple";
           description = "Monospace programming font used system-wide";
         };
-        monospaceFamily = lib.mkOption {
-          type = lib.types.str;
+        monospaceFont = lib.mkOption {
+          type = lib.types.attrs;
           readOnly = true;
-          default = monospaceFamilies.${config.style.fonts.monospace};
-          description = "Font family name of style.fonts.monospace";
+          default = removeAttrs monospaceFonts.${config.style.fonts.monospace} [ "package" ];
+          description = "Family name (`family`) and CJK coverage (`cjk`) of style.fonts.monospace";
         };
       };
     };
@@ -64,7 +79,7 @@ in
             "Noto Sans CJK JP"
             "Noto Color Emoji"
           ];
-          monospace = [ config.style.fonts.monospaceFamily ];
+          monospace = [ config.style.fonts.monospaceFont.family ];
         };
       };
     };

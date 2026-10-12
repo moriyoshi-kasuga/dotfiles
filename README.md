@@ -57,7 +57,7 @@ unixpornではなく、シンプルさを保つための設定です。
 | **Editor**     | [Neovim](https://neovim.io)                                      |
 | **Shell**      | [Fish](https://fishshell.com)                                    |
 | **Theme**      | [Catppuccin Macchiato](https://github.com/catppuccin/catppuccin) |
-| **Font**       | Maple Mono Normal NL NF                                          |
+| **Font**       | Maple Mono Normal NL NF (既定、`style.fonts.monospace` で変更)   |
 
 ## Module Hierarchy
 
