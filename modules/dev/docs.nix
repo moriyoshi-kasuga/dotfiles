@@ -10,6 +10,7 @@ _:
         typst
         poppler-utils
         mo-viewer
+        vivify
       ];
     };
 }
