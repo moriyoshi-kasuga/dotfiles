@@ -65,10 +65,6 @@ in
             findSkills path
         ) (lib.attrNames (lib.filterAttrs (_: type: type == "directory") (builtins.readDir dir)));
 
-      understandAnythingPlugin = pkgs.callPackage ./_understand-anything-plugin.nix {
-        src = inputs.Egonex-AI-Understand-Anything;
-      };
-
       skillList =
         lib.concatMap findSkills [
           # engineering and productivity come from the plugin manifest.
@@ -100,7 +96,6 @@ in
         plugins = {
           inherit (inputs) mattpocock-skills;
           superpowers = inputs.obra-superpowers;
-          understand-anything = understandAnythingPlugin;
         };
         rules = {
           write-style = ''

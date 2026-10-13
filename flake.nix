@@ -50,10 +50,6 @@
       url = "github:obra/superpowers";
       flake = false;
     };
-    Egonex-AI-Understand-Anything = {
-      url = "github:Egonex-AI/Understand-Anything";
-      flake = false;
-    };
     wallpapers = {
       url = "github:dharmx/walls";
       flake = false;

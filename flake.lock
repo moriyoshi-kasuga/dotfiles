@@ -1,21 +1,5 @@
 {
   "nodes": {
-    "Egonex-AI-Understand-Anything": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1791642919,
-        "narHash": "sha256-b2ihqrOKPL/MSdd7rQcsWNLHgtY/fTD5XVak6NaqhT4=",
-        "owner": "Egonex-AI",
-        "repo": "Understand-Anything",
-        "rev": "000fbf3f36b5e534a0a8d3461cf24f5dc9ae43fe",
-        "type": "github"
-      },
-      "original": {
-        "owner": "Egonex-AI",
-        "repo": "Understand-Anything",
-        "type": "github"
-      }
-    },
     "anthropic-skills": {
       "flake": false,
       "locked": {
@@ -332,7 +316,6 @@
     },
     "root": {
       "inputs": {
-        "Egonex-AI-Understand-Anything": "Egonex-AI-Understand-Anything",
         "anthropic-skills": "anthropic-skills",
         "catppuccin": "catppuccin",
         "catppuccin-palette": "catppuccin-palette",
