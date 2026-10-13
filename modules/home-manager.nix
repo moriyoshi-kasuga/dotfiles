@@ -6,6 +6,7 @@ let
   homeManagerCommon = {
     useGlobalPkgs = true;
     useUserPackages = true;
+    backupFileExtension = "nixbackup";
   };
 in
 {
@@ -14,9 +15,7 @@ in
   # 各ファイルが nixos.<層> / darwin.<層> の people.home.imports から入れる。
   flake.modules.nixos.base = {
     imports = [ inputs.home-manager.nixosModules.home-manager ];
-    home-manager = homeManagerCommon // {
-      backupFileExtension = "nixbackup";
-    };
+    home-manager = homeManagerCommon;
     people.home.imports = [ homeManager.base ];
   };
   flake.modules.darwin.base = {

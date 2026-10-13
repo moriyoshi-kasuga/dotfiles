@@ -2,14 +2,11 @@ _:
 
 {
   flake.modules.nixos.pc = {
-    xdg.mime.enable = true;
-
     services.libinput.enable = true;
     services.udisks2.enable = true;
     services.upower.enable = true;
 
     services.power-profiles-daemon.enable = true;
-    powerManagement.enable = true;
 
     services.gnome.gnome-keyring.enable = true;
 

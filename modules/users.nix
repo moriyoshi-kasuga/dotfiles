@@ -1,4 +1,4 @@
-_:
+{ lib, ... }:
 
 let
   # nixos/darwin 共通: primaryUser と、その home-manager 設定を受け取るオプション。
@@ -60,11 +60,15 @@ in
 
   flake.modules.darwin.base = mkUserModule (username: {
     system.primaryUser = username;
-    users.users.${username}.home = "/Users/${username}";
 
-    nix.settings.trusted-users = [
-      "root"
-      username
-    ];
+    # nix-darwin は knownUsers にいる user にだけ shell を反映する。
+    # uid が実際と違うと warning を出してその user を飛ばすだけなので、違う Mac は host で上書きする。
+    users.knownUsers = [ username ];
+    users.users.${username} = {
+      home = "/Users/${username}";
+      uid = lib.mkDefault 501;
+    };
+
+    nix.settings.trusted-users = [ username ];
   });
 }

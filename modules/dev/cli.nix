@@ -14,9 +14,9 @@ in
     { pkgs, ... }:
     {
       programs.man = {
-        enable = true;
-        generateCaches = false;
         package = pkgs.man-db;
+        # programs.fish が mkDefault で有効にする cache の生成は、ビルドが遅くなるので止める
+        generateCaches = false;
       };
 
       home.packages = with pkgs; [

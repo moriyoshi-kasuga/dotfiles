@@ -73,7 +73,7 @@ _:
                 "workspace --wrap-around next"
               ];
 
-              # Layout (niri: Alt+Slash / Alt+Comma)
+              # Layout
               cmd-slash = "layout tiles horizontal vertical";
               cmd-comma = "layout accordion horizontal vertical";
 

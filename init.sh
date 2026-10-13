@@ -31,7 +31,7 @@ run_flake_update() {
 run_darwin() {
   local name=$1
   sudo -H nix --extra-experimental-features 'nix-command flakes' \
-    run nix-darwin/master#darwin-rebuild -- \
+    run --inputs-from . nix-darwin#darwin-rebuild -- \
     switch --flake .#"${name}"
 }
 

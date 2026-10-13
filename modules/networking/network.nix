@@ -24,7 +24,6 @@ _:
           enable = true;
           dns = "systemd-resolved";
         };
-        firewall.enable = true;
       };
 
       environment.systemPackages = [ pkgs.ethtool ];
