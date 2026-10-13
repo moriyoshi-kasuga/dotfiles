@@ -1,7 +1,7 @@
 _:
 
-{
-  flake.modules.homeManager.pc =
+let
+  home =
     {
       lib,
       config,
@@ -29,16 +29,21 @@ _:
       ''
       + builtins.readFile ./wezterm.lua;
     };
-
+in
+{
   flake.modules.nixos.pc =
     { pkgs, config, ... }:
     {
+      people.home.imports = [ home ];
+
       users.users.${config.people.primaryUser}.packages = [
         pkgs.wezterm
       ];
     };
 
   flake.modules.darwin.pc = {
+    people.home.imports = [ home ];
+
     homebrew.casks = [
       "wezterm"
     ];

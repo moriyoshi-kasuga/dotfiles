@@ -67,14 +67,18 @@ unixpornではなく、シンプルさを保つための設定です。
 
 ### 層
 
-各ファイルは `flake.modules.<nixos|darwin|homeManager>.<層>` に設定を書き足します。層は次の 2 つです。
+各ファイルは `flake.modules.<nixos|darwin>.<層>` に設定を書き足します。層は次の 2 つです。
 
 | 層     | 対象             | 内容                                                                          |
 | :----- | :--------------- | :---------------------------------------------------------------------------- |
 | `base` | 全ホスト         | nix 設定、ユーザー、shell、editor、開発ツール、tailscale など                 |
 | `pc`   | 画面を持つホスト | `base` に加えて terminal、font、壁紙、デスクトップ環境 (NixOS) / macOS の設定 |
 
-`modules/home-manager.nix` が OS 側の層と home 側の層をつないでいます。
+home 側の設定は次の 2 通りで入れます。
+
+- 全ホスト共通のものは `flake.modules.homeManager.base` に書きます。`modules/home-manager.nix` が `nixos.base` / `darwin.base` から primaryUser に入れます。
+- 層や OS で絞るものは `flake.modules.<nixos|darwin>.<層>.people.home.imports` から入れます。
+
 ホストは `nixos.pc` / `nixos.base` / `darwin.pc` のどれか 1 つを import するだけで、home 側の設定も揃います。
 
 層に含めない任意の機能は、名前付きのモジュールとしてホストが個別に選びます。
@@ -87,6 +91,7 @@ unixpornではなく、シンプルさを保つための設定です。
 
 ディレクトリは OS ではなく機能ごとに分けています。どの OS 向けかは、ファイル内で書き足している class で分かります。
 OS 固有の home 設定も `homeManager.*` の中で OS を判定せず、`nixos.*` / `darwin.*` から `people.home.imports` で入れます。
+ただし `lang.*` は両 OS のホストが `people.home.imports` で選ぶ home 専用のモジュールなので、中で OS を判定します。
 
 - `modules/`
   - `home-manager.nix`: home-manager の統合と層の配線

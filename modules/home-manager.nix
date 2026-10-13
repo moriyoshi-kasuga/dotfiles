@@ -10,7 +10,8 @@ let
 in
 {
   # 層の配線: base は全 host、pc は画面を持つ host。
-  # OS 側の層を import すると、対応する home 側の層も primaryUser に入る。
+  # homeManager.base は全 host の primaryUser に入る。層や OS で絞る home 設定は、
+  # 各ファイルが nixos.<層> / darwin.<層> の people.home.imports から入れる。
   flake.modules.nixos.base = {
     imports = [ inputs.home-manager.nixosModules.home-manager ];
     home-manager = homeManagerCommon // {
@@ -24,14 +25,8 @@ in
     people.home.imports = [ homeManager.base ];
   };
 
-  flake.modules.nixos.pc = {
-    imports = [ nixos.base ];
-    people.home.imports = [ homeManager.pc ];
-  };
-  flake.modules.darwin.pc = {
-    imports = [ darwin.base ];
-    people.home.imports = [ homeManager.pc ];
-  };
+  flake.modules.nixos.pc.imports = [ nixos.base ];
+  flake.modules.darwin.pc.imports = [ darwin.base ];
 
   flake.modules.homeManager.base =
     { config, ... }:

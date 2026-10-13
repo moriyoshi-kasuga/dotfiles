@@ -1,32 +1,38 @@
 _:
 
+let
+  # vivify は nixpkgs では Linux 向けだけなので、macOS では Homebrew から入れる
+  linuxHome =
+    { pkgs, ... }:
+    {
+      home.packages = [ pkgs.vivify ];
+    };
+in
 {
   flake.modules.homeManager.base =
-    { pkgs, lib, ... }:
+    { pkgs, ... }:
     {
-      home.packages =
-        with pkgs;
-        [
-          marp-cli
-          graphviz
-          typst
-          poppler-utils
-          mo-viewer
-        ]
-        ++ lib.optionals pkgs.stdenv.hostPlatform.isLinux [ pkgs.vivify ];
+      home.packages = with pkgs; [
+        marp-cli
+        graphviz
+        typst
+        poppler-utils
+        mo-viewer
+      ];
     };
 
-  flake.modules.darwin.base = {
-    homebrew = {
-      taps = [
-        {
-          name = "jannis-baum/tap";
-          trusted = true;
-        }
-      ];
-      brews = [
-        "vivify"
-      ];
-    };
+  flake.modules.nixos.base.people.home.imports = [ linuxHome ];
+
+  # homebrew は darwin.pc でだけ有効にしている
+  flake.modules.darwin.pc.homebrew = {
+    taps = [
+      {
+        name = "jannis-baum/tap";
+        trusted = true;
+      }
+    ];
+    brews = [
+      "vivify"
+    ];
   };
 }
