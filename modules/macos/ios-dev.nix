@@ -9,7 +9,7 @@ _:
         libimobiledevice
         swift
         cocoapods
-        xcodes
       ];
+      homebrew.brews = [ "xcodes" ];
     };
 }
