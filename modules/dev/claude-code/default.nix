@@ -8,95 +8,14 @@ in
   flake.modules.darwin.base = { inherit nixpkgs; };
 
   flake.modules.homeManager.base =
-    {
-      pkgs,
-      lib,
-      config,
-      ...
-    }:
+    { pkgs, config, ... }:
     let
-      # Single source for both permissions.deny and the PreToolUse guard hook.
-      guardedCommands = [
-        "git push"
-        "terraform"
-        "sudo"
-        "cargo publish"
-        "nixos-rebuild switch"
-        "gh pr create"
-        "gh issue create"
-      ];
-      guardedReads = [
-        ".env"
-        ".env.*"
-      ];
-      guardedEdits = [
-        ".env"
-        ".env.*"
-      ];
-
-      preToolUseGuard = pkgs.writeShellApplication {
-        name = "claude-pre-tool-use-guard";
-        runtimeInputs = [
-          pkgs.jq
-          pkgs.gnugrep
-          pkgs.gnused
-          pkgs.coreutils
-        ];
-        runtimeEnv = {
-          GUARDED_COMMANDS = lib.concatLines guardedCommands;
-          GUARDED_READS = lib.concatLines guardedReads;
-          GUARDED_EDITS = lib.concatLines guardedEdits;
-        };
-        text = builtins.readFile ./pre-tool-use-guard.sh;
-      };
-
-      # Claude Code only loads skills/<name>/SKILL.md, so nested category
-      # directories are walked and flattened by skill directory name.
-      findSkills =
-        dir:
-        lib.concatMap (
-          name:
-          let
-            path = "${dir}/${name}";
-          in
-          if builtins.pathExists "${path}/SKILL.md" then
-            [ (lib.nameValuePair name path) ]
-          else
-            findSkills path
-        ) (lib.attrNames (lib.filterAttrs (_: type: type == "directory") (builtins.readDir dir)));
-
-      skillList =
-        lib.concatMap findSkills [
-          # engineering and productivity come from the plugin manifest.
-          "${inputs.mattpocock-skills}/skills/in-progress"
-          "${inputs.mattpocock-skills}/skills/misc"
-          "${inputs.mattpocock-skills}/skills/engineering"
-          "${inputs.mattpocock-skills}/skills/productivity"
-          "${inputs.anthropic-skills}/skills"
-        ]
-        ++ [ (lib.nameValuePair "rust-skills" "${inputs.leonardomso-rust-skills}") ];
-
-      duplicateSkills = lib.attrNames (
-        lib.filterAttrs (_: v: builtins.length v > 1) (lib.groupBy (s: s.name) skillList)
-      );
+      notify = "${config.home.profileDirectory}/bin/notify";
     in
     {
-      assertions = [
-        {
-          assertion = duplicateSkills == [ ];
-          message = "duplicate Claude Code skill names: ${lib.concatStringsSep ", " duplicateSkills}";
-        }
-      ];
-
       programs.claude-code = {
         enable = true;
         package = pkgs.claude-code;
-        commandsDir = ../../../commands;
-        skills = lib.listToAttrs skillList;
-        plugins = {
-          inherit (inputs) mattpocock-skills;
-          superpowers = inputs.obra-superpowers;
-        };
         rules = {
           write-style = ''
             装飾的なUnicode記号（現行の記号例のまま）は、英語・日本語を問わず使わない。
@@ -183,31 +102,16 @@ in
               "Bash(npm run format)"
               "Bash(deno run format)"
             ];
-            deny =
-              map (c: "Bash(${c} *)") guardedCommands
-              ++ map (g: "Read(${g})") guardedReads
-              ++ map (g: "Edit(${g})") guardedEdits;
           };
           cleanupPeriodDays = 30;
           hooks = {
-            PreToolUse = [
-              {
-                matcher = "Bash|Read|Edit|MultiEdit|Write|NotebookEdit";
-                hooks = [
-                  {
-                    type = "command";
-                    command = lib.getExe preToolUseGuard;
-                  }
-                ];
-              }
-            ];
             Notification = [
               {
                 matcher = "permission_prompt";
                 hooks = [
                   {
                     type = "command";
-                    command = "msg=$(${pkgs.jq}/bin/jq -r '.message // \"Require operation\"'); /etc/profiles/per-user/${config.home.username}/bin/notify \"$msg\" 'Claude Code'";
+                    command = "msg=$(${pkgs.jq}/bin/jq -r '.message // \"Require operation\"'); ${notify} \"$msg\" 'Claude Code'";
                   }
                 ];
               }
@@ -217,7 +121,7 @@ in
                 hooks = [
                   {
                     type = "command";
-                    command = "/etc/profiles/per-user/${config.home.username}/bin/notify 'Task completed' 'Claude Code'";
+                    command = "${notify} 'Task completed' 'Claude Code'";
                   }
                 ];
               }
