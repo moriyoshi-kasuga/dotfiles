@@ -91,6 +91,9 @@ in
       config = {
         desktop.niri.configDir = configDir;
 
+        # cursor の theme は上の generatedConfigs で xcursor-theme として使う
+        catppuccin.cursors.enable = true;
+
         people.home.imports = [ home ];
 
         programs.niri.enable = true;

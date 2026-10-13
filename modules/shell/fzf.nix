@@ -1,11 +1,11 @@
-{ inputs, ... }:
+_:
 
 {
   flake.modules.homeManager.base =
     { config, ... }:
     let
       c =
-        (builtins.fromJSON (builtins.readFile "${inputs.catppuccin-palette}/palette.json"))
+        (builtins.fromJSON (builtins.readFile "${config.catppuccin.sources.palette}/palette.json"))
         .${config.catppuccin.flavor}.colors;
     in
     {

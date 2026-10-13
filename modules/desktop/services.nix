@@ -2,8 +2,6 @@ _:
 
 {
   flake.modules.nixos.pc = {
-    catppuccin.cursors.enable = true;
-
     xdg.mime.enable = true;
 
     services.libinput.enable = true;
