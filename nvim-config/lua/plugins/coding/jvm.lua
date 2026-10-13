@@ -120,10 +120,6 @@ return {
             root_dir = root_dir,
             capabilities = capabilities,
 
-            init_options = {
-              jvm_args = vim.env.LOMBOK_JAR and { "-javaagent:" .. vim.env.LOMBOK_JAR } or {},
-            },
-
             on_attach = function(_, bufnr)
               local map = function(mode, keys, fn, desc)
                 vim.keymap.set(mode, keys, fn, { buffer = bufnr, desc = desc, silent = true })

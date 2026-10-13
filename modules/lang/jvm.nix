@@ -5,6 +5,18 @@ _:
     { pkgs, ... }:
     let
       java = pkgs.graalvmPackages.graalvm-ce;
+
+      # Lombok は javaagent として JVM の起動時に渡す必要があるので、jdtls 自体に組み込む。
+      # どのエディタから起動しても同じ jdtls になる。
+      jdtls = pkgs.symlinkJoin {
+        name = "jdtls-with-lombok";
+        paths = [ (pkgs.jdt-language-server.override { jdk = java; }) ];
+        nativeBuildInputs = [ pkgs.makeWrapper ];
+        postBuild = ''
+          wrapProgram $out/bin/jdtls \
+            --add-flags "--jvm-arg=-javaagent:${pkgs.lombok}/share/java/lombok.jar"
+        '';
+      };
     in
     {
       home.sessionVariables = {
@@ -29,9 +41,7 @@ _:
           (coursier.override {
             jre = java;
           })
-          (jdt-language-server.override {
-            jdk = java;
-          })
+          jdtls
           (metals.override {
             jre = java;
           })
