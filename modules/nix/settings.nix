@@ -34,12 +34,6 @@ in
       nix = {
         package = pkgs.nixVersions.latest;
         channel.enable = false;
-        # 既定 (max-jobs = CPU 数, cores = 0 は全コア) だと 16 並列 x 16 スレッドまで膨らみ、
-        # メモリを使い切ってデスクトップごと固まる
-        settings = {
-          max-jobs = 4;
-          cores = 8;
-        };
         gc.dates = "weekly";
         # ビルド中も対話的な処理を優先させる
         daemonCPUSchedPolicy = "batch";

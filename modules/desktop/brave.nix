@@ -5,7 +5,6 @@ let
     home.file.".config/brave-flags.conf".text = ''
       --enable-features=AcceleratedVideoDecodeLinuxGL,AcceleratedVideoEncoder
       --ozone-platform=wayland
-      --disable-gpu-compositing
     '';
   };
 in
