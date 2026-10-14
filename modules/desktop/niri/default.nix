@@ -1,4 +1,4 @@
-_:
+{ config, lib, ... }:
 
 let
   # config.kdl はこの順に config/*.kdl を include し、その後に Nix の値から作る
@@ -14,6 +14,21 @@ let
   ];
 in
 {
+  # flake check の eval-configs は評価するだけなので、niri validate を通す configDir は
+  # host ごとにここで build する
+  perSystem =
+    { system, ... }:
+    let
+      niriHosts = lib.filterAttrs (
+        _: cfg: cfg.config.programs.niri.enable && cfg.pkgs.stdenv.hostPlatform.system == system
+      ) config.flake.nixosConfigurations;
+    in
+    {
+      checks = lib.mapAttrs' (
+        name: cfg: lib.nameValuePair "niri-config-${name}" cfg.config.desktop.niri.configDir
+      ) niriHosts;
+    };
+
   flake.modules.nixos.pc =
     {
       config,
