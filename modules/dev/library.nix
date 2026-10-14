@@ -59,6 +59,7 @@ let
       glib
       webkitgtk_4_1
       wayland
+      dbus
     ];
 
   darwinHome =
@@ -108,7 +109,11 @@ in
         shell.interactiveVariables = rec {
           # 存在しないディレクトリは pkg-config が無視する。評価中に pathExists で
           # 確かめると各ライブラリの dev 出力のビルドが必要になる (IFD)。
-          PKG_CONFIG_PATH = lib.makeSearchPathOutput "dev" "lib/pkgconfig" libs;
+          # zlib のように .pc を share/pkgconfig に置くものもあるので、両方を並べる。
+          PKG_CONFIG_PATH = lib.concatStringsSep ":" [
+            (lib.makeSearchPathOutput "dev" "lib/pkgconfig" libs)
+            (lib.makeSearchPathOutput "dev" "share/pkgconfig" libs)
+          ];
           LD_LIBRARY_PATH = lib.makeLibraryPath libs;
           LIBRARY_PATH = LD_LIBRARY_PATH;
         };
