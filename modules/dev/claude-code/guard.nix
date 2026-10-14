@@ -2,14 +2,55 @@
 
 let
   # Single source for both permissions.deny and the PreToolUse guard hook.
+  # Aliases are listed too (gh pr new, docker image push). The guard also blocks `gh api` writes.
   guardedCommands = [
-    "git push"
-    "terraform"
+    # privilege escalation
     "sudo"
-    "cargo publish"
+    "su"
+    "doas"
+    "run0"
+    "pkexec"
+    # system activation
     "nixos-rebuild switch"
+    "nixos-rebuild boot"
+    "nixos-rebuild test"
+    "darwin-rebuild switch"
+    "darwin-rebuild activate"
+    "terraform"
+    # publishing
+    "git push"
+    "cargo publish"
+    "cargo release"
+    "cargo yank"
+    "cargo owner"
+    "npm publish"
+    "pnpm publish"
+    "deno publish"
+    "docker push"
+    "docker image push"
+    "docker compose push"
+    # GitHub writes
     "gh pr create"
+    "gh pr new"
+    "gh pr merge"
+    "gh pr comment"
+    "gh pr review"
+    "gh pr close"
+    "gh pr edit"
     "gh issue create"
+    "gh issue new"
+    "gh issue comment"
+    "gh issue close"
+    "gh issue edit"
+    "gh release create"
+    "gh release new"
+    "gh repo create"
+    "gh repo new"
+    "gh repo delete"
+    "gh gist create"
+    "gh gist new"
+    "gh workflow run"
+    "gh secret set"
   ];
   guardedReads = [
     ".env"
