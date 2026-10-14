@@ -134,10 +134,7 @@ return {
               vim.notify("failed to get oil dir", vim.log.levels.WARN)
               return
             end
-            local result = vim.fn.fnamemodify(dir, ":.")
-            vim.fn.setreg("+", result)
-            vim.fn.setreg("*", result)
-            vim.notify("Copied: " .. result, vim.log.levels.INFO)
+            require("config.util").copy_path(vim.fn.fnamemodify(dir, ":."))
           end,
           mode = "n",
           desc = "Copy Path",
@@ -149,37 +146,10 @@ return {
               vim.notify("failed to get oil dir", vim.log.levels.WARN)
               return
             end
-            local paths = {
+            require("config.util").select_path_to_copy({
               { label = "Absolute", value = dir },
               { label = "Relative to HOME", value = vim.fn.fnamemodify(dir, ":~") },
               { label = "Relative to cwd", value = vim.fn.fnamemodify(dir, ":.") },
-            }
-            local entries = vim.tbl_map(function(item)
-              return string.format("%-20s %s", item.label, item.value)
-            end, paths)
-            require("fzf-lua").fzf_exec(entries, {
-              prompt = "Copy Path> ",
-              winopts = { height = 0.4, width = 0.7 },
-              actions = {
-                ["default"] = function(selected)
-                  if not selected or not selected[1] then
-                    return
-                  end
-                  local idx = nil
-                  for i, e in ipairs(entries) do
-                    if e == selected[1] then
-                      idx = i
-                      break
-                    end
-                  end
-                  if idx then
-                    local result = paths[idx].value
-                    vim.fn.setreg("+", result)
-                    vim.fn.setreg("*", result)
-                    vim.notify("Copied: " .. result, vim.log.levels.INFO)
-                  end
-                end,
-              },
             })
           end,
           mode = "n",

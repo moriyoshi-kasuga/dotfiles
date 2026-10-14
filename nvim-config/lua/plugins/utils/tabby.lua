@@ -1,7 +1,7 @@
 return {
   "nanozuki/tabby.nvim",
   dependencies = {
-    "echasnovski/mini.icons",
+    "nvim-mini/mini.icons",
   },
   event = "VeryLazy",
   config = function()

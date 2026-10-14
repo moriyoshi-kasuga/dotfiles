@@ -4,7 +4,8 @@ return {
     system_clipboard = {
       sync_with_ring = not vim.env.SSH_CONNECTION,
     },
-    highlight = { timer = 150 },
+    -- the yank highlight comes from TextYankPost in autocmds.lua
+    highlight = { on_yank = false, timer = 150 },
   },
   keys = {
     { "y", "<Plug>(YankyYank)", mode = { "n", "x" }, desc = "Yank text" },

@@ -224,10 +224,14 @@ return {
   {
     "stevearc/conform.nvim",
     opts = function(_, opts)
-      local is_dioxus_project = vim.fs.root(0, { "Dioxus.toml" }) ~= nil
       opts.formatters_by_ft = opts.formatters_by_ft or {}
-      if is_dioxus_project then
-        opts.formatters_by_ft.rust = { "dioxus", lsp_format = "first" }
+      local default = opts.formatters_by_ft.rust
+      -- conform loads once, so look for Dioxus.toml per buffer at format time
+      opts.formatters_by_ft.rust = function(bufnr)
+        if vim.fs.root(bufnr, { "Dioxus.toml" }) then
+          return { "dioxus", lsp_format = "first" }
+        end
+        return default
       end
     end,
   },

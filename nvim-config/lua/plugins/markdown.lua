@@ -35,6 +35,6 @@ return {
         },
       },
     },
-    { "jannis-baum/vivify.vim" },
+    { "jannis-baum/vivify.vim", ft = "markdown" },
   },
 }

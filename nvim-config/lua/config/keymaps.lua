@@ -4,6 +4,13 @@ map("i", "<C-e>", "<esc>o")
 
 map("n", "<leader>n", "<cmd>enew | set ft=markdown<cr>", { desc = "New Blank Buf with md" })
 
+-- Neovim's LSP defaults (grn, gra, ...) start with gr, which makes the gr references
+-- mapping in fzf.lua wait for timeoutlen. The same actions live on other keys here.
+for _, lhs in ipairs({ "grn", "gra", "grr", "gri", "grt", "grx" }) do
+  pcall(vim.keymap.del, "n", lhs)
+end
+pcall(vim.keymap.del, "x", "gra")
+
 map("n", "<leader>bo", function()
   local win_bufs = {}
   for _, win in ipairs(vim.api.nvim_list_wins()) do
@@ -44,6 +51,11 @@ map("n", "<leader>ws", "<C-w>s", { desc = "Horizontal split" })
 map("n", "<leader>wo", "<C-w>o", { desc = "Close Other window" })
 
 map("n", "<leader>h", "<cmd>noh<CR>", { desc = "Clear Highlights" })
+
+map("n", "<leader>i", function()
+  vim.cmd.packadd("nvim.undotree")
+  require("undotree").open({ command = "topleft 30vnew" })
+end, { desc = "Undo Tree" })
 
 -- better indenting
 map("x", "<", "<gv", { desc = "Indent Left" })

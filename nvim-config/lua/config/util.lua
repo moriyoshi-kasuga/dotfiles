@@ -23,4 +23,29 @@ M.lsp_locations_to_fzf = function(bufnr, method, params)
   end)
 end
 
+-- Copy a path to the clipboard registers.
+---@param path string
+M.copy_path = function(path)
+  vim.fn.setreg("+", path)
+  vim.fn.setreg("*", path)
+  vim.notify("Copied: " .. path, vim.log.levels.INFO)
+end
+
+-- Pick one of the candidates with vim.ui.select and copy its path.
+-- fzf.lua sizes the picker for the "copy_path" kind.
+---@param candidates {label: string, value: string}[]
+M.select_path_to_copy = function(candidates)
+  vim.ui.select(candidates, {
+    prompt = "Copy Path:",
+    kind = "copy_path",
+    format_item = function(item)
+      return string.format("%-20s %s", item.label, item.value)
+    end,
+  }, function(item)
+    if item then
+      M.copy_path(item.value)
+    end
+  end)
+end
+
 return M

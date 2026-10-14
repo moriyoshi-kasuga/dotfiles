@@ -23,21 +23,6 @@ return {
           information = { "undercurl" },
         },
       },
-      integrations = {
-        blink = true,
-        flash = true,
-        grug_far = true,
-        mini = true,
-        fzf = true,
-        nvim_surround = true,
-        blink_cmp = true,
-        neogit = true,
-        render_markdown = true,
-        octo = true,
-        snacks = {
-          enabled = true,
-        },
-      },
     },
     config = function(_, opts)
       require("catppuccin").setup(opts)
@@ -46,14 +31,14 @@ return {
   },
   {
     "folke/tokyonight.nvim",
-    lazy = false,
-    priority = 1000,
+    -- loaded by lazy.nvim when picked with :colorscheme
+    lazy = true,
     opts = {},
   },
   {
     "rebelot/kanagawa.nvim",
-    lazy = false,
-    priority = 1000,
+    -- loaded by lazy.nvim when picked with :colorscheme
+    lazy = true,
     opts = {},
   },
 }

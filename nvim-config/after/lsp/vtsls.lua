@@ -1,7 +1,8 @@
 ---@diagnostic disable: assign-type-mismatch
 
--- vtsls does not enable inlay hints on its own; turn them on so the
--- LspAttach hook (which only toggles visibility) actually has hints to show.
+-- vtsls does not enable inlay hints on its own; turn them on so
+-- vim.lsp.inlay_hint.enable() in lsp.lua (which only toggles visibility)
+-- actually has hints to show.
 local ts_inlay_hints = {
   parameterNames = { enabled = "literals", suppressWhenArgumentMatchesName = true },
   parameterTypes = { enabled = true },

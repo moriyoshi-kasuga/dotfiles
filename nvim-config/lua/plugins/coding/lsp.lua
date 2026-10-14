@@ -2,24 +2,12 @@ return {
   {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
+    -- blink.cmp registers its capabilities through vim.lsp.config("*") when it
+    -- loads, so it has to load before any server is enabled here.
     dependencies = {
       "saghen/blink.cmp",
     },
     config = function()
-      -- Setup capabilities for blink.cmp
-      local capabilities = vim.lsp.protocol.make_client_capabilities()
-
-      -- Merge blink.cmp capabilities
-      local ok, blink = pcall(require, "blink.cmp")
-      if ok then
-        capabilities = vim.tbl_deep_extend("force", capabilities, blink.get_lsp_capabilities())
-      end
-
-      -- Configure LSP settings
-      vim.lsp.config("*", {
-        capabilities = capabilities,
-      })
-
       -- Per-server settings (vtsls, astro, lua_ls, nixd, ...) live under after/lsp/*.lua
       -- and are merged in automatically; this file only handles cross-server setup.
 
@@ -102,23 +90,15 @@ return {
           header = "",
           prefix = "",
         },
+        jump = {
+          on_jump = function(_, bufnr)
+            vim.diagnostic.open_float({ bufnr = bufnr, scope = "cursor", focus = false })
+          end,
+        },
       })
-    end,
 
-    init = function()
-      vim.api.nvim_create_autocmd("LspAttach", {
-        callback = function(args)
-          local client = vim.lsp.get_client_by_id(args.data.client_id)
-          if not client then
-            return
-          end
-
-          -- toggle keymap is provided by Snacks.toggle.inlay_hints() (<leader>uh)
-          if client:supports_method("textDocument/inlayHint") then
-            vim.lsp.inlay_hint.enable(true, { bufnr = args.buf })
-          end
-        end,
-      })
+      -- toggle keymap is provided by Snacks.toggle.inlay_hints() (<leader>uh)
+      vim.lsp.inlay_hint.enable(true)
     end,
 
     -- stylua: ignore
@@ -126,8 +106,8 @@ return {
       { "gk", function() vim.lsp.buf.signature_help() end, desc = "Signature Help" },
       { "gl", function() vim.lsp.codelens.run() end, desc = "CoreLens" },
       { "<leader>cd", function() vim.diagnostic.open_float() end, desc = "Line Diagnostics" },
-      { "[d", function() vim.diagnostic.jump({ count = -1, float = true }) end, desc = "Previous Diagnostic" },
-      { "]d", function() vim.diagnostic.jump({ count = 1, float = true }) end, desc = "Next Diagnostic" },
+      { "[d", function() vim.diagnostic.jump({ count = -1 }) end, desc = "Previous Diagnostic" },
+      { "]d", function() vim.diagnostic.jump({ count = 1 }) end, desc = "Next Diagnostic" },
     },
   },
 }

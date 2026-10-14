@@ -9,24 +9,17 @@ if vim.fn.isdirectory(backup_dir) == 0 then
 end
 vim.opt.backupdir = backup_dir
 vim.opt.swapfile = false
-vim.opt.autoread = true
-vim.opt.hidden = true
 vim.opt.mouse = ""
-vim.opt.splitkeep = "cursor"
 
 -- disable nvim intro
 vim.opt.shortmess:append("sI")
 
 vim.opt.termguicolors = true
 vim.opt.laststatus = 3
-vim.opt.wrap = true
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.cursorline = true
-vim.opt.cursorcolumn = false
 vim.opt.virtualedit = "block"
-vim.opt.visualbell = false
-vim.opt.errorbells = false
 vim.opt.updatetime = 200
 vim.opt.timeoutlen = 500
 vim.opt.scrolloff = 4
@@ -36,14 +29,9 @@ vim.opt.pumheight = 10
 vim.opt.grepprg = "rg --vimgrep --smart-case"
 vim.opt.grepformat = "%f:%l:%c:%m"
 
-if is_simple_mode then
-  -- Simple mode: disable folding completely
-  vim.opt.foldmethod = "manual"
-  vim.opt.foldenable = false
-else
-  -- Full mode: treesitter-based folding (deferred to avoid early vim.treesitter load)
-  vim.opt.foldmethod = "manual"
-  vim.opt.foldenable = false
+vim.opt.foldenable = false
+if not is_simple_mode then
+  -- Full mode: treesitter-based folding is set up in autocmds.lua (deferred to avoid early vim.treesitter load)
   vim.opt.foldlevel = 99
 end
 
@@ -51,16 +39,10 @@ vim.opt.smoothscroll = true
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
-vim.opt.autoindent = true
 vim.opt.smartindent = true
-vim.opt.backspace = { "indent", "eol", "start" }
-vim.opt.nrformats:remove({ "unsigned", "octal" })
 
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
-vim.opt.incsearch = true
-vim.opt.hlsearch = true
-vim.opt.wrapscan = true
 vim.opt.wildmode = "longest:full,full"
 
 if is_simple_mode then
@@ -114,8 +96,6 @@ vim.g.clipboard = vim.env.SSH_CONNECTION
     cache_enabled = 0,
   }
 vim.opt.clipboard = "unnamedplus"
-
-vim.g.editorconfig = true
 
 -- disable some default providers
 vim.g.loaded_node_provider = 0
