@@ -1,12 +1,9 @@
 { inputs, ... }:
 
 let
+  # setWallpaper は画像のパスを 1 つ受け取って壁紙にする実行ファイルで、OS ごとに用意する
   mkRotateScript =
-    pkgs: setWallpaperCmd:
-    let
-      # Pinned via the `wallpapers` flake input; updated by `./init.sh update`.
-      wallpaperSrc = inputs.wallpapers.outPath;
-    in
+    pkgs: setWallpaper:
     pkgs.writeShellApplication {
       name = "wallpaper-rotate";
       runtimeInputs = [
@@ -14,31 +11,29 @@ let
         pkgs.yazi
       ];
       runtimeEnv = {
-        WALLPAPER_SRC = wallpaperSrc;
-        SET_WALLPAPER_CMD = setWallpaperCmd;
+        # Pinned via the `wallpapers` flake input; updated by `./init.sh update`.
+        WALLPAPER_SRC = inputs.wallpapers.outPath;
+        SET_WALLPAPER = setWallpaper;
       };
-      excludeShellChecks = [
-        "SC2016"
-        "SC2089"
-        "SC2090"
-      ];
       text = builtins.readFile ./wallpaper-rotate.sh;
     };
 
   darwinHome =
     { pkgs, ... }:
     let
-      rotateScript = mkRotateScript pkgs ''
-        /usr/bin/osascript \
-          -e "tell application \"System Events\"" \
-          -e "repeat with d in desktops" \
-          -e "tell d" \
-          -e "set picture to \"$FILE\"" \
-          -e "set |picture scaling| to 0" \
-          -e "end tell" \
-          -e "end repeat" \
-          -e "end tell"
-      '';
+      rotateScript = mkRotateScript pkgs (
+        pkgs.writeShellScript "set-wallpaper" ''
+          /usr/bin/osascript \
+            -e "tell application \"System Events\"" \
+            -e "repeat with d in desktops" \
+            -e "tell d" \
+            -e "set picture to \"$1\"" \
+            -e "set |picture scaling| to 0" \
+            -e "end tell" \
+            -e "end repeat" \
+            -e "end tell"
+        ''
+      );
     in
     {
       home.packages = [ rotateScript ];
@@ -57,9 +52,11 @@ let
   linuxHome =
     { pkgs, ... }:
     let
-      rotateScript = mkRotateScript pkgs ''
-        noctalia msg wallpaper-set "$FILE"
-      '';
+      rotateScript = mkRotateScript pkgs (
+        pkgs.writeShellScript "set-wallpaper" ''
+          noctalia msg wallpaper-set "$1"
+        ''
+      );
     in
     {
       home.packages = [ rotateScript ];

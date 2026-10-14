@@ -26,7 +26,7 @@ case "${1:-}" in
     echo "No file selected" >&2
     exit 1
   fi
-  eval "$SET_WALLPAPER_CMD"
+  "$SET_WALLPAPER" "$FILE"
   exit 0
   ;;
 esac
@@ -60,4 +60,4 @@ FILE="${REMAINING[$INDEX]}"
 
 echo "$FILE" >>"$CACHE_FILE"
 
-eval "$SET_WALLPAPER_CMD"
+"$SET_WALLPAPER" "$FILE"
