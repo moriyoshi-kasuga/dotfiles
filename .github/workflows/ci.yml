@@ -15,4 +15,5 @@ jobs:
 
       - uses: DeterminateSystems/flake-checker-action@main
 
-      - run: nix flake check --print-build-logs
+      # IFD は評価中に build が要るので、Linux の CI では darwin の構成を評価できなくなる
+      - run: nix flake check --print-build-logs --option allow-import-from-derivation false
