@@ -262,22 +262,6 @@
         "type": "github"
       }
     },
-    "nixpkgs-master": {
-      "locked": {
-        "lastModified": 1791716384,
-        "narHash": "sha256-TKNEYu4KIqZCQ1+HDkfk+5/J0IKg1rUM7bIexZyinp8=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "759470ebac766f0adf036a79688c664a124ff157",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "ref": "master",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "noctalia": {
       "inputs": {
         "nixpkgs": [
@@ -328,7 +312,6 @@
         "nix-claude-code": "nix-claude-code",
         "nix-darwin": "nix-darwin",
         "nixpkgs": "nixpkgs",
-        "nixpkgs-master": "nixpkgs-master",
         "noctalia": "noctalia",
         "obra-superpowers": "obra-superpowers",
         "wallpapers": "wallpapers"

@@ -1,11 +1,8 @@
-{ inputs, ... }:
+_:
 
 {
   flake.modules.homeManager."lang.rust" =
     { pkgs, lib, ... }:
-    let
-      pkgsMaster = inputs.nixpkgs-master.legacyPackages.${pkgs.stdenv.hostPlatform.system};
-    in
     {
       programs.fish.interactiveShellInit = ''
         fish_add_path -g ~/.cargo/bin
@@ -46,8 +43,8 @@
           cargo-make
           cargo-llvm-lines
           cargo-depgraph
+          kache
         ])
-        ++ [ pkgsMaster.kache ]
         ++ lib.optionals pkgs.stdenv.hostPlatform.isLinux [ pkgs.wild ];
 
       # Ensure Cargo links with Apple's ld64-backed cc for the native Darwin target,
