@@ -6,17 +6,6 @@ window-rule {
 }
 
 window-rule {
-  match app-id="org.wezfurlong.wezterm"
-
-  background-effect {
-    xray true
-    blur true
-    noise 0.05
-    saturation 3
-  }
-}
-
-window-rule {
   match is-floating=true
 
   border {

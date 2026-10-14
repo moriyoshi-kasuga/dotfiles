@@ -1,23 +1,16 @@
 local wezterm = require("wezterm")
 local act = wezterm.action
 
-local config = {}
-
-if wezterm.config_builder then
-  config = wezterm.config_builder()
-end
+local config = wezterm.config_builder()
 
 local is_darwin = wezterm.target_triple:find("darwin") ~= nil
-local is_linux = wezterm.target_triple:find("linux") ~= nil
 
 -- --- General Settings ---
 config.disable_default_key_bindings = true
 config.check_for_updates = false
 config.scrollback_lines = 10000
-config.use_ime = true
-if is_linux then
-  config.enable_wayland = true
-end
+-- Match the 165Hz desktop monitor; the default caps rendering at 60fps
+config.max_fps = 165
 
 -- --- Appearance ---
 ---@diagnostic disable-next-line: undefined-global
@@ -26,8 +19,6 @@ config.color_scheme = COLOR_SCHEME
 config.font_size = 15
 -- niri (tiling) manages window geometry; resizing on font change fights it
 config.adjust_window_size_when_changing_font_size = is_darwin
-config.cell_width = 1.0
-config.line_height = 1.0
 config.use_cap_height_to_scale_fallback_fonts = true
 
 -- Sharper, more consistent glyph rendering across displays
@@ -132,12 +123,12 @@ config.keys = {
   { key = "c", mods = "CTRL|SHIFT", action = act.CopyTo("Clipboard") },
   { key = "v", mods = "CTRL", action = act.PasteFrom("Clipboard") },
 
-  -- Scrollback
-  { key = "f", mods = "CTRL|SHIFT", action = act.Search("CurrentSelectionOrEmptyString") },
-  { key = "x", mods = "CTRL|SHIFT", action = act.ActivateCopyMode },
+  -- Scrollback search and copy mode are tmux's job. QuickSelect only reads
+  -- the visible screen, so it still works inside tmux.
   { key = "Space", mods = "CTRL|SHIFT", action = act.QuickSelect },
-  { key = "PageUp", mods = "SHIFT", action = act.ScrollByPage(-1) },
-  { key = "PageDown", mods = "SHIFT", action = act.ScrollByPage(1) },
+
+  -- Reaches actions that have no binding of their own
+  { key = "p", mods = "CTRL|SHIFT", action = act.ActivateCommandPalette },
 
   -- Toggles
   {
@@ -150,7 +141,6 @@ config.keys = {
 if is_darwin then
   table.insert(config.keys, { key = "c", mods = "CMD", action = act.CopyTo("Clipboard") })
   table.insert(config.keys, { key = "v", mods = "CMD", action = act.PasteFrom("Clipboard") })
-  table.insert(config.keys, { key = "f", mods = "CMD", action = act.Search("CurrentSelectionOrEmptyString") })
 end
 
 return config
