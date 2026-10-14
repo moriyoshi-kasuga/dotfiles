@@ -9,8 +9,12 @@
 # automatic @types inclusion, which doesn't reach across the pnpm
 # symlink boundary into packages/typescript-plugin/node_modules/@types;
 # pass --types node explicitly to compile as if @types/node were found.
-{ svelte-language-server }:
+{ lib, svelte-language-server }:
 
+let
+  # replaceStrings below silently does nothing once upstream rewords this line.
+  installCmd = "pnpm install --filter=svelte-language-server... --prod --frozen-lockfile --offline --force --ignore-scripts";
+in
 svelte-language-server.overrideAttrs (old: {
   pnpmWorkspaces = old.pnpmWorkspaces ++ [ "typescript-svelte-plugin" ];
   buildPhase =
@@ -45,10 +49,10 @@ svelte-language-server.overrideAttrs (old: {
   # packages/typescript-plugin/node_modules empty). A plain symlink
   # from the still-present `.pnpm` store avoids re-invoking pnpm.
   installPhase =
+    assert lib.assertMsg (lib.hasInfix installCmd old.installPhase)
+      "svelte-language-server's installPhase no longer runs `${installCmd}`; update the override.";
     builtins.replaceStrings
-      [
-        "pnpm install --filter=svelte-language-server... --prod --frozen-lockfile --offline --force --ignore-scripts"
-      ]
+      [ installCmd ]
       [
         ''
           pnpm install --filter=svelte-language-server... --filter=typescript-svelte-plugin --prod --frozen-lockfile --offline --force --ignore-scripts
