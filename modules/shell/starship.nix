@@ -5,9 +5,6 @@ _:
     { config, ... }:
     let
       inherit (config.catppuccin) flavor;
-      palette =
-        (builtins.fromJSON (builtins.readFile "${config.catppuccin.sources.palette}/palette.json"))
-        .${flavor}.colors;
     in
     {
       programs.starship = {
@@ -24,7 +21,7 @@ _:
           aws.disabled = true;
 
           palette = "catppuccin_${flavor}";
-          palettes."catppuccin_${flavor}" = builtins.mapAttrs (_: color: color.hex) palette;
+          palettes."catppuccin_${flavor}" = config.style.palette;
         };
       };
 

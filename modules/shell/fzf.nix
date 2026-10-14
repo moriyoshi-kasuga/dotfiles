@@ -4,9 +4,7 @@ _:
   flake.modules.homeManager.base =
     { config, ... }:
     let
-      c =
-        (builtins.fromJSON (builtins.readFile "${config.catppuccin.sources.palette}/palette.json"))
-        .${config.catppuccin.flavor}.colors;
+      c = config.style.palette;
     in
     {
       programs.fzf = {
@@ -25,7 +23,7 @@ _:
 
       home.sessionVariables = {
         FZF_DEFAULT_COMMAND = "fd --hidden --type l --type f --type d --exclude .git --exclude .cache";
-        FZF_DEFAULT_OPTS = "--color=bg:-1,bg+:-1,hl:${c.red.hex},hl+:${c.red.hex},fg:-1,fg+:-1,header:-1,info:${c.mauve.hex},pointer:${c.rosewater.hex},marker:${c.rosewater.hex},prompt:${c.mauve.hex},spinner:${c.rosewater.hex} --prompt='λ ' --pointer='▶' --marker='✓'";
+        FZF_DEFAULT_OPTS = "--color=bg:-1,bg+:-1,hl:${c.red},hl+:${c.red},fg:-1,fg+:-1,header:-1,info:${c.mauve},pointer:${c.rosewater},marker:${c.rosewater},prompt:${c.mauve},spinner:${c.rosewater} --prompt='λ ' --pointer='▶' --marker='✓'";
       };
     };
 }

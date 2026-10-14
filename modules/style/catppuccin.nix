@@ -12,10 +12,23 @@ let
   };
 in
 {
-  flake.modules.homeManager.base = {
-    imports = [ inputs.catppuccin.homeModules.catppuccin ];
-    inherit catppuccin;
-  };
+  # catppuccin/nix のテーマを使わずに色を組み立てる module (fzf, starship) は style.palette から読む
+  flake.modules.homeManager.base =
+    { config, lib, ... }:
+    let
+      palette = lib.importJSON "${config.catppuccin.sources.palette}/palette.json";
+    in
+    {
+      imports = [ inputs.catppuccin.homeModules.catppuccin ];
+      config = { inherit catppuccin; };
+
+      options.style.palette = lib.mkOption {
+        type = lib.types.attrsOf lib.types.str;
+        readOnly = true;
+        default = lib.mapAttrs (_: color: color.hex) palette.${config.catppuccin.flavor}.colors;
+        description = "Hex color (`#rrggbb`) of each Catppuccin color name in the active flavor.";
+      };
+    };
 
   flake.modules.nixos.base = {
     imports = [ inputs.catppuccin.nixosModules.catppuccin ];
