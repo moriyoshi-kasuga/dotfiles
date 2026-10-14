@@ -4,9 +4,11 @@ function tn
   if test -z "$name"
     set name (basename (pwd))
   end
-  if not tmux has-session -t "=$name:" 2>/dev/null
-    tmux new-session -d -s "$name" -c (pwd); or return
+  if tmux has-session -t "=$name:" 2>/dev/null
+    echo "Error: Session '$name' already exists" >&2
+    return 1
   end
+  tmux new-session -d -s "$name" -c (pwd); or return
   if set -q TMUX
     tmux switch-client -t "=$name:"
   else
