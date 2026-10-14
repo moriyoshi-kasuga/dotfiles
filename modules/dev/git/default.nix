@@ -1,6 +1,23 @@
 _:
 
 {
+  perSystem =
+    { pkgs, ... }:
+    {
+      checks.ja =
+        pkgs.runCommand "ja"
+          {
+            nativeBuildInputs = [
+              pkgs.fish
+              pkgs.git
+            ];
+          }
+          ''
+            HOME=$TMPDIR fish ${./worktree-test.fish} ${./worktree.fish}
+            touch "$out"
+          '';
+    };
+
   flake.modules.homeManager.base =
     { pkgs, ... }:
     {
