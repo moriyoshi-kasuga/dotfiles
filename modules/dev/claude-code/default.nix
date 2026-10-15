@@ -44,6 +44,9 @@ in
         settings = {
           disableArtifact = true;
           diffTool = "terminal";
+          enabledPlugins = {
+            "cc-plugin-diff@builtin" = false;
+          };
           attribution = {
             commit = "";
             pr = "";
