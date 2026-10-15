@@ -1,7 +1,7 @@
 _:
 
 {
-  flake.modules.darwin.pc = {
+  flake.modules.darwin.aerospace = { ... }: {
     services.aerospace = {
       enable = true;
       settings = {
