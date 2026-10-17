@@ -2,7 +2,14 @@ return {
   {
     "esmuellert/codediff.nvim",
     cmd = "CodeDiff",
-    opts = {},
+    opts = {
+      keymaps = {
+        view = {
+          prev_file = "<S-k>",
+          next_file = "<S-j>",
+        },
+      },
+    },
     keys = {
       { "<leader>gd", "<cmd>CodeDiff file HEAD<CR>", desc = "CodeDiff Open (Buffer)" },
       { "<leader>gD", "<cmd>CodeDiff<CR>", desc = "CodeDiff Open (All)" },
