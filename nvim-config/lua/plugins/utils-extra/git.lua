@@ -18,20 +18,6 @@ return {
     },
   },
   {
-    "NeogitOrg/neogit",
-    lazy = true,
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "esmuellert/codediff.nvim",
-
-      "ibhagwan/fzf-lua",
-    },
-    cmd = "Neogit",
-    keys = {
-      { "<C-.>", "<cmd>Neogit<cr>", desc = "Show Neogit UI" },
-    },
-  },
-  {
     "pwntester/octo.nvim",
     cmd = "Octo",
     opts = {
@@ -70,6 +56,16 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim",
       "ibhagwan/fzf-lua",
+    },
+  },
+  {
+    "tpope/vim-fugitive",
+    keys = {
+      {
+        "<C-.>",
+        "<cmd>tab G<cr>",
+        desc = "Show Fugitive",
+      },
     },
   },
 }
