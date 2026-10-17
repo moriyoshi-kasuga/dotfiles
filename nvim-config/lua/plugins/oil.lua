@@ -43,8 +43,9 @@ local git_status = new_git_status()
 return {
   {
     "stevearc/oil.nvim",
-    dependencies = { { "nvim-mini/mini.icons", lazy = true, opts = {} } },
-    cmd = { "Oil" },
+    dependencies = { { "nvim-mini/mini.icons", opts = {} } },
+    -- Lazy loading is not recommended because it is very tricky to make it work correctly in all situations.
+    lazy = false,
     ---@module 'oil'
     ---@type oil.SetupOpts
     opts = {
