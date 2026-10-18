@@ -1,7 +1,7 @@
 { inputs, ... }:
 
 {
-  flake.modules.darwin.paneru = { ... }: {
+  flake.modules.darwin.paneru = _: {
     imports = [ inputs.paneru.darwinModules.paneru ];
 
     services.paneru = {
