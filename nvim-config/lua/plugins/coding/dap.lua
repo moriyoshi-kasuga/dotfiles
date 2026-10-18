@@ -19,6 +19,14 @@ return {
         "theHamsta/nvim-dap-virtual-text",
         opts = {},
       },
+      {
+        "mfussenegger/nvim-dap-python",
+        config = function()
+          -- The adapter comes from Nix (lang.python); the program being debugged
+          -- still runs on the project's .venv python.
+          require("dap-python").setup("debugpy-adapter")
+        end,
+      },
     },
     -- stylua: ignore
     keys = {

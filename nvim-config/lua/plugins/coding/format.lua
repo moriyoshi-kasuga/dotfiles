@@ -92,6 +92,13 @@ return {
         stylua = {
           prepend_args = { "--indent-type", "Spaces" },
         },
+        ruff_format = {
+          -- Prefer the ruff pinned in the project's .venv, so the result matches
+          -- the project's own `ruff format --check` even when Nix's ruff is newer.
+          command = function(self, ctx)
+            return require("conform.util").find_executable({ ".venv/bin/ruff" }, "ruff")(self, ctx)
+          end,
+        },
         prettier = {
           condition = function(_, ctx)
             return has_parser(ctx)

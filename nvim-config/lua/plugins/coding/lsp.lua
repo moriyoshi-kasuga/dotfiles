@@ -48,6 +48,7 @@ return {
 
         "clangd",
         "ty",
+        "ruff",
         "nixd",
         "lua_ls",
         "hls",

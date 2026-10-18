@@ -5,6 +5,7 @@ return {
     "nvim-neotest/nvim-nio",
     "nvim-lua/plenary.nvim",
     "nvim-treesitter/nvim-treesitter",
+    "nvim-neotest/neotest-python",
   },
   config = function()
     -- cargo-nextest / cargo のプログレスバーは neotest の PTY 幅(120x40固定)で描画され、
@@ -26,6 +27,7 @@ return {
       },
       adapters = {
         require("rustaceanvim.neotest"),
+        require("neotest-python"),
       },
     })
   end,
@@ -35,6 +37,7 @@ return {
     { "<leader>tt", function() require("neotest").run.run(vim.fn.expand("%")) end, desc = "Run File (Neotest)" },
     { "<leader>tT", function() require("neotest").run.run(vim.uv.cwd()) end, desc = "Run All Test Files (Neotest)" },
     { "<leader>tr", function() require("neotest").run.run() end, desc = "Run Nearest (Neotest)" },
+    { "<leader>td", function() require("neotest").run.run({ strategy = "dap" }) end, desc = "Debug Nearest (Neotest)" },
     { "<leader>tl", function() require("neotest").run.run_last() end, desc = "Run Last (Neotest)" },
     { "<leader>ts", function() require("neotest").summary.toggle() end, desc = "Toggle Summary (Neotest)" },
     { "<leader>to", function() require("neotest").output.open({ enter = true, auto_close = true }) end, desc = "Show Output (Neotest)" },

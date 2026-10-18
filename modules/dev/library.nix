@@ -60,6 +60,13 @@ let
       webkitgtk_4_1
       wayland
       dbus
+      # pip で入れた Qt (PyQt5 など) の platform plugin が読み込む
+      fontconfig
+      freetype
+      libxcb-wm
+      libxcb-image
+      libxcb-keysyms
+      libxcb-render-util
     ];
 
   darwinHome =
