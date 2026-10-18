@@ -120,7 +120,6 @@ config.keys = {
   { key = "n", mods = "CMD", action = act.SpawnWindow },
 
   -- Clipboard
-  { key = "c", mods = "CTRL|SHIFT", action = act.CopyTo("Clipboard") },
   { key = "v", mods = "CTRL", action = act.PasteFrom("Clipboard") },
 
   -- Scrollback search and copy mode are tmux's job. QuickSelect only reads

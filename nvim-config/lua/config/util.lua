@@ -26,7 +26,6 @@ end
 -- Copy a path to the clipboard registers.
 ---@param path string
 M.copy_path = function(path)
-  vim.fn.setreg("+", path)
   vim.fn.setreg("*", path)
   vim.notify("Copied: " .. path, vim.log.levels.INFO)
 end
