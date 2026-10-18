@@ -31,6 +31,8 @@ let
 
             launcher = {
               categories = false;
+              compact = true;
+              layout = "simple";
             };
 
             shadow = {
