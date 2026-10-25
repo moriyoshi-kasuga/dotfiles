@@ -13,6 +13,19 @@ in
       notify = "${config.home.profileDirectory}/bin/notify";
     in
     {
+      # diffSidebarOpen はグローバル設定 (~/.claude.json) でのみ読まれ、
+      # settings.json や cc-plugin-diff の無効化では右側の diff パネルの自動表示を止められない。
+      home.activation.claudeCodeGlobalConfig = config.lib.dag.entryAfter [ "writeBoundary" ] ''
+        file="$HOME/.claude.json"
+        if [ -f "$file" ]; then
+          tmp=$(mktemp)
+          ${pkgs.jq}/bin/jq '.diffSidebarOpen = false' "$file" > "$tmp" && cat "$tmp" > "$file"
+          rm -f "$tmp"
+        else
+          echo '{"diffSidebarOpen":false}' > "$file"
+        fi
+      '';
+
       programs.claude-code = {
         enable = true;
         package = pkgs.claude-code;
