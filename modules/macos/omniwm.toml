@@ -121,10 +121,11 @@ autoHideHideDelayMilliseconds = 0.0
 autoHideRevealDelayMilliseconds = 0.0
 backgroundOpacity = 0.1
 deduplicateAppIcons = false
-enabled = true
+# 画面上部中央のワークスペース bar は出さない
+enabled = false
 excludedBundleIDs = []
 height = 24.0
-# 空のワークスペースは bar に出さず、Cmd+U / Cmd+I でも飛ばす
+# bar を出さなくても効き、Cmd+U / Cmd+I で空のワークスペースを飛ばす
 hideEmptyWorkspaces = true
 hideInNativeFullscreen = false
 hoverPreviewsEnabled = true
