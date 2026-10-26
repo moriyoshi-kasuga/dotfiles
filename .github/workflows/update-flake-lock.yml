@@ -20,8 +20,7 @@ jobs:
       - uses: DeterminateSystems/update-flake-lock@main
         with:
           pr-title: "chore(nix): update flake.lock"
+          commit-msg: "chore(nix): update flake.lock"
           pr-labels: |
             dependencies
             automated
-          env:
-            GIT_COMMIT_MESSAGE: "chore(nix): update flake.lock"
