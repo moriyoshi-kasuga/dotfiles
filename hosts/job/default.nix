@@ -8,7 +8,6 @@ in
   flake.darwinConfigurations.job = inputs.nix-darwin.lib.darwinSystem {
     modules = [
       darwin.pc
-      darwin.paneru
       darwin.ios-dev
       {
         nixpkgs.hostPlatform = "aarch64-darwin";
@@ -23,6 +22,8 @@ in
             home."lang.lua"
             home."lang.python"
             home."lang.c"
+
+            home.omniwm
           ];
         };
       }
