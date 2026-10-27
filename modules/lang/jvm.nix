@@ -10,7 +10,7 @@ _:
       # どのエディタから起動しても同じ jdtls になる。
       jdtls = pkgs.symlinkJoin {
         name = "jdtls-with-lombok";
-        paths = [ (pkgs.jdt-language-server.override { jdk = java; }) ];
+        paths = [ (pkgs.jdt-language-server.override { jdk25 = java; }) ];
         nativeBuildInputs = [ pkgs.makeWrapper ];
         postBuild = ''
           wrapProgram $out/bin/jdtls \
