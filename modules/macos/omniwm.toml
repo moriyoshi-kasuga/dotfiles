@@ -56,7 +56,7 @@ top = 0.0
 [niri]
 alwaysCenterSingleColumn = false
 centerFocusedColumn = "never"
-containerPrimarySpanPresets = [0.33333, 0.5, 0.66667, 1.0]
+containerPrimarySpanPresets = [0.5, 1.0]
 defaultContainerPrimarySpan = 0.5
 edgeGaps = false
 infiniteLoop = false
@@ -307,18 +307,6 @@ id = "consumeWindowIntoColumn"
 [[hotkeys]]
 binding = "Command+Period"
 id = "expelWindowFromColumn"
-
-[[hotkeys]]
-binding = "Command+R"
-id = "cycleSizeForward"
-
-[[hotkeys]]
-binding = "Command+Shift+R"
-id = "cycleWindowSecondarySpanForward"
-
-[[hotkeys]]
-binding = "Control+Command+R"
-id = "resetWindowSecondarySpan"
 
 [[hotkeys]]
 binding = "Command+Shift+F"
