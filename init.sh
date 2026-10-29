@@ -1,100 +1,33 @@
 #!/usr/bin/env bash
 
+# 初回の適用用。nh はまだ入っていないので flake.lock の nixpkgs から借りて動かす。
+# 一度適用すれば NH_FLAKE が設定されるので、以降は nh を直接使う。
+
 set -euo pipefail
 
-usage() {
-  cat <<'EOF'
-Usage: ./init.sh <command> [name] [options]
+if [ $# -lt 1 ]; then
+  echo 'Usage: ./init.sh <name> [nh options]'
+  exit 1
+fi
 
-Commands:
-  nixos <name> [--boot]   Apply NixOS configuration
-  darwin <name>           Apply nix-darwin configuration
-  update                  Update flake inputs
-  help                    Show this help message
-EOF
-}
+if ! command -v nix >/dev/null 2>&1; then
+  echo 'Nix is not installed or not in PATH.'
+  echo 'Install: https://nixos.org/download.html'
+  exit 1
+fi
 
-require_nix() {
-  if ! command -v nix >/dev/null 2>&1; then
-    echo 'Nix is not installed or not in PATH.'
-    echo 'Install: https://nixos.org/download.html'
-    exit 1
-  fi
-}
+name=$1
+shift
 
-run_flake_update() {
-  echo 'Updating Nix configuration...'
-  nix --extra-experimental-features 'nix-command flakes' flake update
-  echo 'Nix configuration updated.'
-}
+case "$(uname -s)" in
+Linux) target=os ;;
+Darwin) target=darwin ;;
+*)
+  echo "Unsupported OS: $(uname -s)"
+  exit 1
+  ;;
+esac
 
-run_darwin() {
-  local name=$1
-  sudo -H nix --extra-experimental-features 'nix-command flakes' \
-    run --inputs-from . nix-darwin#darwin-rebuild -- \
-    switch --flake .#"${name}"
-}
-
-run_nixos() {
-  local name=$1
-  local extra=${2-}
-
-  if [ -z "${extra}" ]; then
-    sudo -H nixos-rebuild switch --flake .#"${name}"
-  elif [ "${extra}" == "--boot" ]; then
-    sudo -H nixos-rebuild boot --flake .#"${name}"
-  else
-    echo "Unknown argument for nixos: ${extra}"
-    echo 'Usage: ./init.sh nixos <name> [--boot]'
-    exit 1
-  fi
-}
-
-main() {
-  local command=${1-}
-  if [ -z "${command}" ]; then
-    echo 'No command provided.'
-    usage
-    exit 1
-  fi
-
-  case "${command}" in
-  help)
-    usage
-    exit 0
-    ;;
-  update)
-    require_nix
-    run_flake_update
-    exit 0
-    ;;
-  nixos | darwin)
-    require_nix
-    ;;
-  *)
-    echo "Unknown command: ${command}"
-    usage
-    exit 1
-    ;;
-  esac
-
-  local name=${2-}
-  if [ -z "${name}" ]; then
-    echo 'name is required.'
-    usage
-    exit 1
-  fi
-
-  echo "Building Nix configuration...: ${name}"
-
-  case "${command}" in
-  darwin)
-    run_darwin "${name}"
-    ;;
-  nixos)
-    run_nixos "${name}" "${3-}"
-    ;;
-  esac
-}
-
-main "$@"
+cd "$(dirname "$0")"
+exec nix --extra-experimental-features 'nix-command flakes' \
+  run --inputs-from . nixpkgs#nh -- "${target}" switch ".#${name}" "$@"

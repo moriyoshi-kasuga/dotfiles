@@ -29,10 +29,20 @@ git の設定がこのファイルを include しており、ファイルが無�
 
 ## Apply
 
+初回は `init.sh` で適用します。nh を flake.lock の nixpkgs から借りて動かします。
+
 ```sh
-./init.sh nixos   <name> [--boot]   # NixOS
-./init.sh darwin  <name>            # macOS
-./init.sh update                    # flake update
+./init.sh <name>    # <name> は Hosts の Name
+```
+
+一度適用すると [nh](https://github.com/nix-community/nh) が入り、`NH_FLAKE` にこのリポジトリとホストが設定されます。
+以降はどのディレクトリからでも nh を使います。古い世代の掃除も nh が週 1 回行います。
+
+```sh
+nh os switch        # NixOS (--ask で差分を確認してから適用)
+nh os boot          # NixOS, 次回起動時に適用
+nh darwin switch    # macOS
+nh os switch -u     # flake update してから適用
 ```
 
 ## Hosts
