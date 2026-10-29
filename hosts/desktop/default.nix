@@ -21,6 +21,7 @@ in
         }:
         {
           people.primaryUser = "mori";
+          people.flakeHost = "desktop";
           networking.hostName = "Mori-NixOS";
 
           # Hibernate to the swap partition from the hardware configuration.

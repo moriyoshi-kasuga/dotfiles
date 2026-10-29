@@ -12,6 +12,7 @@ in
       ./_hardware-configuration.nix
       {
         people.primaryUser = "sv-main";
+        people.flakeHost = "sv-main";
         networking.hostName = "sv-main";
 
         people.home.imports = [

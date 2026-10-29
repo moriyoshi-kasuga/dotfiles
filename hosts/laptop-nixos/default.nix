@@ -12,6 +12,7 @@ in
       ./_hardware-configuration.nix
       {
         people.primaryUser = "mori";
+        people.flakeHost = "laptop-nixos";
         networking.hostName = "Mori-Laptop-NixOS";
 
         # Only zram swap, so hibernation is impossible; the lid suspends by default.

@@ -13,6 +13,7 @@ in
       {
         nixpkgs.hostPlatform = "aarch64-darwin";
         people.primaryUser = "mori";
+        people.flakeHost = "laptop-mac";
 
         people.home.imports = [
           home."lang.c"

@@ -13,6 +13,7 @@ in
       {
         nixpkgs.hostPlatform = "aarch64-darwin";
         people.primaryUser = "mori";
+        people.flakeHost = "job";
 
         people.home = {
           terminal.wezterm.bigMonitor = true;

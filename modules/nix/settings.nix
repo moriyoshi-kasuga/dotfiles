@@ -17,10 +17,6 @@ let
       max-free = 20 * 1024 * 1024 * 1024;
     };
     optimise.automatic = true;
-    gc = {
-      automatic = true;
-      options = "--delete-older-than 7d";
-    };
     # OS 側の既定でも同じ store path が登録されるが、flake として渡すと rev / narHash も entry に入る
     registry.nixpkgs.flake = inputs.nixpkgs;
   };
@@ -34,7 +30,6 @@ in
       nix = {
         package = pkgs.nixVersions.latest;
         channel.enable = false;
-        gc.dates = "weekly";
         # ビルド中も対話的な処理を優先させる
         daemonCPUSchedPolicy = "batch";
         daemonIOSchedClass = "idle";
@@ -50,11 +45,5 @@ in
 
   flake.modules.darwin.base = {
     imports = [ common ];
-
-    nix.gc.interval = {
-      Weekday = 1;
-      Hour = 0;
-      Minute = 0;
-    };
   };
 }

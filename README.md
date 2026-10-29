@@ -97,7 +97,7 @@ OS 固有の home 設定も `homeManager.*` の中で OS を判定せず、`nixo
   - `home-manager.nix`: home-manager の統合と層の配線
   - `users.nix`: `people.primaryUser` / `people.home`
   - `state-version.nix`: stateVersion
-  - `nix/`: nix の設定、nixpkgs
+  - `nix/`: nix の設定、nixpkgs、nh
   - `style/`: Catppuccin、フォント、壁紙ローテーション
   - `shell/`: Fish / Starship / direnv / fzf / zoxide / nix-index と comma (zsh は system 側で有効にするだけ)、OS 差を埋める shim (`notify` / `pbcopy` など)
   - `editor/`: Neovim / Vim
