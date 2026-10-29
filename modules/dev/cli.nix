@@ -48,14 +48,7 @@ in
         bat.enable = true;
         jq.enable = true;
 
-        mise = {
-          enable = true;
-          globalConfig = {
-            settings = {
-              not_found_auto_install = true;
-            };
-          };
-        };
+        mise.enable = true;
       };
 
       home.shellAliases = {
