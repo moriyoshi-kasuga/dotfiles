@@ -8,7 +8,7 @@ in
   flake.darwinConfigurations.laptop-mac = inputs.nix-darwin.lib.darwinSystem {
     modules = [
       darwin.pc
-      darwin.aerospace
+      darwin.omniwm
       darwin.ios-dev
       {
         nixpkgs.hostPlatform = "aarch64-darwin";
