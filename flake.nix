@@ -45,10 +45,6 @@
       url = "github:anthropics/skills";
       flake = false;
     };
-    leonardomso-rust-skills = {
-      url = "github:leonardomso/rust-skills";
-      flake = false;
-    };
     obra-superpowers = {
       url = "github:obra/superpowers";
       flake = false;

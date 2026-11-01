@@ -1,7 +1,7 @@
 ---
 description: バグの根本原因を特定する。安い観察から順に仮説を確定・除外し、重い観察しか残らなくなった時点で一度結論を出して止まる。コードは変更しない。
 argument-hint: <エラーメッセージ | ファイルパス | 症状の説明>
-allowed-tools: Read, Glob, Grep, Bash(git log *), Bash(git diff *), Bash(git blame *), Bash(git show *), Bash(cargo check *), Bash(cargo test *), Bash(cargo run *)
+allowed-tools: Read, Glob, Grep, Bash(git log *), Bash(git diff *), Bash(git blame *), Bash(git show *)
 ---
 
 # バグ原因特定
@@ -19,8 +19,8 @@ allowed-tools: Read, Glob, Grep, Bash(git log *), Bash(git diff *), Bash(git bla
 観察のコストは3段階で考える。
 
 - **読むだけ**: Read・Glob・Grep、git の log/diff/blame/show
-- **手元ですぐ終わる**: `cargo check`、フィルタで1本に絞ったテスト、hexdump など
-- **重い**: ネットワーク操作（外部 API、依存の取得、DB 接続など）、フィルタなしの `cargo test`、`cargo run`、実行時間が見積もれないもの、副作用があるもの、ユーザーの環境や操作が必要なもの
+- **手元ですぐ終わる**: 型検査や評価だけのコマンド（`cargo check`、`nix eval` など）、フィルタで1本に絞ったテスト、hexdump など
+- **重い**: ネットワーク操作（外部 API、依存の取得、DB 接続など）、フィルタなしのテスト全体、プログラムの実行やシステム全体のビルド（`cargo run`、`nixos-rebuild` など）、実行時間が見積もれないもの、副作用があるもの、ユーザーの環境や操作が必要なもの
 
 読むだけ・手元ですぐ終わる観察は、安い順に上限なく実行して仮説を確定・除外していく。途中で分かった事実から新しい仮説が出てきたら追加してよい。
 

@@ -2,52 +2,48 @@
 
 {
   flake.modules.homeManager.base =
-    { lib, ... }:
+    { lib, pkgs, ... }:
     let
-      # Claude Code only loads skills/<name>/SKILL.md, so nested category
-      # directories are walked and flattened by skill directory name.
-      findSkills =
-        dir:
-        lib.concatMap (
-          name:
-          let
-            path = "${dir}/${name}";
-          in
-          if builtins.pathExists "${path}/SKILL.md" then
-            [ (lib.nameValuePair name path) ]
-          else
-            findSkills path
-        ) (lib.attrNames (lib.filterAttrs (_: type: type == "directory") (builtins.readDir dir)));
+      fromDir = dir: map (rel: lib.nameValuePair (baseNameOf rel) "${dir}/${rel}");
 
       # mattpocock-skills is installed as plain skills rather than as a plugin:
       # its skills call each other by unprefixed name (e.g. "codebase-design"),
       # which a plugin would namespace as "mattpocock-skills:codebase-design".
-      skillList =
-        lib.concatMap findSkills [
-          "${inputs.mattpocock-skills}/skills/in-progress"
-          "${inputs.mattpocock-skills}/skills/misc"
-          "${inputs.mattpocock-skills}/skills/engineering"
-          "${inputs.mattpocock-skills}/skills/productivity"
-          "${inputs.anthropic-skills}/skills"
+      skills =
+        fromDir "${inputs.mattpocock-skills}/skills" [
+          "productivity/grilling"
+          "productivity/grill-me"
+          "productivity/handoff"
+          "productivity/teach"
+          "productivity/writing-for-agents"
+          "engineering/codebase-design"
+          "engineering/improve-codebase-architecture"
+          "engineering/domain-modeling"
+          "engineering/code-review"
+          "engineering/research"
+          "engineering/prototype"
+          "engineering/pr"
         ]
-        ++ [ (lib.nameValuePair "rust-skills" "${inputs.leonardomso-rust-skills}") ];
+        ++ fromDir "${inputs.anthropic-skills}/skills" [
+          "claude-api"
+          "frontend-design"
+          "webapp-testing"
+        ];
 
-      duplicateSkills = lib.attrNames (
-        lib.filterAttrs (_: v: builtins.length v > 1) (lib.groupBy (s: s.name) skillList)
-      );
+      # The thought-bug command replaces systematic-debugging, so the remaining
+      # superpowers skills that send bugs there are pointed at it instead.
+      superpowers = pkgs.runCommand "superpowers" { } ''
+        cp -r ${inputs.obra-superpowers} $out
+        chmod -R u+w $out
+        rm -r $out/skills/systematic-debugging
+        find $out/skills -name '*.md' -exec sed -i 's/\(superpowers:\)\?systematic-debugging/thought-bug/g' {} +
+      '';
     in
     {
-      assertions = [
-        {
-          assertion = duplicateSkills == [ ];
-          message = "duplicate Claude Code skill names: ${lib.concatStringsSep ", " duplicateSkills}";
-        }
-      ];
-
       programs.claude-code = {
         commandsDir = ../../../commands;
-        skills = lib.listToAttrs skillList;
-        plugins.superpowers = inputs.obra-superpowers;
+        skills = lib.listToAttrs skills;
+        plugins = { inherit superpowers; };
       };
     };
 }

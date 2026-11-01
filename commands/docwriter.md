@@ -2,6 +2,7 @@
 description: 既存コメントを当てにせず、現在のコードだけを根拠に Rust のコメント・doc コメント・doctest を最小限に書き直す。判断を誤らせないための設計意図は検証して残し、コードから読めない意図はユーザーに聞く。
 argument-hint: <ファイルパス | 対象箇所の説明>
 allowed-tools: Read, Glob, Grep, Edit, Bash(git diff *), Bash(git status *), Bash(cargo test *)
+disable-model-invocation: true
 ---
 
 # ドキュメントの書き直し（Rust）

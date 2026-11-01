@@ -144,22 +144,6 @@
         "type": "github"
       }
     },
-    "leonardomso-rust-skills": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1781477469,
-        "narHash": "sha256-B6E8JP78/wDdJYHp1l5cpEgxRuCzAhOhUtst4pueMw0=",
-        "owner": "leonardomso",
-        "repo": "rust-skills",
-        "rev": "fd2a861ab0406a4ac536a55274d14ea6fd1ca9c9",
-        "type": "github"
-      },
-      "original": {
-        "owner": "leonardomso",
-        "repo": "rust-skills",
-        "type": "github"
-      }
-    },
     "mattpocock-skills": {
       "flake": false,
       "locked": {
@@ -327,7 +311,6 @@
         "flake-parts": "flake-parts_2",
         "home-manager": "home-manager",
         "import-tree": "import-tree",
-        "leonardomso-rust-skills": "leonardomso-rust-skills",
         "mattpocock-skills": "mattpocock-skills",
         "nix-claude-code": "nix-claude-code",
         "nix-darwin": "nix-darwin",
