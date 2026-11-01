@@ -40,8 +40,10 @@ let
         (writeShellScriptBin "pbpaste" ''
           ${wl-clipboard}/bin/wl-paste --no-newline
         '')
+        # 型を指定しないと wl-copy は中身から MIME を推定し、"modules/..." や "def ..." のような
+        # 文字列を application/x-ruby と判定して text/plain を提供しなくなる
         (writeShellScriptBin "pbcopy" ''
-          ${wl-clipboard}/bin/wl-copy
+          ${wl-clipboard}/bin/wl-copy --type text/plain
         '')
         (writeShellScriptBin "open" ''
           ${xdg-utils}/bin/xdg-open "$@"
