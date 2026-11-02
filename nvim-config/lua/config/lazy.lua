@@ -15,6 +15,13 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- lazy-lock.json is owned by the dotfiles repo: lazy only follows it.
+-- It is written only by `nvim-lazy-update` (NVIM_LAZY_LOCK_UPDATE=1).
+local lock_writable = vim.env.NVIM_LAZY_LOCK_UPDATE == "1"
+if not lock_writable then
+  require("lazy.manage.lock").update = function() end
+end
+
 -- Setup lazy.nvim
 local is_simple_mode = require("config.util").is_in_simple_mode()
 require("lazy").setup({
@@ -60,3 +67,26 @@ require("lazy").setup({
     },
   },
 })
+
+-- Restore plugins when lazy-lock.json changed since the last restore/update
+-- (e.g. after pulling dotfiles). Skipped in simple mode, which loads only a
+-- subset of the spec.
+local lockfile = require("lazy.core.config").options.lockfile
+local stamp = vim.fn.stdpath("state") .. "/lazy-lock.sha256"
+local function lock_hash()
+  return vim.fn.sha256(table.concat(vim.fn.readfile(lockfile, "b"), "\n"))
+end
+local function write_stamp()
+  vim.fn.mkdir(vim.fn.fnamemodify(stamp, ":h"), "p")
+  vim.fn.writefile({ lock_hash() }, stamp)
+end
+
+if lock_writable then
+  vim.api.nvim_create_autocmd("VimLeavePre", { callback = write_stamp })
+elseif not is_simple_mode and vim.fn.filereadable(lockfile) == 1 then
+  local current = vim.fn.filereadable(stamp) == 1 and vim.fn.readfile(stamp)[1] or nil
+  if lock_hash() ~= current then
+    require("lazy").restore({ wait = true })
+    write_stamp()
+  end
+end

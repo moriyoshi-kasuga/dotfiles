@@ -74,6 +74,10 @@ _:
         (pkgs.writeShellScriptBin "simplenvim" ''
           env NVIM_SIMPLE_MODE=1 CATPPUCCIN_FLAVOR=${flavor} ${neovimCmd} "$@"
         '')
+        # Only path that writes nvim-config/lazy-lock.json; see config/lazy.lua.
+        (pkgs.writeShellScriptBin "nvim-lazy-update" ''
+          env NVIM_LAZY_LOCK_UPDATE=1 ${lib.getExe config.programs.neovim.finalPackage} --headless "+Lazy! sync" +qa
+        '')
       ];
 
       programs.fish.interactiveShellInit = ''
