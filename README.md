@@ -95,7 +95,7 @@ home 側の設定は次の 2 通りで入れます。
 
 - homeManager: `lang.buf` / `lang.c` / `lang.go` / `lang.haskell` / `lang.jvm` / `lang.lua` / `lang.node` / `lang.python` / `lang.rust` / `lang.wasm`（`people.home.imports` で選ぶ）
 - nixos: `amd` / `nvidia` / `claude-desktop` / `game` / `server`
-- darwin: `ios-dev`
+- darwin: `ios-dev` / `omniwm` / `aerospace`
 
 ### ディレクトリ
 
@@ -115,7 +115,7 @@ OS 固有の home 設定も `homeManager.*` の中で OS を判定せず、`nixo
   - `lang/`: 各言語のツールチェインと language server
   - `dev/`: Git / tmux / Docker / Claude Code / CLI ツール / ドキュメント作成ツール / 開発用サービスの CLI / TaggedFileFlow / 開発用共有ライブラリ
   - `desktop/`: デスクトップ環境 (Niri + Noctalia / greetd / PipeWire / Bluetooth / Qt / fcitx5 / game など、NixOS) と GUI アプリ (Brave / Discord は macOS では Homebrew cask)
-  - `macos/`: Homebrew / Aerospace / Dock / Finder / キーボード / iOS 開発ツール
+  - `macos/`: Homebrew / OmniWM / Dock / Finder / キーボード / iOS 開発ツール
   - `networking/`: NetworkManager・DNS、Tailscale
   - `system/`: ブートローダー・sudo・SSH・zram・タイムゾーンとロケール・SMART / fwupd・ドキュメント・基本パッケージ、`server`
   - `hardware/`: AMD / NVIDIA GPU、周辺機器
