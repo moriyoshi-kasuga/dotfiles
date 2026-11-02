@@ -8,12 +8,11 @@ _:
         fish_add_path -g ~/.cargo/bin
       '';
 
+      # CARGO_INCREMENTAL stays unset: kache's adaptive incremental mode gives
+      # crates under edit incremental state, and CARGO_INCREMENTAL=0 disables it.
       # mold is a fallback: `cargo build --config 'target."cfg(target_os = \"linux\")".rustflags=["-C","link-arg=-fuse-ld=mold"]'`
       # if wild fails to link a specific crate.
       home.file.".cargo/config.toml".text = ''
-        [env]
-        CARGO_INCREMENTAL = "0"
-
         [build]
         rustc-wrapper = "kache"
 

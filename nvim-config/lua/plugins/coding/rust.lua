@@ -121,6 +121,8 @@ return {
               },
             },
             cargo = {
+              -- target/rust-analyzer so terminal cargo runs don't wait on its build lock
+              targetDir = true,
               allFeatures = true,
               loadOutDirsFromCheck = true,
               buildScripts = {
