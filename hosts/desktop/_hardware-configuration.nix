@@ -30,6 +30,7 @@
       "compress=zstd:1"
       "noatime"
       "space_cache=v2"
+      "discard=async"
     ];
   };
 
@@ -41,6 +42,7 @@
       "compress=zstd:1"
       "noatime"
       "space_cache=v2"
+      "discard=async"
     ];
   };
 
@@ -52,6 +54,7 @@
       "compress=zstd:1"
       "noatime"
       "space_cache=v2"
+      "discard=async"
     ];
   };
 

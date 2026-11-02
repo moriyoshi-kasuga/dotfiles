@@ -58,10 +58,18 @@ in
             fileSystems = [ "/" ];
           };
 
+          # btrfs は discard=async で解放した領域を随時 TRIM するので、週 1 回の fstrim は
+          # 空き領域全体 (1 TiB 超) を毎回 TRIM し直すだけで 5 から 11 分かかる
+          services.fstrim.enable = false;
+
           # The MT7922's Bluetooth half sits on USB via btusb, which
-          # autosuspends it when idle; resuming it mid-stream causes audio
-          # dropouts and "ACL packet for unknown connection handle" errors.
-          # Power saving is irrelevant on a desktop.
+          # autosuspends it when idle. Power saving is irrelevant on a desktop,
+          # so keep it awake to rule it out when audio misbehaves. It caused
+          # neither known symptom: the "ACL packet for unknown connection
+          # handle 3837" kernel errors come from the MT7922 firmware (often
+          # exactly 60s apart while a device is connected), and the earbud
+          # dropouts were a weak link until the board's Wi-Fi antennas, which
+          # Bluetooth shares, were attached.
           boot.extraModprobeConfig = ''
             options btusb enable_autosuspend=0
           '';
