@@ -1,7 +1,7 @@
 { lib, ... }:
 
 let
-  # nixos/darwin 共通: primaryUser と、その home-manager 設定を受け取るオプション。
+  # nixos/darwin 共通: primaryUser と、その home-manager 設定、flakeHost (nh が使う flake 上の host 名) を受け取るオプション。
   # home.username / home.homeDirectory は home-manager が users.users.<u> から自動で設定する。
   mkUserModule =
     extra:

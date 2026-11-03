@@ -7,7 +7,7 @@ _:
       java = pkgs.graalvmPackages.graalvm-ce;
 
       # Lombok は javaagent として JVM の起動時に渡す必要があるので、jdtls 自体に組み込む。
-      # どのエディタから起動しても同じ jdtls になる。
+      # nvim 側の設定に頼らずに Lombok が効く。
       jdtls = pkgs.symlinkJoin {
         name = "jdtls-with-lombok";
         paths = [ (pkgs.jdt-language-server.override { jdk25 = java; }) ];
