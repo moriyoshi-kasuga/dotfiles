@@ -106,15 +106,6 @@ in
               "Bash(git branch)"
               "Bash(git stash list)"
               "Bash(gh pr diff *)"
-              # cargo (rust)
-              "Bash(rustc *)"
-              "Bash(cargo build *)"
-              "Bash(cargo clippy *)"
-              "Bash(cargo fmt *)"
-              "Bash(cargo check *)"
-              "Bash(cargo test *)"
-              "Bash(cargo nextest *)"
-              "Bash(cargo doc *)"
               # js and ts
               "Bash(npm run lint)"
               "Bash(deno run lint)"

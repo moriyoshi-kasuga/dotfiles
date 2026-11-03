@@ -72,11 +72,7 @@ let
   darwinHome =
     { pkgs, ... }:
     {
-      library.libs = with pkgs; [
-        libiconv
-        llvm
-        nsis
-      ];
+      library.libs = [ pkgs.libiconv ];
       home.sessionVariablesExtra = ''
         export SDKROOT="$(xcrun --show-sdk-path)"
       '';
