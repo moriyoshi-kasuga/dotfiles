@@ -85,7 +85,7 @@ _:
 
           # frontend formatting (JS/TS/CSS/HTML/JSON/YAML/Markdown/Svelte/Astro)
           # NOTE: eslint (linting) is expected to come from each project's own
-          # node_modules; vscode-eslint-language-server (editor.neovim) resolves it there.
+          # node_modules; vscode-eslint-language-server (lang/web.nix) resolves it there.
           prettier
         ];
       };

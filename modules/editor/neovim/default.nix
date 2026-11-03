@@ -38,36 +38,8 @@ _:
           flavor
         ];
 
-        extraPackages = with pkgs; [
-          tree-sitter
-
-          # shell
-          bash-language-server
-          shellcheck
-          shfmt
-
-          # lua
-          lua-language-server
-          stylua
-
-          # HTML/CSS/JSON
-          vscode-langservers-extracted
-
-          # nix
-          nixd
-          nixfmt
-
-          # elm
-          elmPackages.elm-language-server
-          elmPackages.elm-format
-
-          # single package for each lang
-          just-lsp
-          hadolint
-          actionlint
-          taplo
-          tinymist
-        ];
+        # 言語ごとの language server などは modules/lang/ の各ファイルが足す
+        extraPackages = [ pkgs.tree-sitter ];
       };
 
       home.packages = [

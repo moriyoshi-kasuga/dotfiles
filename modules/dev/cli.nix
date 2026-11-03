@@ -34,7 +34,6 @@ in
         unzipNLS
         lnav
         bottom
-        just
         hexyl
 
         tokei

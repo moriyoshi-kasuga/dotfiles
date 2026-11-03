@@ -1,6 +1,16 @@
 _:
 
 {
+  # nvim の設定は lua なので、どの host でも書けるように language server と formatter は base に入れる
+  flake.modules.homeManager.base =
+    { pkgs, ... }:
+    {
+      programs.neovim.extraPackages = with pkgs; [
+        lua-language-server
+        stylua
+      ];
+    };
+
   flake.modules.homeManager."lang.lua" =
     { pkgs, ... }:
     {

@@ -110,9 +110,9 @@ OS 固有の home 設定も `homeManager.*` の中で OS を判定せず、`nixo
   - `nix/`: nix の設定、nixpkgs、nh
   - `style/`: Catppuccin、フォント、壁紙ローテーション
   - `shell/`: Fish / Starship / direnv / fzf / zoxide / nix-index と comma (zsh は system 側で有効にするだけ)、OS 差を埋める shim (`notify` / `pbcopy` など)
-  - `editor/`: Neovim / Vim
+  - `editor/`: Neovim (本体と wrapper) / Vim。言語ごとのツールは持たない
   - `terminal/`: WezTerm
-  - `lang/`: 各言語のツールチェインと language server
+  - `lang/`: 言語やファイル形式ごとの toolchain・language server・formatter・linter。rust と node はディレクトリ
   - `dev/`: Git / tmux / Docker / Claude Code / CLI ツール / ドキュメント作成ツール / 開発用サービスの CLI / TaggedFileFlow / 開発用共有ライブラリ
   - `desktop/`: デスクトップ環境 (Niri + Noctalia / greetd / PipeWire / Bluetooth / Qt / fcitx5 / game など、NixOS) と GUI アプリ (Brave / Discord は macOS では Homebrew cask)
   - `macos/`: Homebrew / OmniWM / Dock / Finder / キーボード / iOS 開発ツール
