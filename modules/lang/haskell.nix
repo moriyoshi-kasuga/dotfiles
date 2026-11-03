@@ -4,9 +4,7 @@ _:
   flake.modules.homeManager."lang.haskell" =
     { pkgs, ... }:
     {
-      home.packages = with pkgs; [
-        ghc
-        haskell-language-server
-      ];
+      home.packages = [ pkgs.ghc ];
+      programs.neovim.extraPackages = [ pkgs.haskell-language-server ];
     };
 }

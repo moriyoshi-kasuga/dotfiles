@@ -41,10 +41,6 @@ _:
           (coursier.override {
             jre = java;
           })
-          jdtls
-          (metals.override {
-            jre = java;
-          })
           (scala-next.override {
             scala = pkgs.scala.override { jre = java; };
           })
@@ -53,5 +49,12 @@ _:
           })
         ]
         ++ [ java ];
+
+      programs.neovim.extraPackages = [
+        jdtls
+        (pkgs.metals.override {
+          jre = java;
+        })
+      ];
     };
 }

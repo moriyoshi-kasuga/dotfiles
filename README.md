@@ -113,6 +113,7 @@ OS 固有の home 設定も `homeManager.*` の中で OS を判定せず、`nixo
   - `editor/`: Neovim (本体と wrapper) / Vim。言語ごとのツールは持たない
   - `terminal/`: WezTerm
   - `lang/`: 言語やファイル形式ごとの toolchain・language server・formatter・linter。rust と node はディレクトリ
+    - nvim が使うもの (language server、nvim から呼ぶ formatter・linter、DAP adapter) は `programs.neovim.extraPackages` に入れ、nvim の中からだけ見えるようにする。compiler・build tool・端末で使う CLI は `home.packages` に入れる
   - `dev/`: Git / tmux / Docker / Claude Code / CLI ツール / ドキュメント作成ツール / 開発用サービスの CLI / TaggedFileFlow / 開発用共有ライブラリ
   - `desktop/`: デスクトップ環境 (Niri + Noctalia / greetd / PipeWire / Bluetooth / Qt / fcitx5 / game など、NixOS) と GUI アプリ (Brave / Discord は macOS では Homebrew cask)
   - `macos/`: Homebrew / OmniWM / Dock / Finder / キーボード / iOS 開発ツール
