@@ -24,16 +24,24 @@ in
         };
 
         people.home.imports = [
+          home."lang.bash"
           home."lang.buf"
           home."lang.c"
+          home."lang.dockerfile"
+          home."lang.github-actions"
           home."lang.go"
           home."lang.haskell"
           home."lang.jvm"
+          home."lang.just"
           home."lang.lua"
+          home."lang.nix"
           home."lang.node"
           home."lang.python"
           home."lang.rust"
+          home."lang.toml"
+          home."lang.typst"
           home."lang.wasm"
+          home."lang.web"
         ];
       }
     ];

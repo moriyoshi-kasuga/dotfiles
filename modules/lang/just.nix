@@ -1,7 +1,7 @@
 _:
 
 {
-  flake.modules.homeManager.base =
+  flake.modules.homeManager."lang.just" =
     { pkgs, ... }:
     {
       home.packages = [ pkgs.just ];

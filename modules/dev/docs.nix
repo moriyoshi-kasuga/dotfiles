@@ -16,7 +16,6 @@ in
         marp-cli
         graphviz
         poppler-utils
-        mo-viewer
       ];
     };
 

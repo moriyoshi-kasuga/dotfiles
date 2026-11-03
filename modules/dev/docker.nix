@@ -8,8 +8,6 @@ let
 in
 {
   flake.modules.homeManager.base = {
-    programs.lazydocker.enable = true;
-
     home.shellAliases = {
       d = "docker";
       dc = "docker compose";

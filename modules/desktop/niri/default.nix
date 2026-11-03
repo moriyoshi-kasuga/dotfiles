@@ -118,8 +118,6 @@ in
         environment.systemPackages = with pkgs; [
           imv
           mpv
-          grim
-          slurp
           xwayland-satellite
           libnotify
           brightnessctl

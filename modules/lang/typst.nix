@@ -1,7 +1,7 @@
 _:
 
 {
-  flake.modules.homeManager.base =
+  flake.modules.homeManager."lang.typst" =
     { pkgs, ... }:
     {
       home.packages = [ pkgs.typst ];

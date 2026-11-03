@@ -2,7 +2,9 @@
 return {
   {
     "mfussenegger/nvim-lint",
-    event = { "BufReadPost", "BufNewFile", "BufWritePost" },
+    -- Loading on BufReadPost would replay that event for the first buffer
+    -- before its filetype is detected, so that buffer would never be linted.
+    event = { "BufReadPre", "BufNewFile", "BufWritePost" },
     config = function()
       local lint = require("lint")
 
@@ -12,23 +14,31 @@ return {
         dockerfile = { "hadolint" },
       }
 
+      local function try_lint()
+        -- GitHub Actions workflows keep the plain yaml filetype, so actionlint
+        -- is picked by path rather than through linters_by_ft.
+        local path = vim.api.nvim_buf_get_name(0)
+        if vim.bo.filetype == "yaml" and path:match("/%.github/workflows/[^/]+%.ya?ml$") then
+          lint.try_lint("actionlint")
+          return
+        end
+
+        -- Only lint if linter is configured for this filetype
+        local linters = lint.linters_by_ft[vim.bo.filetype]
+        if linters and #linters > 0 then
+          lint.try_lint()
+        end
+      end
+
       -- Auto-lint on these events
       local lint_augroup = vim.api.nvim_create_augroup("nvim-lint", { clear = true })
       vim.api.nvim_create_autocmd({ "BufWritePost", "BufReadPost", "InsertLeave" }, {
         group = lint_augroup,
-        callback = function()
-          -- Only lint if linter is configured for this filetype
-          local linters = lint.linters_by_ft[vim.bo.filetype]
-          if linters and #linters > 0 then
-            lint.try_lint()
-          end
-        end,
+        callback = try_lint,
       })
 
       -- Create a command to manually trigger linting
-      vim.api.nvim_create_user_command("Lint", function()
-        lint.try_lint()
-      end, {
+      vim.api.nvim_create_user_command("Lint", try_lint, {
         desc = "Trigger linting for current file",
       })
     end,

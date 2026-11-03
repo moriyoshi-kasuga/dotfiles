@@ -93,7 +93,7 @@ home 側の設定は次の 2 通りで入れます。
 
 層に含めない任意の機能は、名前付きのモジュールとしてホストが個別に選びます。
 
-- homeManager: `lang.buf` / `lang.c` / `lang.go` / `lang.haskell` / `lang.jvm` / `lang.lua` / `lang.node` / `lang.python` / `lang.rust` / `lang.wasm`（`people.home.imports` で選ぶ）
+- homeManager: `lang.bash` / `lang.buf` / `lang.c` / `lang.dockerfile` / `lang.elm` / `lang.github-actions` / `lang.go` / `lang.haskell` / `lang.jvm` / `lang.just` / `lang.lua` / `lang.nix` / `lang.node` / `lang.python` / `lang.rust` / `lang.toml` / `lang.typst` / `lang.wasm` / `lang.web`（`people.home.imports` で選ぶ）
 - nixos: `amd` / `nvidia` / `claude-desktop` / `game` / `server`
 - darwin: `ios-dev` / `omniwm`
 

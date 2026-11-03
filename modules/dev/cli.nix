@@ -1,15 +1,6 @@
 _:
 
-let
-  linuxHome =
-    { pkgs, ... }:
-    {
-      home.packages = [ pkgs.cyme ];
-    };
-in
 {
-  flake.modules.nixos.base.people.home.imports = [ linuxHome ];
-
   flake.modules.homeManager.base =
     { pkgs, ... }:
     {
@@ -24,22 +15,13 @@ in
         fastfetch
 
         ripgrep
-        jid
-        tailspin
         xh
         dust
         duf
         tldr
         zip
         unzipNLS
-        lnav
         bottom
-        hexyl
-
-        tokei
-        hyperfine
-        oha
-        kalker
       ];
 
       programs = {

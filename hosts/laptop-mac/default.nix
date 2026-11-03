@@ -16,9 +16,17 @@ in
         people.flakeHost = "laptop-mac";
 
         people.home.imports = [
+          home."lang.bash"
           home."lang.c"
+          home."lang.dockerfile"
+          home."lang.github-actions"
+          home."lang.just"
+          home."lang.nix"
           home."lang.node"
           home."lang.rust"
+          home."lang.toml"
+          home."lang.typst"
+          home."lang.web"
         ];
       }
     ];

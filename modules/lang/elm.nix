@@ -1,7 +1,7 @@
 _:
 
 {
-  flake.modules.homeManager.base =
+  flake.modules.homeManager."lang.elm" =
     { pkgs, ... }:
     {
       programs.neovim.extraPackages = with pkgs; [

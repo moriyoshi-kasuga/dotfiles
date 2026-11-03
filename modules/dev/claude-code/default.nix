@@ -88,7 +88,6 @@ in
               "Bash(diff *)"
               "Bash(stat *)"
               "Bash(du *)"
-              "Bash(tokei *)"
               "Bash(grep *)"
               "Bash(rg *)"
               "Bash(fzf *)"

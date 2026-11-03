@@ -24,6 +24,14 @@ in
             home."lang.lua"
             home."lang.python"
             home."lang.c"
+            home."lang.bash"
+            home."lang.dockerfile"
+            home."lang.github-actions"
+            home."lang.just"
+            home."lang.nix"
+            home."lang.toml"
+            home."lang.typst"
+            home."lang.web"
           ];
         };
       }
