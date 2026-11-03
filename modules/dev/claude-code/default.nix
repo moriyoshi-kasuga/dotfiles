@@ -121,12 +121,14 @@ in
                 ];
               }
             ];
+            # background の subagent や workflow が完了するとメインが起こされて Stop が再発火するため、
+            # それらがまだ残っている途中経過の Stop では通知しない。
             Stop = [
               {
                 hooks = [
                   {
                     type = "command";
-                    command = "${notify} 'Task completed' 'Claude Code'";
+                    command = "${pkgs.jq}/bin/jq -e 'any(.background_tasks[]?; .type == \"subagent\" or .type == \"workflow\")' >/dev/null || ${notify} 'Task completed' 'Claude Code'";
                   }
                 ];
               }
