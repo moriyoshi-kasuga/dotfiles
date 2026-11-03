@@ -95,7 +95,7 @@ home 側の設定は次の 2 通りで入れます。
 
 - homeManager: `lang.buf` / `lang.c` / `lang.go` / `lang.haskell` / `lang.jvm` / `lang.lua` / `lang.node` / `lang.python` / `lang.rust` / `lang.wasm`（`people.home.imports` で選ぶ）
 - nixos: `amd` / `nvidia` / `claude-desktop` / `game` / `server`
-- darwin: `ios-dev` / `omniwm` / `aerospace`
+- darwin: `ios-dev` / `omniwm`
 
 ### ディレクトリ
 
@@ -105,16 +105,16 @@ OS 固有の home 設定も `homeManager.*` の中で OS を判定せず、`nixo
 
 - `modules/`
   - `home-manager.nix`: home-manager の統合と層の配線
-  - `users.nix`: `people.primaryUser` / `people.home`
+  - `users.nix`: `people.primaryUser` / `people.flakeHost` / `people.home`
   - `state-version.nix`: stateVersion
   - `nix/`: nix の設定、nixpkgs、nh
   - `style/`: Catppuccin、フォント、壁紙ローテーション
-  - `shell/`: Fish / Starship / direnv / fzf / zoxide / nix-index と comma (zsh は system 側で有効にするだけ)、OS 差を埋める shim (`notify` / `pbcopy` など)
+  - `shell/`: Fish / Starship / direnv / fzf / zoxide / nix-index と comma (zsh は system 側で有効にするだけ)、OS 差を埋める shim (`notify` / `pbcopy` など)、TaggedFileFlow
   - `editor/`: Neovim (本体と wrapper) / Vim。言語ごとのツールは持たない
   - `terminal/`: WezTerm
   - `lang/`: 言語やファイル形式ごとの toolchain・language server・formatter・linter。rust と node はディレクトリ
     - nvim が使うもの (language server、nvim から呼ぶ formatter・linter、DAP adapter) は `programs.neovim.extraPackages` に入れ、nvim の中からだけ見えるようにする。compiler・build tool・端末で使う CLI は `home.packages` に入れる
-  - `dev/`: Git / tmux / Docker / Claude Code / CLI ツール / ドキュメント作成ツール / 開発用サービスの CLI / TaggedFileFlow / 開発用共有ライブラリ
+  - `dev/`: Git / tmux / Docker / Claude Code / CLI ツール / ドキュメント作成ツール / 開発用サービスの CLI / 開発用共有ライブラリ
   - `desktop/`: デスクトップ環境 (Niri + Noctalia / greetd / PipeWire / Bluetooth / Qt / fcitx5 / game など、NixOS) と GUI アプリ (Brave / Discord は macOS では Homebrew cask)
   - `macos/`: Homebrew / OmniWM / Dock / Finder / キーボード / iOS 開発ツール
   - `networking/`: NetworkManager・DNS、Tailscale

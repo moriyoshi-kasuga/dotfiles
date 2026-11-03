@@ -49,6 +49,7 @@ _:
       home.packages = with pkgs; [
         gh
         git-filter-repo
+        prek
       ];
 
       home.shellAliases = {

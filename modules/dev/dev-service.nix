@@ -5,8 +5,6 @@ _:
     { pkgs, ... }:
     {
       home.packages = with pkgs; [
-        prek
-        oha
         supabase-cli
         postgresql
       ];

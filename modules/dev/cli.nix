@@ -38,6 +38,7 @@ in
 
         tokei
         hyperfine
+        oha
         kalker
       ];
 

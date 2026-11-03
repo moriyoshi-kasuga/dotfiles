@@ -20,6 +20,13 @@ let
           type = lib.types.str;
           description = "Primary user of this host.";
         };
+        flakeHost = lib.mkOption {
+          type = lib.types.str;
+          description = ''
+            Name of this host under nixosConfigurations / darwinConfigurations.
+            nh looks up the configuration by hostname, which differs from the configuration name on most hosts.
+          '';
+        };
         home = lib.mkOption {
           type = lib.types.deferredModule;
           default = { };

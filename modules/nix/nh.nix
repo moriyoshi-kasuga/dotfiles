@@ -4,17 +4,9 @@ let
   # nixos/darwin 共通。古い世代の掃除は nix.gc ではなく nh clean に任せる。
   # --keep を付けて、しばらく rebuild しなかったマシンでもロールバック先を残す。
   common =
-    { config, lib, ... }:
+    { config, ... }:
     {
-      options.people.flakeHost = lib.mkOption {
-        type = lib.types.str;
-        description = ''
-          Name of this host under nixosConfigurations / darwinConfigurations.
-          nh looks up the configuration by hostname, which differs from the configuration name on most hosts.
-        '';
-      };
-
-      config.programs.nh = {
+      programs.nh = {
         enable = true;
         flake = "${
           config.users.users.${config.people.primaryUser}.home
