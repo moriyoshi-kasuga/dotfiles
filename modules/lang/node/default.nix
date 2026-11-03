@@ -59,6 +59,17 @@ _:
 
       home.packages = lib.optionals pkgs.stdenv.hostPlatform.isLinux [ pkgs.nodejs_24 ];
 
+      programs.claude-code.settings.permissions.allow = [
+        "Bash(npm run lint)"
+        "Bash(deno run lint)"
+        "Bash(npm run lint:fix)"
+        "Bash(deno run lint:fix)"
+        "Bash(npm run check)"
+        "Bash(deno run check)"
+        "Bash(npm run format)"
+        "Bash(deno run format)"
+      ];
+
       programs.neovim = {
         extraWrapperArgs = [
           "--set"

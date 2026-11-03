@@ -106,15 +106,6 @@ in
               "Bash(git branch)"
               "Bash(git stash list)"
               "Bash(gh pr diff *)"
-              # js and ts
-              "Bash(npm run lint)"
-              "Bash(deno run lint)"
-              "Bash(npm run lint:fix)"
-              "Bash(deno run lint:fix)"
-              "Bash(npm run check)"
-              "Bash(deno run check)"
-              "Bash(npm run format)"
-              "Bash(deno run format)"
             ];
           };
           cleanupPeriodDays = 30;
