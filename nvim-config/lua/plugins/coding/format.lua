@@ -103,6 +103,20 @@ return {
           condition = function(_, ctx)
             return has_parser(ctx)
           end,
+          -- Follow the buffer's indent settings (config/tab.lua). With
+          -- prefer-file, a project's prettier config (or .editorconfig) still
+          -- wins and these CLI options are ignored.
+          prepend_args = function(_, ctx)
+            local bo = vim.bo[ctx.buf]
+            local width = bo.shiftwidth > 0 and bo.shiftwidth or bo.tabstop
+            return {
+              "--config-precedence",
+              "prefer-file",
+              "--tab-width",
+              tostring(width),
+              bo.expandtab and "--no-use-tabs" or "--use-tabs",
+            }
+          end,
         },
       },
 
