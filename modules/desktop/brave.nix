@@ -10,11 +10,11 @@ let
 in
 {
   flake.modules.nixos.pc =
-    { pkgs, config, ... }:
+    { pkgs, ... }:
     {
       people.home.imports = [ home ];
 
-      users.users.${config.people.primaryUser}.packages = [
+      environment.systemPackages = [
         pkgs.brave
       ];
 

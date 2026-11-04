@@ -55,6 +55,10 @@ nh os switch -u     # flake update してから適用
 | `laptop-mac`   | macOS (aarch64) | ノートPC (macOS)         |
 | `job`          | macOS (aarch64) | 仕事用                   |
 
+ホストを足すときは `hosts/<name>/default.nix` を作り、設定の名前と `people.flakeHost` を `<name>` にそろえます。
+nh はこの名前で設定を選ぶので、ずれていると `nix flake check` が落ちます。
+hardware configuration は `_` で始まる名前にして、import-tree に読ませません。
+
 ## Environment
 
 unixpornではなく、シンプルさを保つための設定です。
@@ -92,9 +96,10 @@ home 側の設定は次の 2 通りで入れます。
 ホストは `nixos.pc` / `nixos.base` / `darwin.pc` のどれか 1 つを import するだけで、home 側の設定も揃います。
 
 層に含めない任意の機能は、名前付きのモジュールとしてホストが個別に選びます。
+名前は定義しているファイルの名前 (ディレクトリならその名前) で、`modules/lang/` の下のものには `lang.` が付きます。homeManager のものは `people.home.imports` で選びます。
 
-- homeManager: `lang.bash` / `lang.buf` / `lang.c` / `lang.dockerfile` / `lang.elm` / `lang.github-actions` / `lang.go` / `lang.haskell` / `lang.jvm` / `lang.just` / `lang.lua` / `lang.nix` / `lang.node` / `lang.python` / `lang.rust` / `lang.toml` / `lang.typst` / `lang.wasm` / `lang.web`（`people.home.imports` で選ぶ）
-- nixos: `amd` / `nvidia` / `claude-desktop` / `game` / `server`
+- homeManager: `lang.bash` / `lang.buf` / `lang.c` / `lang.dockerfile` / `lang.elm` / `lang.github-actions` / `lang.go` / `lang.haskell` / `lang.jvm` / `lang.just` / `lang.lua` / `lang.nix` / `lang.node` / `lang.python` / `lang.rust` / `lang.toml` / `lang.typst` / `lang.wasm` / `lang.web`
+- nixos: `amd` / `nvidia` / `iphone` / `claude-desktop` / `game` / `server`
 - darwin: `ios-dev` / `omniwm`
 
 ### ディレクトリ
@@ -103,25 +108,35 @@ home 側の設定は次の 2 通りで入れます。
 OS 固有の home 設定も `homeManager.*` の中で OS を判定せず、`nixos.*` / `darwin.*` から `people.home.imports` で入れます。
 ただし `lang.*` は両 OS のホストが `people.home.imports` で選ぶ home 専用のモジュールなので、中で OS を判定します。
 
+各ディレクトリに置くものの基準です。中身は網羅しません。
+
 - `modules/`
   - `home-manager.nix`: home-manager の統合と層の配線
   - `users.nix`: `people.primaryUser` / `people.flakeHost` / `people.home`
   - `state-version.nix`: stateVersion
-  - `nix/`: nix の設定、nixpkgs、nh
-  - `style/`: Catppuccin、フォント、壁紙ローテーション
-  - `shell/`: Fish / Starship / direnv / fzf / zoxide / nix-index と comma (zsh は system 側で有効にするだけ)、OS 差を埋める shim (`notify` / `pbcopy` など)、TaggedFileFlow
-  - `editor/`: Neovim (本体と wrapper) / Vim。言語ごとのツールは持たない
-  - `terminal/`: WezTerm
-  - `lang/`: 言語やファイル形式ごとの toolchain・language server・formatter・linter。rust と node はディレクトリ
+  - `nix/`: nix 自体、nixpkgs、nh の設定
+  - `style/`: テーマ、フォント、壁紙などの見た目
+  - `shell/`: 対話シェルと、シェルに組み込んで使う道具 (prompt、hook や alias で連携するもの、OS 差を埋める shim)
+  - `editor/`: エディタ。言語ごとのツールは持たない
+  - `terminal/`: 端末エミュレータ
+  - `lang/`: 言語やファイル形式ごとの toolchain・language server・formatter・linter。1 つのファイルかディレクトリが 1 つの `lang.<名前>`
     - nvim が使うもの (language server、nvim から呼ぶ formatter・linter、DAP adapter) は `programs.neovim.extraPackages` に入れ、nvim の中からだけ見えるようにする。compiler・build tool・runtime・端末で使う CLI は `home.packages` に入れる
-  - `dev/`: Git / tmux / Docker / Claude Code / CLI ツール / ドキュメント作成ツール / 開発用サービスの CLI / 開発用共有ライブラリ
-  - `desktop/`: デスクトップ環境 (Niri + Noctalia / greetd / PipeWire / Bluetooth / Qt / fcitx5 / game など、NixOS) と GUI アプリ (Brave / Discord は macOS では Homebrew cask)
-  - `macos/`: Homebrew / OmniWM / Dock / Finder / キーボード / iOS 開発ツール
-  - `networking/`: NetworkManager・DNS、Tailscale
-  - `system/`: ブートローダー・sudo・SSH・zram・タイムゾーンとロケール・SMART / fwupd・ドキュメント・基本パッケージ、`server`
-  - `hardware/`: AMD / NVIDIA GPU、周辺機器
+    - nvim が使うものを足したら、`nvim-config/lua/plugins/coding/` の対応する設定にも足す。lspconfig の server は `lsp.lua`、formatter は `format.lua`、linter は `lint.lua`、DAP adapter は `dap.lua`、専用の plugin を使う rust と jvm は `rust.lua` と `jvm.lua`。`lsp.lua`・`format.lua`・`lint.lua` は、実行ファイルが無いホストではその tool を使わない
+  - `dev/`: 言語によらない開発ツール
+  - `desktop/`: 画面を持つホストのデスクトップ環境と GUI アプリ
+  - `macos/`: macOS にしかない設定とツール
+  - `networking/`: ネットワークと VPN
+  - `system/`: OS の基本的な設定と、`server` のような用途ごとの設定
+  - `hardware/`: 特定のハードウェアと周辺機器
   - `flake/`: flake-parts 自体の設定（lint / eval check・formatter・devShell）
 - `hosts/<name>/`: ホストごとの `nixosConfigurations` / `darwinConfigurations`
+
+### 書き方
+
+- パッケージは、書いている class の一覧に入れます。NixOS と nix-darwin は `environment.systemPackages`、home-manager は `home.packages`、macOS の GUI アプリは `homebrew.casks` です。専用の option があるもの (nvim が使う tool は `programs.neovim.extraPackages`、フォントは `fonts.packages`、ライブラリは `library.libs`) はそちらに入れます。`users.users.<user>.packages` は使いません。
+- 他の module やホストから値を受け取る option (`library.libs`、`shell.interactiveVariables`、`style.fonts.monospace` など) は、その値を使う module で宣言します。
+- 設定ファイルを生成する module は、生成した内容を検査する check を同じファイルに置きます (niri の設定、fish の設定、Claude Code の guard)。
+- README の一覧のうち、任意の機能、Hosts、`modules/` 直下は網羅していて、`nix flake check` が実際の定義と照合します。ほかの説明は網羅しません。
 
 ## License
 

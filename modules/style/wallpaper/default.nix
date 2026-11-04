@@ -11,7 +11,7 @@ let
         pkgs.yazi
       ];
       runtimeEnv = {
-        # Pinned via the `wallpapers` flake input; updated by `./init.sh update`.
+        # Pinned via the `wallpapers` flake input.
         WALLPAPER_SRC = inputs.wallpapers.outPath;
         SET_WALLPAPER = setWallpaper;
       };

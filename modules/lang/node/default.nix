@@ -8,13 +8,13 @@ _:
       # Under Nix there is no global `typescript`, so we expose its path explicitly.
       # `pkgs.typescript` now points at typescript_7 (the Go-based native compiler,
       # https://github.com/microsoft/typescript-go), which ships only a `tsc` binary
-      # and .d.ts libs — no lib/node_modules/typescript/lib/tsserverlibrary.js. vtsls
+      # and .d.ts libs, without lib/node_modules/typescript/lib/tsserverlibrary.js. vtsls
       # (and astro/svelte's ts-plugins) need that classic JS TSDK, so pin to
       # typescript_5 explicitly instead of the `typescript` alias.
       tsdkPath = "${pkgs.typescript_5}/lib/node_modules/typescript/lib";
       # vtsls forwards these paths to tsserver as `pluginProbeLocations` entries,
       # and tsserver resolves each plugin as `require(<path>/node_modules/<name>)`
-      # (verified by direct tsserver testing) — it does NOT `require(<path>)`
+      # (verified by direct tsserver testing); it does NOT `require(<path>)`
       # directly. So `location` must be a directory whose node_modules contains
       # the plugin under its declared package name, not the plugin's own root.
       # Neither astro's ts-plugin (directory `ts-plugin`, declared name
@@ -91,7 +91,7 @@ _:
           tailwindcss-language-server
           # TypeScript SDK that astro/svelte language servers fall back on (TSDK_PATH).
           # Must be the classic JS TSDK (typescript_5), not the `typescript` alias
-          # (typescript_7, the Go-based native compiler) — see tsdkPath above.
+          # (typescript_7, the Go-based native compiler); see tsdkPath above.
           typescript_5
 
           # frontend formatting (JS/TS/CSS/HTML/JSON/YAML/Markdown/Svelte/Astro)

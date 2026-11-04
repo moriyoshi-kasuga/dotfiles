@@ -14,19 +14,29 @@ return {
         dockerfile = { "hadolint" },
       }
 
+      -- Each host only has the linters of the lang.* modules it imports, so
+      -- skip linters whose command is not on PATH, as lsp.lua does for servers.
+      local function installed(linter)
+        local cmd = linter.cmd
+        if type(cmd) == "function" then
+          cmd = cmd()
+        end
+        return vim.fn.executable(cmd) == 1
+      end
+
       local function try_lint()
         -- GitHub Actions workflows keep the plain yaml filetype, so actionlint
         -- is picked by path rather than through linters_by_ft.
         local path = vim.api.nvim_buf_get_name(0)
         if vim.bo.filetype == "yaml" and path:match("/%.github/workflows/[^/]+%.ya?ml$") then
-          lint.try_lint("actionlint")
+          lint.try_lint("actionlint", { filter = installed })
           return
         end
 
         -- Only lint if linter is configured for this filetype
         local linters = lint.linters_by_ft[vim.bo.filetype]
         if linters and #linters > 0 then
-          lint.try_lint()
+          lint.try_lint(nil, { filter = installed })
         end
       end
 

@@ -38,11 +38,11 @@ svelte-language-server.overrideAttrs (old: {
   # load. (Per-project resolution isn't the issue: typescript-plugin
   # separately resolves the *project's* svelte via
   # `require.resolve('svelte/compiler', { paths: [projectDir] })` and
-  # injects it per-file — but only after the module has loaded.)
+  # injects it per-file, but only after the module has loaded.)
   # A `svelte` tarball is already pulled into the local pnpm store
   # (it's svelte2tsx's own devDependency, used for its build/tests), so
   # we could link it in with a second `pnpm install` scoped to just
-  # `svelte2tsx` — except pnpm's filtered install treats any workspace
+  # `svelte2tsx`, except that pnpm's filtered install treats any workspace
   # package outside the current `--filter` set as unselected and wipes
   # its node_modules, which would undo the typescript-svelte-plugin
   # linking the first install just did (confirmed by testing: it left

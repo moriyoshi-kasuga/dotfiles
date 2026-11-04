@@ -2,9 +2,9 @@ _:
 
 {
   flake.modules.nixos.pc =
-    { pkgs, config, ... }:
+    { pkgs, ... }:
     {
-      users.users.${config.people.primaryUser}.packages = [ pkgs.discord ];
+      environment.systemPackages = [ pkgs.discord ];
     };
 
   flake.modules.darwin.pc.homebrew.casks = [ "discord" ];

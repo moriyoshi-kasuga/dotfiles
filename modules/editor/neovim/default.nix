@@ -69,7 +69,7 @@ _:
       # Prevent programs.neovim from generating init.lua inside the symlinked dir.
       # home-manager sorts files by path length and processes .config/nvim first,
       # so realpath -m on .config/nvim/init.lua resolves through the out-of-store
-      # symlink to /home/mori/dotfiles/nvim-config/init.lua — outside $realOut.
+      # symlink to /home/mori/dotfiles/nvim-config/init.lua, which is outside $realOut.
       xdg.configFile."nvim/init.lua" = lib.mkForce { enable = false; };
 
       home.file.".config/nvim".source =

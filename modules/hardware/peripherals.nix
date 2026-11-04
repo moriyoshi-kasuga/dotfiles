@@ -21,7 +21,7 @@ _:
       # (fixed at 99-local.rules, evaluated after 73). Tagging a device
       # after 73 already ran is one file too late: the tag lands in the
       # udev DB but no ACL ever gets applied. Calling the uaccess builtin
-      # ourselves isn't an option either — modern systemd only allows its
+      # ourselves isn't an option either: modern systemd only allows its
       # own shipped rules to invoke it.
       services.udev.packages = [
         (pkgs.writeTextFile {

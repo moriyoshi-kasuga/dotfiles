@@ -8,15 +8,14 @@ _:
       ...
     }:
     {
-      users.users.${config.people.primaryUser} = {
-        extraGroups = [
-          "gamemode"
-        ];
-        packages = with pkgs; [
-          r2modman
-          modrinth-app
-        ];
-      };
+      users.users.${config.people.primaryUser}.extraGroups = [
+        "gamemode"
+      ];
+
+      environment.systemPackages = with pkgs; [
+        r2modman
+        modrinth-app
+      ];
 
       programs.steam = {
         enable = true;
