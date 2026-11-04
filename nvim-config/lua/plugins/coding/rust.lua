@@ -100,9 +100,6 @@ return {
         end,
         default_settings = {
           ["rust-analyzer"] = {
-            typing = {
-              autoClosingAngleBrackets = { enable = true },
-            },
             completion = {
               autoimport = { enable = true },
               postfix = { enable = true },
@@ -124,7 +121,6 @@ return {
               -- target/rust-analyzer so terminal cargo runs don't wait on its build lock
               targetDir = true,
               allFeatures = true,
-              loadOutDirsFromCheck = true,
               buildScripts = {
                 enable = true,
               },
@@ -153,7 +149,6 @@ return {
               prefix = "self",
             },
             inlayHints = {
-              enable = true,
               chainingHints = { enable = true },
               closingBraceHints = { enable = true, minLines = 25 },
               closureReturnTypeHints = { enable = "with_block" },
@@ -196,21 +191,12 @@ return {
             },
             checkOnSave = true,
             files = {
-              excludeDirs = {
-                "**/.git",
-                "**/node_modules",
-                "**/target",
-                "**/vendor",
-                "**/.svelte-kit",
-                "**/build",
-              },
+              -- paths relative to the workspace root; globs are not supported
               exclude = {
-                "**/.git",
-                "**/node_modules",
-                "**/target",
-                "**/vendor",
-                "**/.svelte-kit",
-                "**/build",
+                "node_modules",
+                "vendor",
+                ".svelte-kit",
+                "build",
               },
               watcher = "server",
             },
