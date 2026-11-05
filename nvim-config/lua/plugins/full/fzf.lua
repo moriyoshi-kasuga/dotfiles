@@ -33,10 +33,11 @@ return {
           width = 0.75,
           row = 0.5,
           col = 0.5,
-          border = "single",
+          -- fzf-lua does not read 'winborder' on its own
+          border = vim.o.winborder,
           preview = {
             default = "bat",
-            border = "single",
+            border = vim.o.winborder,
             wrap = "nowrap",
             hidden = "nohidden",
             vertical = "down:60%",

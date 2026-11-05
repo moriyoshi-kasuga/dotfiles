@@ -81,7 +81,7 @@ return {
                 title = " Memory Layout ",
                 width = 0.55,
                 height = 0.45,
-                border = "rounded",
+                border = true,
                 wo = { wrap = false, spell = false },
                 bo = { modifiable = false },
                 keys = { q = "close" },

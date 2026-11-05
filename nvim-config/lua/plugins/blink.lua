@@ -50,7 +50,6 @@ return {
           },
         },
         menu = {
-          border = "single",
           scrolloff = 1,
           scrollbar = false,
         },
@@ -61,17 +60,12 @@ return {
 
         documentation = {
           auto_show = true,
-
-          window = {
-            border = "single",
-          },
         },
       },
 
       signature = {
         enabled = true,
         window = {
-          border = "single",
           show_documentation = false,
         },
       },
