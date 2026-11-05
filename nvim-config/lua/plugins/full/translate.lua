@@ -1,6 +1,6 @@
 return {
   "moriyoshi-kasuga/google-translate.nvim",
-  lazy = false,
+  cmd = "Translate",
   opts = {
     target = "ja",
     float = {

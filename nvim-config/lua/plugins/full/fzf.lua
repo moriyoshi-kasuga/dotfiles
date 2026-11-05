@@ -153,7 +153,8 @@ return {
         ",v",
         function()
           require("config.util").copy_path(vim.fn.fnamemodify(vim.fn.expand("%:p"), ":."))
-        end
+        end,
+        desc = "Copy Relative Path",
       },
       {
         ",V",

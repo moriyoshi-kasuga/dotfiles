@@ -105,7 +105,7 @@ return {
     -- stylua: ignore
     keys = {
       { "gk", function() vim.lsp.buf.signature_help() end, desc = "Signature Help" },
-      { "gl", function() vim.lsp.codelens.run() end, desc = "CoreLens" },
+      { "gl", function() vim.lsp.codelens.run() end, desc = "CodeLens" },
       { "<leader>cd", function() vim.diagnostic.open_float() end, desc = "Line Diagnostics" },
       { "[d", function() vim.diagnostic.jump({ count = -1 }) end, desc = "Previous Diagnostic" },
       { "]d", function() vim.diagnostic.jump({ count = 1 }) end, desc = "Next Diagnostic" },

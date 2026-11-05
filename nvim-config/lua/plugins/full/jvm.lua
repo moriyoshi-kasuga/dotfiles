@@ -125,7 +125,7 @@ return {
                 vim.keymap.set(mode, keys, fn, { buffer = bufnr, desc = desc, silent = true })
               end
 
-              map("n", "<leader>jo", require("jdtls").organize_imports, "Organize Imports")
+              map("n", "<leader>mo", require("jdtls").organize_imports, "Organize Imports")
             end,
 
             settings = {

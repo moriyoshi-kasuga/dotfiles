@@ -99,7 +99,7 @@ return {
           end,
           mode = "n",
           nowait = true,
-          desc = "Open Terminal",
+          desc = "Search and Replace in Dir",
         },
         ["-"] = { "actions.parent", mode = "n" },
         ["<leader>e"] = { "actions.parent", mode = "n" },
