@@ -15,30 +15,10 @@ return {
       -- deno.json/deno.lock project and makes vtsls stand down there, so enabling
       -- both gives correct LSP in deno and npm trees without double-attaching.
 
-      -- Enable LSP servers whose binaries are available on PATH.
-      -- Server configs are registered by nvim-lspconfig via vim.lsp.config.
-      local function safe_lsp_enable(servers)
-        local to_enable = {}
-        for _, server in ipairs(servers) do
-          local cfg = vim.lsp.config[server]
-          if not cfg then
-            -- config not registered by lspconfig; skip silently
-          elseif not cfg.cmd then
-            -- no explicit cmd (e.g. stdin-based server); enable unconditionally
-            table.insert(to_enable, server)
-          elseif type(cfg.cmd) == "function" then
-            -- dynamic cmd; delegate availability check to Neovim
-            table.insert(to_enable, server)
-          elseif vim.fn.executable(cfg.cmd[1]) == 1 then
-            table.insert(to_enable, server)
-          end
-        end
-        if #to_enable > 0 then
-          vim.lsp.enable(to_enable)
-        end
-      end
-
-      safe_lsp_enable({
+      -- Each host only has the servers of the lang.* modules it imports.
+      -- vim.lsp.enable does not start a server whose cmd is not executable
+      -- (it only logs that to lsp.log), so all of them can be enabled here.
+      vim.lsp.enable({
         "svelte",
         "vtsls",
         "denols",
