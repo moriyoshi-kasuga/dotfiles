@@ -1,8 +1,3 @@
-local sources_default = { "lazydev", "lsp", "path", "snippets", "buffer" }
-if require("config.util").is_in_simple_mode() then
-  table.remove(sources_default, 1)
-end
-
 return {
   {
     "saghen/blink.cmp",
@@ -73,7 +68,7 @@ return {
       -- Default list of enabled providers defined so that you can extend it
       -- elsewhere in your config, without redefining it, due to `opts_extend`
       sources = {
-        default = sources_default,
+        default = { "lsp", "path", "snippets", "buffer" },
         providers = {
           buffer = {
             max_items = 5,
@@ -89,11 +84,6 @@ return {
           snippets = {
             score_offset = 10,
             min_keyword_length = 2,
-          },
-          lazydev = {
-            name = "LazyDev",
-            module = "lazydev.integrations.blink",
-            score_offset = 50,
           },
         },
       },
