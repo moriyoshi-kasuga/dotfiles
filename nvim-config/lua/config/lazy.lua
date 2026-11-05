@@ -47,8 +47,6 @@ require("lazy").setup({
       }),
       disabled_plugins = vim.list_extend({
         "gzip",
-        "matchit",
-        "matchparen",
         "tarPlugin",
         "tar",
         "tohtml",
