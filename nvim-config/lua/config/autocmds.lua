@@ -36,6 +36,16 @@ vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
   end,
 })
 
+-- grammars come from Nix (TREESITTER_GRAMMARS); skip highlighting very large files
+vim.api.nvim_create_autocmd("FileType", {
+  group = augroup("treesitter_start"),
+  callback = function(event)
+    if vim.api.nvim_buf_line_count(event.buf) <= 50000 then
+      pcall(vim.treesitter.start, event.buf)
+    end
+  end,
+})
+
 -- resize splits when terminal is resized
 vim.api.nvim_create_autocmd("VimResized", {
   group = augroup("resize_splits"),
