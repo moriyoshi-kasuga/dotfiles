@@ -33,6 +33,16 @@ return {
         treeViewProvider = true,
       }
 
+      -- Suppress diagnostics published for files under .metals/
+      metals_config.handlers = {
+        ["textDocument/publishDiagnostics"] = function(err, result, ctx)
+          if result and result.uri and result.uri:find("/.metals/", 1, true) then
+            return
+          end
+          vim.lsp.diagnostic.on_publish_diagnostics(err, result, ctx)
+        end,
+      }
+
       metals_config.on_attach = function(_, bufnr)
         local map = function(keys, fn, desc)
           vim.keymap.set("n", keys, fn, { buffer = bufnr, desc = desc })
@@ -75,6 +85,25 @@ return {
         group = nvim_metals_group,
       })
     end,
+  },
+
+  {
+    "stevearc/oil.nvim",
+    opts = {
+      keymaps = {
+        ["<leader>mm"] = {
+          function()
+            local dir = require("oil").get_current_dir()
+            if dir then
+              require("metals").new_scala_file(vim.uri_from_fname(dir))
+            end
+          end,
+          mode = "n",
+          nowait = true,
+          desc = "Create Scala File",
+        },
+      },
+    },
   },
 
   {
