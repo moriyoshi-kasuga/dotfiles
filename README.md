@@ -121,7 +121,7 @@ OS 固有の home 設定も `homeManager.*` の中で OS を判定せず、`nixo
   - `terminal/`: 端末エミュレータ
   - `lang/`: 言語やファイル形式ごとの toolchain・language server・formatter・linter。1 つのファイルかディレクトリが 1 つの `lang.<名前>`
     - nvim が使うもの (language server、nvim から呼ぶ formatter・linter、DAP adapter) は `programs.neovim.extraPackages` に入れ、nvim の中からだけ見えるようにする。compiler・build tool・runtime・端末で使う CLI は `home.packages` に入れる
-    - nvim が使うものを足したら、`nvim-config/lua/plugins/coding/` の対応する設定にも足す。lspconfig の server は `lsp.lua`、formatter は `format.lua`、linter は `lint.lua`、DAP adapter は `dap.lua`、専用の plugin を使う rust と jvm は `rust.lua` と `jvm.lua`。`lsp.lua`・`format.lua`・`lint.lua` は、実行ファイルが無いホストではその tool を使わない
+    - nvim が使うものを足したら、`nvim-config/lua/plugins/full/` の対応する設定にも足す。lspconfig の server は `lsp.lua`、formatter は `format.lua`、linter は `lint.lua`、DAP adapter は `dap.lua`、専用の plugin を使う rust と jvm は `rust.lua` と `jvm.lua`。`lsp.lua`・`format.lua`・`lint.lua` は、実行ファイルが無いホストではその tool を使わない
   - `dev/`: 言語によらない開発ツール
   - `desktop/`: 画面を持つホストのデスクトップ環境と GUI アプリ
   - `macos/`: macOS にしかない設定とツール

@@ -1,7 +1,3 @@
-if require("config.util").is_in_simple_mode() then
-  return {}
-end
-
 -- ref: https://github.com/stevearc/oil.nvim/blob/master/doc/recipes.md#hide-gitignored-files-and-show-git-tracked-hidden-files
 
 -- helper function to parse output
