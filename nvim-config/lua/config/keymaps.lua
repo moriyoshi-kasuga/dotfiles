@@ -51,6 +51,7 @@ map("n", "<leader>ws", "<C-w>s", { desc = "Horizontal split" })
 map("n", "<leader>wo", "<C-w>o", { desc = "Close Other window" })
 
 map("n", "<leader>h", "<cmd>noh<CR>", { desc = "Clear Highlights" })
+map("n", "*", [[<cmd>let @/ = '\<' . expand('<cword>') . '\>' | set hlsearch<cr>]], { desc = "Search Word without Jump" })
 
 map("n", "<leader>i", function()
   vim.cmd.packadd("nvim.undotree")
