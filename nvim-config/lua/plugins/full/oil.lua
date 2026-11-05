@@ -36,6 +36,18 @@ local function new_git_status()
 end
 local git_status = new_git_status()
 
+-- Wrap fn(dir) into a keymap callback that runs on the directory of the oil buffer
+local function with_dir(fn)
+  return function()
+    local dir = require("oil").get_current_dir()
+    if not dir then
+      vim.notify("failed to get oil dir", vim.log.levels.WARN)
+      return
+    end
+    fn(dir)
+  end
+end
+
 return {
   {
     "stevearc/oil.nvim",
@@ -68,35 +80,17 @@ return {
         ["<C-p>"] = "actions.preview",
         ["<C-c>"] = { "actions.close", mode = "n" },
         ["<C-/>"] = {
-          function()
-            local _, oil_dir = pcall(require("oil").get_current_dir)
-            if not oil_dir then
-              vim.notify("failed to get oil dir", 2)
-              return
-            end
-            Snacks.terminal(nil, {
-              cwd = oil_dir,
-            })
-          end,
+          with_dir(function(dir)
+            Snacks.terminal(nil, { cwd = dir })
+          end),
           mode = "n",
           nowait = true,
           desc = "Open Terminal",
         },
         ["<leader>sr"] = {
-          function()
-            local _, oil_dir = pcall(require("oil").get_current_dir)
-            if not oil_dir then
-              vim.notify("failed to get oil dir", 2)
-              return
-            end
-            local grug = require("grug-far")
-            grug.open({
-              transient = true,
-              prefills = {
-                paths = oil_dir,
-              },
-            })
-          end,
+          with_dir(function(dir)
+            require("grug-far").open({ transient = true, prefills = { paths = dir } })
+          end),
           mode = "n",
           nowait = true,
           desc = "Search and Replace in Dir",
@@ -112,30 +106,20 @@ return {
         ["g."] = { "actions.toggle_hidden", mode = "n" },
         ["g\\"] = { "actions.toggle_trash", mode = "n" },
         [",v"] = {
-          function()
-            local dir = require("oil").get_current_dir()
-            if not dir then
-              vim.notify("failed to get oil dir", vim.log.levels.WARN)
-              return
-            end
+          with_dir(function(dir)
             require("config.util").copy_path(vim.fn.fnamemodify(dir, ":."))
-          end,
+          end),
           mode = "n",
           desc = "Copy Path",
         },
         [",V"] = {
-          function()
-            local dir = require("oil").get_current_dir()
-            if not dir then
-              vim.notify("failed to get oil dir", vim.log.levels.WARN)
-              return
-            end
+          with_dir(function(dir)
             require("config.util").select_path_to_copy({
               { label = "Absolute", value = dir },
               { label = "Relative to HOME", value = vim.fn.fnamemodify(dir, ":~") },
               { label = "Relative to cwd", value = vim.fn.fnamemodify(dir, ":.") },
             })
-          end,
+          end),
           mode = "n",
           desc = "Copy Current Dir Path",
         },
