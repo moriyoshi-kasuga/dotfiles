@@ -4,7 +4,6 @@ return {
     event = "VeryLazy",
     dependencies = {
       "nvim-mini/mini.icons",
-      "folke/trouble.nvim",
     },
     opts = function()
       local fzf = require("fzf-lua")
@@ -23,8 +22,6 @@ return {
       keymap.fzf["ctrl-b"] = "preview-page-up"
       keymap.builtin["<c-f>"] = "preview-page-down"
       keymap.builtin["<c-b>"] = "preview-page-up"
-
-      fzf.config.defaults.actions.files["ctrl-q"] = require("trouble.sources.fzf").actions.open
 
       local actions = fzf.actions
 

@@ -37,9 +37,6 @@ return {
       -- Peek (overlook.nvim)
       { "<leader>p", group = "peek" },
 
-      -- Trouble
-      { "<leader>x", group = "trouble" },
-
       -- Search / Replace
       { "<leader>s", group = "search" },
 
