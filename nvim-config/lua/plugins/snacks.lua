@@ -28,6 +28,9 @@ return {
         wo = {
           winblend = 0,
         },
+        keys = {
+          term_hide = { "<C-.>", "hide", mode = "t", desc = "Hide terminal" },
+        },
       },
     },
 
