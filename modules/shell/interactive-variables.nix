@@ -1,7 +1,7 @@
 _:
 
 {
-  # 開発用の環境変数 (LD_LIBRARY_PATH や CFLAGS など) は対話シェルにだけ渡す。
+  # 開発用の環境変数 (LD_LIBRARY_PATH や LDFLAGS など) は対話シェルにだけ渡す。
   # home.sessionVariables に入れると、niri-session がログインシェルの環境を丸ごと
   # systemd --user に取り込むため、compositor や GUI アプリにまで漏れて
   # 別の nixpkgs でビルドされたバイナリが違うライブラリを読み込んでしまう。
