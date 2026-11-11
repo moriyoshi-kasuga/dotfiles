@@ -320,6 +320,10 @@ id = "toggleFullscreen"
 binding = "Control+Command+Shift+F"
 id = "toggleNativeFullscreen"
 
+# niri の toggle-window-floating に相当する
+[[hotkeys]]
+binding = "Command+Shift+V"
+id = "toggleFocusedWindowFloating"
 
 [[hotkeys]]
 binding = "Command+Minus"
