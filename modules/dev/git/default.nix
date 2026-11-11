@@ -39,6 +39,7 @@ _:
           diff.algorithm = "histogram";
           rerere.enabled = true;
           branch.sort = "-committerdate";
+          tag.sort = "version:refname";
         };
 
         # user.name / email などマシンごとの設定はリポジトリに入れず、このファイルに書く。
