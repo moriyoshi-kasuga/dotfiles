@@ -596,11 +596,11 @@ function __ja_complete_worktrees --description "List branches checked out in wor
   '
 end
 
-function __ja_complete_new --description "List local branches without a worktree, then origin branches without a local one"
+function __ja_complete_new --description "List local branches (marking those with a worktree), then origin branches without a local one"
   git for-each-ref --format='%(refname)%09%(worktreepath)%09%(contents:subject)' refs/heads refs/remotes/origin 2>/dev/null | awk -F '\t' '
     sub(/^refs\/heads\//, "", $1) {
       local[$1] = 1
-      if ($2 == "") print $1 "\t" $3
+      print $1 "\t" (($2 != "") ? "worktree: " : "") $3
       next
     }
     sub(/^refs\/remotes\/origin\//, "", $1) && $1 != "HEAD" {
