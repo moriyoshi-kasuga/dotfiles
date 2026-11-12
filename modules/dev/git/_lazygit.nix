@@ -8,6 +8,8 @@
         mainPanelSplitMode = "vertical";
       };
       git = {
+        localBranchSortOrder = "recency";
+
         diffRenderers = [
           {
             command = "delta --dark --paging=never --diff-so-fancy";
