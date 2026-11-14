@@ -14,7 +14,14 @@ _:
 
       environment.systemPackages = with pkgs; [
         r2modman
-        modrinth-app
+        # FIXME: temporary patch for modrinth-app
+        # sqlx-macros links against the system libsqlite3, but nixpkgs does not
+        # put sqlite in buildInputs, so the build fails with "cannot find -lsqlite3".
+        (modrinth-app.override {
+          modrinth-app-unwrapped = modrinth-app-unwrapped.overrideAttrs (old: {
+            buildInputs = old.buildInputs ++ [ sqlite ];
+          });
+        })
       ];
 
       programs.steam = {
