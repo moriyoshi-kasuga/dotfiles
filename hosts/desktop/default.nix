@@ -105,7 +105,6 @@ in
             home."lang.rust"
             home."lang.toml"
             home."lang.typst"
-            home."lang.wasm"
             home."lang.web"
           ];
         }

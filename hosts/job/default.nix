@@ -19,7 +19,6 @@ in
           terminal.wezterm.bigMonitor = true;
           imports = [
             home."lang.rust"
-            home."lang.wasm"
             home."lang.node"
             home."lang.lua"
             home."lang.python"

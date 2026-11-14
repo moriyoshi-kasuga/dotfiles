@@ -98,7 +98,7 @@ home 側の設定は次の 2 通りで入れます。
 層に含めない任意の機能は、名前付きのモジュールとしてホストが個別に選びます。
 名前は定義しているファイルの名前 (ディレクトリならその名前) で、`modules/lang/` の下のものには `lang.` が付きます。homeManager のものは `people.home.imports` で選びます。
 
-- homeManager: `lang.bash` / `lang.buf` / `lang.c` / `lang.dockerfile` / `lang.elm` / `lang.github-actions` / `lang.go` / `lang.haskell` / `lang.jvm` / `lang.just` / `lang.lua` / `lang.nix` / `lang.node` / `lang.python` / `lang.rust` / `lang.toml` / `lang.typst` / `lang.wasm` / `lang.web`
+- homeManager: `lang.bash` / `lang.buf` / `lang.c` / `lang.dockerfile` / `lang.elm` / `lang.github-actions` / `lang.go` / `lang.haskell` / `lang.jvm` / `lang.just` / `lang.lua` / `lang.nix` / `lang.node` / `lang.python` / `lang.rust` / `lang.toml` / `lang.typst` / `lang.web`
 - nixos: `amd` / `nvidia` / `iphone` / `claude-desktop` / `game` / `server`
 - darwin: `ios-dev` / `omniwm`
 
