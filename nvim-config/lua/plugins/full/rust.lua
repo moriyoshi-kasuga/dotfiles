@@ -127,7 +127,7 @@ return {
             },
             diagnostics = {
               enable = true,
-              experimental = { enable = true },
+              experimental = { enable = false },
               styleLints = { enable = true },
               disabled = { "macro-error", "proc-macro-disabled" },
             },
