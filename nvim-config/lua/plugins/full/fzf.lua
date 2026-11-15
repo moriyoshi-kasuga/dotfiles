@@ -84,6 +84,14 @@ return {
           file_icons = true,
           git_icons = false,
           lsp_icons = true,
+          -- Also applies to vim.lsp.buf.code_action() through register_ui_select.
+          code_actions = {
+            -- the builtin "codeaction" previewer renders the diff itself and
+            -- never runs a pager, so delta needs fzf's native previewer
+            previewer = "codeaction_native",
+            -- delta reads the rest of its style from the git config
+            preview_pager = [[delta --width=$FZF_PREVIEW_COLUMNS --hunk-header-style=omit --file-style=omit]],
+          },
         },
         diagnostics = {
           prompt = "Diagnostics> ",
