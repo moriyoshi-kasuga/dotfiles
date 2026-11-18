@@ -64,5 +64,11 @@ _:
       };
 
       programs.fish.interactiveShellInit = builtins.readFile ./worktree.fish;
+
+      # 指定した rev より後の commit を古い順に `- <short hash> <subject>` で出す
+      programs.fish.functions.glr = {
+        description = "List commits after the given rev, oldest first";
+        body = "git log --reverse --format='- %h %s' $argv[1].. $argv[2..]";
+      };
     };
 }
