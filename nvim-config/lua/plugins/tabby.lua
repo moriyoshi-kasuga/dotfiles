@@ -14,7 +14,22 @@ return {
       normal = { fg = palette.overlay1, bg = "none" },
     }
 
+    -- the tab-local cwd (:tcd) tells tabs apart when they show the same file
+    local function tab_name(tabid)
+      local api = require("tabby.module.api")
+      local cur_win = api.get_tab_current_win(tabid)
+      local name = api.is_float_win(cur_win) and "[Floating]" or require("tabby.feature.win_name").get(cur_win)
+      local tabnr = vim.api.nvim_tabpage_get_number(tabid)
+      if vim.fn.haslocaldir(-1, tabnr) == 1 then
+        name = vim.fs.basename(vim.fn.getcwd(-1, tabnr)) .. ": " .. name
+      end
+      return name
+    end
+
     require("tabby").setup({
+      option = {
+        tab_name = { name_fallback = tab_name },
+      },
       line = function(line)
         return {
           line.tabs().foreach(function(tab)

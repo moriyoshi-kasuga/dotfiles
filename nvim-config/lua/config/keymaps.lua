@@ -82,6 +82,18 @@ map("n", "<C-g>t", function()
   vim.cmd.term()
   vim.cmd.startinsert()
 end, { desc = "Tab New with Term" })
+map("n", "<C-g><", "<cmd>-tabmove<cr>", { desc = "Move Tab Left" })
+map("n", "<C-g>>", "<cmd>+tabmove<cr>", { desc = "Move Tab Right" })
+map("n", "<C-g>r", function()
+  vim.ui.input({ prompt = "Tab Name: " }, function(name)
+    if name then
+      vim.cmd.Tabby("rename_tab", name)
+    end
+  end)
+end, { desc = "Rename Tab" })
+for i = 1, 9 do
+  map("n", "<C-g>" .. i, "<cmd>tabnext " .. i .. "<cr>", { desc = "Go to Tab " .. i })
+end
 
 map("n", "=", [[<cmd>vertical resize +5<cr>]], { desc = "Increase window width" })
 map("n", "-", [[<cmd>vertical resize -5<cr>]], { desc = "Decrease window width" })

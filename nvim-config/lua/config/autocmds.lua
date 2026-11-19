@@ -78,6 +78,17 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+-- terminal buffers hold command output, not code
+vim.api.nvim_create_autocmd("TermOpen", {
+  group = augroup("terminal_window"),
+  callback = function()
+    vim.opt_local.number = false
+    vim.opt_local.relativenumber = false
+    vim.opt_local.statuscolumn = ""
+    vim.opt_local.list = false
+  end,
+})
+
 if is_simple_mode then
   return
 end
