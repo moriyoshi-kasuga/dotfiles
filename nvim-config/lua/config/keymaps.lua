@@ -11,23 +11,6 @@ for _, lhs in ipairs({ "grn", "gra", "grr", "gri", "grt", "grx" }) do
 end
 pcall(vim.keymap.del, "x", "gra")
 
-map("n", "<leader>bo", function()
-  local win_bufs = {}
-  for _, win in ipairs(vim.api.nvim_list_wins()) do
-    local buf = vim.api.nvim_win_get_buf(win)
-    win_bufs[buf] = true
-  end
-
-  for _, buf in ipairs(vim.api.nvim_list_bufs()) do
-    if not win_bufs[buf] and vim.api.nvim_buf_is_loaded(buf) then
-      vim.api.nvim_buf_delete(buf, { force = true })
-    end
-  end
-end, { desc = "Delete buffers not shown in any window" })
-map("n", "<leader>bd", "<cmd>bd<cr>", { desc = "Delete Buffer" })
-map("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
-map("n", "]b", "<cmd>bnext<cr>", { desc = "Next Buffer" })
-
 map("n", "<C-S-j>", "<cmd>m .+1<cr>==", { desc = "Move Down" })
 map("n", "<C-S-k>", "<cmd>m .-2<cr>==", { desc = "Move Up" })
 map("i", "<C-S-j>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move Down" })

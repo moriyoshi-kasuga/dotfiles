@@ -55,6 +55,20 @@ return {
   end,
   keys = {
     {
+      "<leader>bd",
+      function()
+        Snacks.bufdelete()
+      end,
+      desc = "Delete Buffer (Keep Window)",
+    },
+    {
+      "<leader>bo",
+      function()
+        Snacks.bufdelete.other()
+      end,
+      desc = "Delete Other Buffers",
+    },
+    {
       "<leader>cR",
       function()
         Snacks.rename.rename_file()

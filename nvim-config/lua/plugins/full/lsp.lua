@@ -63,6 +63,11 @@ return {
         },
       })
 
+      -- nvim-highlight-colors already requests textDocument/documentColor from
+      -- every client (and also colors hex codes in buffers without LSP), so the
+      -- built-in highlighting would only repeat the same requests and extmarks.
+      vim.lsp.document_color.enable(false)
+
       -- toggle keymap is provided by Snacks.toggle.inlay_hints() (<leader>uh)
       vim.lsp.inlay_hint.enable(true)
     end,
@@ -72,8 +77,6 @@ return {
       { "gk", function() vim.lsp.buf.signature_help() end, desc = "Signature Help" },
       { "gl", function() vim.lsp.codelens.run() end, desc = "CodeLens" },
       { "<leader>cd", function() vim.diagnostic.open_float() end, desc = "Line Diagnostics" },
-      { "[d", function() vim.diagnostic.jump({ count = -1 }) end, desc = "Previous Diagnostic" },
-      { "]d", function() vim.diagnostic.jump({ count = 1 }) end, desc = "Next Diagnostic" },
     },
   },
 }
