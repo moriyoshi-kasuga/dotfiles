@@ -51,8 +51,7 @@ return {
 
       -- Configure diagnostics
       vim.diagnostic.config({
-        -- tiny-inline-diagnostic.nvim draws the inline messages instead
-        virtual_text = false,
+        virtual_text = true,
         signs = true,
         underline = true,
         update_in_insert = false,
@@ -75,29 +74,6 @@ return {
       { "<leader>cd", function() vim.diagnostic.open_float() end, desc = "Line Diagnostics" },
       { "[d", function() vim.diagnostic.jump({ count = -1 }) end, desc = "Previous Diagnostic" },
       { "]d", function() vim.diagnostic.jump({ count = 1 }) end, desc = "Next Diagnostic" },
-    },
-  },
-  {
-    "rachartier/tiny-inline-diagnostic.nvim",
-    event = "VeryLazy",
-    priority = 1000,
-    opts = {
-      options = {
-        show_source = {
-          enabled = true,
-          if_many = true,
-        },
-        multilines = {
-          enabled = true,
-          always_show = true,
-        },
-        -- The default attaches on LspAttach only, which would leave buffers
-        -- linted only by nvim-lint (dockerfile, GitHub Actions) without
-        -- inline diagnostics now that virtual_text is off.
-        overwrite_events = { "LspAttach", "DiagnosticChanged" },
-        -- hide the inline text while <leader>cd shows the float
-        override_open_float = true,
-      },
     },
   },
 }
