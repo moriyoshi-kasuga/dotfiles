@@ -111,3 +111,5 @@ vim.g.markdown_syntax_conceal = 0
 -- hide cmd
 vim.opt.showcmd = false
 vim.opt.cmdheight = 0
+-- cmdheight=0 だけだと echo の後に画面が変わるたび hit-enter プロンプトが出る（fugitive の cc など）ので ui2 と組み合わせる
+require("vim._core.ui2").enable()
