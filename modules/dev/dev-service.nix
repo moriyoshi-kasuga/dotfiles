@@ -5,7 +5,6 @@ _:
     { pkgs, ... }:
     {
       home.packages = with pkgs; [
-        supabase-cli
         postgresql
       ];
     };
