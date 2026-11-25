@@ -99,6 +99,7 @@ in
             home."lang.jvm"
             home."lang.just"
             home."lang.lua"
+            home."lang.markdown"
             home."lang.nix"
             home."lang.node"
             home."lang.python"

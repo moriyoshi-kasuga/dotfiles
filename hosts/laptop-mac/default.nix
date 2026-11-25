@@ -21,6 +21,7 @@ in
           home."lang.dockerfile"
           home."lang.github-actions"
           home."lang.just"
+          home."lang.markdown"
           home."lang.nix"
           home."lang.node"
           home."lang.rust"

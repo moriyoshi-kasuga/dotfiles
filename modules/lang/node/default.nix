@@ -94,7 +94,7 @@ _:
           # (typescript_7, the Go-based native compiler); see tsdkPath above.
           typescript_5
 
-          # frontend formatting (JS/TS/CSS/HTML/JSON/YAML/Markdown/Svelte/Astro)
+          # frontend formatting (JS/TS/CSS/HTML/JSON/YAML/MDX/Svelte/Astro)
           # NOTE: eslint (linting) is expected to come from each project's own
           # node_modules; vscode-eslint-language-server (lang/web.nix) resolves it there.
           prettier

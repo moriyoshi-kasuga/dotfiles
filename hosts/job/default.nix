@@ -21,6 +21,7 @@ in
             home."lang.rust"
             home."lang.node"
             home."lang.lua"
+            home."lang.markdown"
             home."lang.python"
             home."lang.c"
             home."lang.bash"
