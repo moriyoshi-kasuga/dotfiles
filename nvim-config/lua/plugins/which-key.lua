@@ -42,7 +42,6 @@ return {
 
       -- FZF / Find
       { ",", group = "find" },
-      { ",g", group = "git" },
     },
   },
 }

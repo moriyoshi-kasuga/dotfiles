@@ -84,13 +84,6 @@ return {
       mode = { "n", "v" },
     },
     {
-      "<leader>gg",
-      function()
-        Snacks.lazygit()
-      end,
-      desc = "Lazygit",
-    },
-    {
       "<c-/>",
       function()
         Snacks.terminal()
