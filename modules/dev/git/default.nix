@@ -36,6 +36,7 @@ _:
           pull.rebase = true;
           fetch.prune = true;
           rebase.autostash = true;
+          rebase.updateRefs = true;
           diff.algorithm = "histogram";
           rerere.enabled = true;
           branch.sort = "-committerdate";
