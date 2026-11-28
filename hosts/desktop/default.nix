@@ -9,7 +9,6 @@ in
     modules = [
       nixos.pc
       nixos.amd
-      nixos.claude-desktop
       nixos.game
       nixos.iphone
       ./_hardware-configuration.nix
