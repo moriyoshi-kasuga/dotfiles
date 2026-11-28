@@ -18,7 +18,16 @@ return {
     local function tab_name(tabid)
       local api = require("tabby.module.api")
       local cur_win = api.get_tab_current_win(tabid)
-      local name = api.is_float_win(cur_win) and "[Floating]" or require("tabby.feature.win_name").get(cur_win)
+      -- kiln names its views after the repository path, so name them after the filetype
+      local ft = vim.bo[vim.api.nvim_win_get_buf(cur_win)].filetype
+      local name
+      if ft:find("^kiln") then
+        name = "kiln " .. ft:sub(5)
+      elseif api.is_float_win(cur_win) then
+        name = "[Floating]"
+      else
+        name = require("tabby.feature.win_name").get(cur_win)
+      end
       local tabnr = vim.api.nvim_tabpage_get_number(tabid)
       if vim.fn.haslocaldir(-1, tabnr) == 1 then
         name = vim.fs.basename(vim.fn.getcwd(-1, tabnr)) .. ": " .. name

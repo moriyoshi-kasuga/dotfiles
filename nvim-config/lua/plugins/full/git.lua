@@ -1,23 +1,5 @@
 return {
   {
-    "esmuellert/codediff.nvim",
-    cmd = "CodeDiff",
-    opts = {
-      keymaps = {
-        view = {
-          prev_file = "<S-k>",
-          next_file = "<S-j>",
-        },
-      },
-    },
-    keys = {
-      { "<leader>gd", "<cmd>CodeDiff file HEAD<CR>", desc = "CodeDiff Open (Buffer)" },
-      { "<leader>gD", "<cmd>CodeDiff<CR>", desc = "CodeDiff Open (All)" },
-      { "<leader>gf", "<cmd>CodeDiff history %<CR>", desc = "CodeDiff File History (Current)" },
-      { "<leader>gF", "<cmd>CodeDiff history<CR>", desc = "CodeDiff File History (All)" },
-    },
-  },
-  {
     "pwntester/octo.nvim",
     cmd = "Octo",
     opts = {
@@ -59,13 +41,46 @@ return {
     },
   },
   {
-    "tpope/vim-fugitive",
-    keys = {
-      {
-        "<C-.>",
-        "<cmd>tab G<cr>",
-        desc = "Show Fugitive",
+    "moriyoshi-kasuga/kiln.nvim",
+    lazy = false,
+    version = "*",
+    opts = {
+      mappings = {
+        common = {
+          ["q"] = "close",
+          ["gx"] = {
+            function(ctx)
+              -- a file line inside a commit also lists the commit, so files come first
+              if #ctx.files > 0 then
+                for _, f in ipairs(ctx.files) do
+                  local cmd = { "gh", "browse", f.path }
+                  if f.commit then
+                    table.insert(cmd, "--commit=" .. f.commit)
+                  end
+                  vim.system(cmd, { cwd = ctx.root })
+                end
+                return
+              end
+              for _, c in ipairs(ctx.commits) do
+                vim.system({ "gh", "browse", c.hash }, { cwd = ctx.root })
+              end
+            end,
+            desc = "Browse files or commits on GitHub",
+          },
+        },
       },
+    },
+    keys = {
+      { "g.", ":Kiln git ", desc = "Kiln git" },
+      { "<C-.>", "<cmd>Kiln<cr>", desc = "Kiln Status" },
+      { "<leader>gl", "<cmd>Kiln log<cr>", desc = "Kiln Log" },
+      { "<leader>gL", "<cmd>Kiln log --all<cr>", desc = "Kiln Log (All)" },
+      { "<leader>gf", "<cmd>Kiln log -- %<cr>", desc = "Kiln File History" },
+      { "<leader>gb", "<cmd>Kiln branch<cr>", desc = "Kiln Branches" },
+      { "<leader>gc", "<cmd>Kiln commit<cr>", desc = "Kiln Commit" },
+      { "<leader>gd", "<cmd>Kiln diffsplit<cr>", desc = "Kiln Diff Split (index)" },
+      { "<leader>gD", "<cmd>Kiln diff origin/HEAD<cr>", desc = "Kiln Diff (PR)" },
+      { "<leader>go", "<cmd>Kiln output<cr>", desc = "Kiln Output" },
     },
   },
 }

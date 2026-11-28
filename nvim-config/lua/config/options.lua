@@ -69,8 +69,8 @@ vim.opt.confirm = true
 vim.opt.list = true
 vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 
--- diffview.nvim 等での行内差分をより正確に
-vim.opt.diffopt:append("linematch:60")
+-- git の diff.algorithm と揃える
+vim.opt.diffopt:append({ "linematch:60", "algorithm:histogram" })
 
 -- セッション保存項目の最適化
 vim.opt.sessionoptions = "buffers,curdir,tabpages,winsize,help,globals,skiprtp"
@@ -111,5 +111,4 @@ vim.g.markdown_syntax_conceal = 0
 -- hide cmd
 vim.opt.showcmd = false
 vim.opt.cmdheight = 0
--- cmdheight=0 だけだと echo の後に画面が変わるたび hit-enter プロンプトが出る（fugitive の cc など）ので ui2 と組み合わせる
 require("vim._core.ui2").enable()
